@@ -9,7 +9,7 @@ function PlacesCards(props) {
               <img src={props.image} alt={props.alt} />
               <div className="card-text">
                 <h2>{props.header}</h2>
-                <p>{}props.description}</p>
+                <p>{props.description}</p>
               </div>
             </div>
         </div>

@@ -1,9 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment } from "react";
+import { Link, Outlet } from "react-router-dom";
 // import {browser}
 
 function Navbar() {
     return (
+    <Fragment>
         <header className="nav">
             <nav className="nav-items">
                 <ul>
@@ -22,6 +23,8 @@ function Navbar() {
                 </ul>
             </nav>
         </header>
+        <Outlet />
+        </Fragment>
     );
 }
 
