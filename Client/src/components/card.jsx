@@ -2,9 +2,6 @@ import React from 'react';
 import Africa from '../assets/placesImages/AFRICA.jpg'
 function Card() {
   return (
-
-    <div className="card-content">
-       <h1>africa</h1>
        <div className="card">
          <img src={Africa} alt="africa image"/>
          <div className="card-text">
@@ -13,10 +10,10 @@ function Card() {
          </div>
          <div className="btns">
          <button>book now</button>
-         <button>+</button>
+         <button className='addBtn'>+</button>
          </div>
-       </div>
-   </div>
+         </div>
+
   );
 }
 
