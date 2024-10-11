@@ -2,8 +2,10 @@ import React from 'react'
 
 function Icon() {
   return (
-    <div className='icon'>Icon</div>
+    <div className='icon'>
+    
+    </div>
   )
 }
 
-export default Icon
+export default Icon;
