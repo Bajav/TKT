@@ -2,7 +2,7 @@ import React from 'react';
 import Africa from '../assets/placesImages/AFRICA.jpg'
 function Card() {
   return (
-    <div>
+
     <div className="card-content">
        <h1>africa</h1>
        <div className="card">
@@ -17,7 +17,6 @@ function Card() {
          </div>
        </div>
    </div>
-</div>
   );
 }
 

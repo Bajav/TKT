@@ -1,24 +1,35 @@
 @media only screen and (max-width: 600px) 
-{.nav-items{
-    background: #0e0e0e;
-    width: fit-content;
-    border-radius: 50px;
-    padding: 2px;
-    position: fixed;
-    /* top: 73%;*/
-    left: 50%; 
-    top: 3%;
+{
+  header{background: #a34e4e;
+width: 400px;
+position: fixed;
+top: 73%;
+left: 5%;
+height: 50px;}
+  .nav-items{
+  background: #0e0e0e;
+  width: fit-content;
+  border-radius: 50px;
+  padding: 2px;
+
   ul{
     display: flex;
     justify-content: center;
     gap: 5px;
     margin: 0;
+    padding: 0;
   }
   li{
     color: #fefefe;
     list-style: none;
     padding: 2px 14px;
     border-radius: 30px;
+  }
+  li:hover
+  {
+    background: #fefefe;
+    color: #141414;
+    transition: all 1.2s;
   }
   a{
     color: #141414;
