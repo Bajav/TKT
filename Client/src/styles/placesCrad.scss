@@ -5,7 +5,7 @@
     height: 100vh;
     background: $page_color;
     background: #E7E7E7;
-    overflow-x: hidden;
+    // overflow-x: hidden;
     // card
     .card
     {
@@ -21,10 +21,11 @@
       align-items: center;
       h2
   {
-    font-size: 15px;
+    font-size: 13px;
     margin-bottom: 5px;
     font-family: $textFont, sans-serif ;
-    font-weight: 70;
+    font-weight: 400;
+    color: $visibleFontColor;
   }
  p
   {
@@ -118,3 +119,50 @@
     }
 
 }
+.cardTitle
+{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 70%;
+    justify-content: center;
+    h4
+    {
+        font-family: $textFont,sans-serif;
+        text-transform: capitalize;
+        font-weight: 20;
+        font-size: 15px;
+    }
+    h5
+    {
+        font-family: $textFont,sans-serif;
+        font-weight: 20;
+        font-size: 12px;
+        color: $deemFontColor ;
+        opacity: 70%;
+    }
+}
+.cardRail
+{
+    height: 300px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.cards
+{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+    width: fit-content;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+// .cards::-webkit-scrollbar
+// {
+//     display: none;  
+// }
