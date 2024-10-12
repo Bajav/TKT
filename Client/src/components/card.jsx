@@ -9,7 +9,7 @@ function Card() {
            <p>Saint-Tropez is a popular beach destination, especially for its famous Pampelonne Beach, which attracts celebrities and tourists from around the world.</p>
          </div>
          <div className="btns">
-         <button>book now</button>
+         <button className='bookBtn'>book now</button>
          <button className='addBtn'>+</button>
          </div>
          </div>
