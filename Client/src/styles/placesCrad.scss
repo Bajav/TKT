@@ -1,16 +1,19 @@
 @import "./variables.scss";
-@media only screen and (max-width: 600px) 
-{
-    .places{
+// @media only screen and (max-width: 600px) 
+// {
+     .places{
     height: 100vh;
     background: $page_color;
     background: #E7E7E7;
-    // overflow-x: hidden;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 2;
+}
     // card
     .card
     {
       width: 200px;
-      height: 250px;
+      max-height: 250px;
       background: #fff;
       position: relative;
       left: 30px;
@@ -19,16 +22,14 @@
       padding-top: 2px;
       flex-direction: column;
       align-items: center;
-      h2
-  {
+      h2{
     font-size: 13px;
     margin-bottom: 5px;
     font-family: $textFont, sans-serif ;
     font-weight: 400;
     color: $visibleFontColor;
   }
- p
-  {
+ p{
     font-size: 10px;
     margin: 0;
     font-family: $textFont, sans-serif ;
@@ -40,41 +41,41 @@
     border-radius:15px ;
     margin-top: 2px;
   }
-    }
-    .card-text
-    {
-      width: 195px;
-      margin-top: 10px;
-      margin-top: 5px;
-      margin-left: 10px;
-    }
-    .btns
-    {
-      width: 195px;
-      display: flex;
-      justify-content: space-evenly;
-      margin-top: 10px;
-      gap: 70px;
-    button
-    {
-      font-family: $textFont,sans-serif;
-      background: $buttonColor;
-      color: #fefefe;
-      border: none;
-      padding: 3px 5px;
-      text-transform: capitalize;
-      font-size: 12px;
-    }
-    .bookBtn{
-        border-radius: 10px;
-        width: 85px;
-    }
-    .addBtn
-    {
-      border-radius: 1px;
-    }
-    }
+  .card-text
+  {
+    width: 195px;
+    margin-top: 10px;
+    margin-top: 5px;
+    margin-left: 10px;
   }
+  .btns
+  {
+    width: 195px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    gap: 70px;
+  button
+  {
+    font-family: $textFont,sans-serif;
+    background: $buttonColor;
+    color: #fefefe;
+    border: none;
+    padding: 3px 5px;
+    text-transform: capitalize;
+    font-size: 12px;
+  }
+  .bookBtn{
+      border-radius: 10px;
+      width: 85px;
+  }
+  .addBtn
+  {
+    border-radius: 1px;
+  }
+
+  }
+}
       // header
       .location{
         background: $buttonColor;
@@ -118,7 +119,6 @@
         }
     }
 
-}
 .cardTitle
 {
     display: flex;
@@ -150,19 +150,21 @@
     width: 100%;
     flex-direction: column;
     justify-content: center;
-
-}
-.cards
+    .cards
 {
     display: flex;
     gap: 10px;
+    columns: 40ch;
+    position:absolute;
     width: 100%;
+    height: 42svh;
     justify-content: space-between;
     width: fit-content;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
-// .cards::-webkit-scrollbar
-// {
-//     display: none;  
-// }
+.cards::-webkit-scrollbar
+{
+    width: 0px;
+}
+}
