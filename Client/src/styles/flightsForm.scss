@@ -1,0 +1,94 @@
+@import "./variables.scss";
+
+.cutout-box {
+    width: 410px;
+    height: 460px;
+    border-radius: 50px;
+    background: url(../assets/images/bg.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // padding: 5px;
+}
+.flights
+{
+    height: 100vh;
+    position: relative;
+    z-index: 2;
+    .flights-console
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.flightType-btns
+{    display: flex;
+    gap: 2%;
+    justify-content: space-around;
+    padding: 10px;
+    button
+    {
+        border: none;
+        border-radius:30px ;
+        padding: 16px 35px;
+        width: 180px;
+        font-size: 15px;
+        font-family: $textFont, sans-serif;
+        text-transform: capitalize;
+        font-weight: bold;
+        color: $visibleFontColor;
+    }
+    button:hover
+    {
+        background: $buttonColor;
+        border: 1px solid #e7e7e7;
+        color: #e7e7e7;
+        transition: 2s;
+    }
+}
+.flightSearch
+{
+    .flexInput{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        background: #FCFCFC;
+        margin-bottom: 15px;
+        margin-top: 5px;
+        width: 95%;
+        margin-left: 10px;
+        border-radius: 15px;
+        height: 60px;
+    }
+    
+    label
+    {
+        color: $deemFontColor;
+        font-family: $textFont, sans-serif;
+        text-transform: capitalize;
+        font-size: 10px;
+        font-weight: 600;
+        opacity: 70%;
+        margin-left: 10px;
+    }
+    input
+    {
+        border: none;
+        width: 95%;
+        margin-left: 10px;
+        height: 30px;
+        color: $visibleFontColor;
+        // font-weight: 600;
+        text-transform: capitalize;
+    }
+    input:focus
+    {
+        outline: none;
+    }
+    input::placeholder
+    {
+        margin-left: 20px;
+    }
+}

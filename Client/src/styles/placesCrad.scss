@@ -17,6 +17,7 @@
         align-items: center;
         padding: 7px;
         border-radius: 20px;
+        margin-left: 10px;
         // margin: 30px;
         h4
         {
@@ -30,10 +31,9 @@
     .header{
         display: flex;
         justify-content: space-between;
-        width: 97%;
+        display: flex;
+        height: 70px;
         align-items: center;
-        margin-top: 20px;
-        padding: 5px;
         .icon
         {
             background: url(../assets/placesImages/Greece.jpg);
@@ -63,13 +63,15 @@
         font-family: $textFont,sans-serif;
         text-transform: capitalize;
         font-weight: 20;
+        color: $visibleFontColor;
         font-size: 15px;
+        font-weight: 600;
     }
     h5
     {
         font-family: $textFont,sans-serif;
         font-weight: 20;
-        font-size: 12px;
+        font-size: 15px;
         color: $deemFontColor ;
         opacity: 70%;
     }
@@ -86,8 +88,9 @@
   display: flex;
   gap: 10px;
   width: 100%;
-  margin-left: 30px;
+  margin-left: 15px;
   // height: min(50vh ,30vh);
+  scroll-behavior: smooth;
   max-height: 50vh;
   justify-content: space-between;
   overflow-x: auto;
@@ -111,13 +114,14 @@
       display: flex;
       border-radius: 20px;
       padding-top: 2px;
+      scroll-snap-align: start;
       flex-direction: column;
       align-items: center;
       h2{
     font-size: 13px;
     margin-bottom: 5px;
     font-family: $textFont, sans-serif ;
-    font-weight: 400;
+    font-weight: 700;
     color: $visibleFontColor;
   }
  p{
@@ -128,7 +132,7 @@
   }
  img
   {
-    width: 190px;
+    width: 185px;
     height: 120px;
     border-radius:15px ;
     margin-top: 2px;

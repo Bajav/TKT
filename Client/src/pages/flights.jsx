@@ -1,10 +1,15 @@
 import React from 'react'
+import Header from '../components/header';
+import FlightsForm from '../components/flightsFormInput';
 
 function Flights() {
   return (
-    <div>
-        <h1>flights</h1>
-    </div>
+ <main className='flights'>
+  <Header />
+  <div className="flights-console">
+    <FlightsForm />
+  </div>
+ </main>
   )
 }
 
