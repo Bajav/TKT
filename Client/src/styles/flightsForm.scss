@@ -48,7 +48,8 @@
 }
 .flightSearch
 {
-    .flexInput{
+    .flexInput
+    {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -61,7 +62,6 @@
         border-radius: 15px;
         height: 60px;
     }
-    
     label
     {
         color: $deemFontColor;
