@@ -4,7 +4,7 @@ function Calender(props) {
   return (
     <div className="calender flexInput">
         <label htmlFor={props.label}>{props.labelName}</label>
-        <input type="text" name={props.inputName} id={props.ID} />
+        <input type={props.inputType} name={props.inputName} id={props.ID} />
     </div>
   )
 }
