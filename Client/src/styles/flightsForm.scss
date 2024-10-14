@@ -91,14 +91,22 @@
     .calender
     {
         width: 190px;
+        border-radius: 40px;
         input
         {
-            width: 170px;
+            width: 150px;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+        label
+        {
+            margin-left: 20px;
         }
     }
     .calendersUI
     {
         width: 100%;
+        margin-top: 30PX;
         display: flex;
         flex-direction: row;
         align-items: center;
