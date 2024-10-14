@@ -111,3 +111,61 @@
         flex-direction: row;
         align-items: center;
     }
+    //seat selections
+    .passenger-selector {
+        max-width: 190px;
+        margin: 20px auto;
+        padding: 10px;
+        // border: 1px solid #ddd;
+        position: relative;
+        // background-color: #fff;
+        font-family: $textFont, sans-serif;
+        font-weight: 600;
+        color: $visibleFontColor;
+        cursor: pointer;
+        .dropdown-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+        }
+        .arrow {
+            font-size: 12px;
+        }
+        .dropdown-content {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .passenger-type {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+        }
+        
+        .dropdown-content span {
+            min-width: 20px;
+            text-align: center;
+        }
+        
+    }   

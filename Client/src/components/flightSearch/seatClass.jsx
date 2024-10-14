@@ -14,4 +14,4 @@ function SeatClass() {
   )
 }
 
-export default SeatClass
+export default SeatClass;
