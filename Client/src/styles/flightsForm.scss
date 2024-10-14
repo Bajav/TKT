@@ -46,9 +46,7 @@
         transition: 2s;
     }
 }
-.flightSearch
-{
-    .flexInput
+.flexInput
     {
         display: flex;
         flex-direction: column;
@@ -61,33 +59,32 @@
         margin-left: 10px;
         border-radius: 15px;
         height: 60px;
+        label
+        {
+            color: $deemFontColor;
+            font-family: $textFont, sans-serif;
+            text-transform: capitalize;
+            font-size: 10px;
+            font-weight: 600;
+            opacity: 70%;
+            margin-left: 10px;
+        }
+        input
+        {
+            border: none;
+            width: 95%;
+            margin-left: 10px;
+            height: 30px;
+            color: $visibleFontColor;
+            // font-weight: 600;
+            text-transform: capitalize;
+        }
+        input:focus
+        {
+            outline: none;
+        }
+        input::placeholder
+        {
+            margin-left: 20px;
+        }
     }
-    label
-    {
-        color: $deemFontColor;
-        font-family: $textFont, sans-serif;
-        text-transform: capitalize;
-        font-size: 10px;
-        font-weight: 600;
-        opacity: 70%;
-        margin-left: 10px;
-    }
-    input
-    {
-        border: none;
-        width: 95%;
-        margin-left: 10px;
-        height: 30px;
-        color: $visibleFontColor;
-        // font-weight: 600;
-        text-transform: capitalize;
-    }
-    input:focus
-    {
-        outline: none;
-    }
-    input::placeholder
-    {
-        margin-left: 20px;
-    }
-}
