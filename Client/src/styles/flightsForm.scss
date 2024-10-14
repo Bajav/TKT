@@ -88,3 +88,18 @@
             margin-left: 20px;
         }
     }
+    .calender
+    {
+        width: 190px;
+        input
+        {
+            width: 170px;
+        }
+    }
+    .calendersUI
+    {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
