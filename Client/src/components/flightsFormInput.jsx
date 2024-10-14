@@ -8,10 +8,11 @@ function FlightsForm() {
     <div class="cutout-box">
         <form action="/flights">
         <Buttons />
-        <FlightSearchb />
+        <FlightSearch />
+        <CalenderInputs />
         </form>
     </div>
   )
 }
 
-export default FlightsForm
+export default FlightsForm;
