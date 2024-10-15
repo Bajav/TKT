@@ -12,6 +12,7 @@ function FlightsForm() {
         <FlightSearch />
         <CalenderInputs />
         <PassengerSeatType />
+        <button className='btn-submit' onClick={(e)=>{e.preventDefault();}}>search</button>
         </form>
     </div>
   )

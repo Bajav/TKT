@@ -7,6 +7,8 @@
     background: url(../assets/images/bg.svg);
     background-position: center;
     background-repeat: no-repeat;
+    position: relative;
+    z-index: 2;
     background-size: cover;
 }
 .flights
@@ -17,6 +19,8 @@
     .flights-console
     {
         display: flex;
+        flex-direction: column;
+        gap: 30px;
         justify-content: center;
         align-items: center;
     }
@@ -113,21 +117,20 @@
     }
     //seat selections
     .passenger-selector {
-        max-width: 190px;
-        margin: 20px auto;
+        width: 175px;
         padding: 10px;
-        // border: 1px solid #ddd;
-        position: relative;
-        // background-color: #fff;
         font-family: $textFont, sans-serif;
         font-weight: 600;
+        position: relative;
+        display: inline-block;
         color: $visibleFontColor;
         cursor: pointer;
         .dropdown-header {
             display: flex;
-            justify-content: space-between;
+            /* justify-content: space-between; */
             align-items: center;
-            padding: 10px;
+            flex-direction: column;
+            padding: 14px;
             background-color: #f7f7f7;
             border-radius: 30px;
             height: 30px;
@@ -137,6 +140,8 @@
             font-size: 12px;
         }
         .dropdown-content {
+            position: absolute;
+            z-index: 10;
             margin-top: 10px;
             padding: 10px;
             background-color: white;
@@ -166,6 +171,65 @@
         .dropdown-content span {
             min-width: 20px;
             text-align: center;
+        } 
+    }  
+    .seatType
+    {
+        display: flex;
+        align-items: center;
+        margin-top: -16px;
+        position: relative;
+        z-index: 2;
+        gap: 10px;
+        // background: #007bff;
+    }
+    .seatClass
+    {
+        display: flex;
+        flex-direction: column;
+        background: #FCFCFC;
+        padding: 10px;
+        border-radius: 30px;
+        font-family: $textFont, sans-serif;
+        text-transform: capitalize;
+        font-weight: 600;
+        width: 175px;
+        select
+        {
+            background: transparent;
+            border: none;
+            margin-left: 10px;
+            text-transform: capitalize;
+            color: $visibleFontColor;
+            font-weight: 600;
         }
-        
-    }   
+        select:focus
+        {
+            outline: none;
+        }
+        label
+        {
+            margin-left: 13px;
+            color: $deemFontColor;
+        }
+    }
+    .btn-submit
+    {
+        width: 380px;
+    height: 50px;
+    text-align: center;
+    color: #313030;
+    font-size: 20px;
+    text-transform: capitalize;
+    border-radius: 20px;
+    margin-left: 15px;
+    margin-top: 5px;
+    font-weight: 600;
+    }
+    // gallery
+    .gallery
+    {
+        background: #313030;
+        width: 300px;
+        height: 250px;
+    }
