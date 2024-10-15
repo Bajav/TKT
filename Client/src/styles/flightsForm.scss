@@ -230,6 +230,18 @@
     .gallery
     {
         background: #313030;
-        width: 300px;
+        width: 410px;
         height: 250px;
+        scroll-behavior: auto;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        .item
+        {
+            width: 400px;
+            height: 240px;
+            background: #007bff;
+        }
     }
