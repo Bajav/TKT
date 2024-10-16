@@ -1,16 +1,13 @@
 import React from 'react';
 import Header from '../components/header';
-import CardRail from '../components/cardsRail';
+import Africa from '../components/places/africa';
+
 
 function Places() {
   return (
     <main className='places default'>
-       <Header />
-     <CardRail />
-     <CardRail />
-     <CardRail />
-     <CardRail />
-     <CardRail />
+       <Header  />
+     <Africa />
     </main>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import Location from './location';
-import Icon from './icon';
+import Location from './places/location'
+import Icon from './places/icon';
 
 export default function Header() {
   return (

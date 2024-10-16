@@ -2,42 +2,47 @@ import React, { useRef, useState } from 'react';
 import CardTitle from './cardTitle';
 import Card from './card';
 import Dummy from './dummyCard';
+import places from '../../data/placesArray';
 
-function CardRail() {
+const placeCard = (place) => {
+  return (
+    <div key={place.id}>
+      <Card placeName={place.name} placeDescription={place.description} />
+    </div>
+  );
+};
+
+function Africa() {
   const itemsRef = useRef(null);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
-  // Handle mouse down event to initiate dragging
   const handleMouseDown = (e) => {
     setIsMouseDown(true);
     setStartX(e.pageX - itemsRef.current.offsetLeft);
     setScrollLeft(itemsRef.current.scrollLeft);
   };
 
-  // Handle mouse leave event to stop dragging
   const handleMouseLeave = () => {
     setIsMouseDown(false);
   };
 
-  // Handle mouse up event to stop dragging
   const handleMouseUp = () => {
     setIsMouseDown(false);
   };
 
-  // Handle mouse move event to drag the scroll
   const handleMouseMove = (e) => {
-    if (!isMouseDown) return; // If not dragging, do nothing
-    e.preventDefault(); // Prevent default behavior
-    const x = e.pageX - itemsRef.current.offsetLeft; // Calculate current mouse position
-    const walk = (x - startX) * 2; // Distance moved
-    itemsRef.current.scrollLeft = scrollLeft - walk; // Update scroll position
+    if (!isMouseDown) return;
+    e.preventDefault(); 
+    const x = e.pageX - itemsRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    itemsRef.current.scrollLeft = scrollLeft - walk; 
   };
 
   return (
     <div className="cardRail">
-      <CardTitle countryName="Africa" />
+      <CardTitle countryName={places[0].continent} />
       <div
         className="cards"
         ref={itemsRef}
@@ -46,18 +51,9 @@ function CardRail() {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Dummy />
-        <Dummy />
+        {places[0].places.map((place) => (
+          <Card key={place.id} placeName={place.name} placeDescription={place.description} />
+        ))}
         <Dummy />
         <Dummy />
       </div>
@@ -65,4 +61,4 @@ function CardRail() {
   );
 }
 
-export default CardRail;
+export default Africa;
