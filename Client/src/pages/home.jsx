@@ -1,20 +1,35 @@
-import React, { Fragment , useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const Fruitlist = (props) => {
+  return <li>{props.fruit}</li>;
+}
+
 function Home() {
-  const fetchApi = async ()=>{
-    const response = await axios.get("http://localhost:3000/");
-    console.log(response);
+  const [fruits, setFruits] = useState([]); 
+
+  const fetchApi = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/"); 
+      setFruits(response.data.fruits); 
+    } catch (error) {
+      console.error("Error fetching fruits:", error);
+    }
   }
-   useEffect(()=>{
-    fetchApi();
-   },[]);
+
+  useEffect(() => {
+    fetchApi(); 
+  }, []);
 
   return (
     <div>
-        <h1>home</h1>
+      <ul>
+        {fruits.map((fruit, index) => (  
+          <Fruitlist key={index} fruit={fruit} /> 
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
 
 export default Home;
