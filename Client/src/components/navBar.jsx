@@ -8,6 +8,9 @@ function Navbar() {
         <header className="nav">
             <nav className="nav-items">
                 <ul>
+                    <Link to='/'>
+                    <li>home</li>
+                    </Link>
                     <Link to='/places'>
                     <li>places</li>
                     </Link>
