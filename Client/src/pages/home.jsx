@@ -1,12 +1,19 @@
-import React, { Fragment } from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from '../components/navBar';
+import React, { Fragment , useEffect } from 'react';
+import axios from 'axios';
 
 function Home() {
+  const fetchApi = async ()=>{
+    const response = await axios.get("http://localhost:3000/");
+    console.log(response);
+  }
+   useEffect(()=>{
+    fetchApi();
+   },[]);
+
   return (
-    <Fragment>
+    <div>
         <h1>home</h1>
-    </Fragment>
+    </div>
   )
 }
 

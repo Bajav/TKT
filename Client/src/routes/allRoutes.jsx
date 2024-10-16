@@ -10,7 +10,7 @@ function AllRoutes() {
   return (
    <Routes>
         <Route path='/' element={<Navbar />} >
-    <Route  element={<Home />} />
+    <Route index element={<Home />} />
     <Route path='places' element={<Places />} />
     <Route path='flights' element={<Flights />} />
     <Route path='hotels' element={<Hotels />} />
