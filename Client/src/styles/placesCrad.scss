@@ -88,6 +88,9 @@
 {
   display: flex;
   gap: 10px;
+  height: 35vh;
+  // min-height: 37vh;
+  max-height: 35vh;
   width: 100%;
   margin-left: 15px;
   // height: min(50vh ,30vh);
@@ -111,6 +114,8 @@
     {
       width: 200px;
       max-height: 260px;
+      height: 260px;
+      min-height: 70%;
       background: #fff;
       display: flex;
       border-radius: 20px;
