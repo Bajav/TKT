@@ -46,7 +46,6 @@ const toggleDropdown = () => {
 return (
   <div class="cutout-box">
       <form action="/flights" onSubmit={handleSubmit}>
-
   <div className="flightSearch">
     <div className='flightType-btns'>
           <select name='flight-type'>
@@ -59,7 +58,7 @@ return (
           <input type="checkbox" name="multicity"/>
           </div>
       </div>
-
+  <div className="flightInputs">
     <div className='flexInput'>
       <label htmlFor="from">from</label>
       <input type="text" name="origin" placeholder='enter origin' onChange={handleChange} value={inputs.origin || ""} />
@@ -67,6 +66,7 @@ return (
       <div className='flexInput'>
       <label htmlFor="to">to</label>
       <input type="text" name="destination" placeholder='enter destination' onChange={handleChange} value={inputs.destination || ""} />
+    </div>
     </div>
   </div>
     <div className='calendersUI'>

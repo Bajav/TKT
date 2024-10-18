@@ -1,5 +1,5 @@
 @import "./variables.scss";
-
+@media only screen and (max-width: 600px) {
 .cutout-box {
     width: 410px;
     height: 460px;
@@ -20,7 +20,7 @@
     {
         display: flex;
         flex-direction: column;
-        gap: 10%;
+        gap: 5%;
         height: 90vh;
         align-items: center;
     }
@@ -64,7 +64,7 @@
         margin-bottom: 15px;
         margin-top: 5px;
         width: 95%;
-        margin-left: 10px;
+        // margin-left: 10px;
         border-radius: 15px;
         height: 60px;
         label
@@ -96,6 +96,12 @@
         {
             margin-left: 20px;
         }
+    }
+    .flightInputs{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .calender
     {
@@ -142,24 +148,23 @@
     .calendersUI
     {
         width: 100%;
-        margin-top: 30PX;
+        margin-top: 10PX;
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: center;
+        gap: 10px;
     }
     //seat selections
     .passenger-selector {
-        /* width: 190px; */
-        height: 60px;
         font-family: $textFont, sans-serif;
         font-weight: 600;
+        background: #fefefe;
+        border-radius: 30px;
+        color: #313030;
+        font-size: 12px;
         position: relative;
-        display: flex;
-        color: $visibleFontColor;
-        /* flex-direction: column; */
-        cursor: pointer;
-        justify-content: center;
-        cursor: pointer;
+        z-index: 20;
         .dropdown-header {
             display: flex;
             justify-content: space-evenly; 
@@ -168,6 +173,7 @@
             background: $inputBackGround;
             border-radius: 30px;
             width: 190px;
+            height: 60px;
         .arrow {
             font-size: 12px;
         }
@@ -177,6 +183,7 @@
             margin-top: 10px;
             padding: 10px;
             background: $inputBackGround;
+            // width: 100px;
             border-radius: 8px;
             box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
         }
@@ -266,8 +273,8 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        width: 410px;
-        height: 250px;
+        width: 415px;
+        height: 240px;
         scroll-behavior: auto;
         border-radius: 30px;
         display: flex;
@@ -280,4 +287,4 @@
             height: 240px;
             background: #007bff;
         }
-    }
+    }}
