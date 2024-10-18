@@ -19,6 +19,7 @@ function FlightSearch() {
       <div className='flexInput'>
       <label htmlFor="to">to</label>
       <input type="text" name="destination" placeholder='enter destination' onChange={handleChange} value={inputs.destination || ""} />
+      
       </div>
     </div>
   )
