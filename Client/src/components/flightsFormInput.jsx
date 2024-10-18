@@ -53,7 +53,11 @@ return (
             <option value="oneWay">one way</option>
             <option value="roundTrip">round trip</option>
           </select>
-          <input type="checkbox" />
+
+          <div className="check">
+            <label htmlFor="multicity">multicity</label>
+          <input type="checkbox" name="multicity"/>
+          </div>
       </div>
 
     <div className='flexInput'>

@@ -16,4 +16,4 @@ function Gallery() {
   )
 }
 
-export default Gallery
+export default Gallery;

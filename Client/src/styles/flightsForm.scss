@@ -30,24 +30,28 @@
     gap: 2%;
     justify-content: space-around;
     padding: 10px;
-    button
+    select
     {
-        border: none;
-        border-radius:30px ;
-        padding: 16px 35px;
-        width: 180px;
+        width: 165px;
+        padding: 15px 30px;
+        color: $visibleFontColor;
         font-size: 15px;
+        font-weight: 600;
         font-family: $textFont, sans-serif;
         text-transform: capitalize;
-        font-weight: bold;
-        color: $visibleFontColor;
+        border-radius: 30px;   
     }
-    button:hover
-    {
-        background: $buttonColor;
-        border: 1px solid #e7e7e7;
-        color: #e7e7e7;
-        transition: 2s;
+    select:focus{
+        outline: none;
+    }
+    option {
+        font-weight: 600;
+        display: block;
+        padding-block-start: 0px;
+        padding-block-end: 1px;
+        min-block-size: 1.2em;
+        padding-inline: 2px;
+        white-space: nowrap;
     }
 }
 .flexInput
@@ -56,7 +60,7 @@
         flex-direction: column;
         justify-content: center;
         gap: 5px;
-        background: #FCFCFC;
+        background:$inputBackGround;
         margin-bottom: 15px;
         margin-top: 5px;
         width: 95%;
@@ -79,6 +83,7 @@
             width: 95%;
             margin-left: 10px;
             height: 30px;
+            background: transparent;
             color: $visibleFontColor;
             // font-weight: 600;
             text-transform: capitalize;
@@ -96,16 +101,43 @@
     {
         width: 190px;
         border-radius: 40px;
+        background: $inputBackGround;
         input
         {
             width: 150px;
             border-radius: 10px;
             margin-left: 20px;
+            background: $inputBackGround;
         }
         label
         {
             margin-left: 20px;
         }
+    }
+    .check
+    {
+        display: flex;
+        color: $visibleFontColor;
+        text-transform: capitalize;
+        font-family: $textFont,sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 30px;
+        width: 180px;
+        outline: none;
+        background: $inputBackGround;
+        padding: 10 20px;
+        justify-content: center;
+        align-items: center;
+        input{
+            position: absolute;
+            // right: 20px;
+            background: #007bff;
+            opacity: 5%;
+            width: 100px;
+            height: 30px;
+        }
+        
     }
     .calendersUI
     {
@@ -117,25 +149,25 @@
     }
     //seat selections
     .passenger-selector {
-        width: 175px;
-        padding: 10px;
+        /* width: 190px; */
+        height: 60px;
         font-family: $textFont, sans-serif;
         font-weight: 600;
         position: relative;
-        display: inline-block;
+        display: flex;
         color: $visibleFontColor;
+        /* flex-direction: column; */
+        cursor: pointer;
+        justify-content: center;
         cursor: pointer;
         .dropdown-header {
             display: flex;
-            /* justify-content: space-between; */
+            justify-content: space-evenly; 
             align-items: center;
             flex-direction: column;
-            padding: 14px;
-            background-color: #f7f7f7;
+            background: $inputBackGround;
             border-radius: 30px;
-            height: 30px;
-            border: 1px solid #ccc;
-        }
+            width: 190px;
         .arrow {
             font-size: 12px;
         }
@@ -144,8 +176,7 @@
             z-index: 10;
             margin-top: 10px;
             padding: 10px;
-            background-color: white;
-            border: 1px solid #ddd;
+            background: $inputBackGround;
             border-radius: 8px;
             box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
         }
@@ -155,17 +186,10 @@
             justify-content: space-between;
             margin-bottom: 10px;
         }
-        button {
-            padding: 5px 10px;
-            margin: 0 5px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-        }
         
         button:disabled {
-            background-color: #ccc;
+            background: $inputBackGround;;
+        }
         }
         
         .dropdown-content span {
@@ -177,8 +201,10 @@
     {
         display: flex;
         align-items: center;
-        margin-top: -16px;
+        // margin-top: 2px;
+        justify-content: center;
         position: relative;
+        margin-bottom: 5px;
         z-index: 2;
         gap: 10px;
         // background: #007bff;
@@ -187,21 +213,24 @@
     {
         display: flex;
         flex-direction: column;
-        background: #FCFCFC;
-        padding: 10px;
+        background: $inputBackGround;
+        gap: 5px;
+        height: 60px;
+        width: 190px;
         border-radius: 30px;
         font-family: $textFont, sans-serif;
         text-transform: capitalize;
         font-weight: 600;
-        width: 175px;
         select
         {
             background: transparent;
             border: none;
-            margin-left: 10px;
+            margin-left: 15px;
             text-transform: capitalize;
             color: $visibleFontColor;
             font-weight: 600;
+            margin-top: 7px;
+            width: 160px;
         }
         select:focus
         {
@@ -209,8 +238,10 @@
         }
         label
         {
-            margin-left: 13px;
+            margin-left: 20px;
+            font-size: 10px;
             color: $deemFontColor;
+            margin-top: 5px;
         }
     }
     .btn-submit
@@ -224,6 +255,8 @@
     border-radius: 20px;
     margin-left: 15px;
     margin-top: 5px;
+    border: none;
+    background: $inputBackGround;
     font-weight: 600;
     }
     // gallery
