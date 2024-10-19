@@ -6,7 +6,6 @@ const cors = require("cors");
 const port = 3000;
 const app = express();
 
-// CORS options
 const corsOptions = {
   origin: ["http://localhost:5173"]
 };
@@ -21,7 +20,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/IATACODESDB")
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Could not connect to MongoDB', err));
 
-// Define the schema without _id
+
 const iataSchema = new mongoose.Schema({
   AirportCode: String,
   AirportName: String,
@@ -40,12 +39,25 @@ const IATACODE = mongoose.model("IATACODE", iataSchema);
 // IATACODE.insertMany(newAirports)
 //   .then(() => console.log('Airports saved successfully'))
 //   .catch(err => console.error('Error saving airports', err));
+// app.route("/flights")
+// .get((req, res) => {
+//   res.json({
+//     message: "Welcome to the airport database!"
+//   });
+// });
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "Welcome to the airport database!"
+app.route("/flights")
+  .get((req, res) => {
+    IATACODE.find()
+      .then((foundData) => {
+        res.json(foundData);
+      })
+      .catch(err => {
+        console.error('Error finding airports', err);
+        res.status(500).json({ error: 'Error retrieving airports data' });
+      });
   });
-});
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
