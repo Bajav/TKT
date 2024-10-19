@@ -285,4 +285,9 @@
             height: 240px;
             background: #007bff;
         }
-    }}
+    }
+    input:focus
+    {
+        background: transparent;
+    }
+}
