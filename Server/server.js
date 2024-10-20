@@ -32,6 +32,18 @@ const iataSchema = new mongoose.Schema({
 
 const IATACODE = mongoose.model("IATACODE", iataSchema);
 
+app.route("/")
+  .get((req, res) => {
+    IATACODE.find()
+      .then((foundData) => {
+        res.json(foundData);
+      })
+      .catch(err => {
+        console.error('Error finding airports', err);
+        res.status(500).json({ error: 'Error retrieving airports data' });
+      });
+  });
+
 app.route("/flights")
   .get((req, res) => {
     IATACODE.find()
@@ -46,7 +58,7 @@ app.route("/flights")
   .post((req,res)=>{
     const flightData = req.body;
     console.log(flightData);
-  })
+  });
 
 
 app.listen(port, () => {
