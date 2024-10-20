@@ -12,7 +12,7 @@ const corsOptions = {
 
 // Middleware setup
 app.use(cors(corsOptions));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
@@ -32,20 +32,6 @@ const iataSchema = new mongoose.Schema({
 
 const IATACODE = mongoose.model("IATACODE", iataSchema);
 
-// Sample data
-
-
-// Insert all airports at once
-// IATACODE.insertMany(newAirports)
-//   .then(() => console.log('Airports saved successfully'))
-//   .catch(err => console.error('Error saving airports', err));
-// app.route("/flights")
-// .get((req, res) => {
-//   res.json({
-//     message: "Welcome to the airport database!"
-//   });
-// });
-
 app.route("/flights")
   .get((req, res) => {
     IATACODE.find()
@@ -56,7 +42,11 @@ app.route("/flights")
         console.error('Error finding airports', err);
         res.status(500).json({ error: 'Error retrieving airports data' });
       });
-  });
+  })
+  .post((req,res)=>{
+    const flightData = req.body;
+    console.log(flightData);
+  })
 
 
 app.listen(port, () => {
