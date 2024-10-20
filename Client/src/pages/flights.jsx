@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from '../components/header';
 import FlightsForm from '../components/flightsFormInput';
 import Gallery from '../components/flightSearch/galler';
+// import axios from 'axios';
+
+
 
 function Flights() {
   return (

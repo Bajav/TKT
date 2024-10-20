@@ -1,25 +1,53 @@
-import React, { useState } from 'react';
-import Calender from './flightSearch/calenderInput';
+import React, { Fragment, useState, useEffect } from "react";
+import axios from 'axios';  
+import Calender from "./flightSearch/calenderInput";
 
 function FlightsForm() {
   const [inputs, setInputs] = useState({
-    flightType: 'oneWay',
-    seatClass: 'economy_class',
+    flightType: "oneWay",
+    seatClass: "economy_class",
     multicity: false,
   });
 
   const handleChange = (e) => {
     const name = e.target.name;
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = { ...inputs, passengers };
+    console.log(formData);
+
+    /////-----axios-----/////
+    // POST SUBMITTING FORMS
+    try {
+      const response = await axios.post('http://localhost:3000/flights', formData);
+      console.log('Flight data posted:', response.data);
+    } catch (error) {
+      console.error('Error posting flight:', error);
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ ...inputs, passengers });
-    // This is where you would send the data to your backend, for example:
-    // axios.post('/api/flights', { ...inputs, passengers });
-  };
+  const [message, setMessage] = useState("");
+  let iataCodes ;
+  // get AIRPORT CODES CITIES COUNTRIES FROM DB
+  const getIataCodes = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/flights"); 
+       iataCodes = response.data;
+      setMessage("STATUS 200"); 
+      console.log(iataCodes);
+    } catch (error) {
+      setMessage("STATUS 400"); 
+      console.error("Error fetching DATA:", error);
+    }
+  }
+  useEffect(() => {
+    getIataCodes(); 
+  }, []);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [passengers, setPassengers] = useState({
@@ -50,19 +78,31 @@ function FlightsForm() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+
   return (
+    <Fragment >
+      <h1>{message}</h1>
     <div className="cutout-box">
       <form action="/flights" onSubmit={handleSubmit}>
         <div className="flightSearch">
           <div className="flightType-btns">
-            <select name="flightType" onChange={handleChange} value={inputs.flightType}>
+            <select
+              name="flightType"
+              onChange={handleChange}
+              value={inputs.flightType}
+            >
               <option value="oneWay">One Way</option>
               <option value="roundTrip">Round Trip</option>
             </select>
 
             <div className="check">
               <label htmlFor="multicity">Multicity</label>
-              <input type="checkbox" name="multicity" onChange={handleChange} checked={inputs.multicity} />
+              <input
+                type="checkbox"
+                name="multicity"
+                onChange={handleChange}
+                checked={inputs.multicity}
+              />
             </div>
           </div>
 
@@ -74,7 +114,7 @@ function FlightsForm() {
                 name="origin"
                 placeholder="Enter origin"
                 onChange={handleChange}
-                value={inputs.origin || ''}
+                value={inputs.origin || ""}
               />
             </div>
             <div className="flexInput">
@@ -84,7 +124,7 @@ function FlightsForm() {
                 name="destination"
                 placeholder="Enter destination"
                 onChange={handleChange}
-                value={inputs.destination || ''}
+                value={inputs.destination || ""}
               />
             </div>
           </div>
@@ -96,14 +136,14 @@ function FlightsForm() {
             inputType="date"
             inputName="departureDate"
             change={handleChange}
-            value={inputs.departureDate || ''}
+            value={inputs.departureDate || ""}
           />
           <Calender
             label="Date of Return"
             inputType="date"
             inputName="returnDate"
             change={handleChange}
-            value={inputs.returnDate || ''}
+            value={inputs.returnDate || ""}
           />
         </div>
 
@@ -111,7 +151,7 @@ function FlightsForm() {
           <div className="passenger-selector">
             <div className="dropdown-header" onClick={toggleDropdown}>
               <span>Passengers: {getTotalPassengers()}</span>
-              <span className="arrow">{isDropdownOpen ? '▲' : '▼'}</span>
+              <span className="arrow">{isDropdownOpen ? "▲" : "▼"}</span>
             </div>
 
             {isDropdownOpen && (
@@ -120,7 +160,7 @@ function FlightsForm() {
                   <div className="passenger-label">Adults</div>
                   <button
                     onClick={(e) => {
-                      decrement('adults');
+                      decrement("adults");
                       e.preventDefault();
                     }}
                     disabled={passengers.adults <= 1}
@@ -130,7 +170,7 @@ function FlightsForm() {
                   <span>{passengers.adults}</span>
                   <button
                     onClick={(e) => {
-                      increment('adults');
+                      increment("adults");
                       e.preventDefault();
                     }}
                   >
@@ -141,7 +181,7 @@ function FlightsForm() {
                   <div className="passenger-label">Children</div>
                   <button
                     onClick={(e) => {
-                      decrement('children');
+                      decrement("children");
                       e.preventDefault();
                     }}
                     disabled={passengers.children <= 0}
@@ -151,7 +191,7 @@ function FlightsForm() {
                   <span>{passengers.children}</span>
                   <button
                     onClick={(e) => {
-                      increment('children');
+                      increment("children");
                       e.preventDefault();
                     }}
                   >
@@ -162,7 +202,7 @@ function FlightsForm() {
                   <div className="passenger-label">Infants</div>
                   <button
                     onClick={(e) => {
-                      decrement('infants');
+                      decrement("infants");
                       e.preventDefault();
                     }}
                     disabled={passengers.infants <= 0}
@@ -172,7 +212,7 @@ function FlightsForm() {
                   <span>{passengers.infants}</span>
                   <button
                     onClick={(e) => {
-                      increment('infants');
+                      increment("infants");
                       e.preventDefault();
                     }}
                   >
@@ -185,7 +225,12 @@ function FlightsForm() {
 
           <div className="seatClass">
             <label htmlFor="seatClass"> Seat Class</label>
-            <select name="seatClass" id="seatClass" onChange={handleChange} value={inputs.seatClass}>
+            <select
+              name="seatClass"
+              id="seatClass"
+              onChange={handleChange}
+              value={inputs.seatClass}
+            >
               <option value="economy_class">Economy</option>
               <option value="economy_premium">Economy Premium</option>
               <option value="business_class">Business</option>
@@ -194,11 +239,15 @@ function FlightsForm() {
           </div>
         </div>
 
-        <button onClick={(e)=>{console.log("clicked")}} className="btn-submit" type="submit">
+        <button
+          className="btn-submit"
+          type="submit"
+        >
           Search
         </button>
       </form>
     </div>
+    </Fragment>  
   );
 }
 

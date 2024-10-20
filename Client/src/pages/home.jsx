@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Fruitlist = (props) => {
-  return <li>{props.fruit}</li>;
-}
 
 function Home() {
-  const [fruits, setFruits] = useState([]); 
+  const [message, setMessage] = useState(""); 
 
   const fetchApi = async () => {
     try {
       const response = await axios.get("http://localhost:3000/"); 
-      setFruits(response.data.fruits); 
+      setMessage(response.data.message); 
     } catch (error) {
-      console.error("Error fetching fruits:", error);
+      console.error("Error fetching message:", error);
     }
   }
 
@@ -23,11 +20,7 @@ function Home() {
 
   return (
     <div>
-      <ul>
-        {fruits.map((fruit, index) => (  
-          <Fruitlist key={index} fruit={fruit} /> 
-        ))}
-      </ul>
+     <h1>{message}</h1>
     </div>
   );
 }
