@@ -16,7 +16,7 @@ function FlightCard() {
         <div className="ticket-header">
             <div className="origin">
                 <h2>kla</h2>
-                <h5>Kampala, Uganda</h5>
+                <h5>Kampala , Uganda</h5>
                 <h5>12:00 pm</h5>
             </div>
             <div className="item"><Arrow /></div>
@@ -28,11 +28,11 @@ function FlightCard() {
         </div>
         <div className="flights-actions">
             <div className="time-details">
-                <div className="time">
+                <div className="flex-tim">
                 <CalenderSvg />
                 <h4>23.DEC.24</h4>
                 </div>
-                <div className="date">
+                <div className="flex-tim">
                    <TimeSvg />
                     <h4>4h30m</h4>
                 </div>

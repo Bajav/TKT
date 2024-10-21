@@ -4,7 +4,7 @@ import { Arrow } from '../components/flightSearch/flightArrowSvg';
 
 function FlightResult() {
   return (
-    <main className='FlightResult'>
+    <main className='FlightResult-page'>
       <div className="FlightResults">
         <h3>Results for your search</h3>
         <div className="FlightResult-header">
