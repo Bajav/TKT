@@ -22,16 +22,16 @@ function FlightsForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = { ...inputs, passengers };
-    console.log(formData);
+    console.log("submit is working")
+    // console.log(formData);
     /////-----axios-----/////
     // POST SUBMITTING FORMS
+    navigate("/flights/flightsResults");
     try {
       const response = await axios.post('http://localhost:3000/flights', formData);
       console.log('Flight data posted:', response.data);
     } catch (error) {
       console.error('Error posting flight:', error);
-    }finally {
-      navigate("/flights/flightsResults");
     }
   };
 
@@ -92,9 +92,9 @@ function FlightsForm() {
           </div>
 
           <div className="flightInputs">
-            <FlightSearchInput classOne="flexInput" labelFor="Origin" label="Origin" placeholder="input place of origin" InputName="origin" change={handleChange} value={inputs.origin || ""} />
+            <FlightSearchInput required classOne="flexInput" labelFor="Origin" label="Origin" placeholder="input place of origin" InputName="origin" change={handleChange} value={inputs.origin || ""} />
             <div className="changeUi">
-            <FlightSearchInput classOne="flexInput" labelFor="destination" label="destination" placeholder="input place of destination" InputName="destination" change={handleChange} value={inputs.destination || ""} />
+            <FlightSearchInput required classOne="flexInput" labelFor="destination" label="destination" placeholder="input place of destination" InputName="destination" change={handleChange} value={inputs.destination || ""} />
             </div>   
           </div>
         </div>
@@ -103,6 +103,7 @@ function FlightsForm() {
           <Calender
             label="Date of Departure"
             inputType="date"
+            required
             inputName="departureDate"
             change={handleChange}
             value={inputs.departureDate || ""}
