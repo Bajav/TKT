@@ -1,0 +1,45 @@
+@import "./variables.scss";
+
+body
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1.h2,h3,h4,h5,h6
+{
+    margin: 0;
+    padding: 0;
+
+}
+.flights{
+    background: url('../assets/images/Subtract.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: $visibleFontColor;
+    height: 40vh;
+    margin-top: 20px;
+
+}
+.ticket-header
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: $textFont, sans-serif;
+    h2
+    {
+        text-transform: uppercase;
+        font-family: $cityFont, sans-serif;
+        font-weight: 600;
+        color: $visibleFontColor;
+        font-size: 25px;
+    }
+    h5
+    {
+        font-size: 10px;
+    }
+}

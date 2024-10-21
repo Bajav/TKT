@@ -5,10 +5,10 @@ import { Arrow } from '../components/flightSearch/flightArrowSvg';
 function FlightResult() {
   return (
     <main className='FlightResult'>
-      <div className="FlightResult">
+      <div className="FlightResults">
         <h3>Results for your search</h3>
         <div className="FlightResult-header">
-        <div className="flights-header">
+        <div className="ticket-header">
             <div className="origin">
                 <h2>kla</h2>
                 <h5>Kampala, Uganda</h5>

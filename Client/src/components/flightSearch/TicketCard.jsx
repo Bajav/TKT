@@ -13,7 +13,7 @@ function FlightCard() {
             </div>
             <h4>A380</h4>
         </div>
-        <div className="flights-header">
+        <div className="ticket-header">
             <div className="origin">
                 <h2>kla</h2>
                 <h5>Kampala, Uganda</h5>
