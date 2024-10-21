@@ -1,28 +1,70 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import axios from 'axios';
 
-function FlightSearch() {
-  
-  const [inputs, setInputs] = useState({});
-  const handleChange = (e)=>{
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs(values =>({...values,[name]:value}));
+function FlightSearchInput(props) {
+  const [iataCodes, setIataCodes] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);  
+
+  const fetchIataCodes = async () => { 
+    try {
+      const response = await axios.get("http://localhost:3000/flights"); 
+      setIataCodes(response.data);
+    } catch (err) {
+      console.error("Error fetching IATA codes", err);
+    }
+  }
+
+  useEffect(() => {
+    fetchIataCodes();
+  }, []);
+
+  const filteredCodes = iataCodes.filter((code) => {
+    return (
+      code.AirportName.toLowerCase().includes(props.value.toLowerCase()) || 
+      code.AirportCode.toLowerCase().includes(props.value.toLowerCase()) || 
+      code.City.toLowerCase().includes(props.value.toLowerCase()) ||        
+      code.Country.toLowerCase().includes(props.value.toLowerCase())       
+    );
+  });
+
+  const onSearch = (searchTerm) => {
+    props.change({ target: { name: props.InputName, value: searchTerm } });
+    setShowDropdown(false);  
   }
 
   return (
-    <div className="flightSearch">
-      <div className='flexInput'>
-      <label htmlFor="from">from</label>
-      <input type="text" name="origin" placeholder='enter origin' onChange={handleChange} value={inputs.origin || ""} />
+    <Fragment>
+      <div className={props.classOne} >
+        <label htmlFor={props.labelFor}>{props.label}</label>
+        <input
+        className={props.class}
+          type="text"
+          name={props.InputName}
+          placeholder={props.placeholder}
+          onChange={props.change}
+          value={props.value}
+          onFocus={() => setShowDropdown(true)}  
+          onBlur={() => setTimeout(() => setShowDropdown(false), 200)}  
+        />
       </div>
-      <div className='flexInput'>
-      <label htmlFor="to">to</label>
-      <input type="text" name="destination" placeholder='enter destination' onChange={handleChange} value={inputs.destination || ""} />
       
-      </div>
-    </div>
-  )
+      {props.value && showDropdown && filteredCodes.length > 0 ? (
+        <div className="dropDown">
+          <ul>
+            {filteredCodes.slice(0, 2).map((code, index) => (
+              <li 
+                className='dropDownRow' 
+                key={index} 
+                onClick={() => onSearch(`${code.AirportCode}, ${code.AirportName}, ${code.City}, ${code.Country}`)}
+              >
+                {code.AirportCode} - {code.AirportName}, {code.City}, {code.Country}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </Fragment>
+  );
 }
 
-export default FlightSearch;
+export default FlightSearchInput;

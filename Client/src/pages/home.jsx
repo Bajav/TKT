@@ -2,58 +2,77 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Home() {
-  const [message, setMessage] = useState("");
-  const [value, setValue] = useState("");
-  const [iataCodes, setIataCodes] = useState([]); 
+  const [value, setValue] = useState(""); 
+  const [status, setStatus] = useState(""); 
+  const [iataCodes, setIataCodes] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);  
 
-  const getIataCodes = async () => {
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    setShowDropdown(true);  
+  }
+
+  const fetchIataCodes = async () => { 
     try {
-      const response = await axios.get("http://localhost:3000/flights");
-      setIataCodes(response.data); 
-      setMessage("STATUS 200");
-      console.log(response.data);
-    } catch (error) {
-      setMessage("STATUS 400");
-      console.error("Error fetching DATA:", error);
+      const response = await axios.get("http://localhost:3000/flights"); 
+      setStatus(response.statusText);
+      setIataCodes(response.data);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      setStatus("400");
     }
-  };
+  }
 
   useEffect(() => {
-    getIataCodes();
+    fetchIataCodes();
   }, []);
-  const filteredCodes = iataCodes.filter((item) =>
-    item.AirportName.toLowerCase().includes(value.toLowerCase())  ||
-    item.AirportCode.toLowerCase().includes(value.toLowerCase()) ||  
-    item.City.toLowerCase().includes(value.toLowerCase()) ||     
-    item.Country.toLowerCase().includes(value.toLowerCase())   
-  );
+
+  const filteredCodes = iataCodes.filter((code) => {
+    return (
+      code.AirportName.toLowerCase().includes(value.toLowerCase()) || 
+      code.AirportCode.toLowerCase().includes(value.toLowerCase()) || 
+      code.City.toLowerCase().includes(value.toLowerCase()) ||        
+      code.Country.toLowerCase().includes(value.toLowerCase())       
+    );
+  });
+
+  const onSearch = (searchTerm) => {
+    setValue(searchTerm); 
+    setShowDropdown(false);  
+  }
 
   return (
     <div className="testing">
-      <h1>{message}</h1>
-      <div className="input">
+      <h1>{status}</h1>
+      <div className="flexInput">
+        <label htmlFor="to">To</label>
         <input
           type="text"
-          name="search"
+          name="destination"
+          placeholder="Enter destination"
+          onChange={handleChange}
           value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
         />
-        <div className="dropDown">
-          {filteredCodes.length > 0 ? (
-            filteredCodes.slice(0 , 10).map((item, index) => (
-              <li className="dropDownRow" key={index}>
-                {item.AirportName} - {item.AirportCode}, {item.Country}
-              </li>
-            ))
-          ) : (
-            <div className="dropDownRow">No results found</div>
-          )}
-        </div>
       </div>
+      
+      {value && showDropdown ? (
+        <div className="dropDown">
+          <ul>
+            {filteredCodes.slice(0, 10).map((code, index) => (
+              <li 
+                className='dropDownRow' 
+                key={index} 
+                onClick={() => onSearch(`${code.AirportCode}, ${code.AirportName}, ${code.City}, ${code.Country}`)}
+              >
+                {code.AirportCode} - {code.AirportName}, {code.City}, {code.Country}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null} 
     </div>
-  );
+  )
 }
 
 export default Home;

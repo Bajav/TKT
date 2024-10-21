@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import axios from 'axios';  
 import Calender from "./flightSearch/calenderInput";
+import FlightSearchInput from "./flightSearch/flightSearch";
 
 function FlightsForm() {
   const [inputs, setInputs] = useState({
@@ -30,24 +31,6 @@ function FlightsForm() {
       console.error('Error posting flight:', error);
     }
   };
-
-  const [message, setMessage] = useState("");
-  let iataCodes ;
-  // get AIRPORT CODES CITIES COUNTRIES FROM DB
-  const getIataCodes = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/flights"); 
-       iataCodes = response.data;
-      setMessage("STATUS 200"); 
-      console.log(iataCodes);
-    } catch (error) {
-      setMessage("STATUS 400"); 
-      console.error("Error fetching DATA:", error);
-    }
-  }
-  useEffect(() => {
-    getIataCodes(); 
-  }, []);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [passengers, setPassengers] = useState({
@@ -81,7 +64,6 @@ function FlightsForm() {
 
   return (
     <Fragment >
-      <h1>{message}</h1>
     <div className="cutout-box">
       <form action="/flights" onSubmit={handleSubmit}>
         <div className="flightSearch">
@@ -107,26 +89,10 @@ function FlightsForm() {
           </div>
 
           <div className="flightInputs">
-            <div className="flexInput">
-              <label htmlFor="from">From</label>
-              <input
-                type="text"
-                name="origin"
-                placeholder="Enter origin"
-                onChange={handleChange}
-                value={inputs.origin || ""}
-              />
-            </div>
-            <div className="flexInput">
-              <label htmlFor="to">To</label>
-              <input
-                type="text"
-                name="destination"
-                placeholder="Enter destination"
-                onChange={handleChange}
-                value={inputs.destination || ""}
-              />
-            </div>
+            <FlightSearchInput classOne="flexInput" labelFor="Origin" label="Origin" placeholder="input place of origin" InputName="origin" change={handleChange} value={inputs.origin || ""} />
+            <div className="changeUi">
+            <FlightSearchInput classOne="flexInput" labelFor="destination" label="destination" placeholder="input place of destination" InputName="destination" change={handleChange} value={inputs.destination || ""} />
+            </div>   
           </div>
         </div>
 
@@ -159,6 +125,7 @@ function FlightsForm() {
                 <div className="passenger-type">
                   <div className="passenger-label">Adults</div>
                   <button
+                  className="add"
                     onClick={(e) => {
                       decrement("adults");
                       e.preventDefault();

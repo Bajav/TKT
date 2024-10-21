@@ -56,6 +56,7 @@
 }
 .flexInput
     {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -155,52 +156,80 @@
         justify-content: center;
         gap: 10px;
     }
-    //seat selections
+    
+    // passenger
     .passenger-selector {
-        font-family: $textFont, sans-serif;
-        display: inline-block;
-        font-weight: 600;
-        background: #fefefe;
-        border-radius: 30px;
-        color: #313030;
-        font-size: 12px;
         position: relative;
-        z-index: 20;
-        .dropdown-header {
-            display: flex;
-            justify-content: space-evenly; 
-            align-items: center;
-            flex-direction: column;
-            background: $inputBackGround;
-            border-radius: 30px;
-            width: 190px;
-            height: 60px;
-        .arrow {
-            font-size: 12px;
+        /* display: inline-block; */
+        width: 190px;
+        display: flex;
+        flex-direction: column;
+        font-family: $textFont,sans-serif;
+        font-weight: 600;
+        color: $deemFontColor;
+      }
+      
+      .dropdown-header {
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        border-radius: 30px;
+        height: 40px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap:8px;
+        justify-content: space-between;
+        align-items: center;
+        span{
+            font-size: 10px;
+            
         }
-        .dropdown-content {
-            position: absolute;
-            z-index: 10;
-            margin-top: 10px;
-            padding: 10px;
-            background: $inputBackGround;
-            width: 200px;
-            border-radius: 8px;
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-        }
-        .passenger-type {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        }
-        }
-        
-        .dropdown-content span {
-            min-width: 20px;
-            text-align: center;
-        } 
+      }
+      
+      .dropdown-content {
+        position: absolute;
+        background-color: #fff;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 12px;
+        border-radius: 10px;
+        z-index: 1;
+        top: 50px;
+        margin-top: 10px; /* to create some space below the button */
+      }
+      
+      .passenger-type {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      
+      .passenger-type button {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      .passenger-type button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+      
+      .arrow {
+        margin-left: 10px;
+      }
+      
+      .dropdown-content span {
+        font-size: 16px;
+        margin: 0 10px;
+      }
+      
       
     .seatType
     {
@@ -290,4 +319,53 @@
     {
         background: transparent;
     }
+}
+.dropDown
+{
+    position: absolute;
+    top: 135px; 
+    left: 0;
+    width: 100%;
+    background-color: $inputBackGround;
+    border: 1px solid #ccc;
+    max-height: 200px; 
+    overflow-y: auto; 
+    z-index: 10; 
+    .dropDown:empty
+{
+    border: none;
+    display: none;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+li
+{
+    text-decoration: none;
+    text-overflow: clip;
+    list-style: none;
+    font-size: 10px;
+    font-family: $textFont, sans-serif ;
+    font-weight: 600;
+}
+.dropDownRow
+{
+    display: flex;
+    align-items: center;
+}
+}
+.changeUi{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .dropDown
+{
+    position: absolute;
+    top: 225px; 
+    left: 0;
+    width: 100%;
+    z-index: 10; 
+}
 }
