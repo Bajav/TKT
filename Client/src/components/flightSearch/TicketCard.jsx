@@ -19,7 +19,7 @@ function FlightCard() {
                 <h5>Kampala , Uganda</h5>
                 <h5>12:00 pm</h5>
             </div>
-            <div className="item"><Arrow /></div>
+            <div className="item"><Arrow color="#F5F7F8" /></div>
             <div className="item">
                 <h2>DXB</h2>
                 <h5>Dubai , UAE</h5>

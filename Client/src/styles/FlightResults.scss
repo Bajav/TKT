@@ -11,6 +11,7 @@ body
 {
     background: $page_color;
     height: 100vh;
+
 }
 h1.h2,h3,h4,h5,h6
 {
@@ -143,4 +144,29 @@ h1.h2,h3,h4,h5,h6
     {
         background: $actionBlue;
     }
+}
+.FlightResult-header
+{
+    color: $deemFontColor;
+    // background: $deemFontColor;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    h2
+    {
+        color: $visibleFontColor;
+    }
+    h5
+    {
+        color: $visibleFontColor;
+    }
+}
+.text
+{
+    font-family: $textFont, sans-serif;
+    color: $deemFontColor;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 15px;
 }
