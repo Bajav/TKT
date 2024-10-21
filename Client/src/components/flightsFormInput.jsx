@@ -1,9 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';  
 import Calender from "./flightSearch/calenderInput";
 import FlightSearchInput from "./flightSearch/flightSearch";
 
 function FlightsForm() {
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     flightType: "oneWay",
     seatClass: "economy_class",
@@ -21,7 +23,6 @@ function FlightsForm() {
     e.preventDefault();
     const formData = { ...inputs, passengers };
     console.log(formData);
-
     /////-----axios-----/////
     // POST SUBMITTING FORMS
     try {
@@ -29,6 +30,8 @@ function FlightsForm() {
       console.log('Flight data posted:', response.data);
     } catch (error) {
       console.error('Error posting flight:', error);
+    }finally {
+      navigate("/flights/flightsResults");
     }
   };
 
