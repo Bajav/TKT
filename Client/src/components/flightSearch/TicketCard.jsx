@@ -5,7 +5,7 @@ import {Arrow, CalenderSvg, TimeSvg } from './flightArrowSvg'
 
 function FlightCard() {
   return (
-    <div className="flights">
+    <div className="flights-res">
         <div className="flights-header">
             <div className="airLineIcone">
                 <div className="icon"></div>

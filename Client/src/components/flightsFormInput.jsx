@@ -26,7 +26,7 @@ function FlightsForm() {
     // console.log(formData);
     /////-----axios-----/////
     // POST SUBMITTING FORMS
-    navigate("/flights/flightsResults");
+    navigate("/flights/flightsResults",{ state: { formData }});
     try {
       const response = await axios.post('http://localhost:3000/flights', formData);
       console.log('Flight data posted:', response.data);

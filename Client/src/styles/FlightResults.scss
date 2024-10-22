@@ -24,9 +24,10 @@ h1.h2,h3,h4,h5,h6
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
 }
-.flights{
+.flights-res{
     background: url('../assets/images/ticketBG\ \(1\).png');
     background-size: cover;
     background-repeat: no-repeat;
@@ -53,6 +54,7 @@ h1.h2,h3,h4,h5,h6
         font-size: 10px;
         width: 95%;
         height: 50px;
+        font-weight: 10;
         .airLineIcone
         {
             display: flex;
