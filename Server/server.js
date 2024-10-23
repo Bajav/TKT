@@ -1,12 +1,12 @@
+require('dotenv').config();
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
-const https = require("https");
 const cors = require("cors");
-const env = require("dotenv").config();
+const Amadeus = require('amadeus');
 
 // console.log(process.env);`
-
+// const amadeus = new Amadeus();
 const port = 3080;
 const app = express();
 
@@ -26,16 +26,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Could not connect to MongoDB", err));
 
-const iataSchema = new mongoose.Schema({
-  AirportCode: String,
-  AirportName: String,
-  City: String,
-  Country: String,
-  Latitude: String,
-  Longitude: String,
-});
-
-const IATACODE = mongoose.model("IATACODE", iataSchema);
 
 app.route("/").get((req, res) => {
   IATACODE.find()
@@ -48,8 +38,8 @@ app.route("/").get((req, res) => {
     });
 });
 
-app
-  .route("/flights")
+// API GET AIRPORTS || CITIES || COUNTRY NAME CODES TO
+app.route("/flights")
   .get((req, res) => {
     IATACODE.find()
       .then((foundData) => {
@@ -65,20 +55,51 @@ app
     console.log(flightData);
   });
 
-const getAccessToken = async () => {
-  const response = await axios.post(
-    "https://test.api.amadeus.com/v1/security/oauth2/token",
-    {
-      grant_type: "client_credentials",
-      client_id: AMADEUS_API_KEY,
-      client_secret: AMADEUS_API_SECRET,
-    }
-  );
-  return response.data.access_token;
-};
-
+// ---GET REQS--- AMADEUS SDK ---//  
+const amadeus = new Amadeus({
+    clientId: process.env.AMADEUS_API_KEY,
+    clientSecret: process.env.AMADEUS_API_SECRET
+});
+// -- SEARCH FOR FLIGHTS -- //
 app.route("/flights/flightsResults")
+.get(async (req, res) => {
+  try {
+    const response = await amadeus.shopping.flightOffersSearch.get({
+      originLocationCode: "NYC",
+      destinationLocationCode: "MAD",
+      departureDate: "2023-11-01",
+      adults: 1,
+      travelClass: "BUSINESS",
+      currencyCode: "USD",
+      max: 2,
+    });
+    const flightOffers = response.data;
+    res.json(flightOffers);
+  } catch (error) {
+    console.error('Error fetching flight offers:', error);
+    res.status(500).send("Error fetching flight offers.");
+  }
+})
 
+.post(async (req, res) => {
+  try {
+    const flightOffers = req.body.flightOffers; 
+
+    const responsePricing = await amadeus.shopping.flightOffers.pricing.post(
+      JSON.stringify({
+        data: {
+          type: "flight-offers-pricing",
+          flightOffers: flightOffers,
+        },
+      })
+    );
+
+    res.json(JSON.parse(responsePricing.body));
+  } catch (err) {
+    console.error("Error pricing flight offers:", err);
+    res.status(500).send("Error pricing flight offers.");
+  }
+});
 
 app.get("/testing", (req, res) => {
   res.json({
