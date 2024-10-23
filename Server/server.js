@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https");
 const cors = require("cors");
-const env = require('dotenv').config();
+const env = require("dotenv").config();
 
 // console.log(process.env);`
 
@@ -11,7 +11,7 @@ const port = 3080;
 const app = express();
 
 const corsOptions = {
-  origin: ["http://localhost:5174"]
+  origin: ["http://localhost:5174"],
 };
 
 // Middleware setup
@@ -21,13 +21,10 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-const API_KEY = process.env.API_KEY;
-const SECRET_KEY = process.env.SECRET_KEY;
-
-mongoose.connect("mongodb://127.0.0.1:27017/IATACODESDB")
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Could not connect to MongoDB', err));
-
+mongoose
+  .connect("mongodb://127.0.0.1:27017/IATACODESDB")
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Could not connect to MongoDB", err));
 
 const iataSchema = new mongoose.Schema({
   AirportCode: String,
@@ -35,4379 +32,4205 @@ const iataSchema = new mongoose.Schema({
   City: String,
   Country: String,
   Latitude: String,
-  Longitude: String
+  Longitude: String,
 });
 
 const IATACODE = mongoose.model("IATACODE", iataSchema);
 
-app.route("/")
-  .get((req, res) => {
-    IATACODE.find()
-      .then((foundData) => {
-        res.json(foundData);
-      })
-      .catch(err => {
-        console.error('Error finding airports', err);
-        res.status(500).json({ error: 'Error retrieving airports data' });
-      });
-  });
+app.route("/").get((req, res) => {
+  IATACODE.find()
+    .then((foundData) => {
+      res.json(foundData);
+    })
+    .catch((err) => {
+      console.error("Error finding airports", err);
+      res.status(500).json({ error: "Error retrieving airports data" });
+    });
+});
 
-app.route("/flights")
+app
+  .route("/flights")
   .get((req, res) => {
     IATACODE.find()
       .then((foundData) => {
         res.json(foundData);
       })
-      .catch(err => {
-        console.error('Error finding airports', err);
-        res.status(500).json({ error: 'Error retrieving airports data' });
+      .catch((err) => {
+        console.error("Error finding airports", err);
+        res.status(500).json({ error: "Error retrieving airports data" });
       });
   })
-  .post((req,res)=>{
+  .post((req, res) => {
     const flightData = req.body;
     console.log(flightData);
   });
 
+const getAccessToken = async () => {
+  const response = await axios.post(
+    "https://test.api.amadeus.com/v1/security/oauth2/token",
+    {
+      grant_type: "client_credentials",
+      client_id: AMADEUS_API_KEY,
+      client_secret: AMADEUS_API_SECRET,
+    }
+  );
+  return response.data.access_token;
+};
 
-  app.route("flights/flightsResults")
-  .get(async(req,res)=>{
-    try {
-      const { origin, destination, departureDate, returnDate } = req.body;
-      const token = await getAccessToken();
-  
-      const response = await axios.get('https://test.api.amadeus.com/v2/shopping/flight-offers', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: {
-          originLocationCode: origin,
-          destinationLocationCode: destination,
-          departureDate,
-          returnDate,
-          adults: 1, // Change according to your requirement
-        },
-      });
-  
-      res.json(response.data);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Failed to fetch flight offers' });
-    }  
+app.route("/flights/flightsResults")
+
+
+app.get("/testing", (req, res) => {
+  res.json({
+    AirSearchResponse: {
+      session_id: "MTcyOTU1ODQxMF85MzI1MDM=",
+      AirSearchResult: {
+        FareItineraries: [
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "MnVtTEpzZkNLc29JVW5ISTRzTnlBaFgzbXlXV3N2bllJOEg3cVRTcGU5TDRtUkNwWDNlOGl2TXhUblViV1VXSDJXSEtUZDl0VDlFMzUzbkZLS0FsZ0NLQzNjUFdzZDBpcnF0QmM0RHRSTlpYQ0Z6OXorQTFpRXB1Uk1TaEJLVUo3NnpBaDFqRGdZTUptRUZQTkRRaHduc0JCSjVqbWZaUHI1dmw4M2lreGhrPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "335.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "335.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "572.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "907.85",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "335.42",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "335.42",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "163.78",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "907.85",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T16:40:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:15:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "934",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "CL",
+                          Name: "Lufthansa Cityline",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T19:20:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T16:55:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "4827",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T09:35:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T21:00:00",
+                        Eticket: true,
+                        JourneyDuration: "695",
+                        FlightNumber: "572",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "359",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T19:55:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T18:20:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6456",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ERJ",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "Ti8xd0tFaWwxdmJXREYvQ0trbkIvVDZDWnhMbWlxYmRHNStJaVhweGpYK0RFSVZldkhiU0U2ajdTMW1BelNTU2NQejJyaEtUaEtoZTM0czJhRk5FS001TnltcW9ueGwvMG5VbldXdVNkdmdjWHI0bU5MQ0NsdmRZTEdwVDNpdFQ5N1RNMGJIMkU1RzUxUGtPbUp3VlAyK2JjeEsveTVTVXY5UXBwUldTZFZvPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "335.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "335.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "572.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "907.85",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "335.42",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "335.42",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "163.78",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "907.85",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T16:40:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:15:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "934",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "CL",
+                          Name: "Lufthansa Cityline",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T19:20:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T17:00:00",
+                        Eticket: true,
+                        JourneyDuration: "80",
+                        FlightNumber: "6931",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T09:35:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T21:00:00",
+                        Eticket: true,
+                        JourneyDuration: "695",
+                        FlightNumber: "572",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "359",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T19:55:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T18:20:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6456",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ERJ",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "WTQrQVpLTkVJUTQzbUxJaU1kT1ZqSFowVUtSZkhnTXY1UUtlYnlFQ1BzS1pWdVhCc3EvSVJXZUNDbTh1cFJLUGY2TVVQQW45dnMvM3Uydm11U3V5QUdGOUVaTDZ2d0tER1RhR2hJQ3Z0a2NVWWtPK3JLRG1PSzVJTEpSdmRLMllmTndDQWZYTzk2ZTlQRDRqaTMyWlArcjdKRlF3eWE5Nkg2bVl4Tnp0eWNvPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "335.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "335.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "572.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "907.85",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "335.42",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "335.42",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "163.78",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "907.85",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T16:25:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:00:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "6930",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T19:20:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T16:55:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "4827",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T09:35:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T21:00:00",
+                        Eticket: true,
+                        JourneyDuration: "695",
+                        FlightNumber: "572",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "359",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T19:55:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T18:20:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6456",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ERJ",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "TjNSdTl4R1ZmTkY5SlNyTHErbFpsRjJFWERDZVM2dW5GSUdtbUJRYnZYVjB2bmYzMnNybDVySkNzQzhiZmUwNkpSK3lHSW9aSW02RkFuR1pJdWNWOGIzZUl0NkgvVCtQb2d2NXNqN3F3Z1BuTTVwSFJVZVdlQTkzaHZHL204dlFVVlZxcDBMVGtWejF4aWhDRUY4RlhncHVZOGxxZFFEZ2VMTWgxRUIvaHBJPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "335.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "335.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "572.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "907.85",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "335.42",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "335.42",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "163.78",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "907.85",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T16:25:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:00:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "6930",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T19:20:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T17:00:00",
+                        Eticket: true,
+                        JourneyDuration: "80",
+                        FlightNumber: "6931",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T09:35:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T21:00:00",
+                        Eticket: true,
+                        JourneyDuration: "695",
+                        FlightNumber: "572",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "359",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T19:55:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T18:20:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6456",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ERJ",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "U1g0Y2lkMmpqVzBvUHhza2tLSHN2NVQyeVRlSmF5ZEl6TW90MlFnSkFOdit4dDBHejhCOHVLYmJ3cnVkbklFWXdyb09kK3ZiT3h5REwwbnhxMktJdVByQ2dzS3Vab3hvY3pwNmRkNHpwRmpkSHVEZkFQeU1qWVhLTEF3RzFjU0dUSkl6ejZyY0NMczU5MTMzejBBMnBiaFMvaTBrK0FBVjVRUlZxZFh2c2x3PQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "335.92",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "335.92",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "621.55",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "957.48",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "335.92",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "335.92",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "212.91",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "957.48",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T17:15:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:50:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "8776",
+                        MarketingAirlineCode: "EN",
+                        MarketingAirlineName: "Air Dolomiti",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T19:20:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T16:55:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "4827",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T09:35:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T21:00:00",
+                        Eticket: true,
+                        JourneyDuration: "695",
+                        FlightNumber: "572",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "359",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T19:55:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T18:20:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6456",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ERJ",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "ZE9nTVJ6M3hQV0NlYXdSQmVaWFc2Zlp5d2IxZWFWN3JocmVJQkR6czBSSHpBaEVOQzl5V1ZOMnJjeTI1alJnQU5ZWm43bFVqM3VQUTlkY3Vvd1BMRkJsQ1FBa2d1dGowQlBHT0FkUjVhRTZTY0FMWHVTMXRIbDlXeThPM0s0UVdncVZ4aWJnUWdXdWxUdzcwT1k2THppcUNueVBIc3VvTllOY1RXblRxbjcwPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "335.92",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "335.92",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "621.55",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "957.48",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "335.92",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "335.92",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "212.91",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "957.48",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T17:15:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:50:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "8776",
+                        MarketingAirlineCode: "EN",
+                        MarketingAirlineName: "Air Dolomiti",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T19:20:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T17:00:00",
+                        Eticket: true,
+                        JourneyDuration: "80",
+                        FlightNumber: "6931",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T09:35:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T21:00:00",
+                        Eticket: true,
+                        JourneyDuration: "695",
+                        FlightNumber: "572",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "359",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T19:55:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T18:20:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6456",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ERJ",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "eTBQNzJHQm5lb09BYWkzcWp5ektQWXlueG4rRy9RQjZsM1BtM2NrQ2ZEbFQ5RnY3UEtQeVRUNlJNbDd2Q0NyT2ZqSVU0OFF4djQrOE5qY3VnWXRkOWtJaUNGdEFoMS9wYnUzWTlueTBLTFBrWmNrSTlhNitLTlBtNzk3RjZUUlNXRlc3TnM4L09zYkFXamNCZExVNHgvZTF0cDY1UG45b0ExWXlySU5WY3NvPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "480.64",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "480.64",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "572.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "1053.06",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "480.64",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "480.64",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "163.78",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "1053.06",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T16:40:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:15:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "934",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "CL",
+                          Name: "Lufthansa Cityline",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T11:35:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T09:15:00",
+                        Eticket: true,
+                        JourneyDuration: "80",
+                        FlightNumber: "5657",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T07:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T20:00:00",
+                        Eticket: true,
+                        JourneyDuration: "600",
+                        FlightNumber: "7012",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "346",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T12:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T10:30:00",
+                        Eticket: true,
+                        JourneyDuration: "90",
+                        FlightNumber: "6450",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "b2Z6a0poNWpTbitrSGhFSzFlUkZjU0FMcm1ScnFCL2pOSEoyQXRXQzRTWGorZkQrTGY2dWxOMlg5NHVJTktEV2VXVjJrSGdseDllM0t2OEx1SVZrbmxVOGYzNFgzQmwwMzNIeTZCakd2alZYVDMzZ2ZEK2RTdFQvK2xqd2hlbXE0WWlmRTJhd0xaWGtZSm9yYmE3dTdwd29kQ3VuUDBNbnhZZUdndmpPbm9jPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "480.64",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "480.64",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "572.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "1053.06",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "480.64",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "480.64",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "163.78",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "1053.06",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T16:25:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:00:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "6930",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T11:35:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T09:15:00",
+                        Eticket: true,
+                        JourneyDuration: "80",
+                        FlightNumber: "5657",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T07:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T20:00:00",
+                        Eticket: true,
+                        JourneyDuration: "600",
+                        FlightNumber: "7012",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "346",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T12:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T10:30:00",
+                        Eticket: true,
+                        JourneyDuration: "90",
+                        FlightNumber: "6450",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "Rmg1WFo5cUxlMEQxYW81Z2M2ZENHNW0zampjRnBTSVdudm1paHhSQS9HSVNGdU1TdnI0V2ZCdnoxUTd6MnhZcndlb1hGZk9DNFhBNllBZkJ0Qm9ubmlkOWl0bjhTY1FiV0FmeGFQTjBvb3JpNFlZNzUxU3RRZTBzNmJQbzJYc0ZMUW5xeGVqeTlIZUhDMVFXQkZneSt6RTcyQllrRlpXQlAzT1R1VUppTnkwPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "480.64",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "480.64",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "572.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "1053.06",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "480.64",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "480.64",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "163.78",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "1053.06",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T16:40:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:15:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "934",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "CL",
+                          Name: "Lufthansa Cityline",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T12:25:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T10:00:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "929",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "CL",
+                          Name: "Lufthansa Cityline",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T07:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T20:00:00",
+                        Eticket: true,
+                        JourneyDuration: "600",
+                        FlightNumber: "7012",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "346",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T12:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T10:30:00",
+                        Eticket: true,
+                        JourneyDuration: "90",
+                        FlightNumber: "6450",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "ZVhjNG01clZOU1ZEZXNHUUd0MWFJOEhMcGU2bmxlWUYycUc3RWJtTFhuN3NBMVFUWHhmUG1xNEw1UVg3cGNram1IT0s1elZtVG1STXRaQ1pKYnphWm9Xa0lFWEJmZUtxOTVvc0lWejRDdHo0aUxybGorZzlVNEdpaGF5L1VpMFgxTXlVQjlxVDB5QkNwUUZVZGxPNTIwd1R0RTFVbEx3U2FOTXVzd1Uva1NFPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "480.64",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "480.64",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "572.42",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "1053.06",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "480.64",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "480.64",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "163.78",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "1053.06",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T16:25:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:00:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "6930",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T12:25:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T10:00:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "929",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "CL",
+                          Name: "Lufthansa Cityline",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T07:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T20:00:00",
+                        Eticket: true,
+                        JourneyDuration: "600",
+                        FlightNumber: "7012",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "346",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T12:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T10:30:00",
+                        Eticket: true,
+                        JourneyDuration: "90",
+                        FlightNumber: "6450",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "WEhVM21ackdMZTNyUjJkYThOQVJuVWRIeXRxNVNEYnJ1NEJ1dDFnM2FLQzVTNnlKamJEd2VRWnh1OTA5clN0WHpXV3JsTlpCVTBhT0E4TmdlcDFYblk0UzdDZFNuaG9Pd095RGY0dFhMbFFRa05odjZIeWsrdWZGQkhEWlNrV212bzBDMVhjbVpLa0EwRjdIYWwyOTFQd1F0a0tRekVZMVFTY1pwaEdzYUZvPQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "481.13",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "481.13",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "621.55",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "1102.69",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "481.13",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "481.13",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "212.91",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "1102.69",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T17:15:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:50:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "8776",
+                        MarketingAirlineCode: "EN",
+                        MarketingAirlineName: "Air Dolomiti",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T11:35:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T09:15:00",
+                        Eticket: true,
+                        JourneyDuration: "80",
+                        FlightNumber: "5657",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T07:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T20:00:00",
+                        Eticket: true,
+                        JourneyDuration: "600",
+                        FlightNumber: "7012",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "346",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T12:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T10:30:00",
+                        Eticket: true,
+                        JourneyDuration: "90",
+                        FlightNumber: "6450",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+          {
+            FareItinerary: {
+              DirectionInd: "Return",
+              AirItineraryFareInfo: {
+                DivideInPartyIndicator: "false",
+                FareSourceCode:
+                  "RGxEYXd2aVlkMlc5Q0dIZW5MS2gzU25DM3NtLzFycmtrMlRkZ1BmMVhLREExQ2ZjaHQ1RG01NE8rV2N5bWtHTFVQQno2YnlJdU5adDV6TDFTeXNzbWhZcHptdHdDWHF5cHFsTVRwSXZtU01tcnVFZVpOdHdZY0hHNWd3VlpzRFpMUi9wc3dwNFNaTG45azBjZzYxeTJ2RkZoYytXanVZMC95eS9CUVpGV0o4PQ==",
+                FareInfos: [],
+                FareType: "Public",
+                ResultIndex: "",
+                IsRefundable: "No",
+                ItinTotalFares: {
+                  BaseFare: {
+                    Amount: "481.13",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  EquivFare: {
+                    Amount: "481.13",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  ServiceTax: {
+                    Amount: "0.00",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalTax: {
+                    Amount: "621.55",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                  TotalFare: {
+                    Amount: "1102.69",
+                    CurrencyCode: "USD",
+                    DecimalPlaces: "2",
+                  },
+                },
+                FareBreakdown: [
+                  {
+                    FareBasisCode: "",
+                    Baggage: ["1PC", "1PC", "1PC", "1PC", "1PC", "1PC"],
+                    CabinBaggage: ["SB", "SB", "SB", "SB", "SB", "SB"],
+                    PassengerFare: {
+                      BaseFare: {
+                        Amount: "481.13",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      EquivFare: {
+                        Amount: "481.13",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      ServiceTax: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Surcharges: {
+                        Amount: "0.00",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                      Taxes: [
+                        {
+                          TaxCode: "YQ",
+                          Amount: "212.91",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "YR",
+                          Amount: "19.11",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "",
+                          Amount: "0.00",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                        {
+                          TaxCode: "XT",
+                          Amount: "389.53",
+                          CurrencyCode: "USD",
+                          DecimalPlaces: "2",
+                        },
+                      ],
+                      TotalFare: {
+                        Amount: "1102.69",
+                        CurrencyCode: "USD",
+                        DecimalPlaces: "2",
+                      },
+                    },
+                    PassengerTypeQuantity: {
+                      Code: "ADT",
+                      Quantity: 1,
+                    },
+                    PenaltyDetails: {
+                      Currency: "USD",
+                      RefundAllowed: false,
+                      RefundPenaltyAmount: "0.00",
+                      ChangeAllowed: true,
+                      ChangePenaltyAmount: "0.00",
+                    },
+                  },
+                ],
+                SplitItinerary: false,
+              },
+              OriginDestinationOptions: [
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-06T14:10:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "ELS",
+                        DepartureDateTime: "2024-12-06T12:35:00",
+                        Eticket: true,
+                        JourneyDuration: "95",
+                        FlightNumber: "6451",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-07T18:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-07T08:00:00",
+                        Eticket: true,
+                        JourneyDuration: "660",
+                        FlightNumber: "5019",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "744",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "LCY",
+                        ArrivalDateTime: "2024-12-08T17:15:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-08T16:50:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "8776",
+                        MarketingAirlineCode: "EN",
+                        MarketingAirlineName: "Air Dolomiti",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "EN",
+                          Name: "Air Dolomiti",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+                {
+                  OriginDestinationOption: [
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "FRA",
+                        ArrivalDateTime: "2024-12-16T12:25:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "LCY",
+                        DepartureDateTime: "2024-12-16T10:00:00",
+                        Eticket: true,
+                        JourneyDuration: "85",
+                        FlightNumber: "929",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "CL",
+                          Name: "Lufthansa Cityline",
+                          Equipment: "E90",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "JNB",
+                        ArrivalDateTime: "2024-12-17T07:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "FRA",
+                        DepartureDateTime: "2024-12-16T20:00:00",
+                        Eticket: true,
+                        JourneyDuration: "600",
+                        FlightNumber: "7012",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "LH",
+                          Name: "Deutsche Lufthansa",
+                          Equipment: "346",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                    {
+                      FlightSegment: {
+                        ArrivalAirportLocationCode: "ELS",
+                        ArrivalDateTime: "2024-12-17T12:00:00",
+                        CabinClassCode: "Y",
+                        CabinClassText: "ECOSAVERA",
+                        DepartureAirportLocationCode: "JNB",
+                        DepartureDateTime: "2024-12-17T10:30:00",
+                        Eticket: true,
+                        JourneyDuration: "90",
+                        FlightNumber: "6450",
+                        MarketingAirlineCode: "LH",
+                        MarketingAirlineName: "Deutsche Lufthansa",
+                        MarriageGroup: "",
+                        MealCode: "",
+                        OperatingAirline: {
+                          Code: "4Z",
+                          Name: "Sa Airlink",
+                          Equipment: "ER3",
+                          FlightNumber: "",
+                        },
+                      },
+                      ResBookDesigCode: "",
+                      ResBookDesigText: "",
+                      SeatsRemaining: {
+                        BelowMinimum: false,
+                        Number: 6,
+                      },
+                      StopQuantity: 0,
+                      StopQuantityInfo: {
+                        ArrivalDateTime: "",
+                        DepartureDateTime: "",
+                        Duration: "",
+                        LocationCode: "",
+                      },
+                    },
+                  ],
+                  TotalStops: 2,
+                },
+              ],
+              IsPassportMandatory: null,
+              SequenceNumber: "",
+              TicketType: "eTicket",
+              ValidatingAirlineCode: "LH",
+            },
+          },
+        ],
+      },
+    },
   });
-    
-
-  
-  searchFlights();
-  
-  app.get("/testing",(req,res)=>{
-    res.json( {
-      "AirSearchResponse": {
-          "session_id": "MTcyOTU1ODQxMF85MzI1MDM=",
-          "AirSearchResult": {
-              "FareItineraries": [
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "MnVtTEpzZkNLc29JVW5ISTRzTnlBaFgzbXlXV3N2bllJOEg3cVRTcGU5TDRtUkNwWDNlOGl2TXhUblViV1VXSDJXSEtUZDl0VDlFMzUzbkZLS0FsZ0NLQzNjUFdzZDBpcnF0QmM0RHRSTlpYQ0Z6OXorQTFpRXB1Uk1TaEJLVUo3NnpBaDFqRGdZTUptRUZQTkRRaHduc0JCSjVqbWZaUHI1dmw4M2lreGhrPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "335.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "335.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "572.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "907.85",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "335.42",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "335.42",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "163.78",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "907.85",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T16:40:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:15:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "934",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "CL",
-                                                  "Name": "Lufthansa Cityline",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T19:20:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T16:55:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "4827",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T09:35:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T21:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "695",
-                                              "FlightNumber": "572",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "359",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T19:55:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T18:20:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6456",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ERJ",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "Ti8xd0tFaWwxdmJXREYvQ0trbkIvVDZDWnhMbWlxYmRHNStJaVhweGpYK0RFSVZldkhiU0U2ajdTMW1BelNTU2NQejJyaEtUaEtoZTM0czJhRk5FS001TnltcW9ueGwvMG5VbldXdVNkdmdjWHI0bU5MQ0NsdmRZTEdwVDNpdFQ5N1RNMGJIMkU1RzUxUGtPbUp3VlAyK2JjeEsveTVTVXY5UXBwUldTZFZvPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "335.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "335.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "572.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "907.85",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "335.42",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "335.42",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "163.78",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "907.85",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T16:40:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:15:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "934",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "CL",
-                                                  "Name": "Lufthansa Cityline",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T19:20:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T17:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "80",
-                                              "FlightNumber": "6931",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T09:35:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T21:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "695",
-                                              "FlightNumber": "572",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "359",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T19:55:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T18:20:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6456",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ERJ",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "WTQrQVpLTkVJUTQzbUxJaU1kT1ZqSFowVUtSZkhnTXY1UUtlYnlFQ1BzS1pWdVhCc3EvSVJXZUNDbTh1cFJLUGY2TVVQQW45dnMvM3Uydm11U3V5QUdGOUVaTDZ2d0tER1RhR2hJQ3Z0a2NVWWtPK3JLRG1PSzVJTEpSdmRLMllmTndDQWZYTzk2ZTlQRDRqaTMyWlArcjdKRlF3eWE5Nkg2bVl4Tnp0eWNvPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "335.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "335.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "572.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "907.85",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "335.42",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "335.42",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "163.78",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "907.85",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T16:25:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "6930",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T19:20:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T16:55:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "4827",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T09:35:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T21:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "695",
-                                              "FlightNumber": "572",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "359",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T19:55:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T18:20:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6456",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ERJ",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "TjNSdTl4R1ZmTkY5SlNyTHErbFpsRjJFWERDZVM2dW5GSUdtbUJRYnZYVjB2bmYzMnNybDVySkNzQzhiZmUwNkpSK3lHSW9aSW02RkFuR1pJdWNWOGIzZUl0NkgvVCtQb2d2NXNqN3F3Z1BuTTVwSFJVZVdlQTkzaHZHL204dlFVVlZxcDBMVGtWejF4aWhDRUY4RlhncHVZOGxxZFFEZ2VMTWgxRUIvaHBJPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "335.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "335.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "572.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "907.85",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "335.42",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "335.42",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "163.78",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "907.85",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T16:25:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "6930",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T19:20:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T17:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "80",
-                                              "FlightNumber": "6931",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T09:35:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T21:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "695",
-                                              "FlightNumber": "572",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "359",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T19:55:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T18:20:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6456",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ERJ",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "U1g0Y2lkMmpqVzBvUHhza2tLSHN2NVQyeVRlSmF5ZEl6TW90MlFnSkFOdit4dDBHejhCOHVLYmJ3cnVkbklFWXdyb09kK3ZiT3h5REwwbnhxMktJdVByQ2dzS3Vab3hvY3pwNmRkNHpwRmpkSHVEZkFQeU1qWVhLTEF3RzFjU0dUSkl6ejZyY0NMczU5MTMzejBBMnBiaFMvaTBrK0FBVjVRUlZxZFh2c2x3PQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "335.92",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "335.92",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "621.55",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "957.48",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "335.92",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "335.92",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "212.91",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "957.48",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T17:15:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:50:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "8776",
-                                              "MarketingAirlineCode": "EN",
-                                              "MarketingAirlineName": "Air Dolomiti",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T19:20:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T16:55:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "4827",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T09:35:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T21:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "695",
-                                              "FlightNumber": "572",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "359",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T19:55:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T18:20:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6456",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ERJ",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "ZE9nTVJ6M3hQV0NlYXdSQmVaWFc2Zlp5d2IxZWFWN3JocmVJQkR6czBSSHpBaEVOQzl5V1ZOMnJjeTI1alJnQU5ZWm43bFVqM3VQUTlkY3Vvd1BMRkJsQ1FBa2d1dGowQlBHT0FkUjVhRTZTY0FMWHVTMXRIbDlXeThPM0s0UVdncVZ4aWJnUWdXdWxUdzcwT1k2THppcUNueVBIc3VvTllOY1RXblRxbjcwPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "335.92",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "335.92",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "621.55",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "957.48",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "335.92",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "335.92",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "212.91",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "957.48",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T17:15:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:50:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "8776",
-                                              "MarketingAirlineCode": "EN",
-                                              "MarketingAirlineName": "Air Dolomiti",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T19:20:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T17:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "80",
-                                              "FlightNumber": "6931",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T09:35:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T21:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "695",
-                                              "FlightNumber": "572",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "359",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T19:55:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T18:20:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6456",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ERJ",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "eTBQNzJHQm5lb09BYWkzcWp5ektQWXlueG4rRy9RQjZsM1BtM2NrQ2ZEbFQ5RnY3UEtQeVRUNlJNbDd2Q0NyT2ZqSVU0OFF4djQrOE5qY3VnWXRkOWtJaUNGdEFoMS9wYnUzWTlueTBLTFBrWmNrSTlhNitLTlBtNzk3RjZUUlNXRlc3TnM4L09zYkFXamNCZExVNHgvZTF0cDY1UG45b0ExWXlySU5WY3NvPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "480.64",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "480.64",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "572.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "1053.06",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "480.64",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "480.64",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "163.78",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "1053.06",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T16:40:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:15:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "934",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "CL",
-                                                  "Name": "Lufthansa Cityline",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T11:35:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T09:15:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "80",
-                                              "FlightNumber": "5657",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T07:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T20:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "600",
-                                              "FlightNumber": "7012",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "346",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T12:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T10:30:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "90",
-                                              "FlightNumber": "6450",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "b2Z6a0poNWpTbitrSGhFSzFlUkZjU0FMcm1ScnFCL2pOSEoyQXRXQzRTWGorZkQrTGY2dWxOMlg5NHVJTktEV2VXVjJrSGdseDllM0t2OEx1SVZrbmxVOGYzNFgzQmwwMzNIeTZCakd2alZYVDMzZ2ZEK2RTdFQvK2xqd2hlbXE0WWlmRTJhd0xaWGtZSm9yYmE3dTdwd29kQ3VuUDBNbnhZZUdndmpPbm9jPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "480.64",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "480.64",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "572.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "1053.06",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "480.64",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "480.64",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "163.78",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "1053.06",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T16:25:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "6930",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T11:35:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T09:15:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "80",
-                                              "FlightNumber": "5657",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T07:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T20:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "600",
-                                              "FlightNumber": "7012",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "346",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T12:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T10:30:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "90",
-                                              "FlightNumber": "6450",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "Rmg1WFo5cUxlMEQxYW81Z2M2ZENHNW0zampjRnBTSVdudm1paHhSQS9HSVNGdU1TdnI0V2ZCdnoxUTd6MnhZcndlb1hGZk9DNFhBNllBZkJ0Qm9ubmlkOWl0bjhTY1FiV0FmeGFQTjBvb3JpNFlZNzUxU3RRZTBzNmJQbzJYc0ZMUW5xeGVqeTlIZUhDMVFXQkZneSt6RTcyQllrRlpXQlAzT1R1VUppTnkwPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "480.64",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "480.64",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "572.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "1053.06",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "480.64",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "480.64",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "163.78",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "1053.06",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T16:40:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:15:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "934",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "CL",
-                                                  "Name": "Lufthansa Cityline",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T12:25:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T10:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "929",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "CL",
-                                                  "Name": "Lufthansa Cityline",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T07:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T20:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "600",
-                                              "FlightNumber": "7012",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "346",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T12:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T10:30:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "90",
-                                              "FlightNumber": "6450",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "ZVhjNG01clZOU1ZEZXNHUUd0MWFJOEhMcGU2bmxlWUYycUc3RWJtTFhuN3NBMVFUWHhmUG1xNEw1UVg3cGNram1IT0s1elZtVG1STXRaQ1pKYnphWm9Xa0lFWEJmZUtxOTVvc0lWejRDdHo0aUxybGorZzlVNEdpaGF5L1VpMFgxTXlVQjlxVDB5QkNwUUZVZGxPNTIwd1R0RTFVbEx3U2FOTXVzd1Uva1NFPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "480.64",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "480.64",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "572.42",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "1053.06",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "480.64",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "480.64",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "163.78",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "1053.06",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T16:25:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "6930",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T12:25:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T10:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "929",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "CL",
-                                                  "Name": "Lufthansa Cityline",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T07:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T20:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "600",
-                                              "FlightNumber": "7012",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "346",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T12:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T10:30:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "90",
-                                              "FlightNumber": "6450",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "WEhVM21ackdMZTNyUjJkYThOQVJuVWRIeXRxNVNEYnJ1NEJ1dDFnM2FLQzVTNnlKamJEd2VRWnh1OTA5clN0WHpXV3JsTlpCVTBhT0E4TmdlcDFYblk0UzdDZFNuaG9Pd095RGY0dFhMbFFRa05odjZIeWsrdWZGQkhEWlNrV212bzBDMVhjbVpLa0EwRjdIYWwyOTFQd1F0a0tRekVZMVFTY1pwaEdzYUZvPQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "481.13",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "481.13",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "621.55",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "1102.69",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "481.13",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "481.13",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "212.91",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "1102.69",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T17:15:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:50:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "8776",
-                                              "MarketingAirlineCode": "EN",
-                                              "MarketingAirlineName": "Air Dolomiti",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T11:35:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T09:15:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "80",
-                                              "FlightNumber": "5657",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T07:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T20:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "600",
-                                              "FlightNumber": "7012",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "346",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T12:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T10:30:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "90",
-                                              "FlightNumber": "6450",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  },
-                  {
-                      "FareItinerary": {
-                          "DirectionInd": "Return",
-                          "AirItineraryFareInfo": {
-                              "DivideInPartyIndicator": "false",
-                              "FareSourceCode": "RGxEYXd2aVlkMlc5Q0dIZW5MS2gzU25DM3NtLzFycmtrMlRkZ1BmMVhLREExQ2ZjaHQ1RG01NE8rV2N5bWtHTFVQQno2YnlJdU5adDV6TDFTeXNzbWhZcHptdHdDWHF5cHFsTVRwSXZtU01tcnVFZVpOdHdZY0hHNWd3VlpzRFpMUi9wc3dwNFNaTG45azBjZzYxeTJ2RkZoYytXanVZMC95eS9CUVpGV0o4PQ==",
-                              "FareInfos": [],
-                              "FareType": "Public",
-                              "ResultIndex": "",
-                              "IsRefundable": "No",
-                              "ItinTotalFares": {
-                                  "BaseFare": {
-                                      "Amount": "481.13",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "EquivFare": {
-                                      "Amount": "481.13",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "ServiceTax": {
-                                      "Amount": "0.00",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalTax": {
-                                      "Amount": "621.55",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  },
-                                  "TotalFare": {
-                                      "Amount": "1102.69",
-                                      "CurrencyCode": "USD",
-                                      "DecimalPlaces": "2"
-                                  }
-                              },
-                              "FareBreakdown": [
-                                  {
-                                      "FareBasisCode": "",
-                                      "Baggage": [
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC",
-                                          "1PC"
-                                      ],
-                                      "CabinBaggage": [
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB",
-                                          "SB"
-                                      ],
-                                      "PassengerFare": {
-                                          "BaseFare": {
-                                              "Amount": "481.13",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "EquivFare": {
-                                              "Amount": "481.13",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "ServiceTax": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Surcharges": {
-                                              "Amount": "0.00",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          },
-                                          "Taxes": [
-                                              {
-                                                  "TaxCode": "YQ",
-                                                  "Amount": "212.91",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "YR",
-                                                  "Amount": "19.11",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "",
-                                                  "Amount": "0.00",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              },
-                                              {
-                                                  "TaxCode": "XT",
-                                                  "Amount": "389.53",
-                                                  "CurrencyCode": "USD",
-                                                  "DecimalPlaces": "2"
-                                              }
-                                          ],
-                                          "TotalFare": {
-                                              "Amount": "1102.69",
-                                              "CurrencyCode": "USD",
-                                              "DecimalPlaces": "2"
-                                          }
-                                      },
-                                      "PassengerTypeQuantity": {
-                                          "Code": "ADT",
-                                          "Quantity": 1
-                                      },
-                                      "PenaltyDetails": {
-                                          "Currency": "USD",
-                                          "RefundAllowed": false,
-                                          "RefundPenaltyAmount": "0.00",
-                                          "ChangeAllowed": true,
-                                          "ChangePenaltyAmount": "0.00"
-                                      }
-                                  }
-                              ],
-                              "SplitItinerary": false
-                          },
-                          "OriginDestinationOptions": [
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-06T14:10:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "ELS",
-                                              "DepartureDateTime": "2024-12-06T12:35:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "95",
-                                              "FlightNumber": "6451",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-07T18:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-07T08:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "660",
-                                              "FlightNumber": "5019",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "744",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "LCY",
-                                              "ArrivalDateTime": "2024-12-08T17:15:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-08T16:50:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "8776",
-                                              "MarketingAirlineCode": "EN",
-                                              "MarketingAirlineName": "Air Dolomiti",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "EN",
-                                                  "Name": "Air Dolomiti",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              },
-                              {
-                                  "OriginDestinationOption": [
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "FRA",
-                                              "ArrivalDateTime": "2024-12-16T12:25:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "LCY",
-                                              "DepartureDateTime": "2024-12-16T10:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "85",
-                                              "FlightNumber": "929",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "CL",
-                                                  "Name": "Lufthansa Cityline",
-                                                  "Equipment": "E90",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "JNB",
-                                              "ArrivalDateTime": "2024-12-17T07:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "FRA",
-                                              "DepartureDateTime": "2024-12-16T20:00:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "600",
-                                              "FlightNumber": "7012",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "LH",
-                                                  "Name": "Deutsche Lufthansa",
-                                                  "Equipment": "346",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      },
-                                      {
-                                          "FlightSegment": {
-                                              "ArrivalAirportLocationCode": "ELS",
-                                              "ArrivalDateTime": "2024-12-17T12:00:00",
-                                              "CabinClassCode": "Y",
-                                              "CabinClassText": "ECOSAVERA",
-                                              "DepartureAirportLocationCode": "JNB",
-                                              "DepartureDateTime": "2024-12-17T10:30:00",
-                                              "Eticket": true,
-                                              "JourneyDuration": "90",
-                                              "FlightNumber": "6450",
-                                              "MarketingAirlineCode": "LH",
-                                              "MarketingAirlineName": "Deutsche Lufthansa",
-                                              "MarriageGroup": "",
-                                              "MealCode": "",
-                                              "OperatingAirline": {
-                                                  "Code": "4Z",
-                                                  "Name": "Sa Airlink",
-                                                  "Equipment": "ER3",
-                                                  "FlightNumber": ""
-                                              }
-                                          },
-                                          "ResBookDesigCode": "",
-                                          "ResBookDesigText": "",
-                                          "SeatsRemaining": {
-                                              "BelowMinimum": false,
-                                              "Number": 6
-                                          },
-                                          "StopQuantity": 0,
-                                          "StopQuantityInfo": {
-                                              "ArrivalDateTime": "",
-                                              "DepartureDateTime": "",
-                                              "Duration": "",
-                                              "LocationCode": ""
-                                          }
-                                      }
-                                  ],
-                                  "TotalStops": 2
-                              }
-                          ],
-                          "IsPassportMandatory": null,
-                          "SequenceNumber": "",
-                          "TicketType": "eTicket",
-                          "ValidatingAirlineCode": "LH"
-                      }
-                  }
-              ]
-          }
-      }
-  }
-);
-  });
-
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
@@ -4423,7 +4246,57 @@ app.listen(port, () => {
 //   });
 
 //   const data = await response.json();
-//   console.log(data); 
+//   console.log(data);
 // } catch (error) {
 //   console.error('Error fetching flight availability:', error);
 // }
+
+// ----FLIGHT LOGIC API ---- //
+
+// .get((req, res) => {
+//     const reqBody = {
+//       user_id: "balijawahussein_testAPI",
+//       user_password: "balijawahusseinTest@2024",
+//       access: "Test",
+//       ip_address: "41.210.143.183",
+//       requiredCurrency: "USD",
+//       journeyType: "OneWay",
+//       OriginDestinationInfo: [
+//         {
+//           departureDate: "2024-12-07",
+//           airportOriginCode: "EBB",
+//           airportDestinationCode: "DXB",
+//         },
+//       ],
+//       class: "Economy",
+//       adults: 2,
+//       childs: 1,
+//       infants: 1,
+//     };
+//     const options = {
+//       hostname: "travelnext.works",
+//       path: "/api/aeroVE5/availabilit",
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Content-Length": Buffer.byteLength(JSON.stringify(reqBody)),
+//       },
+//     };
+  
+//     const request = https.request(options, (response) => {
+//       let data = "";
+//       response.on("data", (chunk) => {
+//         data += chunk;
+//       });
+//       response.on("end", () => {
+//         res.json(JSON.parse(data));
+//       });
+//     });
+//     request.on("error", (error) => {
+//       console.error(error);
+//       res.status(500).send("Internal Server Error");
+//     });
+  
+//     request.write(JSON.stringify(reqBody));
+//     request.end();
+//   });
