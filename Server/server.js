@@ -3,6 +3,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https");
 const cors = require("cors");
+const env = require('dotenv').config();
+
+// console.log(process.env);`
 
 const port = 3080;
 const app = express();
@@ -12,10 +15,14 @@ const corsOptions = {
 };
 
 // Middleware setup
+app.use(express.json());
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+
+const API_KEY = process.env.API_KEY;
+const SECRET_KEY = process.env.SECRET_KEY;
 
 mongoose.connect("mongodb://127.0.0.1:27017/IATACODESDB")
   .then(() => console.log('Connected to MongoDB'))
@@ -61,6 +68,37 @@ app.route("/flights")
     console.log(flightData);
   });
 
+
+  app.route("flights/flightsResults")
+  .get(async(req,res)=>{
+    try {
+      const { origin, destination, departureDate, returnDate } = req.body;
+      const token = await getAccessToken();
+  
+      const response = await axios.get('https://test.api.amadeus.com/v2/shopping/flight-offers', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          originLocationCode: origin,
+          destinationLocationCode: destination,
+          departureDate,
+          returnDate,
+          adults: 1, // Change according to your requirement
+        },
+      });
+  
+      res.json(response.data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch flight offers' });
+    }  
+  });
+    
+
+  
+  searchFlights();
+  
   app.get("/testing",(req,res)=>{
     res.json( {
       "AirSearchResponse": {
@@ -4374,3 +4412,18 @@ app.route("/flights")
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+// try {
+//   const response = await fetch('https://travelnext.works/api/aeroVE5/availability', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(requestBody)
+//   });
+
+//   const data = await response.json();
+//   console.log(data); 
+// } catch (error) {
+//   console.error('Error fetching flight availability:', error);
+// }
