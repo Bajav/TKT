@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import FlightCard from '../components/flightSearch/TicketCard';
 import { Arrow } from '../components/flightSearch/flightArrowSvg';
+import Dummy from '../components/places/dummyCard';
 
 function FlightResult() {
   const location = useLocation();
@@ -45,6 +46,7 @@ function FlightResult() {
           <FlightCard />
           <FlightCard />
           <FlightCard />
+          <Dummy />
         </div>
       </div>
     </main>

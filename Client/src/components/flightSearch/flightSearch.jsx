@@ -7,7 +7,7 @@ function FlightSearchInput(props) {
 
   const fetchIataCodes = async () => { 
     try {
-      const response = await axios.get("http://localhost:3000/flights"); 
+      const response = await axios.get("http://localhost:3080/flights"); 
       setIataCodes(response.data);
     } catch (err) {
       console.error("Error fetching IATA codes", err);
@@ -51,7 +51,7 @@ function FlightSearchInput(props) {
       {props.value && showDropdown && filteredCodes.length > 0 ? (
         <div className="dropDown">
           <ul>
-            {filteredCodes.slice(0, 2).map((code, index) => (
+            {filteredCodes.slice(0, 5).map((code, index) => (
               <li 
                 className='dropDownRow' 
                 key={index} 

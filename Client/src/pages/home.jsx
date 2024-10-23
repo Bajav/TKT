@@ -14,7 +14,7 @@ function Home() {
 
   const fetchIataCodes = async () => { 
     try {
-      const response = await axios.get("http://localhost:3000/flights"); 
+      const response = await axios.get("http://localhost:3080/flights"); 
       setStatus(response.statusText);
       setIataCodes(response.data);
       console.log(response);
@@ -44,33 +44,7 @@ function Home() {
 
   return (
     <div className="testing">
-      <h1>{status}</h1>
-      <div className="flexInput">
-        <label htmlFor="to">To</label>
-        <input
-          type="text"
-          name="destination"
-          placeholder="Enter destination"
-          onChange={handleChange}
-          value={value}
-        />
-      </div>
       
-      {value && showDropdown ? (
-        <div className="dropDown">
-          <ul>
-            {filteredCodes.slice(0, 10).map((code, index) => (
-              <li 
-                className='dropDownRow' 
-                key={index} 
-                onClick={() => onSearch(`${code.AirportCode}, ${code.AirportName}, ${code.City}, ${code.Country}`)}
-              >
-                {code.AirportCode} - {code.AirportName}, {code.City}, {code.Country}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null} 
     </div>
   )
 }
