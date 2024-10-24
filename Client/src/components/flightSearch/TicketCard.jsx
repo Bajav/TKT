@@ -1,9 +1,26 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import {Arrow, CalenderSvg, TimeSvg } from './flightArrowSvg'
+import axios from 'axios';
 
 
 
 function FlightCard() {
+    const [flightResponse , setflightResponse]= useState([]);
+
+    const fetchFlights = async()=>{ 
+        try{
+            const res = axios.get('http://localhost:3080/flights/flightsResults');
+            setflightResponse(res.data);
+            console.log(res);
+            console.log(res.data);
+        }catch(err){
+            console.log(err);
+        }
+    }
+    useEffect(()=>{
+        fetchFlights();
+    },[]);
+
   return (
     <div className="flights-res">
         <div className="flights-header">
