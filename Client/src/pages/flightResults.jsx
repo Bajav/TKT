@@ -33,19 +33,6 @@ function FlightResult() {
         </div>
         <div className="results">
           <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
           <Dummy />
         </div>
       </div>
