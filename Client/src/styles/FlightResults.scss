@@ -11,7 +11,10 @@ body
 {
     background: $page_color;
     height: 100vh;
-
+    .card
+    {
+        height: 90px;
+    }
 }
 h1.h2,h3,h4,h5,h6
 {
@@ -86,7 +89,7 @@ h1.h2,h3,h4,h5,h6
     {
         text-transform: uppercase;
         font-family: $cityFont, sans-serif;
-        font-weight: 600;
+        font-weight: 500;
         // color: $visibleFontColor;
         font-size: 30px;
     }
@@ -123,6 +126,10 @@ h1.h2,h3,h4,h5,h6
         padding: 3px 10px;
         border-radius: 15px;
         color: $deemFontColor;
+    }
+    .price-details h4
+    {
+        font-size: 15px;
     }
 }
 .actions
@@ -171,7 +178,7 @@ h1.h2,h3,h4,h5,h6
     font-family: $textFont, sans-serif;
     color: $deemFontColor;
     text-align: center;
-    margin-top: 20px;
+    padding: 20px 10px;
     font-size: 15px;
 }
 .center

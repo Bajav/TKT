@@ -32,6 +32,7 @@ function FlightCard() {
   return (
     <Fragment>
       {flightResponse.map((itinerary, index) => {  
+        console.log(itinerary);
         const segments = itinerary.itineraries[0].segments;
         const segmentNumber = segments.length;
         const lastSegmentIndex = segmentNumber - 1;
@@ -71,7 +72,7 @@ function FlightCard() {
                     <h4>{itinerary.itineraries[0].duration.slice(2)}</h4>
                   </div>
                 </div>
-                <div className="price details">
+                <div className="price-details">
                   <h4>${itinerary.price.grandTotal}</h4>
                 </div>
                 <div className="actions">
