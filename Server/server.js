@@ -81,7 +81,7 @@ app.route("/flights/flightsResults")
         adults: 1,
         travelClass: "ECONOMY",
         currencyCode: "USD",
-        max: 2,
+        max: 20,
       });
       const flightOffers = response.data;
       res.json(flightOffers);

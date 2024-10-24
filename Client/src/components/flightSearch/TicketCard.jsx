@@ -9,6 +9,7 @@ function FlightCard() {
     try {
       const res = await axios.get("http://localhost:3080/flights/flightsResults");
       setFlightResponse(res.data);
+      console.log()
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +22,7 @@ function FlightCard() {
   return (
     <Fragment>
       {flightResponse.map((itinerary) => {
-        console.log("results", itinerary);
+        // console.log("results", itinerary);
         return ( 
           <div className="flights-res" key={itinerary.itineraries[0].segments[0].id || itinerary.id}>
             <div className="flights-header">
@@ -46,20 +47,17 @@ function FlightCard() {
                 <h5>{itinerary.itineraries[0].segments[0].arrival.at.slice(11)}</h5> {/* Corrected here */}
               </div>
             </div>
-            {/* .slice(11, 17) */}
             <div className="flights-actions">
               <div className="time-details">
                 <div className="flex-tim">
-                  <CalenderSvg />
                   <h4>{itinerary.itineraries[0].segments[0].arrival.at.slice(0,10)}</h4>
                 </div>
                 <div className="flex-tim">
-                  <TimeSvg />
                   <h4>{itinerary.itineraries[0].duration.slice(2)}</h4>
                 </div>
               </div>
               <div className="price details">
-                <h4>{itinerary.price.grandTotal}/Pax</h4>
+                <h4>${itinerary.price.grandTotal}/Pax</h4>
               </div>
               <div className="actions">
                 <button className="bookBtn">book now</button>
