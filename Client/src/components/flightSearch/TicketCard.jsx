@@ -101,7 +101,7 @@ function FlightCard() {
             </div>
             {dropDown === index ? (
               <div className="flightsDetails">
-                <div className="stopOvers">
+                <div className="stopOvers ">
                 <div className="ticket-header">
                   <div className="origin">
                     <h2>{segments[0].departure.iataCode}</h2>
@@ -109,12 +109,7 @@ function FlightCard() {
                     <h5>{segments[0].departure.at.slice(11)}</h5>
                   </div>
                   <div className="center">
-                    <Arrow color="#F5F7F8" width="80px" height="" />
-                    {segmentNumber > 1 ? (
-                      <h5>{segmentNumber - 1} stops</h5>
-                    ) : (
-                      <h5>0 stops</h5>
-                    )}
+                    <Arrow color="#F5F7F8" width="90px" height="" />
                   </div>
                   <div className="item">
                     <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
@@ -122,9 +117,39 @@ function FlightCard() {
                     <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
                   </div>
                 </div>
+                <div className="ticket-header">
+                  <div className="origin">
+                    <h2>{segments[0].departure.iataCode}</h2>
+                    <h5>Kampala, Uganda</h5>
+                    <h5>{segments[0].departure.at.slice(11)}</h5>
+                  </div>
+                  <div className="center">
+                    <Arrow color="#F5F7F8" width="90px" height="" />
+                  </div>
+                  <div className="item">
+                    <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
+                    <h5>Dubai, UAE</h5>
+                    <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
+                  </div>
+                </div>
+                <div className="ticket-header">
+                  <div className="origin">
+                    <h2>{segments[0].departure.iataCode}</h2>
+                    <h5>Kampala, Uganda</h5>
+                    <h5>{segments[0].departure.at.slice(11)}</h5>
+                  </div>
+                  <div className="center">
+                    <Arrow color="#F5F7F8" width="90px" height="" />
+                  </div>
+                  <div className="item">
+                    <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
+                    <h5>Dubai, UAE</h5>
+                    <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
+                  </div>
+                </div>
+                </div>
                 <div className="line"></div>
                 <div className="Alldetails"></div>
-                </div>
               </div>
             ) : null}
           </div>
