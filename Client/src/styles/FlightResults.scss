@@ -187,21 +187,21 @@ h1.h2,h3,h4,h5,h6
 .flightsDetails {
     position: relative;
     height: 180px; 
-    overflow: hidden;
-    width: 420px;
+    overflow-x: hidden;
+    width: 100%;
     background: #202020;
     border-radius: 0px 0px 20px 20px; 
     bottom: 20px;
 }
 .stopOvers{
-    // background: #803c3c;
-    padding: 5px;
     display: flex;
-    gap: 10px;
-    width: 140%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 10px;
     position: absolute;
-    top: 21px;
-    overflow-x: scroll;
+    top: 25px;
+    width: 200%;
     h2
     {
         font-size: 13px;
@@ -211,9 +211,6 @@ h1.h2,h3,h4,h5,h6
     {
         font-size: 6px;
         margin-bottom: 5px;
-    }
-    .ticket-header {
-        width:300px;
     }
 }
 .flightsDetails.open {

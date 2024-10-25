@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState , useRef} from "react";
 import { Arrow, Small } from "./flightArrowSvg";
 import axios from "axios";
 
@@ -30,7 +30,7 @@ function FlightCard() {
   const bookNow = (e) => {
     console.log("bookNow button is clicked");
   };
-
+  
   return (
     <Fragment>
       {flightResponse.map((itinerary, index) => {
@@ -101,7 +101,7 @@ function FlightCard() {
             </div>
             {dropDown === index ? (
               <div className="flightsDetails">
-                <div className="stopOvers ">
+                <div className="stopOvers">
                 <div className="ticket-header">
                   <div className="origin">
                     <h2>{segments[0].departure.iataCode}</h2>
@@ -149,9 +149,11 @@ function FlightCard() {
                     <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
                   </div>
                 </div>
+                <div className="dummy-ticket"></div>
                 </div>
                 <div className="line"></div>
                 <div className="Alldetails"></div>
+
               </div>
             ) : null}
           </div>
