@@ -194,21 +194,23 @@ h1.h2,h3,h4,h5,h6
     bottom: 20px;
 }
 .stopOvers{
-    background: #803c3c;
+    // background: #803c3c;
     padding: 5px;
     display: flex;
     gap: 10px;
-    width: 100%;
+    width: 140%;
     position: absolute;
     top: 21px;
     overflow-x: scroll;
     h2
     {
         font-size: 13px;
+        margin-bottom: 5px;
     }
     h5
     {
         font-size: 6px;
+        margin-bottom: 5px;
     }
     .ticket-header {
         width:300px;

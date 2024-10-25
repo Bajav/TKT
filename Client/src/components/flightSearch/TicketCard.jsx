@@ -124,7 +124,8 @@ function FlightCard() {
                     <h5>{segments[0].departure.at.slice(11)}</h5>
                   </div>
                   <div className="center">
-                  <Small />
+                  <Arrow color="#F5F7F8" width="90px" />
+
                   </div>
                   <div className="item">
                     <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
@@ -139,8 +140,8 @@ function FlightCard() {
                     <h5>{segments[0].departure.at.slice(11)}</h5>
                   </div>
                   <div className="center">
-                    {/* <Arrow color="#F5F7F8" width="90px" height="" /> */}
-                    <Small />
+                    <Arrow color="#F5F7F8" width="90px" height="" />
+                    {/* <Small /> */}
                   </div>
                   <div className="item">
                     <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
