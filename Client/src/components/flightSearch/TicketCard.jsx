@@ -59,7 +59,7 @@ function FlightCard() {
                   <h5>{segments[0].departure.at.slice(11)}</h5>
                 </div>
                 <div className="center">
-                  <Arrow color="#F5F7F8" />
+                  <Arrow color="#F5F7F8" width="200px" />
                   {segmentNumber > 1 ? (
                     <h5>{segmentNumber - 1} stops</h5>
                   ) : (
@@ -109,7 +109,7 @@ function FlightCard() {
                     <h5>{segments[0].departure.at.slice(11)}</h5>
                   </div>
                   <div className="center">
-                    <Arrow color="#F5F7F8" />
+                    <Arrow color="#F5F7F8" width="80px" height="" />
                     {segmentNumber > 1 ? (
                       <h5>{segmentNumber - 1} stops</h5>
                     ) : (
