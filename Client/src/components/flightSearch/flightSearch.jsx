@@ -7,7 +7,7 @@ function FlightSearchInput(props) {
 
   const fetchIataCodes = async () => { 
     try {
-      const response = await axios.get("http://localhost:3080/flights"); 
+      const response = await axios.get("http://localhost:3000/flights"); 
       setIataCodes(response.data);
     } catch (err) {
       console.error("Error fetching IATA codes", err);

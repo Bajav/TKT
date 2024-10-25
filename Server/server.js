@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const Amadeus = require('amadeus');
 
-const port = 3080;
+const port = 3000;
 const app = express();
 
 // CORS Options

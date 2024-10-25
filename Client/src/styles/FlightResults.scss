@@ -36,12 +36,8 @@ h1.h2,h3,h4,h5,h6
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
     background-position: center;
-    // gap: 30px;
-    // background-color: $visibleFontColor;
-    // height: 40vh;
     width: 420px;
     height: 200px;
     color: $page_color;
@@ -189,7 +185,7 @@ h1.h2,h3,h4,h5,h6
 }
 .flightsDetails {
     position: relative;
-    height: 150px; 
+    height: 180px; 
     overflow: hidden;
     width: 420px;
     background: #202020;
