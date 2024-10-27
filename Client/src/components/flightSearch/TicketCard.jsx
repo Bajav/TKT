@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState , useRef} from "react";
-import { Arrow, Small } from "./flightArrowSvg";
+import { Arrow } from "./flightArrowSvg";
 import axios from "axios";
 
 function FlightCard() {

@@ -49,6 +49,7 @@ app.route("/")
   });
 
 // API to get Airports, Cities, and Country Codes
+var flightData ;
 app.route("/flights")
   .get((req, res) => {
     IATACODE.find()
@@ -59,50 +60,21 @@ app.route("/flights")
       });
   })
   .post((req, res) => {
-    const flightData = req.body;
-    console.log(flightData);
-    res.send("Flight data received");
+     flightData = req.body;
+     console.log("flight data recieved");
+    //  console.log(flightData);
+    return flightData;
+    // console.log(flightData);
   });
-
 // Amadeus API setup
 const amadeus = new Amadeus({
   clientId: process.env.API_KEY,
   clientSecret: process.env.SECRET_KEY
 });
-var formData ;
-// Flight search route
-app.route("/flights/flightsResults")
-  .post(async (req,res)=>{
-     formData = req.body;
-    // console.log(f);
-    
-  })
-  .get(async (req, res) => {
-    try {
-
-      const response = await amadeus.shopping.flightOffersSearch.get({
-        originLocationCode: "EBB",
-        destinationLocationCode: "CHI",
-        departureDate: "2024-11-02",
-        returnDate: "2024-11-09", 
-        adults: 1, 
-        currencyCode: "USD",
-        max: 100, 
-        nonStop: false, 
-        travelClass: "ECONOMY",
-        currencyCode:"USD",
-        maxPrice:"1500",
-        includedAirlineCodes:"SN" 
-      });
-
-      // Sending flight data as JSON response
-      console.log(formData)
-      res.json(response.data);
-    } catch (error) {
-      console.error("Error fetching flight offers:", error.response?.data || error);
-      res.status(500).send("Error fetching flight offers.");
-    }
-  });
+app.route("flights/flightsResults")
+.get((res,req)=>{
+  console.log("route is working");
+})
 
 // Test Route
 app.get("/testing", (req, res) => {
@@ -115,109 +87,24 @@ app.listen(port, () => {
 });
 
 
-
-// {
-//     originLocationCode: "EBB",
-//     destinationLocationCode: "DXB",
-//     departureDate: "2024-11-02",
-//     returnDate: "2024-11-09",    // For round trip
-//     adults: 1,
-//     children: 1,                 // Number of children
-//     infants: 1,                  // Number of infants
-//     travelClass: "ECONOMY",       // Can be "ECONOMY", "PREMIUM_ECONOMY", "BUSINESS", or "FIRST"
-//     currencyCode: "USD",
-//     max: 2,                      // Maximum number of results
-//     tripType: "ROUND_TRIP",       // "ONE_WAY", "ROUND_TRIP", or "MULTI_CITY"
-//     nonStop: true,                // To search only direct flights
-//     maxStops: 1,                  // Preferred number of stops (e.g., 1 for one stop, 2 for two stops, etc.)
-//     includeAirlines: ["EK"],      // Preferred airlines (use airline codes, e.g., "EK" for Emirates)
-//     excludeAirlines: ["BA"],      // Exclude specific airlines (e.g., "BA" for British Airways)
-//     stopDuration: {               // Stopover duration preference (min and max stop duration)
-//       max: 180,                   // Maximum stop duration in minutes
-//       min: 30                     // Minimum stop duration in minutes
-//     },
-//     cabinRestrictions: [          // Cabin restrictions for multi-segment flights
-//       {
-//         cabin: "BUSINESS",
-//         coverage: "MOST_SEGMENTS",  // Options: "ALL_SEGMENTS" or "MOST_SEGMENTS"
-//         originDestinationIds: ["1"]
-//       }
-//     ],
-//     multiCity: [
-//       {
-//         originLocationCode: "EBB",
-//         destinationLocationCode: "DXB",
-//         departureDate: "2024-11-02"
-//       },
-//       {
-//         originLocationCode: "DXB",
-//         destinationLocationCode: "LHR",
-//         departureDate: "2024-11-06"
-//       }
-//     ]
+// const flightSearch = async () => {
+//   try {
+//     const response = await amadeus.shopping.flightOffersSearch.get({
+//       originLocationCode: "EBB",
+//       destinationLocationCode: "DXB",
+//       departureDate: "2024-11-02",
+//       returnDate: "2024-11-09",
+//       adults: 1,
+//       currencyCode: "USD",
+//       max: 10,
+//       nonStop: false,
+//       travelClass: "ECONOMY",
+//       maxPrice: 500,
+//       includedAirlineCodes: "UR"
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching flight offers:", error.response?.data || error);
+//     throw new Error("Error fetching flight offers.");
 //   }
-
-// try {
-//   const response = await fetch('https://travelnext.works/api/aeroVE5/availability', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(requestBody)
-//   });
-
-//   const data = await response.json();
-//   console.log(data);
-// } catch (error) {
-//   console.error('Error fetching flight availability:', error);
-// }
-
-// ----FLIGHT LOGIC API ---- //
-
-// .get((req, res) => {
-//     const reqBody = {
-//       user_id: "balijawahussein_testAPI",
-//       user_password: "balijawahusseinTest@2024",
-//       access: "Test",
-//       ip_address: "41.210.143.183",
-//       requiredCurrency: "USD",
-//       journeyType: "OneWay",
-//       OriginDestinationInfo: [
-//         {
-//           departureDate: "2024-12-07",
-//           airportOriginCode: "EBB",
-//           airportDestinationCode: "DXB",
-//         },
-//       ],
-//       class: "Economy",
-//       adults: 2,
-//       childs: 1,
-//       infants: 1,
-//     };
-//     const options = {
-//       hostname: "travelnext.works",
-//       path: "/api/aeroVE5/availabilit",
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         "Content-Length": Buffer.byteLength(JSON.stringify(reqBody)),
-//       },
-//     };
-  
-//     const request = https.request(options, (response) => {
-//       let data = "";
-//       response.on("data", (chunk) => {
-//         data += chunk;
-//       });
-//       response.on("end", () => {
-//         res.json(JSON.parse(data));
-//       });
-//     });
-//     request.on("error", (error) => {
-//       console.error(error);
-//       res.status(500).send("Internal Server Error");
-//     });
-  
-//     request.write(JSON.stringify(reqBody));
-//     request.end();
-//   });
+// };
