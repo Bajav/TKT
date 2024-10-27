@@ -69,24 +69,37 @@ const amadeus = new Amadeus({
   clientId: process.env.API_KEY,
   clientSecret: process.env.SECRET_KEY
 });
-
+var formData ;
 // Flight search route
 app.route("/flights/flightsResults")
+  .post(async (req,res)=>{
+     formData = req.body;
+    // console.log(f);
+    
+  })
   .get(async (req, res) => {
     try {
+
       const response = await amadeus.shopping.flightOffersSearch.get({
         originLocationCode: "EBB",
-        destinationLocationCode: "DXB",
+        destinationLocationCode: "CHI",
         departureDate: "2024-11-02",
-        adults: 1,
-        travelClass: "ECONOMY",
+        returnDate: "2024-11-09", 
+        adults: 1, 
         currencyCode: "USD",
-        max: 20,
+        max: 100, 
+        nonStop: false, 
+        travelClass: "ECONOMY",
+        currencyCode:"USD",
+        maxPrice:"1500",
+        includedAirlineCodes:"SN" 
       });
-      const flightOffers = response.data;
-      res.json(flightOffers);
+
+      // Sending flight data as JSON response
+      console.log(formData)
+      res.json(response.data);
     } catch (error) {
-      console.error('Error fetching flight offers:', error);
+      console.error("Error fetching flight offers:", error.response?.data || error);
       res.status(500).send("Error fetching flight offers.");
     }
   });
