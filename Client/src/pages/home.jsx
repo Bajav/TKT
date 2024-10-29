@@ -2,49 +2,39 @@ import React, { useEffect, useState } from "react";
 // import axios from "axios";
 
 function Home() {
-  const itemsRef = useRef(null);
-  const [isMouseDown, setIsMouseDown] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-
-  const handleMouseDown = (e) => {
-    setIsMouseDown(true);
-    setStartX(e.pageX - itemsRef.current.offsetLeft);
-    setScrollLeft(itemsRef.current.scrollLeft);
-  };
-
-  const handleMouseLeave = () => {
-    setIsMouseDown(false);
-  };
-
-  const handleMouseUp = () => {
-    setIsMouseDown(false);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isMouseDown) return;
-    e.preventDefault();
-    const x = e.pageX - itemsRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; 
-    itemsRef.current.scrollLeft = scrollLeft - walk;
-  };
-
+  // useState
+  // const [count,setCount] = useState(1);
+  const [inputs, setInputs] = useState({});
+  
+  const onChange =(e)=>
+    {
+      const name = e.target.name;
+      const value = e.target.value;
+      setInputs(values=>({...values,[name]: value}));
+    }
+  
   return (
-    <div className="testing">
-      <div
-        className="stopOvers"
-        ref={itemsRef}
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-      >
-        <div className="item"></div>
-        <div className="item"></div>
-        <div className="item"></div>
-      </div>
-    </div>
+    <form className="form">
+      <input type="text" name="fName" placeholder="fName" value={inputs.fName ||""} required  onChange={onChange} autoComplete="off"/>
+      <input type="text" name="lName" placeholder="lName" value={inputs.lName ||""} required onChange={onChange} autoComplete="off" />
+      <input type="text" name="password" placeholder="password" value={inputs.password ||""} required onChange={onChange} autoComplete="off" />
+      
+    </form>
   );
 }
 
 export default Home;
+{/* <button onClick={e=>{setCount(count +1)}}>add</button>
+<h1>{count}</h1>
+<button onClick={e=>{setCount(count -1)}}>minus</button> */}
+// ( values === "multicity" ?
+//   <h1>value is multicity</h1>:
+// <div className="testing">
+//   <select onClick={e=>{ setValue(e.target.value); console.log(e.target.value)}} name="tripType" id="tripType">
+//     <option  value="oneway">one way</option>
+//     <option  value="roundTrip">roundTrip</option>
+//     <option  value="multicity">multicity</option>
+//   </select>
+//   <button onClick={e=>{console.log("got clicked")}}>click me</button>
+// </div>  
+//   )

@@ -64,16 +64,17 @@ app.route("/flights")
      console.log("flight data recieved");
     //  console.log(flightData);
     return flightData;
-    // console.log(flightData);
   });
 // Amadeus API setup
 const amadeus = new Amadeus({
   clientId: process.env.API_KEY,
   clientSecret: process.env.SECRET_KEY
 });
-app.route("flights/flightsResults")
-.get((res,req)=>{
+app.route("/flights/flightsResults")
+.get((req,res)=>{
   console.log("route is working");
+  console.log(flightData);
+  res.send("hellos");
 })
 
 // Test Route
