@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState , useRef} from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import { Arrow } from "./flightArrowSvg";
 import axios from "axios";
 
@@ -12,6 +12,7 @@ function FlightCard() {
         "http://localhost:3000/flights/flightsResults"
       );
       setFlightResponse(res.data);
+      // console.log(res.data)
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +31,7 @@ function FlightCard() {
   const bookNow = (e) => {
     console.log("bookNow button is clicked");
   };
-  
+
   return (
     <Fragment>
       {flightResponse.map((itinerary, index) => {
@@ -102,58 +103,56 @@ function FlightCard() {
             {dropDown === index ? (
               <div className="flightsDetails">
                 <div className="stopOvers">
-                <div className="ticket-header">
-                  <div className="origin">
-                    <h2>{segments[0].departure.iataCode}</h2>
-                    <h5>Kampala, Uganda</h5>
-                    <h5>{segments[0].departure.at.slice(11)}</h5>
+                  <div className="ticket-header">
+                    <div className="origin">
+                      <h2>{segments[0].departure.iataCode}</h2>
+                      <h5>Kampala, Uganda</h5>
+                      <h5>{segments[0].departure.at.slice(11)}</h5>
+                    </div>
+                    <div className="center">
+                      <Arrow color="#F5F7F8" width="90px" height="" />
+                    </div>
+                    <div className="item">
+                      <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
+                      <h5>Dubai, UAE</h5>
+                      <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
+                    </div>
                   </div>
-                  <div className="center">
-                    <Arrow color="#F5F7F8" width="90px" height="" />
+                  <div className="ticket-header">
+                    <div className="origin">
+                      <h2>{segments[0].departure.iataCode}</h2>
+                      <h5>Kampala, Uganda</h5>
+                      <h5>{segments[0].departure.at.slice(11)}</h5>
+                    </div>
+                    <div className="center">
+                      <Arrow color="#F5F7F8" width="90px" />
+                    </div>
+                    <div className="item">
+                      <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
+                      <h5>Dubai, UAE</h5>
+                      <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
+                    </div>
                   </div>
-                  <div className="item">
-                    <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
-                    <h5>Dubai, UAE</h5>
-                    <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
+                  <div className="ticket-header">
+                    <div className="origin">
+                      <h2>{segments[0].departure.iataCode}</h2>
+                      <h5>Kampala, Uganda</h5>
+                      <h5>{segments[0].departure.at.slice(11)}</h5>
+                    </div>
+                    <div className="center">
+                      <Arrow color="#F5F7F8" width="90px" height="" />
+                      {/* <Small /> */}
+                    </div>
+                    <div className="item">
+                      <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
+                      <h5>Dubai, UAE</h5>
+                      <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
+                    </div>
                   </div>
-                </div>
-                <div className="ticket-header">
-                  <div className="origin">
-                    <h2>{segments[0].departure.iataCode}</h2>
-                    <h5>Kampala, Uganda</h5>
-                    <h5>{segments[0].departure.at.slice(11)}</h5>
-                  </div>
-                  <div className="center">
-                  <Arrow color="#F5F7F8" width="90px" />
-
-                  </div>
-                  <div className="item">
-                    <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
-                    <h5>Dubai, UAE</h5>
-                    <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
-                  </div>
-                </div>
-                <div className="ticket-header">
-                  <div className="origin">
-                    <h2>{segments[0].departure.iataCode}</h2>
-                    <h5>Kampala, Uganda</h5>
-                    <h5>{segments[0].departure.at.slice(11)}</h5>
-                  </div>
-                  <div className="center">
-                    <Arrow color="#F5F7F8" width="90px" height="" />
-                    {/* <Small /> */}
-                  </div>
-                  <div className="item">
-                    <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
-                    <h5>Dubai, UAE</h5>
-                    <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
-                  </div>
-                </div>
-                <div className="dummy-ticket"></div>
+                  <div className="dummy-ticket"></div>
                 </div>
                 <div className="line"></div>
                 <div className="Alldetails"></div>
-
               </div>
             ) : null}
           </div>

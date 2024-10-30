@@ -59,36 +59,70 @@ app.route("/flights")
         res.status(500).json({ error: "Error retrieving airports data" });
       });
   })
-  .post((req, res) => {
-     flightData = req.body;
-     console.log("flight data recieved");
-    //  console.log(flightData);
-    return flightData;
-  });
 // Amadeus API setup
 const amadeus = new Amadeus({
   clientId: process.env.API_KEY,
   clientSecret: process.env.SECRET_KEY
 });
+
+
 app.route("/flights/flightsResults")
-.get((req,res)=>{
-  console.log("route is working");
-  console.log(flightData);
-  res.send("hellos");
+  .post(async (req, res) => {
+    const flightData = req.body;
+    console.log(flightData);
+    const origin = flightData.origin.slice(0,3);
+    const destination = flightData.destination.slice(0,3);
+    const departureDate = flightData.departureDate;
+    const returnDate = flightData.returnDate;
+    const seatClass = flightData.seatClass;
+    const passengers = flightData.passengers;
+    const adult = passengers.adults;
+    const children = passengers.children;
+    const infant = passengers.infants;
+    const multicity = flightData.multicity;
+    // console.log({origin,destination,seatClass,multicity, adult, children,infant});
+    
+
+    // making a post req to amadeus API
+    const  main  = async ()=> {
+      try {
+        // Find the cheapest flights from SYD to BKK
+        const response = await amadeus.shopping.flightOffersSearch.get({
+          originLocationCode: origin,
+          destinationLocationCode: destination,
+          departureDate: "2024-11-11",
+          adults: "2",
+          max:3
+        });
+    
+        console.log(response.data);
+        res.send(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+  }
+  main();
 })
 
-// Test Route
-app.get("/testing", (req, res) => {
-  res.send("Hello, I am testing");
-});
+// .get(async (req, res) => {
+//     try {
+//       // Find the cheapest flights from SYD to BKK
+//       const response = await amadeus.shopping.flightOffersSearch.get({
+//         originLocationCode: "EBB",
+//         destinationLocationCode: "DXB",
+//         departureDate: "2024-11-11",
+//         adults: "1",
+//         max:3
+//       });
+  
+//       console.log(response.data);
+//       res.send(response.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+// });
 
-// Start server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
-
-// const flightSearch = async () => {
+// .get(async(req,res)=>{
 //   try {
 //     const response = await amadeus.shopping.flightOffersSearch.get({
 //       originLocationCode: "EBB",
@@ -103,9 +137,96 @@ app.listen(port, () => {
 //       maxPrice: 500,
 //       includedAirlineCodes: "UR"
 //     });
-//     return response.data;
+
+//     res.status(200).json(response.data);  // Send data back as JSON
 //   } catch (error) {
 //     console.error("Error fetching flight offers:", error.response?.data || error);
-//     throw new Error("Error fetching flight offers.");
+//     res.status(500).json({ error: "Error fetching flight offers." });
 //   }
-// };
+// })
+
+// Test Route
+app.get("/testing", (req, res) => {
+  res.send("Hello, I am testing");
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+
+// originLocationCode: "EBB",
+// destinationLocationCode: "DXB",
+// departureDate: "2024-11-02",
+// returnDate: "2024-11-09",
+// adults: 1,
+// currencyCode: "USD",
+// max: 10,
+// nonStop: false,
+// travelClass: "ECONOMY",
+// maxPrice: 500,
+// includedAirlineCodes: "UR"
+
+
+
+// MORE OPTIONS
+// try {
+//   const response = await amadeus.shopping.flightOffersSearch.post({
+//     currencyCode: "USD",
+//     originDestinations: [
+//       {
+//         id: "1",
+//         originLocationCode: "SYD",
+//         destinationLocationCode: "BKK",
+//         departureDateTimeRange: {
+//           date: "2024-11-11",
+//           time: "10:00:00",
+//         },
+//       },
+//       {
+//         id: "2",
+//         originLocationCode: "BKK",
+//         destinationLocationCode: "SYD",
+//         departureDateTimeRange: {
+//           date: "2024-11-11",
+//           time: "17:00:00",
+//         },
+//       },
+//     ],
+//     travelers: [
+//       {
+//         id: "1",
+//         travelerType: "ADULT",
+//         fareOptions: ["STANDARD"],
+//       },
+//       {
+//         id: "2",
+//         travelerType: "CHILD",
+//         fareOptions: ["STANDARD"],
+//       },
+//     ],
+//     sources: ["GDS"],
+//     searchCriteria: {
+//       maxFlightOffers: 50,
+//       flightFilters: {
+//         cabinRestrictions: [
+//           {
+//             cabin: "BUSINESS",
+//             coverage: "MOST_SEGMENTS",
+//             originDestinationIds: ["1"],
+//           },
+//         ],
+//         carrierRestrictions: {
+//           excludedCarrierCodes: ["AA", "TP", "AZ"],
+//         },
+//       },
+//     },
+//   });
+
+//   console.log(response.data);
+// } catch (error) {
+//   console.error(error);
+// }
+// }
+// main();
