@@ -12,7 +12,7 @@ function FlightCard() {
         "http://localhost:3000/flights/flightsResults"
       );
       setFlightResponse(res.data);
-      // console.log(res.data)
+      console.log(res.data)
     } catch (err) {
       console.log(err);
     }
