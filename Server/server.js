@@ -68,7 +68,13 @@ app.route("/flights/flightsResults")
   // res.send(formData);
   const origin = formData.origin.slice(0,3);
   const destination = formData.destination.slice(0,3);
+  const seatClass = formData.seatClass;
+  const departureDate = formData.departureDate;
+  const returnDate = formData.returnDate;
   const passengers = formData.passengers;
+  const adults = passengers.adults;
+  const infants = passengers.infants;
+  const children = passengers.children;
   console.log(formData);
   // const departureDate = formData
   // console.log(origin,destination,passengers);

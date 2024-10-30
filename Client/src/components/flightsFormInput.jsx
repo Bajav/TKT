@@ -202,10 +202,10 @@ function FlightsForm() {
               onChange={handleChange}
               value={inputs.seatClass}
             >
-              <option value="economy_class">Economy</option>
-              <option value="economy_premium">Economy Premium</option>
-              <option value="business_class">Business</option>
-              <option value="first_class">First Class</option>
+              <option value="ECONOMY">Economy</option>
+              <option value="PREMIUM_ECONOMY">Economy Premium</option>
+              <option value="BUSINESS">Business</option>
+              <option value="FIRST">First Class</option>
             </select>
           </div>
         </div>
