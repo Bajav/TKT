@@ -7,8 +7,8 @@ import FlightSearchInput from "./flightSearch/flightSearch";
 function FlightsForm() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
-    flightType: "oneWay",
-    seatClass: "economy_class",
+    flightType: false,
+    seatClass: "ECONOMY",
     multicity: false,
   });
 

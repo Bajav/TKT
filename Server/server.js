@@ -82,14 +82,14 @@ app.route("/flights/flightsResults")
       const response = await amadeus.shopping.flightOffersSearch.get({
         originLocationCode: origin,
         destinationLocationCode: destination,
-        departureDate: "2024-11-23",
-        returnDate:"2024-11-28",
-        adults: "1",
-        children:"0",
-        infants:"0",
-        travelClass:"ECONOMY",
-        nonStop:true,
-        max:2
+        departureDate: departureDate,
+        returnDate:returnDate,
+        adults: adults,
+        children: children,
+        infants: infants,
+        travelClass:seatClass,
+        nonStop:false,
+        max:10
       });
   
       console.log(response.data);
