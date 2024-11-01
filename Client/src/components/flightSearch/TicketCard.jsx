@@ -13,7 +13,6 @@ function FlightCard() {
         "http://localhost:3000/flights/flightsResults"
       );
       setFlightResponse(res.data);
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -23,6 +22,7 @@ function FlightCard() {
     try {
       const response = await axios.get("http://localhost:3000/flights"); 
       setIataCodes(response.data);
+      // console.log(response.data)
     } catch (err) {
       console.error("Error fetching IATA codes", err);
     }
@@ -35,10 +35,9 @@ function FlightCard() {
   }, []);
 
   const iataLookup = iataCodes.reduce((lookup, item) => {
-    lookup[item.iataCode] = { city: item.city, country: item.country };
+    lookup = {AirportCode: item.AirportCode, city: item.City, country: item.Country};
     return lookup;
   }, {});
-
 
 
   // Button actions
