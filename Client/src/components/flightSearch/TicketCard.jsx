@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useRef } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Arrow } from "./flightArrowSvg";
 import axios from "axios";
@@ -46,7 +46,8 @@ function FlightCard() {
         return (
           <div
             className="main-cards"
-            key={itinerary.itineraries[0].segments[0].id || itinerary.id}
+            // key={itinerary.itineraries[0].segments[0].id || itinerary.id}
+            key={index}
           >
             <div className="flights-res">
               <div className="flights-header">
@@ -112,27 +113,25 @@ function FlightCard() {
                   onSwiper={(swiper) => console.log(swiper)}
                   className="stopOvers"
                 >
-                  {segmentOne.map((stopOver, index) => {
-                    <SwiperSlide>
+                  {segmentOne.map((stopOver, setStopIndex) => (
+                    <SwiperSlide key={setStopIndex}>
                       <div className="ticket-header">
                         <div className="origin">
-                          <h2>{segmentOne.departure.iataCode}</h2>
+                          <h2>{stopOver.departure.iataCode}</h2>
                           <h5>Kampala, Uganda</h5>
-                          <h5>{segments[0].departure.at.slice(11)}</h5>
+                          <h5>{stopOver.departure.at.slice(11)}</h5>
                         </div>
                         <div className="center">
-                          <Arrow color="#F5F7F8" width="200px" />
+                          <Arrow color="#F5F7F8" width="150px" />
                         </div>
                         <div className="item">
-                          <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
-                          <h5>Dubai, UAE</h5>
-                          <h5>
-                            {segments[lastSegmentIndex].arrival.at.slice(11)}
-                          </h5>
+                          <h2>{stopOver.arrival.iataCode}</h2>
+                          <h5>Destination City</h5>
+                          <h5>{stopOver.arrival.at.slice(11)}</h5>
                         </div>
                       </div>
-                    </SwiperSlide>;
-                  })}
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
                 <div className="line"></div>
                 <div className="Alldetails"></div>
