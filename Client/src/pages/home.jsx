@@ -4,7 +4,7 @@ import 'swiper/css';
 function Home() {
   return (
       <Swiper
-        spaceBetween={30}
+        spaceBetween={1}
         slidesPerView="auto"
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
@@ -12,7 +12,7 @@ function Home() {
       >
         <SwiperSlide className='brand'>slide 1</SwiperSlide>
         <SwiperSlide className='brand'>Slide 2</SwiperSlide>
-        <div className="brand">slide 1</div>
+        <SwiperSlide className="brand">slide 1</SwiperSlide>
       </Swiper>
     );
   }

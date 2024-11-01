@@ -41,13 +41,11 @@ function FlightsForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = { ...inputs, passengers };
-    console.log("submit is working")
-    // console.log(formData);
-    /////-----axios-----/////
-    // POST SUBMITTING FORMS
-    navigate("/flights/flightsResults",{ state: { formData, iataCodes }});
     try {
       const response = await axios.post('http://localhost:3000/flights/flightsResults', formData);
+  
+      // After posting, navigate to the results page and pass response data
+      navigate("/flights/flightsResults", { state: { formData,results: response.data } });
       console.log('Flight data posted:', response.data);
     } catch (error) {
       console.error('Error posting flight:', error);

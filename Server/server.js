@@ -58,7 +58,7 @@ app.route("/flights")
 var formData ;
 app.route("/flights/flightsResults")
   .post(async (req, res) => {
-  //  console.log(req.body);
+   console.log(req.body);
    formData = req.body;
    res.send("hello");
   //  console.log()
@@ -77,7 +77,7 @@ app.route("/flights/flightsResults")
   const children = passengers.children;
   console.log(formData);
   // const departureDate = formData
-  // console.log(origin,destination,passengers);
+  console.log(origin,destination,passengers);
     try {
       const response = await amadeus.shopping.flightOffersSearch.get({
         originLocationCode: origin,

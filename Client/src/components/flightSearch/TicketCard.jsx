@@ -18,16 +18,15 @@ function FlightCard() {
     }
   };
   const [iataCodes, setIataCodes] = useState([]);
-  const fetchIataCodes = async () => { 
+  const fetchIataCodes = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/flights"); 
+      const response = await axios.get("http://localhost:3000/flights");
       setIataCodes(response.data);
       // console.log(response.data)
     } catch (err) {
       console.error("Error fetching IATA codes", err);
     }
-  }
-
+  };
 
   useEffect(() => {
     fetchFlights();
@@ -35,10 +34,13 @@ function FlightCard() {
   }, []);
 
   const iataLookup = iataCodes.reduce((lookup, item) => {
-    lookup = {AirportCode: item.AirportCode, city: item.City, country: item.Country};
+    lookup = {
+      AirportCode: item.AirportCode,
+      city: item.City,
+      country: item.Country,
+    };
     return lookup;
   }, {});
-
 
   // Button actions
   const seeDetails = (index) => {
@@ -53,7 +55,6 @@ function FlightCard() {
   return (
     <Fragment>
       {flightResponse.map((itinerary, index) => {
-        console.log(itinerary);
         const segments = itinerary.itineraries[0].segments;
         const segmentNumber = segments.length;
         const lastSegmentIndex = segmentNumber - 1;
@@ -77,7 +78,13 @@ function FlightCard() {
               <div className="ticket-header">
                 <div className="origin">
                   <h2>{segments[0].departure.iataCode}</h2>
-                  <h5>Kampala, Uganda</h5>
+                  <h5>
+                    {iataCodes.find(
+                      (lookup) =>
+                        lookup.AirportCode === segments[0].departure.iataCode
+                    )?.City || ""}
+                  </h5>
+
                   <h5>{segments[0].departure.at.slice(11)}</h5>
                 </div>
                 <div className="center">
@@ -90,7 +97,12 @@ function FlightCard() {
                 </div>
                 <div className="item">
                   <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
-                  <h5>Dubai, UAE</h5>
+                  <h5>
+                  {iataCodes.find(
+                      (lookup) =>
+                        lookup.AirportCode === segments[0].arrival.iataCode
+                    )?.City || ""}
+                  </h5>
                   <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
                 </div>
               </div>
@@ -134,23 +146,25 @@ function FlightCard() {
                     <SwiperSlide key={setStopIndex}>
                       <div className="ticket-header">
                         <div className="stopFlight">
-                        <div className="origin">
-                          <h2>{stopOver.departure.iataCode}</h2>
-                          <h5>{stopOver.departure.iataCode}</h5>
-                          <h5>{stopOver.departure.at.slice(11)}</h5>
-                        </div>
-                        <div className="center">
-                          <Arrow color="#F5F7F8" width="150px" />
-                        </div>
-                        <div className="item">
-                          <h2>{stopOver.arrival.iataCode}</h2>
-                          <h5>Destination City</h5>
-                          <h5>{stopOver.arrival.at.slice(11)}</h5>
-                        </div>
+                          <div className="origin">
+                            <h2>{stopOver.departure.iataCode}</h2>
+                            <h5>{stopOver.departure.iataCode}</h5>
+                            <h5>{stopOver.departure.at.slice(11)}</h5>
+                          </div>
+                          <div className="center">
+                            <Arrow color="#F5F7F8" width="150px" />
+                          </div>
+                          <div className="item">
+                            <h2>{stopOver.arrival.iataCode}</h2>
+                            <h5>Destination City</h5>
+                            <h5>{stopOver.arrival.at.slice(11)}</h5>
+                          </div>
                         </div>
                         <div className="lineOne">
-                  <h5>--------------------------------------------------------</h5>
-                </div>
+                          <h5>
+                            --------------------------------------------------------
+                          </h5>
+                        </div>
                         <div className="stop-details">
                           <h5>LAYOVER TIME : 1H40M </h5>
                           <h5>||</h5>
@@ -165,7 +179,9 @@ function FlightCard() {
                   ))}
                 </Swiper>
                 <div className="line">
-                  <h5>------------------------------------------------------</h5>
+                  <h5>
+                    ------------------------------------------------------
+                  </h5>
                 </div>
                 <div className="Alldetails">
                   <h5>SEATS LEFT : 9</h5>
