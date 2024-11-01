@@ -172,11 +172,6 @@ h6 {
   bottom: 20px;
 }
 .stopOvers {
-  // display: flex;
-  // overflow-x: auto;
-  // scroll-behavior: smooth;
-  // gap: 20px;
-  // padding: 10px;
   position: absolute;
   top: 25px;
   width: 100%;
@@ -190,7 +185,6 @@ h6 {
     color: $page_color;
     width: 95%;
     margin-left: 10px;
-    background: #883838;
   }
   .ticket-header
   {
@@ -211,7 +205,6 @@ h6 {
 }
 .stop-details
 {
-    background: #938181;
     display: flex;
     align-items: center;
     margin-left: 10px;
@@ -225,5 +218,49 @@ h6 {
         margin: 0;
         font-size: 8px;
         font-family: $textFont, sans-serif;
+        font-weight: 10;
+    }
+}
+.lineOne
+{
+    color: $page_color;
+    letter-spacing: 4px;
+    position: relative;
+    left: 10px;
+    text-align: center;
+    width: 100%;
+    h5
+    {
+        text-align:center;
+        margin: 0;
+    }
+}
+.line
+{
+    // background: #c8c1c1;
+    // margin-top: 30px;
+    position: relative;
+    top: 127px;
+    color: $page_color;
+    letter-spacing: 3px;
+    text-align: center;
+}
+.Alldetails
+{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    position: relative;
+    top: 135px;
+    h5
+    {
+        background: #F5F7F8;
+        padding: 6px 8px;
+        margin: 0;
+        text-transform: capitalize;
+        border-radius: 15px;
+        font-family: $textFont, sans-serif;
+        font-size: 6px;
     }
 }

@@ -149,6 +149,9 @@ function FlightCard() {
                           <h5>{stopOver.arrival.at.slice(11)}</h5>
                         </div>
                         </div>
+                        <div className="lineOne">
+                  <h5>--------------------------------------------------------</h5>
+                </div>
                         <div className="stop-details">
                           <h5>LAYOVER TIME : 1H40M </h5>
                           <h5>||</h5>
@@ -162,8 +165,16 @@ function FlightCard() {
                     </SwiperSlide>
                   ))}
                 </Swiper>
-                <div className="line"></div>
-                <div className="Alldetails"></div>
+                <div className="line">
+                  <h5>------------------------------------------------------</h5>
+                </div>
+                <div className="Alldetails">
+                  <h5>SEATS LEFT : 9</h5>
+                  <h5>last Date : 2024-11-02</h5>
+                  <h5>TRAVLR TYPE : ADT</h5>
+                  <h5>ECONOMY</h5>
+                  <h5>CHECKED BAG : 2PCS</h5>
+                </div>
               </div>
             ) : null}
           </div>
