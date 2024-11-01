@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';  
 import Calender from "./flightSearch/calenderInput";
@@ -6,6 +6,7 @@ import FlightSearchInput from "./flightSearch/flightSearch";
 
 function FlightsForm() {
   const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     flightType: false,
     seatClass: "ECONOMY",
@@ -19,6 +20,24 @@ function FlightsForm() {
     setInputs((values) => ({ ...values, [name]: value }));
   }
 
+  
+  const [iataCodes, setIataCodes] = useState([]);
+  const fetchIataCodes = async () => { 
+    try {
+      const response = await axios.get("http://localhost:3000/flights"); 
+      setIataCodes(response.data);
+    } catch (err) {
+      console.error("Error fetching IATA codes", err);
+    }
+  }
+
+  useEffect(() => {
+    fetchIataCodes();
+  }, []);
+
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = { ...inputs, passengers };
@@ -26,7 +45,7 @@ function FlightsForm() {
     // console.log(formData);
     /////-----axios-----/////
     // POST SUBMITTING FORMS
-    navigate("/flights/flightsResults",{ state: { formData }});
+    navigate("/flights/flightsResults",{ state: { formData, iataCodes }});
     try {
       const response = await axios.post('http://localhost:3000/flights/flightsResults', formData);
       console.log('Flight data posted:', response.data);

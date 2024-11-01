@@ -7,6 +7,8 @@ import Dummy from '../components/places/dummyCard';
 function FlightResult() {
   const location = useLocation();
   const { searchResults, formData } = location.state || {};
+  
+
   const data =()=>
     {
       const origin = formData;
@@ -15,6 +17,7 @@ function FlightResult() {
     useEffect(()=>{
       data();
     },[])
+
   return (
     <main className='FlightResult-page'>
       <div className="FlightResults">

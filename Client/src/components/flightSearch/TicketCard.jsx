@@ -18,10 +18,28 @@ function FlightCard() {
       console.log(err);
     }
   };
+  const [iataCodes, setIataCodes] = useState([]);
+  const fetchIataCodes = async () => { 
+    try {
+      const response = await axios.get("http://localhost:3000/flights"); 
+      setIataCodes(response.data);
+    } catch (err) {
+      console.error("Error fetching IATA codes", err);
+    }
+  }
+
 
   useEffect(() => {
     fetchFlights();
+    fetchIataCodes();
   }, []);
+
+  const iataLookup = iataCodes.reduce((lookup, item) => {
+    lookup[item.iataCode] = { city: item.city, country: item.country };
+    return lookup;
+  }, {});
+
+
 
   // Button actions
   const seeDetails = (index) => {
@@ -116,9 +134,10 @@ function FlightCard() {
                   {segmentOne.map((stopOver, setStopIndex) => (
                     <SwiperSlide key={setStopIndex}>
                       <div className="ticket-header">
+                        <div className="stopFlight">
                         <div className="origin">
                           <h2>{stopOver.departure.iataCode}</h2>
-                          <h5>Kampala, Uganda</h5>
+                          <h5>{stopOver.departure.iataCode}</h5>
                           <h5>{stopOver.departure.at.slice(11)}</h5>
                         </div>
                         <div className="center">
@@ -128,6 +147,16 @@ function FlightCard() {
                           <h2>{stopOver.arrival.iataCode}</h2>
                           <h5>Destination City</h5>
                           <h5>{stopOver.arrival.at.slice(11)}</h5>
+                        </div>
+                        </div>
+                        <div className="stop-details">
+                          <h5>LAYOVER TIME : 1H40M </h5>
+                          <h5>||</h5>
+                          <h5>CLASS : N ECONOMY</h5>
+                          <h5>||</h5>
+                          <h5>AIRLINE : KENYA AIRWAYS - KQ23A</h5>
+                          <h5>||</h5>
+                          <h5>DURATION : 4H40M </h5>
                         </div>
                       </div>
                     </SwiperSlide>
