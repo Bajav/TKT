@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Arrow } from "./flightArrowSvg";
 import axios from "axios";
 
@@ -12,7 +13,7 @@ function FlightCard() {
         "http://localhost:3000/flights/flightsResults"
       );
       setFlightResponse(res.data);
-      console.log(res.data)
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -39,6 +40,8 @@ function FlightCard() {
         const segments = itinerary.itineraries[0].segments;
         const segmentNumber = segments.length;
         const lastSegmentIndex = segmentNumber - 1;
+        const segmentOne = itinerary.itineraries[0].segments;
+        const segmentTwo = itinerary.itineraries[1].segments;
 
         return (
           <div
@@ -102,55 +105,35 @@ function FlightCard() {
             </div>
             {dropDown === index ? (
               <div className="flightsDetails">
-                <div className="stopOvers">
-                  <div className="ticket-header">
-                    <div className="origin">
-                      <h2>{segments[0].departure.iataCode}</h2>
-                      <h5>Kampala, Uganda</h5>
-                      <h5>{segments[0].departure.at.slice(11)}</h5>
-                    </div>
-                    <div className="center">
-                      <Arrow color="#F5F7F8" width="90px" height="" />
-                    </div>
-                    <div className="item">
-                      <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
-                      <h5>Dubai, UAE</h5>
-                      <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
-                    </div>
-                  </div>
-                  <div className="ticket-header">
-                    <div className="origin">
-                      <h2>{segments[0].departure.iataCode}</h2>
-                      <h5>Kampala, Uganda</h5>
-                      <h5>{segments[0].departure.at.slice(11)}</h5>
-                    </div>
-                    <div className="center">
-                      <Arrow color="#F5F7F8" width="90px" />
-                    </div>
-                    <div className="item">
-                      <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
-                      <h5>Dubai, UAE</h5>
-                      <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
-                    </div>
-                  </div>
-                  <div className="ticket-header">
-                    <div className="origin">
-                      <h2>{segments[0].departure.iataCode}</h2>
-                      <h5>Kampala, Uganda</h5>
-                      <h5>{segments[0].departure.at.slice(11)}</h5>
-                    </div>
-                    <div className="center">
-                      <Arrow color="#F5F7F8" width="90px" height="" />
-                      {/* <Small /> */}
-                    </div>
-                    <div className="item">
-                      <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
-                      <h5>Dubai, UAE</h5>
-                      <h5>{segments[lastSegmentIndex].arrival.at.slice(11)}</h5>
-                    </div>
-                  </div>
-                  <div className="dummy-ticket"></div>
-                </div>
+                <Swiper
+                  spaceBetween={20}
+                  slidesPerView="auto"
+                  onSlideChange={() => console.log("slide change")}
+                  onSwiper={(swiper) => console.log(swiper)}
+                  className="stopOvers"
+                >
+                  {segmentOne.map((stopOver, index) => {
+                    <SwiperSlide>
+                      <div className="ticket-header">
+                        <div className="origin">
+                          <h2>{segmentOne.departure.iataCode}</h2>
+                          <h5>Kampala, Uganda</h5>
+                          <h5>{segments[0].departure.at.slice(11)}</h5>
+                        </div>
+                        <div className="center">
+                          <Arrow color="#F5F7F8" width="200px" />
+                        </div>
+                        <div className="item">
+                          <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
+                          <h5>Dubai, UAE</h5>
+                          <h5>
+                            {segments[lastSegmentIndex].arrival.at.slice(11)}
+                          </h5>
+                        </div>
+                      </div>
+                    </SwiperSlide>;
+                  })}
+                </Swiper>
                 <div className="line"></div>
                 <div className="Alldetails"></div>
               </div>
