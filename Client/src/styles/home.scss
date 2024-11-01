@@ -1,46 +1,64 @@
-body{
+@import './variables.scss';
+body
+{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    overflow: hidden;
 }
-.main
+.home
 {
     height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+    background: $page_color;
+    h1
+    {
+        font-family: $textFont, sans-serif;
+        text-transform: capitalize;
+        font-size: 15px;
+        padding: 5px 15px;
+    }
 }
-.brands
+.activites
 {
-    width: 22rem;
-    background: red;
-    height: 300px;
-    margin: 30px auto;
-    overflow: hidden;
-    gap: 30px;
-}
-.brand
-{
-    width: 85%;
-    height: 200px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 40px;
-    background: #d9cdcd;
-    border-radius: 5px;
-}
-.brand:nth-child(2)
-{
-background: #ab6b6b;
-}
-.brand:nth-child(3)
-{
-background: #501111;
-}
-.brand:nth-child(4)
-{
-background: #49e43d;
-}
-.brand:nth-child(5)
-{
-background: #5a9d0d;
+    h2
+    {
+        font-family: $textFont, sans-serif;
+        font-size: 20px;
+        // padding-left: 5px 15px;
+        margin-left: 15px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .activity-rail
+    {
+        display: flex;
+        gap: 10px;
+        // width: fit-content;
+        padding: 10px;
+        overflow-x: auto;
+        // background: #000;
+    }
+    .activity
+    {
+        background: $actionBlue;
+        height: 350px;
+        padding: 15px 5px;
+        width: 100%;
+        background: url("../assets/images/skyDving.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 20px;
+        h1
+        {
+            position: relative;
+            top: 250px;
+            text-align: center;
+            // left: 40px;
+            font-size: 50px;
+            font-family: $cityFont, sans-serif;
+            text-transform: uppercase;
+            color: $page_color;
+        }
+    }
 }

@@ -13,6 +13,7 @@ function FlightCard() {
         "http://localhost:3000/flights/flightsResults"
       );
       setFlightResponse(res.data);
+      console.log(flightResponse);
     } catch (err) {
       console.log(err);
     }
@@ -168,14 +169,14 @@ function FlightCard() {
                         <div className="stop-details">
                           <h5>LAYOVER TIME : 1H40M </h5>
                           <h5>||</h5>
-                          <h5>CLASS : N ECONOMY</h5>
+                          <h5>CLASS : {itinerary.travelerPricings[0].fareDetailsBySegment[0].class} {itinerary.travelerPricings[0].fareDetailsBySegment[0].cabin}</h5>
                           <h5>||</h5>
                           <h5>AIRLINE : KENYA AIRWAYS - KQ23A</h5>
                           <h5>||</h5>
                           <h5>DURATION : 4H40M </h5>
                         </div>
                       </div>
-                    </SwiperSlide>
+                    </SwiperSlide> 
                   ))}
                 </Swiper>
                 <div className="line">
@@ -184,11 +185,12 @@ function FlightCard() {
                   </h5>
                 </div>
                 <div className="Alldetails">
-                  <h5>SEATS LEFT : 9</h5>
-                  <h5>last Date : 2024-11-02</h5>
+                  <h5>SEATS LEFT : {itinerary.numberOfBookableSeats}</h5>
+                  <h5>last Date : {itinerary.lastTicketingDate}</h5>
                   <h5>TRAVLR TYPE : ADT</h5>
-                  <h5>ECONOMY</h5>
-                  <h5>CHECKED BAG : 2PCS</h5>
+                  <h5>{itinerary.travelerPricings[0].fareDetailsBySegment[0].cabin}</h5>
+                  <h5>CHECKED BAG : 30KG{itinerary.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight }</h5>
+                  {console.log(itinerary.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight)}
                 </div>
               </div>
             ) : null}

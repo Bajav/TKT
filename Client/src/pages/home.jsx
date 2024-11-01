@@ -1,19 +1,30 @@
 import React from 'react'
+import Header from '../components/header';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Location from '../components/places/location';
 import 'swiper/css';
 function Home() {
   return (
-      <Swiper
-        spaceBetween={1}
-        slidesPerView="auto"
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
-        className='brands'
-      >
-        <SwiperSlide className='brand'>slide 1</SwiperSlide>
-        <SwiperSlide className='brand'>Slide 2</SwiperSlide>
-        <SwiperSlide className="brand">slide 1</SwiperSlide>
-      </Swiper>
+    <main className='home'>
+        <Header />
+        <h1>welcome dennin</h1>
+        <div className="activites">
+          <h2>Activities to do this summer.</h2>
+          <div className="activity-rail">
+
+            <div className="activity">
+            <Location />
+            <h1>sky diving</h1>
+            </div> 
+            {/* <div className="activity">
+            <Location />
+            <h1>sky diving</h1>
+            </div>  */}
+
+          </div>
+          
+        </div>
+    </main>
     );
   }
 
