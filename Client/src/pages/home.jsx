@@ -10,19 +10,48 @@ function Home() {
         <h1>welcome dennin</h1>
         <div className="activites">
           <h2>Activities to do this summer.</h2>
-          <div className="activity-rail">
+          
+          <Swiper
+          spaceBetween={40}
+          slidesPerView={1}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+           className="activity-rail"
+           >
 
+            <SwiperSlide>
             <div className="activity">
             <Location />
             <h1>sky diving</h1>
             </div> 
-            {/* <div className="activity">
+            </SwiperSlide>
+            <SwiperSlide>
+            <div className="activity">
             <Location />
             <h1>sky diving</h1>
-            </div>  */}
+            </div>  
+            </SwiperSlide>
+            <SwiperSlide>
+            <div className="activity">
+            <Location />
+            <h1>sky diving</h1>
+            </div>  
+            </SwiperSlide>
+            <SwiperSlide>
+            <div className="activity">
+            <Location />
+            <h1>sky diving</h1>
+            </div>  
+            </SwiperSlide>
 
-          </div>
+          </Swiper>
           
+        </div>
+        <div className="toView">
+          <h1>have you seen these ?</h1>
+          <div className="viewCards">
+            <div className="viewCard"></div>
+          </div>
         </div>
     </main>
     );

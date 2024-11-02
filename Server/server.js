@@ -20,22 +20,31 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-// MongoDB connection
-mongoose
-  .connect("mongodb://127.0.0.1:27017/IATACODESDB")
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("Could not connect to MongoDB", err));
+const iataConnection = mongoose.createConnection("mongodb://127.0.0.1:27017/IATACODESDB");
+iataConnection.on('connected', () => console.log('Connected to IATACODESDB'));
 
-// MongoDB Schema & Model
+// Connect to second database (AIRLINESDB)
+const airlineConnection = mongoose.createConnection("mongodb://127.0.0.1:27017/AIRLINESDB");
+airlineConnection.on('connected', () => console.log('Connected to AIRLINESDB'));
+
+// Define schemas and models on specific connections
 const iataSchema = new mongoose.Schema({
   AirportCode: String,
   AirportName: String,
   City: String,
   Country: String,
   Latitude: String,
-  Longitude: String
+  Longitude: String,
 });
-const IATACODE = mongoose.model("IATACODE", iataSchema);
+const airlineSchema = new mongoose.Schema({
+  name: String,
+  code: String,
+  is_lowcost: Boolean,
+  logo: String,
+});
+
+const IATACODE = iataConnection.model("IATACODE", iataSchema);
+const Airline = airlineConnection.model("Airline", airlineSchema);
 
 // amadeus setUp
 const amadeus = new Amadeus({
@@ -103,7 +112,12 @@ app.route("/flights/flightsResults")
 
 // Test Route
 app.get("/testing", (req, res) => {
-  res.send("Hello, I am testing");
+  Airline.find()
+  .then((foundData) => res.json(foundData))
+  .catch((err) => {
+    console.error("Error finding airports", err);
+    res.status(500).json({ error: "Error retrieving airports data" });
+  });
 });
 
 // Start server
