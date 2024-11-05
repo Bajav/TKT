@@ -3,12 +3,18 @@ import axios from 'axios';
 
 function FlightSearchInput(props) {
   const [iataCodes, setIataCodes] = useState([]);
+  const [airlineData, setAirlineData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);  
 
   const fetchIataCodes = async () => { 
     try {
       const response = await axios.get("http://localhost:3000/flights"); 
-      setIataCodes(response.data);
+      // setIataCodes(response.data);
+      // console.log(response.data);
+      const {iataCodes,airlines} = response.data;
+      setIataCodes(iataCodes);
+      setAirlineData(airlineData);
+
     } catch (err) {
       console.error("Error fetching IATA codes", err);
     }

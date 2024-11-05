@@ -31,7 +31,6 @@ function FlightsForm() {
       const { iataCodes, airlines } = res.data;
       setIataCodes(iataCodes);
       setAirlines(airlines);
-      // Now you can work with iataCodes and airlines separately
     } catch (err) {
       console.error("Error fetching data:", err);
     }

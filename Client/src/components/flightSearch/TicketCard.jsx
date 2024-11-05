@@ -19,11 +19,14 @@ function FlightCard() {
     }
   };
   const [iataCodes, setIataCodes] = useState([]);
+  const [airlines, setAirlines] = useState([]);
   const fetchIataCodes = async () => {
     try {
       const response = await axios.get("http://localhost:3000/flights");
-      setIataCodes(response.data);
-      // console.log(response.data)
+      const { iataCodes, airlines } = response.data;
+      setIataCodes(iataCodes);
+      setAirlines(airlines);
+      console.log(airlines);
     } catch (err) {
       console.error("Error fetching IATA codes", err);
     }

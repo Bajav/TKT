@@ -6,7 +6,8 @@ import Dummy from '../components/places/dummyCard';
 
 function FlightResult() {
   const location = useLocation();
-  const { searchResults, formData } = location.state || {};
+  const { searchResults, formData,airlines } = location.state || {};
+  console.log(airlines);
   
 
   const data =()=>
