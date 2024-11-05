@@ -107,11 +107,19 @@ app.route("/flights/flightsResults")
         infants: infants,
         travelClass:seatClass,
         nonStop:false,
-        max:10
+        currencyCode:"USD",
+        max:40
       });
-  
-      console.log(response.data);
-      res.send(response.data);
+      if(response.data.length === 0)
+        {
+          console.log("no flights available");
+        }else
+        {
+          res.send(response.data);
+          const limitedData = response.data.slice(0,4)
+          console.log(limitedData);
+        }
+      // res.send(response.data);
     } catch (error) {
       console.error(error);
     }
