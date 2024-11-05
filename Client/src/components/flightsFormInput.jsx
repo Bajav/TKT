@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';  
 import Calender from "./flightSearch/calenderInput";
 import FlightSearchInput from "./flightSearch/flightSearch";
+import { set } from "mongoose";
 
 function FlightsForm() {
   const navigate = useNavigate();
@@ -22,17 +23,22 @@ function FlightsForm() {
 
   
   const [iataCodes, setIataCodes] = useState([]);
-  const fetchIataCodes = async () => { 
+  const [airlines, setAirlines] = useState([]);
+
+  const fetchFlightData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/flights"); 
-      setIataCodes(response.data);
+      const res = await axios.get("http://localhost:3000/flights");
+      const { iataCodes, airlines } = res.data;
+      setIataCodes(iataCodes);
+      setAirlines(airlines);
+      // Now you can work with iataCodes and airlines separately
     } catch (err) {
-      console.error("Error fetching IATA codes", err);
+      console.error("Error fetching data:", err);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchIataCodes();
+    fetchFlightData();
   }, []);
 
 
@@ -43,9 +49,8 @@ function FlightsForm() {
     const formData = { ...inputs, passengers };
     try {
       const response = await axios.post('http://localhost:3000/flights/flightsResults', formData);
-  
-      // After posting, navigate to the results page and pass response data
-      navigate("/flights/flightsResults", { state: { formData,results: response.data } });
+      // i send data to next page
+      navigate("/flights/flightsResults", { state: { formData, airlines } });
       console.log('Flight data posted:', response.data);
     } catch (error) {
       console.error('Error posting flight:', error);

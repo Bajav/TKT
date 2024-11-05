@@ -55,14 +55,23 @@ const amadeus = new Amadeus({
 
 // --get AIRPORTS , CITIES , COUNTRIES FROM DATABASE
 app.route("/flights")
-  .get((req, res) => {
-    IATACODE.find()
-      .then((foundData) => res.json(foundData))
-      .catch((err) => {
-        console.error("Error finding airports", err);
-        res.status(500).json({ error: "Error retrieving airports data" });
-      });
-  })
+  .get(async (req, res) => {
+    try {
+      // Run both queries in parallel
+      const [iataCodes, airlines] = await Promise.all([
+        IATACODE.find().exec(),
+        Airline.find().exec()
+      ]);
+
+      // Send both datasets in a single response
+      res.json({ iataCodes, airlines });
+      
+    } catch (err) {
+      console.error("Error retrieving data:", err);
+      res.status(500).json({ error: "Error retrieving data" });
+    }
+  });
+
 
 var formData ;
 app.route("/flights/flightsResults")
