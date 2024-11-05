@@ -172,7 +172,7 @@ h6 {
 }
 .flightsDetails {
   position: relative;
-  height: 180px;
+  height: 190px;
   overflow-x: hidden;
   width: 100%;
   background: #202020;
@@ -212,7 +212,7 @@ h6 {
 {
   h5
   {
-    font-size: 5px;
+    font-size: 15px;
   }
 }
 .flightsDetails.open {
@@ -229,7 +229,7 @@ h6 {
     height: 30px;
     gap: 4px;
     position: relative;
-    top: -10px;
+    top: -8px;
     h5
     {
         margin: 0;
@@ -259,7 +259,7 @@ h6 {
     position: relative;
     top: 127px;
     color: $page_color;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     text-align: center;
 }
 .Alldetails
@@ -269,15 +269,15 @@ h6 {
     gap: 5px;
     align-items: center;
     position: relative;
-    top: 145px;
+    top: 135px;
     h5
     {
         background: #F5F7F8;
-        padding: 6px 8px;
+        padding: 5px 6px;
         margin: 0;
         text-transform: capitalize;
         border-radius: 15px;
         font-family: $textFont, sans-serif;
-        font-size: 6px;
+        font-size: 8px;
     }
 }

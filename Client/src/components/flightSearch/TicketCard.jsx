@@ -234,7 +234,7 @@ function FlightCard() {
                 </Swiper>
                 <div className="line">
                   <h5>
-------------------
+                  -------------------------------------------
                   </h5>
                 </div>
                 <div className="Alldetails">
@@ -250,8 +250,7 @@ function FlightCard() {
                   <h5>
                     CHECKED BAG : 30KG
                     {
-                      itinerary.travelerPricings[0].fareDetailsBySegment[0]
-                        .includedCheckedBags.weight
+                      itinerary.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight
                     }
                   </h5>
                 </div>
