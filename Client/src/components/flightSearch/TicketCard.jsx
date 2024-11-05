@@ -13,7 +13,7 @@ function FlightCard() {
         "http://localhost:3000/flights/flightsResults"
       );
       setFlightResponse(res.data);
-      console.log(flightResponse);
+      // console.log(flightResponse);
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +21,7 @@ function FlightCard() {
   const [iataCodes, setIataCodes] = useState([]);
   const [airlines, setAirlines] = useState([]);
   const fetchIataCodes = async () => {
-    console.log("fetch function is running again and again")
+    console.log("fetch function is running again and again");
     try {
       const response = await axios.get("http://localhost:3000/flights");
       const { iataCodes, airlines } = response.data;
@@ -45,6 +45,16 @@ function FlightCard() {
       country: item.Country,
     };
     return lookup;
+  }, {});
+
+  const airlinesLookUp = airlines.reduce((airlineLookUp, item) => {
+    airlineLookUp = {
+      code: item.code,
+      logo: item.logo,
+      name: item.name,
+    };
+    // console.log(airlineLookUp);
+    return airlineLookUp;
   }, {});
 
   // Button actions
@@ -75,8 +85,24 @@ function FlightCard() {
             <div className="flights-res">
               <div className="flights-header">
                 <div className="airLineIcone">
-                  <div className="icon"></div>
-                  <h4>{segments[0].carrierCode}</h4>
+                  <div className="icon">
+                    <img
+                      src={
+                        airlines.find(
+                          (airlineLookUp) =>
+                            airlineLookUp.code === segments[0].carrierCode
+                        )?.logo || ""
+                      }
+                      alt="Airline Logo"
+                      className="airline-logo"
+                    />
+                  </div>
+                  <h4>
+                    {airlines.find(
+                      (airlineLookUp) =>
+                        airlineLookUp.code === segments[0].carrierCode
+                    )?.name || ""}
+                  </h4>
                 </div>
                 <h4>{segments[0].aircraft.code}</h4>
               </div>
@@ -103,7 +129,7 @@ function FlightCard() {
                 <div className="item">
                   <h2>{segments[lastSegmentIndex].arrival.iataCode}</h2>
                   <h5>
-                  {iataCodes.find(
+                    {iataCodes.find(
                       (lookup) =>
                         lookup.AirportCode === segments[0].arrival.iataCode
                     )?.City || ""}
@@ -173,14 +199,24 @@ function FlightCard() {
                         <div className="stop-details">
                           <h5>LAYOVER TIME : 1H40M </h5>
                           <h5>||</h5>
-                          <h5>CLASS : {itinerary.travelerPricings[0].fareDetailsBySegment[0].class} {itinerary.travelerPricings[0].fareDetailsBySegment[0].cabin}</h5>
+                          <h5>
+                            CLASS :{" "}
+                            {
+                              itinerary.travelerPricings[0]
+                                .fareDetailsBySegment[0].class
+                            }{" "}
+                            {
+                              itinerary.travelerPricings[0]
+                                .fareDetailsBySegment[0].cabin
+                            }
+                          </h5>
                           <h5>||</h5>
                           <h5>AIRLINE : KENYA AIRWAYS - KQ23A</h5>
                           <h5>||</h5>
                           <h5>DURATION : 4H40M </h5>
                         </div>
                       </div>
-                    </SwiperSlide> 
+                    </SwiperSlide>
                   ))}
                 </Swiper>
                 <div className="line">
@@ -192,9 +228,19 @@ function FlightCard() {
                   <h5>SEATS LEFT : {itinerary.numberOfBookableSeats}</h5>
                   <h5>last Date : {itinerary.lastTicketingDate}</h5>
                   <h5>TRAVLR TYPE : ADT</h5>
-                  <h5>{itinerary.travelerPricings[0].fareDetailsBySegment[0].cabin}</h5>
-                  <h5>CHECKED BAG : 30KG{itinerary.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight }</h5>
-                  {console.log(itinerary.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight)}
+                  <h5>
+                    {
+                      itinerary.travelerPricings[0].fareDetailsBySegment[0]
+                        .cabin
+                    }
+                  </h5>
+                  <h5>
+                    CHECKED BAG : 30KG
+                    {
+                      itinerary.travelerPricings[0].fareDetailsBySegment[0]
+                        .includedCheckedBags.weight
+                    }
+                  </h5>
                 </div>
               </div>
             ) : null}
