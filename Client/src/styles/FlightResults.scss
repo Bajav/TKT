@@ -62,7 +62,7 @@ h6 {
     .icon {
       background: $page_color;
       width: 130px;
-      height: 30px;
+      height: 40px;
       overflow: hidden;
       border-radius: 30px;
       display:  flex;
@@ -71,6 +71,7 @@ h6 {
       img
       {
         width: 100px;
+        height: 85px;
       }
     }
   }
