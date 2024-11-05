@@ -1,12 +1,11 @@
 @import "./variables.scss";
-body
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 @media only screen and (max-width: 600px) {
-.cutout-box {
+  .cutout-box {
     width: 410px;
     height: 460px;
     border-radius: 50px;
@@ -16,277 +15,255 @@ body
     position: relative;
     z-index: 2;
     background-size: cover;
-}
-.flights
-{
+  }
+  .flights {
     height: 100vh;
     position: relative;
     z-index: 2;
-    .flights-console
-    {
-        display: flex;
-        flex-direction: column;
-        gap: 5%;
-        height: 90vh;
-        align-items: center;
+    .flights-console {
+      display: flex;
+      flex-direction: column;
+      gap: 5%;
+      height: 90vh;
+      align-items: center;
     }
-}
-.flightType-btns
-{    display: flex;
+  }
+  .flightType-btns {
+    display: flex;
     gap: 2%;
     justify-content: space-around;
     padding: 10px;
-    select
-    {
-        width: 165px;
-        padding: 15px 30px;
-        color: $visibleFontColor;
-        font-size: 15px;
-        font-weight: 600;
-        font-family: $textFont, sans-serif;
-        text-transform: capitalize;
-        border-radius: 30px;   
+    select {
+      width: 165px;
+      padding: 15px 30px;
+      color: $visibleFontColor;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: $textFont, sans-serif;
+      text-transform: capitalize;
+      border-radius: 30px;
     }
-    select:focus{
-        outline: none;
+    select:focus {
+      outline: none;
     }
     option {
-        font-weight: 600;
-        display: block;
-        padding-block-start: 0px;
-        padding-block-end: 1px;
-        min-block-size: 1.2em;
-        padding-inline: 2px;
-        white-space: nowrap;
+      font-weight: 600;
+      display: block;
+      padding-block-start: 0px;
+      padding-block-end: 1px;
+      min-block-size: 1.2em;
+      padding-inline: 2px;
+      white-space: nowrap;
     }
-}
-.flexInput
-    {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 5px;
-        background:$inputBackGround;
-        margin-bottom: 15px;
-        margin-top: 5px;
-        width: 95%;
-        // margin-left: 10px;
-        border-radius: 15px;
-        height: 60px;
-        label
-        {
-            color: $deemFontColor;
-            font-family: $textFont, sans-serif;
-            text-transform: capitalize;
-            font-size: 10px;
-            font-weight: 600;
-            opacity: 70%;
-            margin-left: 10px;
-        }
-        input
-        {
-            border: none;
-            width: 95%;
-            margin-left: 10px;
-            height: 30px;
-            background: transparent;
-            color: $visibleFontColor;
-            // font-weight: 600;
-            text-transform: capitalize;
-        }
-        input:focus
-        {
-            outline: none;
-        }
-        input::placeholder
-        {
-            margin-left: 20px;
-        }
+  }
+  .flexInput {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: $inputBackGround;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    width: 95%;
+    // margin-left: 10px;
+    border-radius: 15px;
+    height: 60px;
+    label {
+      color: $deemFontColor;
+      font-family: $textFont, sans-serif;
+      text-transform: capitalize;
+      font-size: 10px;
+      font-weight: 600;
+      opacity: 70%;
+      margin-left: 10px;
     }
-    .flightInputs{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    input {
+      border: none;
+      width: 95%;
+      margin-left: 10px;
+      height: 30px;
+      background: transparent;
+      color: $visibleFontColor;
+      // font-weight: 600;
+      text-transform: capitalize;
     }
-    .calender
-    {
-        width: 190px;
-        border-radius: 40px;
-        background: $inputBackGround;
-        input
-        {
-            width: 150px;
-            border-radius: 10px;
-            margin-left: 20px;
-            background: $inputBackGround;
-        }
-        label
-        {
-            margin-left: 20px;
-        }
+    input:focus {
+      outline: none;
     }
-    .check
-    {
-        display: flex;
-        color: $visibleFontColor;
-        text-transform: capitalize;
-        font-family: $textFont,sans-serif;
-        font-weight: 600;
-        font-size: 15px;
-        border-radius: 30px;
-        width: 180px;
-        outline: none;
-        background: $inputBackGround;
-        padding: 10 20px;
-        justify-content: center;
-        align-items: center;
-        input{
-            position: absolute;
-            // right: 20px;
-            background: #007bff;
-            opacity: 5%;
-            width: 100px;
-            height: 30px;
-        }
-        
+    input::placeholder {
+      margin-left: 20px;
     }
-    .calendersUI
-    {
-        width: 100%;
-        margin-top: 10PX;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
+  }
+  .flightInputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .calender {
+    width: 190px;
+    border-radius: 40px;
+    background: $inputBackGround;
+    input {
+      width: 150px;
+      border-radius: 10px;
+      margin-left: 20px;
+      background: $inputBackGround;
     }
-    
-    // passenger
-    .passenger-selector {
-        position: relative;
-        /* display: inline-block; */
-        width: 190px;
-        display: flex;
-        flex-direction: column;
-        font-family: $textFont,sans-serif;
-        font-weight: 600;
-        color: $deemFontColor;
-      }
-      
-      .dropdown-header {
-        background-color: #f2f2f2;
-        border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 5px;
-        border-radius: 30px;
-        height: 40px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        gap:8px;
-        justify-content: space-between;
-        align-items: center;
-        span{
-            font-size: 10px;
-            
-        }
-      }
-      
-      .dropdown-content {
-        position: absolute;
-        background-color: #fff;
-        min-width: 200px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-        padding: 12px;
-        border-radius: 10px;
-        z-index: 1;
-        top: 50px;
-        margin-top: 10px; /* to create some space below the button */
-      }
-      
-      .passenger-type {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-      }
-      
-      .passenger-type button {
-        background-color: #007bff;
-        border: none;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      
-      .passenger-type button:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-      }
-      
-      .arrow {
-        margin-left: 10px;
-      }
-      
-      .dropdown-content span {
-        font-size: 16px;
-        margin: 0 10px;
-      }
-      
-      
-    .seatType
-    {
-        display: flex;
-        align-items: center;
-        // margin-top: 2px;
-        justify-content: center;
-        position: relative;
-        margin-bottom: 5px;
-        z-index: 2;
-        gap: 10px;
-        // background: #007bff;
+    label {
+      margin-left: 20px;
     }
-    .seatClass
-    {
-        display: flex;
-        flex-direction: column;
-        background: $inputBackGround;
-        gap: 5px;
-        height: 60px;
-        width: 190px;
-        border-radius: 30px;
-        font-family: $textFont, sans-serif;
-        text-transform: capitalize;
-        font-weight: 600;
-        select
-        {
-            background: transparent;
-            border: none;
-            margin-left: 15px;
-            text-transform: capitalize;
-            color: $visibleFontColor;
-            font-weight: 600;
-            margin-top: 7px;
-            width: 160px;
-        }
-        select:focus
-        {
-            outline: none;
-        }
-        label
-        {
-            margin-left: 20px;
-            font-size: 10px;
-            color: $deemFontColor;
-            margin-top: 5px;
-        }
+  }
+  .check {
+    display: flex;
+    color: $visibleFontColor;
+    text-transform: capitalize;
+    font-family: $textFont, sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 30px;
+    width: 180px;
+    outline: none;
+    background: $inputBackGround;
+    padding: 10 20px;
+    justify-content: center;
+    align-items: center;
+    input {
+      position: absolute;
+      // right: 20px;
+      background: #007bff;
+      opacity: 5%;
+      width: 100px;
+      height: 30px;
     }
-    .btn-submit
-    {
-     width: 380px;
+  }
+  .calendersUI {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  // passenger
+  .passenger-selector {
+    position: relative;
+    /* display: inline-block; */
+    width: 190px;
+    display: flex;
+    flex-direction: column;
+    font-family: $textFont, sans-serif;
+    font-weight: 600;
+    color: $deemFontColor;
+  }
+
+  .dropdown-header {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    border-radius: 30px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-size: 10px;
+    }
+  }
+
+  .dropdown-content {
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border-radius: 10px;
+    z-index: 1;
+    top: 50px;
+    margin-top: 10px; /* to create some space below the button */
+  }
+
+  .passenger-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .passenger-type button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .passenger-type button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .arrow {
+    margin-left: 10px;
+  }
+
+  .dropdown-content span {
+    font-size: 16px;
+    margin: 0 10px;
+  }
+
+  .seatType {
+    display: flex;
+    align-items: center;
+    // margin-top: 2px;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 5px;
+    z-index: 2;
+    gap: 10px;
+    // background: #007bff;
+  }
+  .seatClass {
+    display: flex;
+    flex-direction: column;
+    background: $inputBackGround;
+    gap: 5px;
+    height: 60px;
+    width: 190px;
+    border-radius: 30px;
+    font-family: $textFont, sans-serif;
+    text-transform: capitalize;
+    font-weight: 600;
+    select {
+      background: transparent;
+      border: none;
+      margin-left: 15px;
+      text-transform: capitalize;
+      color: $visibleFontColor;
+      font-weight: 600;
+      margin-top: 7px;
+      width: 160px;
+    }
+    select:focus {
+      outline: none;
+    }
+    label {
+      margin-left: 20px;
+      font-size: 10px;
+      color: $deemFontColor;
+      margin-top: 5px;
+    }
+  }
+  .btn-submit {
+    width: 380px;
     height: 50px;
     text-align: center;
     color: #313030;
@@ -298,80 +275,76 @@ body
     border: none;
     background: $inputBackGround;
     font-weight: 600;
-    }
-    // gallery
-    .gallery
-    {
-        background: url(../assets/placesImages/lowerBg.jpg);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        width: 415px;
-        height: 240px;
-        scroll-behavior: auto;
-        border-radius: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        .item
-        {
-            width: 400px;
-            height: 240px;
-            background: #007bff;
-        }
-    }
-    input:focus
-    {
-        background: transparent;
-    }
+  }
+  input:focus {
+    background: transparent;
+  }
 }
-.dropDown
-{
-    position: absolute;
-    top: 135px; 
-    left: 0;
-    width: 100%;
-    background-color: $inputBackGround;
-    border: 1px solid #ccc;
-    max-height: 200px; 
-    overflow-y: auto; 
-    z-index: 10; 
-    .dropDown:empty
-{
+.dropDown {
+  position: absolute;
+  top: 135px;
+  left: 0;
+  width: 100%;
+  background-color: $inputBackGround;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  .dropDown:empty {
     border: none;
     display: none;
-}
-ul {
+  }
+  ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
   }
-li
-{
+  li {
     text-decoration: none;
     text-overflow: clip;
     list-style: none;
     font-size: 10px;
-    font-family: $textFont, sans-serif ;
+    font-family: $textFont, sans-serif;
     font-weight: 600;
-}
-.dropDownRow
-{
+  }
+  .dropDownRow {
     display: flex;
     align-items: center;
+  }
 }
-}
-.changeUi{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    .dropDown
-{
+.changeUi {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .dropDown {
     position: absolute;
-    top: 225px; 
+    top: 225px;
     left: 0;
     width: 100%;
-    z-index: 10; 
+    z-index: 10;
+  }
 }
+.swiper {
+    width: 415px;
+    background: #313030;
+    padding: 5px;
+    height: 240px;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  width: 400px;
+  height: 240px;
+  border-radius: 10px;
+  background: #007bff;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
