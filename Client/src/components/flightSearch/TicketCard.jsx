@@ -21,17 +21,18 @@ function FlightCard() {
   const [iataCodes, setIataCodes] = useState([]);
   const [airlines, setAirlines] = useState([]);
   const fetchIataCodes = async () => {
+    console.log("fetch function is running again and again")
     try {
       const response = await axios.get("http://localhost:3000/flights");
       const { iataCodes, airlines } = response.data;
       setIataCodes(iataCodes);
       setAirlines(airlines);
-      console.log(airlines);
     } catch (err) {
       console.error("Error fetching IATA codes", err);
     }
   };
 
+  console.log("fetching is done multiple times");
   useEffect(() => {
     fetchFlights();
     fetchIataCodes();
