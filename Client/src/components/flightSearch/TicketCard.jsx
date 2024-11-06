@@ -59,6 +59,8 @@ function FlightCard() {
 
   // Button actions
   const seeDetails = (index) => {
+    console.log(index);
+    console.log(flightResponse.slice(index,index + 1));
     console.log("details button is clicked for card", index);
     showDropDown((prevIndex) => (prevIndex === index ? null : index));
   };
@@ -157,7 +159,7 @@ function FlightCard() {
                     Book Now
                   </button>
                   <button
-                    onClick={() => seeDetails(index)}
+                    onClick={() =>{ seeDetails(index)}}
                     className="detailsBtn"
                   >
                     See Details
