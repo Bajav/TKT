@@ -6,6 +6,7 @@ import axios from "axios";
 function FlightCard() {
   const [flightResponse, setFlightResponse] = useState([]);
   const [dropDown, showDropDown] = useState(null);
+  const [selectedFlight , setFlight] = useState(null);
 
   const fetchFlights = async () => {
     try {
@@ -59,14 +60,14 @@ function FlightCard() {
 
   // Button actions
   const seeDetails = (index) => {
-    console.log(index);
-    console.log(flightResponse.slice(index,index + 1));
     console.log("details button is clicked for card", index);
     showDropDown((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  const bookNow = (e) => {
-    console.log("bookNow button is clicked");
+  const bookNow = (index) => {
+    console.log(selectedFlight);
+    var selectedFLightOut = flightResponse.slice(index,index + 1);
+    setFlight(selectedFLightOut)
   };
 
   return (
@@ -155,7 +156,7 @@ function FlightCard() {
                   <h4>${itinerary.price.grandTotal}</h4>
                 </div>
                 <div className="actions">
-                  <button onClick={bookNow} className="bookBtn">
+                  <button onClick={() =>{ bookNow(index)}} className="bookBtn">
                     Book Now
                   </button>
                   <button
