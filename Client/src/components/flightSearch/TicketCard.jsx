@@ -6,7 +6,8 @@ import axios from "axios";
 function FlightCard() {
   const [flightResponse, setFlightResponse] = useState([]);
   const [dropDown, showDropDown] = useState(null);
-  const [selectedFlight , setFlight] = useState(null);
+  const [outBoundFlight , setFlight] = useState({});
+  const [showBookingInfo, setShowBookingInfo] = useState(false)
 
   const fetchFlights = async () => {
     try {
@@ -65,14 +66,18 @@ function FlightCard() {
   };
 
   const bookNow = (index) => {
-    console.log(selectedFlight);
+    console.log(outBoundFlight);
     var selectedFLightOut = flightResponse.slice(index,index + 1);
-    setFlight(selectedFLightOut)
+    setFlight({flight:selectedFLightOut, index });
+    var numOfObjElements = Object.keys(outBoundFlight).length;
+    numOfObjElements > 1 ?  setShowBookingInfo(true): setShowBookingInfo(false);
+    console.log(numOfObjElements);
   };
 
   return (
     <Fragment>
-      {flightResponse.map((itinerary, index) => {
+      {!showBookingInfo ?(
+      flightResponse.map((itinerary, index) => {
         const segments = itinerary.itineraries[0].segments;
         const segmentNumber = segments.length;
         const lastSegmentIndex = segmentNumber - 1;
@@ -82,7 +87,6 @@ function FlightCard() {
         return (
           <div
             className="main-cards"
-            // key={itinerary.itineraries[0].segments[0].id || itinerary.id}
             key={index}
           >
             <div className="flights-res">
@@ -261,7 +265,7 @@ function FlightCard() {
             ) : null}
           </div>
         );
-      })}
+      })):<h1>helo it worked</h1>}
     </Fragment>
   );
 }
