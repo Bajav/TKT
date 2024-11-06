@@ -1,14 +1,9 @@
-import React, { useRef, useState } from 'react';
-// Import Swiper React components
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-
-
-// import required modules
 import { Pagination } from 'swiper/modules';
+import skyDiver from '../../assets/images/skyDving.jpg';
 
 export default function App() {
   return (
@@ -18,18 +13,23 @@ export default function App() {
         pagination={{
           clickable: true,
         }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        spaceBetween={30}
         modules={[Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        <SwiperSlide>
+          <img src={skyDiver} alt="Slide 1" />
+        </SwiperSlide>
+        <SwiperSlide>
+        <img src={skyDiver} alt="Slide 1" />
+        </SwiperSlide>
+        <SwiperSlide>
+        <img src={skyDiver} alt="Slide 1" />
+        </SwiperSlide>
       </Swiper>
     </>
   );
