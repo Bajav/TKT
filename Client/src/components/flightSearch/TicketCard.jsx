@@ -68,11 +68,21 @@ function FlightCard() {
   const bookNow = (index) => {
     console.log(outBoundFlight);
     var selectedFLightOut = flightResponse.slice(index, index + 1);
-    setFlight({ flight: selectedFLightOut, index });
+    setFlight((prevState) => {
+      return {
+        ...prevState,
+        flight: selectedFLightOut,
+        index: index,
+      };
+    });
     var numOfObjElements = Object.keys(outBoundFlight).length;
     numOfObjElements > 1 ? setShowBookingInfo(true) : setShowBookingInfo(false);
     console.log(numOfObjElements);
   };
+
+  useEffect(() => {
+    console.log("outBoundFlight updated:", outBoundFlight);
+  }, [outBoundFlight]);
 
   return (
     <Fragment>

@@ -6,7 +6,16 @@ import Gallery from '../components/flightSearch/galler';
 
 
 
+
 function Flights() {
+  // const reloadPage =() =>
+  //   {
+  //     window.location.reload();
+  //   }
+ useEffect(()=>{
+  // reloadPage();
+  // console.log("page reloaded");
+ },[]);
   return (
  <main className='flights'>
   <Header />
