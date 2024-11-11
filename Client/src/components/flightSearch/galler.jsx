@@ -7,7 +7,7 @@ import skyDiver from '../../assets/images/skyDving.jpg';
 
 export default function App() {
   return (
-    <>
+    <div className='swipes'>
       <Swiper
         direction={'vertical'}
         pagination={{
@@ -31,6 +31,6 @@ export default function App() {
         <img src={skyDiver} alt="Slide 1" />
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 }
