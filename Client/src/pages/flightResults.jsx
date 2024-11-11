@@ -7,7 +7,6 @@ import Dummy from '../components/places/dummyCard';
 function FlightResult() {
   const location = useLocation();
   const { searchResults, formData,airlines } = location.state || {};
-  console.log(airlines);
   
 
   const data =()=>
@@ -21,6 +20,7 @@ function FlightResult() {
 
   return (
     <main className='FlightResult-page'>
+      <button>back</button>
       <div className="FlightResults">
         <h3 className='text'> Results for your search</h3>
         <h3>{searchResults}</h3>

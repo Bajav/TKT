@@ -182,7 +182,8 @@ h6 {
 }
 .stopOvers {
   position: absolute;
-  top: -40px;
+  top: 20px;
+  left: 10px;
   width: 100%;
 
   .stopFlight {
@@ -198,6 +199,8 @@ h6 {
   .ticket-header
   {
     display: flex;
+    position: relative;
+    height: 125px;
     flex-direction: column;
   }
   h2 {
@@ -230,7 +233,7 @@ h6 {
     height: 30px;
     gap: 4px;
     position: relative;
-    top: -8px;
+    top: -10px;
     h5
     {
         margin: 0;
