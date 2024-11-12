@@ -80,6 +80,16 @@ function FlightCard() {
     console.log(numOfObjElements);
   };
 
+  const bookNowTwo =async()=>
+    {
+      try {
+        const response = await axios.post('http://localhost:3000/flights/flightsResults/flightPricing',outBoundFlight);
+        console.log(response);
+        }catch(err){
+          console.log("error posting data");
+        }
+  }
+
   useEffect(() => {
     console.log("outBoundFlight updated:", outBoundFlight);
   }, [outBoundFlight]);
@@ -368,7 +378,7 @@ function FlightCard() {
                     <div className="actions">
                       <button
                         onClick={() => {
-                          bookNow(index);
+                          bookNowTwo();
                         }}
                         className="bookBtn"
                       >
@@ -475,6 +485,11 @@ function FlightCard() {
                     </div>
                   </div>
                 ) : null}
+                <div className="form">
+                  <form method="post">
+                    <input type="hidden" name="flightIndex" value={outBoundFlight.index} />
+                  </form>
+                </div>
               </div>
             );
           })}

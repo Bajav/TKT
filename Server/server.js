@@ -123,7 +123,12 @@ app.route("/flights/flightsResults")
     } catch (error) {
       console.error(error);
     }
-})
+});
+
+app.route("/flights/flightsResults/flightPricing")
+.post((req, res)=>{
+  console.log(req.body)
+});
 
 
 
