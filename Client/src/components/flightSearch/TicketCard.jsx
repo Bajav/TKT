@@ -376,7 +376,10 @@ function FlightCard() {
                         </h4>
                       </div>
                     <div className="actions">
-                      <button
+                    <div className="form">
+                  <form method="post">
+                    <input type="hidden" name="flightIndex" value={outBoundFlight.index} />
+                    <button
                         onClick={() => {
                           bookNowTwo();
                         }}
@@ -384,6 +387,8 @@ function FlightCard() {
                       >
                         Book Now
                       </button>
+                  </form>
+                </div>
                       <button
                         onClick={() => {
                           seeDetails(index);
@@ -485,11 +490,6 @@ function FlightCard() {
                     </div>
                   </div>
                 ) : null}
-                <div className="form">
-                  <form method="post">
-                    <input type="hidden" name="flightIndex" value={outBoundFlight.index} />
-                  </form>
-                </div>
               </div>
             );
           })}
