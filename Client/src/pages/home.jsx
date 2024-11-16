@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../components/header';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Location from '../components/places/location';
+import Loader from '../components/loader';
 import 'swiper/css';
 function Home() {
   return (
@@ -48,8 +49,9 @@ function Home() {
           
         </div>
         <div className="toView">
-          <h1>have you seen these ?</h1>
+          <h1>have you seen these?</h1>
           <div className="viewCards">
+            <Loader loaderTag="Searching for flights"/>
             <div className="viewCard"></div>
           </div>
         </div>
