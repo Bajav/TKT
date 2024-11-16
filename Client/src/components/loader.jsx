@@ -1,8 +1,11 @@
 import React from 'react'
 
-function Loader() {
+function Loader(props) {
   return (
-    <div className='loader'>
+    <div className="main-loader">
+            <div className='loader'>
+            </div>
+            <h4>{props.loaderTag}</h4>
     </div>
   )
 }
