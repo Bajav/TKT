@@ -97,7 +97,7 @@ function FlightCard() {
 
   return (
     <Fragment>
-      {flightResponse.length < 1 ? (<Loader/>
+      {flightResponse.length < 1 ? (<Loader loaderTag="Searching for flights"/>
           ):(
             !showBookingInfo
             ? flightResponse.map((itinerary, index) => {

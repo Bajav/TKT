@@ -1,3 +1,42 @@
+@import './variables.scss';
+
+.main-loader
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    width: 70%;
+    // translate: -0% -50%;
+    flex-direction: column;
+    background: rgba(34, 34, 34, 0.5);
+-webkit-backdrop-filter: blur(11px);
+backdrop-filter: blur(11px);
+border: 1px solid rgba(255,255,255,0.25);
+    h4
+    {
+        font-size: 15px;
+        text-align: center;
+        color: $page_color;
+        margin-top: 30px;
+        font-family: $textFont, sans-serif;
+        animation: customAni 2s ease-in-out 2s infinite normal none;
+        letter-spacing: 1px;
+    } 
+    @keyframes customAni {
+        0% {
+          opacity: 1;
+        }
+      
+        50% {
+          opacity: 0.2;
+        }
+      
+        100% {
+          opacity: 1;
+        }
+      }
+}
 .loader {
   display: inline-flex;
   gap: 10px;
