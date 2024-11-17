@@ -92,7 +92,6 @@ function FlightCard() {
       navigate("/flights/flightsResults/flightPricing", { state: {  } });
       console.log("Server response:", response.data);
       // Example: Update state with server response
-      setFlightPricingDetails(response.data);
     } catch (err) {
       console.error("Error posting data:", err);
       setError("Could not send flight data. Please try again.");
