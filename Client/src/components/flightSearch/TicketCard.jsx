@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Arrow } from "./flightArrowSvg";
 import axios from "axios";
@@ -9,6 +10,7 @@ function FlightCard() {
   const [dropDown, showDropDown] = useState(null);
   const [outBoundFlight, setFlight] = useState({});
   const [showBookingInfo, setShowBookingInfo] = useState(false);
+  const navigate = useNavigate();
 
   const fetchFlights = async () => {
     try {
@@ -87,6 +89,7 @@ function FlightCard() {
         "http://localhost:3000/flights/flightsResults/flightPricing",
         outBoundFlight
       );
+      navigate("/flights/flightsResults/flightPricing", { state: {  } });
       console.log("Server response:", response.data);
       // Example: Update state with server response
       setFlightPricingDetails(response.data);

@@ -6,6 +6,7 @@ import Hotels from '../pages/hotels';
 import Packages from '../pages/packages';
 import Navbar from '../components/navBar';
 import FlightResult from '../pages/flightResults';
+import FlightPricing from '../pages/flightPricing';
 
 function AllRoutes() {
   return (
@@ -15,6 +16,7 @@ function AllRoutes() {
         <Route path='places' element={<Places />} />
         <Route path='flights' element={<Flights />} />
         <Route path='flights/flightsResults' element={<FlightResult />} />
+        <Route path='flights/flightsResults/flightPricing' element={<FlightPricing />} />
         <Route path='hotels' element={<Hotels />} />
         <Route path='packages' element={<Packages />} />
       </Route>

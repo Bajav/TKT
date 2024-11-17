@@ -8,4 +8,4 @@ function FlightPricing() {
   )
 }
 
-export default FlightPricing
+export default FlightPricing;
