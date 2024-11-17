@@ -81,15 +81,21 @@ function FlightCard() {
     console.log(numOfObjElements);
   };
 
-  const bookNowTwo =async()=>
-    {
-      try {
-        const response = await axios.post('http://localhost:3000/flights/flightsResults/flightPricing',outBoundFlight);
-        console.log(response);
-        }catch(err){
-          console.log("error posting data");
-        }
-  }
+  const bookNowTwo = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/flights/flightsResults/flightPricing",
+        outBoundFlight
+      );
+      console.log("Server response:", response.data);
+      // Example: Update state with server response
+      setFlightPricingDetails(response.data);
+    } catch (err) {
+      console.error("Error posting data:", err);
+      setError("Could not send flight data. Please try again.");
+    }
+  };
+  
 
   useEffect(() => {
     console.log("outBoundFlight updated:", outBoundFlight);
