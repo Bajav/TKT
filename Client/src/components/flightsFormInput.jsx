@@ -48,7 +48,7 @@ function FlightsForm() {
     try {
       const response = await axios.post('http://localhost:3000/flights/flightsResults', formData);
       // i send data to next page
-      navigate("/flights/flightsResults", { state: { formData, airlines } });
+      navigate("flightsResults", { state: { formData, airlines } });
       console.log('Flight data posted:', response.data);
     } catch (error) {
       console.error('Error posting flight:', error);
