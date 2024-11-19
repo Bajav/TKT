@@ -14,9 +14,9 @@ function AllRoutes() {
     <Route path="/" element={<Navbar />}>
         <Route index element={<Home />} />
         <Route path="flights" element={<Flights />}>
-            <Route path="flightsResults" element={<FlightResult />} />
-            <Route path="flightPricing" element={<FlightPricing />} />
         </Route>
+            <Route path="flights/flightsResults" element={<FlightResult />} />
+            <Route path="flights/flightsResults/flightPricing" element={<FlightPricing />} />
         <Route path="places" element={<Places />} />
         <Route path="hotels" element={<Hotels />} />
         <Route path="packages" element={<Packages />} />
