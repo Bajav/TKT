@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';  
 import Calender from "./flightSearch/calenderInput";
 import FlightSearchInput from "./flightSearch/flightSearch";
+import { Outlet,useLocation } from "react-router-dom";
 
 function FlightsForm() {
+  const location = useLocation();
   const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
@@ -48,7 +50,7 @@ function FlightsForm() {
     try {
       const response = await axios.post('http://localhost:3000/flights/flightsResults', formData);
       // i send data to next page
-      navigate("flightsResults", { state: { formData, airlines } });
+      navigate("/flights/flightsResults", { state: { formData, airlines } });
       console.log('Flight data posted:', response.data);
     } catch (error) {
       console.error('Error posting flight:', error);
@@ -58,6 +60,7 @@ function FlightsForm() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [passengers, setPassengers] = useState({
     adults: 1,
+    
     children: 0,
     infants: 0,
   });
@@ -87,6 +90,7 @@ function FlightsForm() {
 
   return (
     <Fragment >
+      {location.pathname === "/flights" && (
     <div className="cutout-box">
       <form action="/flights" onSubmit={handleSubmit}>
         <div className="flightSearch">
@@ -238,6 +242,8 @@ function FlightsForm() {
         </button>
       </form>
     </div>
+  )}
+    <Outlet />
     </Fragment>  
   );
 }
