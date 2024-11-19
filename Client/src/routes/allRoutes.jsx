@@ -10,17 +10,18 @@ import FlightPricing from '../pages/flightPricing';
 
 function AllRoutes() {
   return (
-    <Routes>
-      <Route path='/' element={<Navbar />} >
-        <Route index element={<Home />} />
-        <Route path='places' element={<Places />} />
-        <Route path='flights' element={<Flights />} />
-        <Route path='flights/flightsResults' element={<FlightResult />} />
-        <Route path='flights/flightsResults/flightPricing' element={<FlightPricing />} />
-        <Route path='hotels' element={<Hotels />} />
-        <Route path='packages' element={<Packages />} />
-      </Route>
-    </Routes>
+<Routes>
+            <Route path="/" element={<Navbar />}>
+                <Route index element={<Home />} />
+                <Route path="places" element={<Places />} />
+                <Route path="flights" element={<Flights />}>
+                    <Route path="flightsResults" element={<FlightResult />} />
+                    <Route path="flightsResults/flightPricing" element={<FlightPricing />} />
+                </Route>
+                <Route path="hotels" element={<Hotels />} />
+                <Route path="packages" element={<Packages />} />
+            </Route>
+        </Routes>
   );
 }
 
