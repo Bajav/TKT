@@ -57,13 +57,10 @@ const amadeus = new Amadeus({
 app.route("/flights")
   .get(async (req, res) => {
     try {
-      // Run both queries in parallel
       const [iataCodes, airlines] = await Promise.all([
         IATACODE.find().exec(),
         Airline.find().exec()
       ]);
-
-      // Send both datasets in a single response
       res.json({ iataCodes, airlines });
       
     } catch (err) {
@@ -116,7 +113,7 @@ app.route("/flights/flightsResults")
         }else
         {
           res.send(response.data);
-          const limitedData = response.data.slice(0,4)
+          const limitedData = response.data.slice(0,1)
           console.log(limitedData);
         }
       // res.send(response.data);
@@ -125,9 +122,19 @@ app.route("/flights/flightsResults")
     }
 });
 
+// --get/post /flights/flightsResults/flightPricing
+
+let flightIndex ;
 app.route("/flights/flightsResults/flightPricing")
 .post((req, res)=>{
   console.log(req.body);
+   flightIndex = req.body.index;
+  console.log(flightIndex);
+})
+.get((req,res)=>{
+  res.send("working");
+  // console.log(req);
+  console.log(flightIndex);
 });
 
 
