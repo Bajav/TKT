@@ -89,7 +89,7 @@ function FlightCard() {
         "http://localhost:3000/flights/flightsResults/flightPricing",
         outBoundFlight
       );
-      navigate("/flights/flightsResults/flightPricing", { state: {  } });
+      navigate("/flights/flightsResults/flightPricing");
       console.log("Server response:", response.data);
       // Example: Update state with server response
     } catch (err) {
