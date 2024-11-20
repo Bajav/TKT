@@ -215,6 +215,7 @@ app.get("/flights/flightsResults/confirmOrder/seatMap",async (req,res)=>{
     });
     seatMaps = response.data;
     console.log(seatMaps);
+    res.send(seatMaps);
   } catch (error) {
     console.error(error);
   }
