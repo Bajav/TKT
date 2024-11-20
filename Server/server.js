@@ -154,7 +154,7 @@ app.route("/flights/flightsResults/flightPricing")
     console.log(err);
   }
 });
-
+let confirmOrder ;
 app.get("/flights/flightsResults/confirmOrder",async (req,res)=>{
   try{
     const response = await amadeus.booking.flightOrders.post({
@@ -199,8 +199,24 @@ app.get("/flights/flightsResults/confirmOrder",async (req,res)=>{
       },
     });
     res.send(response.data);
+    confirmOrder = response.data;
   }catch(err){
     console.log(err)
+  }
+});
+
+// seatMaps
+let seatMaps ;
+app.get("/flights/flightsResults/confirmOrder/seatMap",async (req,res)=>{
+  try {
+    // Returns all the seat maps of a given order
+    const response = await amadeus.shopping.seatmaps.get({
+      "flight-orderId": confirmOrder.id,
+    });
+    seatMaps = response.data;
+    console.log(seatMaps);
+  } catch (error) {
+    console.error(error);
   }
 });
 
