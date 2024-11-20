@@ -146,9 +146,9 @@ app.route("/flights/flightsResults/flightPricing")
       },
       { include: "credit-card-fees,detailed-fare-rules" }
     );
-    flightOffersResponse = response.data;
-    console.log(flightOffersResponse);
-    res.send(response.data);
+    pricingResponse = response.data;
+    console.log(pricingResponse);
+    res.send(pricingResponse);
   }catch(err)
   {
     console.log(err);
@@ -198,6 +198,7 @@ app.get("/flights/flightsResults/confirmOrder",async (req,res)=>{
         ],
       },
     });
+    res.send(response.data);
   }catch(err){
     console.log(err)
   }
