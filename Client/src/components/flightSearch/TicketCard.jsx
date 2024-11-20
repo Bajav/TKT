@@ -28,8 +28,6 @@ function FlightCard() {
         setAirlines(airlines);
       } catch (err) {
         setError("Failed to fetch data. Please try again.");
-      } finally {
-        setLoading(false);
       }
     };
     fetchData();
