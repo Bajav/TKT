@@ -128,6 +128,7 @@ app.route("/flights/flightsResults")
 // --get/post /flights/flightsResults/flightPricing
 
 let flightIndex ;
+let pricingResponse;
 app.route("/flights/flightsResults/flightPricing")
 .post((req, res)=>{
   console.log(req.body);
@@ -145,7 +146,8 @@ app.route("/flights/flightsResults/flightPricing")
       },
       { include: "credit-card-fees,detailed-fare-rules" }
     );
-    console.log(response);
+    flightOffersResponse = response.data;
+    console.log(flightOffersResponse);
     res.send(response.data);
   }catch(err)
   {
@@ -158,7 +160,7 @@ app.get("/flights/flightsResults/confirmOrder",async (req,res)=>{
     const response = await amadeus.booking.flightOrders.post({
       data: {
         type: "flight-order",
-        flightOffers: [pricingResponse.data.flightOffers[0]],
+        flightOffers: [pricingResponse.flightOffers[0]],
         travelers: [
           {
             id: "1",

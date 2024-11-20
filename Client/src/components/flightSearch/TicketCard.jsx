@@ -23,6 +23,7 @@ function FlightCard() {
           axios.get("http://localhost:3000/flights"),
         ]);
         setFlightResponse(flightsRes.data);
+        console.log(flightsRes.data);
         const { iataCodes, airlines } = iataRes.data;
         setIataCodes(iataCodes);
         setAirlines(airlines);
