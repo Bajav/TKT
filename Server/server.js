@@ -71,6 +71,7 @@ app.route("/flights")
 
 
 var formData ;
+let flightOffersResponse ;
 app.route("/flights/flightsResults")
   .post(async (req, res) => {
    console.log(req.body);
@@ -79,6 +80,7 @@ app.route("/flights/flightsResults")
   //  console.log()
   })
 
+  // 
 .get(async (req, res) => {
   // res.send(formData);
   const origin = formData.origin.slice(0,3);
@@ -113,6 +115,7 @@ app.route("/flights/flightsResults")
         }else
         {
           res.send(response.data);
+          flightOffersResponse = response.data;
           const limitedData = response.data.slice(0,1)
           console.log(limitedData);
         }
@@ -131,10 +134,29 @@ app.route("/flights/flightsResults/flightPricing")
    flightIndex = req.body.index;
   console.log(flightIndex);
 })
-.get((req,res)=>{
-  res.send("working");
-  // console.log(req);
-  console.log(flightIndex);
+.get(async(req,res)=>{
+  try{
+    const response = await amadeus.shopping.flightOffers.pricing.post(
+      {
+        data: {
+          type: "flight-offers-pricing",
+          flightOffers: [flightOffersResponse[0]],
+        },
+      },
+      { include: "credit-card-fees,detailed-fare-rules" }
+    );
+    console.log(response);
+    res.send(response.data);
+  }catch(err)
+  {
+    console.log(err);
+  }
+});
+
+app.get("/flights/flightsResults/confirmOrder",(req,res)=>{
+  try{}catch(err){
+    console.log(err)
+  }
 });
 
 
@@ -153,3 +175,50 @@ app.get("/testing", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+try{
+const response = await amadeus.booking.flightOrders.post({
+  data: {
+    type: "flight-order",
+    flightOffers: [pricingResponse.data.flightOffers[0]],
+    travelers: [
+      {
+        id: "1",
+        dateOfBirth: "1982-01-16",
+        name: {
+          firstName: "JORGE",
+          lastName: "GONZALES",
+        },
+        gender: "MALE",
+        contact: {
+          emailAddress: "jorge.gonzales833@telefonica.es",
+          phones: [
+            {
+              deviceType: "MOBILE",
+              countryCallingCode: "34",
+              number: "480080076",
+            },
+          ],
+        },
+        documents: [
+          {
+            documentType: "PASSPORT",
+            birthPlace: "Madrid",
+            issuanceLocation: "Madrid",
+            issuanceDate: "2015-04-14",
+            number: "00000000",
+            expiryDate: "2025-04-14",
+            issuanceCountry: "ES",
+            validityCountry: "ES",
+            nationality: "ES",
+            holder: true,
+          },
+        ],
+      },
+    ],
+  },
+});
+console.log(response);
+} catch (error) {
+console.error(error);
+}
