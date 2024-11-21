@@ -59,13 +59,14 @@ function FlightCard() {
   };
 
   const bookNow = async (index) => {
+    navigate("/flights/flightsResults/flightPricing");
+    console.log("boook now btn hit")
     try {
       setFlight (flightResponse[index]);
       await axios.post(
         "http://localhost:3000/flights/flightsResults/flightPricing",
         { flight: outBoundFlight,index : index }
       );
-      navigate("/flights/flightsResults/flightPricing");
     } catch (err) {
       console.error("Error posting data:", err);
     }
