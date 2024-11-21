@@ -11,5 +11,20 @@ body
     height: 100vh;
     background: $page_color;
     font-family: $textFont, sans-serif;
-    color: $deemFontColor;
+    // color: $deemFontColor;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+.mainReview
+{
+    background: $ticketColor;
+    height: 85vh;
+    width: 95%;
+    padding: 8px;
+    border-radius: 20px;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+}
+
