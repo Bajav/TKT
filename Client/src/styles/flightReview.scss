@@ -19,12 +19,45 @@ body
 .mainReview
 {
     background: $ticketColor;
-    height: 85vh;
+    height: 85%;
     width: 95%;
     padding: 8px;
     border-radius: 20px;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .departureReview
+    {
+        width: 100%;
+        // background: #fff;
+        h1
+        {
+            text-align: center;
+            font-family: $cityFont,sans-serif;
+            font-weight: 700;
+            font-size: 25px;
+            margin: 10px;
+            color: $page_color;
+        }
+        .ticket
+        {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .flight-info
+            {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                margin-top: 10px;
+                .flex-info
+                {
+                    background: $inputBackGround;
+                    padding: 5px 10px;
+                }
+            }
+        }
+    }
 }
 
