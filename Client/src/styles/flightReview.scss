@@ -49,12 +49,19 @@ body
             {
                 display: flex;
                 align-items: center;
-                gap: 5px;
-                margin-top: 10px;
+                gap: 2px;;
+                margin-top: 20px;
                 .flex-info
                 {
                     background: $inputBackGround;
-                    padding: 5px 10px;
+                    padding: 5px 6.4px ;
+                    border-radius: 10px;
+                    h5
+                    {
+                        font-family: $textFont, sans-serif;
+                        font-size: 9px;
+                        font-weight: 500;
+                    }
                 }
             }
         }
