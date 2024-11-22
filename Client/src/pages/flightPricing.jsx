@@ -29,7 +29,7 @@ function FlightPricing() {
           <h1>DEPARTURE FLIGHT</h1>
           <div className="ticket">
             <div className="ticket-header">
-              <div className="origin">
+              <div className="origin text-review">
                 <h2>kla</h2>
                 <h5>kampala</h5>
                 <h5>11:12</h5>
@@ -39,7 +39,7 @@ function FlightPricing() {
                 <Arrow color="#F5F7F8" width="200px" />
                 <h4>5hr40min</h4>
               </div>
-              <div className="departure">
+              <div className="departure text-review">
                 <h2>kla</h2>
                 <h5>kampala</h5>
                 <h5>11:12</h5>
