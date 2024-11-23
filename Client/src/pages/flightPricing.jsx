@@ -27,7 +27,7 @@ function FlightPricing() {
       <div className="mainReview">
         <div className="departureReview">
           <h1>DEPARTURE FLIGHT</h1>
-          <div className="ticket">
+          <div className="ticket ">
             <div className="ticket-header">
               <div className="origin text-review">
                 <h2>kla</h2>
@@ -57,7 +57,44 @@ function FlightPricing() {
                 <h5>CO2 : 93 KG</h5>
               </div>
               <div className="flex-info">
-                <h5>THU-05-DEC-24</h5>
+                <h5>05.DEC.24</h5>
+              </div>
+              <div className="flex-info">
+                <h5>CLASS : R ECONOMY</h5>
+              </div>
+            </div>
+          </div>
+          <div className="ticket review-ticket">
+            <div className="ticket-header">
+              <div className="origin text-review">
+                <h2>kla</h2>
+                <h5>kampala</h5>
+                <h5>11:12</h5>
+                <h6>TERMINAL : 1E</h6>
+              </div>
+              <div className="center">
+                <Arrow color="#F5F7F8" width="200px" />
+                <h4>5hr40min</h4>
+              </div>
+              <div className="departure text-review">
+                <h2>kla</h2>
+                <h5>kampala</h5>
+                <h5>11:12</h5>
+                <h6>TERMINAL : 1E</h6>
+              </div>
+            </div>
+            <div className="flight-info">
+              <div className="flex-info">
+                <h5>AIRLINE : KQ A380</h5>
+              </div>
+              <div className="flex-info">
+                <h5>NO STOPS</h5>
+              </div>
+              <div className="flex-info">
+                <h5>CO2 : 93 KG</h5>
+              </div>
+              <div className="flex-info">
+                <h5>05.DEC.24</h5>
               </div>
               <div className="flex-info">
                 <h5>CLASS : R ECONOMY</h5>
