@@ -32,7 +32,7 @@ body
     height: 85%;
     width: 95%;
     padding: 8px;
-    border-radius: 50px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,7 +64,7 @@ body
                 .flex-info
                 {
                     background: $inputBackGround;
-                    padding: 5px 9px ;
+                    padding: 5px 7px ;
                     border-radius: 10px;
                     h5
                     {
@@ -97,3 +97,9 @@ body
     }
 }
 
+.border
+{
+    color: $page_color;
+    opacity: 70%;
+    margin-top: 30px;
+}
