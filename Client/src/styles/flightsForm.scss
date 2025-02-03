@@ -6,9 +6,7 @@ body {
 }
 @media only screen and (max-width: 600px) {
   .cutout-box {
-    width: 410px;
-    height: 460px;
-    border-radius: 50px;
+    border-radius: 40px;
     background: url(../assets/images/bg.svg);
     background-position: center;
     background-repeat: no-repeat;
@@ -17,14 +15,12 @@ body {
     background-size: cover;
   }
   .flights {
-    height: 100vh;
     position: relative;
     z-index: 2;
     .flights-console {
       display: flex;
       flex-direction: column;
       gap: 5%;
-      height: 90vh;
       align-items: center;
     }
   }
