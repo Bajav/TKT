@@ -29,7 +29,7 @@ function FlightResult() {
             <div className="origin">
                 <h2>{formData.origin.slice(0,3)}</h2>
             </div>
-            <div className="item"><Arrow color="#313030" /></div>
+            <div className="item"><Arrow color="#313030" width="200px" /></div>
             <div className="item">
                 <h2>{formData.destination.slice(0,3)}</h2>
             </div>

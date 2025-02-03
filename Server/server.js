@@ -147,7 +147,7 @@ app.route("/flights/flightsResults/flightPricing")
       { include: "credit-card-fees,detailed-fare-rules" }
     );
     pricingResponse = response.data;
-    console.log(pricingResponse);
+    console.log(`pricing response ::: ${pricingResponse}`);
     res.send(pricingResponse);
   }catch(err)
   {
@@ -157,6 +157,7 @@ app.route("/flights/flightsResults/flightPricing")
 let confirmOrder ;
 app.get("/flights/flightsResults/confirmOrder",async (req,res)=>{
   try{
+    // console.log(pricingResponse.flightOffers[0]);
     const response = await amadeus.booking.flightOrders.post({
       data: {
         type: "flight-order",
@@ -166,31 +167,31 @@ app.get("/flights/flightsResults/confirmOrder",async (req,res)=>{
             id: "1",
             dateOfBirth: "1982-01-16",
             name: {
-              firstName: "JORGE",
-              lastName: "GONZALES",
+              firstName: "hussein",
+              lastName: "balijawa",
             },
             gender: "MALE",
             contact: {
-              emailAddress: "jorge.gonzales833@telefonica.es",
+              emailAddress: "balijawahussein@gmail.com",
               phones: [
                 {
                   deviceType: "MOBILE",
-                  countryCallingCode: "34",
-                  number: "480080076",
+                  countryCallingCode: "256",
+                  number: "781372789",
                 },
               ],
             },
             documents: [
               {
                 documentType: "PASSPORT",
-                birthPlace: "Madrid",
+                birthPlace: "Kampala",
                 issuanceLocation: "Madrid",
-                issuanceDate: "2015-04-14",
+                issuanceDate: "2023-04-14",
                 number: "00000000",
-                expiryDate: "2025-04-14",
-                issuanceCountry: "ES",
-                validityCountry: "ES",
-                nationality: "ES",
+                expiryDate: "2027-09-14",
+                issuanceCountry: "UG",
+                validityCountry: "UG",
+                nationality: "UG",
                 holder: true,
               },
             ],
