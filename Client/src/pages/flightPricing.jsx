@@ -211,7 +211,20 @@ function FlightPricing() {
           </div>
 
           <div className="paxData">
-
+            <div className="paxDataContainer">
+              <div className="data">
+                <h4>travelers 4</h4>
+              </div>
+              <div className=" pax">
+                <h4>adult(s) :: 1</h4>
+              </div>
+              <div className=" pax">
+                <h4>children :: 1</h4>
+              </div>
+              <div className=" pax">
+                <h4>infants :: 0</h4>
+              </div>
+            </div>
           </div>
         </section>
       </div>
