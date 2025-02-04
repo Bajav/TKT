@@ -188,7 +188,24 @@ function FlightPricing() {
         <div className="returnReview"></div>
         <InfoHighlights />
         <Border />
+        <section className="taxes">
+          <div className="taxesHeade">
+            <h1>fare breakdown</h1>
+            <h1>taxes breakdown</h1>
+          </div>
+          <div className="taxesBody">
+            <div className="bodyOne">
+              <h4>base : $230</h4>
+              <h4>taxes : $330</h4>
+              <h4>total : $560</h4>
+            </div>
+            <div className="bodyTwo">
+              
+            </div>
+          </div>
+        </section>
       </div>
+      <button>continue</button>
     </section>
   );
 }
