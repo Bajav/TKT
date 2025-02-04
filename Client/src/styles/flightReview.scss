@@ -8,7 +8,6 @@ body
 }
 .reviewFlight
 {
-    height: 100vh;
     background: $page_color;
     font-family: $textFont, sans-serif;
     // color: $deemFontColor;
@@ -155,4 +154,20 @@ body
         margin-bottom: 10px;
         color: $visibleFontColor;
     }
+}
+
+.continueBtn
+{
+    background: $actionOrange;
+    color: $page_color;
+    font-family: $textFont,sans-serif;
+    font-size: 15px;
+    text-transform: capitalize;
+    text-align: center;
+    border: none;
+    margin-top: 10px;
+    padding: 20px 30px;
+    width: 95%;
+    margin-bottom: 20px;
+    border-radius: 5px;
 }

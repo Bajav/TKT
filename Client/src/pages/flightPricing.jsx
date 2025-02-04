@@ -215,7 +215,7 @@ function FlightPricing() {
           </div>
         </section>
       </div>
-      <button>continue</button>
+      <button className="continueBtn">continue</button>
     </section>
   );
 }
