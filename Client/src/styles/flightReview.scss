@@ -121,3 +121,38 @@ body
         border-radius: 10px;
     }
 }
+
+.taxes
+{
+    background: $page_color;
+    font-family: $textFont, sans-serif;
+    width: 98%;
+    border-radius: 0px 0px 10px 10px;
+    padding: 5px;
+    .border
+    {
+        color: $ticketColor;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .taxesHeader
+    {
+        display: flex;
+        gap: 10%;
+        align-items: center;
+    }
+    .taxesBody
+    {
+        display: flex;
+        align-items: center;
+        gap: 10%;
+    }
+    .bodyOne h4
+    {
+        font-size: 11px;
+        text-transform: capitalize;
+        font-weight: 400;
+        margin-bottom: 10px;
+        color: $visibleFontColor;
+    }
+}

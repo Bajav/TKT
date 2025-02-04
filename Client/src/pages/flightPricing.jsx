@@ -189,19 +189,29 @@ function FlightPricing() {
         <InfoHighlights />
         <Border />
         <section className="taxes">
-          <div className="taxesHeade">
+          <div className="taxesHeader">
             <h1>fare breakdown</h1>
             <h1>taxes breakdown</h1>
           </div>
+        <Border />
           <div className="taxesBody">
             <div className="bodyOne">
               <h4>base : $230</h4>
               <h4>taxes : $330</h4>
               <h4>total : $560</h4>
             </div>
-            <div className="bodyTwo">
-              
+            <div className="bodyOne">
+              <h4>F6 YQ - Carrier-Imposed Surcharge : $10</h4>
+              <h4>UL - Passenger Service Charges : $10</h4>
+              <h4>AE - UAE Passenger Service Charge : $10</h4>
+              <h4>F6 - UAE Passenger Facility Charge : $10</h4>
+              <h4>UG - Security Charge : $10</h4>
+              <h4>TP - UAE Passenger Security and Safety Fee : $10</h4>
             </div>
+          </div>
+
+          <div className="paxData">
+
           </div>
         </section>
       </div>
