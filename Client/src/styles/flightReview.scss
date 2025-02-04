@@ -101,5 +101,24 @@ body
 {
     color: $page_color;
     opacity: 70%;
-    margin-top: 30px;
+    margin-top: 10px;
+}
+.infoHighlights
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    .info
+    {
+        font-size: 8px;
+        font-family: $textFont, sans-serif;
+        color: $page_color;
+        background: $actionBlue;
+        padding: 5px 10px;
+        text-transform: capitalize;
+        font-weight: 500;
+        border-radius: 10px;
+    }
 }
