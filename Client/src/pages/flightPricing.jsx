@@ -21,8 +21,9 @@ function FlightPricing() {
 
   // Log updated state when it changes
   useEffect(() => {
+    fetchFlightPricing();
     console.log("Updated res:", res);
-  }, [res]);
+  }, []);
 
 
   return (
