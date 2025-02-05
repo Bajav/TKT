@@ -12,16 +12,18 @@ function FlightPricing() {
       const response = await axios.get(
         "http://localhost:3000/flights/flightsResults/flightPricing"
       );
-      console.log(response.data);
+      console.log("RESPONSE DATA IS BACK", response.data);
       setRes(response.data);
     } catch (err) {
-      console.log(err);
+      console.log("Error fetching data:", err);
     }
   };
 
+  // Log updated state when it changes
   useEffect(() => {
-    fetchFlightPricing();
-  }, []);
+    console.log("Updated res:", res);
+  }, [res]);
+
 
   return (
     <section className="reviewFlight">
