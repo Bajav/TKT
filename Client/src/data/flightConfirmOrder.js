@@ -299,3 +299,5 @@ const confirmOder  = {
     }
     ]
     }
+
+    export default confirmOder;
