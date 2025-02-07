@@ -30,100 +30,98 @@ function FlightPricing() {
   }, []);
   return (
     <section className="reviewFlight">
-
-      <h1>review flight</h1>
-    {confirmOder.flightOffers.map((flightOffer,offerInd) => (
-      <div className="mainReview" key={offerInd}>
-        {flightOffer.itineraries.map((itinerary, itinInd) => (
-          <div className="departureReview" key={itinInd}>
-           {itinerary.segments.map((segment, segInd) => (
-                  <div className="ticket ">
+      <h1>Review Flight</h1>
+      {confirmOder.flightOffers.map((flightOffer, offerInd) => (
+        <div className="mainReview" key={`offer-${offerInd}`}>
+          {flightOffer.itineraries.map((itinerary, itinInd) => (
+            <div className="departureReview" key={`itin-${itinInd}`}>
+              {itinerary.segments.map((segment, segInd) => (
+                <div className="ticket" key={`seg-${segInd}`}>
                   <div className="ticket-header">
                     <div className="origin text-review">
                       <h2>{segment.departure.iataCode}</h2>
-                      <h5>kampala</h5>
-                      <h5>11:12</h5>
-                      <h6>TERMINAL : {segment.departure.terminal}</h6>
+                      <h5>{segment.departure.city || "Unknown City"}</h5>
+                      <h5>{new Date(segment.departure.at).toLocaleTimeString()}</h5>
+                      <h6>TERMINAL: {segment.departure.terminal || "N/A"}</h6>
                     </div>
                     <div className="center">
                       <Arrow color="#F5F7F8" width="200px" />
-                      <h4>{segment.duration}</h4>
+                      <h4>{segment.duration || "N/A"}</h4>
                     </div>
                     <div className="departure text-review">
                       <h2>{segment.arrival.iataCode}</h2>
-                      <h5>kampala</h5>
-                      <h5>11:12</h5>
-                      <h6>TERMINAL : {segment.arrival.terminal}</h6>
+                      <h5>{segment.arrival.city || "Unknown City"}</h5>
+                      <h5>{new Date(segment.arrival.at).toLocaleTimeString()}</h5>
+                      <h6>TERMINAL: {segment.arrival.terminal || "N/A"}</h6>
                     </div>
                   </div>
                   <div className="flight-info">
                     <div className="flex-info">
-                      <h5>AIRLINE : {segment.carrierCode} {segment.aircraft.code}</h5>
+                      <h5>AIRLINE: {segment.carrierCode} {segment.aircraft.code}</h5>
                     </div>
                     <div className="flex-info">
                       <h5>NO STOPS</h5>
                     </div>
                     <div className="flex-info">
-                      <h5>CO2 : {segment.co2Emissions[0].weight} {segment.co2Emissions[0].weightUnit}</h5>
+                      <h5>CO2: {segment.co2Emissions?.[0]?.weight || "N/A"} {segment.co2Emissions?.[0]?.weightUnit || ""}</h5>
                     </div>
                     <div className="flex-info">
-                      <h5>05.DEC.24</h5>
+                      <h5>{new Date(segment.departure.at).toLocaleDateString()}</h5>
                     </div>
                     <div className="flex-info">
-                      <h5>CLASS : R {flightOffer.travelerPricings.fareDetailsBySegment}</h5>
+                      <h5>CLASS: {"" || "N/A"} {flightOffer.travelerPricings[0]?.fareDetailsBySegment[0]?.cabin || "N/A"}</h5>
                     </div>
                   </div>
                 </div>
-           ))}
-          </div>
-        ))}
-      </div>
-    ))}
-
-
-      <section className="taxes">
-        <div className="taxesHeader">
-          <h1>fare breakdown</h1>
-          <h1>taxes breakdown</h1>
+              ))}
+            </div>
+          ))}
+          {/* Fare Breakdown Section */}
+          <section className="taxes">
+            <div className="taxesHeader">
+              <h1>Fare Breakdown</h1>
+              <h1>Taxes Breakdown</h1>
+            </div>
+            <Border />
+            <div className="taxesBody">
+              <div className="bodyOne">
+                <h4>Base: $230</h4>
+                <h4>Taxes: $330</h4>
+                <h4>Total: $560</h4>
+              </div>
+              <div className="bodyOne">
+                <h4>F6 YQ - Carrier-Imposed Surcharge: $10</h4>
+                <h4>UL - Passenger Service Charges: $10</h4>
+                <h4>AE - UAE Passenger Service Charge: $10</h4>
+                <h4>F6 - UAE Passenger Facility Charge: $10</h4>
+                <h4>UG - Security Charge: $10</h4>
+                <h4>TP - UAE Passenger Security and Safety Fee: $10</h4>
+              </div>
+            </div>
+            {/* Travelers Section */}
+            <div className="paxData">
+              <div className="paxDataContainer">
+                <div className="data">
+                  <h4>Travelers: 4</h4>
+                </div>
+                <div className="pax">
+                  <h4>Adults: 1</h4>
+                </div>
+                <div className="pax">
+                  <h4>Children: 1</h4>
+                </div>
+                <div className="pax">
+                  <h4>Infants: 0</h4>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        <Border />
-        <div className="taxesBody">
-          <div className="bodyOne">
-            <h4>base : $230</h4>
-            <h4>taxes : $330</h4>
-            <h4>total : $560</h4>
-          </div>
-          <div className="bodyOne">
-            <h4>F6 YQ - Carrier-Imposed Surcharge : $10</h4>
-            <h4>UL - Passenger Service Charges : $10</h4>
-            <h4>AE - UAE Passenger Service Charge : $10</h4>
-            <h4>F6 - UAE Passenger Facility Charge : $10</h4>
-            <h4>UG - Security Charge : $10</h4>
-            <h4>TP - UAE Passenger Security and Safety Fee : $10</h4>
-          </div>
-        </div>
-  
-        <div className="paxData">
-          <div className="paxDataContainer">
-            <div className="data">
-              <h4>travelers 4</h4>
-            </div>
-            <div className=" pax">
-              <h4>adult(s) :: 1</h4>
-            </div>
-            <div className=" pax">
-              <h4>children :: 1</h4>
-            </div>
-            <div className=" pax">
-              <h4>infants :: 0</h4>
-            </div>
-          </div>
-        </div>
-      </section>
-  
-      <button className="continueBtn">continue</button>
+      ))}
+      <button className="continueBtn">Continue</button>
     </section>
   );
+  
   
 }
 
