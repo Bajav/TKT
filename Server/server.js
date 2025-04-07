@@ -43,10 +43,13 @@ const airlineSchema = new mongoose.Schema({
   logo: String,
 });
 
+
+
 const IATACODE = iataConnection.model("IATACODE", iataSchema);
 const Airline = airlineConnection.model("Airline", airlineSchema);
 
 // amadeus setUp
+
 const amadeus = new Amadeus({
   clientId: process.env.API_KEY,
   clientSecret: process.env.SECRET_KEY,
@@ -80,7 +83,7 @@ app.route("/flights/flightsResults")
   //  console.log()
   })
 
-  // 
+  // get form data from frontend to backend, then do a get req
 .get(async (req, res) => {
   // res.send(formData);
   const origin = formData.origin.slice(0,3);
@@ -94,6 +97,7 @@ app.route("/flights/flightsResults")
   const children = passengers.children;
   console.log(formData);
   // const departureDate = formData
+  // API get req
   console.log(origin,destination,passengers);
     try {
       const response = await amadeus.shopping.flightOffersSearch.get({
