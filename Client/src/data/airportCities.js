@@ -1,4 +1,5 @@
-const airportCities = 
+const 
+airportCities = 
 [
     {
         "AirportCode": "AAA",
