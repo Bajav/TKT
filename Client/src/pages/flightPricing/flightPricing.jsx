@@ -49,6 +49,12 @@ function FlightPricing() {
               <h5>2.00pm</h5>
             </div>
           </div>
+          <div className="flightData">
+          <h5>SEATS LEFT : </h5>
+          <h5>last Date :</h5>
+          <h5>Economy</h5>
+          <h5>CHECKED BAG : 30KG</h5>
+        </div>
         </div>
         <div className="Maindestination"></div>
       </div>

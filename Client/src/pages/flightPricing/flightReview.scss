@@ -23,6 +23,7 @@ body {
     margin-top: 10px;
   }
 }
+// flight ticket
 .mainReview {
   background: $ticketColor;
   width: 95%;
@@ -47,6 +48,29 @@ body {
     }
   }
 }
+// flight data
+
+.flightData
+{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    margin-top: 10px;
+
+    h5
+    {
+        background: #F5F7F8;
+        padding: 5px 14px;
+        margin: 0;
+        text-transform: capitalize;
+        border-radius: 15px;
+        font-family: $textFont, sans-serif;
+        font-size: 10px;
+        font-weight: 100;
+    }
+}
+
 .border {
   color: $page_color;
   opacity: 70%;
