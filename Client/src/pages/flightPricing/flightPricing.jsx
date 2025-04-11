@@ -32,7 +32,7 @@ function FlightPricing() {
     <section className="reviewFlight">
       <h1>Review Flight</h1>
       <div className="mainReview">
-        <div className="Mainorigin">
+        <div className="departureReview">
           <h1>departure flight</h1>
           <div className="ticket-header">
             <div className="origin">
