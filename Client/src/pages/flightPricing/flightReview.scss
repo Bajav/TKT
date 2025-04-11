@@ -119,15 +119,17 @@ body {
 .taxesBody {
   display: flex;
   align-items: center;
-  gap: 10%;
+  gap: 5%;
+  justify-content: center;
 }
 
-.bodyone 
+.bodyOne 
 {
     h4
     {
         font-family: $textFont,sans-serif;
-        font-size: 10px;
+        font-size: 13px;
+        margin-bottom: 5px;
         font-weight: 100;
     }
 }
