@@ -1,26 +1,44 @@
-import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useLocation,useNavigate } from 'react-router-dom';
 import FlightCard from '../components/flightSearch/TicketCard';
 import { Arrow } from '../components/flightSearch/flightArrowSvg';
 import Dummy from '../components/places/dummyCard';
+import DummyTicket from '../components/features/DummyTicket';
 
 function FlightResult() {
+  // define location
   const location = useLocation();
   const { searchResults, formData,airlines } = location.state || {};
-  
+    const [iataCodes, setIataCodes] = useState([]);
+      const [airliness, setAirlines] = useState([]);
+// define navigate
+const navigate = useNavigate();
+      useEffect(() => {
+        const data =()=>
+          {
+            const origin = formData;
+            console.log(formData);
+          };
+          data();
 
-  const data =()=>
-    {
-      const origin = formData;
-      console.log(formData);
-    }
-    useEffect(()=>{
-      data();
-    },[])
+        const fetchData = async () => {
+          try {
+            const iataRes = await Promise.all([
+              axios.get("http://localhost:3000/flights"),
+            ]);
+            const { iataCodes, airliness } = iataRes.data;
+            setIataCodes(iataCodes);
+            setAirlines(airlines);
+          } catch (err) {
+            setError("Failed to fetch data. Please try again.");
+          }
+        };
+        fetchData();
+      }, []);
 
   return (
     <main className='FlightResult-page'>
-      <button>back</button>
+      <button onClick={()=>{navigate("/flights")}}>back</button>
       <div className="FlightResults">
         <h3 className='text'> Results for your search</h3>
         <h3>{searchResults}</h3>
@@ -36,7 +54,8 @@ function FlightResult() {
         </div>
         </div>
         <div className="results">
-          <FlightCard />
+          {/* <FlightCard /> */}
+          <DummyTicket />
           <Dummy />
         </div>
       </div>

@@ -95,10 +95,10 @@ app.route("/flights/flightsResults")
   const adults = passengers.adults;
   const infants = passengers.infants;
   const children = passengers.children;
-  console.log(formData);
+  // console.log(formData);
   // const departureDate = formData
   // API get req
-  console.log(origin,destination,passengers);
+  // console.log(origin,destination,passengers);
     try {
       const response = await amadeus.shopping.flightOffersSearch.get({
         originLocationCode: origin,
@@ -121,7 +121,7 @@ app.route("/flights/flightsResults")
           res.send(response.data);
           flightOffersResponse = response.data;
           const limitedData = response.data.slice(0,1)
-          console.log(limitedData);
+          console.log("LIMITED DATA ::" +" "+ limitedData);
         }
       // res.send(response.data);
     } catch (error) {
@@ -137,7 +137,7 @@ app.route("/flights/flightsResults/flightPricing")
 .post((req, res)=>{
   console.log(req.body);
    flightIndex = req.body.index;
-  console.log(flightIndex);
+  console.log("flightIndex :: " + " " + flightIndex);
 })
 .get(async(req,res)=>{
   try{

@@ -30,12 +30,12 @@ body {
     justify-content: space-around;
     padding: 10px;
     select {
-      width: 165px;
-      padding: 15px 30px;
-      color: $visibleFontColor;
-      font-size: 15px;
-      font-weight: 600;
-      font-family: $textFont, sans-serif;
+      // width: 165px; 
+      padding: 20px 30px;
+      color: #313030;
+      font-size: 20px;
+      font-weight: 500;
+      font-family: poppins, sans-serif;
       text-transform: capitalize;
       border-radius: 30px;
     }
@@ -59,7 +59,7 @@ body {
     justify-content: center;
     gap: 5px;
     background: $inputBackGround;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     margin-top: 5px;
     width: 95%;
     // margin-left: 10px;
@@ -116,13 +116,13 @@ body {
     color: $visibleFontColor;
     text-transform: capitalize;
     font-family: $textFont, sans-serif;
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: 500;
+    font-size: 20px;
     border-radius: 30px;
-    width: 180px;
+    // width: 180px;
+    padding: 20px 55px;
     outline: none;
     background: $inputBackGround;
-    padding: 10 20px;
     justify-content: center;
     align-items: center;
     input {

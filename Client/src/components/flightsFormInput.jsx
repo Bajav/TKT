@@ -32,15 +32,14 @@ function FlightsForm() {
       const { iataCodes, airlines } = res.data;
       setIataCodes(iataCodes);
       setAirlines(airlines);
+      console.log("flight data recieved")
     } catch (err) {
       console.error("Error fetching data:", err);
     }
   };
-
   useEffect(() => {
     fetchFlightData();
   }, []);
-
 
 
 
@@ -60,7 +59,6 @@ function FlightsForm() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [passengers, setPassengers] = useState({
     adults: 1,
-    
     children: 0,
     infants: 0,
   });
