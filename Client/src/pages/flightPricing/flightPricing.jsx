@@ -34,11 +34,13 @@ function FlightPricing() {
       <div className="mainReview">
         <div className="departureReview">
           <h1>departure flight</h1>
+
           <div className="ticket-header">
             <div className="origin">
               <h2>kla</h2>
               <h5>Kampala, Uganda</h5>
               <h5>12:00 pm</h5>
+              <h5>TERMINAL : 1E</h5>
             </div>
             <div className="center">
               <Arrow color="#F5F7F8" width="200px" />
@@ -47,19 +49,47 @@ function FlightPricing() {
               <h2>dxb</h2>
               <h5>Dubai , UAE</h5>
               <h5>2.00pm</h5>
+              <h5>TERMINAL : 1E</h5>
             </div>
           </div>
+
           <div className="flightData">
-          <h5>SEATS LEFT : </h5>
-          <h5>last Date :</h5>
-          <h5>Economy</h5>
-          <h5>CHECKED BAG : 30KG</h5>
-        </div>
+            <h5>AIRLINE : KQ A380 </h5>
+            <h5>CO2 : 93 KG</h5>
+            <h5>THU 05-DEC-24</h5>
+            <h5>CLASS : R ECONOMY</h5>
+          </div>
+          <div className="infoHighlights">
+            <h5> CARRY ON INCLUDED </h5>
+            <h5>NO STOPS</h5>
+            <h5>LAYOVER : 3HR40MINS</h5>
+            <h5>CHECKED BAGS : 2 PCS</h5>
+          </div>
         </div>
         <div className="Maindestination"></div>
       </div>
       <section className="taxes">
         <Border />
+        <div className="taxesHeader">
+          <h5>fare breakdown </h5>
+          <h5>taxes breakdown </h5>
+        </div>
+        <Border />
+        <div className="taxesBody">
+          <div className="bodyOne">
+            <h4>Base: $230</h4>
+            <h4>Taxes: $330</h4>
+            <h4>Total: $560</h4>
+          </div>
+          <div className="bodyOne">
+            <h4>F6 YQ - Carrier-Imposed Surcharge: $10</h4>
+            <h4>UL - Passenger Service Charges: $10</h4>
+            <h4>AE - UAE Passenger Service Charge: $10</h4>
+            <h4>F6 - UAE Passenger Facility Charge: $10</h4>
+            <h4>UG - Security Charge: $10</h4>
+            <h4>TP - UAE Passenger Security and Safety Fee: $10</h4>
+          </div>
+        </div>
       </section>
       <button className="continueBtn">Continue</button>
     </section>
@@ -105,6 +135,7 @@ export default FlightPricing;
 //               </div>
 //               <div className="flex-info">
 //                 <h5>{new Date(segment.departure.at).toLocaleDateString()}</h5>
+
 //               </div>
 //               <div className="flex-info">
 //                 <h5>CLASS: {"" || "N/A"} {flightOffer.travelerPricings[0]?.fareDetailsBySegment[0]?.cabin || "N/A"}</h5>
@@ -116,22 +147,6 @@ export default FlightPricing;
 //     ))}
 
 {
-  /* <div className="taxesBody">
-<div className="bodyOne">
-  <h4>Base: $230</h4>
-  <h4>Taxes: $330</h4>
-  <h4>Total: $560</h4>
-</div> */
-}
-{
-  /* <div className="bodyOne">
-  <h4>F6 YQ - Carrier-Imposed Surcharge: $10</h4>
-  <h4>UL - Passenger Service Charges: $10</h4>
-  <h4>AE - UAE Passenger Service Charge: $10</h4>
-  <h4>F6 - UAE Passenger Facility Charge: $10</h4>
-  <h4>UG - Security Charge: $10</h4>
-  <h4>TP - UAE Passenger Security and Safety Fee: $10</h4>
-</div> */
 }
 {
   /* <div className="paxData">

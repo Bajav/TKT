@@ -50,25 +50,23 @@ body {
 }
 // flight data
 
-.flightData
-{
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    align-items: center;
-    margin-top: 10px;
+.flightData {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+  margin-top: 10px;
 
-    h5
-    {
-        background: #F5F7F8;
-        padding: 5px 14px;
-        margin: 0;
-        text-transform: capitalize;
-        border-radius: 15px;
-        font-family: $textFont, sans-serif;
-        font-size: 10px;
-        font-weight: 100;
-    }
+  h5 {
+    background: #f5f7f8;
+    padding: 5px 14px;
+    margin: 0;
+    text-transform: capitalize;
+    border-radius: 15px;
+    font-family: $textFont, sans-serif;
+    font-size: 10px;
+    font-weight: 100;
+  }
 }
 
 .border {
@@ -82,7 +80,7 @@ body {
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
-  .info {
+  h5 {
     font-size: 8px;
     font-family: $textFont, sans-serif;
     color: $page_color;
@@ -107,24 +105,32 @@ body {
     margin-top: 0;
   }
   .taxesHeader {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
     gap: 10%;
-    align-items: center;
-  }
-  .taxesBody {
-    display: flex;
-    align-items: center;
-    gap: 10%;
-  }
-  .bodyOne h4 {
-    font-size: 11px;
+    font-size: 20px;
     text-transform: capitalize;
-    font-weight: 400;
-    margin-bottom: 10px;
     color: $visibleFontColor;
+    font-weight: 100;
   }
 }
 
+.taxesBody {
+  display: flex;
+  align-items: center;
+  gap: 10%;
+}
+
+.bodyone 
+{
+    h4
+    {
+        font-family: $textFont,sans-serif;
+        font-size: 10px;
+        font-weight: 100;
+    }
+}
 .continueBtn {
   background: $actionOrange;
   color: $page_color;
