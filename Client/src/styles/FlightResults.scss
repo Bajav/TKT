@@ -12,6 +12,20 @@ body {
   .card {
     height: 90px;
   }
+  .backBtn
+  {
+    position: relative;
+    top: 10px;
+    text-transform: capitalize;
+    left: 10px;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+    color:$page_color;
+    font-family: $textFont;
+    background-color: $visibleFontColor;
+  }
 }
 h1.h2,
 h3,

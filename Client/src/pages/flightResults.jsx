@@ -38,7 +38,7 @@ const navigate = useNavigate();
 
   return (
     <main className='FlightResult-page'>
-      <button onClick={()=>{navigate("/flights")}}>back</button>
+      <button className='backBtn' onClick={()=>{navigate("/flights")}}>back</button>
       <div className="FlightResults">
         <h3 className='text'> Results for your search</h3>
         <h3>{searchResults}</h3>
