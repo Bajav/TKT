@@ -1,7 +1,7 @@
 import {Routes , Route} from 'react-router-dom';
-import Flights from '../pages/flights';
-import FlightPricing from '../pages/flightPricing';
-import FlightResult from '../pages/flightResults';
+import Flights from '../../pages/flights';
+import FlightPricing from '../../pages/flightPricing/flightPricing';
+import FlightResult from '../../pages/flightResult/flightResults';
 
 const FlightsRoutes =()=>{
     return(

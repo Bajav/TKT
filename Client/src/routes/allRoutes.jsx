@@ -5,8 +5,8 @@ import Flights from "../pages/flights";
 import Hotels from "../pages/hotels";
 import Packages from "../pages/packages";
 import Navbar from "../components/navBar";
-import FlightResult from "../pages/flightResults";
-import FlightPricing from "../pages/flightPricing";
+import FlightPricing from '../pages/flightPricing/flightPricing';
+import FlightResult from '../pages/flightResult/flightResults';
 
 function AllRoutes() {
   const location = useLocation();

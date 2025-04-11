@@ -3,10 +3,10 @@
 @import './flightsForm.scss';
 @import './mediaQueries/600px.scss';
 @import './home.scss';
-@import './FlightResults.scss';
+@import '../pages/flightResult/FlightResults.scss';
 @import './loader.scss';
 @import '../components/features/ticket.scss';
-@import './flightReview.scss';
+@import '../pages/flightPricing/flightReview.scss';
 body{
   margin: 0;
   padding: 0;
