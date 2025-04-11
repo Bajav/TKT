@@ -66,7 +66,40 @@ function FlightPricing() {
             <h5>CHECKED BAGS : 2 PCS</h5>
           </div>
         </div>
-        <div className="Maindestination"></div>
+        <div className="departureReview">
+          <h1>destination flight</h1>
+
+          <div className="ticket-header">
+            <div className="origin">
+              <h2>kla</h2>
+              <h5>Kampala, Uganda</h5>
+              <h5>12:00 pm</h5>
+              <h5>TERMINAL : 1E</h5>
+            </div>
+            <div className="center">
+              <Arrow color="#F5F7F8" width="200px" />
+            </div>
+            <div className="item">
+              <h2>dxb</h2>
+              <h5>Dubai , UAE</h5>
+              <h5>2.00pm</h5>
+              <h5>TERMINAL : 1E</h5>
+            </div>
+          </div>
+
+          <div className="flightData">
+            <h5>AIRLINE : KQ A380 </h5>
+            <h5>CO2 : 93 KG</h5>
+            <h5>THU 05-DEC-24</h5>
+            <h5>CLASS : R ECONOMY</h5>
+          </div>
+          <div className="infoHighlights">
+            <h5> CARRY ON INCLUDED </h5>
+            <h5>NO STOPS</h5>
+            <h5>LAYOVER : 3HR40MINS</h5>
+            <h5>CHECKED BAGS : 2 PCS</h5>
+          </div>
+        </div>
       </div>
       <section className="taxes">
         <Border />
