@@ -4,6 +4,7 @@ import { Arrow } from "../../components/flightSearch/flightArrowSvg";
 import InfoHighlights from "../../components/flightSearch/InfoHighlights";
 import Border from "../../components/flightSearch/border";
 import confirmOder from "../../data/flightConfirmOrder";
+import BackBTN from "../../components/features/BackButton/BackBTN";
 
 function FlightPricing() {
   const flightOffers = confirmOder.flightOffers;
@@ -30,6 +31,7 @@ function FlightPricing() {
   }, []);
   return (
     <section className="reviewFlight">
+      <BackBTN to={"/"} btnName="cancel" />
       <h1>Review Flight</h1>
       <div className="mainReview">
         <div className="departureReview">
