@@ -39,7 +39,7 @@ const navigate = useNavigate();
 
   return (
     <main className='FlightResult-page'>
-      <BackBTN to={"./flights"} btnName='back'/>
+      <BackBTN to={"/flights"} btnName='back'/>
       <div className="FlightResults">
         <h3 className='text'> Results for your search</h3>
         <h3>{searchResults}</h3>
