@@ -83,7 +83,7 @@ function PaxForm() {
           />
         </div>
         <div className="cell">
-          <PhoneInput placeholder="enter phone number" name="phone number" />
+          {/* <PhoneInput placeholder="enter phone number" name="phone number" /> */}
           <FlexInput name="" type="" For="" labelName=" " placeholder="  " />
         </div>
         <FlexInput name="" type="" For="" labelName=" " placeholder="  " />
