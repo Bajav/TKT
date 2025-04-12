@@ -123,6 +123,22 @@ function FlightPricing() {
             <h4>TP - UAE Passenger Security and Safety Fee: $10</h4>
           </div>
         </div>
+        <div className="paxData">
+              <div className="paxDataContainer">
+                <div className="data">
+                  <h4>Travelers: 4</h4>
+                </div>
+                <div className="pax">
+                  <h4>Adults: 1</h4>
+                </div>
+                <div className="pax">
+                  <h4>Children: 1</h4>
+                </div>
+                <div className="pax">
+                  <h4>Infants: 0</h4>
+                </div>
+              </div>
+            </div> 
       </section>
       <button className="continueBtn">Continue</button>
     </section>
