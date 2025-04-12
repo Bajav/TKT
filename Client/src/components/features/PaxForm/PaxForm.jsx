@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FlexInput from "../../../props/FlexInput/FlexInput";
+
 function PaxForm() {
     // define navigation
     const navigate = useNavigate();
@@ -17,7 +19,12 @@ function PaxForm() {
     navigate("/")
   };
 
-  return <form className="paxForm"></form>;
+  return( 
+  <form className="paxForm">
+    <div className="names">
+        <FlexInput For="fName" labelName="first name" placeholder="enter first name"/>
+    </div>
+  </form>);
 }
 
 export default PaxForm;
