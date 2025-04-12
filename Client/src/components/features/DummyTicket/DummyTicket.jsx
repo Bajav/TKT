@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Arrow } from "./flightSearch/flightArrowSvg";
+import { Arrow } from "../../../components/flightSearch/flightArrowSvg";
 
 function DummyTicket() {
     // define navigate

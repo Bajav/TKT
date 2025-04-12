@@ -3,7 +3,7 @@ import { useLocation,useNavigate } from 'react-router-dom';
 import FlightCard from '../../components/flightSearch/TicketCard';
 import { Arrow } from '../../components/flightSearch/flightArrowSvg';
 import Dummy from '../../components/places/dummyCard';
-import DummyTicket from '../../components/DummyTicket';
+import DummyTicket from '../../components/features/DummyTicket/DummyTicket';
 import BackBTN from '../../components/features/BackButton/BackBTN';
 
 function FlightResult() {
