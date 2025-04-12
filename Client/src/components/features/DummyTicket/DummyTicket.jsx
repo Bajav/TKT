@@ -12,7 +12,7 @@ function DummyTicket() {
     const bookNow=()=>
         {
             // navigate to a different route
-            navigate("/flights/flightsResults/flightPricing");
+            navigate("/flights/pricing");
             console.log("book now btn clicked")
         };
         // see details btn hit

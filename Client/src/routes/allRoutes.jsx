@@ -7,29 +7,37 @@ import Packages from "../pages/packages";
 import Navbar from "../components/navBar";
 import FlightPricing from '../pages/flightPricing/flightPricing';
 import FlightResult from '../pages/flightResult/flightResults';
-// import FlightsRoutes from "./flightsRoutes/flightsRoute";
 
 function AllRoutes() {
   const location = useLocation();
 
-  // Define routes where Navbar should NOT appear
-  const hideNavRoutes = ["/flights/flightsResults/flightPricing"];
+  // All routes where the Navbar should be hidden
+  const hideNavRoutes = [
+    "/flights/pricing",
+    "/flights/results"
+  ];
+
+  const shouldHideNavbar = hideNavRoutes.some(path =>
+    location.pathname.startsWith(path)
+  );
 
   return (
     <div>
       {/* Conditionally render Navbar */}
-      {!hideNavRoutes.includes(location.pathname) && <Navbar />}
+      {!shouldHideNavbar && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* {FlightsRoutes()} */}
-        <Route path="flights" element={<Flights />} />
-        <Route path="flights/FlightResult" element={<Places />} />
         <Route path="places" element={<Places />} />
+
+        <Route path="flights" element={<Flights />}>
+          <Route path="results" element={<FlightResult />} />
+          <Route path="pricing" element={<FlightPricing />} />
+        </Route>
+
         <Route path="hotels" element={<Hotels />} />
         <Route path="packages" element={<Packages />} />
       </Routes>
-      {/* <FlightsRoutes /> */}
     </div>
   );
 }
