@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Arrow } from "../../components/flightSearch/flightArrowSvg";
-import InfoHighlights from "../../components/flightSearch/InfoHighlights";
 import Border from "../../components/flightSearch/border";
 import confirmOder from "../../data/flightConfirmOrder";
 import BackBTN from "../../components/features/BackButton/BackBTN";
