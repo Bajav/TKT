@@ -5,10 +5,12 @@ import FlightResult from '../../pages/flightResult/flightResults';
 
 const FlightsRoutes =()=>{
     return(
-        <Route path='/flights' element={<Flights />} >
+        <Routes>
+        {/* <Route path='/flights' element={<Flights />} >
         <Route path='/flightsResults' element={<FlightResult />} />
-        <Route path='/flightsResults/flightPricing' element={<FlightResult />} />
-        </Route>
+        <Route path='/flightsResults/flightPricing' element={<FlightResult />} /> */}
+        {/* </Route> */}
+        </Routes>
     );
 };
 export default FlightsRoutes;
