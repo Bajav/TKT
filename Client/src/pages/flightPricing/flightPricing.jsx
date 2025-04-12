@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Arrow } from "../../components/flightSearch/flightArrowSvg";
 import Border from "../../components/flightSearch/border";
@@ -28,6 +29,10 @@ function FlightPricing() {
     fetchFlightPricing();
     // console.log("Updated res:", res);
   }, []);
+// define navigation
+
+const navigate = useNavigate();
+
   return (
     <section className="reviewFlight">
       <BackBTN to={"/"} btnName="cancel" />
@@ -141,7 +146,7 @@ function FlightPricing() {
               </div>
             </div> 
       </section>
-      <button className="continueBtn">Continue</button>
+      <button className="continueBtn" onClick={()=>navigate("/travelerData")}>Continue</button>
     </section>
   );
 }
