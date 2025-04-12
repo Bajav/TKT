@@ -4,6 +4,7 @@ import FlightCard from '../../components/flightSearch/TicketCard';
 import { Arrow } from '../../components/flightSearch/flightArrowSvg';
 import Dummy from '../../components/places/dummyCard';
 import DummyTicket from '../../components/DummyTicket';
+import BackBTN from '../../components/features/BackButton/BackBTN';
 
 function FlightResult() {
   // define location
@@ -38,7 +39,7 @@ const navigate = useNavigate();
 
   return (
     <main className='FlightResult-page'>
-      <button className='backBtn' onClick={()=>{navigate("/flights")}}>back</button>
+      <BackBTN to={"./flights"} btnName='back'/>
       <div className="FlightResults">
         <h3 className='text'> Results for your search</h3>
         <h3>{searchResults}</h3>
