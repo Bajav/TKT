@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { model } from "mongoose";
 
 // Define schemas and models on specific connections
 const iataSchema = new mongoose.Schema({
@@ -16,8 +16,10 @@ const airlineSchema = new mongoose.Schema({
   logo: String,
 });
 
-//   module.exports = mongoose.model('User', userSchema);
+// initiate models
+const IATACODE = mongoose.model("IATACODE", iataSchema);
+const Airline = mongoose.model("Airline", airlineSchema);
 
-module.exports = mongoose.model("IATACODE", iataSchema);
-module.exports = mongoose.model("Airline", airlineSchema);
+// export models
+module.exports = {IATACODE,Airline};
 
