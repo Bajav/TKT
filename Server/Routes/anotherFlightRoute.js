@@ -1,10 +1,12 @@
 // routes/userRoutes.js
 import express  from 'express';
 const router = express.Router();
-import flightController from '../Controllers/flightController';
+import iataController from '../Controllers/flightController';
 // import userController from '../Controllers/userController';
 
-router.get('/iata', flightController.getIataCodes);
+const {getAirlines,getIataCodes} = iataController;
+
+router.get('/iata', iataController.getIataCodes);
 // router.post('/', userController.createUser);
 
 export default router;
