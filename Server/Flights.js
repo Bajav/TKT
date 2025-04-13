@@ -1,14 +1,18 @@
-require("dotenv").config();
-const cors = require("cors");
-const Amadeus = require("amadeus");
-const express = require("express");
-const bodyParser = require("body-parser");
+import dotenv from "dotenv";
+import cors from 'cors';
+// const cors = require("cors");
+import Amadeus from "amadeus";
+import express from "express";
+import bodyParser from "body-parser";
 
+const router = express.Router();
+const app = express();
 // CORS Options
+dotenv.config();
 const corsOptions = {
   origin: ["http://localhost:5173"],
 };
-app.use(cors(corsOptions));
+router.use(cors(corsOptions));
 
 // amadeus setUp
 
@@ -18,6 +22,7 @@ const amadeus = new Amadeus({
   });
   
   
+
   // --get AIRPORTS , CITIES , COUNTRIES FROM DATABASE
   app.route("/flights")
     .get(async (req, res) => {
@@ -27,7 +32,7 @@ const amadeus = new Amadeus({
           Airline.find().exec()
         ]);
         res.json({ iataCodes, airlines });
-        
+        res.send("we are working")
       } catch (err) {
         console.error("Error retrieving data:", err);
         res.status(500).json({ error: "Error retrieving data" });
@@ -62,15 +67,15 @@ const amadeus = new Amadeus({
     // API get req
     // console.log(origin,destination,passengers);
   
-    const origin = formData.origin.slice(0,3);
-    const destination = formData.destination.slice(0,3);
-    const seatClass = formData.seatClass;
-    const departureDate = formData.departureDate;
-    const returnDate = formData.returnDate;
-    const passengers = formData.passengers;
-    const adults = passengers.adults;
-    const infants = passengers.infants;
-    const children = passengers.children;
+    const origin = "EBB";
+    const destination = "DXB";
+    const seatClass = "ECONOMY";
+    const departureDate = "2025-11-04" ;
+    const returnDate = "2025-11-08" ;
+    const passengers = 1;
+    const adults =1;
+    const infants = 0;
+    const children = 0;
       try {
         const response = await amadeus.shopping.flightOffersSearch.get({
           originLocationCode: origin,
@@ -87,6 +92,7 @@ const amadeus = new Amadeus({
         });
         if(response.data.length === 0)
           {
+            res.send("no flights available")
             console.log("no flights available");
           }else
           {
@@ -197,3 +203,5 @@ const amadeus = new Amadeus({
       console.error(error);
     }
   });
+
+  export default router;

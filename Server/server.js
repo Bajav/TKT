@@ -1,7 +1,8 @@
-require('dotenv').config();
-const mongoose = require("mongoose");
-const express = require("express");
-const bodyParser = require("body-parser");
+import dotenv from "dotenv";
+import cors from 'cors';
+import mongoose from "mongoose";
+import express from "express";
+import bodyParser from "body-parser";
 import Flights from './Flights.js';
 
 const port = 3000;
@@ -43,18 +44,20 @@ const airlineSchema = new mongoose.Schema({
 const IATACODE = iataConnection.model("IATACODE", iataSchema);
 const Airline = airlineConnection.model("Airline", airlineSchema);
 
-
-
+app.use("/flights", Flights); 
+app.get("/",(req,res)=>{
+  res.send("route is working");
+});
 
 // Test Route
-app.get("/testing", (req, res) => {
-  Airline.find()
-  .then((foundData) => res.json(foundData))
-  .catch((err) => {
-    console.error("Error finding airports", err);
-    res.status(500).json({ error: "Error retrieving airports data" });
-  });
-});
+// app.get("/testing", (req, res) => {
+//   Airline.find()
+//   .then((foundData) => res.json(foundData))
+//   .catch((err) => {
+//     console.error("Error finding airports", err);
+//     res.status(500).json({ error: "Error retrieving airports data" });
+//   });
+// });
 
 // Start server
 app.listen(port, () => {
