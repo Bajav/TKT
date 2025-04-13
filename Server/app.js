@@ -1,9 +1,8 @@
-import dotenv from "dotenv";
-import cors from 'cors';
+// import dotenv from "dotenv";
+// import cors from 'cors';
 import mongoose from "mongoose";
 import express from "express";
 import bodyParser from "body-parser";
-import Flights from './Flights.js';
 
 const port = 3000;
 const app = express();
@@ -23,46 +22,115 @@ iataConnection.on('connected', () => console.log('Connected to IATACODESDB'));
 const airlineConnection = mongoose.createConnection("mongodb://127.0.0.1:27017/AIRLINESDB");
 airlineConnection.on('connected', () => console.log('Connected to AIRLINESDB'));
 
-// Define schemas and models on specific connections
-const iataSchema = new mongoose.Schema({
-  AirportCode: String,
-  AirportName: String,
-  City: String,
-  Country: String,
-  Latitude: String,
-  Longitude: String,
-});
-const airlineSchema = new mongoose.Schema({
-  name: String,
-  code: String,
-  is_lowcost: Boolean,
-  logo: String,
-});
 
 
-
-const IATACODE = iataConnection.model("IATACODE", iataSchema);
-const Airline = airlineConnection.model("Airline", airlineSchema);
-
-app.use("/flights", Flights); 
-app.get("/",(req,res)=>{
-  res.send("route is working");
-});
-
-// Test Route
-// app.get("/testing", (req, res) => {
-//   Airline.find()
-//   .then((foundData) => res.json(foundData))
-//   .catch((err) => {
-//     console.error("Error finding airports", err);
-//     res.status(500).json({ error: "Error retrieving airports data" });
-//   });
-// });
+// const IATACODE = iataConnection.model("IATACODE", iataSchema);
+// const Airline = airlineConnection.model("Airline", airlineSchema);
 
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // try{
 // const response = await amadeus.booking.flightOrders.post({
