@@ -2,7 +2,8 @@
 // import cors from 'cors';
 import mongoose from "mongoose";
 import express from "express";
-import bodyParser from "body-parser";
+import flightRoutes from './Routes/anotherFlightRoute.js';
+
 
 const port = 3000;
 const app = express();
@@ -11,7 +12,6 @@ const app = express();
 
 // Middleware setup
 app.use(express.json());
-app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
@@ -22,10 +22,8 @@ iataConnection.on('connected', () => console.log('Connected to IATACODESDB'));
 const airlineConnection = mongoose.createConnection("mongodb://127.0.0.1:27017/AIRLINESDB");
 airlineConnection.on('connected', () => console.log('Connected to AIRLINESDB'));
 
+app.use('/',flightRoutes);
 
-
-// const IATACODE = iataConnection.model("IATACODE", iataSchema);
-// const Airline = airlineConnection.model("Airline", airlineSchema);
 
 // Start server
 app.listen(port, () => {

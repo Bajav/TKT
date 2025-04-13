@@ -1,4 +1,4 @@
-import { IATACODE, Airline } from ("../Models/iataModel");
+import { IATACODE, Airline } from "../Models/iataModel";
 
 const getIataCodes = async (req, res) => {
   try {
