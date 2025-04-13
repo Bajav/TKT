@@ -61,7 +61,7 @@ function PaxForm() {
             labelName="Other Names"
             placeholder="enter otehr names"
           />
-          <h4>passport details</h4>
+          {/* <h4>passport details</h4> */}
           <FlexInput
             name="IssuanceDate"
             type="date"
