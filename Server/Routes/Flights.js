@@ -32,7 +32,7 @@ const amadeus = new Amadeus({
           Airline.find().exec()
         ]);
         res.json({ iataCodes, airlines });
-        res.send("we are working")
+        res.send("we are working");
       } catch (err) {
         console.error("Error retrieving data:", err);
         res.status(500).json({ error: "Error retrieving data" });

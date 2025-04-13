@@ -1,0 +1,1 @@
+// a controller is where all the logic happens , it handles which routes were hit and how to respond to them
