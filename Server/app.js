@@ -1,6 +1,5 @@
 // import dotenv from "dotenv";
 // import cors from 'cors';
-import mongoose from "mongoose";
 import express from "express";
 import flightRoutes from './Routes/anotherFlightRoute.js';
 
@@ -15,12 +14,6 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-const iataConnection = mongoose.createConnection("mongodb://127.0.0.1:27017/IATACODESDB");
-iataConnection.on('connected', () => console.log('Connected to IATACODESDB'));
-
-// Connect to second database (AIRLINESDB)
-const airlineConnection = mongoose.createConnection("mongodb://127.0.0.1:27017/AIRLINESDB");
-airlineConnection.on('connected', () => console.log('Connected to AIRLINESDB'));
 
 app.use('/',flightRoutes);
 
