@@ -21,3 +21,27 @@ const IATACODE =  iataConnection.model("IATACODE", iataSchema);
 const Airline =  airlineConnection.model("Airline", airlineSchema);
 
 002
+de:internal/modules/esm/resolve:275
+    throw new ERR_MODULE_NOT_FOUND
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\hussein\Desktop\devFiles\TKT\Server\Services\Amadeus' imported from C:\Users\hussein\Desktop\devFiles\TKT\Server\Controllers\flightSearch.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/Users/hussein/Desktop/devFiles/TKT/Server/Services/Amadeus'
+}
+
+Node.js v22.14.0
+[nodemon] app crashed - waiting for file changes before starting.
+
+
+fix 
+
+add file extension .js
