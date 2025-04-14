@@ -1,6 +1,9 @@
 import amadeus from "../Services/Amadeus.js";
 
+
+let responsse ;
 const searchFlights = async (req, res) => {
+
   const origin = "EBB";
   const destination = "DXB";
   const seatClass = "ECONOMY";
@@ -29,12 +32,12 @@ const searchFlights = async (req, res) => {
       console.log("No flights available");
       return res.status(404).json({ message: "No flights available" });
     }
-
+    responsse = response.data;
+    console.log(`responess::`,responsse);
     const limitedData = response.data.slice(0, 1);
-    console.log("LIMITED DATA ::", limitedData);
+    // console.log("LIMITED DATA ::", limitedData);
 
     return res.json(response.data);
-
   } catch (error) {
     console.error("Flight search error:", error);
     return res.status(500).json({
@@ -44,4 +47,4 @@ const searchFlights = async (req, res) => {
   }
 };
 
-export default searchFlights;
+export { searchFlights , responsse};
