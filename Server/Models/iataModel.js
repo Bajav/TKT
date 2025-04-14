@@ -1,4 +1,5 @@
 import mongoose, { model } from "mongoose";
+import {iataConnection,airlineConnection} from '../DB/mongoose.js'
 
 // Define schemas and models on specific connections
 const iataSchema = new mongoose.Schema({
@@ -20,6 +21,13 @@ const airlineSchema = new mongoose.Schema({
 const IATACODE = mongoose.model("IATACODE", iataSchema);
 const Airline = mongoose.model("Airline", airlineSchema);
 
+// const find =()=>
+//     {
+//         const res = IATACODE.find();
+//         console.log(res);
+//     };
+//     find();
+
 // export models
-module.exports = {IATACODE,Airline};
+export {IATACODE,Airline};
 

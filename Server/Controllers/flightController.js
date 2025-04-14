@@ -1,18 +1,19 @@
-import { IATACODE, Airline } from "../Models/iataModel";
+import { IATACODE, Airline } from "../Models/iataModel.js";
 
 const getIataCodes = async (req, res) => {
   try {
-    const iataCodes = await IATACODE.find().exec();
-    res.jason(iataCodes);
+    // const iataCodes = await IATACODE.find();
+    // res.json(iataCodes);
+    res.send("working")
   } catch (err) {
     console.log(err);
-    res.status(err.status).json({ message: 'Something went wrong', error: err.message });
+    res.status(500).json({ message: 'Something went wrong', error: err.message });
   }
 };
 
 const getAirlines = async (req, res) => {
   try {
-    const airlines = await Airline.find().exec();
+    const airlines = await Airline.find();
     res.json(airlines);
   } catch (err) {
     res.status(500).json({ message: 'Something went wrong', error: err.message });
