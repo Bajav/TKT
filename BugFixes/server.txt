@@ -1,0 +1,21 @@
+{
+"message": "Something went wrong",
+"error": "Operation airlines.find() buffering timed out after 10000ms"
+} 
+
+the above error came in because of the lack of a direct 
+connection between the model and server
+
+the fix
+
+// initiate models
+
+from
+const IATACODE =  new mongoose.model("IATACODE", iataSchema);
+const Airline =  new mongoose.model("Airline", airlineSchema);
+
+to
+const IATACODE =  iataConnection.model("IATACODE", iataSchema);
+const Airline =  airlineConnection.model("Airline", airlineSchema);
+
+Error two

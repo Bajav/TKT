@@ -8,7 +8,8 @@ const {getAirlines,getIataCodes} = iataController;
 
 console.log(iataController);
 
-router.get('/iata', iataController.getAirlines);
+router.get('/airlines', iataController.getAirlines);
+router.get('/iata', iataController.getIataCodes);
 // router.post('/', userController.createUser);
 
 export default router;

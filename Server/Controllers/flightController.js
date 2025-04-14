@@ -2,9 +2,9 @@ import { IATACODE, Airline } from "../Models/iataModel.js";
 
 const getIataCodes = async (req, res) => {
   try {
-    // const iataCodes = await IATACODE.find();
-    // res.json(iataCodes);
-    res.send("working")
+    const iataCodes = await IATACODE.find();
+    res.json(iataCodes);
+    // res.send("working")
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Something went wrong', error: err.message });

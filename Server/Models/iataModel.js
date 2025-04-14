@@ -18,8 +18,8 @@ const airlineSchema = new mongoose.Schema({
 });
 
 // initiate models
-const IATACODE = mongoose.model("IATACODE", iataSchema);
-const Airline = mongoose.model("Airline", airlineSchema);
+const IATACODE =  iataConnection.model("IATACODE", iataSchema);
+const Airline =  airlineConnection.model("Airline", airlineSchema);
 
 // const find =()=>
 //     {
