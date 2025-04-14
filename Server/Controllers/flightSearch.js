@@ -47,4 +47,21 @@ const searchFlights = async (req, res) => {
   }
 };
 
-export { searchFlights , responsse};
+
+// works
+const getCheckIn = async (req, res) => { 
+    const checkIn = "KQ";
+    try {
+      const response = await amadeus.referenceData.urls.checkinLinks.get({ airlineCode: checkIn });
+      if (response.data.length === 0) {
+        return res.send("No check-in links available");
+      } else {
+        return res.json(response.data);
+      }
+    } catch (err) {
+      console.log("Error getting check-ins:", err);
+      return res.status(500).json({ message: "Error fetching check-in links" });
+    }
+  };
+  
+export { searchFlights , getCheckIn};
