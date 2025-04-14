@@ -2,6 +2,7 @@
 // import cors from 'cors';
 import express from "express";
 import flightRoutes from './Routes/anotherFlightRoute.js';
+import searchFlight from './Routes/searchFlightRt.js'
 
 
 const port = 3000;
@@ -16,6 +17,7 @@ app.use(express.static("public"));
 
 
 app.use('/',flightRoutes);
+app.use('/',searchFlight);
 
 
 // Start server
