@@ -63,5 +63,60 @@ const getCheckIn = async (req, res) => {
       return res.status(500).json({ message: "Error fetching check-in links" });
     }
   };
+
+//   find out the latest price for a flight selected
+
+// amadeus.shopping.flightOffers.pricing.post(
+//     {
+//       'data': {
+//         'type': 'flight-offers-pricing',
+//         'flightOffers': [response.data[0]]
+//       }
+//     }
+//   )
+
+
+// Flight Offers Price with additional parameters
+// for example: check additional baggage options 
+
+// amadeus.shopping.flightOffers.pricing.post(body ,{include: 'bags'});
+
+// Flight Create Orders
+// To book the flight-offer(s) returned by the Flight Offers Price
+// and create a flight-order with travelers' information.
+// A full example can be found at https://git.io/JtnYo
+
+
+// amadeus.booking.flightOrders.post(
+//   {
+//     'type': 'flight-order',
+//     'flightOffers': [priced-offers],
+//     'travelers': []
+//   }
+// );
+
+
+
+//   find cheapest dates for given flight
+//  not working 
+const cheapestDate = async (req, res) => {
+    try {
+      const response = await amadeus.shopping.flightDates.get({
+        origin: 'MAD', // Madrid
+        destination: 'MUC' // Munich
+      });
   
-export { searchFlights , getCheckIn};
+      if (!response.data || response.data.length === 0) {
+        console.log("No data received for cheapest flight dates");
+        return res.status(404).json({ message: "No cheap dates found for the given route" });
+      }
+  
+      return res.json(response.data);
+    } catch (err) {
+      console.error("Error getting cheapest flight dates:", err);
+      return res.status(500).json({ message: "Failed to fetch cheapest flight dates", error: err.description || err.message });
+    }
+  };
+  
+  
+export { searchFlights , getCheckIn, cheapestDate};
