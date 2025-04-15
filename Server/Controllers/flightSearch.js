@@ -3,7 +3,7 @@ import amadeus from "../Services/Amadeus.js";
 let responsse;
 const searchFlights = async (req, res) => {
   const origin = "EBB";
-  const destination = "DXB";
+  const destination = "CDG";
   const seatClass = "ECONOMY";
   const departureDate = "2025-11-04";
   const returnDate = "2025-11-08";
@@ -74,26 +74,25 @@ const findLastPrice = async (req, res) => {
     //   if (!flightOffer) {
     //     return res.status(400).json({ error: "Missing flight offer data" });
     //   }
-  
-      const response = await amadeus.shopping.flightOffers.pricing.post({
+  console.log("responseee::", responsse[0]);
+    const pricingResponse = await amadeus.shopping.flightOffers.pricing.post({
         data: {
           type: "flight-offers-pricing",
           flightOffers: [responsse[0]],
         },
       });
   
-      return res.json(response.data);
+      return res.json(responsse[0]);
     } catch (err) {
       console.error("Error fetching last price:", err);
-      res.status(500).json({
-        error: "Error fetching final flight price",
-        details: err.description || err.message || "Unknown error",
-      });
+      return res.json(err);
+    //   res.status(500).json({
+    //     error: "Error fetching final flight price",
+    //     details: err.description || err.message || "Unknown error",
+    //   });
     }
   };
   
-
-
 
 // Flight Offers Price with additional parameters
 // for example: check additional baggage options
@@ -105,40 +104,82 @@ const findLastPrice = async (req, res) => {
 // and create a flight-order with travelers' information.
 // A full example can be found at https://git.io/JtnYo
 
-// amadeus.booking.flightOrders.post(
-//   {
-//     'type': 'flight-order',
-//     'flightOffers': [priced-offers],
-//     'travelers': []
-//   }
-// );
-
-//   find cheapest dates for given flight
-//  not working
-const cheapestDate = async (req, res) => {
-  try {
-    const response = await amadeus.shopping.flightDates.get({
-      origin: "MAD", // Madrid
-      destination: "MUC", // Munich
-    });
-
-    if (!response.data || response.data.length === 0) {
-      console.log("No data received for cheapest flight dates");
-      return res
-        .status(404)
-        .json({ message: "No cheap dates found for the given route" });
-    }
-
-    return res.json(response.data);
-  } catch (err) {
-    console.error("Error getting cheapest flight dates:", err);
-    return res
-      .status(500)
-      .json({
-        message: "Failed to fetch cheapest flight dates",
-        error: err.description || err.message,
-      });
+const getFlightOrder = async (req, res) => {
+    try{
+  const response = await amadeus.booking.flightOrders.post({
+    data: {
+      type: "flight-order",
+      flightOffers: [responsse[1]],
+      travelers: [
+        {
+          id: "1",
+          dateOfBirth: "1999-11-11", //YYY-MMM-DDD
+          name: {
+            firstName: "JORGE",
+            lastName: "GONZALES",
+          },
+          gender: "MALE",
+          contact: {
+            emailAddress: "jorge.gonzales833@telefonica.es",
+            phones: [
+              {
+                deviceType: "MOBILE",
+                countryCallingCode: "256",
+                number: "480080076",
+              },
+            ],
+          },
+          documents: [
+            {
+              documentType: "PASSPORT",
+              birthPlace: "Madrid",
+              issuanceLocation: "Madrid",
+              issuanceDate: "2020-04-14",
+              number: "00000000",
+              expiryDate: "2076-04-14",
+              issuanceCountry: "UG",
+              validityCountry: "UG",
+              nationality: "UG",
+              holder: true,
+            },
+          ],
+        },
+      ],
+    },
+  });
+  return res.json(response.data);
+}catch(err){
+  console.log("error getting pricing", err);
+  return res.json(err);
   }
 };
 
-export { searchFlights, getCheckIn, cheapestDate, findLastPrice };
+//   find cheapest dates for given flight
+//  not working
+// const cheapestDate = async (req, res) => {
+//   try {
+//     const response = await amadeus.shopping.flightDates.get({
+//       origin: "MAD", // Madrid
+//       destination: "MUC", // Munich
+//     });
+
+//     if (!response.data || response.data.length === 0) {
+//       console.log("No data received for cheapest flight dates");
+//       return res
+//         .status(404)
+//         .json({ message: "No cheap dates found for the given route" });
+//     }
+
+//     return res.json(response.data);
+//   } catch (err) {
+//     console.error("Error getting cheapest flight dates:", err);
+//     return res
+//       .status(500)
+//       .json({
+//         message: "Failed to fetch cheapest flight dates",
+//         error: err.description || err.message,
+//       });
+//   }
+// };
+
+export { searchFlights, getCheckIn, findLastPrice, getFlightOrder };
