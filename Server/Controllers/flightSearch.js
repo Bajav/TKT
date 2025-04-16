@@ -156,6 +156,23 @@ const getFlightOrder = async (req, res) => {
   }
 };
 
+
+const retriveOrder = async (req,res)=>
+  {
+    console.log(oderId);
+    try {
+      const response = await amadeus.booking.flightOrder(orderId).get();
+      console.log(response.data);
+      return res.json(response.data);
+    } catch (err) {
+      console.error("Error retrieving order:", err);
+      return res.status(500).json({
+        error: "Failed to retrieve order",
+        details: err.description || err.message || "Unknown error"
+      });
+    }
+  };
+
 //   find cheapest dates for given flight
 //  not working
 const cheapestDate = async (req, res) => {
@@ -184,6 +201,7 @@ const cheapestDate = async (req, res) => {
   }
 };
 
-export { searchFlights, getCheckIn, findLastPrice, getFlightOrder ,cheapestDate};
+
+export { searchFlights, getCheckIn, findLastPrice, getFlightOrder ,cheapestDate,retriveOrder};
 
 // conso-lidator
