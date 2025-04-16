@@ -193,17 +193,17 @@ const deleteOrder = async (req,res)=>
   // SeatMap display
   const seatMap = async(req,res)=>{
     console.log(oderId);
-    try{
-     const response = amadeus.shopping.seatmaps.get({
+    try {
+      const response = await amadeus.shopping.seatmaps.get({
         'flight-orderId': oderId
       });
-      console.log(response.data);
+  
+      console.log("Seat Map Response:", response.data);
       return res.json(response.data);
-    }catch(err)
-    {
-      console.error("Error retrieving order:", err);
+    } catch (err) {
+      console.error("Error retrieving seat map:", err);
       return res.status(500).json({
-        error: "Failed to retrieve order",
+        error: "Failed to retrieve seat map",
         details: err.description || err.message || "Unknown error"
       });
     }
