@@ -190,6 +190,25 @@ const deleteOrder = async (req,res)=>
     }
   };
 
+  // SeatMap display
+  const seatMap = async(req,res)=>{
+    console.log(oderId);
+    try{
+     const response = amadeus.shopping.seatmaps.get({
+        'flight-orderId': oderId
+      });
+      console.log(response.data);
+      return res.json(response.data);
+    }catch(err)
+    {
+      console.error("Error retrieving order:", err);
+      return res.status(500).json({
+        error: "Failed to retrieve order",
+        details: err.description || err.message || "Unknown error"
+      });
+    }
+  }
+
 
 //   find cheapest dates for given flight
 //  not working
@@ -220,6 +239,6 @@ const cheapestDate = async (req, res) => {
 };
 
 
-export { searchFlights, getCheckIn, findLastPrice, getFlightOrder ,cheapestDate,retriveOrder,deleteOrder};
+export { searchFlights, getCheckIn, findLastPrice, getFlightOrder ,cheapestDate,retriveOrder,deleteOrder, seatMap};
 
 // conso-lidator
