@@ -1,6 +1,7 @@
 import amadeus from "../Services/Amadeus.js";
 
 let responsse;
+let oderId;
 const searchFlights = async (req, res) => {
   const origin = "EBB";
   const destination = "CDG";
@@ -147,6 +148,7 @@ const getFlightOrder = async (req, res) => {
       ],
     },
   });
+  oderId = response.data.id;
   return res.json(response.data);
 }catch(err){
   console.log("error getting pricing", err);
@@ -156,30 +158,32 @@ const getFlightOrder = async (req, res) => {
 
 //   find cheapest dates for given flight
 //  not working
-// const cheapestDate = async (req, res) => {
-//   try {
-//     const response = await amadeus.shopping.flightDates.get({
-//       origin: "MAD", // Madrid
-//       destination: "MUC", // Munich
-//     });
+const cheapestDate = async (req, res) => {
+  try {
+    const response = await amadeus.shopping.flightDates.get({
+      origin: "NYC", // Madrid
+      destination: "CDG", // Munich
+    });
 
-//     if (!response.data || response.data.length === 0) {
-//       console.log("No data received for cheapest flight dates");
-//       return res
-//         .status(404)
-//         .json({ message: "No cheap dates found for the given route" });
-//     }
+    if (!response.data || response.data.length === 0) {
+      console.log("No data received for cheapest flight dates");
+      return res
+        .status(404)
+        .json({ message: "No cheap dates found for the given route" });
+    }
 
-//     return res.json(response.data);
-//   } catch (err) {
-//     console.error("Error getting cheapest flight dates:", err);
-//     return res
-//       .status(500)
-//       .json({
-//         message: "Failed to fetch cheapest flight dates",
-//         error: err.description || err.message,
-//       });
-//   }
-// };
+    return res.json(response.data);
+  } catch (err) {
+    console.error("Error getting cheapest flight dates:", err);
+    return res
+      .status(500)
+      .json({
+        message: "Failed to fetch cheapest flight dates",
+        error: err.description || err.message,
+      });
+  }
+};
 
-export { searchFlights, getCheckIn, findLastPrice, getFlightOrder };
+export { searchFlights, getCheckIn, findLastPrice, getFlightOrder ,cheapestDate};
+
+// conso-lidator
