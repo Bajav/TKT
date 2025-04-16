@@ -1,10 +1,11 @@
 // ✅ Corrected Code
 import express from 'express';
-import {searchFlights , getCheckIn, findLastPrice,getFlightOrder,cheapestDate,retriveOrder,deleteOrder,seatMap} from '../Controllers/flightSearch.js';
+import {searchFlights ,brandedUpSell, getCheckIn, findLastPrice,getFlightOrder,cheapestDate,retriveOrder,deleteOrder,seatMap} from '../Controllers/flightSearch.js';
 
 const router = express.Router();
 
 router.get('/results', searchFlights);
+router.get('/brandedUpSell', brandedUpSell);
 router.get("/checkin",getCheckIn);
 router.get("/findLastPrice",findLastPrice);
 router.get("/getFlightOrder",getFlightOrder);
