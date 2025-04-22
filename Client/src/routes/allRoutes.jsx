@@ -12,6 +12,7 @@ import Flights from "../pages/flights";
 import FlightPricing from "../pages/flightPricing/flightPricing";
 import FlightResult from "../pages/flightResult/flightResults";
 import TravelerForm from "../pages/TravelerForm/TravelerForm";
+import FlightsForm from "../components/flightsFormInput";
 
 function AllRoutes() {
   const location = useLocation();
@@ -34,6 +35,8 @@ function AllRoutes() {
           <Route path="places" element={<Places />} />
           <Route path="flights" element={<Flights />}>
             <Route path="result" element={<FlightResult />} />
+            <Route path="review" element={<FlightPricing />} />
+            <Route path="confirm" element={<TravelerForm />} />
           </Route>
           <Route path="hotels" element={<Hotels />} />
           <Route path="packages" element={<Packages />} />
