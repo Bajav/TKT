@@ -1,6 +1,7 @@
 import amadeus from "../Services/Amadeus.js";
 
 let responsse;
+let brandedFlight;
 let oderId;
 const searchFlights = async (req, res) => {
   const origin = "EBB";
@@ -46,6 +47,7 @@ const searchFlights = async (req, res) => {
   }
 };
 
+
 const brandedUpSell = async (req, res) => {
   try {
     const response = await amadeus.shopping.flightOffers.upselling.post({
@@ -60,36 +62,22 @@ const brandedUpSell = async (req, res) => {
           1
         ]
       }
-    ]
+    ],
+      },
+      params: {
+        include: "detailed-fare-rules"
       }
     });
     if (response.data.length === 0) {
       return res.send("No data available");
     } else {
+      brandedFlight = response.data;
+      console.log("brandedFlight",brandedFlight);
       return res.json(response.data);
     }
   } catch (err) {
     console.log("Error getting branded flights:", err);
     return res.status(500).json({ message: "Error fetching branded flights" });
-  }
-};
-
-// works
-// find checkin links for different airlines
-const getCheckIn = async (req, res) => {
-  const checkIn = "KQ";
-  try {
-    const response = await amadeus.referenceData.urls.checkinLinks.get({
-      airlineCode: checkIn,
-    });
-    if (response.data.length === 0) {
-      return res.send("No check-in links available");
-    } else {
-      return res.json(response.data);
-    }
-  } catch (err) {
-    console.log("Error getting check-ins:", err);
-    return res.status(500).json({ message: "Error fetching check-in links" });
   }
 };
 
@@ -107,11 +95,12 @@ const findLastPrice = async (req, res) => {
     const pricingResponse = await amadeus.shopping.flightOffers.pricing.post({
       data: {
         type: "flight-offers-pricing",
-        flightOffers: [responsse[0]],
+        flightOffers: [brandedFlight[0]],
       },
+      include: ["detailed-fare-rules"]
     });
 
-    return res.json(responsse[0]);
+    return res.json(pricingResponse.data);
   } catch (err) {
     console.error("Error fetching last price:", err);
     return res.json(err);
@@ -257,6 +246,26 @@ const cheapestDate = async (req, res) => {
       message: "Failed to fetch cheapest flight dates",
       error: err.description || err.message,
     });
+  }
+};
+
+
+// works
+// find checkin links for different airlines
+const getCheckIn = async (req, res) => {
+  const checkIn = "KQ";
+  try {
+    const response = await amadeus.referenceData.urls.checkinLinks.get({
+      airlineCode: checkIn,
+    });
+    if (response.data.length === 0) {
+      return res.send("No check-in links available");
+    } else {
+      return res.json(response.data);
+    }
+  } catch (err) {
+    console.log("Error getting check-ins:", err);
+    return res.status(500).json({ message: "Error fetching check-in links" });
   }
 };
 
