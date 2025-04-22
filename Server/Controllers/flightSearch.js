@@ -97,7 +97,9 @@ const findLastPrice = async (req, res) => {
         type: "flight-offers-pricing",
         flightOffers: [brandedFlight[0]],
       },
-      include: ["detailed-fare-rules"]
+        params: {
+          include: "detailed-fare-rules"
+      }
     });
 
     return res.json(pricingResponse.data);
