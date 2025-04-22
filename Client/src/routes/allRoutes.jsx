@@ -17,7 +17,7 @@ function AllRoutes() {
   const location = useLocation();
 
   // All routes where the Navbar should be hidden
-  const hideNavRoutes = ["/pricing", "/results","/travelerData"];
+  const hideNavRoutes = ["/pricing", "/results", "/travelerData"];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>
     location.pathname.startsWith(path)
@@ -29,11 +29,14 @@ function AllRoutes() {
       {!shouldHideNavbar && <Navbar />}
 
       <Routes>
-        <Route path="/" element={<Navbar />} >
-        <Route index element={<Home />} />
-        <Route path="places" element={<Places />} />
-        <Route path="hotels" element={<Hotels />} />
-        <Route path="packages" element={<Packages />} />
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<Home />} />
+          <Route path="places" element={<Places />} />
+          <Route path="flights" element={<Flights />}>
+            <Route path="result" element={<FlightResult />} />
+          </Route>
+          <Route path="hotels" element={<Hotels />} />
+          <Route path="packages" element={<Packages />} />
         </Route>
       </Routes>
     </div>
