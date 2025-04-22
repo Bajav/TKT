@@ -47,7 +47,7 @@ function FlightsForm() {
     e.preventDefault();
     const formData = { ...inputs, passengers };
     try {
-      const response = await axios.post('http://localhost:3000/flights/results', formData);
+      const response = await axios.post('http://localhost:3000/results', formData);
       // i send data to next page
       navigate("/results", { state: { formData, airlines } });
       console.log('Flight data posted:', response.data);
