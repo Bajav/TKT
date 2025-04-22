@@ -28,12 +28,10 @@ function AllRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="places" element={<Places />} />
-
         <Route path="flights" element={<Flights />} />
         <Route path="results" element={<FlightResult />} />
         <Route path="pricing" element={<FlightPricing />} />
         <Route path="travelerData" element={<TravelerForm />} />
-
         <Route path="hotels" element={<Hotels />} />
         <Route path="packages" element={<Packages />} />
       </Routes>
