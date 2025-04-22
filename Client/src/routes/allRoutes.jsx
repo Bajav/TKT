@@ -2,10 +2,13 @@ import { Routes, Route, useLocation } from "react-router-dom";
 
 import Home from "../pages/home";
 import Places from "../pages/places";
-import Flights from "../pages/flights";
 import Hotels from "../pages/hotels";
 import Packages from "../pages/packages";
 import Navbar from "../components/navBar";
+
+// IMPORT ROUTES
+// import FlightsRoutes from "./flightsRoutes/flightsRoute";
+import Flights from "../pages/flights";
 import FlightPricing from "../pages/flightPricing/flightPricing";
 import FlightResult from "../pages/flightResult/flightResults";
 import TravelerForm from "../pages/TravelerForm/TravelerForm";
@@ -26,14 +29,12 @@ function AllRoutes() {
       {!shouldHideNavbar && <Navbar />}
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navbar />} >
+        <Route index element={<Home />} />
         <Route path="places" element={<Places />} />
-        <Route path="flights" element={<Flights />} />
-        <Route path="results" element={<FlightResult />} />
-        <Route path="pricing" element={<FlightPricing />} />
-        <Route path="travelerData" element={<TravelerForm />} />
         <Route path="hotels" element={<Hotels />} />
         <Route path="packages" element={<Packages />} />
+        </Route>
       </Routes>
     </div>
   );
