@@ -1,9 +1,11 @@
-import { IATACODE, Airline } from "../Models/iataModel";
+import { IATACODE, Airline } from "../Models/iataModel.js";
 
-const fetchIataCodes= async()=>{
+const fetchIataCodes= async(req,res)=>{
   try{
     const iataCodes = await IATACODE.find();
-    return iataCodes;
+    console.log(iataCodes);
+    return res.json(iataCodes)
+    // return iataCodes;
   }catch(err)
   {
     console.error("error fetching codes:",err)
@@ -11,14 +13,14 @@ const fetchIataCodes= async()=>{
   }
 };
 
-const fetchAirlines= async()=>{
+const fetchAirlines = async(req,res)=>{
   try{
     const airlines = await Airline.find();
-    return airlines;
-  }catch(err)
-  {
-    console.error("error fetching airlines:",err)
-    throw err
+    return res.json(airlines); // Add res.json!
+  }catch(err) {
+    console.error("error fetching airlines:", err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 export {fetchIataCodes,fetchAirlines};

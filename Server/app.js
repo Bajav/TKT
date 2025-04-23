@@ -18,7 +18,7 @@ app.use(corsMiddleware);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-app.use('/flights',iataRoutes);
+app.use('/',iataRoutes);
 app.use('/',flightRoutes);
 app.use('/',searchFlight);
 
