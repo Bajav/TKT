@@ -3,6 +3,7 @@ import {searchFlights ,brandedUpSell, getCheckIn, findLastPrice,getFlightOrder,c
 
 const router = express.Router();
 
+router.get('/flights', searchFlights);
 router.get('/results', searchFlights);
 router.get('/brandedUpSell', brandedUpSell);
 router.get("/checkin",getCheckIn);

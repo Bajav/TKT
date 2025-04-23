@@ -1,17 +1,23 @@
-// a controller is where all the logic happens ,
-// it handles which routes were hit and how to respond to them
+import { IATACODE, Airline } from "../Models/iataModel";
 
-import User from "../Models/User";
-
-// function to get all users
-exports.getAllUsers = async (req, res) => {
-  const users = await User.find();
-  res.json(users);
-  console.log(users);
+const fetchIataCodes= async(req,res)=>{
+  try{
+    const iataCodes = await IATACODE.find();
+    return iataCodes;
+  }catch(err)
+  {
+    console.error("error fetching codes:",err)
+    throw err
+  }
 };
-
-exports.createUser = async (req, res) => {
-  const newUser = new User(req.body);
-  await newUser.save();
-  res.status(201).json(newUser);
+const fetchAirlines= async(req,res)=>{
+  try{
+    const airlines = await Airline.find();
+    return airlines;
+  }catch(err)
+  {
+    console.error("error fetching airlines:",err)
+    throw err
+  }
 };
+export {fetchIataCodes,fetchAirlines};

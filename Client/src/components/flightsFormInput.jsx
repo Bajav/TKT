@@ -26,21 +26,23 @@ function FlightsForm() {
   const [iataCodes, setIataCodes] = useState([]);
   const [airlines, setAirlines] = useState([]);
 
-  const fetchFlightData = async () => {
-    try {
-      const res = await axios.get("http://localhost:3000/flights");
-      const { iataCodes, airlines } = res.data;
-      setIataCodes(iataCodes);
-      setAirlines(airlines);
-      console.log("flight data recieved")
-    } catch (err) {
-      console.error("Error fetching data:", err);
-    }
-  };
   useEffect(() => {
-    fetchFlightData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const [iataRes, airlineRes] = await Promise.all([
+          axios.get("http://localhost:3000/api/flights/iata-codes"),
+          axios.get("http://localhost:3000/api/flights/airlines")
+        ]);
 
+        setIataCodes(iataRes.data);
+        setAirlines(airlineRes.data);
+      } catch (error) {
+        console.error("Error fetching flight data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 
   const handleSubmit = async (e) => {

@@ -1,6 +1,7 @@
 // import dotenv from "dotenv";
 // import cors from 'cors';
 import express from "express";
+import iataRoutes from './Routes/iataRoutes.js'
 import flightRoutes from './Routes/anotherFlightRoute.js';
 import searchFlight from './Routes/searchFlightRt.js'
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
@@ -17,7 +18,7 @@ app.use(corsMiddleware);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-
+app.use('/flights',iataRoutes);
 app.use('/',flightRoutes);
 app.use('/',searchFlight);
 

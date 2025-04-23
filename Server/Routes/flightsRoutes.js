@@ -1,18 +1,12 @@
 import dotenv from "dotenv";
-import cors from 'cors';
-// const cors = require("cors");
-
 import express from "express";
-import bodyParser from "body-parser";
+import { IATACODE,Airline } from "../Models/iataModel";
 
 const router = express.Router();
 const app = express();
-// CORS Options
+
 dotenv.config();
-const corsOptions = {
-  origin: ["http://localhost:5173"],
-};
-router.use(cors(corsOptions));
+
 
 // amadeus setUp
 
