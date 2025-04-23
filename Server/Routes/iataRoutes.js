@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/iata-codes", async (req, res) => {
   try {
     const data = await fetchIataCodes();
+    res.json(data);
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: "Error fetching IATA codes." });

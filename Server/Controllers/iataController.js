@@ -1,6 +1,6 @@
 import { IATACODE, Airline } from "../Models/iataModel";
 
-const fetchIataCodes= async(req,res)=>{
+const fetchIataCodes= async()=>{
   try{
     const iataCodes = await IATACODE.find();
     return iataCodes;
@@ -10,7 +10,8 @@ const fetchIataCodes= async(req,res)=>{
     throw err
   }
 };
-const fetchAirlines= async(req,res)=>{
+
+const fetchAirlines= async()=>{
   try{
     const airlines = await Airline.find();
     return airlines;
