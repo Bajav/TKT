@@ -30,10 +30,11 @@ function FlightsForm() {
     const fetchData = async () => {
       try {
         const [iataRes, airlineRes] = await Promise.all([
-          axios.get("http://localhost:3000/api/flights/iata-codes"),
-          axios.get("http://localhost:3000/api/flights/airlines")
+          axios.get("http://localhost:3000/iataCodes"),
+          axios.get("http://localhost:3000/airlines")
         ]);
-
+        console.log("airlines",airlineRes);
+        console.log("iatacodes",iataRes);
         setIataCodes(iataRes.data);
         setAirlines(airlineRes.data);
       } catch (error) {
