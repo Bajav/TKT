@@ -27,7 +27,7 @@ function AllRoutes() {
   return (
     <div>
       {/* Conditionally render Navbar */}
-      {!shouldHideNavbar && <Navbar />}
+      {/* {!shouldHideNavbar && <Navbar />} */}
 
       <Routes>
         <Route path="/" element={<Navbar />}>
