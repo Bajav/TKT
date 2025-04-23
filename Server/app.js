@@ -3,6 +3,7 @@
 import express from "express";
 import flightRoutes from './Routes/anotherFlightRoute.js';
 import searchFlight from './Routes/searchFlightRt.js'
+import corsMiddleware from "./Middleware/corsMiddleWare.js";
 
 
 const port = 3000;
@@ -12,6 +13,7 @@ const app = express();
 
 // Middleware setup
 app.use(express.json());
+app.use(corsMiddleware);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
