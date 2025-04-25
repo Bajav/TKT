@@ -102,7 +102,7 @@ function FlightsForm() {
               value={inputs.flightType}
               className="text-[#F5F7F8] rounded-2xl"
             >
-              <option value="oneWay">One Way</option>
+              <option className="" value="oneWay">One Way</option>
               <option value="roundTrip">Round Trip</option>
             </select>
 
