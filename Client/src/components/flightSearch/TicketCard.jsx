@@ -19,7 +19,7 @@ function FlightCard() {
     const fetchData = async () => {
       try {
         const [flightsRes, iataRes] = await Promise.all([
-          axios.get("http://localhost:3000/flights/flightsResults"),
+          axios.get("http://localhost:3000/results"),
           axios.get("http://localhost:3000/flights"),
         ]);
         setFlightResponse(flightsRes.data);

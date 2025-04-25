@@ -55,8 +55,8 @@ const navigate = useNavigate();
         </div>
         </div>
         <div className="results">
-          {/* <FlightCard /> */}
-          <DummyTicket />
+          <FlightCard />
+          {/* <DummyTicket /> */}
           <Dummy />
         </div>
       </div>
