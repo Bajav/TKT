@@ -13,7 +13,7 @@ function FlightCard() {
   const [flightResponse, setFlightResponse] = useState([]);
   const [dropDown, showDropDown] = useState(null);
   const [outBoundFlight, setFlight] = useState({});
-  const [isOverLay, setShowOverLay] = useState(true);
+  const [isOverLay, setShowOverLay] = useState(false);
   // const [showBookingInfo, setShowBookingInfo] = useState(false);
   const navigate = useNavigate();
 
@@ -63,7 +63,8 @@ function FlightCard() {
   };
 
   const bookNow = async (index) => {
-    navigate("/flights/flightsResults/flightPricing");
+    // navigate("/flights/flightsResults/flightPricing");
+    setShowOverLay(true)
     console.log("boook now btn hit")
     try {
       setFlight (flightResponse[index]);
@@ -77,6 +78,9 @@ function FlightCard() {
   };
   return(
 <Fragment>
+{isOverLay && (
+  <BrandedFaresOverlay />
+)}
   {flightResponse.length < 1 ? (
     <Loader loaderTag="Searching for flights" />
   ) : (
