@@ -5,18 +5,18 @@ let brandedFlight;
 let oderId;
 const searchFlights = async (req, res) => {
   try {
-  const data = req.body;
-  console.log("form data recieved");
-  console.log(data);
+    const data = req.body;
+    console.log("form data recieved");
+    console.log(data);
 
-  const origin = "EBB";
-  const destination = "CDG";
-  const seatClass = "ECONOMY";
-  const departureDate = "2025-11-04";
-  const returnDate = "2025-11-08";
-  const adults = 1;
-  const children = 0;
-  const infants = 0;
+    const origin = "EBB";
+    const destination = "CDG";
+    const seatClass = "ECONOMY";
+    const departureDate = "2025-11-04";
+    const returnDate = "2025-11-08";
+    const adults = 1;
+    const children = 0;
+    const infants = 0;
 
     const response = await amadeus.shopping.flightOffersSearch.get({
       originLocationCode: origin,
@@ -51,32 +51,33 @@ const searchFlights = async (req, res) => {
   }
 };
 
-
 const brandedUpSell = async (req, res) => {
   try {
+    const selectedFlight = req.body;
+    console.log("selectedFlight recieved");
+    console.log("selectedFlight",selectedFlight);
+
     const response = await amadeus.shopping.flightOffers.upselling.post({
       data: {
         type: "flight-offers-upselling",
-        flightOffers:[responsse[0]],
-        "payments": [
-      {
-        "brand": "VISA_IXARIS",
-        "binNumber": 123456,
-        "flightOfferIds": [
-          1
-        ]
-      }
-    ],
+        flightOffers: [responsse[0]],
+        payments: [
+          {
+            brand: "VISA_IXARIS",
+            binNumber: 123456,
+            flightOfferIds: [1],
+          },
+        ],
       },
       params: {
-        include: "detailed-fare-rules"
-      }
+        include: "detailed-fare-rules",
+      },
     });
     if (response.data.length === 0) {
       return res.send("No data available");
     } else {
       brandedFlight = response.data;
-      console.log("brandedFlight",brandedFlight);
+      console.log("brandedFlight", brandedFlight);
       return res.json(response.data);
     }
   } catch (err) {
@@ -101,9 +102,9 @@ const findLastPrice = async (req, res) => {
         type: "flight-offers-pricing",
         flightOffers: [brandedFlight[0]],
       },
-        params: {
-          include: "detailed-fare-rules"
-      }
+      params: {
+        include: "detailed-fare-rules",
+      },
     });
 
     return res.json(pricingResponse.data);
@@ -254,7 +255,6 @@ const cheapestDate = async (req, res) => {
     });
   }
 };
-
 
 // works
 // find checkin links for different airlines

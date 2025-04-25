@@ -5,8 +5,9 @@ import {searchFlights ,brandedUpSell, getCheckIn, findLastPrice,getFlightOrder,c
 const router = express.Router();
 
 // router.get('/', searchFlights);
-router.get('/results', searchFlights);
 router.post('/results', searchFlights);
+router.get('/results', searchFlights);
+router.post('/brandedUpSell', brandedUpSell);
 router.get('/brandedUpSell', brandedUpSell);
 router.get("/checkin",getCheckIn);
 router.get("/findLastPrice",findLastPrice);
