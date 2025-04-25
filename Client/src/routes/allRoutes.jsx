@@ -34,7 +34,7 @@ function AllRoutes() {
           <Route index element={<Home />} />
           <Route path="places" element={<Places />} />
           <Route path="flights" element={<Flights />}>
-            <Route path="result" element={<FlightResult />} />
+            <Route path="results" element={<FlightResult />} />
             <Route path="review" element={<FlightPricing />} />
             <Route path="confirm" element={<TravelerForm />} />
           </Route>
