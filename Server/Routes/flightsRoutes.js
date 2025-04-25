@@ -36,7 +36,7 @@ const amadeus = new Amadeus({
   
   var formData ;
   let flightOffersResponse ;
-  app.route("/flights/flightsResults")
+  app.route("/flights")
     .post(async (req, res) => {
      console.log(req.body);
      formData = req.body;
