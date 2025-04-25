@@ -4,7 +4,7 @@ const fetchIataCodes= async(req,res)=>{
   try{
     const iataCodes = await IATACODE.find();
     console.log(iataCodes);
-    return res.json(iataCodes)
+    return res.json(iataCodes);
     // return iataCodes;
   }catch(err)
   {
