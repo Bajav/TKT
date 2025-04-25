@@ -1,11 +1,12 @@
 import express from 'express';
+import formData from '../Controllers/flightsForm.js';
 import {searchFlights ,brandedUpSell, getCheckIn, findLastPrice,getFlightOrder,cheapestDate,retriveOrder,deleteOrder,seatMap} from '../Controllers/flightSearch.js';
 
 const router = express.Router();
 
 // router.get('/', searchFlights);
 router.get('/results', searchFlights);
-router.post('/results', searchFlights);
+router.post('/results', formData);
 router.get('/brandedUpSell', brandedUpSell);
 router.get("/checkin",getCheckIn);
 router.get("/findLastPrice",findLastPrice);
