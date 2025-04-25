@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Arrow } from "./flightArrowSvg";
+import BrandedFaresOverlay from "./BrandedFaresOverlay";
 import axios from "axios";
 import Loader from "../loader";
 
