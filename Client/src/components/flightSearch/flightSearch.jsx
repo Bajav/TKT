@@ -13,8 +13,8 @@ function FlightSearchInput(props) {
           axios.get("http://localhost:3000/iataCodes"),
           axios.get("http://localhost:3000/airlines")
         ]);
-        console.log("airlines",airlineRes);
-        console.log("iatacodes",iataRes);
+        // console.log("airlines",airlineRes);
+        // console.log("iatacodes",iataRes);
         setIataCodes(iataRes.data);
         setAirlineData(airlineRes.data);
       } catch (error) {
