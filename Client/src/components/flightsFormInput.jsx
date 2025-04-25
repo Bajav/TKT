@@ -95,11 +95,12 @@ function FlightsForm() {
     <div className="cutout-box">
       <form action="/flights" onSubmit={handleSubmit}>
         <div className="flightSearch">
-          <div className="flightType-btns">
+          <div className="flex justify-center gap-10">
             <select
               name="flightType"
               onChange={handleChange}
               value={inputs.flightType}
+              className="text-[#F5F7F8] rounded-2xl"
             >
               <option value="oneWay">One Way</option>
               <option value="roundTrip">Round Trip</option>

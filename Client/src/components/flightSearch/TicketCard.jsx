@@ -12,6 +12,7 @@ function FlightCard() {
   const [flightResponse, setFlightResponse] = useState([]);
   const [dropDown, showDropDown] = useState(null);
   const [outBoundFlight, setFlight] = useState({});
+  const [isOverLay, setShowOverLay] = useState(true);
   // const [showBookingInfo, setShowBookingInfo] = useState(false);
   const navigate = useNavigate();
 
@@ -26,9 +27,9 @@ function FlightCard() {
         setFlightResponse(flightsRes.data);
         console.log(flightsRes.data);
         const iataCodes = iataRes.data;
-        const airportCodes = airporRes.data;
+        const airlines = airporRes.data;
         setIataCodes(iataCodes);
-        setAirlines(airporRes);
+        setAirlines(airlines);
       } catch (err) {
         setError("Failed to fetch data. Please try again.");
       }

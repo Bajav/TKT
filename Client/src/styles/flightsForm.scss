@@ -24,21 +24,7 @@ body {
       align-items: center;
     }
   }
-  .flightType-btns {
-    display: flex;
-    gap: 2%;
-    justify-content: space-around;
-    padding: 10px;
-    select {
-      // width: 165px; 
-      padding: 20px 30px;
-      color: #313030;
-      font-size: 20px;
-      font-weight: 500;
-      font-family: poppins, sans-serif;
-      text-transform: capitalize;
-      border-radius: 30px;
-    }
+
     select:focus {
       outline: none;
     }
@@ -51,7 +37,7 @@ body {
       padding-inline: 2px;
       white-space: nowrap;
     }
-  }
+
   .flexInput {
     position: relative;
     display: flex;
