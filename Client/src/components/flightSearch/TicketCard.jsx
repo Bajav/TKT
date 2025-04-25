@@ -28,7 +28,7 @@ function FlightCard() {
         const iataCodes = iataRes.data;
         const airportCodes = airporRes.data;
         setIataCodes(iataCodes);
-        setAirlines(airportCodes);
+        setAirlines(airporRes);
       } catch (err) {
         setError("Failed to fetch data. Please try again.");
       }
