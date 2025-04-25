@@ -6,7 +6,7 @@ const router = express.Router();
 
 // router.get('/', searchFlights);
 router.get('/results', searchFlights);
-router.post('/results', formData);
+router.post('/results', searchFlights);
 router.get('/brandedUpSell', brandedUpSell);
 router.get("/checkin",getCheckIn);
 router.get("/findLastPrice",findLastPrice);

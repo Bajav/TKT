@@ -4,6 +4,11 @@ let responsse;
 let brandedFlight;
 let oderId;
 const searchFlights = async (req, res) => {
+  try {
+  const data = req.body;
+  console.log("form data recieved");
+  console.log(data);
+
   const origin = "EBB";
   const destination = "CDG";
   const seatClass = "ECONOMY";
@@ -13,7 +18,6 @@ const searchFlights = async (req, res) => {
   const children = 0;
   const infants = 0;
 
-  try {
     const response = await amadeus.shopping.flightOffersSearch.get({
       originLocationCode: origin,
       destinationLocationCode: destination,
