@@ -61,6 +61,19 @@ function FlightCard() {
     console.log("details button is clicked for card", index);
     showDropDown((prevIndex) => (prevIndex === index ? null : index));
   };
+// button posts selected flight for branded upsell deals
+  const selectButton = async (index)=>
+    {
+      try {
+        setFlight (flightResponse[index]);
+        await axios.post(
+          "http://localhost:3000/flights/flightsResults/flightPricing",
+          { flight: outBoundFlight,index : index }
+        );
+      } catch (err) {
+        console.error("Error posting data:", err);
+      }
+    }
 
   const bookNow = async (index) => {
     // navigate("/flights/flightsResults/flightPricing");
@@ -79,7 +92,18 @@ function FlightCard() {
   return(
 <Fragment>
 {isOverLay && (
-  <BrandedFaresOverlay />
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-lg shadow-xl relative w-[90%] max-w-md">
+      <button
+        onClick={() => setShowOverLay(false)}
+        className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+      >
+        ✕
+      </button>
+      <h2 className="text-lg font-bold mb-4">Selected Flight Info</h2>
+      <p>Display some content here... like flight info, pricing, etc.</p>
+    </div>
+  </div>
 )}
   {flightResponse.length < 1 ? (
     <Loader loaderTag="Searching for flights" />
