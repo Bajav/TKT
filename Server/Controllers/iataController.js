@@ -3,7 +3,7 @@ import { IATACODE, Airline } from "../Models/iataModel.js";
 const fetchIataCodes= async(req,res)=>{
   try{
     const iataCodes = await IATACODE.find();
-    console.log(iataCodes);
+    // console.log(iataCodes);
     return res.json(iataCodes);
     // return iataCodes;
   }catch(err)

@@ -18,15 +18,17 @@ function FlightCard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [flightsRes, iataRes] = await Promise.all([
+        const [flightsRes, iataRes,airporRes] = await Promise.all([
           axios.get("http://localhost:3000/results"),
-          axios.get("http://localhost:3000/flights"),
+          axios.get("http://localhost:3000/iataCodes"),
+          axios.get("http://localhost:3000/airlines"),
         ]);
         setFlightResponse(flightsRes.data);
         console.log(flightsRes.data);
-        const { iataCodes, airlines } = iataRes.data;
+        const iataCodes = iataRes.data;
+        const airportCodes = airporRes.data;
         setIataCodes(iataCodes);
-        setAirlines(airlines);
+        setAirlines(airportCodes);
       } catch (err) {
         setError("Failed to fetch data. Please try again.");
       }
