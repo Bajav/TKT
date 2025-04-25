@@ -3,7 +3,7 @@ import express from 'express';
 const formData = async (req,res)=>
     {
         try{
-            const data = await req.body;
+            const data = req.body;
             console.log("form data recieved");
             console.log(data);
             return data;
