@@ -64,10 +64,11 @@ function FlightCard() {
 // button posts selected flight for branded upsell deals
   const selectButton = async (index)=>
     {
+      console.log("selectButton clicked");
       try {
         setFlight (flightResponse[index]);
         await axios.post(
-          "http://localhost:3000/flights/flightsResults/flightPricing",
+          "http://localhost:3000/brandedUpSell",
           { flight: outBoundFlight,index : index }
         );
       } catch (err) {
@@ -188,7 +189,7 @@ function FlightCard() {
               <div className="actions">
                 <button
                   onClick={() => {
-                    bookNow(index);
+                    selectButton(index);
                   }}
                   className="bookBtn"
                 >

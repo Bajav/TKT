@@ -61,6 +61,7 @@ const brandedUpSell = async (req, res) => {
       data: {
         type: "flight-offers-upselling",
         flightOffers: [responsse[0]],
+        include:["bags"],
         payments: [
           {
             brand: "VISA_IXARIS",
