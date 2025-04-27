@@ -10,7 +10,7 @@ function ClickOption(props) {
       name={props.checkName}
       onChange={props.changeFunc}
       checked={props.checkedName}
-      className="absolute w-full h-full opacity-0 cursor-pointer"
+      className="absolute w-full h-full opacity-20 cursor-pointer"
     />
   </label>
 </div>
