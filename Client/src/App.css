@@ -16,15 +16,14 @@
     }
 
 :root {
- --pageColor: $page_color;
- --ticketColor: $ticketColor;
- --buttonColor:$buttonColor;
- --actionBlue:$actionBlue;
- --actionOrange:$actionOrange;
- --deemFontColor:$deemFontColor;
- --visibleFontColor:$visibleFontColor;
- --inputBackGround:$inputBackGround;
- --textFont:poppins;
- --cityFont:bebbasNeue;
-   
+ --pageColor: #F5F7F8;
+ --ticketColor: #222222;
+ --buttonColor:#222222;
+ --actionBlue:#65B7F5;
+ --actionOrange:#E88D67;
+ --deemFontColor:#313030;
+ --visibleFontColor:#313030;
+ --inputBackGround:#fefefe;
+ --textFont:poppins,sans-serif;
+ --cityFont:bebbasNeue,sans-serif;
 }
