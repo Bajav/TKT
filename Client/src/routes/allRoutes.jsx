@@ -6,19 +6,20 @@ import Hotels from "../pages/hotels";
 import Packages from "../pages/packages";
 import Navbar from "../components/navBar";
 
-// IMPORT ROUTES
-// import FlightsRoutes from "./flightsRoutes/flightsRoute";
+// FLIGHTS PAGES
 import Flights from "../pages/flights";
 import FlightPricing from "../pages/flightPricing/flightPricing";
 import FlightResult from "../pages/flightResult/flightResults";
 import TravelerForm from "../pages/TravelerForm/TravelerForm";
-import FlightsForm from "../components/flightsFormInput";
+
+// FALLBACK PAGE
+// import NotFound from "../pages/NotFound"; // create this page if you haven't already
 
 function AllRoutes() {
   const location = useLocation();
 
-  // All routes where the Navbar should be hidden
-  const hideNavRoutes = ["/pricing", "/results", "/travelerData"];
+  // Define all routes where Navbar should be hidden
+  const hideNavRoutes = ["/pricing", "/flights/results", "/travelerData"];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>
     location.pathname.startsWith(path)
@@ -26,21 +27,24 @@ function AllRoutes() {
 
   return (
     <div>
-      {/* Conditionally render Navbar */}
-      {/* {!shouldHideNavbar && <Navbar />} */}
+      {/* Show Navbar unless on certain routes */}
+      {!shouldHideNavbar && <Navbar />}
 
       <Routes>
-        <Route path="/" element={<Navbar />}>
-          <Route index element={<Home />} />
-          <Route path="places" element={<Places />} />
-          <Route path="flights" element={<Flights />}>
-            <Route path="results" element={<FlightResult />} />
-            <Route path="review" element={<FlightPricing />} />
-            <Route path="confirm" element={<TravelerForm />} />
-          </Route>
-          <Route path="hotels" element={<Hotels />} />
-          <Route path="packages" element={<Packages />} />
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/places" element={<Places />} />
+        <Route path="/hotels" element={<Hotels />} />
+        <Route path="/packages" element={<Packages />} />
+
+        {/* Flights Route Group */}
+        <Route path="flights" element={<Flights />} />
+        <Route path="flights/results" element={<FlightResult />} />
+        <Route path="flights/results" element={<FlightResult />} />
+        <Route path="flights/review" element={<FlightPricing />} />
+        <Route path="flights/confirm" element={<TravelerForm />} />
+
+        {/* Catch-All for Unknown Routes */}
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </div>
   );
