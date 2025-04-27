@@ -1,3 +1,30 @@
 @import "tailwindcss";
-@import "./styles/variables.scss"
+@import "./styles/variables.scss";
 
+@font-face {
+    font-family: "poppins";
+    src: url('../fonts/Poppins/Poppins-Bold.ttf') format('ttf'), 
+         url('../fonts/Poppins/Poppins-Light.ttf') format('ttf'); 
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+      font-family: "bebbasNeue";
+      src: url('../fonts/Bebas_Neue/BebasNeue-Regular.ttf') format('ttf');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+:root {
+ --pageColor: $page_color;
+ --ticketColor: $ticketColor;
+ --buttonColor:$buttonColor;
+ --actionBlue:$actionBlue;
+ --actionOrange:$actionOrange;
+ --deemFontColor:$deemFontColor;
+ --visibleFontColor:$visibleFontColor;
+ --inputBackGround:$inputBackGround;
+ --textFont:poppins;
+ --cityFont:bebbasNeue;
+   
+}
