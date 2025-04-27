@@ -97,29 +97,7 @@ body {
       margin-left: 20px;
     }
   }
-  .check {
-    display: flex;
-    color: $visibleFontColor;
-    text-transform: capitalize;
-    font-family: $textFont, sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    border-radius: 30px;
-    // width: 180px;
-    padding: 20px 55px;
-    outline: none;
-    background: $inputBackGround;
-    justify-content: center;
-    align-items: center;
-    input {
-      position: absolute;
-      // right: 20px;
-      background: #007bff;
-      opacity: 5%;
-      width: 100px;
-      height: 30px;
-    }
-  }
+  
   .calendersUI {
     width: 100%;
     margin-top: 10px;
