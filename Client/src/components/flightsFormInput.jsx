@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';  
 import Calender from "./flightSearch/calenderInput";
 import FlightSearchInput from "./flightSearch/flightSearch";
-import ClickOption from "./flightSearch/ClickOption";
+import ClickOption from "./flightSearch/checkBtns/ClickOption";
 import { Outlet,useLocation } from "react-router-dom";
 
 function FlightsForm() {
@@ -94,7 +94,7 @@ function FlightsForm() {
     <Fragment >
       {location.pathname === "/flights" && (
     <div className="cutout-box">
-      <form action="/flights" onSubmit={handleSubmit}>
+      <form action="/flights" onSubmit={handleSubmit}>  
         <div className="flightSearch">
           <div className="flex justify-center gap-10">
             <ClickOption labelName="oneWay" label="one way" checkName="oneWay" changeFunc={(e)=>{console.log("one way is active")}}/>

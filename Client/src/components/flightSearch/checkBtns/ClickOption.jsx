@@ -11,6 +11,7 @@ function ClickOption(props) {
         name={props.checkName}
         onChange={props.changeFunc}
         checked={props.checkedName}
+        onClick={props.click}
       />
     </div>
   );

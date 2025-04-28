@@ -1,0 +1,29 @@
+@import '../../../styles/variables.scss';
+
+.btn-flex
+{
+    display: flex;
+    background:red ;
+    flex-direction: column;
+    // width: 100px;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    text-transform: capitalize;
+    font-family: $textFont,sans-serif;
+    input
+    {
+        width: 25px;
+        height:30px;
+        position: absolute;
+        z-index: 30;
+        opacity: 10%;
+        
+    }
+    label
+    {
+        font-size: 15px;
+        position: relative;
+        z-index: 20;
+    }
+}
