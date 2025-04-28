@@ -24,7 +24,7 @@
         height:30px;
         position: absolute;
         z-index: 30;
-        opacity: 2%;
+        // opacity: 1%;
         
     }
     label
@@ -34,4 +34,10 @@
         z-index: 20;
         font-family: $textFont,sans-serif;
     }
+}
+.btn-flex:hover
+{
+    border: 1px solid $page_color;
+    background: $ticketColor;
+    color: $page_color;
 }
