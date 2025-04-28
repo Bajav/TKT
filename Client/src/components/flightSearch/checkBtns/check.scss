@@ -1,23 +1,30 @@
 @import '../../../styles/variables.scss';
 
+.flex-option
+{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2px;
+    padding: 10px 5px;
+}
 .btn-flex
 {
     display: flex;
-    background:red ;
+    background:$page_color ;
     flex-direction: column;
     // width: 100px;
     justify-content: center;
     align-items: center;
-    padding: 15px 20px;
+    padding: 12px 27px;
     text-transform: capitalize;
-    font-family: $textFont,sans-serif;
+    border-radius: 30px;
     input
     {
         width: 25px;
         height:30px;
         position: absolute;
         z-index: 30;
-        opacity: 10%;
+        opacity: 2%;
         
     }
     label
@@ -25,5 +32,6 @@
         font-size: 15px;
         position: relative;
         z-index: 20;
+        font-family: $textFont,sans-serif;
     }
 }

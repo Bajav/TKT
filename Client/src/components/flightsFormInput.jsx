@@ -96,8 +96,10 @@ function FlightsForm() {
     <div className="cutout-box">
       <form action="/flights" onSubmit={handleSubmit}>  
         <div className="flightSearch">
-          <div className="flex justify-center gap-10">
+          <div className="flex-option">
             <ClickOption labelName="oneWay" label="one way" checkName="oneWay" changeFunc={(e)=>{console.log("one way is active")}}/>
+            <ClickOption labelName="roundTrip" label="round Trip" checkName="roundTrip" changeFunc={(e)=>{console.log("roundTrip is active")}}/>
+            <ClickOption labelName="multiCity" label="multi-city" checkName="multiCity" changeFunc={(e)=>{console.log("multiCity is active")}}/>
           </div>
 
           <div className="flightInputs">
