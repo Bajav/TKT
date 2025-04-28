@@ -2,12 +2,11 @@ import React from "react";
 
 function ClickOption(props) {
   return (
-    <div className="flex flex-col items-center justify-center">
-      <label className="relat" htmlFor={props.labelName}>
+    <div className="btn-flex">
+      <label  htmlFor={props.labelName}>
         {props.label}
       </label>
       <input
-        className="relative z-10 "
         type="checkbox"
         name={props.checkName}
         onChange={props.changeFunc}
