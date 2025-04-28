@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';  
 import Calender from "./flightSearch/calenderInput";
-import FlightSearchInput from "./flightSearch/flightSearch";
+import FlightSearchInput from "./flightSearch/SearchInput/flightSearch";
 import ClickOption from "./flightSearch/checkBtns/ClickOption";
 import { Outlet,useLocation } from "react-router-dom";
 
