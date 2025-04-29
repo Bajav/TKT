@@ -7,19 +7,15 @@ import Packages from "../pages/packages";
 import Navbar from "../components/navBar";
 
 // FLIGHTS PAGES
-import Flights from "../pages/flights";
-import FlightPricing from "../pages/flightPricing/flightPricing";
-import FlightResult from "../pages/flightResult/flightResults";
-import TravelerForm from "../pages/TravelerForm/TravelerForm";
+import FlightsRoutes from "./flightsRoutes/flightsRoute";
+
 // import context
 import { FormContextProvider } from "../Hooks/Context/formData.context";
 
 function AllRoutes() {
   const location = useLocation();
 
-  // Define all routes where Navbar should be hidden
-  const hideNavRoutes = ["/pricing", "/flights/results", "/travelerData"];
-
+  const hideNavRoutes = ["/pricing", "/results", "/travelerData"];
   const shouldHideNavbar = hideNavRoutes.some((path) =>
     location.pathname.startsWith(path)
   );
@@ -35,41 +31,12 @@ function AllRoutes() {
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/packages" element={<Packages />} />
 
-        {/* Flights Route Group */}
-        <Route path="flights" element={
-            <FormContextProvider>
-            <Flights />
+        {/* Flights Route Group with Context */}
+        <Route path="/flights/*" element={
+          <FormContextProvider>
+            <FlightsRoutes />
           </FormContextProvider>
         } />
-        <Route
-          path="flights/results"
-          element={
-            <FormContextProvider>
-              <FlightResult />
-            </FormContextProvider>
-          }
-        />
-        <Route
-          path="flights/results"
-          element={
-            <FormContextProvider>
-              <FlightResult />
-            </FormContextProvider>
-          }
-        />
-        <Route
-          path="flights/review"
-          element={
-            <FormContextProvider>
-              <FlightPricing />
-            </FormContextProvider>
-          }
-        />
-        <Route path="flights/confirm" element={
-          <FormContextProvider>
-          <TravelerForm />
-          </FormContextProvider>
-          } />
 
         {/* Catch-All for Unknown Routes */}
         {/* <Route path="*" element={<NotFound />} /> */}
