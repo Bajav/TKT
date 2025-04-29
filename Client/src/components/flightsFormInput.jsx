@@ -7,7 +7,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Calender from "./flightSearch/calenderInput";
 import FlightSearchInput from "./flightSearch/SearchInput/flightSearch";
 import ClickOption from "./flightSearch/checkBtns/ClickOption";
-// import context
+// import Hooks
 import { FormContext } from "../Hooks/Context/formData.context";
 
 function FlightsForm() {
@@ -20,11 +20,15 @@ function FlightsForm() {
     seatClass: "ECONOMY",
     multicity: false,
   });
+  // USESTATE HOOKS
+  const [iataCodes, setIataCodes] = useState([]);
+  const [airlines, setAirlines] = useState([]);
 
+  // FORM FUNCTIONS
   const handleChange = (e) => {
     const name = e.target.name;
     const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+      e.target.type === "radio" ? e.target.checked : e.target.value;
     const updatedInputs = {
       ...inputs,
       [name]: value,
@@ -32,8 +36,6 @@ function FlightsForm() {
     setInputs(updatedInputs);
   };
 
-  const [iataCodes, setIataCodes] = useState([]);
-  const [airlines, setAirlines] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,13 +72,17 @@ function FlightsForm() {
       console.error("Error posting flight:", error);
     }
   };
-
+  const [selected, setSelected] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [passengers, setPassengers] = useState({
     adults: 1,
     children: 0,
     infants: 0,
   });
+
+  const handleCheckboxChange = (name) => {
+    setSelected((prevSelected) => (prevSelected === name ? null : name));
+  };
 
   const increment = (type) => {
     setPassengers((prev) => ({
@@ -101,7 +107,7 @@ function FlightsForm() {
   };
 
   return (
-    <Fragment>
+    <div>
       {location.pathname === "/flights" && (
         <div className="cutout-box">
           <form action="/flights" onSubmit={handleSubmit}>
@@ -111,26 +117,26 @@ function FlightsForm() {
                   labelName="oneWay"
                   label="one way"
                   checkName="oneWay"
-                  click={(e) => {
-                    console.log("one way is active");
-                  }}
+                  changeFunc={handleChange}
+                  checkedName={selected ===  "oneWay"}
+                  click={()=>handleCheckboxChange("oneWay")}
                 />
-                <ClickOption
+                {/* <ClickOption
                   labelName="roundTrip"
                   label="round Trip"
                   checkName="roundTrip"
-                  click={(e) => {
-                    console.log("roundTrip is active");
-                  }}
+                  changeFunc={handleChange}
+                  checkedName={selected ===  "roundTrip"}
+                  click={handleCheckboxChange("roundTrip")}
                 />
                 <ClickOption
                   labelName="multiCity"
                   label="multi-city"
                   checkName="multiCity"
-                  click={(e) => {
-                    console.log("multiCity is active");
-                  }}
-                />
+                  changeFunc={handleChange}
+                  checkedName={selected ===  "multi-city"}
+                  click={handleCheckboxChange("multi-city")}
+                /> */}
               </div>
 
               <div className="flightInputs">
@@ -277,7 +283,7 @@ function FlightsForm() {
         </div>
       )}
       <Outlet />
-    </Fragment>
+    </div>
   );
 }
 
