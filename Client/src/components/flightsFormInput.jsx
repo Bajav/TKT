@@ -16,7 +16,7 @@ function FlightsForm() {
     destination: "",
     departureDate: "",
     returnDate: "",
-    flightType: "oneWay",
+    flightType: "roundTrip",
     seatClass: "ECONOMY",
   });
 
@@ -88,7 +88,10 @@ function FlightsForm() {
     e.preventDefault();
     const formData = { ...inputs, passengers };
     try {
-      const response = await axios.post("http://localhost:3000/results", formData);
+      const response = await axios.post(
+        "http://localhost:3000/results",
+        formData
+      );
       setTravelData(formData);
       navigate("results", { state: { formData, airlines } });
       console.log("Flight data posted:", response.data);
@@ -150,7 +153,8 @@ function FlightsForm() {
                 change={handleChange}
                 value={inputs.departureDate}
               />
-              {inputs.flightType === "roundTrip" && (
+              {(inputs.flightType === "roundTrip" ||
+                inputs.flightType === "multiCity") && (
                 <Calender
                   label="Date of Return"
                   inputType="date"
@@ -160,7 +164,6 @@ function FlightsForm() {
                 />
               )}
             </div>
-
             <div className="seatType">
               <div className="passenger-selector">
                 <div className="dropdown-header" onClick={toggleDropdown}>
@@ -172,13 +175,19 @@ function FlightsForm() {
                   <div className="dropdown-content">
                     {["adults", "children", "infants"].map((type) => (
                       <div className="passenger-type" key={type}>
-                        <div className="passenger-label">{type.charAt(0).toUpperCase() + type.slice(1)}</div>
+                        <div className="passenger-label">
+                          {type.charAt(0).toUpperCase() + type.slice(1)}
+                        </div>
                         <button
                           onClick={(e) => {
                             e.preventDefault();
                             decrement(type);
                           }}
-                          disabled={type === "adults" ? passengers[type] <= 1 : passengers[type] <= 0}
+                          disabled={
+                            type === "adults"
+                              ? passengers[type] <= 1
+                              : passengers[type] <= 0
+                          }
                         >
                           -
                         </button>
@@ -196,9 +205,25 @@ function FlightsForm() {
                   </div>
                 )}
               </div>
+              <div className="seatClass">
+                <label htmlFor="seatClass"> Seat Class</label>
+                <select
+                  name="seatClass"
+                  id="seatClass"
+                  onChange={handleChange}
+                  value={inputs.seatClass}
+                >
+                  <option value="ECONOMY">Economy</option>
+                  <option value="PREMIUM_ECONOMY">Economy Premium</option>
+                  <option value="BUSINESS">Business</option>
+                  <option value="FIRST">First Class</option>
+                </select>
+              </div>
             </div>
 
-            <button className="btn-submit"  type="submit">Search Flights</button>
+            <button className="btn-submit" type="submit">
+              Search Flights
+            </button>
           </form>
         </div>
       )}
