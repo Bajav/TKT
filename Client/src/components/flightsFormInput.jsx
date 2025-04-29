@@ -128,6 +128,7 @@ function FlightsForm() {
                     changeFunc={() => handleTripTypeClick(type)}
                     checkedName={inputs.flightType === type}
                     click={() => handleTripTypeClick(type)}
+                    isActive={inputs.flightType === type}
                   />
                 ))}
               </div>

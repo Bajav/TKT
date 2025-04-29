@@ -11,7 +11,8 @@
 .btn-flex
 {
     display: flex;
-    background:$page_color ;
+    background:$ticketColor ;
+    border: 2px solid $page_color;
     flex-direction: column;
     // width: 100px;
     justify-content: center;
@@ -19,6 +20,8 @@
     padding: 18px 27px;
     text-transform: capitalize;
     border-radius: 30px;
+    color: $page_color;
+
     input
     {
         position: absolute;
@@ -34,9 +37,7 @@
         font-family: $textFont,sans-serif;
     }
 }
-.btn-flex:hover
-{
-    border: 1px solid $page_color;
-    background: $ticketColor;
-    color: $page_color;
-}
+.btn-flex.active {
+    background-color: $page_color;
+    color: $visibleFontColor;
+  }
