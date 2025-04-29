@@ -43,16 +43,21 @@
   {
     position: absolute;
     z-index: 20;
-    background: $page_color;
+    background: $visibleFontColor;
     color: $visibleFontColor;
     font-family: $textFont,sans-serif;
     text-transform: capitalize;
     font-size: 20px;
     padding: 10px;
+    rotate: 90deg;
     border-radius: 30px;
     // left: 30px;
     right: 10%;
-    border: 1px solid $visibleFontColor;
+    border: 2px solid $page_color;
+    img
+    {
+      width: 30px;
+    }
   }
   .flightInputs {
     display: flex;

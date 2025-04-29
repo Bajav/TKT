@@ -6,6 +6,7 @@ import { FormContext } from "../Hooks/Context/formData.context";
 import FlightSearchInput from "./flightSearch/SearchInput/flightSearch";
 import ClickOption from "./flightSearch/checkBtns/ClickOption";
 import Calender from "./flightSearch/Calender/calenderInput";
+import RoundTripIcon from '../assets/icons/arrows-svgrepo-com (1).svg';
 
 
 
@@ -144,7 +145,9 @@ function FlightsForm() {
                   change={handleChange}
                   value={inputs.origin}
                 />
-                <button className="switchBtn" onClick={handleSwitch}>switch</button>
+                <button className="switchBtn" onClick={handleSwitch}>
+                  <img src={RoundTripIcon} alt="" />
+                </button>
                 <FlightSearchInput
                   required
                   classOne="flexInput"
