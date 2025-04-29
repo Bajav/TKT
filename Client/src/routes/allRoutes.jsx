@@ -11,9 +11,8 @@ import Flights from "../pages/flights";
 import FlightPricing from "../pages/flightPricing/flightPricing";
 import FlightResult from "../pages/flightResult/flightResults";
 import TravelerForm from "../pages/TravelerForm/TravelerForm";
-
-// FALLBACK PAGE
-// import NotFound from "../pages/NotFound"; // create this page if you haven't already
+// import context
+import { FormContextProvider } from "../Hooks/Context/formData.context";
 
 function AllRoutes() {
   const location = useLocation();
@@ -38,10 +37,35 @@ function AllRoutes() {
 
         {/* Flights Route Group */}
         <Route path="flights" element={<Flights />} />
-        <Route path="flights/results" element={<FlightResult />} />
-        <Route path="flights/results" element={<FlightResult />} />
-        <Route path="flights/review" element={<FlightPricing />} />
-        <Route path="flights/confirm" element={<TravelerForm />} />
+        <Route
+          path="flights/results"
+          element={
+            <FormContextProvider>
+              <FlightResult />
+            </FormContextProvider>
+          }
+        />
+        <Route
+          path="flights/results"
+          element={
+            <FormContextProvider>
+              <FlightResult />
+            </FormContextProvider>
+          }
+        />
+        <Route
+          path="flights/review"
+          element={
+            <FormContextProvider>
+              <FlightPricing />
+            </FormContextProvider>
+          }
+        />
+        <Route path="flights/confirm" element={
+          <FormContextProvider>
+          <TravelerForm />
+          </FormContextProvider>
+          } />
 
         {/* Catch-All for Unknown Routes */}
         {/* <Route path="*" element={<NotFound />} /> */}
