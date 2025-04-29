@@ -79,10 +79,9 @@ body {
   .dropdown-header {
     background-color: #f2f2f2;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 3px 0px;
     border-radius: 5px;
     border-radius: 30px;
-    height: 40px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -90,7 +89,7 @@ body {
     justify-content: space-between;
     align-items: center;
     span {
-      font-size: 10px;
+      font-size: 15px;
     }
   }
 
@@ -106,12 +105,12 @@ body {
     margin-top: 10px; /* to create some space below the button */
   }
 
-  .passenger-type {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
+  // .passenger-type {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   margin-bottom: 8px;
+  // }
 
   .passenger-type button {
     background-color: #007bff;
@@ -151,7 +150,7 @@ body {
     display: flex;
     flex-direction: column;
     background: $inputBackGround;
-    gap: 5px;
+    // gap: 5px;
     height: 60px;
     width: 190px;
     border-radius: 30px;
@@ -165,7 +164,8 @@ body {
       text-transform: capitalize;
       color: $visibleFontColor;
       font-weight: 600;
-      margin-top: 7px;
+      font-size: 14px;
+      // margin-top: 7px;
       width: 160px;
     }
     select:focus {
@@ -173,7 +173,7 @@ body {
     }
     label {
       margin-left: 20px;
-      font-size: 10px;
+      font-size: 15px;
       color: $deemFontColor;
       margin-top: 5px;
     }

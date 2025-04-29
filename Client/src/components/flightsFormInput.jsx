@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import Calender from "./flightSearch/calenderInput";
+import { FormContext } from "../Hooks/Context/formData.context";
+// components
 import FlightSearchInput from "./flightSearch/SearchInput/flightSearch";
 import ClickOption from "./flightSearch/checkBtns/ClickOption";
-import { FormContext } from "../Hooks/Context/formData.context";
+import Calender from "./flightSearch/Calender/calenderInput";
+
+
 
 function FlightsForm() {
   const { setTravelData } = useContext(FormContext);
