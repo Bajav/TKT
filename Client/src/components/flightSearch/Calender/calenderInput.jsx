@@ -1,12 +1,36 @@
-import React from 'react'
+import React from 'react';
+// import './Calender.css'; // Your CSS file
 
 function Calender(props) {
+  const {
+    label,
+    labelName,
+    inputType,
+    inputName,
+    ID,
+    change,
+    value,
+    flightType,
+  } = props;
+
+  const calenderClass =
+    flightType === 'oneWay'
+      ? 'calender oneWayStyle flexInput'
+      : 'calender flexInput';
+
   return (
-    <div className="calender flexInput">
-        <label htmlFor={props.label}>{props.labelName}</label>
-        <input type={props.inputType} name={props.inputName} id={props.ID} format="yyyy-MM-dd" onChange={props.change} value={props.value}/>
+    <div className={calenderClass}>
+      <label htmlFor={label}>{labelName}</label>
+      <input
+        type={inputType}
+        name={inputName}
+        id={ID}
+        format="yyyy-MM-dd"
+        onChange={change}
+        value={value}
+      />
     </div>
-  )
+  );
 }
 
 export default Calender;

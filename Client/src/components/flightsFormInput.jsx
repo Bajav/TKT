@@ -6,9 +6,7 @@ import { FormContext } from "../Hooks/Context/formData.context";
 import FlightSearchInput from "./flightSearch/SearchInput/flightSearch";
 import ClickOption from "./flightSearch/checkBtns/ClickOption";
 import Calender from "./flightSearch/Calender/calenderInput";
-import RoundTripIcon from '../assets/icons/arrows-svgrepo-com (1).svg';
-
-
+import RoundTripIcon from "../assets/icons/arrows-svgrepo-com (1).svg";
 
 function FlightsForm() {
   const { setTravelData } = useContext(FormContext);
@@ -160,27 +158,31 @@ function FlightsForm() {
                 />
               </div>
             </div>
-
             <div className="calendersUI">
               <Calender
                 label="Date of Departure"
+                labelName="Date of Departure"
                 inputType="date"
                 required
                 inputName="departureDate"
                 change={handleChange}
                 value={inputs.departureDate}
+                flightType={inputs.flightType}
               />
               {(inputs.flightType === "roundTrip" ||
                 inputs.flightType === "multiCity") && (
                 <Calender
                   label="Date of Return"
+                  labelName="Date of Return"
                   inputType="date"
                   inputName="returnDate"
                   change={handleChange}
                   value={inputs.returnDate}
+                  flightType={inputs.flightType}
                 />
               )}
             </div>
+
             <div className="seatType">
               <div className="passenger-selector">
                 <div className="dropdown-header" onClick={toggleDropdown}>

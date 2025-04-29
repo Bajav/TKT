@@ -61,6 +61,14 @@
     justify-content: center;
     gap: 10px;
   }
+  .oneWayStyle {
+    width: 95%;
+    border-radius: 10px;
+    input
+    {
+      width: 90%;
+    }
+  }
 
   // passenger
   .passenger-selector {
