@@ -63,7 +63,7 @@ function FlightsForm() {
         formData
       );
       // i send data to next page
-      navigate("flights/results", { state: { formData, airlines } });
+      navigate("results", { state: { formData, airlines } });
       console.log("Flight data posted:", response.data);
       setTravelData(formData);
     } catch (error) {

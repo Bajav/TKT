@@ -7,7 +7,7 @@ function ClickOption(props) {
         {props.label}
       </label>
       <input
-        type="checkbox"
+        type="radio"
         name={props.checkName}
         onChange={props.changeFunc}
         checked={props.checkedName}
