@@ -4,12 +4,22 @@
   //     max-height: 30vh !important;
   // }
   .cutout-box {
-    width: 415px !important;
-    height: 460px !important;
+    width: 415px ;
+    height: 460px ;
   }
   .gallery
   {
     width: 415px;
     height: 250px;
   }
+}
+@media only screen and (max-width: 360px) {
+  // body
+  // {
+  //   display: none;
+  // }
+  .cutout-box {
+    width: 350px;
+    height: 100% ;
+}
 }
