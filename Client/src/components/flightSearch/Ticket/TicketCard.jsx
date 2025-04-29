@@ -246,11 +246,11 @@ function FlightCard() {
                         </div>
                       </div>
                       <div className="lineOne">
-                        <h5>-----------------------------------------------</h5>
+                        <h5>--------------------------------------------</h5>
                       </div>
                       <div className="stop-details">
                         <h5>LAYOVER TIME : 1H40M </h5>
-                        <h5>||</h5>
+                        
                         <h5>
                           CLASS :{" "}
                           {
@@ -262,9 +262,9 @@ function FlightCard() {
                               .fareDetailsBySegment[0].cabin
                           }
                         </h5>
-                        <h5>||</h5>
-                        <h5>AIRLINE : KENYA AIRWAYS - KQ23A</h5>
-                        <h5>||</h5>
+                        
+                        <h5>AIRLINE :KQ23A</h5>
+                        
                         <h5>DURATION : 4H40M </h5>
                       </div>
                     </div>
@@ -277,7 +277,6 @@ function FlightCard() {
               <div className="Alldetails">
                 <h5>SEATS LEFT : {itinerary.numberOfBookableSeats}</h5>
                 <h5>last Date : {itinerary.lastTicketingDate}</h5>
-                <h5>TRAVLR TYPE : ADT</h5>
                 <h5>
                   {itinerary.travelerPricings[0].fareDetailsBySegment[0].cabin}
                 </h5>

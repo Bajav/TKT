@@ -165,7 +165,7 @@
   .stopOvers {
     position: absolute;
     top: 20px;
-    left: 10px;
+    left: px;
     width: 100%;
   
     .stopFlight {
@@ -176,7 +176,6 @@
       font-family: $textFont, sans-serif;
       color: $page_color;
       width: 95%;
-      margin-left: 10px;
     }
     .ticket-header
     {
@@ -191,7 +190,7 @@
     }
     h5 {
       font-size: 8px;
-      margin-bottom: 5px;
+      margin-bottom: 0px;
     }
   }
   .line
@@ -211,13 +210,13 @@
       justify-content: center;
       width: 110%;
       height: 30px;
-      gap: 4px;
+      gap: 10px;
       position: relative;
       top: -10px;
       h5
       {
-          margin: 0;
-          font-size: 8px;
+        //   margin: 0px 10px 0px 10px;
+          font-size: 10px;
           font-family: $textFont, sans-serif;
           font-weight: 10;
       }
@@ -257,7 +256,7 @@
       h5
       {
           background: #F5F7F8;
-          padding: 5px 14px;
+          padding: 5px 7px;
           margin: 0;
           text-transform: capitalize;
           border-radius: 15px;
