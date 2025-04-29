@@ -103,6 +103,15 @@ function FlightsForm() {
     }
   };
 
+  const handleSwitch = (e) => {
+    e.preventDefault();
+    setInputs((prev) => ({
+      ...prev,
+      origin: prev.destination,
+      destination: prev.origin,
+    }));
+  };
+
   return (
     <div>
       {location.pathname === "/flights" && (
@@ -134,7 +143,7 @@ function FlightsForm() {
                   change={handleChange}
                   value={inputs.origin}
                 />
-                <button className="switchBtn">switch</button>
+                <button className="switchBtn" onClick={handleSwitch}>switch</button>
                 <FlightSearchInput
                   required
                   classOne="flexInput"
