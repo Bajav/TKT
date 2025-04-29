@@ -8,6 +8,7 @@
     margin-bottom: 10px;
     margin-top: 5px;
     width: 95%;
+    z-index: 1;
     // margin-left: 10px;
     border-radius: 15px;
     height: 60px;
@@ -37,6 +38,21 @@
     input::placeholder {
       margin-left: 20px;
     }
+  }
+  .switchBtn
+  {
+    position: absolute;
+    z-index: 20;
+    background: $page_color;
+    color: $visibleFontColor;
+    font-family: $textFont,sans-serif;
+    text-transform: capitalize;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 30px;
+    // left: 30px;
+    right: 10%;
+    border: 1px solid $visibleFontColor;
   }
   .flightInputs {
     display: flex;

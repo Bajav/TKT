@@ -134,6 +134,7 @@ function FlightsForm() {
                   change={handleChange}
                   value={inputs.origin}
                 />
+                <button className="switchBtn">switch</button>
                 <FlightSearchInput
                   required
                   classOne="flexInput"
