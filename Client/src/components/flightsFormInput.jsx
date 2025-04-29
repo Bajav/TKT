@@ -1,8 +1,8 @@
 // import middleware
-import React, { Fragment, useState, useEffect,useContext } from "react";
+import React, { Fragment, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';  
-import { Outlet,useLocation } from "react-router-dom";
+import axios from "axios";
+import { Outlet, useLocation } from "react-router-dom";
 // import components
 import Calender from "./flightSearch/calenderInput";
 import FlightSearchInput from "./flightSearch/SearchInput/flightSearch";
@@ -11,6 +11,7 @@ import ClickOption from "./flightSearch/checkBtns/ClickOption";
 import { FormContext } from "../Hooks/Context/formData.context";
 
 function FlightsForm() {
+  const { setTravelData } = useContext(FormContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -20,17 +21,17 @@ function FlightsForm() {
     multicity: false,
   });
 
-  const {setFlightData} = useContext(FormContext);
-
   const handleChange = (e) => {
     const name = e.target.name;
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
-    setFlightData(value);
-  }
+    const updatedInputs = {
+      ...inputs,
+      [name]: value,
+    };
+    setInputs(updatedInputs);
+  };
 
-  
   const [iataCodes, setIataCodes] = useState([]);
   const [airlines, setAirlines] = useState([]);
 
@@ -39,7 +40,7 @@ function FlightsForm() {
       try {
         const [iataRes, airlineRes] = await Promise.all([
           axios.get("http://localhost:3000/iataCodes"),
-          axios.get("http://localhost:3000/airlines")
+          axios.get("http://localhost:3000/airlines"),
         ]);
         // console.log("airlines",airlineRes);
         // console.log("iatacodes",iataRes);
@@ -53,17 +54,20 @@ function FlightsForm() {
     fetchData();
   }, []);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = { ...inputs, passengers };
     try {
-      const response = await axios.post('http://localhost:3000/results', formData);
+      const response = await axios.post(
+        "http://localhost:3000/results",
+        formData
+      );
       // i send data to next page
       navigate("flights/results", { state: { formData, airlines } });
-      console.log('Flight data posted:', response.data);
+      console.log("Flight data posted:", response.data);
+      setTravelData(formData);
     } catch (error) {
-      console.error('Error posting flight:', error);
+      console.error("Error posting flight:", error);
     }
   };
 
@@ -96,149 +100,184 @@ function FlightsForm() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-
   return (
-    <Fragment >
+    <Fragment>
       {location.pathname === "/flights" && (
-    <div className="cutout-box">
-      <form action="/flights" onSubmit={handleSubmit}>  
-        <div className="flightSearch">
-          <div className="flex-option">
-            <ClickOption labelName="oneWay" label="one way" checkName="oneWay" click={(e)=>{console.log("one way is active")}}/>
-            <ClickOption labelName="roundTrip" label="round Trip" checkName="roundTrip" click={(e)=>{console.log("roundTrip is active")}}/>
-            <ClickOption labelName="multiCity" label="multi-city" checkName="multiCity" click={(e)=>{console.log("multiCity is active")}}/>
-          </div>
+        <div className="cutout-box">
+          <form action="/flights" onSubmit={handleSubmit}>
+            <div className="flightSearch">
+              <div className="flex-option">
+                <ClickOption
+                  labelName="oneWay"
+                  label="one way"
+                  checkName="oneWay"
+                  click={(e) => {
+                    console.log("one way is active");
+                  }}
+                />
+                <ClickOption
+                  labelName="roundTrip"
+                  label="round Trip"
+                  checkName="roundTrip"
+                  click={(e) => {
+                    console.log("roundTrip is active");
+                  }}
+                />
+                <ClickOption
+                  labelName="multiCity"
+                  label="multi-city"
+                  checkName="multiCity"
+                  click={(e) => {
+                    console.log("multiCity is active");
+                  }}
+                />
+              </div>
 
-          <div className="flightInputs">
-            <FlightSearchInput required classOne="flexInput" labelFor="Origin" label="Origin" placeholder="input place of origin" InputName="origin" change={handleChange} value={inputs.origin || ""} />
-            <div className="changeUi">
-            <FlightSearchInput required classOne="flexInput" labelFor="destination" label="destination" placeholder="input place of destination" InputName="destination" change={handleChange} value={inputs.destination || ""} />
-            </div>   
-          </div>
-        </div>
-
-        <div className="calendersUI">
-          <Calender
-            label="Date of Departure"
-            inputType="date"
-            required
-            inputName="departureDate"
-            change={handleChange}
-            value={inputs.departureDate || ""}
-          />
-          <Calender
-            label="Date of Return"
-            inputType="date"
-            inputName="returnDate"
-            change={handleChange}
-            value={inputs.returnDate || ""}
-          />
-        </div>
-
-        <div className="seatType">
-          <div className="passenger-selector">
-            <div className="dropdown-header" onClick={toggleDropdown}>
-              <span>Passengers: {getTotalPassengers()}</span>
-              <span className="arrow">{isDropdownOpen ? "▲" : "▼"}</span>
-            </div>
-
-            {isDropdownOpen && (
-              <div className="dropdown-content">
-                <div className="passenger-type">
-                  <div className="passenger-label">Adults</div>
-                  <button
-                  className="add"
-                    onClick={(e) => {
-                      decrement("adults");
-                      e.preventDefault();
-                    }}
-                    disabled={passengers.adults <= 1}
-                  >
-                    -
-                  </button>
-                  <span>{passengers.adults}</span>
-                  <button
-                    onClick={(e) => {
-                      increment("adults");
-                      e.preventDefault();
-                    }}
-                  >
-                    +
-                  </button>
-                </div>
-                <div className="passenger-type">
-                  <div className="passenger-label">Children</div>
-                  <button
-                    onClick={(e) => {
-                      decrement("children");
-                      e.preventDefault();
-                    }}
-                    disabled={passengers.children <= 0}
-                  >
-                    -
-                  </button>
-                  <span>{passengers.children}</span>
-                  <button
-                    onClick={(e) => {
-                      increment("children");
-                      e.preventDefault();
-                    }}
-                  >
-                    +
-                  </button>
-                </div>
-                <div className="passenger-type">
-                  <div className="passenger-label">Infants</div>
-                  <button
-                    onClick={(e) => {
-                      decrement("infants");
-                      e.preventDefault();
-                    }}
-                    disabled={passengers.infants <= 0}
-                  >
-                    -
-                  </button>
-                  <span>{passengers.infants}</span>
-                  <button
-                    onClick={(e) => {
-                      increment("infants");
-                      e.preventDefault();
-                    }}
-                  >
-                    +
-                  </button>
+              <div className="flightInputs">
+                <FlightSearchInput
+                  required
+                  classOne="flexInput"
+                  labelFor="Origin"
+                  label="Origin"
+                  placeholder="input place of origin"
+                  InputName="origin"
+                  change={handleChange}
+                  value={inputs.origin || ""}
+                />
+                <div className="changeUi">
+                  <FlightSearchInput
+                    required
+                    classOne="flexInput"
+                    labelFor="destination"
+                    label="destination"
+                    placeholder="input place of destination"
+                    InputName="destination"
+                    change={handleChange}
+                    value={inputs.destination || ""}
+                  />
                 </div>
               </div>
-            )}
-          </div>
+            </div>
 
-          <div className="seatClass">
-            <label htmlFor="seatClass"> Seat Class</label>
-            <select
-              name="seatClass"
-              id="seatClass"
-              onChange={handleChange}
-              value={inputs.seatClass}
-            >
-              <option value="ECONOMY">Economy</option>
-              <option value="PREMIUM_ECONOMY">Economy Premium</option>
-              <option value="BUSINESS">Business</option>
-              <option value="FIRST">First Class</option>
-            </select>
-          </div>
+            <div className="calendersUI">
+              <Calender
+                label="Date of Departure"
+                inputType="date"
+                required
+                inputName="departureDate"
+                change={handleChange}
+                value={inputs.departureDate || ""}
+              />
+              <Calender
+                label="Date of Return"
+                inputType="date"
+                inputName="returnDate"
+                change={handleChange}
+                value={inputs.returnDate || ""}
+              />
+            </div>
+
+            <div className="seatType">
+              <div className="passenger-selector">
+                <div className="dropdown-header" onClick={toggleDropdown}>
+                  <span>Passengers: {getTotalPassengers()}</span>
+                  <span className="arrow">{isDropdownOpen ? "▲" : "▼"}</span>
+                </div>
+
+                {isDropdownOpen && (
+                  <div className="dropdown-content">
+                    <div className="passenger-type">
+                      <div className="passenger-label">Adults</div>
+                      <button
+                        className="add"
+                        onClick={(e) => {
+                          decrement("adults");
+                          e.preventDefault();
+                        }}
+                        disabled={passengers.adults <= 1}
+                      >
+                        -
+                      </button>
+                      <span>{passengers.adults}</span>
+                      <button
+                        onClick={(e) => {
+                          increment("adults");
+                          e.preventDefault();
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div className="passenger-type">
+                      <div className="passenger-label">Children</div>
+                      <button
+                        onClick={(e) => {
+                          decrement("children");
+                          e.preventDefault();
+                        }}
+                        disabled={passengers.children <= 0}
+                      >
+                        -
+                      </button>
+                      <span>{passengers.children}</span>
+                      <button
+                        onClick={(e) => {
+                          increment("children");
+                          e.preventDefault();
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div className="passenger-type">
+                      <div className="passenger-label">Infants</div>
+                      <button
+                        onClick={(e) => {
+                          decrement("infants");
+                          e.preventDefault();
+                        }}
+                        disabled={passengers.infants <= 0}
+                      >
+                        -
+                      </button>
+                      <span>{passengers.infants}</span>
+                      <button
+                        onClick={(e) => {
+                          increment("infants");
+                          e.preventDefault();
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="seatClass">
+                <label htmlFor="seatClass"> Seat Class</label>
+                <select
+                  name="seatClass"
+                  id="seatClass"
+                  onChange={handleChange}
+                  value={inputs.seatClass}
+                >
+                  <option value="ECONOMY">Economy</option>
+                  <option value="PREMIUM_ECONOMY">Economy Premium</option>
+                  <option value="BUSINESS">Business</option>
+                  <option value="FIRST">First Class</option>
+                </select>
+              </div>
+            </div>
+
+            <button className="btn-submit" type="submit">
+              Search
+            </button>
+          </form>
         </div>
-
-        <button
-          className="btn-submit"
-          type="submit"
-        >
-          Search
-        </button>
-      </form>
-    </div>
-  )}
-    <Outlet />
-    </Fragment>  
+      )}
+      <Outlet />
+    </Fragment>
   );
 }
 

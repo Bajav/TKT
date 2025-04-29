@@ -36,7 +36,11 @@ function AllRoutes() {
         <Route path="/packages" element={<Packages />} />
 
         {/* Flights Route Group */}
-        <Route path="flights" element={<Flights />} />
+        <Route path="flights" element={
+            <FormContextProvider>
+            <Flights />
+          </FormContextProvider>
+        } />
         <Route
           path="flights/results"
           element={

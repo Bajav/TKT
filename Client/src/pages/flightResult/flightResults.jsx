@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlightCard from "../../components/flightSearch/TicketCard";
 import { Arrow } from "../../components/flightSearch/flightArrowSvg";
@@ -6,7 +6,12 @@ import Dummy from "../../components/places/dummyCard";
 import DummyTicket from "../../components/features/DummyTicket/DummyTicket";
 import BackBTN from "../../components/features/BackButton/BackBTN";
 
+// import hooks
+import { FormContext } from "../../Hooks/Context/formData.context";
+
 function FlightResult() {
+  const { travelData } = useContext(FormContext);
+  console.log("travellerData ::: ",travelData);
   // define location
   const location = useLocation();
   const { searchResults, formData, airlines } = location.state || {};
