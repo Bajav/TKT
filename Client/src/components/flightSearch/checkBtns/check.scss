@@ -6,6 +6,7 @@
     justify-content: space-evenly;
     gap: 2px;
     padding: 10px 5px;
+    // margin-top: 10px;
 }
 .btn-flex
 {
@@ -15,7 +16,7 @@
     // width: 100px;
     justify-content: center;
     align-items: center;
-    padding: 12px 27px;
+    padding: 18px 27px;
     text-transform: capitalize;
     border-radius: 30px;
     input
@@ -24,7 +25,7 @@
         height:50px;
         position: absolute;
         z-index: 30;
-        // opacity: 1%;
+        opacity: 1%;
         
     }
     label
