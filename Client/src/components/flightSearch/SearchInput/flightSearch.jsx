@@ -2,10 +2,11 @@ import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 
 function FlightSearchInput(props) {
+  // state
   const [iataCodes, setIataCodes] = useState([]);
   const [airlineData, setAirlineData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);  
-
+// fetch
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,6 +25,8 @@ function FlightSearchInput(props) {
 
     fetchData();
   }, []);
+
+  // filters
 
   const filteredCodes = iataCodes.filter((code) => {
     return (
