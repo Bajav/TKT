@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 // import './Calender.css'; // Your CSS file
 
 function Calender(props) {
@@ -14,14 +14,15 @@ function Calender(props) {
   } = props;
 
   const calenderClass =
-    flightType === 'oneWay'
-      ? 'calender oneWayStyle flexInput'
-      : 'calender flexInput';
+    flightType === "oneWay"
+      ? "calender oneWayStyle flexInput"
+      : "calender flexInput";
 
   return (
     <div className={calenderClass}>
       <label htmlFor={label}>{labelName}</label>
       <input
+        required
         type={inputType}
         name={inputName}
         id={ID}

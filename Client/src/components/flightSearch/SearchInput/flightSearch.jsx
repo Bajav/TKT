@@ -44,6 +44,7 @@ function FlightSearchInput(props) {
       <div className={props.classOne} >
         <label htmlFor={props.labelFor}>{props.label}</label>
         <input
+        required
         className={props.class}
           type="text"
           name={props.InputName}

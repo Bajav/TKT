@@ -134,7 +134,6 @@ function FlightsForm() {
 
               <div className="flightInputs">
                 <FlightSearchInput
-                  required
                   classOne="flexInput"
                   labelFor="Origin"
                   label="Origin"
@@ -147,7 +146,6 @@ function FlightsForm() {
                   <img src={RoundTripIcon} alt="" />
                 </button>
                 <FlightSearchInput
-                  required
                   classOne="flexInput"
                   labelFor="Destination"
                   label="Destination"
