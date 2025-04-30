@@ -285,3 +285,15 @@
           font-weight: 100;
       }
   }
+  // overlayUpsell
+  .brandedUpsell
+  {
+    background: $ticketColor;
+    height: 99vh;
+    width: 98vw;
+    color: $page_color;
+    font-family: $textFont,sans-serif;
+    position: absolute;
+    z-index: 30;
+    top: 4px;
+  }
