@@ -161,7 +161,6 @@ function FlightsForm() {
                 label="Date of Departure"
                 labelName="Date of Departure"
                 inputType="date"
-                required
                 inputName="departureDate"
                 change={handleChange}
                 value={inputs.departureDate}
