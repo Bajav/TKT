@@ -49,3 +49,28 @@ h6 {
   font-size: 15px;
   font-weight: 600;
 }
+.filter-form
+{
+  // position: absolute;
+  background: $ticketColor;
+  color: $page_color;
+  font-family: $textFont,sans-serif;
+  width: 40vw;
+  z-index: 20;
+  top: 30px;
+  .option
+  {
+    color: $visibleFontColor;
+    width: 300px;
+  }
+  select
+  {
+    width: 100px;
+  }
+  option
+  {
+    color: $visibleFontColor;
+      font-size: 10px;
+    width: 10px;
+  }
+}
