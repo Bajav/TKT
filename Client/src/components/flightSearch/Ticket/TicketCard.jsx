@@ -231,6 +231,7 @@ useEffect(() => {
         filteredFlights.map((itinerary, index) => {
           const segments = itinerary.itineraries[0]?.segments || [];
           const segmentNumber = segments.length;
+          console.log("iatacodeeee",segments[0].departure.iataCode)
           const lastSegmentIndex = segmentNumber - 1;
           const segmentOne = itinerary.itineraries[0].segments;
           const segmentTwo = itinerary.itineraries[1]?.segments || [];
@@ -256,7 +257,7 @@ useEffect(() => {
                 <div className="ticket-header">
                   <div className="origin">
                     <h2>{segments[0]?.departure.iataCode || ""}</h2>
-                    <h5>{iataLookup[segments[0]?.departure.iataCode]?.City || ""}</h5>
+                    <h5>{iataLookup[segments[0]?.departure.iataCode]?.City || "xxx"}</h5>
                     <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
                   </div>
                   <div className="center">
