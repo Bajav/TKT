@@ -5,6 +5,7 @@ import { Arrow } from "../flightArrowSvg";
 import BrandedFaresOverlay from "../BrandedFaresOverlay";
 import axios from "axios";
 import Loader from "../../loader";
+import Select from 'react-select';
 
 function FlightCard() {
   // States
@@ -15,6 +16,7 @@ function FlightCard() {
   const [dropDown, showDropDown] = useState(null);
   const [outBoundFlight, setFlight] = useState({});
   const [isOverLay, setShowOverLay] = useState(false);
+  const [availableAirlines, setAvailableAirlines] = useState([]);
   const [filters, setFilters] = useState({
     maxPrice: "",
     stops: "any", // Options: "any", "0"
@@ -43,35 +45,49 @@ function FlightCard() {
   }, []);
 
   // Filter flights when filters change
-  useEffect(() => {
-    const applyFilters = () => {
-      const results = flightResponse.filter((itinerary) => {
-        // Price filter
-        const priceOk = filters.maxPrice
-          ? parseFloat(itinerary.price.grandTotal) <= parseFloat(filters.maxPrice)
-          : true;
+// Extract unique airlines from flightResponse
+useEffect(() => {
+  const uniqueAirlineCodes = [
+    ...new Set(
+      flightResponse.flatMap((itinerary) => itinerary.validatingAirlineCodes)
+    ),
+  ];
+  const filteredAirlines = airlines.filter((airline) =>
+    uniqueAirlineCodes.includes(airline.code)
+  );
+  setAvailableAirlines(filteredAirlines);
+}, [flightResponse, airlines]);
 
-        // Stops filter
-        const stopsOk =
-          filters.stops === "any" ||
-          (filters.stops === "0" &&
-            itinerary.itineraries.every((it) =>
-              it.segments.every((seg) => seg.numberOfStops === 0)
-            ));
+// Filter flights when filters change
+useEffect(() => {
+  const applyFilters = () => {
+    const results = flightResponse.filter((itinerary) => {
+      // Price filter
+      const priceOk = filters.maxPrice
+        ? parseFloat(itinerary.price.grandTotal) <= parseFloat(filters.maxPrice)
+        : true;
 
-        // Airline filter
-        const airlineOk = filters.airline
-          ? itinerary.validatingAirlineCodes.includes(filters.airline)
-          : true;
+      // Stops filter
+      const stopsOk =
+        filters.stops === "any" ||
+        (filters.stops === "0" &&
+          itinerary.itineraries.every((it) =>
+            it.segments.every((seg) => seg.numberOfStops === 0)
+          ));
 
-        return priceOk && stopsOk && airlineOk;
-      });
+      // Airline filter
+      const airlineOk = filters.airline
+        ? itinerary.validatingAirlineCodes.includes(filters.airline)
+        : true;
 
-      setFilteredFlights(results);
-    };
+      return priceOk && stopsOk && airlineOk;
+    });
 
-    applyFilters();
-  }, [filters, flightResponse]);
+    setFilteredFlights(results);
+  };
+
+  applyFilters();
+}, [filters, flightResponse]);
 
   // Lookup tables
   const iataLookup = iataCodes.reduce((lookup, item) => {
@@ -134,7 +150,7 @@ function FlightCard() {
       )}
 
       {/* Filter Form */}
-      <div className="filter-form">
+      {/* <div className="filter-form">
         <form>
           <div>
             <label>Max Price (USD):</label>
@@ -163,6 +179,44 @@ function FlightCard() {
               <option className="option" value="">All Airlines</option>
               {airlines.map((airline) => (
                 <option className="optionName" key={airline.code} value={airline.code}>
+                  {airline.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </form>
+      </div> */}
+
+<div className="filter-form">
+        <h3>Filter Flights</h3>
+        <form>
+          <div>
+            <label>Max Price (USD):</label>
+            <input
+              type="number"
+              name="maxPrice"
+              value={filters.maxPrice}
+              onChange={handleFilterChange}
+              placeholder="No limit"
+            />
+          </div>
+          <div>
+            <label>Stops:</label>
+            <select name="stops" value={filters.stops} onChange={handleFilterChange}>
+              <option value="any">Any</option>
+              <option value="0">Non-stop (0 stops)</option>
+            </select>
+          </div>
+          <div>
+            <label>Airline:</label>
+            <select
+              name="airline"
+              value={filters.airline}
+              onChange={handleFilterChange}
+            >
+              <option value="">All Airlines</option>
+              {availableAirlines.map((airline) => (
+                <option key={airline.code} value={airline.code}>
                   {airline.name}
                 </option>
               ))}

@@ -29,7 +29,7 @@ const searchFlights = async (req, res) => {
       travelClass: seatClass,
       nonStop: false,
       currencyCode: "USD",
-      max: 2,
+      max: 30,
     });
 
     if (response.data.length === 0) {
