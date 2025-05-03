@@ -69,8 +69,8 @@ useEffect(() => {
 
       // Stops filter
       const stopsOk =
-        filters.stops === "any" ||
-        (filters.stops === "0" &&
+        filters.stops === "0" ||
+        (filters.stops === "any" &&
           itinerary.itineraries.every((it) =>
             it.segments.every((seg) => seg.numberOfStops === 0)
           ));

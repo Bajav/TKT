@@ -10,10 +10,10 @@ const searchFlights = async (req, res) => {
     console.log(data);
 
     const origin = "EBB";
-    const destination = "CDG";
+    const destination = "LHR";
     const seatClass = "ECONOMY";
-    const departureDate = "2025-11-04";
-    const returnDate = "2025-11-08";
+    const departureDate = "2025-05-09";
+    const returnDate = "2025-11-17";
     const adults = 1;
     const children = 0;
     const infants = 0;
@@ -37,7 +37,7 @@ const searchFlights = async (req, res) => {
       return res.status(404).json({ message: "No flights available" });
     }
     responsse = response.data;
-    console.log(`responess::`, responsse[0]);
+    console.log(`responess::`, responsse[0]); 
     const limitedData = response.data.slice(0, 1);
     // console.log("LIMITED DATA ::", limitedData);
 
