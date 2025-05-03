@@ -296,4 +296,10 @@
     position: absolute;
     z-index: 30;
     top: 4px;
+    .upsellContent
+    {
+      height: 100%;
+      width: 100%;
+      background: $page_color;
+    }
   }

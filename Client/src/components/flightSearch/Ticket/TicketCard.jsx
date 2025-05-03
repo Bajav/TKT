@@ -69,8 +69,8 @@ useEffect(() => {
 
       // Stops filter
       const stopsOk =
-        filters.stops === "0" ||
-        (filters.stops === "any" &&
+        filters.stops === "any" ||
+        (filters.stops === "0" &&
           itinerary.itineraries.every((it) =>
             it.segments.every((seg) => seg.numberOfStops === 0)
           ));
@@ -142,51 +142,12 @@ useEffect(() => {
       {isOverLay && (
         <div className="brandedUpsell">
           <div className="upsellContent">
-            <button onClick={() => setShowOverLay(false)}>✕</button>
+            <button className="closeBtn" onClick={() => setShowOverLay(false)}>✕</button>
             <h2>Selected Flight Info</h2>
             <p>Display some content here... like flight info, pricing, etc.</p>
           </div>
         </div>
       )}
-
-      {/* Filter Form */}
-      {/* <div className="filter-form">
-        <form>
-          <div>
-            <label>Max Price (USD):</label>
-            <input
-              type="number"
-              name="maxPrice"
-              value={filters.maxPrice}
-              onChange={handleFilterChange}
-              placeholder="No limit"
-            />
-          </div>
-          <div>
-            <label>Stops:</label>
-            <select name="stops" value={filters.stops} onChange={handleFilterChange}>
-              <option value="any">Any</option>
-              <option value="0">Non-stop (0 stops)</option>
-            </select>
-          </div>
-          <div>
-            <label>Airline:</label>
-            <select
-              name="airline"
-              value={filters.airline}
-              onChange={handleFilterChange}
-            >
-              <option className="option" value="">All Airlines</option>
-              {airlines.map((airline) => (
-                <option className="optionName" key={airline.code} value={airline.code}>
-                  {airline.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </form>
-      </div> */}
-
 <div className="filter-form">
         <h3>Filter Flights</h3>
         <form>
@@ -293,7 +254,7 @@ useEffect(() => {
                       onClick={() => selectButton(index)}
                       className="bookBtn"
                     >
-                      Book Now
+                      select
                     </button>
                     <button
                       onClick={() => seeDetails(index)}
