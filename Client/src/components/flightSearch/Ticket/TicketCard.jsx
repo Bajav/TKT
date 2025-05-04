@@ -5,7 +5,7 @@ import { Arrow } from "../flightArrowSvg";
 import BrandedFaresOverlay from "../BrandedFaresOverlay";
 import axios from "axios";
 import Loader from "../../loader";
-import Select from 'react-select';
+import Select from "react-select";
 
 function FlightCard() {
   // States
@@ -45,49 +45,49 @@ function FlightCard() {
   }, []);
 
   // Filter flights when filters change
-// Extract unique airlines from flightResponse
-useEffect(() => {
-  const uniqueAirlineCodes = [
-    ...new Set(
-      flightResponse.flatMap((itinerary) => itinerary.validatingAirlineCodes)
-    ),
-  ];
-  const filteredAirlines = airlines.filter((airline) =>
-    uniqueAirlineCodes.includes(airline.code)
-  );
-  setAvailableAirlines(filteredAirlines);
-}, [flightResponse, airlines]);
+  // Extract unique airlines from flightResponse
+  useEffect(() => {
+    const uniqueAirlineCodes = [
+      ...new Set(
+        flightResponse.flatMap((itinerary) => itinerary.validatingAirlineCodes)
+      ),
+    ];
+    const filteredAirlines = airlines.filter((airline) =>
+      uniqueAirlineCodes.includes(airline.code)
+    );
+    setAvailableAirlines(filteredAirlines);
+  }, [flightResponse, airlines]);
 
-// Filter flights when filters change
-useEffect(() => {
-  const applyFilters = () => {
-    const results = flightResponse.filter((itinerary) => {
-      // Price filter
-      const priceOk = filters.maxPrice
-        ? parseFloat(itinerary.price.grandTotal) <= parseFloat(filters.maxPrice)
-        : true;
+  // Filter flights when filters change
+  useEffect(() => {
+    const applyFilters = () => {
+      const results = flightResponse.filter((itinerary) => {
+        // Price filter
+        const priceOk = filters.maxPrice
+          ? parseFloat(itinerary.price.grandTotal) <=
+            parseFloat(filters.maxPrice)
+          : true;
 
-      // Stops filter
-      const stopsOk =
-        filters.stops === "any" ||
-        (filters.stops === "0" &&
-          itinerary.itineraries.every((it) =>
-            it.segments.every((seg) => seg.numberOfStops === 0)
-          ));
+        // Stops filter
+        const stopsOk =
+          filters.stops === "any" ||
+          (filters.stops === "0" &&
+            itinerary.itineraries.every((it) =>
+              it.segments.every((seg) => seg.numberOfStops === 0)
+            ));
 
-      // Airline filter
-      const airlineOk = filters.airline
-        ? itinerary.validatingAirlineCodes.includes(filters.airline)
-        : true;
+        // Airline filter
+        const airlineOk = filters.airline
+          ? itinerary.validatingAirlineCodes.includes(filters.airline)
+          : true;
+        return priceOk && stopsOk && airlineOk;
+      });
 
-      return priceOk && stopsOk && airlineOk;
-    });
+      setFilteredFlights(results);
+    };
 
-    setFilteredFlights(results);
-  };
-
-  applyFilters();
-}, [filters, flightResponse]);
+    applyFilters();
+  }, [filters, flightResponse]);
 
   // Lookup tables
   const iataLookup = iataCodes.reduce((lookup, item) => {
@@ -142,13 +142,88 @@ useEffect(() => {
       {isOverLay && (
         <div className="brandedUpsell">
           <div className="upsellContent">
-            <button className="closeBtn" onClick={() => setShowOverLay(false)}>✕</button>
+            <button className="closeBtn" onClick={() => setShowOverLay(false)}>
+              ✕
+            </button>
             <h2>Selected Flight Info</h2>
-            <p>Display some content here... like flight info, pricing, etc.</p>
+            <div className="flights-res">
+              <div className="flights-header">
+                <div className="airLineIcone">
+                  <div className="icon">
+                    <img
+                      src={airlinesLookUp[segments[0]?.carrierCode]?.logo || ""}
+                      alt="Airline Logo"
+                      className="airline-logo"
+                    />
+                  </div>
+                  <h4>
+                    {airlinesLookUp[segments[0]?.carrierCode]?.name || ""}
+                  </h4>
+                </div>
+                <h4>{segments[0]?.aircraft?.code || ""}</h4>
+              </div>
+              <div className="ticket-header">
+                <div className="origin">
+                  <h2>{segments[0]?.departure.iataCode || ""}</h2>
+                  <h5>
+                    {iataLookup[segments[0]?.departure.iataCode]?.City || "xxx"}
+                  </h5>
+                  <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
+                </div>
+                <div className="center">
+                  <Arrow color="#F5F7F8" width="200px" />
+                  {segmentNumber > 1 ? (
+                    <h5>{segmentNumber - 1} stops</h5>
+                  ) : (
+                    <h5>0 stops</h5>
+                  )}
+                </div>
+                <div className="item">
+                  <h2>{segments[lastSegmentIndex]?.arrival.iataCode || ""}</h2>
+                  <h5>
+                    {iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]
+                      ?.City || ""}
+                  </h5>
+                  <h5>
+                    {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
+                  </h5>
+                </div>
+              </div>
+              <div className="flights-actions">
+                <div className="time-details">
+                  <div className="flex-tim">
+                    <h4>
+                      {segments[lastSegmentIndex]?.arrival.at.slice(0, 10) ||
+                        ""}
+                    </h4>
+                  </div>
+                  <div className="flex-tim">
+                    <h4>{itinerary.itineraries[0]?.duration.slice(2) || ""}</h4>
+                  </div>
+                </div>
+                <div className="price-details">
+                  <h4>${itinerary.price?.grandTotal || ""}</h4>
+                </div>
+                <div className="actions">
+                  <button
+                    onClick={() => selectButton(index)}
+                    className="bookBtn"
+                  >
+                    select
+                  </button>
+                  <button
+                    onClick={() => seeDetails(index)}
+                    className="detailsBtn"
+                  >
+                    See Details
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
-<div className="filter-form">
+      <div className="filter-form">
         <h3>Filter Flights</h3>
         <form>
           <div>
@@ -163,7 +238,11 @@ useEffect(() => {
           </div>
           <div>
             <label>Stops:</label>
-            <select name="stops" value={filters.stops} onChange={handleFilterChange}>
+            <select
+              name="stops"
+              value={filters.stops}
+              onChange={handleFilterChange}
+            >
               <option value="any">Any</option>
               <option value="0">Non-stop (0 stops)</option>
             </select>
@@ -192,7 +271,7 @@ useEffect(() => {
         filteredFlights.map((itinerary, index) => {
           const segments = itinerary.itineraries[0]?.segments || [];
           const segmentNumber = segments.length;
-          console.log("iatacodeeee",segments[0].departure.iataCode)
+          console.log("iatacodeeee", segments[0].departure.iataCode);
           const lastSegmentIndex = segmentNumber - 1;
           const segmentOne = itinerary.itineraries[0].segments;
           const segmentTwo = itinerary.itineraries[1]?.segments || [];
@@ -211,14 +290,19 @@ useEffect(() => {
                         className="airline-logo"
                       />
                     </div>
-                    <h4>{airlinesLookUp[segments[0]?.carrierCode]?.name || ""}</h4>
+                    <h4>
+                      {airlinesLookUp[segments[0]?.carrierCode]?.name || ""}
+                    </h4>
                   </div>
                   <h4>{segments[0]?.aircraft?.code || ""}</h4>
                 </div>
                 <div className="ticket-header">
                   <div className="origin">
                     <h2>{segments[0]?.departure.iataCode || ""}</h2>
-                    <h5>{iataLookup[segments[0]?.departure.iataCode]?.City || "xxx"}</h5>
+                    <h5>
+                      {iataLookup[segments[0]?.departure.iataCode]?.City ||
+                        "xxx"}
+                    </h5>
                     <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
                   </div>
                   <div className="center">
@@ -230,20 +314,30 @@ useEffect(() => {
                     )}
                   </div>
                   <div className="item">
-                    <h2>{segments[lastSegmentIndex]?.arrival.iataCode || ""}</h2>
+                    <h2>
+                      {segments[lastSegmentIndex]?.arrival.iataCode || ""}
+                    </h2>
                     <h5>
-                      {iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]?.City || ""}
+                      {iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]
+                        ?.City || ""}
                     </h5>
-                    <h5>{segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}</h5>
+                    <h5>
+                      {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
+                    </h5>
                   </div>
                 </div>
                 <div className="flights-actions">
                   <div className="time-details">
                     <div className="flex-tim">
-                      <h4>{segments[lastSegmentIndex]?.arrival.at.slice(0, 10) || ""}</h4>
+                      <h4>
+                        {segments[lastSegmentIndex]?.arrival.at.slice(0, 10) ||
+                          ""}
+                      </h4>
                     </div>
                     <div className="flex-tim">
-                      <h4>{itinerary.itineraries[0]?.duration.slice(2) || ""}</h4>
+                      <h4>
+                        {itinerary.itineraries[0]?.duration.slice(2) || ""}
+                      </h4>
                     </div>
                   </div>
                   <div className="price-details">
@@ -281,7 +375,8 @@ useEffect(() => {
                             <div className="origin">
                               <h2>{stopOver.departure.iataCode}</h2>
                               <h5>
-                                {iataLookup[stopOver.departure.iataCode]?.City || ""}
+                                {iataLookup[stopOver.departure.iataCode]
+                                  ?.City || ""}
                               </h5>
                               <h5>{stopOver.departure.at.slice(11)}</h5>
                             </div>
@@ -291,13 +386,16 @@ useEffect(() => {
                             <div className="item">
                               <h2>{stopOver.arrival.iataCode}</h2>
                               <h5>
-                                {iataLookup[stopOver.arrival.iataCode]?.City || ""}
+                                {iataLookup[stopOver.arrival.iataCode]?.City ||
+                                  ""}
                               </h5>
                               <h5>{stopOver.arrival.at.slice(11)}</h5>
                             </div>
                           </div>
                           <div className="lineOne">
-                            <h5>--------------------------------------------</h5>
+                            <h5>
+                              --------------------------------------------
+                            </h5>
                           </div>
                           <div className="stop-details">
                             <h5>
@@ -310,8 +408,11 @@ useEffect(() => {
                                 : "N/A"}
                             </h5>
                             <h5>
-                              CLASS: {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]?.class || ""}{" "}
-                              {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]?.cabin || ""}
+                              CLASS:{" "}
+                              {itinerary.travelerPricings[0]
+                                ?.fareDetailsBySegment[0]?.class || ""}{" "}
+                              {itinerary.travelerPricings[0]
+                                ?.fareDetailsBySegment[0]?.cabin || ""}
                             </h5>
                             <h5>AIRLINE: {stopOver.carrierCode}</h5>
                             <h5>DURATION: {stopOver.duration.slice(2)}</h5>
@@ -326,9 +427,15 @@ useEffect(() => {
                   <div className="Alldetails">
                     <h5>SEATS LEFT: {itinerary.numberOfBookableSeats}</h5>
                     <h5>LAST DATE: {itinerary.lastTicketingDate}</h5>
-                    <h5>{itinerary.travelerPricings[0]?.fareDetailsBySegment[0]?.cabin || ""}</h5>
                     <h5>
-                      CHECKED BAG: {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]?.includedCheckedBags?.quantity || 0} pieces
+                      {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
+                        ?.cabin || ""}
+                    </h5>
+                    <h5>
+                      CHECKED BAG:{" "}
+                      {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
+                        ?.includedCheckedBags?.quantity || 0}{" "}
+                      pieces
                     </h5>
                   </div>
                 </div>

@@ -289,17 +289,28 @@
   .brandedUpsell
   {
     background: $ticketColor;
-    height: 99vh;
+    height: 100vh;
     width: 98vw;
     color: $page_color;
     font-family: $textFont,sans-serif;
     position: absolute;
     z-index: 30;
     top: 4px;
+    // overflow-y: hidden;
     .upsellContent
     {
       height: 100%;
       width: 100%;
       background: $page_color;
+      position: relative;
+    }
+    .closeBtn
+    {
+      background: $ticketColor;
+      position: absolute;
+      width: 40px;
+      font-size: 15px;
+      height: 40px;
+      border-radius: 20px;
     }
   }
