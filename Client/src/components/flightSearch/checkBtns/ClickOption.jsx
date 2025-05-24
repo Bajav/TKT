@@ -1,4 +1,4 @@
-import React from "react";
+// import 'check.scss';
 
 function ClickOption(props) {
   return (

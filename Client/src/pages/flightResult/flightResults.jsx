@@ -5,6 +5,7 @@ import { Arrow } from "../../components/flightSearch/flightArrowSvg";
 import Dummy from "../../components/places/dummyCard";
 import DummyTicket from "../../components/features/DummyTicket/DummyTicket";
 import BackBTN from "../../components/features/BackButton/BackBTN";
+// import './FlightResults.scss';
 
 // import hooks
 import { FormContext } from "../../Hooks/Context/formData.context";

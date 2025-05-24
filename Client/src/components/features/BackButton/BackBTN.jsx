@@ -1,5 +1,5 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import "./backBtn.scss";
 
 function BackBTN({btnName = "back",to = -1}) {
     const navigate = useNavigate();

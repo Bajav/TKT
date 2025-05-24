@@ -7,7 +7,7 @@ import axios from "axios";
 import Loader from "../../loader";
 import Select from "react-select";
 // import scss
-import './ticket.scss';
+// import './ticket.scss';
 
 function FlightCard() {
   // States
