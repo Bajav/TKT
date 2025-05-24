@@ -1,5 +1,4 @@
-import React from "react";
-// import './Calender.css'; // Your CSS file
+import './Calender.css';
 
 function Calender(props) {
   const {
