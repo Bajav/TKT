@@ -98,12 +98,13 @@ function FlightCard() {
     return lookup;
   }, {});
 
+  // Fixed: Correct accumulator name
   const airlinesLookUp = airlines.reduce((airlineLookUp, item) => {
     airlineLookUp[item.code] = {
       logo: item.logo,
       name: item.name,
     };
-    return airlineLookUp; // Fixed: Correct accumulator name
+    return airlineLookUp; 
   }, {});
 
   // Button actions
@@ -151,24 +152,24 @@ function FlightCard() {
                 <div className="airLineIcone">
                   <div className="icon">
                     <img
-                      src={airlinesLookUp[segments[0]?.carrierCode]?.logo || ""}
+                      src= {""}
                       alt="Airline Logo"
                       className="airline-logo"
                     />
                   </div>
                   <h4>
-                    {airlinesLookUp[segments[0]?.carrierCode]?.name || ""}
+                    {""}
                   </h4>
                 </div>
-                <h4>{segments[0]?.aircraft?.code || ""}</h4>
+                <h4>{""}</h4>
               </div>
               <div className="ticket-header">
                 <div className="origin">
-                  <h2>{segments[0]?.departure.iataCode || ""}</h2>
+                  <h2>{ ""}</h2>
                   <h5>
-                    {iataLookup[segments[0]?.departure.iataCode]?.City || "xxx"}
+                    {"xxx"}
                   </h5>
-                  <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
+                  <h5>{""}</h5>
                 </div>
                 <div className="center">
                   <Arrow color="#F5F7F8" width="200px" />
