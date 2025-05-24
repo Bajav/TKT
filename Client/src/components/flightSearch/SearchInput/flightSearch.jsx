@@ -1,5 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
+import './flightSearch.scss';
 
 function FlightSearchInput(props) {
   // state
