@@ -1,11 +1,14 @@
-import React, { Fragment } from 'react'
+import {createContext, useState } from "react";
 
-function FlightSearch() {
+export const FlightContext = createContext({
+  formData: null,
+  setFormData: () => null,
+});
+
+export const FlightSearchProvider = ({ children }) => {
+  const [formData, setFormData] = useState(null);
+  const value = { formData, setFormData };
   return (
-    <Fragment>
-        
-    </Fragment>
-  )
-}
-
-export default FlightSearch
+    <FlightContext.Provider value={value}>{children}</FlightContext.Provider>
+  );
+};
