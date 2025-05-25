@@ -6594,4 +6594,5 @@ const airlines = [
         "logo": "https://pics.avs.io/200/200/JE@2x.png"
     }
 ];
+
 export default airlines;
