@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
-
 // seed.js
-import mongoose from "mongoose";
 import { IATACODE,Airline } from "./Models/iataModel.js"; 
 import airportCities from "./DATA/airportCities.js";
-import airlines from "./DATA/airlines.JS";
+import airlines from "./DATA/airlines.js/index.js";
 
 dotenv.config();
 
