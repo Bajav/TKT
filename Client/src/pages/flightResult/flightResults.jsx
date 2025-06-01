@@ -1,18 +1,18 @@
-import React, { useEffect, useState,useContext } from "react";
+import { useEffect, useState,useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+// importing components
 import FlightCard from "../../components/flightSearch/Ticket/TicketCard";
 import { Arrow } from "../../components/flightSearch/flightArrowSvg";
 import Dummy from "../../components/places/dummyCard";
 import DummyTicket from "../../components/features/DummyTicket/DummyTicket";
 import BackBTN from "../../components/features/BackButton/BackBTN";
-// import './FlightResults.scss';
+// impoting hooks
+import { FlightContext } from "../../components/context/flightSearch.context";
 
-// import hooks
-import { FormContext } from "../../Hooks/Context/formData.context";
 
 function FlightResult() {
-  const { travelData } = useContext(FormContext);
-  console.log("travellerData ::: ",travelData);
+  const { flightSearch } = useContext(FlightContext);
+  console.log("travellerData ::: ",flightSearch);
   // define location
   const location = useLocation();
   const { searchResults, formData, airlines } = location.state || {};

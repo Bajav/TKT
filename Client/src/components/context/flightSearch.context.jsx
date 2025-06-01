@@ -1,13 +1,13 @@
 import {createContext, useState } from "react";
 
 export const FlightContext = createContext({
-  formData: null,
+  flightSearch: null,
   setFormData: () => null,
 });
 
 export const FlightSearchProvider = ({ children }) => {
-  const [formData, setFormData] = useState(null);
-  const value = { formData, setFormData };
+  const [flightSearch, setFormData] = useState(null);
+  const value = { flightSearch, setFormData };
   return (
     <FlightContext.Provider value={value}>{children}</FlightContext.Provider>
   );
