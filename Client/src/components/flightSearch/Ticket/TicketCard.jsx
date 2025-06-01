@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState,useContext } from "react";
+import { FlightContext } from "../../context/flightSearch.context";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Arrow } from "../flightArrowSvg";
@@ -10,9 +11,9 @@ import Select from "react-select";
 // import './ticket.scss';
 
 function FlightCard() {
-  // States
-  const [iataCodes, setIataCodes] = useState([]);
-  const [airlines, setAirlines] = useState([]);
+  // contexts
+  const {iataCodes} = useContext(FlightContext);
+  const {airlineData} = useContext(FlightContext);
   const [flightResponse, setFlightResponse] = useState([]);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [dropDown, showDropDown] = useState(null);
@@ -32,15 +33,8 @@ useEffect(() => {
     try {
       const flightsRes = await axios.get("http://localhost:3000/results");
       console.log("Flights response:", flightsRes.data);
-      const iataRes = await axios.get("http://localhost:3000/iataCodes");
-      console.log("IATA codes response:", iataRes.data);
-      const airporRes = await axios.get("http://localhost:3000/airlines");
-      console.log("Airlines response:", airporRes.data);
-
       setFlightResponse(flightsRes.data);
       setFilteredFlights(flightsRes.data);
-      setIataCodes(iataRes.data);
-      setAirlines(airporRes.data);
     } catch (err) {
       console.error("Failed to fetch data:", err);
       console.log("Error response:", err.response?.data);
@@ -58,11 +52,11 @@ useEffect(() => {
         flightResponse.flatMap((itinerary) => itinerary.validatingAirlineCodes)
       ),
     ];
-    const filteredAirlines = airlines.filter((airline) =>
+    const filteredAirlines = airlineData.filter((airline) =>
       uniqueAirlineCodes.includes(airline.code)
     );
     setAvailableAirlines(filteredAirlines);
-  }, [flightResponse, airlines]);
+  }, [flightResponse, airlineData]);
 
   // Filter flights when filters change
   useEffect(() => {
@@ -105,7 +99,7 @@ useEffect(() => {
   }, {});
 
   // Fixed: Correct accumulator name
-  const airlinesLookUp = airlines.reduce((airlineLookUp, item) => {
+  const airlinesLookUp = airlineData.reduce((airlineLookUp, item) => {
     airlineLookUp[item.code] = {
       logo: item.logo,
       name: item.name,

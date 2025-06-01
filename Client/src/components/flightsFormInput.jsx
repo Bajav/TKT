@@ -10,7 +10,9 @@ import Calender from "./flightSearch/Calender/calenderInput";
 import RoundTripIcon from "../assets/icons/arrows-svgrepo-com (1).svg";
 
 function FlightsForm() {
+  // contexts
   const { setFormData } = useContext(FlightContext);
+  const { iataCodes,setIataCodes } = useContext(FlightContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -29,7 +31,6 @@ function FlightsForm() {
     infants: 0,
   });
 
-  const [iataCodes, setIataCodes] = useState([]);
   const [airlines, setAirlines] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

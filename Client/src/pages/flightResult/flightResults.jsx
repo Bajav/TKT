@@ -12,12 +12,11 @@ import { FlightContext } from "../../components/context/flightSearch.context";
 
 function FlightResult() {
   const { flightSearch } = useContext(FlightContext);
-  console.log("travellerData ::: ",flightSearch);
+  const {airlineData}= useContext(FlightContext);
+  console.log("airlineData ::: ",airlineData);
   // define location
   const location = useLocation();
-  const { searchResults, formData, airlines } = location.state || {};
-  const [iataCodes, setIataCodes] = useState([]);
-  const [airliness, setAirlines] = useState([]);
+  const { searchResults, formData } = location.state || {};
   const [error , setError] = useState([]);
   // define navigate
   const navigate = useNavigate();
@@ -34,8 +33,6 @@ function FlightResult() {
           axios.get("http://localhost:3000/flights"),
         ]);
         const { iataCodes, airliness } = iataRes.data;
-        setIataCodes(iataCodes);
-        setAirlines(airlines);
       } catch (err) {
         setError("Failed to fetch data. Please try again.");
       }

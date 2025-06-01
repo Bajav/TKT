@@ -1,11 +1,13 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState,useContext } from 'react';
 import axios from 'axios';
+import {FlightContext} from '../../context/flightSearch.context';
 // import './flightSearch.scss';
 
 function FlightSearchInput(props) {
+  // contexts
+  const {iataCodes,setIataCodes} = useContext(FlightContext);
+  const {setAirlineData} = useContext(FlightContext);
   // state
-  const [iataCodes, setIataCodes] = useState([]);
-  const [airlineData, setAirlineData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);  
 // fetch
   useEffect(() => {
@@ -15,8 +17,6 @@ function FlightSearchInput(props) {
           axios.get("http://localhost:3000/iataCodes"),
           axios.get("http://localhost:3000/airlines")
         ]);
-        console.log("airlines",airlineRes);
-        console.log("iatacodes",iataRes);
         setIataCodes(iataRes.data);
         setAirlineData(airlineRes.data);
       } catch (error) {
