@@ -204,38 +204,6 @@
     background: transparent;
   }
 }
-.dropDown {
-  position: absolute;
-  top: 135px;
-  left: 0;
-  width: 100%;
-  background-color: $inputBackGround;
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 10;
-  .dropDown:empty {
-    border: none;
-    display: none;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  li {
-    text-decoration: none;
-    text-overflow: clip;
-    list-style: none;
-    font-size: 10px;
-    font-family: $textFont, sans-serif;
-    font-weight: 600;
-  }
-  .dropDownRow {
-    display: flex;
-    align-items: center;
-  }
-}
 .swipes
 {
   .swiper {
@@ -264,15 +232,4 @@
   }
   }    
 }
-.changeUi {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  .dropDown {
-    position: absolute;
-    top: 225px;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-  }
-}
+

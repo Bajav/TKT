@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState,useContext } from 'react';
 import axios from 'axios';
 import {FlightContext} from '../../context/flightSearch.context';
-// import './flightSearch.scss';
+import './flightSearch.scss';
 
 function FlightSearchInput(props) {
   // contexts
