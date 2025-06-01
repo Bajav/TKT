@@ -15,6 +15,7 @@ function FlightCard() {
   const {airlineData} = useContext(FlightContext);
   // states
   const [flightResponse, setFlightResponse] = useState([]);
+  const [isOverlay,setOverlay] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [dropDown, showDropDown] = useState(null);
   const [outBoundFlight, setFlight] = useState({});
@@ -194,6 +195,7 @@ useEffect(() => {
 
           return (
             <div className="main-cards" key={index}>
+              {isOverlay && <FlightDeals />}
               <div className="flights-res">
                 <div className="flights-header">
                   <div className="airLineIcone">

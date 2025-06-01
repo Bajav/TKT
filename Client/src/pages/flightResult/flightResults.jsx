@@ -6,6 +6,7 @@ import { Arrow } from "../../components/flightSearch/flightArrowSvg";
 import Dummy from "../../components/places/dummyCard";
 import DummyTicket from "../../components/features/DummyTicket/DummyTicket";
 import BackBTN from "../../components/features/BackButton/BackBTN";
+import FlightDeals from "../../components/FLIGHTDEALS/flightdeals.component";
 // impoting hooks
 import { FlightContext } from "../../components/context/flightSearch.context";
 
@@ -14,6 +15,7 @@ function FlightResult() {
   const { flightSearch } = useContext(FlightContext);
   const {airlineData}= useContext(FlightContext);
   console.log("airlineData ::: ",airlineData);
+  const [isOverlay,setOverlay]= useState(true);
   // define location
   const location = useLocation();
   const { searchResults, formData } = location.state || {};
@@ -51,6 +53,7 @@ function FlightResult() {
         </div>
         </div>
         <div className="results">
+          {isOverlay && <FlightDeals />}
           <FlightCard />
           {/* <DummyTicket /> */}
           <Dummy />
