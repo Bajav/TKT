@@ -15,20 +15,27 @@ const searchFlights = async (req, res) => {
       passengers,
     } = req.body;
     console.log("form data recieved");
-    console.log(req.body);
 
-    // const origin = "EBB";
-    // const destination = "LHR";
-    // const seatClass = "ECONOMY";
-    // const departureDate = "2025-05-09";
-    // const returnDate = "2025-11-17";
-    // const adults = 1;
-    // const children = 0;
-    // const infants = 0;
+    if (
+      !origin ||
+      !destination ||
+      !departureDate ||
+      !passengers ||
+      !seatClass
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Missing required fields in request." });
+    } else {
+      console.log(req.body);
+    }
 
+    const originCode = origin.split(",")[0].trim();
+    const destinationCode = destination.split(",")[0].trim();
+    console.log(originCode, destinationCode);
     const response = await amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: origin.slice(0,3),
-      destinationLocationCode: destination.slice(0,3),
+      originLocationCode: originCode,
+      destinationLocationCode: destinationCode,
       departureDate: departureDate,
       returnDate: returnDate,
       adults: passengers.adults,
