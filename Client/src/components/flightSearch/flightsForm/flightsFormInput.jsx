@@ -1,13 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 // hooks
-import { FlightContext } from "./context/flightSearch.context";
+import { FlightContext } from "../../context/flightSearch.context";
 // components
-import FlightSearchInput from "./flightSearch/SearchInput/flightSearch";
-import ClickOption from "./flightSearch/checkBtns/ClickOption";
-import Calender from "./flightSearch/Calender/calenderInput";
+import FlightSearchInput from "../SearchInput/flightSearch";
+import ClickOption from "../checkBtns/ClickOption";
+import Calender from "../Calender/calenderInput";
 import RoundTripIcon from "../assets/icons/arrows-svgrepo-com (1).svg";
+// import styles
+import './flightsForm.scss';
 
 function FlightsForm() {
   // contexts
