@@ -18,7 +18,6 @@ function FlightCard() {
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [dropDown, showDropDown] = useState(null);
   const [outBoundFlight, setFlight] = useState({});
-  const [isOverLay, setShowOverLay] = useState(false);
   const [availableAirlines, setAvailableAirlines] = useState([]);
   const [filters, setFilters] = useState({
     maxPrice: "",
@@ -140,90 +139,6 @@ useEffect(() => {
 
   return (
     <Fragment>
-      {isOverLay && (
-        <div className="brandedUpsell">
-          <div className="upsellContent">
-            <button className="closeBtn" onClick={() => setShowOverLay(false)}>
-              ✕
-            </button>
-            <h2>Selected Flight Info</h2>
-            <div className="flights-res">
-              <div className="flights-header">
-                <div className="airLineIcone">
-                  <div className="icon">
-                    <img
-                      src= {""}
-                      alt="Airline Logo"
-                      className="airline-logo"
-                    />
-                  </div>
-                  <h4>
-                    {""}
-                  </h4>
-                </div>
-                <h4>{""}</h4>
-              </div>
-              <div className="ticket-header">
-                <div className="origin">
-                  <h2>{ ""}</h2>
-                  <h5>
-                    {"xxx"}
-                  </h5>
-                  <h5>{""}</h5>
-                </div>
-                <div className="center">
-                  <Arrow color="#F5F7F8" width="200px" />
-                  {segmentNumber > 1 ? (
-                    <h5>{segmentNumber - 1} stops</h5>
-                  ) : (
-                    <h5>0 stops</h5>
-                  )}
-                </div>
-                <div className="item">
-                  <h2>{segments[lastSegmentIndex]?.arrival.iataCode || ""}</h2>
-                  <h5>
-                    {iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]
-                      ?.City || ""}
-                  </h5>
-                  <h5>
-                    {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
-                  </h5>
-                </div>
-              </div>
-              <div className="flights-actions">
-                <div className="time-details">
-                  <div className="flex-tim">
-                    <h4>
-                      {segments[lastSegmentIndex]?.arrival.at.slice(0, 10) ||
-                        ""}
-                    </h4>
-                  </div>
-                  <div className="flex-tim">
-                    <h4>{itinerary.itineraries[0]?.duration.slice(2) || ""}</h4>
-                  </div>
-                </div>
-                <div className="price-details">
-                  <h4>${itinerary.price?.grandTotal || ""}</h4>
-                </div>
-                <div className="actions">
-                  <button
-                    onClick={() => selectButton(index)}
-                    className="bookBtn"
-                  >
-                    select
-                  </button>
-                  <button
-                    onClick={() => seeDetails(index)}
-                    className="detailsBtn"
-                  >
-                    See Details
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
       <div className="filter-form">
         <h3>Filter Flights</h3>
         <form>
