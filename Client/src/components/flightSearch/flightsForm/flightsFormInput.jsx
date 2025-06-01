@@ -7,7 +7,7 @@ import { FlightContext } from "../../context/flightSearch.context";
 import FlightSearchInput from "../SearchInput/flightSearch";
 import ClickOption from "../checkBtns/ClickOption";
 import Calender from "../Calender/calenderInput";
-import RoundTripIcon from "../assets/icons/arrows-svgrepo-com (1).svg";
+import RoundTripIcon from "../../../assets/icons/flight-round-svgrepo-com.svg";
 // import styles
 import './flightsForm.scss';
 
