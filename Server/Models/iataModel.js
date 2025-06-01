@@ -1,6 +1,5 @@
 import mongoose, { model } from "mongoose";
 import {iataConnection,airlineConnection} from '../DB/mongoose.js'
-import airportCities from "../DATA/airportCities.js";
 
 // Define schemas and models on specific connections
 const iataSchema = new mongoose.Schema({

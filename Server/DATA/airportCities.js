@@ -1,5 +1,4 @@
-const 
-airportCities = 
+
 [
     {
         "AirportCode": "AAA",
@@ -77617,6 +77616,4 @@ airportCities =
         "Latitude": "39.933334",
         "Longitude": "-82.01667"
     }
-];
-
-export default airportCities;
+]

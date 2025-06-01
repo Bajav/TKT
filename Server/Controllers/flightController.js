@@ -1,5 +1,4 @@
 import { IATACODE, Airline } from "../Models/iataModel.js";
-import airportCities from "../DATA/airportCities.js";
 
 const getIataCodes = async (req, res) => {
   try {
