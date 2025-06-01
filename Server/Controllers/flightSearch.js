@@ -3,6 +3,7 @@ import amadeus from "../Services/Amadeus.js";
 let responsse;
 let brandedFlight;
 let oderId;
+
 const searchFlights = async (req, res) => {
   try {
     const {
@@ -13,7 +14,7 @@ const searchFlights = async (req, res) => {
       flightType,
       seatClass,
       passengers,
-    } = req.body;
+    } = await req.body;
     console.log("form data recieved");
 
     if (
@@ -33,6 +34,7 @@ const searchFlights = async (req, res) => {
     const originCode = origin.split(",")[0].trim();
     const destinationCode = destination.split(",")[0].trim();
     console.log(originCode, destinationCode);
+
     const response = await amadeus.shopping.flightOffersSearch.get({
       originLocationCode: originCode,
       destinationLocationCode: destinationCode,
@@ -65,6 +67,7 @@ const searchFlights = async (req, res) => {
     });
   }
 };
+
 
 const brandedUpSell = async (req, res) => {
   try {

@@ -27,24 +27,28 @@ function FlightCard() {
   const navigate = useNavigate();
 
   // Fetch data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [flightsRes, iataRes, airporRes] = await Promise.all([
-          axios.get("http://localhost:3000/results"),
-          axios.get("http://localhost:3000/iataCodes"),
-          axios.get("http://localhost:3000/airlines"),
-        ]);
-        setFlightResponse(flightsRes.data);
-        setFilteredFlights(flightsRes.data); // Initialize filtered flights
-        setIataCodes(iataRes.data);
-        setAirlines(airporRes.data);
-      } catch (err) {
-        console.error("Failed to fetch data:", err);
-      }
-    };
-    fetchData();
-  }, []);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const flightsRes = await axios.get("http://localhost:3000/results");
+      console.log("Flights response:", flightsRes.data);
+      const iataRes = await axios.get("http://localhost:3000/iataCodes");
+      console.log("IATA codes response:", iataRes.data);
+      const airporRes = await axios.get("http://localhost:3000/airlines");
+      console.log("Airlines response:", airporRes.data);
+
+      setFlightResponse(flightsRes.data);
+      setFilteredFlights(flightsRes.data);
+      setIataCodes(iataRes.data);
+      setAirlines(airporRes.data);
+    } catch (err) {
+      console.error("Failed to fetch data:", err);
+      console.log("Error response:", err.response?.data);
+      console.log("Error status:", err.response?.status);
+    }
+  };
+  fetchData();
+}, []);
 
   // Filter flights when filters change
   // Extract unique airlines from flightResponse
