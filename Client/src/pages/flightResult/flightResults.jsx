@@ -21,18 +21,11 @@ function FlightResult() {
   // define navigate
   const navigate = useNavigate();
   useEffect(() => {
-    const data = () => {
-      const formDataa = formData;
-      console.log("form data :::", formData);
-    };
-    data();
-
     const fetchData = async () => {
       try {
         const iataRes = await Promise.all([
           axios.get("http://localhost:3000/flights"),
         ]);
-        const { iataCodes, airliness } = iataRes.data;
       } catch (err) {
         setError("Failed to fetch data. Please try again.");
       }
@@ -49,11 +42,11 @@ function FlightResult() {
         <div className="FlightResult-header">
           <div className="ticket-header">
             <div className="origin">
-                <h2>{formData?.origin?.slice(0,3) || "XXX"}</h2>
+                <h2>{flightSearch?.origin?.slice(0,3) || "XXX"}</h2>
             </div>
             <div className="item"><Arrow color="#313030" width="200px" /></div>
             <div className="item">
-                <h2>{formData?.destination?.slice(0,3) || "XXX"}</h2>
+                <h2>{flightSearch?.destination?.slice(0,3) || "XXX"}</h2>
             </div>
         </div>
         </div>

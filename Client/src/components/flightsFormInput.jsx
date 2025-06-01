@@ -93,12 +93,10 @@ function FlightsForm() {
     const formData = { ...inputs, passengers };
     try {
       const response = await axios.post(
-        "http://localhost:3000/results",
-        formData
+        "http://localhost:3000/results"
       );
       setFormData(formData);
-      navigate("results", { state: { formData, airlines } });
-      console.log("Flight data posted:", response.data);
+      navigate("results");
     } catch (error) {
       console.error("Error posting flight:", error);
     }

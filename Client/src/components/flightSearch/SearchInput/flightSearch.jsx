@@ -7,6 +7,7 @@ function FlightSearchInput(props) {
   // contexts
   const {iataCodes,setIataCodes} = useContext(FlightContext);
   const {setAirlineData} = useContext(FlightContext);
+  const {setFormData} = useContext(FlightContext);
   // state
   const [showDropdown, setShowDropdown] = useState(false);  
 // fetch
