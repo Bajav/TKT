@@ -12,7 +12,7 @@ import RoundTripIcon from "../assets/icons/arrows-svgrepo-com (1).svg";
 function FlightsForm() {
   // contexts
   const { setFormData } = useContext(FlightContext);
-  const { iataCodes,setIataCodes } = useContext(FlightContext);
+  const { setIataCodes } = useContext(FlightContext);
   const location = useLocation();
   const navigate = useNavigate();
 

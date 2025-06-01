@@ -6,7 +6,6 @@ import { Arrow } from "../flightArrowSvg";
 import BrandedFaresOverlay from "../BrandedFaresOverlay";
 import axios from "axios";
 import Loader from "../../loader";
-import Select from "react-select";
 // import scss
 // import './ticket.scss';
 
@@ -14,6 +13,7 @@ function FlightCard() {
   // contexts
   const {iataCodes} = useContext(FlightContext);
   const {airlineData} = useContext(FlightContext);
+  // states
   const [flightResponse, setFlightResponse] = useState([]);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [dropDown, showDropDown] = useState(null);
