@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { FormContext } from "../Hooks/Context/formData.context";
+// hooks
+import { FlightContext } from "./context/flightSearch.context";
 // components
 import FlightSearchInput from "./flightSearch/SearchInput/flightSearch";
 import ClickOption from "./flightSearch/checkBtns/ClickOption";
@@ -9,7 +10,7 @@ import Calender from "./flightSearch/Calender/calenderInput";
 import RoundTripIcon from "../assets/icons/arrows-svgrepo-com (1).svg";
 
 function FlightsForm() {
-  const { setTravelData } = useContext(FormContext);
+  const { setFormData } = useContext(FlightContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -94,7 +95,7 @@ function FlightsForm() {
         "http://localhost:3000/results",
         formData
       );
-      setTravelData(formData);
+      setFormData(formData);
       navigate("results", { state: { formData, airlines } });
       console.log("Flight data posted:", response.data);
     } catch (error) {

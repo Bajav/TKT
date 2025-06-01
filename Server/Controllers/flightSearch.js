@@ -6,44 +6,50 @@ let oderId;
 
 const searchFlights = async (req, res) => {
   try {
-    const {
-      origin,
-      destination,
-      departureDate,
-      returnDate,
-      flightType,
-      seatClass,
-      passengers,
-    } = await req.body;
-    console.log("form data recieved");
+    // const {
+    //   origin,
+    //   destination,
+    //   departureDate,
+    //   returnDate,
+    //   flightType,
+    //   seatClass,
+    //   passengers,
+    // } = await req.body;
+    console.log("form data recieved",req.body);
 
-    if (
-      !origin ||
-      !destination ||
-      !departureDate ||
-      !passengers ||
-      !seatClass
-    ) {
-      return res
-        .status(400)
-        .json({ message: "Missing required fields in request." });
-    } else {
-      console.log(req.body);
-    }
+    // if (
+    //   !origin ||
+    //   !destination ||
+    //   !departureDate ||
+    //   !passengers ||
+    //   !seatClass
+    // ) {
+    //   return res
+    //     .status(400)
+    //     .json({ message: "Missing required fields in request." });
+    // } else {
+    //   console.log(req.body);
+    // }
 
-    const originCode = origin.split(",")[0].trim();
-    const destinationCode = destination.split(",")[0].trim();
-    console.log(originCode, destinationCode);
+    // const originCode = origin.split(",")[0].trim();
+    // const destinationCode = destination.split(",")[0].trim();
+    // console.log(originCode, destinationCode);
+
+    const origin = "EBB";
+    const destination ="DXB";
+    const departureDate ='2025-06-08';
+    const returnDate = '2025-06-15';
+    const adult = 1;
 
     const response = await amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: originCode,
-      destinationLocationCode: destinationCode,
+      originLocationCode: origin,
+      destinationLocationCode: destination,
       departureDate: departureDate,
       returnDate: returnDate,
-      adults: passengers.adults,
-      children: passengers.children,
-      infants: passengers.infants,
-      travelClass: seatClass,
+      adults: 1,
+      children: 0,
+      infants: 0,
+      travelClass: "ECONOMY",
       nonStop: false,
       currencyCode: "USD",
       max: 30,
