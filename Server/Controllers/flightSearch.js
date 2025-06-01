@@ -5,27 +5,35 @@ let brandedFlight;
 let oderId;
 const searchFlights = async (req, res) => {
   try {
-    const data = req.body;
-    console.log("form data recieved");
-    console.log(data);
-
-    const origin = "EBB";
-    const destination = "LHR";
-    const seatClass = "ECONOMY";
-    const departureDate = "2025-05-09";
-    const returnDate = "2025-11-17";
-    const adults = 1;
-    const children = 0;
-    const infants = 0;
-
-    const response = await amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: origin,
-      destinationLocationCode: destination,
+    const {
+      origin,
+      destination,
       departureDate,
       returnDate,
-      adults,
-      children,
-      infants,
+      flightType,
+      seatClass,
+      passengers,
+    } = req.body;
+    console.log("form data recieved");
+    console.log(req.body);
+
+    // const origin = "EBB";
+    // const destination = "LHR";
+    // const seatClass = "ECONOMY";
+    // const departureDate = "2025-05-09";
+    // const returnDate = "2025-11-17";
+    // const adults = 1;
+    // const children = 0;
+    // const infants = 0;
+
+    const response = await amadeus.shopping.flightOffersSearch.get({
+      originLocationCode: origin.slice(0,3),
+      destinationLocationCode: destination.slice(0,3),
+      departureDate: departureDate,
+      returnDate: returnDate,
+      adults: passengers.adults,
+      children: passengers.children,
+      infants: passengers.infants,
       travelClass: seatClass,
       nonStop: false,
       currencyCode: "USD",
@@ -37,7 +45,7 @@ const searchFlights = async (req, res) => {
       return res.status(404).json({ message: "No flights available" });
     }
     responsse = response.data;
-    console.log(`responess::`, responsse[0]); 
+    console.log(`responess::`, responsse[0]);
     const limitedData = response.data.slice(0, 1);
     // console.log("LIMITED DATA ::", limitedData);
 
@@ -55,13 +63,13 @@ const brandedUpSell = async (req, res) => {
   try {
     const selectedFlight = req.body;
     console.log("selectedFlight recieved");
-    console.log("selectedFlight",selectedFlight);
+    console.log("selectedFlight", selectedFlight);
 
     const response = await amadeus.shopping.flightOffers.upselling.post({
       data: {
         type: "flight-offers-upselling",
         flightOffers: [responsse[0]],
-        include:["bags"],
+        include: ["bags"],
         payments: [
           {
             brand: "VISA_IXARIS",
