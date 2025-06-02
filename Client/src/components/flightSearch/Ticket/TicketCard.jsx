@@ -24,7 +24,7 @@ function FlightCard() {
   const { flightResults } = useContext(FlightContext);
   console.log("flightResults", flightResults);
   // states
-  const [isOverlay, setOverlay] = useState(true);
+  const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
@@ -196,7 +196,7 @@ function FlightCard() {
       {isOverlay && (
         <div className="overlay">
           <div className="funcContainer">
-            <button>cancel</button>
+            <button onClick={()=>setOverlay(false)}>cancel</button>
           </div>
           <h3 className="text">choose your best deal</h3>
           <div className="flightDealsHeader ticket-header">
@@ -402,7 +402,7 @@ function FlightCard() {
                   </div>
                   <div className="actions">
                     <button
-                      onClick={() => selectButton(index)}
+                      onClick={() => setOverlay(true)}
                       className="bookBtn"
                     >
                       select
