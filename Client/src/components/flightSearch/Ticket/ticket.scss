@@ -316,10 +316,10 @@
   }
   .overlay
   {
-    background-color: $ticketColor;
+    background-color: $page_color;
     height: 100vh;
     width: 100vw;
-    position: relative;
+    position: absolute;
     z-index: 40;
-    top: 10;
+    top: 0;
   }

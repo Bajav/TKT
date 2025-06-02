@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
 import Loader from "../../loader";
 // import scss
-import './ticket.scss';
+import "./ticket.scss";
 // import components
 import { Arrow } from "../flightArrowSvg";
 
@@ -185,7 +185,64 @@ function FlightCard() {
           </form>
         )}
       </div>
-      {isOverlay && <div className="overlay"></div>}
+      {isOverlay && (
+        <div className="overlay">
+          <div className="funcContainer">
+            <button>back</button>
+          </div>
+          <h3>choose your best deal</h3>
+          <div className="ticket-header">
+            <div className="origin">
+              <h2>{"" || ""}</h2>
+              <h5>{"" || "xxx"}</h5>
+              <h5>{"" || ""}</h5>
+            </div>
+            <div className="center">
+              <Arrow color="#F5F7F8" width="200px" />
+              {2 > 1 ? <h5>{3 - 1} stops</h5> : <h5>0 stops</h5>}
+            </div>
+            <div className="item">
+              <h2>{"" || ""}</h2>
+              <h5>{"" || "xxx"}</h5>
+              <h5>{"" || ""}</h5>
+            </div>
+          </div>
+          <div className="flightDealContainer">
+            
+            <div className="flights-header">
+              <div className="airLineIcone">
+                <div className="icon">
+                  <img
+                    src={"" || ""}
+                    alt="Airline Logo"
+                    className="airline-logo"
+                  />
+                </div>
+                <h4>{"" || ""}</h4>
+              </div>
+              <h4>{"" || ""}</h4>
+            </div>
+
+            <div className="ticket-header">
+              <div className="origin">
+                <h2>{"" || ""}</h2>
+                <h5>{"" || "xxx"}</h5>
+                <h5>{"" || ""}</h5>
+              </div>
+              <div className="center">
+                <Arrow color="#F5F7F8" width="200px" />
+                {2 > 1 ? <h5>{2 - 1} stops</h5> : <h5>0 stops</h5>}
+              </div>
+              <div className="item">
+                <h2>{"" || ""}</h2>
+                <h5>{"" || ""}</h5>
+                <h5>{"" || ""}</h5>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
       {filteredFlights.length < 1 ? (
         <Loader loaderTag="Searching for flights" />
       ) : (
@@ -219,7 +276,8 @@ function FlightCard() {
                   <div className="origin">
                     <h2>{segments[0]?.departure.iataCode || ""}</h2>
                     <h5>
-                      {iataLookup[segments[0]?.departure.iataCode]?.city || "xxx"}
+                      {iataLookup[segments[0]?.departure.iataCode]?.city ||
+                        "xxx"}
                     </h5>
                     <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
                   </div>
@@ -236,7 +294,8 @@ function FlightCard() {
                       {segments[lastSegmentIndex]?.arrival.iataCode || ""}
                     </h2>
                     <h5>
-                     {iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]?.city || "xxx"}
+                      {iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]
+                        ?.city || "xxx"}
                     </h5>
                     <h5>
                       {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
@@ -292,7 +351,8 @@ function FlightCard() {
                             <div className="origin">
                               <h2>{stopOver.departure.iataCode}</h2>
                               <h5>
-                              {iataLookup[stopOver.departure.iataCode]?.city || ""}
+                                {iataLookup[stopOver.departure.iataCode]
+                                  ?.city || ""}
                               </h5>
                               <h5>{stopOver.departure.at.slice(11)}</h5>
                             </div>
@@ -302,8 +362,8 @@ function FlightCard() {
                             <div className="item">
                               <h2>{stopOver.arrival.iataCode}</h2>
                               <h5>
-                               {iataLookup[stopOver.arrival.iataCode]?.city || "ddd"}
-
+                                {iataLookup[stopOver.arrival.iataCode]?.city ||
+                                  "ddd"}
                               </h5>
                               <h5>{stopOver.arrival.at.slice(11)}</h5>
                             </div>

@@ -3,7 +3,6 @@ import { Arrow } from "../flightSearch/flightArrowSvg";
 
 function FlightDeals(props) {
   return (
-    <div className="dealsContainer">
       <div className="flights-res">
         <div className="flights-header">
           <div className="airLineIcone">
@@ -50,7 +49,6 @@ function FlightDeals(props) {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
