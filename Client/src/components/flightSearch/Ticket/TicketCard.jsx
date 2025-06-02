@@ -249,9 +249,36 @@ function FlightCard() {
             </div>
             <h6 className="lineNew">--------------------------------------------------------</h6>
             <div className="flightDetails">
-              <div className="itemContainer">
 
+              <div className="itemContainer">
+                <img src={seat} />
+                <li>seat choice included</li>
               </div>
+
+               <div className="itemContainer">
+                <img src={cutlary} />
+                <li>MEAL BEVERAGE</li>
+              </div>
+
+                <div className="itemContainer">
+                <li>$ CHANGEABLE TICKET</li>
+              </div>
+
+               <div className="itemContainer">
+                <img src={carier} />
+                <li>CHECKED BAG 2 PCS 23 KG EACH</li>
+              </div>
+
+               <div className="itemContainer">
+                <img src={suiteCase} />
+                <li>CABIN BAG 1 PIECE 7 KG</li>
+              </div>
+
+              <div className="itemContainer">
+                <img src={pctMile} />
+                <li>50 PCT QMILES ACCUMULATION</li>
+              </div>
+
             </div>
           </div>
         </div>

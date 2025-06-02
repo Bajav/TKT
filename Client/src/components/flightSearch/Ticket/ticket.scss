@@ -366,3 +366,22 @@
 .flightDealContainer::after {
   right: -10px; 
 }
+
+.itemContainer
+{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  img
+  {
+    width: 12px;
+  }
+  li
+  {
+    font-family: $textFont,sans-serif;
+    color: $page_color;
+    text-transform: uppercase;
+    list-style: none;
+    font-size: 10px;
+  }
+}
