@@ -316,6 +316,16 @@
     }
   }
 }
+.flightDealsHeader {
+  margin-bottom: 20px;
+    h2
+    {
+      color: $visibleFontColor;
+    }
+    h5{
+      color: $visibleFontColor;
+    }
+  }
 .flightDealContainer {
   background: $ticketColor;
   padding: 10px;

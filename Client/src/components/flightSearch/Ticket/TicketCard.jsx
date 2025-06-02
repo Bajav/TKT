@@ -199,20 +199,18 @@ function FlightCard() {
             <button>cancel</button>
           </div>
           <h3 className="text">choose your best deal</h3>
-          <div className="ticket-header">
+          <div className="flightDealsHeader ticket-header">
             <div className="origin">
-              <h2>{"" || ""}</h2>
-              <h5>{"" || "xxx"}</h5>
-              <h5>{"" || ""}</h5>
+              <h2>{"ebb" || ""}</h2>
+              <h5>{"Kampala, Uganda" || ""}</h5>
             </div>
             <div className="center">
               <Arrow color="#1D1D1D" width="200px" />
-              {2 > 1 ? <h5>{3 - 1} stops</h5> : <h5>0 stops</h5>}
+              <h5>23.DEC.24</h5>
             </div>
             <div className="item">
-              <h2>{"" || ""}</h2>
-              <h5>{"" || "xxx"}</h5>
-              <h5>{"" || ""}</h5>
+              <h2>{"dxb" || ""}</h2>
+              <h5>{"Dubai , UAE" || ""}</h5>
             </div>
           </div>
           <div className="flightDealContainer">
