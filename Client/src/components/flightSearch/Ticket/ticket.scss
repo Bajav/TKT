@@ -371,6 +371,7 @@
 {
   display: flex;
   align-items: center;
+  justify-items: center;
   gap: 10px;
   img
   {
@@ -384,4 +385,10 @@
     list-style: none;
     font-size: 10px;
   }
+}
+.detailsSect
+{
+  display: flex;
+  justify-content: space-between;
+  padding: 2px;
 }

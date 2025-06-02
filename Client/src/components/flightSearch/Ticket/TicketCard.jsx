@@ -8,14 +8,14 @@ import Loader from "../../loader";
 import "./ticket.scss";
 // import components
 import { Arrow } from "../flightArrowSvg";
-import line from '../../../assets/icons/line.svg';
-import calender from '../../../assets/icons/calender.svg';
-import seat from '../../../assets/icons/Seat.svg';
-import carier from '../../../assets/icons/carier.svg';
-import pctMile from '../../../assets/icons/pctMile.svg';
-import cutlary from '../../../assets/icons/cutlary.svg';
-import suiteCase from '../../../assets/icons/suiteCase.svg';
-import clock from '../../../assets/icons/clock.svg';
+import line from "../../../assets/icons/line.svg";
+import calender from "../../../assets/icons/calender.svg";
+import seat from "../../../assets/icons/Seat.svg";
+import carier from "../../../assets/icons/carier.svg";
+import pctMile from "../../../assets/icons/pctMile.svg";
+import cutlary from "../../../assets/icons/cutlary.svg";
+import suiteCase from "../../../assets/icons/suiteCase.svg";
+import clock from "../../../assets/icons/clock.svg";
 
 function FlightCard() {
   // contexts
@@ -216,7 +216,6 @@ function FlightCard() {
             </div>
           </div>
           <div className="flightDealContainer">
-
             <div className="flights-header">
               <div className="airLineIcone">
                 <div className="icon">
@@ -247,38 +246,43 @@ function FlightCard() {
                 <h5>{"2.00pm" || ""}</h5>
               </div>
             </div>
-            <h6 className="lineNew">--------------------------------------------------------</h6>
+            <h6 className="lineNew">
+              --------------------------------------------------------
+            </h6>
             <div className="flightDetails">
-
-              <div className="itemContainer">
-                <img src={seat} />
-                <li>seat choice included</li>
-              </div>
-
-               <div className="itemContainer">
-                <img src={cutlary} />
-                <li>MEAL BEVERAGE</li>
-              </div>
-
+              <div className="detailsSect">
                 <div className="itemContainer">
-                <li>$ CHANGEABLE TICKET</li>
+                  <img src={seat} />
+                  <li>seat choice included</li>
+                </div>
+                <div className="itemContainer">
+                  <img src={cutlary} />
+                  <li>MEAL BEVERAGE</li>
+                </div>
+                <div className="itemContainer">
+                  <li>$ CHANGEABLE TICKET</li>
+                </div>
+              </div>
+              <div className="detailsSect">
+                <div className="itemContainer">
+                  <img src={carier} />
+                  <li>CHECKED BAG 2 PCS 23 KG EACH</li>
+                </div>
+                <div className="itemContainer">
+                  <li>$ REFUNDABLE TICKET</li>
+                </div>
               </div>
 
-               <div className="itemContainer">
-                <img src={carier} />
-                <li>CHECKED BAG 2 PCS 23 KG EACH</li>
+              <div className="detailsSect">
+                <div className="itemContainer">
+                  <img src={suiteCase} />
+                  <li>CABIN BAG 1 PIECE 7 KG</li>
+                </div>
+                <div className="itemContainer">
+                  <img src={pctMile} />
+                  <li>50 PCT QMILES ACCUMULATION</li>
+                </div>
               </div>
-
-               <div className="itemContainer">
-                <img src={suiteCase} />
-                <li>CABIN BAG 1 PIECE 7 KG</li>
-              </div>
-
-              <div className="itemContainer">
-                <img src={pctMile} />
-                <li>50 PCT QMILES ACCUMULATION</li>
-              </div>
-
             </div>
           </div>
         </div>
