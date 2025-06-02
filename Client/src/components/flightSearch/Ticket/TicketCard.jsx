@@ -249,6 +249,7 @@ function FlightCard() {
             <h6 className="lineNew">
               --------------------------------------------------------
             </h6>
+
             <div className="flightDetails">
               <div className="detailsSect">
                 <div className="itemContainer">
@@ -283,6 +284,43 @@ function FlightCard() {
                   <li>50 PCT QMILES ACCUMULATION</li>
                 </div>
               </div>
+
+            </div>
+                   <div className="flights-actions">
+                  <div className="time-details">
+                    <div className="flex-tim">
+
+                      <h4>
+                        23.DEC.24
+                      </h4>
+                    </div>
+                    <div className="flex-tim">
+                      <h4>
+                        4 h 30 m
+                      </h4>
+                    </div>
+                  </div>
+                  <div className="price-details">
+                    <h4>$243/<span>pax</span></h4>
+                  </div>
+                  <div className="actions">
+                    <button
+                      onClick={() => {}}
+                      className="bookBtn"
+                    >
+                      book now
+                    </button>
+                    <button
+                      onClick={() => {}}
+                      className="detailsBtn"
+                    >
+                     economy
+                    </button>
+                  </div>
+                </div>
+
+            <div className="flightFunction">
+
             </div>
           </div>
         </div>
