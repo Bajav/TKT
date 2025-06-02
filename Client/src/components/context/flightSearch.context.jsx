@@ -8,7 +8,11 @@ export const FlightContext = createContext({
   airlineData: [],
   setAirlineData: () => {},
   flightResults:[],
-  setFlightResults:()=>{}
+  setFlightResults:()=>{},
+  selectedFlight:[],
+  setSelectFlight:()=>{},
+  bookedFlight:[],
+  setBookedFlight:()=>{}
 });
 
 export const FlightSearchProvider = ({ children }) => {
@@ -16,6 +20,9 @@ export const FlightSearchProvider = ({ children }) => {
   const [iataCodes, setIataCodes] = useState([]);
   const [airlineData, setAirlineData] = useState([]);
   const [flightResults, setFlightResults] = useState([]);
+  const [selectedFlight,setSelectFlight] = useState([]);
+  const [bookedFlight,setBookedFlight] = useState([]);
+
   const value = {
     flightSearch,
     setFormData,
@@ -23,7 +30,9 @@ export const FlightSearchProvider = ({ children }) => {
     setIataCodes,
     airlineData,
     setAirlineData,
-    flightResults, setFlightResults
+    flightResults, setFlightResults,
+    selectedFlight,setSelectFlight,
+    bookedFlight,setBookedFlight
   };
   return (
     <FlightContext.Provider value={value}>{children}</FlightContext.Provider>

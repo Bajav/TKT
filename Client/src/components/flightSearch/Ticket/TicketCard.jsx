@@ -15,13 +15,14 @@ import carier from "../../../assets/icons/carier.svg";
 import pctMile from "../../../assets/icons/pctMile.svg";
 import cutlary from "../../../assets/icons/cutlary.svg";
 import suiteCase from "../../../assets/icons/suiteCase.svg";
-import clock from "../../../assets/icons/clock.svg";
 
 function FlightCard() {
   // contexts
   const { iataCodes } = useContext(FlightContext);
   const { airlineData } = useContext(FlightContext);
   const { flightResults } = useContext(FlightContext);
+  const { bookedFlight,setBookedFlight } = useContext(FlightContext);
+  const { selectedFlight,setSelectFlight } = useContext(FlightContext);
   console.log("flightResults", flightResults);
   // states
   const [isOverlay, setOverlay] = useState(false);
@@ -29,7 +30,7 @@ function FlightCard() {
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
-  const [outBoundFlight, setFlight] = useState({});
+  // const [outBoundFlight, setFlight] = useState({});
   const [availableAirlines, setAvailableAirlines] = useState([]);
   const [filters, setFilters] = useState({
     maxPrice: "",
@@ -114,7 +115,7 @@ function FlightCard() {
       logo: item.logo,
       name: item.name,
     };
-    return airlineLookUp;
+    return airlineLookUp; 
   }, {});
 
   // Button actions
@@ -125,13 +126,20 @@ function FlightCard() {
 
   const selectButton = async (index) => {
     console.log("selectButton clicked");
-    setFlight(filteredFlights[index]);
+    setSelectFlight(filteredFlights[index]);
+    console.log(selectedFlight);
+    setOverlay(true);
+    try{
+      const response = await axios.post("http://localhost:3000/flights/",{selectedFlight});
+    }catch(err){
+      console.log(err);
+    }
   };
 
   const bookNow = async (index) => {
     console.log("book now btn hit");
     try {
-      setFlight(filteredFlights[index]);
+      setBookedFlight(filteredFlights[index]);
       await axios.post(
         "http://localhost:3000/flights/flightsResults/flightPricing",
         { flight: filteredFlights[index], index }
@@ -402,7 +410,7 @@ function FlightCard() {
                   </div>
                   <div className="actions">
                     <button
-                      onClick={() => setOverlay(true)}
+                      onClick={() => selectButton(index)}
                       className="bookBtn"
                     >
                       select
