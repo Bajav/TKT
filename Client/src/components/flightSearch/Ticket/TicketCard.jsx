@@ -17,12 +17,13 @@ function FlightCard() {
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
+  const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
   const [outBoundFlight, setFlight] = useState({});
   const [availableAirlines, setAvailableAirlines] = useState([]);
   const [filters, setFilters] = useState({
     maxPrice: "",
-    stops: "any", // Options: "any", "0"
+    stops: 0, // Options: "any", "0"
     airline: "",
   });
   const navigate = useNavigate();
@@ -52,9 +53,13 @@ function FlightCard() {
     const filteredAirlines = airlineData.filter((airline) =>
       uniqueAirlineCodes.includes(airline.code)
     );
+    setFilteredPrices(prices);
     setAvailableAirlines(filteredAirlines);
   }, [flightResults, airlineData]);
-
+     const prices = [...new Set(flightResults.flatMap((itinerary)=>{
+      itinerary.price.total
+    }))];
+    console.log(prices);
   // Filter flights when filters change
   useEffect(() => {
     const applyFilters = () => {
@@ -68,7 +73,7 @@ function FlightCard() {
         // Stops filter
         const stopsOk =
           filters.stops === "any" ||
-          (filters.stops === "0" &&
+          (filters.stops === 0 &&
             itinerary.itineraries.every((it) =>
               it.segments.every((seg) => seg.numberOfStops === 0)
             ));
@@ -79,13 +84,13 @@ function FlightCard() {
           : true;
         return priceOk && stopsOk && airlineOk;
       });
-
+      
+      console.log(filters);
       setFilteredFlights(results);
     };
 
     applyFilters();
   }, [filters, flightResults]);
-
   // Lookup tables
   const iataLookup = iataCodes.reduce((lookup, item) => {
     lookup[item.AirportCode] = {
@@ -192,7 +197,6 @@ function FlightCard() {
 
           return (
             <div className="main-cards" key={index}>
-              {isOverlay && <FlightDeals />}
               <div className="flights-res">
                 <div className="flights-header">
                   <div className="airLineIcone">

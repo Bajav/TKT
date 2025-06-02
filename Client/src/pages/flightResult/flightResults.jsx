@@ -1,4 +1,4 @@
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 // importing components
 import FlightCard from "../../components/flightSearch/Ticket/TicketCard";
@@ -6,20 +6,18 @@ import { Arrow } from "../../components/flightSearch/flightArrowSvg";
 import Dummy from "../../components/places/dummyCard";
 import DummyTicket from "../../components/features/DummyTicket/DummyTicket";
 import BackBTN from "../../components/features/BackButton/BackBTN";
-import FlightDeals from "../../components/FLIGHTDEALS/flightdeals.component";
 // impoting hooks
 import { FlightContext } from "../../components/context/flightSearch.context";
 
-
 function FlightResult() {
   const { flightSearch } = useContext(FlightContext);
-  const {airlineData}= useContext(FlightContext);
-  console.log("airlineData ::: ",airlineData);
-  const [isOverlay,setOverlay]= useState(true);
+  const { airlineData } = useContext(FlightContext);
+  const { flightResults } = useContext(FlightContext);
+  console.log("airlineData ::: ", airlineData);
   // define location
   const location = useLocation();
-  const { searchResults, formData } = location.state || {};
-  const [error , setError] = useState([]);
+  const resLength = flightResults.length;
+  const [error, setError] = useState([]);
   // define navigate
   const navigate = useNavigate();
   useEffect(() => {
@@ -39,21 +37,21 @@ function FlightResult() {
     <main className="FlightResult-page">
       <BackBTN to={"/flights"} btnName="back" />
       <div className="FlightResults">
-        <h3 className="text"> Results for your search</h3>
-        <h3>{searchResults}</h3>
+        <h3 className="text"> <span>{ resLength }</span> Results for your search </h3>
         <div className="FlightResult-header">
           <div className="ticket-header">
             <div className="origin">
-                <h2>{flightSearch?.origin?.slice(0,3) || "XXX"}</h2>
+              <h2>{flightSearch?.origin?.slice(0, 3) || "XXX"}</h2>
             </div>
-            <div className="item"><Arrow color="#313030" width="200px" /></div>
             <div className="item">
-                <h2>{flightSearch?.destination?.slice(0,3) || "XXX"}</h2>
+              <Arrow color="#313030" width="200px" />
             </div>
-        </div>
+            <div className="item">
+              <h2>{flightSearch?.destination?.slice(0, 3) || "XXX"}</h2>
+            </div>
+          </div>
         </div>
         <div className="results">
-          {isOverlay && <FlightDeals />}
           <FlightCard />
           {/* <DummyTicket /> */}
           <Dummy />
