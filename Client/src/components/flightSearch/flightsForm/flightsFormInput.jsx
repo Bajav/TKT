@@ -99,6 +99,7 @@ function FlightsForm() {
         "http://localhost:3000/results"
       );
       setFlightResults(response.data);
+      console.log(response.data[0,1,2]);
       setFormData(formData);
       navigate("results");
     } catch (error) {

@@ -12,8 +12,7 @@ body {
   .card {
     height: 90px;
   }
-  .backBtn
-  {
+  .backBtn {
     position: relative;
     top: 10px;
     text-transform: capitalize;
@@ -22,7 +21,7 @@ body {
     border: none;
     border-radius: 20px;
     font-size: 12px;
-    color:$page_color;
+    color: $page_color;
     font-family: $textFont;
     background-color: $visibleFontColor;
   }
@@ -49,32 +48,33 @@ h6 {
   font-size: 15px;
   font-weight: 600;
 }
-.filter-form
-{
+.filter-form {
+  // background: red;
+  width: 95%;
   // position: absolute;
-  background: $ticketColor;
-  color: $page_color;
-  font-family: $textFont,sans-serif;
-  width: 40vw;
-  z-index: 20;
-  top: 30px;
-  .option
-  {
+  button {
+    background: $ticketColor;
+    color: $page_color;
+    font-family: $textFont, sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: none;
+  }
+  .option {
     color: $visibleFontColor;
     width: 300px;
   }
-  select
-  {
+  select {
     width: 100px;
   }
-  option
-  {
+  option {
     color: $visibleFontColor;
-      font-size: 10px;
+    font-size: 10px;
     width: 10px;
   }
 }
-.optionName
-{
+.optionName {
   width: 10px;
 }

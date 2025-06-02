@@ -13,9 +13,10 @@ function FlightCard() {
   const { iataCodes } = useContext(FlightContext);
   const { airlineData } = useContext(FlightContext);
   const { flightResults } = useContext(FlightContext);
-  console.log("flightResults",flightResults);
+  console.log("flightResults", flightResults);
   // states
   const [isOverlay, setOverlay] = useState(false);
+  const [filterDropDown,setFilterDropDown] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
@@ -42,8 +43,6 @@ function FlightCard() {
     fetchData();
   }, []);
 
-  // Filter flights when filters change
-  // Extract unique airlines from flightResults
   useEffect(() => {
     const uniqueAirlineCodes = [
       ...new Set(
@@ -53,13 +52,13 @@ function FlightCard() {
     const filteredAirlines = airlineData.filter((airline) =>
       uniqueAirlineCodes.includes(airline.code)
     );
-    setFilteredPrices(prices);
     setAvailableAirlines(filteredAirlines);
   }, [flightResults, airlineData]);
-     const prices = [...new Set(flightResults.flatMap((itinerary)=>{
-      itinerary.price.total
-    }))];
-    console.log(prices);
+  const prices = [
+    ...new Set(flightResults.flatMap((itinerary) => itinerary.price.total)),
+  ];
+  // setFilteredPrices(prices);
+  console.log(prices);
   // Filter flights when filters change
   useEffect(() => {
     const applyFilters = () => {
@@ -84,7 +83,7 @@ function FlightCard() {
           : true;
         return priceOk && stopsOk && airlineOk;
       });
-      
+
       console.log(filters);
       setFilteredFlights(results);
     };
@@ -143,9 +142,9 @@ function FlightCard() {
   return (
     <Fragment>
       <div className="filter-form">
-        <h3>Filter Flights</h3>
-        <form>
-          <div>
+        <button>Filter Flights</button>
+        {filterDropDown &&  <form className="filters">
+          <div className="maxPrice">
             <label>Max Price (USD):</label>
             <input
               type="number"
@@ -155,7 +154,7 @@ function FlightCard() {
               placeholder="No limit"
             />
           </div>
-          <div>
+          <div className="stops">
             <label>Stops:</label>
             <select
               name="stops"
@@ -166,7 +165,7 @@ function FlightCard() {
               <option value="0">Non-stop (0 stops)</option>
             </select>
           </div>
-          <div>
+          <div className="byAirline">
             <label>Airline:</label>
             <select
               name="airline"
@@ -181,7 +180,7 @@ function FlightCard() {
               ))}
             </select>
           </div>
-        </form>
+        </form>}
       </div>
 
       {filteredFlights.length < 1 ? (
