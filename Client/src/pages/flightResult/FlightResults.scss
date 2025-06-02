@@ -62,19 +62,31 @@ h6 {
     border-radius: 20px;
     border: none;
   }
-  .option {
-    color: $visibleFontColor;
-    width: 300px;
+  .filters {
+    background: $actionOrange;
+    position: absolute;
+    margin-top: 10px;
+    z-index: 30;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: $textFont, sans-serif;
+    color: $page_color;
   }
-  select {
-    width: 100px;
+  .maxPrice
+  {
+    input
+    {
+      margin-left: 10px;
+      outline: none;
+      border-bottom: 1px solid;
+    }
   }
-  option {
-    color: $visibleFontColor;
-    font-size: 10px;
-    width: 10px;
-  }
+    option
+    {
+      background: $ticketColor;
+      font-size: 10px;
+    }
 }
-.optionName {
-  width: 10px;
-}
+// .optionName {
+//   width: 10px;
+// }

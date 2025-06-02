@@ -16,7 +16,7 @@ function FlightCard() {
   console.log("flightResults", flightResults);
   // states
   const [isOverlay, setOverlay] = useState(false);
-  const [filterDropDown,setFilterDropDown] = useState(false);
+  const [filterDropDown,setFilterDropDown] = useState(true);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
@@ -145,13 +145,13 @@ function FlightCard() {
         <button>Filter Flights</button>
         {filterDropDown &&  <form className="filters">
           <div className="maxPrice">
-            <label>Max Price (USD):</label>
+            <label>Max Price (USD) :</label>
             <input
               type="number"
               name="maxPrice"
               value={filters.maxPrice}
               onChange={handleFilterChange}
-              placeholder="No limit"
+              placeholder="set price limit"
             />
           </div>
           <div className="stops">
