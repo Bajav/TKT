@@ -8,6 +8,7 @@ import Loader from "../../loader";
 import "./ticket.scss";
 // import components
 import { Arrow } from "../flightArrowSvg";
+import line from '../../../assets/icons/line.svg';
 
 function FlightCard() {
   // contexts
@@ -239,7 +240,7 @@ function FlightCard() {
                 <h5>{"2.00pm" || ""}</h5>
               </div>
             </div>
-
+        <img className="lineImg" src={line} />
           </div>
         </div>
       )}
