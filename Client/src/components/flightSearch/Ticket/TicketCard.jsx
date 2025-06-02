@@ -192,10 +192,8 @@ function FlightCard() {
         filteredFlights.map((itinerary, index) => {
           const segments = itinerary.itineraries[0]?.segments || [];
           const segmentNumber = segments.length;
-          console.log("iatacodeeee", segments[0].departure.iataCode);
           const lastSegmentIndex = segmentNumber - 1;
           const segmentOne = itinerary.itineraries[0].segments;
-          const segmentTwo = itinerary.itineraries[1]?.segments || [];
 
           return (
             <div className="main-cards" key={index}>
@@ -221,8 +219,7 @@ function FlightCard() {
                   <div className="origin">
                     <h2>{segments[0]?.departure.iataCode || ""}</h2>
                     <h5>
-                      {iataLookup[segments[0]?.departure.iataCode]?.City ||
-                        "xxx"}
+                      {iataLookup[segments[0]?.departure.iataCode]?.city || "xxx"}
                     </h5>
                     <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
                   </div>
@@ -239,8 +236,7 @@ function FlightCard() {
                       {segments[lastSegmentIndex]?.arrival.iataCode || ""}
                     </h2>
                     <h5>
-                      {iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]
-                        ?.City || ""}
+                     {iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]?.city || "xxx"}
                     </h5>
                     <h5>
                       {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
@@ -296,8 +292,7 @@ function FlightCard() {
                             <div className="origin">
                               <h2>{stopOver.departure.iataCode}</h2>
                               <h5>
-                                {iataLookup[stopOver.departure.iataCode]
-                                  ?.City || ""}
+                              {iataLookup[stopOver.departure.iataCode]?.city || ""}
                               </h5>
                               <h5>{stopOver.departure.at.slice(11)}</h5>
                             </div>
@@ -307,8 +302,8 @@ function FlightCard() {
                             <div className="item">
                               <h2>{stopOver.arrival.iataCode}</h2>
                               <h5>
-                                {iataLookup[stopOver.arrival.iataCode]?.City ||
-                                  ""}
+                               {iataLookup[stopOver.arrival.iataCode]?.city || "ddd"}
+
                               </h5>
                               <h5>{stopOver.arrival.at.slice(11)}</h5>
                             </div>
