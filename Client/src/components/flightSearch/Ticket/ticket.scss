@@ -320,7 +320,7 @@
   background: $ticketColor;
   padding: 10px;
   border-radius: 20px;
-  height: 300px;
+  height: 270px;
   position: relative;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   .ticket-header {
@@ -351,7 +351,7 @@
 .flightDealContainer::after {
   content: "";
   position: absolute;
-  top: 51%;
+  top: 57%;
   width: 20px;
   height: 20px;
   background-color: $page_color; 
@@ -392,4 +392,8 @@
   display: flex;
   justify-content: space-between;
   padding: 2px;
+}
+.flightDetails
+{
+  margin-top: 5px;
 }
