@@ -15,6 +15,7 @@ function FlightsForm() {
   // contexts
   const { setFormData } = useContext(FlightContext);
   const { setIataCodes } = useContext(FlightContext);
+  const { setFlightResults } = useContext(FlightContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -97,6 +98,7 @@ function FlightsForm() {
       const response = await axios.post(
         "http://localhost:3000/results"
       );
+      setFlightResults(response);
       setFormData(formData);
       navigate("results");
     } catch (error) {
