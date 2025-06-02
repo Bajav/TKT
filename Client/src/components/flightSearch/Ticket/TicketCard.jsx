@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
 import Loader from "../../loader";
 // import scss
-// import './ticket.scss';
+import './ticket.scss';
 // import components
 import { Arrow } from "../flightArrowSvg";
 
@@ -16,7 +16,7 @@ function FlightCard() {
   const { flightResults } = useContext(FlightContext);
   console.log("flightResults", flightResults);
   // states
-  const [isOverlay, setOverlay] = useState(false);
+  const [isOverlay, setOverlay] = useState(true);
   const [filterDropDown, setFilterDropDown] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
@@ -185,7 +185,7 @@ function FlightCard() {
           </form>
         )}
       </div>
-
+      {isOverlay && <div className="overlay"></div>}
       {filteredFlights.length < 1 ? (
         <Loader loaderTag="Searching for flights" />
       ) : (
