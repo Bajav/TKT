@@ -316,10 +316,24 @@
   }
   .overlay
   {
+    padding: 10px;
     background-color: $page_color;
     height: 100vh;
     width: 100vw;
     position: absolute;
     z-index: 40;
     top: 0;
+    .funcContainer
+    {
+      button
+      {
+        background: $actionOrange;
+        padding: 5px 15px;
+        border-radius: 15px;
+        border: none;
+        font-family: $textFont,sans-serif;
+        color: $page_color;
+        text-transform: capitalize;
+      }
+    }
   }
