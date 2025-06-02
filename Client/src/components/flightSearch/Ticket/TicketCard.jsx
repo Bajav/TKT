@@ -16,7 +16,7 @@ function FlightCard() {
   console.log("flightResults", flightResults);
   // states
   const [isOverlay, setOverlay] = useState(false);
-  const [filterDropDown,setFilterDropDown] = useState(true);
+  const [filterDropDown, setFilterDropDown] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
@@ -29,7 +29,7 @@ function FlightCard() {
   });
   const navigate = useNavigate();
 
-  // Fetch data
+  // Fetch data --- use effects ---
   useEffect(() => {
     const fetchData = () => {
       try {
@@ -133,6 +133,7 @@ function FlightCard() {
     }
   };
 
+  const showFilterDropDown = () => setFilterDropDown(!filterDropDown);
   // Handle filter changes
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -142,45 +143,47 @@ function FlightCard() {
   return (
     <Fragment>
       <div className="filter-form">
-        <button>Filter Flights</button>
-        {filterDropDown &&  <form className="filters">
-          <div className="maxPrice">
-            <label>Max Price (USD) :</label>
-            <input
-              type="number"
-              name="maxPrice"
-              value={filters.maxPrice}
-              onChange={handleFilterChange}
-              placeholder="set price limit"
-            />
-          </div>
-          <div className="stops">
-            <label>Stops:</label>
-            <select
-              name="stops"
-              value={filters.stops}
-              onChange={handleFilterChange}
-            >
-              <option value="any">Any</option>
-              <option value="0">Non-stop (0 stops)</option>
-            </select>
-          </div>
-          <div className="byAirline">
-            <label>Airline:</label>
-            <select
-              name="airline"
-              value={filters.airline}
-              onChange={handleFilterChange}
-            >
-              <option value="">All Airlines</option>
-              {availableAirlines.map((airline) => (
-                <option key={airline.code} value={airline.code}>
-                  {airline.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </form>}
+        <button onClick={showFilterDropDown}>Filter Flights</button>
+        {filterDropDown && (
+          <form className="filters">
+            <div className="maxPrice">
+              <label>Max Price (USD) :</label>
+              <input
+                type="number"
+                name="maxPrice"
+                value={filters.maxPrice}
+                onChange={handleFilterChange}
+                placeholder="set price limit"
+              />
+            </div>
+            <div className="stops">
+              <label>Stops:</label>
+              <select
+                name="stops"
+                value={filters.stops}
+                onChange={handleFilterChange}
+              >
+                <option value="any">Any</option>
+                <option value="0">Non-stop (0 stops)</option>
+              </select>
+            </div>
+            <div className="byAirline">
+              <label>Airline:</label>
+              <select
+                name="airline"
+                value={filters.airline}
+                onChange={handleFilterChange}
+              >
+                <option value="">All Airlines</option>
+                {availableAirlines.map((airline) => (
+                  <option key={airline.code} value={airline.code}>
+                    {airline.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </form>
+        )}
       </div>
 
       {filteredFlights.length < 1 ? (
