@@ -1,9 +1,8 @@
-import { Fragment, useEffect, useState,useContext } from "react";
+import { Fragment, useEffect, useState, useContext } from "react";
 import { FlightContext } from "../../context/flightSearch.context";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Arrow } from "../flightArrowSvg";
-import BrandedFaresOverlay from "../BrandedFaresOverlay";
 import axios from "axios";
 import Loader from "../../loader";
 // import scss
@@ -11,11 +10,12 @@ import Loader from "../../loader";
 
 function FlightCard() {
   // contexts
-  const {iataCodes} = useContext(FlightContext);
-  const {airlineData} = useContext(FlightContext);
+  const { iataCodes } = useContext(FlightContext);
+  const { airlineData } = useContext(FlightContext);
+  const { flightResults } = useContext(FlightContext);
+  console.log("flightResults",flightResults);
   // states
-  const [flightResponse, setFlightResponse] = useState([]);
-  const [isOverlay,setOverlay] = useState(false);
+  const [isOverlay, setOverlay] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [dropDown, showDropDown] = useState(null);
   const [outBoundFlight, setFlight] = useState({});
@@ -28,40 +28,37 @@ function FlightCard() {
   const navigate = useNavigate();
 
   // Fetch data
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const flightsRes = await axios.get("http://localhost:3000/results");
-      console.log("Flights response:", flightsRes.data);
-      setFlightResponse(flightsRes.data);
-      setFilteredFlights(flightsRes.data);
-    } catch (err) {
-      console.error("Failed to fetch data:", err);
-      console.log("Error response:", err.response?.data);
-      console.log("Error status:", err.response?.status);
-    }
-  };
-  fetchData();
-}, []);
+  useEffect(() => {
+    const fetchData = () => {
+      try {
+        setFilteredFlights(flightResults);
+      } catch (err) {
+        console.error("Failed to fetch data:", err);
+        console.log("Error response:", err.response?.data);
+        console.log("Error status:", err.response?.status);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Filter flights when filters change
-  // Extract unique airlines from flightResponse
+  // Extract unique airlines from flightResults
   useEffect(() => {
     const uniqueAirlineCodes = [
       ...new Set(
-        flightResponse.flatMap((itinerary) => itinerary.validatingAirlineCodes)
+        flightResults.flatMap((itinerary) => itinerary.validatingAirlineCodes)
       ),
     ];
     const filteredAirlines = airlineData.filter((airline) =>
       uniqueAirlineCodes.includes(airline.code)
     );
     setAvailableAirlines(filteredAirlines);
-  }, [flightResponse, airlineData]);
+  }, [flightResults, airlineData]);
 
   // Filter flights when filters change
   useEffect(() => {
     const applyFilters = () => {
-      const results = flightResponse.filter((itinerary) => {
+      const results = flightResults.filter((itinerary) => {
         // Price filter
         const priceOk = filters.maxPrice
           ? parseFloat(itinerary.price.grandTotal) <=
@@ -87,7 +84,7 @@ useEffect(() => {
     };
 
     applyFilters();
-  }, [filters, flightResponse]);
+  }, [filters, flightResults]);
 
   // Lookup tables
   const iataLookup = iataCodes.reduce((lookup, item) => {
@@ -104,7 +101,7 @@ useEffect(() => {
       logo: item.logo,
       name: item.name,
     };
-    return airlineLookUp; 
+    return airlineLookUp;
   }, {});
 
   // Button actions

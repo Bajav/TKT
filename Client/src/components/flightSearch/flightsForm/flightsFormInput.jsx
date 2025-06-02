@@ -98,7 +98,7 @@ function FlightsForm() {
       const response = await axios.post(
         "http://localhost:3000/results"
       );
-      setFlightResults(response);
+      setFlightResults(response.data);
       setFormData(formData);
       navigate("results");
     } catch (error) {
