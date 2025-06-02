@@ -342,7 +342,6 @@ function FlightCard() {
                   </div>
                   <div className="Alldetails">
                     <h5>SEATS LEFT: {itinerary.numberOfBookableSeats}</h5>
-                    <h5>LAST DATE: {itinerary.lastTicketingDate}</h5>
                     <h5>
                       {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
                         ?.cabin || ""}

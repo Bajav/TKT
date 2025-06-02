@@ -52,14 +52,16 @@ h6 {
   // background: red;
   width: 95%;
   // position: absolute;
+  margin-top: 10px;
   button {
-    background: $ticketColor;
-    color: $page_color;
+    background: $actionOrange;
+    color: $inputBackGround;
     font-family: $textFont, sans-serif;
     font-size: 15px;
     letter-spacing: 0.5px;
     padding: 5px 20px;
-    border-radius: 20px;
+    border-radius: 10px;
+    // font-weight: 0;
     border: none;
   }
   .filters {
