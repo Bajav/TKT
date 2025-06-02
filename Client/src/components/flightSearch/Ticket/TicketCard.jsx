@@ -9,6 +9,13 @@ import "./ticket.scss";
 // import components
 import { Arrow } from "../flightArrowSvg";
 import line from '../../../assets/icons/line.svg';
+import calender from '../../../assets/icons/calender.svg';
+import seat from '../../../assets/icons/Seat.svg';
+import carier from '../../../assets/icons/carier.svg';
+import pctMile from '../../../assets/icons/pctMile.svg';
+import cutlary from '../../../assets/icons/cutlary.svg';
+import suiteCase from '../../../assets/icons/suiteCase.svg';
+import clock from '../../../assets/icons/clock.svg';
 
 function FlightCard() {
   // contexts
@@ -241,6 +248,11 @@ function FlightCard() {
               </div>
             </div>
             <h6 className="lineNew">--------------------------------------------------------</h6>
+            <div className="flightDetails">
+              <div className="itemContainer">
+
+              </div>
+            </div>
           </div>
         </div>
       )}
