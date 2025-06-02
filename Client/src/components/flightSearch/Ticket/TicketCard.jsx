@@ -220,7 +220,7 @@ function FlightCard() {
                 </div>
                 <h4>{"UR, Uganda Air" || ""}</h4>
               </div>
-              <h4>{"" || "economy premium"}</h4>
+              <h3>{"" || "economy premium"}</h3>
             </div>
 
             <div className="ticket-header">
