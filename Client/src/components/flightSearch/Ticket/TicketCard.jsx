@@ -2,11 +2,12 @@ import { Fragment, useEffect, useState, useContext } from "react";
 import { FlightContext } from "../../context/flightSearch.context";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Arrow } from "../flightArrowSvg";
 import axios from "axios";
 import Loader from "../../loader";
 // import scss
 // import './ticket.scss';
+// import components
+import { Arrow } from "../flightArrowSvg";
 
 function FlightCard() {
   // contexts
@@ -115,7 +116,6 @@ function FlightCard() {
   };
 
   const selectButton = async (index) => {
-    setShowOverLay(true);
     console.log("selectButton clicked");
     setFlight(filteredFlights[index]);
   };
