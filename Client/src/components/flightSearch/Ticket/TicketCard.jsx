@@ -240,7 +240,7 @@ function FlightCard() {
                 <h5>{"2.00pm" || ""}</h5>
               </div>
             </div>
-        <img className="lineImg" src={line} />
+            <h6 className="lineNew">--------------------------------------------------------</h6>
           </div>
         </div>
       )}

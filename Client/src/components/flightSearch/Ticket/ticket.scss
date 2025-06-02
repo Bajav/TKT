@@ -334,10 +334,16 @@
       color: #59f763;
     }
   }
-  .lineImg
-  {
-    margin-top: 4px;
-    margin-left: 3px;
+  .lineNew
+  { h6{
+    margin: 0;
+    padding: 0;
+  }
+    text-align: center;
+    color: $page_color;
+    font-family: $textFont,sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
   }
 }
 
