@@ -21,8 +21,8 @@ function FlightCard() {
   const { iataCodes } = useContext(FlightContext);
   const { airlineData } = useContext(FlightContext);
   const { flightResults } = useContext(FlightContext);
-  const { bookedFlight,setBookedFlight } = useContext(FlightContext);
-  const { selectedFlight,setSelectFlight } = useContext(FlightContext);
+  const { bookedFlight, setBookedFlight } = useContext(FlightContext);
+  const { selectedFlight, setSelectFlight } = useContext(FlightContext);
   console.log("flightResults", flightResults);
   // states
   const [isOverlay, setOverlay] = useState(false);
@@ -115,7 +115,7 @@ function FlightCard() {
       logo: item.logo,
       name: item.name,
     };
-    return airlineLookUp; 
+    return airlineLookUp;
   }, {});
 
   // Button actions
@@ -126,13 +126,18 @@ function FlightCard() {
 
   const selectButton = async (index) => {
     console.log("selectButton clicked");
-    setSelectFlight(filteredFlights[index]);
-    console.log(selectedFlight);
+    const selected = filteredFlights[index];
+    setSelectFlight(selected); // this still updates UI state if needed
     setOverlay(true);
-    try{
-      const response = await axios.post("http://localhost:3000/flights/",{selectedFlight});
-    }catch(err){
-      console.log(err);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/brandedUpSell",
+        selected
+      );
+      console.log("brandedUpsell res", response);
+    } catch (err) {
+      console.log("Axios error:", err.response.data.message);
     }
   };
 
@@ -204,7 +209,7 @@ function FlightCard() {
       {isOverlay && (
         <div className="overlay">
           <div className="funcContainer">
-            <button onClick={()=>setOverlay(false)}>cancel</button>
+            <button onClick={() => setOverlay(false)}>cancel</button>
           </div>
           <h3 className="text">choose your best deal</h3>
           <div className="flightDealsHeader ticket-header">
@@ -290,46 +295,33 @@ function FlightCard() {
                   <li>50 PCT QMILES ACCUMULATION</li>
                 </div>
               </div>
-
             </div>
-                   <div className="flights-actions">
-                  <div className="time-details">
-                    <div className="flex-tim">
-
-                      <h4>
-                        23.DEC.24
-                      </h4>
-                    </div>
-                    <div className="flex-tim">
-                      <h4>
-                        4 h 30 m
-                      </h4>
-                    </div>
-                  </div>
-                  <div className="price-details">
-                    <h4>$243/<span>pax</span></h4>
-                  </div>
-                  <div className="actions">
-                    <button
-                      onClick={() => {}}
-                      className="bookBtn"
-                    >
-                      book now
-                    </button>
-                    <button
-                      onClick={() => {}}
-                      className="detailsBtn"
-                    >
-                     economy
-                    </button>
-                  </div>
+            <div className="flights-actions">
+              <div className="time-details">
+                <div className="flex-tim">
+                  <h4>23.DEC.24</h4>
                 </div>
-
-            <div className="flightFunction">
-
+                <div className="flex-tim">
+                  <h4>4 h 30 m</h4>
+                </div>
+              </div>
+              <div className="price-details">
+                <h4>
+                  $243/<span>pax</span>
+                </h4>
+              </div>
+              <div className="actions">
+                <button onClick={() => {}} className="bookBtn">
+                  book now
+                </button>
+                <button onClick={() => {}} className="detailsBtn">
+                  economy
+                </button>
+              </div>
             </div>
+
+            <div className="flightFunction"></div>
           </div>
-          
         </div>
       )}
       {filteredFlights.length < 1 ? (

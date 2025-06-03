@@ -36,7 +36,7 @@ const searchFlights = async (req, res) => {
     // console.log(originCode, destinationCode);
 
     const origin = "EBB";
-    const destination ="DXB";
+    const destination ="LHR";
     const departureDate ='2025-06-08';
     const returnDate = '2025-06-15';
     const adult = 1;
@@ -60,7 +60,7 @@ const searchFlights = async (req, res) => {
       return res.status(404).json({ message: "No flights available" });
     }
     responsse = response.data;
-    console.log(`responess::`, responsse[0]);
+    console.log(`responess::`, responsse[3]);
     const limitedData = response.data.slice(0, 1);
     // console.log("LIMITED DATA ::", limitedData);
 
@@ -76,21 +76,20 @@ const searchFlights = async (req, res) => {
 
 
 const brandedUpSell = async (req, res) => {
-  try {
-    const selectedFlight = req.body;
-    console.log("selectedFlight recieved");
-    console.log("selectedFlight", selectedFlight);
+  const selectedFlight = req.body;
+  console.log("selectedFlight received:", selectedFlight.id);
 
+  try {
     const response = await amadeus.shopping.flightOffers.upselling.post({
       data: {
         type: "flight-offers-upselling",
-        flightOffers: [responsse[0]],
+        flightOffers: [selectedFlight],  // Use selectedFlight, not responsse
         include: ["bags"],
         payments: [
           {
             brand: "VISA_IXARIS",
             binNumber: 123456,
-            flightOfferIds: [1],
+            flightOfferIds: [selectedFlight.id], // You might want to make this dynamic
           },
         ],
       },
@@ -98,16 +97,18 @@ const brandedUpSell = async (req, res) => {
         include: "detailed-fare-rules",
       },
     });
-    if (response.data.length === 0) {
+
+    if (!response.data || response.data.length === 0) {
       return res.send("No data available");
-    } else {
-      brandedFlight = response.data;
-      console.log("brandedFlight", brandedFlight);
-      return res.json(response.data);
     }
+
+    console.log("brandedFlight", response.data);
+    return res.json(response.data);
+
   } catch (err) {
-    console.log("Error getting branded flights:", err);
-    return res.status(500).json({ message: "Error fetching branded flights" });
+    console.error("Error getting branded flights:", err);
+    const statusCode = err.response?.status || 500;
+    return res.status(statusCode).json({ message: err.description || err.message });
   }
 };
 
