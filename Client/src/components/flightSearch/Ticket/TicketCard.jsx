@@ -23,7 +23,7 @@ function FlightCard() {
   const { flightResults } = useContext(FlightContext);
   const { bookedFlight, setBookedFlight } = useContext(FlightContext);
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
-  console.log("flightResults", flightResults);
+  const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
@@ -124,22 +124,24 @@ function FlightCard() {
     showDropDown((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  const selectButton = async (index) => {
-    console.log("selectButton clicked");
-    const selected = filteredFlights[index];
-    setSelectFlight(selected); // this still updates UI state if needed
-    setOverlay(true);
+const selectButton = async (index) => {
+  console.log("selectButton clicked");
+  const selected = filteredFlights[index];
+  setSelectFlight(selected);
+  setOverlay(true);
 
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/brandedUpSell",
-        selected
-      );
-      console.log("brandedUpsell res", response);
-    } catch (err) {
-      console.log("Axios error:", err.response.data.message);
-    }
-  };
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/brandedUpSell",
+      selected
+    );
+    setBrandedUpSell(response.data); // likely want .data, not full response
+    console.log("brandedUpsell res", response.data);
+  } catch (err) {
+    console.error("Axios error:", err?.response?.data?.message || err.message);
+  }
+};
+
 
   const bookNow = async (index) => {
     console.log("book now btn hit");
@@ -160,6 +162,12 @@ function FlightCard() {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
+
+  const fareBrandMap = {
+  ECONVENIEN: "Economy Convenient",
+  ECOFLEX: "Economy Flexible",
+  ECOBASIC: "Economy Basic",
+};
 
   return (
     <Fragment>
@@ -226,35 +234,43 @@ function FlightCard() {
               <h5>{"Dubai , UAE" || ""}</h5>
             </div>
           </div>
+          {brandedUpSell.map((itinerary)=>{
+            const{itineraries,price,validatingAirlineCodes,travelerPricings}= itinerary;
+            const {aircraft,arrival,departure,duration} = itineraries[0];
+            const departureObject = itineraries[0].segments[0].departure;
+            const arrivalObject = itineraries[0].segments[1].arrival;
+          
+          {console.log("price",price)}
+          return(
           <div className="flightDealContainer">
             <div className="flights-header">
               <div className="airLineIcone">
                 <div className="icon">
                   <img
-                    src={"" || ""}
+                    src={airlinesLookUp[itineraries[0].segments[0]?.carrierCode]?.logo|| ""}
                     alt="Airline Logo"
                     className="airline-logo"
                   />
                 </div>
-                <h4>{"UR, Uganda Air" || ""}</h4>
+                <h4>{validatingAirlineCodes[0] || ""}</h4>
               </div>
-              <h3>{"" || "economy premium"}</h3>
+              <h3>{fareBrandMap[travelerPricings[0].fareDetailsBySegment[0].brandedFare] || "economy premium"}</h3>
             </div>
 
             <div className="ticket-header">
               <div className="origin">
-                <h2>{"Kla" || ""}</h2>
-                <h5>{"Kampala, Uganda" || ""}</h5>
-                <h5>{"12:00 pm" || ""}</h5>
+                <h2>{departureObject.iataCode || ""}</h2>
+                <h5>{iataLookup[departureObject.iataCode]?.city || ""}</h5>
+                <h5>{departureObject.at.slice(11) || ""}</h5>
               </div>
               <div className="center">
                 <Arrow color="#F5F7F8" width="200px" />
                 {2 > 1 ? <h5>{2 - 1} stops</h5> : <h5>0 stops</h5>}
               </div>
               <div className="item">
-                <h2>{"DXB" || ""}</h2>
-                <h5>{"Dubai , UAE" || ""}</h5>
-                <h5>{"2.00pm" || ""}</h5>
+                <h2>{arrivalObject.iataCode || ""}</h2>
+                <h5>{iataLookup[arrivalObject.iataCode]?.city || ""}</h5>
+                <h5>{arrivalObject.at.slice(11) || ""}</h5>
               </div>
             </div>
             <h6 className="lineNew">
@@ -307,7 +323,7 @@ function FlightCard() {
               </div>
               <div className="price-details">
                 <h4>
-                  $243/<span>pax</span>
+                  {price.grandTotal}/<span>pax</span>
                 </h4>
               </div>
               <div className="actions">
@@ -322,6 +338,8 @@ function FlightCard() {
 
             <div className="flightFunction"></div>
           </div>
+          )
+        })}
         </div>
       )}
       {filteredFlights.length < 1 ? (
