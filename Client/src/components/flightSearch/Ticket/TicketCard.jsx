@@ -34,7 +34,7 @@ function FlightCard() {
   const [availableAirlines, setAvailableAirlines] = useState([]);
   const [filters, setFilters] = useState({
     maxPrice: "",
-    stops: 0, // Options: "any", "0"
+    // stops: 0, // Options: "any", "0"
     airline: "",
   });
   const navigate = useNavigate();
@@ -91,7 +91,7 @@ function FlightCard() {
         const airlineOk = filters.airline
           ? itinerary.validatingAirlineCodes.includes(filters.airline)
           : true;
-        return priceOk && stopsOk && airlineOk;
+        return priceOk && airlineOk;
       });
 
       console.log("filter res", results);
@@ -164,6 +164,10 @@ function FlightCard() {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
+  const cancelBTN =()=>{
+    setBrandedUpSell([]);
+    setOverlay(false);
+  }
 
   const fareBrandMap = {
     ECONVENIEN: "Economy Convenient",
@@ -219,7 +223,7 @@ function FlightCard() {
       {isOverlay && (
         <div className="overlay">
           <div className="funcContainer">
-            <button onClick={() => setOverlay(false)}>cancel</button>
+            <button onClick={ cancelBTN }>cancel</button>
           </div>
           <h3 className="text">choose your best deal</h3>
           <div className="flightDealsHeader ticket-header">
@@ -347,7 +351,7 @@ function FlightCard() {
                       <li>{perks.checkedBag || "No Checked Bag"}</li>
                     </div>
                     <div className="itemContainer">
-                      <li>{perks.refundable  ? "refundable at a fee" : " Refundable Ticket"}</li>
+                      <li>{perks.refundable ? "refundable at a fee" : " Refundable Ticket"}</li>
                     </div>
                   </div>
 
