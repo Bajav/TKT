@@ -94,7 +94,7 @@ function FlightCard() {
         return priceOk && stopsOk && airlineOk;
       });
 
-      console.log(filters);
+      console.log("filter res",results);
       setFilteredFlights(results);
     };
 

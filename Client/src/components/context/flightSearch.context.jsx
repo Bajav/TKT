@@ -7,12 +7,14 @@ export const FlightContext = createContext({
   setIataCodes: () => {},
   airlineData: [],
   setAirlineData: () => {},
-  flightResults:[],
-  setFlightResults:()=>{},
-  selectedFlight:[],
-  setSelectFlight:()=>{},
-  bookedFlight:[],
-  setBookedFlight:()=>{}
+  flightResults: [],
+  setFlightResults: () => {},
+  selectedFlight: [],
+  setSelectFlight: () => {},
+  bookedFlight: [],
+  setBookedFlight: () => {},
+  brandedUpSell: [],
+  setBrandedUpSell: () => {},
 });
 
 export const FlightSearchProvider = ({ children }) => {
@@ -20,8 +22,9 @@ export const FlightSearchProvider = ({ children }) => {
   const [iataCodes, setIataCodes] = useState([]);
   const [airlineData, setAirlineData] = useState([]);
   const [flightResults, setFlightResults] = useState([]);
-  const [selectedFlight,setSelectFlight] = useState([]);
-  const [bookedFlight,setBookedFlight] = useState([]);
+  const [selectedFlight, setSelectFlight] = useState([]);
+  const [bookedFlight, setBookedFlight] = useState([]);
+  const [brandedUpSell, setBrandedUpSell] = useState([]);
 
   const value = {
     flightSearch,
@@ -30,9 +33,14 @@ export const FlightSearchProvider = ({ children }) => {
     setIataCodes,
     airlineData,
     setAirlineData,
-    flightResults, setFlightResults,
-    selectedFlight,setSelectFlight,
-    bookedFlight,setBookedFlight
+    flightResults,
+    setFlightResults,
+    selectedFlight,
+    setSelectFlight,
+    bookedFlight,
+    setBookedFlight,
+    brandedUpSell,
+    setBrandedUpSell,
   };
   return (
     <FlightContext.Provider value={value}>{children}</FlightContext.Provider>
