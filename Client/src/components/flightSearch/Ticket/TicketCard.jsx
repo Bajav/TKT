@@ -64,11 +64,6 @@ function FlightCard() {
     );
     setAvailableAirlines(filteredAirlines);
   }, [flightResults, airlineData]);
-  const prices = [
-    ...new Set(flightResults.flatMap((itinerary) => itinerary.price.total)),
-  ];
-  // setFilteredPrices(prices);
-  console.log(prices);
   // Filter flights when filters change
   useEffect(() => {
     const applyFilters = () => {
@@ -78,7 +73,6 @@ function FlightCard() {
           ? parseFloat(itinerary.price.grandTotal) <=
             parseFloat(filters.maxPrice)
           : true;
-
         // Stops filter
         const stopsOk =
           filters.stops === "any" ||
@@ -249,6 +243,9 @@ function FlightCard() {
             } = itinerary;
             const segmentOne = itineraries[0].segments[0];
             const segmentTwo = itineraries[0].segments[1];
+            console.log("segmentOne",segmentOne);
+            console.log("segmentTwo",segmentTwo);
+            console.log("itineraries",itineraries);
             const departureObject = segmentOne.departure;
             const arrivalObject = segmentTwo.arrival;
             const amenities =
@@ -266,9 +263,9 @@ function FlightCard() {
 
               for (const item of amenities) {
                 const desc = item.description.toLowerCase();
-
+                const itemBoolean = item.isChargeable;
                 if (desc.includes("seat")) normalized.seatChoice = true;
-                else if (desc.includes("meal")) normalized.meal = true;
+                else if (desc.includes("meal") || desc.includes("food"))  normalized.meal = true;
                 else if (desc.includes("changeable"))
                   normalized.changeable = true;
                 else if (desc.includes("refundable"))

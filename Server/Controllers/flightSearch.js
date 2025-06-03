@@ -36,7 +36,7 @@ const searchFlights = async (req, res) => {
     // console.log(originCode, destinationCode);
 
     const origin = "EBB";
-    const destination ="LHR";
+    const destination ="DXB";
     const departureDate ='2025-06-08';
     const returnDate = '2025-06-15';
     const adult = 1;
