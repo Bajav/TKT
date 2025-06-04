@@ -84,7 +84,7 @@ function DummyTicket(props) {
           </div>
         </div>
       </div>
-      {dropDown === index ?(<div className="flightsDetails">
+      {/* {dropDown === index ?(<div className="flightsDetails">
         <Swiper
           spaceBetween={20}
           slidesPerView="auto"
@@ -133,7 +133,7 @@ function DummyTicket(props) {
           <h5>Economy</h5>
           <h5>CHECKED BAG : 30KG</h5>
         </div>
-      </div>) :null}
+      </div>) :null} */}
     </div>
   );
 }

@@ -15,6 +15,7 @@ import carier from "../../../assets/icons/carier.svg";
 import pctMile from "../../../assets/icons/pctMile.svg";
 import cutlary from "../../../assets/icons/cutlary.svg";
 import suiteCase from "../../../assets/icons/suiteCase.svg";
+import DummyTicket from "../../features/DummyTicket/DummyTicket";
 
 function FlightCard() {
   // contexts
@@ -410,182 +411,29 @@ function FlightCard() {
         <Loader loaderTag="Searching for flights" />
       ) : (
         filteredFlights.map((itinerary, index) => {
+          // console.log("itinerary for return",itinerary.itineraries[1]);
           const segments = itinerary.itineraries[0]?.segments || [];
           const segmentNumber = segments.length;
           const lastSegmentIndex = segmentNumber - 1;
           const segmentOne = itinerary.itineraries[0].segments;
           const segmentTwo = itinerary.itineraries[1].segments;
+          // console.log("departure flight",segmentOne);
+          // console.log("return flight",segmentTwo);
+          console.log('====================================');
+          console.log(segments);
+          console.log('====================================');
           return (
             <div className="flightContainer">
-              <div className="main-cards" key={index}>
-                <div className="flights-res">
-                  <div className="flights-header">
-                    <div className="airLineIcone">
-                      <div className="icon">
-                        <img
-                          src={
-                            airlinesLookUp[segments[0]?.carrierCode]?.logo || ""
-                          }
-                          alt="Airline Logo"
-                          className="airline-logo"
-                        />
-                      </div>
-                      <h4>
-                        {airlinesLookUp[segments[0]?.carrierCode]?.name || ""}
-                      </h4>
-                    </div>
-                    <h4>{segments[0]?.aircraft?.code || ""}</h4>
-                  </div>
-                  <div className="ticket-header">
-                    <div className="origin">
-                      <h2>{segments[0]?.departure.iataCode || ""}</h2>
-                      <h5>
-                        {iataLookup[segments[0]?.departure.iataCode]?.city ||
-                          "xxx"}
-                      </h5>
-                      <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
-                    </div>
-                    <div className="center">
-                      <Arrow color="#F5F7F8" width="200px" />
-                      {segmentNumber > 1 ? (
-                        <h5>{segmentNumber - 1} stops</h5>
-                      ) : (
-                        <h5>0 stops</h5>
-                      )}
-                    </div>
-                    <div className="item">
-                      <h2>
-                        {segments[lastSegmentIndex]?.arrival.iataCode || ""}
-                      </h2>
-                      <h5>
-                        {iataLookup[
-                          segments[lastSegmentIndex]?.arrival.iataCode
-                        ]?.city || "xxx"}
-                      </h5>
-                      <h5>
-                        {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="flights-actions">
-                    <div className="time-details">
-                      <div className="flex-tim">
-                        <h4>
-                          {segments[lastSegmentIndex]?.arrival.at.slice(
-                            0,
-                            10
-                          ) || ""}
-                        </h4>
-                      </div>
-                      <div className="flex-tim">
-                        <h4>
-                          {itinerary.itineraries[0]?.duration.slice(2) || ""}
-                        </h4>
-                      </div>
-                    </div>
-                    <div className="price-details">
-                      <h4>${itinerary.price?.grandTotal || ""}</h4>
-                    </div>
-                    <div className="actions">
-                      <button
-                        onClick={() => selectButton(index)}
-                        className="bookBtn"
-                      >
-                        select
-                      </button>
-                      <button
-                        onClick={() => seeDetails(index)}
-                        className="detailsBtn"
-                      >
-                        See Details
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              {/* {duration,segments,index} */}
+              {itinerary.itineraries.map((segment) => {
+                // const returnFlights = segments;
+                // console.log("segments",segment);
 
-                {dropDown === index ? (
-                  <div className="flightsDetails">
-                    <Swiper
-                      spaceBetween={20}
-                      slidesPerView="auto"
-                      onSlideChange={() => console.log("slide change")}
-                      onSwiper={(swiper) => console.log(swiper)}
-                      className="stopOvers"
-                    >
-                      {segmentOne.map((stopOver, setStopIndex) => (
-                        <SwiperSlide key={setStopIndex}>
-                          <div className="ticket-header">
-                            <div className="stopFlight">
-                              <div className="origin">
-                                <h2>{stopOver.departure.iataCode}</h2>
-                                <h5>
-                                  {iataLookup[stopOver.departure.iataCode]
-                                    ?.city || ""}
-                                </h5>
-                                <h5>{stopOver.departure.at.slice(11)}</h5>
-                              </div>
-                              <div className="center">
-                                <Arrow color="#F5F7F8" width="200px" />
-                              </div>
-                              <div className="item">
-                                <h2>{stopOver.arrival.iataCode}</h2>
-                                <h5>
-                                  {iataLookup[stopOver.arrival.iataCode]
-                                    ?.city || "ddd"}
-                                </h5>
-                                <h5>{stopOver.arrival.at.slice(11)}</h5>
-                              </div>
-                            </div>
-                            <div className="lineOne">
-                              <h5>
-                                --------------------------------------------
-                              </h5>
-                            </div>
-                            <div className="stop-details">
-                              <h5>
-                                LAYOVER TIME:{" "}
-                                {setStopIndex > 0
-                                  ? calculateLayover(
-                                      segmentOne[setStopIndex - 1].arrival.at,
-                                      stopOver.departure.at
-                                    )
-                                  : "N/A"}
-                              </h5>
-                              <h5>
-                                CLASS:{" "}
-                                {itinerary.travelerPricings[0]
-                                  ?.fareDetailsBySegment[0]?.class || ""}{" "}
-                                {itinerary.travelerPricings[0]
-                                  ?.fareDetailsBySegment[0]?.cabin || ""}
-                              </h5>
-                              <h5>AIRLINE: {stopOver.carrierCode}</h5>
-                              <h5>DURATION: {stopOver.duration.slice(2)}</h5>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                    <div className="line">
-                      <h5>-------------------------------------------</h5>
-                    </div>
-                    <div className="Alldetails">
-                      <h5>SEATS LEFT: {itinerary.numberOfBookableSeats}</h5>
-                      <h5>
-                        {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
-                          ?.cabin || ""}
-                      </h5>
-                      <h5>
-                        CHECKED BAG:{" "}
-                        {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
-                          ?.includedCheckedBags?.quantity || 0}{" "}
-                        pieces
-                      </h5>
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-              {itinerary.itineraries.map(({duration,segments}) => {
-                console.log(segments);
+                
+                const selectSegMents =[segments[0],segments[segments.length -1]];
+                // console.log(selectSegMents);
+                return (<DummyTicket />)
+              
               })}
             </div>
           );
@@ -606,3 +454,172 @@ const calculateLayover = (arrival, departure) => {
 };
 
 export default FlightCard;
+
+
+    //  <div className="main-cards" key={index}>
+    //             <div className="flights-res">
+    //               <div className="flights-header">
+    //                 <div className="airLineIcone">
+    //                   <div className="icon">
+    //                     <img
+    //                       src={
+    //                         airlinesLookUp[segments[0]?.carrierCode]?.logo || ""
+    //                       }
+    //                       alt="Airline Logo"
+    //                       className="airline-logo"
+    //                     />
+    //                   </div>
+    //                   <h4>
+    //                     {airlinesLookUp[segments[0]?.carrierCode]?.name || ""}
+    //                   </h4>
+    //                 </div>
+    //                 <h4>{segments[0]?.aircraft?.code || ""}</h4>
+    //               </div>
+    //               <div className="ticket-header">
+    //                 <div className="origin">
+    //                   <h2>{segments[0]?.departure.iataCode || ""}</h2>
+    //                   <h5>
+    //                     {iataLookup[segments[0]?.departure.iataCode]?.city ||
+    //                       "xxx"}
+    //                   </h5>
+    //                   <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
+    //                 </div>
+    //                 <div className="center">
+    //                   <Arrow color="#F5F7F8" width="200px" />
+    //                   {segmentNumber > 1 ? (
+    //                     <h5>{segmentNumber - 1} stops</h5>
+    //                   ) : (
+    //                     <h5>0 stops</h5>
+    //                   )}
+    //                 </div>
+    //                 <div className="item">
+    //                   <h2>
+    //                     {segments[lastSegmentIndex]?.arrival.iataCode || ""}
+    //                   </h2>
+    //                   <h5>
+    //                     {iataLookup[
+    //                       segments[lastSegmentIndex]?.arrival.iataCode
+    //                     ]?.city || "xxx"}
+    //                   </h5>
+    //                   <h5>
+    //                     {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
+    //                   </h5>
+    //                 </div>
+    //               </div>
+    //               <div className="flights-actions">
+    //                 <div className="time-details">
+    //                   <div className="flex-tim">
+    //                     <h4>
+    //                       {segments[lastSegmentIndex]?.arrival.at.slice(
+    //                         0,
+    //                         10
+    //                       ) || ""}
+    //                     </h4>
+    //                   </div>
+    //                   <div className="flex-tim">
+    //                     <h4>
+    //                       {itinerary.itineraries[0]?.duration.slice(2) || ""}
+    //                     </h4>
+    //                   </div>
+    //                 </div>
+    //                 <div className="price-details">
+    //                   <h4>${itinerary.price?.grandTotal || ""}</h4>
+    //                 </div>
+    //                 <div className="actions">
+    //                   <button
+    //                     onClick={() => selectButton(index)}
+    //                     className="bookBtn"
+    //                   >
+    //                     select
+    //                   </button>
+    //                   <button
+    //                     onClick={() => seeDetails(index)}
+    //                     className="detailsBtn"
+    //                   >
+    //                     See Details
+    //                   </button>
+    //                 </div>
+    //               </div>
+    //             </div>
+
+    //             {dropDown === index ? (
+    //               <div className="flightsDetails">
+    //                 <Swiper
+    //                   spaceBetween={20}
+    //                   slidesPerView="auto"
+    //                   onSlideChange={() => console.log("slide change")}
+    //                   onSwiper={(swiper) => console.log(swiper)}
+    //                   className="stopOvers"
+    //                 >
+    //                   {segmentOne.map((stopOver, setStopIndex) => (
+    //                     <SwiperSlide key={setStopIndex}>
+    //                       <div className="ticket-header">
+    //                         <div className="stopFlight">
+    //                           <div className="origin">
+    //                             <h2>{stopOver.departure.iataCode}</h2>
+    //                             <h5>
+    //                               {iataLookup[stopOver.departure.iataCode]
+    //                                 ?.city || ""}
+    //                             </h5>
+    //                             <h5>{stopOver.departure.at.slice(11)}</h5>
+    //                           </div>
+    //                           <div className="center">
+    //                             <Arrow color="#F5F7F8" width="200px" />
+    //                           </div>
+    //                           <div className="item">
+    //                             <h2>{stopOver.arrival.iataCode}</h2>
+    //                             <h5>
+    //                               {iataLookup[stopOver.arrival.iataCode]
+    //                                 ?.city || "ddd"}
+    //                             </h5>
+    //                             <h5>{stopOver.arrival.at.slice(11)}</h5>
+    //                           </div>
+    //                         </div>
+    //                         <div className="lineOne">
+    //                           <h5>
+    //                             --------------------------------------------
+    //                           </h5>
+    //                         </div>
+    //                         <div className="stop-details">
+    //                           <h5>
+    //                             LAYOVER TIME:{" "}
+    //                             {setStopIndex > 0
+    //                               ? calculateLayover(
+    //                                   segmentOne[setStopIndex - 1].arrival.at,
+    //                                   stopOver.departure.at
+    //                                 )
+    //                               : "N/A"}
+    //                           </h5>
+    //                           <h5>
+    //                             CLASS:{" "}
+    //                             {itinerary.travelerPricings[0]
+    //                               ?.fareDetailsBySegment[0]?.class || ""}{" "}
+    //                             {itinerary.travelerPricings[0]
+    //                               ?.fareDetailsBySegment[0]?.cabin || ""}
+    //                           </h5>
+    //                           <h5>AIRLINE: {stopOver.carrierCode}</h5>
+    //                           <h5>DURATION: {stopOver.duration.slice(2)}</h5>
+    //                         </div>
+    //                       </div>
+    //                     </SwiperSlide>
+    //                   ))}
+    //                 </Swiper>
+    //                 <div className="line">
+    //                   <h5>-------------------------------------------</h5>
+    //                 </div>
+    //                 <div className="Alldetails">
+    //                   <h5>SEATS LEFT: {itinerary.numberOfBookableSeats}</h5>
+    //                   <h5>
+    //                     {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
+    //                       ?.cabin || ""}
+    //                   </h5>
+    //                   <h5>
+    //                     CHECKED BAG:{" "}
+    //                     {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
+    //                       ?.includedCheckedBags?.quantity || 0}{" "}
+    //                     pieces
+    //                   </h5>
+    //                 </div>
+    //               </div>
+    //             ) : null}
+    //           </div>
