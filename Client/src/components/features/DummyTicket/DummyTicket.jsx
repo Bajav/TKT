@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // import './ticket.scss';
 import { Arrow } from "../../../components/flightSearch/flightArrowSvg";
 
-function DummyTicket() {
+function DummyTicket(props) {
     // define navigate
     const navigate = useNavigate();
     // drop down state
@@ -24,61 +24,59 @@ function DummyTicket() {
             };
 
   return (
-    <div className="main-cards" key={2}>
+    <div className="main-cards">
       <div className="flights-res">
         <div className="flights-header">
           <div className="airLineIcone">
             <div className="icon">
-              <img src="" alt="Airline Logo" className="airline-logo" />
+              <img src={props.airlineLogo} alt="Airline Logo" className="airline-logo" />
             </div>
-            <h4>UR, Uganda Air</h4>
+            <h4>{props.airlineName}</h4>
           </div>
-          <h4>A380</h4>
+          <h4>{props.airlineNumber}</h4>
         </div>
         <div className="ticket-header">
           <div className="origin">
-            <h2>kla</h2>
-            <h5>Kampala, Uganda</h5>
+            <h2>{props.origin}</h2>
+            <h5>{props.originCity}</h5>
 
-            <h5>12:00 pm</h5>
+            <h5>{props.departureTime}</h5>
           </div>
           <div className="center">
             <Arrow color="#F5F7F8" width="200px" />
-            <h4>0 stops</h4>
+            <h4>{props.time}</h4>
           </div>
           <div className="item">
-            <h2>dxb</h2>
-            <h5>Dubai , UAE</h5>
-            <h5>2.00pm</h5>
+            <h2>{props.destination}</h2>
+            <h5>{props.destinationCity}</h5>
+            <h5>{props.destinationTime}</h5>
           </div>
         </div>
         <div className="flights-actions">
           <div className="time-details">
             <div className="flex-tim">
-              <h4>23.DEC.24</h4>
+              <h4>{props.date}</h4>
             </div>
             <div className="flex-tim">
-              <h4>4h 30m</h4>
+              <h4>{props.Duration}</h4>
             </div>
           </div>
           <div className="price-details">
             <h4>
-              $200/<span>pax</span>
+              ${props.price}/<span>pax</span>
             </h4>
           </div>
           <div className="actions">
             <button
-              onClick={() => {
-                bookNow();
-              }}
+              onClick={props.BookNowClick}
               className="bookBtn"
             >
               Book Now
             </button>
             <button
-              onClick={() => {
-                seeDetails();
-              }}
+              onClick={
+                props.detailClick
+              }
               className="detailsBtn"
             >
               See Details
@@ -86,7 +84,7 @@ function DummyTicket() {
           </div>
         </div>
       </div>
-      <div className="flightsDetails">
+      {dropDown === index ?(<div className="flightsDetails">
         <Swiper
           spaceBetween={20}
           slidesPerView="auto"
@@ -135,7 +133,7 @@ function DummyTicket() {
           <h5>Economy</h5>
           <h5>CHECKED BAG : 30KG</h5>
         </div>
-      </div>
+      </div>) :null}
     </div>
   );
 }
