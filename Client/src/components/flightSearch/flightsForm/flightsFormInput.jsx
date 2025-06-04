@@ -96,10 +96,10 @@ function FlightsForm() {
     const formData = { ...inputs, passengers };
     try {
       const response = await axios.post(
-        "http://localhost:3000/results"
+        "http://localhost:3000/results",formData
       );
       setFlightResults(response.data);
-      console.log(response.data[0,1,2]);
+      console.log(response.data[0]);
       setFormData(formData);
       navigate("results");
     } catch (error) {

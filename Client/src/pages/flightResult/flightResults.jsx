@@ -11,9 +11,7 @@ import { FlightContext } from "../../components/context/flightSearch.context";
 
 function FlightResult() {
   const { flightSearch } = useContext(FlightContext);
-  const { airlineData } = useContext(FlightContext);
   const { flightResults } = useContext(FlightContext);
-  console.log("airlineData ::: ", airlineData);
   // define location
   const location = useLocation();
   const resLength = flightResults.length;

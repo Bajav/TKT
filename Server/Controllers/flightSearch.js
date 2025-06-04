@@ -6,44 +6,44 @@ let oderId;
 
 const searchFlights = async (req, res) => {
   try {
-    // const {
-    //   origin,
-    //   destination,
-    //   departureDate,
-    //   returnDate,
-    //   flightType,
-    //   seatClass,
-    //   passengers,
-    // } = await req.body;
+    const {
+      origin,
+      destination,
+      departureDate,
+      returnDate,
+      flightType,
+      seatClass,
+      passengers,
+    } = await req.body;
     console.log("form data recieved",req.body);
 
-    // if (
-    //   !origin ||
-    //   !destination ||
-    //   !departureDate ||
-    //   !passengers ||
-    //   !seatClass
-    // ) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "Missing required fields in request." });
-    // } else {
-    //   console.log(req.body);
-    // }
+    if (
+      !origin ||
+      !destination ||
+      !departureDate ||
+      !passengers ||
+      !seatClass
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Missing required fields in request." });
+    } else {
+      console.log(req.body);
+    }
 
-    // const originCode = origin.split(",")[0].trim();
-    // const destinationCode = destination.split(",")[0].trim();
-    // console.log(originCode, destinationCode);
+    const originCode = origin.split(",")[0].trim();
+    const destinationCode = destination.split(",")[0].trim();
+    console.log(originCode, destinationCode);
 
-    const origin = "EBB";
-    const destination ="DXB";
-    const departureDate ='2025-06-08';
-    const returnDate = '2025-06-15';
-    const adult = 1;
+    // const origin = "EBB";
+    // const destination ="DXB";
+    // const departureDate ='2025-06-08';
+    // const returnDate = '2025-06-15';
+    // const adult = 1;
 
     const response = await amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: origin,
-      destinationLocationCode: destination,
+      originLocationCode: originCode,
+      destinationLocationCode: destinationCode,
       departureDate: departureDate,
       returnDate: returnDate,
       adults: 1,

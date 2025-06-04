@@ -234,7 +234,7 @@ function FlightCard() {
               <h5>{"Dubai , UAE" || ""}</h5>
             </div>
           </div>
-          {brandedUpSell.map((itinerary) => {
+          {brandedUpSell.map((itinerary,index) => {
             const {
               itineraries,
               price,
@@ -287,7 +287,7 @@ function FlightCard() {
               console.log("amenities", amenities);
             }
             return (
-              <div className="flightDealContainer">
+              <div key={index} className="flightDealContainer">
                 <div className="flights-header">
                   <div className="airLineIcone">
                     <div className="icon">
