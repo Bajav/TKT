@@ -16,6 +16,7 @@ const searchFlights = async (req, res) => {
       passengers,
     } = await req.body;
     console.log("form data recieved",req.body);
+    // console.log("passengers",passengers);
 
     if (
       !origin ||
@@ -46,13 +47,13 @@ const searchFlights = async (req, res) => {
       destinationLocationCode: destinationCode,
       departureDate: departureDate,
       returnDate: returnDate,
-      adults: 1,
-      children: 0,
-      infants: 0,
-      travelClass: "ECONOMY",
+      adults: passengers.adults,
+      children: passengers.children,
+      infants: passengers.infants,
+      travelClass: seatClass,
       nonStop: false,
       currencyCode: "USD",
-      // max: 30,
+      max: 100,
     });
 
     if (response.data.length === 0) {
