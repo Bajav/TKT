@@ -30,6 +30,9 @@ function FlightCard() {
   const [filterDropDown, setFilterDropDown] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
+  const [upsellError, setUpsellError] = useState(
+    "No upsell offer can be found"
+  );
   const [dropDown, showDropDown] = useState(null);
   // const [outBoundFlight, setFlight] = useState({});
   const [availableAirlines, setAvailableAirlines] = useState([]);
@@ -57,13 +60,19 @@ function FlightCard() {
   useEffect(() => {
     const uniqueAirlineCodes = [
       ...new Set(
-        flightResults.flatMap((itinerary) => itinerary.validatingAirlineCodes)
+        flightResults.flatMap((itinerary) => {
+          itinerary.validatingAirlineCodes
+        console.log("validatingAirlineCodes",itinerary.validatingAirlineCodes)
+      }
+      )
       ),
     ];
+    // console.log("uniqueAirlineCodes",uniqueAirlineCodes);
     const filteredAirlines = airlineData.filter((airline) =>
       uniqueAirlineCodes.includes(airline.code)
     );
     setAvailableAirlines(filteredAirlines);
+    // console.log("filteredAirlines",filteredAirlines);
   }, [flightResults, airlineData]);
   // Filter flights when filters change
   useEffect(() => {
@@ -135,8 +144,9 @@ function FlightCard() {
     } catch (err) {
       console.error(
         "Axios error:",
-        err?.response?.data?.message || err.message
+        err?.response?.data?.message[0].detail 
       );
+      // setUpsellError(err?.response?.data?.message);
     }
   };
 
@@ -235,176 +245,7 @@ function FlightCard() {
               <h5>{"Dubai , UAE" || ""}</h5>
             </div>
           </div>
-          {brandedUpSell.map((itinerary, index) => {
-            const {
-              itineraries,
-              price,
-              validatingAirlineCodes,
-              travelerPricings,
-            } = itinerary;
-            const segmentOne = itineraries[0].segments[0];
-            const segmentTwo = itineraries[0].segments[1];
-            console.log("segmentOne", segmentOne);
-            console.log("segmentTwo", segmentTwo);
-            console.log("itineraries", itineraries);
-            const departureObject = segmentOne.departure;
-            const arrivalObject = segmentTwo.arrival;
-            const amenities =
-              travelerPricings[0].fareDetailsBySegment[0].amenities;
-            const normalizeAmenities = (amenities) => {
-              const normalized = {
-                seatChoice: false,
-                meal: false,
-                changeable: false,
-                refundable: false,
-                checkedBag: null,
-                cabinBag: null,
-                qmiles: null,
-              };
-
-              for (const item of amenities) {
-                const desc = item.description.toLowerCase();
-                const itemBoolean = item.isChargeable;
-                if (desc.includes("seat")) normalized.seatChoice = true;
-                else if (desc.includes("meal") || desc.includes("food"))
-                  normalized.meal = true;
-                else if (desc.includes("changeable"))
-                  normalized.changeable = true;
-                else if (desc.includes("refundable"))
-                  normalized.refundable = true;
-                else if (desc.includes("checked bag"))
-                  normalized.checkedBag = item.description;
-                else if (desc.includes("cabin bag"))
-                  normalized.cabinBag = item.description;
-                else if (desc.includes("qmiles"))
-                  normalized.qmiles = item.description;
-              }
-
-              return normalized;
-            };
-            const perks = normalizeAmenities(amenities);
-
-            {
-              console.log("amenities", amenities);
-            }
-            return (
-              <div key={index} className="flightDealContainer">
-                <div className="flights-header">
-                  <div className="airLineIcone">
-                    <div className="icon">
-                      <img
-                        src={
-                          airlinesLookUp[segmentOne?.carrierCode]?.logo || ""
-                        }
-                        alt="Airline Logo"
-                        className="airline-logo"
-                      />
-                    </div>
-                    <h4>{validatingAirlineCodes[0] || ""}</h4>
-                  </div>
-                  <h3>
-                    {fareBrandMap[
-                      travelerPricings[0].fareDetailsBySegment[0].brandedFare
-                    ] || "economy premium"}
-                  </h3>
-                </div>
-
-                <div className="ticket-header">
-                  <div className="origin">
-                    <h2>{departureObject.iataCode || ""}</h2>
-                    <h5>{iataLookup[departureObject.iataCode]?.city || ""}</h5>
-                    <h5>{departureObject.at.slice(11) || ""}</h5>
-                  </div>
-                  <div className="center">
-                    <Arrow color="#F5F7F8" width="200px" />
-                    {2 > 1 ? <h5>{2 - 1} stops</h5> : <h5>0 stops</h5>}
-                  </div>
-                  <div className="item">
-                    <h2>{arrivalObject.iataCode || ""}</h2>
-                    <h5>{iataLookup[arrivalObject.iataCode]?.city || ""}</h5>
-                    <h5>{arrivalObject.at.slice(11) || ""}</h5>
-                  </div>
-                </div>
-                <h6 className="lineNew">
-                  --------------------------------------------------------
-                </h6>
-
-                <div className="flightDetails">
-                  <div className="detailsSect">
-                    <div className="itemContainer">
-                      <img src={seat} />
-                      <li>
-                        {perks.seatChoice
-                          ? "Seat Choice Included"
-                          : "No Seat Selection"}
-                      </li>
-                    </div>
-                    <div className="itemContainer">
-                      <img src={cutlary} />
-                      <li>{perks.meal ? "Meal Beverage" : "No Meal"}</li>
-                    </div>
-                    <div className="itemContainer">
-                      <li>
-                        ${" "}
-                        {perks.changeable
-                          ? "Changeable Ticket"
-                          : "Not Changeable"}
-                      </li>
-                    </div>
-                  </div>
-                  <div className="detailsSect">
-                    <div className="itemContainer">
-                      <img src={carier} />
-                      <li>{perks.checkedBag || "No Checked Bag"}</li>
-                    </div>
-                    <div className="itemContainer">
-                      <li>
-                        {perks.refundable
-                          ? "refundable at a fee"
-                          : " Refundable Ticket"}
-                      </li>
-                    </div>
-                  </div>
-
-                  <div className="detailsSect">
-                    <div className="itemContainer">
-                      <img src={suiteCase} />
-                      <li>{perks.cabinBag || "No Cabin Bag"}</li>
-                    </div>
-                    <div className="itemContainer">
-                      <img src={pctMile} />
-                      <li>{perks.qmiles || "No QMiles Accumulation"}</li>
-                    </div>
-                  </div>
-                </div>
-                <div className="flights-actions">
-                  <div className="time-details">
-                    <div className="flex-tim">
-                      <h4>23.DEC.24</h4>
-                    </div>
-                    <div className="flex-tim">
-                      <h4>4 h 30 m</h4>
-                    </div>
-                  </div>
-                  <div className="price-details">
-                    <h4>
-                      {price.grandTotal}/<span>pax</span>
-                    </h4>
-                  </div>
-                  <div className="actions">
-                    <button onClick={() => {}} className="bookBtn">
-                      book now
-                    </button>
-                    <button onClick={() => {}} className="detailsBtn">
-                      economy
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flightFunction"></div>
-              </div>
-            );
-          })}
+          {brandedUpSell.length < 0 ?(<h1>flights</h1>):(<h1>{upsellError}</h1>)}
         </div>
       )}
       {filteredFlights.length < 1 ? (
@@ -419,22 +260,178 @@ function FlightCard() {
           const segmentTwo = itinerary.itineraries[1].segments;
           // console.log("departure flight",segmentOne);
           // console.log("return flight",segmentTwo);
-          console.log('====================================');
-          console.log(segments);
-          console.log('====================================');
+          // console.log('====================================');
+          // console.log(segments);
+          // console.log('====================================');
           return (
             <div className="flightContainer">
-              {/* {duration,segments,index} */}
-              {itinerary.itineraries.map((segment) => {
-                // const returnFlights = segments;
-                // console.log("segments",segment);
+              <div className="main-cards" key={index}>
+                <div className="flights-res">
+                  <div className="flights-header">
+                    <div className="airLineIcone">
+                      <div className="icon">
+                        <img
+                          src={
+                            airlinesLookUp[segments[0]?.carrierCode]?.logo || ""
+                          }
+                          alt="Airline Logo"
+                          className="airline-logo"
+                        />
+                      </div>
+                      <h4>
+                        {airlinesLookUp[segments[0]?.carrierCode]?.name || ""}
+                      </h4>
+                    </div>
+                    <h4>{segments[0]?.aircraft?.code || ""}</h4>
+                  </div>
+                  <div className="ticket-header">
+                    <div className="origin">
+                      <h2>{segments[0]?.departure.iataCode || ""}</h2>
+                      <h5>
+                        {iataLookup[segments[0]?.departure.iataCode]?.city ||
+                          "xxx"}
+                      </h5>
+                      <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
+                    </div>
+                    <div className="center">
+                      <Arrow color="#F5F7F8" width="200px" />
+                      {segmentNumber > 1 ? (
+                        <h5>{segmentNumber - 1} stops</h5>
+                      ) : (
+                        <h5>0 stops</h5>
+                      )}
+                    </div>
+                    <div className="item">
+                      <h2>
+                        {segments[lastSegmentIndex]?.arrival.iataCode || ""}
+                      </h2>
+                      <h5>
+                        {iataLookup[
+                          segments[lastSegmentIndex]?.arrival.iataCode
+                        ]?.city || "xxx"}
+                      </h5>
+                      <h5>
+                        {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="flights-actions">
+                    <div className="time-details">
+                      <div className="flex-tim">
+                        <h4>
+                          {segments[lastSegmentIndex]?.arrival.at.slice(
+                            0,
+                            10
+                          ) || ""}
+                        </h4>
+                      </div>
+                      <div className="flex-tim">
+                        <h4>
+                          {itinerary.itineraries[0]?.duration.slice(2) || ""}
+                        </h4>
+                      </div>
+                    </div>
+                    <div className="price-details">
+                      <h4>${itinerary.price?.grandTotal || ""}</h4>
+                    </div>
+                    <div className="actions">
+                      <button
+                        onClick={() => selectButton(index)}
+                        className="bookBtn"
+                      >
+                        select
+                      </button>
+                      <button
+                        onClick={() => seeDetails(index)}
+                        className="detailsBtn"
+                      >
+                        See Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-                
-                const selectSegMents =[segments[0],segments[segments.length -1]];
-                // console.log(selectSegMents);
-                return (<DummyTicket />)
-              
-              })}
+                {dropDown === index ? (
+                  <div className="flightsDetails">
+                    <Swiper
+                      spaceBetween={20}
+                      slidesPerView="auto"
+                      onSlideChange={() => console.log("slide change")}
+                      onSwiper={(swiper) => console.log(swiper)}
+                      className="stopOvers"
+                    >
+                      {segmentOne.map((stopOver, setStopIndex) => (
+                        <SwiperSlide key={setStopIndex}>
+                          <div className="ticket-header">
+                            <div className="stopFlight">
+                              <div className="origin">
+                                <h2>{stopOver.departure.iataCode}</h2>
+                                <h5>
+                                  {iataLookup[stopOver.departure.iataCode]
+                                    ?.city || ""}
+                                </h5>
+                                <h5>{stopOver.departure.at.slice(11)}</h5>
+                              </div>
+                              <div className="center">
+                                <Arrow color="#F5F7F8" width="200px" />
+                              </div>
+                              <div className="item">
+                                <h2>{stopOver.arrival.iataCode}</h2>
+                                <h5>
+                                  {iataLookup[stopOver.arrival.iataCode]
+                                    ?.city || "ddd"}
+                                </h5>
+                                <h5>{stopOver.arrival.at.slice(11)}</h5>
+                              </div>
+                            </div>
+                            <div className="lineOne">
+                              <h5>
+                                --------------------------------------------
+                              </h5>
+                            </div>
+                            <div className="stop-details">
+                              <h5>
+                                LAYOVER TIME:{" "}
+                                {setStopIndex > 0
+                                  ? calculateLayover(
+                                      segmentOne[setStopIndex - 1].arrival.at,
+                                      stopOver.departure.at
+                                    )
+                                  : "N/A"}
+                              </h5>
+                              <h5>
+                                CLASS:{" "}
+                                {itinerary.travelerPricings[0]
+                                  ?.fareDetailsBySegment[0]?.class || ""}{" "}
+                                {itinerary.travelerPricings[0]
+                                  ?.fareDetailsBySegment[0]?.cabin || ""}
+                              </h5>
+                              <h5>AIRLINE: {stopOver.carrierCode}</h5>
+                              <h5>DURATION: {stopOver.duration.slice(2)}</h5>
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                    <div className="line">
+                      <h5>-------------------------------------------</h5>
+                    </div>
+                    <div className="Alldetails">
+                      <h5>SEATS LEFT: {itinerary.numberOfBookableSeats}</h5>
+                      <h5>
+                        {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
+                          ?.cabin || ""}
+                      </h5>
+                      <h5>
+                        CHECKED BAG:{" "}
+                        {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
+                          ?.includedCheckedBags?.quantity || 0}{" "}
+                        pieces
+                      </h5>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             </div>
           );
         })
@@ -456,170 +453,124 @@ const calculateLayover = (arrival, departure) => {
 export default FlightCard;
 
 
-    //  <div className="main-cards" key={index}>
-    //             <div className="flights-res">
-    //               <div className="flights-header">
-    //                 <div className="airLineIcone">
-    //                   <div className="icon">
-    //                     <img
-    //                       src={
-    //                         airlinesLookUp[segments[0]?.carrierCode]?.logo || ""
-    //                       }
-    //                       alt="Airline Logo"
-    //                       className="airline-logo"
-    //                     />
-    //                   </div>
-    //                   <h4>
-    //                     {airlinesLookUp[segments[0]?.carrierCode]?.name || ""}
-    //                   </h4>
-    //                 </div>
-    //                 <h4>{segments[0]?.aircraft?.code || ""}</h4>
-    //               </div>
-    //               <div className="ticket-header">
-    //                 <div className="origin">
-    //                   <h2>{segments[0]?.departure.iataCode || ""}</h2>
-    //                   <h5>
-    //                     {iataLookup[segments[0]?.departure.iataCode]?.city ||
-    //                       "xxx"}
-    //                   </h5>
-    //                   <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
-    //                 </div>
-    //                 <div className="center">
-    //                   <Arrow color="#F5F7F8" width="200px" />
-    //                   {segmentNumber > 1 ? (
-    //                     <h5>{segmentNumber - 1} stops</h5>
-    //                   ) : (
-    //                     <h5>0 stops</h5>
-    //                   )}
-    //                 </div>
-    //                 <div className="item">
-    //                   <h2>
-    //                     {segments[lastSegmentIndex]?.arrival.iataCode || ""}
-    //                   </h2>
-    //                   <h5>
-    //                     {iataLookup[
-    //                       segments[lastSegmentIndex]?.arrival.iataCode
-    //                     ]?.city || "xxx"}
-    //                   </h5>
-    //                   <h5>
-    //                     {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
-    //                   </h5>
-    //                 </div>
-    //               </div>
-    //               <div className="flights-actions">
-    //                 <div className="time-details">
-    //                   <div className="flex-tim">
-    //                     <h4>
-    //                       {segments[lastSegmentIndex]?.arrival.at.slice(
-    //                         0,
-    //                         10
-    //                       ) || ""}
-    //                     </h4>
-    //                   </div>
-    //                   <div className="flex-tim">
-    //                     <h4>
-    //                       {itinerary.itineraries[0]?.duration.slice(2) || ""}
-    //                     </h4>
-    //                   </div>
-    //                 </div>
-    //                 <div className="price-details">
-    //                   <h4>${itinerary.price?.grandTotal || ""}</h4>
-    //                 </div>
-    //                 <div className="actions">
-    //                   <button
-    //                     onClick={() => selectButton(index)}
-    //                     className="bookBtn"
-    //                   >
-    //                     select
-    //                   </button>
-    //                   <button
-    //                     onClick={() => seeDetails(index)}
-    //                     className="detailsBtn"
-    //                   >
-    //                     See Details
-    //                   </button>
-    //                 </div>
-    //               </div>
-    //             </div>
+// <div key={index} className="flightDealContainer">
+//                     <div className="flights-header">
+//                       <div className="airLineIcone">
+//                         <div className="icon">
+//                           <img
+//                             src={
+//                               airlinesLookUp[segmentOne?.carrierCode]?.logo ||
+//                               ""
+//                             }
+//                             alt="Airline Logo"
+//                             className="airline-logo"
+//                           />
+//                         </div>
+//                         <h4>{validatingAirlineCodes[0] || ""}</h4>
+//                       </div>
+//                       <h3>
+//                         {fareBrandMap[
+//                           travelerPricings[0].fareDetailsBySegment[0]
+//                             .brandedFare
+//                         ] || "economy premium"}
+//                       </h3>
+//                     </div>
 
-    //             {dropDown === index ? (
-    //               <div className="flightsDetails">
-    //                 <Swiper
-    //                   spaceBetween={20}
-    //                   slidesPerView="auto"
-    //                   onSlideChange={() => console.log("slide change")}
-    //                   onSwiper={(swiper) => console.log(swiper)}
-    //                   className="stopOvers"
-    //                 >
-    //                   {segmentOne.map((stopOver, setStopIndex) => (
-    //                     <SwiperSlide key={setStopIndex}>
-    //                       <div className="ticket-header">
-    //                         <div className="stopFlight">
-    //                           <div className="origin">
-    //                             <h2>{stopOver.departure.iataCode}</h2>
-    //                             <h5>
-    //                               {iataLookup[stopOver.departure.iataCode]
-    //                                 ?.city || ""}
-    //                             </h5>
-    //                             <h5>{stopOver.departure.at.slice(11)}</h5>
-    //                           </div>
-    //                           <div className="center">
-    //                             <Arrow color="#F5F7F8" width="200px" />
-    //                           </div>
-    //                           <div className="item">
-    //                             <h2>{stopOver.arrival.iataCode}</h2>
-    //                             <h5>
-    //                               {iataLookup[stopOver.arrival.iataCode]
-    //                                 ?.city || "ddd"}
-    //                             </h5>
-    //                             <h5>{stopOver.arrival.at.slice(11)}</h5>
-    //                           </div>
-    //                         </div>
-    //                         <div className="lineOne">
-    //                           <h5>
-    //                             --------------------------------------------
-    //                           </h5>
-    //                         </div>
-    //                         <div className="stop-details">
-    //                           <h5>
-    //                             LAYOVER TIME:{" "}
-    //                             {setStopIndex > 0
-    //                               ? calculateLayover(
-    //                                   segmentOne[setStopIndex - 1].arrival.at,
-    //                                   stopOver.departure.at
-    //                                 )
-    //                               : "N/A"}
-    //                           </h5>
-    //                           <h5>
-    //                             CLASS:{" "}
-    //                             {itinerary.travelerPricings[0]
-    //                               ?.fareDetailsBySegment[0]?.class || ""}{" "}
-    //                             {itinerary.travelerPricings[0]
-    //                               ?.fareDetailsBySegment[0]?.cabin || ""}
-    //                           </h5>
-    //                           <h5>AIRLINE: {stopOver.carrierCode}</h5>
-    //                           <h5>DURATION: {stopOver.duration.slice(2)}</h5>
-    //                         </div>
-    //                       </div>
-    //                     </SwiperSlide>
-    //                   ))}
-    //                 </Swiper>
-    //                 <div className="line">
-    //                   <h5>-------------------------------------------</h5>
-    //                 </div>
-    //                 <div className="Alldetails">
-    //                   <h5>SEATS LEFT: {itinerary.numberOfBookableSeats}</h5>
-    //                   <h5>
-    //                     {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
-    //                       ?.cabin || ""}
-    //                   </h5>
-    //                   <h5>
-    //                     CHECKED BAG:{" "}
-    //                     {itinerary.travelerPricings[0]?.fareDetailsBySegment[0]
-    //                       ?.includedCheckedBags?.quantity || 0}{" "}
-    //                     pieces
-    //                   </h5>
-    //                 </div>
-    //               </div>
-    //             ) : null}
-    //           </div>
+//                     <div className="ticket-header">
+//                       <div className="origin">
+//                         <h2>{departureObject.iataCode || ""}</h2>
+//                         <h5>
+//                           {iataLookup[departureObject.iataCode]?.city || ""}
+//                         </h5>
+//                         <h5>{departureObject.at.slice(11) || ""}</h5>
+//                       </div>
+//                       <div className="center">
+//                         <Arrow color="#F5F7F8" width="200px" />
+//                         {2 > 1 ? <h5>{2 - 1} stops</h5> : <h5>0 stops</h5>}
+//                       </div>
+//                       <div className="item">
+//                         <h2>{arrivalObject.iataCode || ""}</h2>
+//                         <h5>
+//                           {iataLookup[arrivalObject.iataCode]?.city || ""}
+//                         </h5>
+//                         <h5>{arrivalObject.at.slice(11) || ""}</h5>
+//                       </div>
+//                     </div>
+//                     <h6 className="lineNew">
+//                       --------------------------------------------------------
+//                     </h6>
+
+//                     <div className="flightDetails">
+//                       <div className="detailsSect">
+//                         <div className="itemContainer">
+//                           <img src={seat} />
+//                           <li>
+//                             {perks.seatChoice
+//                               ? "Seat Choice Included"
+//                               : "No Seat Selection"}
+//                           </li>
+//                         </div>
+//                         <div className="itemContainer">
+//                           <img src={cutlary} />
+//                           <li>{perks.meal ? "Meal Beverage" : "No Meal"}</li>
+//                         </div>
+//                         <div className="itemContainer">
+//                           <li>
+//                             ${" "}
+//                             {perks.changeable
+//                               ? "Changeable Ticket"
+//                               : "Not Changeable"}
+//                           </li>
+//                         </div>
+//                       </div>
+//                       <div className="detailsSect">
+//                         <div className="itemContainer">
+//                           <img src={carier} />
+//                           <li>{perks.checkedBag || "No Checked Bag"}</li>
+//                         </div>
+//                         <div className="itemContainer">
+//                           <li>
+//                             {perks.refundable
+//                               ? "refundable at a fee"
+//                               : " Refundable Ticket"}
+//                           </li>
+//                         </div>
+//                       </div>
+
+//                       <div className="detailsSect">
+//                         <div className="itemContainer">
+//                           <img src={suiteCase} />
+//                           <li>{perks.cabinBag || "No Cabin Bag"}</li>
+//                         </div>
+//                         <div className="itemContainer">
+//                           <img src={pctMile} />
+//                           <li>{perks.qmiles || "No QMiles Accumulation"}</li>
+//                         </div>
+//                       </div>
+//                     </div>
+//                     <div className="flights-actions">
+//                       <div className="time-details">
+//                         <div className="flex-tim">
+//                           <h4>23.DEC.24</h4>
+//                         </div>
+//                         <div className="flex-tim">
+//                           <h4>4 h 30 m</h4>
+//                         </div>
+//                       </div>
+//                       <div className="price-details">
+//                         <h4>
+//                           {price.grandTotal}/<span>pax</span>
+//                         </h4>
+//                       </div>
+//                       <div className="actions">
+//                         <button onClick={() => {}} className="bookBtn">
+//                           book now
+//                         </button>
+//                         <button onClick={() => {}} className="detailsBtn">
+//                           economy
+//                         </button>
+//                       </div>
+//                     </div>
+
+//                     <div className="flightFunction"></div>
+//                   </div>
