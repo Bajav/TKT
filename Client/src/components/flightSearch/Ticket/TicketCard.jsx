@@ -31,7 +31,7 @@ function FlightCard() {
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [upsellError, setUpsellError] = useState(
-    "No upsell offer can be found"
+    ""
   );
   const [dropDown, showDropDown] = useState(null);
   // const [outBoundFlight, setFlight] = useState({});
@@ -144,7 +144,7 @@ function FlightCard() {
         "Axios error:",
         err?.response?.data?.message[0].detail 
       );
-      // setUpsellError(err?.response?.data?.message);
+      setUpsellError(err?.response?.data?.message[0].detail);
     }
   };
 

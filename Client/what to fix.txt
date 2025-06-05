@@ -2,3 +2,4 @@ some of the itineraries have a different validating code with carrier code
 the amenities logic
 routing from one page to another when animated (gsap,barba)
 classes to render incase passengers are more than one
+work on the flight type logic , one way , roundtrip , multicity
