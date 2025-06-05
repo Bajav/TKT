@@ -60,10 +60,8 @@ function FlightCard() {
   useEffect(() => {
     const uniqueAirlineCodes = [
       ...new Set(
-        flightResults.flatMap((itinerary) => {
+        flightResults.flatMap((itinerary) => 
           itinerary.validatingAirlineCodes
-        console.log("validatingAirlineCodes",itinerary.validatingAirlineCodes)
-      }
       )
       ),
     ];
@@ -252,6 +250,7 @@ function FlightCard() {
         <Loader loaderTag="Searching for flights" />
       ) : (
         filteredFlights.map((itinerary, index) => {
+                  console.log("validatingAirlineCodes",itinerary.validatingAirlineCodes);
           // console.log("itinerary for return",itinerary.itineraries[1]);
           const segments = itinerary.itineraries[0]?.segments || [];
           const segmentNumber = segments.length;
