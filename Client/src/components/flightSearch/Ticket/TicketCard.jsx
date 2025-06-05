@@ -61,11 +61,11 @@ function FlightCard() {
     const uniqueAirlineCodes = [
       ...new Set(
         flightResults.flatMap((itinerary) => 
-          itinerary.validatingAirlineCodes
+          itinerary.itineraries[0].segments.flatMap((items)=>items.carrierCode)
       )
       ),
     ];
-    // console.log("uniqueAirlineCodes",uniqueAirlineCodes);
+    console.log("uniqueAirlineCodes",uniqueAirlineCodes);
     const filteredAirlines = airlineData.filter((airline) =>
       uniqueAirlineCodes.includes(airline.code)
     );
@@ -176,6 +176,7 @@ function FlightCard() {
     ECONVENIEN: "Economy Convenient",
     ECOFLEX: "Economy Flexible",
     ECOBASIC: "Economy Basic",
+
   };
 
   return (
@@ -250,18 +251,13 @@ function FlightCard() {
         <Loader loaderTag="Searching for flights" />
       ) : (
         filteredFlights.map((itinerary, index) => {
-                  console.log("validatingAirlineCodes",itinerary.validatingAirlineCodes);
+                  // console.log("validatingAirlineCodes",itinerary.validatingAirlineCodes);
           // console.log("itinerary for return",itinerary.itineraries[1]);
           const segments = itinerary.itineraries[0]?.segments || [];
           const segmentNumber = segments.length;
           const lastSegmentIndex = segmentNumber - 1;
           const segmentOne = itinerary.itineraries[0].segments;
           const segmentTwo = itinerary.itineraries[1].segments;
-          // console.log("departure flight",segmentOne);
-          // console.log("return flight",segmentTwo);
-          // console.log('====================================');
-          // console.log(segments);
-          // console.log('====================================');
           return (
             <div className="flightContainer">
               <div className="main-cards" key={index}>
