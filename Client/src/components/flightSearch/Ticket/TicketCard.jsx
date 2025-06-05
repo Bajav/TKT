@@ -65,7 +65,7 @@ function FlightCard() {
       )
       ),
     ];
-    console.log("uniqueAirlineCodes",uniqueAirlineCodes);
+    console.log("uniqueAirlineCodes",uniqueAirlineCodes); 
     const filteredAirlines = airlineData.filter((airline) =>
       uniqueAirlineCodes.includes(airline.code)
     );
@@ -91,7 +91,7 @@ function FlightCard() {
 
         // Airline filter
         const airlineOk = filters.airline
-          ? itinerary.validatingAirlineCodes.includes(filters.airline)
+          ? itinerary.itineraries[0].segments[0].carrierCode.includes(filters.airline)
           : true;
         return priceOk && airlineOk;
       });
