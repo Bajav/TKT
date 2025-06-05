@@ -31,9 +31,7 @@ function FlightCard() {
   const [filterDropDown, setFilterDropDown] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
-  const [upsellError, setUpsellError] = useState(
-    ""
-  );
+  const [upsellError, setUpsellError] = useState("");
   const [dropDown, showDropDown] = useState(null);
   // const [outBoundFlight, setFlight] = useState({});
   const [availableAirlines, setAvailableAirlines] = useState([]);
@@ -61,12 +59,14 @@ function FlightCard() {
   useEffect(() => {
     const uniqueAirlineCodes = [
       ...new Set(
-        flightResults.flatMap((itinerary) => 
-          itinerary.itineraries[0].segments.flatMap((items)=>items.carrierCode)
-      )
+        flightResults.flatMap((itinerary) =>
+          itinerary.itineraries[0].segments.flatMap(
+            (items) => items.carrierCode
+          )
+        )
       ),
     ];
-    console.log("uniqueAirlineCodes",uniqueAirlineCodes); 
+    console.log("uniqueAirlineCodes", uniqueAirlineCodes);
     const filteredAirlines = airlineData.filter((airline) =>
       uniqueAirlineCodes.includes(airline.code)
     );
@@ -92,7 +92,9 @@ function FlightCard() {
 
         // Airline filter
         const airlineOk = filters.airline
-          ? itinerary.itineraries[0].segments[0].carrierCode.includes(filters.airline)
+          ? itinerary.itineraries[0].segments[0].carrierCode.includes(
+              filters.airline
+            )
           : true;
         return priceOk && airlineOk;
       });
@@ -141,10 +143,7 @@ function FlightCard() {
       setBrandedUpSell(response.data); // likely want .data, not full response
       console.log("brandedUpsell res", response.data);
     } catch (err) {
-      console.error(
-        "Axios error:",
-        err?.response?.data?.message[0].detail 
-      );
+      console.error("Axios error:", err?.response?.data?.message[0].detail);
       setUpsellError(err?.response?.data?.message[0].detail);
     }
   };
@@ -177,7 +176,6 @@ function FlightCard() {
     ECONVENIEN: "Economy Convenient",
     ECOFLEX: "Economy Flexible",
     ECOBASIC: "Economy Basic",
-
   };
 
   return (
@@ -245,14 +243,145 @@ function FlightCard() {
               <h5>{"Dubai , UAE" || ""}</h5>
             </div>
           </div>
-          {brandedUpSell.length < 1 ?(<h1>flights</h1>):(<BearLoader />)}
+          {brandedUpSell.length === 0 ? (
+            <BearLoader />
+          ) : (
+            brandedUpSell.map((upsell, index) => {
+              const segments = upsell.itineraries[0]?.segments || [];
+              const segmentNumber = segments.length;
+              const lastSegmentIndex = segmentNumber - 1;
+              console.log("carrire code",segmentOne[0].carrierCode)
+              const segmentOne = upsell.itineraries[0].segments;
+              const segmentTwo = upsell.itineraries[1].segments;
+
+              return (
+                <div key={index} className="flightDealContainer">
+                  <div className="flights-header">
+                    <div className="airLineIcone">
+                      <div className="icon">
+                        <img
+                          src={
+                            airlinesLookUp[segmentOne?.carrierCode]?.logo || ""
+                          }
+                          alt="Airline Logo"
+                          className="airline-logo"
+                        />
+                      </div>
+                      <h4>{"" || ""}</h4>
+                    </div>
+                    <h3>
+                      {fareBrandMap[
+                        travelerPricings[0].fareDetailsBySegment[0].brandedFare
+                      ] || "economy premium"}
+                    </h3>
+                  </div>
+
+                  <div className="ticket-header">
+                    <div className="origin">
+                      <h2>{departureObject.iataCode || ""}</h2>
+                      <h5>
+                        {iataLookup[departureObject.iataCode]?.city || ""}
+                      </h5>
+                      <h5>{departureObject.at.slice(11) || ""}</h5>
+                    </div>
+                    <div className="center">
+                      <Arrow color="#F5F7F8" width="200px" />
+                      {2 > 1 ? <h5>{2 - 1} stops</h5> : <h5>0 stops</h5>}
+                    </div>
+                    <div className="item">
+                      <h2>{arrivalObject.iataCode || ""}</h2>
+                      <h5>{iataLookup[arrivalObject.iataCode]?.city || ""}</h5>
+                      <h5>{arrivalObject.at.slice(11) || ""}</h5>
+                    </div>
+                  </div>
+                  <h6 className="lineNew">
+                    --------------------------------------------------------
+                  </h6>
+
+                  <div className="flightDetails">
+                    <div className="detailsSect">
+                      <div className="itemContainer">
+                        <img src={seat} />
+                        <li>
+                          {perks.seatChoice
+                            ? "Seat Choice Included"
+                            : "No Seat Selection"}
+                        </li>
+                      </div>
+                      <div className="itemContainer">
+                        <img src={cutlary} />
+                        <li>{perks.meal ? "Meal Beverage" : "No Meal"}</li>
+                      </div>
+                      <div className="itemContainer">
+                        <li>
+                          ${" "}
+                          {perks.changeable
+                            ? "Changeable Ticket"
+                            : "Not Changeable"}
+                        </li>
+                      </div>
+                    </div>
+                    <div className="detailsSect">
+                      <div className="itemContainer">
+                        <img src={carier} />
+                        <li>{perks.checkedBag || "No Checked Bag"}</li>
+                      </div>
+                      <div className="itemContainer">
+                        <li>
+                          {perks.refundable
+                            ? "refundable at a fee"
+                            : " Refundable Ticket"}
+                        </li>
+                      </div>
+                    </div>
+
+                    <div className="detailsSect">
+                      <div className="itemContainer">
+                        <img src={suiteCase} />
+                        <li>{perks.cabinBag || "No Cabin Bag"}</li>
+                      </div>
+                      <div className="itemContainer">
+                        <img src={pctMile} />
+                        <li>{perks.qmiles || "No QMiles Accumulation"}</li>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flights-actions">
+                    <div className="time-details">
+                      <div className="flex-tim">
+                        <h4>23.DEC.24</h4>
+                      </div>
+                      <div className="flex-tim">
+                        <h4>4 h 30 m</h4>
+                      </div>
+                    </div>
+                    <div className="price-details">
+                      <h4>
+                        {price.grandTotal}/<span>pax</span>
+                      </h4>
+                    </div>
+                    <div className="actions">
+                      <button onClick={() => {}} className="bookBtn">
+                        book now
+                      </button>
+                      <button onClick={() => {}} className="detailsBtn">
+                        economy
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flightFunction"></div>
+                </div>
+              );
+            })
+          )}
         </div>
       )}
       {filteredFlights.length < 1 ? (
         <Loader loaderTag="Searching for flights" />
       ) : (
         filteredFlights.map((itinerary, index) => {
-                  // console.log("validatingAirlineCodes",itinerary.validatingAirlineCodes);
+          // console.log("validatingAirlineCodes",itinerary.validatingAirlineCodes);
           // console.log("itinerary for return",itinerary.itineraries[1]);
           const segments = itinerary.itineraries[0]?.segments || [];
           const segmentNumber = segments.length;
@@ -447,126 +576,3 @@ const calculateLayover = (arrival, departure) => {
 };
 
 export default FlightCard;
-
-
-// <div key={index} className="flightDealContainer">
-//                     <div className="flights-header">
-//                       <div className="airLineIcone">
-//                         <div className="icon">
-//                           <img
-//                             src={
-//                               airlinesLookUp[segmentOne?.carrierCode]?.logo ||
-//                               ""
-//                             }
-//                             alt="Airline Logo"
-//                             className="airline-logo"
-//                           />
-//                         </div>
-//                         <h4>{validatingAirlineCodes[0] || ""}</h4>
-//                       </div>
-//                       <h3>
-//                         {fareBrandMap[
-//                           travelerPricings[0].fareDetailsBySegment[0]
-//                             .brandedFare
-//                         ] || "economy premium"}
-//                       </h3>
-//                     </div>
-
-//                     <div className="ticket-header">
-//                       <div className="origin">
-//                         <h2>{departureObject.iataCode || ""}</h2>
-//                         <h5>
-//                           {iataLookup[departureObject.iataCode]?.city || ""}
-//                         </h5>
-//                         <h5>{departureObject.at.slice(11) || ""}</h5>
-//                       </div>
-//                       <div className="center">
-//                         <Arrow color="#F5F7F8" width="200px" />
-//                         {2 > 1 ? <h5>{2 - 1} stops</h5> : <h5>0 stops</h5>}
-//                       </div>
-//                       <div className="item">
-//                         <h2>{arrivalObject.iataCode || ""}</h2>
-//                         <h5>
-//                           {iataLookup[arrivalObject.iataCode]?.city || ""}
-//                         </h5>
-//                         <h5>{arrivalObject.at.slice(11) || ""}</h5>
-//                       </div>
-//                     </div>
-//                     <h6 className="lineNew">
-//                       --------------------------------------------------------
-//                     </h6>
-
-//                     <div className="flightDetails">
-//                       <div className="detailsSect">
-//                         <div className="itemContainer">
-//                           <img src={seat} />
-//                           <li>
-//                             {perks.seatChoice
-//                               ? "Seat Choice Included"
-//                               : "No Seat Selection"}
-//                           </li>
-//                         </div>
-//                         <div className="itemContainer">
-//                           <img src={cutlary} />
-//                           <li>{perks.meal ? "Meal Beverage" : "No Meal"}</li>
-//                         </div>
-//                         <div className="itemContainer">
-//                           <li>
-//                             ${" "}
-//                             {perks.changeable
-//                               ? "Changeable Ticket"
-//                               : "Not Changeable"}
-//                           </li>
-//                         </div>
-//                       </div>
-//                       <div className="detailsSect">
-//                         <div className="itemContainer">
-//                           <img src={carier} />
-//                           <li>{perks.checkedBag || "No Checked Bag"}</li>
-//                         </div>
-//                         <div className="itemContainer">
-//                           <li>
-//                             {perks.refundable
-//                               ? "refundable at a fee"
-//                               : " Refundable Ticket"}
-//                           </li>
-//                         </div>
-//                       </div>
-
-//                       <div className="detailsSect">
-//                         <div className="itemContainer">
-//                           <img src={suiteCase} />
-//                           <li>{perks.cabinBag || "No Cabin Bag"}</li>
-//                         </div>
-//                         <div className="itemContainer">
-//                           <img src={pctMile} />
-//                           <li>{perks.qmiles || "No QMiles Accumulation"}</li>
-//                         </div>
-//                       </div>
-//                     </div>
-//                     <div className="flights-actions">
-//                       <div className="time-details">
-//                         <div className="flex-tim">
-//                           <h4>23.DEC.24</h4>
-//                         </div>
-//                         <div className="flex-tim">
-//                           <h4>4 h 30 m</h4>
-//                         </div>
-//                       </div>
-//                       <div className="price-details">
-//                         <h4>
-//                           {price.grandTotal}/<span>pax</span>
-//                         </h4>
-//                       </div>
-//                       <div className="actions">
-//                         <button onClick={() => {}} className="bookBtn">
-//                           book now
-//                         </button>
-//                         <button onClick={() => {}} className="detailsBtn">
-//                           economy
-//                         </button>
-//                       </div>
-//                     </div>
-
-//                     <div className="flightFunction"></div>
-//                   </div>
