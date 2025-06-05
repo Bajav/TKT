@@ -7,6 +7,7 @@ import Loader from "../../loader";
 // import scss
 import "./ticket.scss";
 // import components
+import BearLoader from "../../bearLoader/bearLoader.component";
 import { Arrow } from "../flightArrowSvg";
 import line from "../../../assets/icons/line.svg";
 import calender from "../../../assets/icons/calender.svg";
@@ -244,7 +245,7 @@ function FlightCard() {
               <h5>{"Dubai , UAE" || ""}</h5>
             </div>
           </div>
-          {brandedUpSell.length < 0 ?(<h1>flights</h1>):(<h1>{upsellError}</h1>)}
+          {brandedUpSell.length < 1 ?(<h1>flights</h1>):(<BearLoader />)}
         </div>
       )}
       {filteredFlights.length < 1 ? (
