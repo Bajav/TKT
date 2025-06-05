@@ -1,4 +1,5 @@
-some of the itineraries have a different validating code with carrier code
+some of the itineraries have a different validating code with carrier code {render the validating flight}
+the muliflights 
 the amenities logic
 routing from one page to another when animated (gsap,barba)
 classes to render incase passengers are more than one
