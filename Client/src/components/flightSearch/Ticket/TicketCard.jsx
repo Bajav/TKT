@@ -177,6 +177,44 @@ function FlightCard() {
     ECOFLEX: "Economy Flexible",
     ECOBASIC: "Economy Basic",
   };
+  const normalizeAmenities = (amenities) => {
+  const normalized = {
+    seatChoice: false,
+    meal: false,
+    changeable: false,
+    refundable: false,
+    checkedBag: null,
+    cabinBag: null,
+    qmiles: null,
+  };
+
+  for (const item of amenities) {
+    const desc = item.description.toLowerCase();
+
+    if (desc.includes("seat")) normalized.seatChoice = true;
+    if (
+      desc.includes("meal") ||
+      desc.includes("food") ||
+      desc.includes("snack") ||
+      desc.includes("beverage")
+    ) {
+      normalized.meal = true;
+    }
+    if (desc.includes("change")) normalized.changeable = true;
+    if (desc.includes("refund")) normalized.refundable = true;
+    if (desc.includes("checked bag")) normalized.checkedBag = item.description;
+    if (desc.includes("cabin bag")) normalized.cabinBag = item.description;
+    if (
+      desc.includes("qmile") ||
+      desc.includes("mile accrual") ||
+      desc.includes("mileage")
+    ) {
+      normalized.qmiles = item.description;
+    }
+  }
+
+  return normalized;
+};
 
   return (
     <Fragment>
@@ -250,10 +288,14 @@ function FlightCard() {
               const segments = upsell.itineraries[0]?.segments || [];
               const segmentNumber = segments.length;
               const lastSegmentIndex = segmentNumber - 1;
-              console.log("carrire code",segmentOne[0].carrierCode)
               const segmentOne = upsell.itineraries[0].segments;
               const segmentTwo = upsell.itineraries[1].segments;
-
+              const travelerPricings = upsell.travelerPricings;
+              const departureObject = segmentOne[0].departure;
+              const arrivalObject = segmentOne[0].arrival;
+              // console.log("airline logo link",segmentOne[0].carrierCode);
+              const perks = normalizeAmenities(travelerPricings[0].fareDetailsBySegment[0].amenities);
+              
               return (
                 <div key={index} className="flightDealContainer">
                   <div className="flights-header">
@@ -261,13 +303,13 @@ function FlightCard() {
                       <div className="icon">
                         <img
                           src={
-                            airlinesLookUp[segmentOne?.carrierCode]?.logo || ""
+                            airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""
                           }
                           alt="Airline Logo"
                           className="airline-logo"
                         />
                       </div>
-                      <h4>{"" || ""}</h4>
+                      <h4>{segmentOne[0].carrierCode || ""}</h4>
                     </div>
                     <h3>
                       {fareBrandMap[
@@ -357,7 +399,7 @@ function FlightCard() {
                     </div>
                     <div className="price-details">
                       <h4>
-                        {price.grandTotal}/<span>pax</span>
+                        {""}/<span>pax</span>
                       </h4>
                     </div>
                     <div className="actions">
@@ -372,6 +414,7 @@ function FlightCard() {
 
                   <div className="flightFunction"></div>
                 </div>
+                // <h1>hello</h1>
               );
             })
           )}
