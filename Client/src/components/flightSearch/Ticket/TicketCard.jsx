@@ -18,7 +18,7 @@ import cutlary from "../../../assets/icons/cutlary.svg";
 import suiteCase from "../../../assets/icons/suiteCase.svg";
 import DummyTicket from "../../features/DummyTicket/DummyTicket";
 import TicketHeader from "./ticketheader.component";
-
+import AirlineInfo from "./airlinedata.component";
 function FlightCard() {
   // contexts
   const { iataCodes } = useContext(FlightContext);
@@ -302,26 +302,8 @@ function FlightCard() {
 
               return (
                 <div key={index} className="flightDealContainer">
-                  <div className="flights-header">
-                    <div className="airLineIcone">
-                      <div className="icon">
-                        <img
-                          src={
-                            airlinesLookUp[segmentOne[0].carrierCode]?.logo ||
-                            ""
-                          }
-                          alt="Airline Logo"
-                          className="airline-logo"
-                        />
-                      </div>
-                      <h4>{segmentOne[0].carrierCode || ""}</h4>
-                    </div>
-                    <h3>
-                      {fareBrandMap[
-                        travelerPricings[0].fareDetailsBySegment[0].brandedFare
-                      ] || "economy premium"}
-                    </h3>
-                  </div>
+        <AirlineInfo logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""} carrierCode={segmentOne[0].carrierCode || ""} airlineName={fareBrandMap[travelerPricings[0].fareDetailsBySegment[0].brandedFare] ||
+      "economy premium"}/>
                   <TicketHeader
                     originCode={departureObject.iataCode || ""}
                     originCity={
