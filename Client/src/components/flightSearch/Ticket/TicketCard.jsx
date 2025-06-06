@@ -25,13 +25,13 @@ function FlightCard() {
   const { flightResults } = useContext(FlightContext);
   const { bookedFlight, setBookedFlight } = useContext(FlightContext);
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
-  const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
+  // const { selectedFlight, setSelectFlight } = useContext(FlightContext);
+  const { setUpsellError } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
-  const [upsellError, setUpsellError] = useState("");
   const [dropDown, showDropDown] = useState(null);
   // const [outBoundFlight, setFlight] = useState({});
   const [availableAirlines, setAvailableAirlines] = useState([]);
