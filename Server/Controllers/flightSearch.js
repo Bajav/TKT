@@ -116,14 +116,13 @@ const brandedUpSell = async (req, res) => {
 //   find out the latest price for a flight selected
 
 const findLastPrice = async (req, res) => {
-  const responce = req.body;
-  console.log("findLastPrice",responce);
+  const response = req.body;
+  console.log("findLastPrice",response);
   try {
-    console.log("responseee::", responsse[0]);
     const pricingResponse = await amadeus.shopping.flightOffers.pricing.post({
       data: {
         type: "flight-offers-pricing",
-        flightOffers: [brandedFlight[0]],
+        flightOffers: [response],
       },
       params: {
         include: "detailed-fare-rules",

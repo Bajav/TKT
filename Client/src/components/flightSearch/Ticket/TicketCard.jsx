@@ -132,10 +132,8 @@ function FlightCard() {
   const selectButton = async (index) => {
     console.log("selectButton clicked");
     const selected = filteredFlights[index];
-    console.log("selected for branded upsell", selected);
     setSelectFlight(selected);
     setOverlay(true);
-
     try {
       const response = await axios.post(
         "http://localhost:3000/brandedUpSell",
@@ -150,10 +148,10 @@ function FlightCard() {
   };
 
   const bookNow = async (index) => {
+    setBookedFlight(brandedUpSell[index]);
     console.log("book now btn hit");
     console.log(bookedFlight);
     try {
-      setBookedFlight(filteredFlights[index]);
     const response =  await axios.post(
         "http://localhost:3000/findLastPrice",
         { bookedFlight }
@@ -406,7 +404,7 @@ function FlightCard() {
                       </h4>
                     </div>
                     <div className="actions">
-                      <button onClick={bookNow} className="bookBtn">
+                      <button onClick={()=>bookNow(index)} className="bookBtn">
                         book now
                       </button>
                       <button onClick={() => {}} className="detailsBtn">
