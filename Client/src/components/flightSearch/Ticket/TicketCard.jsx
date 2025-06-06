@@ -25,7 +25,7 @@ function FlightCard() {
   const { flightResults } = useContext(FlightContext);
   const { bookedFlight, setBookedFlight } = useContext(FlightContext);
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
-  // const { selectedFlight, setSelectFlight } = useContext(FlightContext);
+  const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
   const { setUpsellError } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
@@ -149,9 +149,10 @@ function FlightCard() {
   };
 
   const bookNow = async (index) => {
+    const selected = filteredFlights[index];
     console.log("book now btn hit");
     try {
-      setBookedFlight(filteredFlights[index]);
+      setBookedFlight(selected);
       await axios.post(
         "http://localhost:3000/flights/flightsResults/flightPricing",
         { flight: filteredFlights[index], index }
