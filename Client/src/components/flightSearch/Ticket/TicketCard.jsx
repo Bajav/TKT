@@ -149,8 +149,8 @@ function FlightCard() {
 
   const bookNow = async (index) => {
     setBookedFlight(brandedUpSell[index]);
-    console.log("book now btn hit");
-    console.log(bookedFlight);
+    console.log(brandedUpSell[index]);
+    console.log("bookedFlight",bookedFlight);
     try {
     const response =  await axios.post(
         "http://localhost:3000/findLastPrice",
