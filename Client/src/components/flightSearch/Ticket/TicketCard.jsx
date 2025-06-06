@@ -151,13 +151,12 @@ function FlightCard() {
   const bookNow = async (index) => {
     setBookedFlight(brandedUpSell[index]);
     console.log(brandedUpSell[index]);
-    console.log("bookedFlight",bookedFlight);
+    console.log("bookedFlight", bookedFlight);
     try {
-    const response =  await axios.post(
-        "http://localhost:3000/findLastPrice",
-        { bookedFlight }
-      );
-      console.log("response",response);
+      const response = await axios.post("http://localhost:3000/findLastPrice", {
+        bookedFlight,
+      });
+      console.log("response", response);
     } catch (err) {
       console.error("Error posting data:", err);
     }
@@ -180,43 +179,44 @@ function FlightCard() {
     ECOBASIC: "Economy Basic",
   };
   const normalizeAmenities = (amenities) => {
-  const normalized = {
-    seatChoice: false,
-    meal: false,
-    changeable: false,
-    refundable: false,
-    checkedBag: null,
-    cabinBag: null,
-    qmiles: null,
+    const normalized = {
+      seatChoice: false,
+      meal: false,
+      changeable: false,
+      refundable: false,
+      checkedBag: null,
+      cabinBag: null,
+      qmiles: null,
+    };
+
+    for (const item of amenities) {
+      const desc = item.description.toLowerCase();
+
+      if (desc.includes("seat")) normalized.seatChoice = true;
+      if (
+        desc.includes("meal") ||
+        desc.includes("food") ||
+        desc.includes("snack") ||
+        desc.includes("beverage")
+      ) {
+        normalized.meal = true;
+      }
+      if (desc.includes("change")) normalized.changeable = true;
+      if (desc.includes("refund")) normalized.refundable = true;
+      if (desc.includes("checked bag"))
+        normalized.checkedBag = item.description;
+      if (desc.includes("cabin bag")) normalized.cabinBag = item.description;
+      if (
+        desc.includes("qmile") ||
+        desc.includes("mile accrual") ||
+        desc.includes("mileage")
+      ) {
+        normalized.qmiles = item.description;
+      }
+    }
+
+    return normalized;
   };
-
-  for (const item of amenities) {
-    const desc = item.description.toLowerCase();
-
-    if (desc.includes("seat")) normalized.seatChoice = true;
-    if (
-      desc.includes("meal") ||
-      desc.includes("food") ||
-      desc.includes("snack") ||
-      desc.includes("beverage")
-    ) {
-      normalized.meal = true;
-    }
-    if (desc.includes("change")) normalized.changeable = true;
-    if (desc.includes("refund")) normalized.refundable = true;
-    if (desc.includes("checked bag")) normalized.checkedBag = item.description;
-    if (desc.includes("cabin bag")) normalized.cabinBag = item.description;
-    if (
-      desc.includes("qmile") ||
-      desc.includes("mile accrual") ||
-      desc.includes("mileage")
-    ) {
-      normalized.qmiles = item.description;
-    }
-  }
-
-  return normalized;
-};
 
   return (
     <Fragment>
@@ -296,8 +296,10 @@ function FlightCard() {
               const departureObject = segmentOne[0].departure;
               const arrivalObject = segmentOne[0].arrival;
               // console.log("airline logo link",segmentOne[0].carrierCode);
-              const perks = normalizeAmenities(travelerPricings[0].fareDetailsBySegment[0].amenities);
-              
+              const perks = normalizeAmenities(
+                travelerPricings[0].fareDetailsBySegment[0].amenities
+              );
+
               return (
                 <div key={index} className="flightDealContainer">
                   <div className="flights-header">
@@ -305,7 +307,8 @@ function FlightCard() {
                       <div className="icon">
                         <img
                           src={
-                            airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""
+                            airlinesLookUp[segmentOne[0].carrierCode]?.logo ||
+                            ""
                           }
                           alt="Airline Logo"
                           className="airline-logo"
@@ -319,7 +322,18 @@ function FlightCard() {
                       ] || "economy premium"}
                     </h3>
                   </div>
-                      <TicketHeader originCode={departureObject.iataCode || ""} originCity={iataLookup[departureObject.iataCode]?.city || ""} originTime={departureObject.at.slice(11) || ""} departureCode={arrivalObject.iataCode || ""} departureCity={iataLookup[arrivalObject.iataCode]?.city || ""} departureTime={arrivalObject.at.slice(11) || ""}/>
+                  <TicketHeader
+                    originCode={departureObject.iataCode || ""}
+                    originCity={
+                      iataLookup[departureObject.iataCode]?.city || ""
+                    }
+                    originTime={departureObject.at.slice(11) || ""}
+                    departureCode={arrivalObject.iataCode || ""}
+                    departureCity={
+                      iataLookup[arrivalObject.iataCode]?.city || ""
+                    }
+                    departureTime={arrivalObject.at.slice(11) || ""}
+                  />
                   <h6 className="lineNew">
                     --------------------------------------------------------
                   </h6>
@@ -387,7 +401,10 @@ function FlightCard() {
                       </h4>
                     </div>
                     <div className="actions">
-                      <button onClick={()=>bookNow(index)} className="bookBtn">
+                      <button
+                        onClick={() => bookNow(index)}
+                        className="bookBtn"
+                      >
                         book now
                       </button>
                       <button onClick={() => {}} className="detailsBtn">
@@ -436,37 +453,27 @@ function FlightCard() {
                     </div>
                     <h4>{segments[0]?.aircraft?.code || ""}</h4>
                   </div>
-                  <div className="ticket-header">
-                    <div className="origin">
-                      <h2>{segments[0]?.departure.iataCode || ""}</h2>
-                      <h5>
-                        {iataLookup[segments[0]?.departure.iataCode]?.city ||
-                          "xxx"}
-                      </h5>
-                      <h5>{segments[0]?.departure.at.slice(11) || ""}</h5>
-                    </div>
-                    <div className="center">
-                      <Arrow color="#F5F7F8" width="200px" />
-                      {segmentNumber > 1 ? (
-                        <h5>{segmentNumber - 1} stops</h5>
-                      ) : (
-                        <h5>0 stops</h5>
-                      )}
-                    </div>
-                    <div className="item">
-                      <h2>
-                        {segments[lastSegmentIndex]?.arrival.iataCode || ""}
-                      </h2>
-                      <h5>
-                        {iataLookup[
-                          segments[lastSegmentIndex]?.arrival.iataCode
-                        ]?.city || "xxx"}
-                      </h5>
-                      <h5>
-                        {segments[lastSegmentIndex]?.arrival.at.slice(11) || ""}
-                      </h5>
-                    </div>
-                  </div>
+                  <TicketHeader
+                    originCode={segments[0]?.departure.iataCode || ""}
+                    originCity={
+                      iataLookup[segments[0]?.departure.iataCode]?.city || ""
+                    }
+                    originTime={segments[0]?.departure.at.slice(11) || ""}
+                    segmentNum={segmentNumber}
+                    segment={segmentNumber}
+                    arrowColor="#F5F7F8"
+                    departureCode={
+                      segments[lastSegmentIndex]?.arrival.iataCode || ""
+                    }
+                    departureCity={
+                      iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]
+                        ?.city || "xxx"
+                    }
+                    departureTime={
+                      segments[lastSegmentIndex]?.arrival.at.slice(11) || ""
+                    }
+                  />
+                  ;
                   <div className="flights-actions">
                     <div className="time-details">
                       <div className="flex-tim">
