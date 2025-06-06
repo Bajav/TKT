@@ -17,6 +17,7 @@ import pctMile from "../../../assets/icons/pctMile.svg";
 import cutlary from "../../../assets/icons/cutlary.svg";
 import suiteCase from "../../../assets/icons/suiteCase.svg";
 import DummyTicket from "../../features/DummyTicket/DummyTicket";
+import TicketHeader from "./ticketheader.component";
 
 function FlightCard() {
   // contexts
@@ -318,25 +319,7 @@ function FlightCard() {
                       ] || "economy premium"}
                     </h3>
                   </div>
-
-                  <div className="ticket-header">
-                    <div className="origin">
-                      <h2>{departureObject.iataCode || ""}</h2>
-                      <h5>
-                        {iataLookup[departureObject.iataCode]?.city || ""}
-                      </h5>
-                      <h5>{departureObject.at.slice(11) || ""}</h5>
-                    </div>
-                    <div className="center">
-                      <Arrow color="#F5F7F8" width="200px" />
-                      {2 > 1 ? <h5>{2 - 1} stops</h5> : <h5>0 stops</h5>}
-                    </div>
-                    <div className="item">
-                      <h2>{arrivalObject.iataCode || ""}</h2>
-                      <h5>{iataLookup[arrivalObject.iataCode]?.city || ""}</h5>
-                      <h5>{arrivalObject.at.slice(11) || ""}</h5>
-                    </div>
-                  </div>
+                      <TicketHeader originCode={departureObject.iataCode || ""} originCity={iataLookup[departureObject.iataCode]?.city || ""} originTime={departureObject.at.slice(11) || ""} departureCode={arrivalObject.iataCode || ""} departureCity={iataLookup[arrivalObject.iataCode]?.city || ""} departureTime={arrivalObject.at.slice(11) || ""}/>
                   <h6 className="lineNew">
                     --------------------------------------------------------
                   </h6>
