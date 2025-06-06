@@ -153,10 +153,11 @@ function FlightCard() {
     console.log("book now btn hit");
     try {
       setBookedFlight(selected);
-      await axios.post(
+    const response =  await axios.post(
         "http://localhost:3000/flights/flightsResults/flightPricing",
-        { flight: filteredFlights[index], index }
+        { bookedFlight }
       );
+      console.log("response",response);
     } catch (err) {
       console.error("Error posting data:", err);
     }
@@ -404,7 +405,7 @@ function FlightCard() {
                       </h4>
                     </div>
                     <div className="actions">
-                      <button onClick={() => {}} className="bookBtn">
+                      <button onClick={bookNow} className="bookBtn">
                         book now
                       </button>
                       <button onClick={() => {}} className="detailsBtn">
