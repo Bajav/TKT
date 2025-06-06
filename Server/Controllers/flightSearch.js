@@ -117,18 +117,19 @@ const brandedUpSell = async (req, res) => {
 
 const findLastPrice = async (req, res) => {
   const response = req.body;
-  console.log("findLastPrice",response);
+  console.log("findLastPrice",response.bookedFlight);
   try {
     const pricingResponse = await amadeus.shopping.flightOffers.pricing.post({
       data: {
         type: "flight-offers-pricing",
-        flightOffers: [response],
+        flightOffers: [response.bookedFlight],
       },
       params: {
         include: "detailed-fare-rules",
       },
     });
 
+    console.log("responce from server",pricingResponse.data)
     return res.json(pricingResponse.data);
   } catch (err) {
     console.error("Error fetching last price:", err);
