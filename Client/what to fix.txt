@@ -6,3 +6,4 @@ classes to render incase passengers are more than one
 work on the flight type logic , one way , roundtrip , multicity
 error handling for flights eg No flights available
 check for rules of a flight
+use chill guy for the waiting 
