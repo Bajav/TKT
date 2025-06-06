@@ -1,35 +1,67 @@
 @import "../../styles/variables.scss";
 
-.loadingClass
-{
-    width: 94vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.loadingClass {
+  width: 94vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.uppsellError
-{
+.uppsellError {
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 300px;
   background: $ticketColor;
-  border-radius:10px;
+  border-radius: 10px;
   margin-top: 300px;
   padding: 10px;
-  img
-  {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01);
+  &::after {
+    position: absolute;
+    content: "";
+    top: 690px;
+    left: 35px;
+    right: 0;
+    z-index: -1;
+    height: 5%;
+    width: 80%;
+    transform: scale(0.9) translateZ(0);
+    filter: blur(15px);
+    background: linear-gradient(
+      to left,
+      #ff5770,
+      #e4428d,
+      #c42da8,
+      #9e16c3,
+      #6501de,
+      #9e16c3,
+      #c42da8,
+      #e4428d,
+      #ff5770
+    );
+    background-size: 200% 200%;
+    animation: animateGlow 1.25s linear infinite;
+  }
+
+  img {
     width: 30px;
   }
-  h1
-    {
-      font-size: 15px;
-      text-transform: capitalize;
-      color: $page_color;
-      font-family: $textFont,sans-serif;
-    }
+  h1 {
+    font-size: 15px;
+    text-transform: capitalize;
+    color: $page_color;
+    font-family: $textFont, sans-serif;
+  }
+}
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
 }
 .loaded {
   width: 160px;
@@ -92,4 +124,3 @@
     transform: translateX(0px);
   }
 }
-  
