@@ -132,6 +132,7 @@ function FlightCard() {
   const selectButton = async (index) => {
     console.log("selectButton clicked");
     const selected = filteredFlights[index];
+    console.log("selected for branded upsell", selected);
     setSelectFlight(selected);
     setOverlay(true);
 
@@ -149,10 +150,10 @@ function FlightCard() {
   };
 
   const bookNow = async (index) => {
-    const selected = filteredFlights[index];
     console.log("book now btn hit");
+    console.log(bookedFlight);
     try {
-      setBookedFlight(selected);
+      setBookedFlight(filteredFlights[index]);
     const response =  await axios.post(
         "http://localhost:3000/findLastPrice",
         { bookedFlight }
