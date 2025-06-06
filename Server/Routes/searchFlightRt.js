@@ -11,6 +11,7 @@ router.post('/brandedUpSell', brandedUpSell);
 router.get('/brandedUpSell', brandedUpSell);
 router.get("/checkin",getCheckIn);
 router.get("/findLastPrice",findLastPrice);
+router.post("/findLastPrice",findLastPrice);
 router.get("/getFlightOrder",getFlightOrder);
 router.get("/retriveOrder",retriveOrder);
 router.get("/seatMap",seatMap);

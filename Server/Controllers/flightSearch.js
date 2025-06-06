@@ -116,13 +116,9 @@ const brandedUpSell = async (req, res) => {
 //   find out the latest price for a flight selected
 
 const findLastPrice = async (req, res) => {
+  const responce = req.body;
+  console.log("findLastPrice",responce);
   try {
-    // Assuming flight data is passed in the request body
-    //   const flightOffer = req.body.flightOffer;
-
-    //   if (!flightOffer) {
-    //     return res.status(400).json({ error: "Missing flight offer data" });
-    //   }
     console.log("responseee::", responsse[0]);
     const pricingResponse = await amadeus.shopping.flightOffers.pricing.post({
       data: {

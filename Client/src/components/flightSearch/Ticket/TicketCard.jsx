@@ -154,7 +154,7 @@ function FlightCard() {
     try {
       setBookedFlight(selected);
     const response =  await axios.post(
-        "http://localhost:3000/flights/flightsResults/flightPricing",
+        "http://localhost:3000/g/findLastPrice",
         { bookedFlight }
       );
       console.log("response",response);
