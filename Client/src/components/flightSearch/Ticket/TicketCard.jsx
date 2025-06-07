@@ -159,7 +159,7 @@ const bookNow = async (index) => {
     });
 
     console.log("response", response);
-    navigate("/lastprice");
+    // navigate("/lastprice");
   } catch (err) {
     console.error("Error posting data:", err);
   }

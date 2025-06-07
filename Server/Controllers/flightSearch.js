@@ -125,7 +125,7 @@ const findLastPrice = async (req, res) => {
         flightOffers: [response.bookedFlight],
       },
       params: {
-        include: "detailed-fare-rules",bags
+        include: ["bags","detailed-fare-rules"]
       },
     });
 
