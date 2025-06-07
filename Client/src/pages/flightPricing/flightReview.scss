@@ -127,6 +127,10 @@ body {
 }
 .trip-container
 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
   background: $ticketColor;
   width: 100%;
   margin-bottom: 10px;
@@ -141,3 +145,4 @@ body {
     text-align: center;
   }
 }
+// 0744188138
