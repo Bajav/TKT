@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
@@ -6,31 +6,33 @@ import Border from "../../components/flightSearch/border";
 import confirmOder from "../../data/flightConfirmOrder";
 import BackBTN from "../../components/features/BackButton/BackBTN";
 import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
+import { FlightContext } from "../../components/context/flightSearch.context";
 
 function FlightPricing() {
   const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
-
+  const { bookedFlight } = useContext(FlightContext);
+  console.log("bookedFlight",bookedFlight);
   const [res, setRes] = useState([]);
 
-  const fetchFlightPricing = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/flights/flightsResults/flightPricing"
-      );
-      console.log("RESPONSE DATA IS BACK", response.data);
-      setRes(response.data);
-    } catch (err) {
-      console.log("Error fetching data:", err);
-    }
-  };
+  // const fetchFlightPricing = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:3000/flights/flightsResults/flightPricing"
+  //     );
+  //     console.log("RESPONSE DATA IS BACK", response.data);
+  //     setRes(response.data);
+  //   } catch (err) {
+  //     console.log("Error fetching data:", err);
+  //   }
+  // };
 
   // Log updated state when it changes
-  useEffect(() => {
-    fetchFlightPricing();
-    // console.log("Updated res:", res);
-  }, []);
-  // define navigation
+  // useEffect(() => {
+  //   fetchFlightPricing();
+  //   // console.log("Updated res:", res);
+  // }, []);
+  // // define navigation
 
   const navigate = useNavigate();
 

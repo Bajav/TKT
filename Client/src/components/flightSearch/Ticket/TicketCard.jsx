@@ -24,10 +24,10 @@ function FlightCard() {
   const { iataCodes } = useContext(FlightContext);
   const { airlineData } = useContext(FlightContext);
   const { flightResults } = useContext(FlightContext);
-  const { bookedFlight, setBookedFlight } = useContext(FlightContext);
+  const { setBookedFlight } = useContext(FlightContext);
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
   const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
-  const {upsellError, setUpsellError } = useContext(FlightContext);
+  const { upsellError, setUpsellError } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
@@ -148,23 +148,21 @@ function FlightCard() {
     }
   };
 
-const bookNow = async (index) => {
-  const flight = brandedUpSell[index];
-  console.log("book now btn hit");
-  console.log("Flight to book:", flight);
-
-  try {
-    const response = await axios.post("http://localhost:3000/findLastPrice", {
-      bookedFlight: flight,
-    });
-
-    console.log("response", response);
-    // navigate("/lastprice");
-  } catch (err) {
-    console.error("Error posting data:", err);
-  }
-};
-
+  const bookNow = async (index) => {
+    const flight = brandedUpSell[index];
+    console.log("book now btn hit");
+    console.log("Flight to book:", flight);
+    try {
+      const response = await axios.post("http://localhost:3000/findLastPrice", {
+        bookedFlight: flight,
+      });
+      setBookedFlight(response.data);
+      console.log("response", response);
+      // navigate("/lastprice");
+    } catch (err) {
+      console.error("Error posting data:", err);
+    }
+  };
 
   const showFilterDropDown = () => setFilterDropDown(!filterDropDown);
   // Handle filter changes
@@ -177,7 +175,6 @@ const bookNow = async (index) => {
     setOverlay(false);
     setUpsellError(null);
     console.log(upsellError);
-
   };
 
   const fareBrandMap = {
