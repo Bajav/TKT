@@ -57,6 +57,8 @@ function FlightPricing() {
               departureCode={"dxb"}
               departureCity={"dubai"}
               departureTime={"12:00:00"}
+              originTerminal={"Terminal:1A"}
+              destinationTerminal={"Terminal:7A"}
             />
           </SwiperSlide>
              <SwiperSlide >
