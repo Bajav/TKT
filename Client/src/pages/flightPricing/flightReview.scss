@@ -26,8 +26,7 @@ body {
   opacity: 70%;
   margin-top: 10px;
 }
-.taxes-container
-{
+.taxes-container {
   background: $ticketColor;
   width: 100%;
   border-radius: 20px;
@@ -51,6 +50,7 @@ body {
     justify-items: center;
     gap: 10%;
     // font-size: 20px;
+    padding: 10px 0px 0px 0px;
     text-transform: capitalize;
     color: $visibleFontColor;
     h5 {
@@ -125,12 +125,10 @@ body {
     padding: 5px 5px;
   }
 }
-.tickets
-{
+.tickets {
   width: 100%;
 }
-.main-trip-container
-{
+.main-trip-container {
   background: $actionsDar_color;
   margin-bottom: 10px;
   padding: 4px;
@@ -140,8 +138,7 @@ body {
   align-items: center;
   border-radius: 25px;
 }
-.trip-container
-{
+.trip-container {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -150,17 +147,15 @@ body {
   width: 100%;
   border-radius: 20px;
   height: 250px;
-  h1
-  {
+  h1 {
     color: $visibleFontColor;
-    font-family: $cityFont,sans-serif;
+    font-family: $cityFont, sans-serif;
     font-size: 30px;
     padding: 5px 0px 0px 5px;
     margin: 0;
     text-align: center;
   }
-  .ticket-header
-  {
+  .ticket-header {
     color: $visibleFontColor;
     width: 100%;
     h2 {
@@ -168,20 +163,20 @@ body {
     }
   }
 }
-.flight-container{
+.flight-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  .detail{
+  .detail {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 10px;
     gap: 5px;
-    h5{
+    h5 {
       background: $actionOrange;
       padding: 5px 7px;
-      font-family: $textFont,sans-serif;
+      font-family: $textFont, sans-serif;
       font-size: 9px;
       border-radius: 10px;
       color: $page_color;
