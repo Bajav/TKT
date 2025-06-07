@@ -159,7 +159,7 @@ const bookNow = async (index) => {
     });
 
     console.log("response", response);
-    navigate("flights/lastprice");
+    navigate("/lastprice");
   } catch (err) {
     console.error("Error posting data:", err);
   }
@@ -459,7 +459,6 @@ const bookNow = async (index) => {
                       segments[lastSegmentIndex]?.arrival.at.slice(11) || ""
                     }
                   />
-                  ;
                   <div className="flights-actions">
                     <div className="time-details">
                       <div className="flex-tim">

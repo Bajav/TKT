@@ -1,4 +1,5 @@
 import "./ticket.scss";
+import { Arrow } from "../flightArrowSvg";
 
 function TicketHeader(props) {
   return (
