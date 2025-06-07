@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
-import { Arrow } from "../../components/flightSearch/flightArrowSvg";
 import Border from "../../components/flightSearch/border";
 import confirmOder from "../../data/flightConfirmOrder";
 import BackBTN from "../../components/features/BackButton/BackBTN";
@@ -38,17 +38,40 @@ function FlightPricing() {
     <section className="reviewFlight">
       <BackBTN to={"/"} btnName="cancel" />
       <h1>Review Flight</h1>
+      <div className="main-trip-container">
       <div className="trip-container">
         <h1>departure flight</h1>
-        <TicketHeader
-          originCode={"ebb"}
-          originCity={"kampala"}
-          originTime={"12:00:00"}
-          arrowColor="#F5F7F8"
-          departureCode={"dxb"}
-          departureCity={"dubai"}
-          departureTime={"12:00:00"}
-        />
+        <Swiper
+          spaceBetween={0}
+          slidesPerView="auto"
+          onSlideChange={() => console.log("slide change")}
+          onSwiper={(swiper) => console.log(swiper)}
+          className="tickets"
+        >
+          <SwiperSlide >
+            <TicketHeader
+              originCode={"ebb"}
+              originCity={"kampala"}
+              originTime={"12:00:00"}
+              arrowColor="#222222"
+              departureCode={"dxb"}
+              departureCity={"dubai"}
+              departureTime={"12:00:00"}
+            />
+          </SwiperSlide>
+             <SwiperSlide >
+            <TicketHeader
+              originCode={"ebb"}
+              originCity={"kampala"}
+              originTime={"12:00:00"}
+              arrowColor="#222222"
+              departureCode={"dxb"}
+              departureCity={"dubai"}
+              departureTime={"12:00:00"}
+            />
+          </SwiperSlide>
+        </Swiper>
+      </div>
       </div>
       <section className="taxes-container">
         <div className="taxes">

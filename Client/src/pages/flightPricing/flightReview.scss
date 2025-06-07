@@ -125,24 +125,47 @@ body {
     padding: 5px 5px;
   }
 }
+.tickets
+{
+  width: 100%;
+}
+.main-trip-container
+{
+  background: $actionsDar_color;
+  margin-bottom: 10px;
+  padding: 5px 0px 5px 0px;
+  width: 99vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
 .trip-container
 {
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 10px;
-  background: $ticketColor;
-  width: 100%;
-  margin-bottom: 10px;
-  border-radius: 10px;
+  background: $page_color;
+  width: 97vw;
+  border-radius: 20px;
+  height: 200px;
   h1
   {
-    color: $page_color;
+    color: $visibleFontColor;
     font-family: $cityFont,sans-serif;
     font-size: 30px;
     padding: 5px 0px 0px 5px;
     margin: 0;
     text-align: center;
+  }
+  .ticket-header
+  {
+    color: $visibleFontColor;
+    width: 100%;
+    h2 {
+      color: $visibleFontColor;
+    }
   }
 }
 // 0744188138
