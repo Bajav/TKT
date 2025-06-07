@@ -20,19 +20,23 @@ body {
     margin-top: 10px;
   }
 }
-
-
 .border {
   color: $page_color;
   opacity: 70%;
   margin-top: 10px;
 }
-
+.taxes-container
+{
+  background: $ticketColor;
+  width: 98%;
+  border-radius: 20px;
+  padding: 10px;
+}
 .taxes {
   background: $page_color;
   font-family: $textFont, sans-serif;
-  width: 98%;
-  border-radius: 0px 0px 10px 10px;
+  width: 100%;
+  border-radius: 15px;
   padding: 5px;
   .border {
     color: $ticketColor;
@@ -48,10 +52,9 @@ body {
     // font-size: 20px;
     text-transform: capitalize;
     color: $visibleFontColor;
-    h5
-    {
-        font-weight: 400;
-        font-size: 15px;
+    h5 {
+      font-weight: 400;
+      font-size: 15px;
     }
   }
 }
@@ -63,15 +66,13 @@ body {
   justify-content: center;
 }
 
-.bodyOne 
-{
-    h4
-    {
-        font-family: $textFont,sans-serif;
-        font-size: 13px;
-        margin-bottom: 5px;
-        font-weight: 100;
-    }
+.bodyOne {
+  h4 {
+    font-family: $textFont, sans-serif;
+    font-size: 13px;
+    margin-bottom: 5px;
+    font-weight: 100;
+  }
 }
 .continueBtn {
   background: $actionOrange;
