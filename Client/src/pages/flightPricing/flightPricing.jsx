@@ -40,7 +40,15 @@ function FlightPricing() {
       <h1>Review Flight</h1>
       <div className="trip-container">
         <h1>departure flight</h1>
-        <TicketHeader />
+        <TicketHeader
+          originCode={"ebb"}
+          originCity={"kampala"}
+          originTime={"12:00:00"}
+          arrowColor="#F5F7F8"
+          departureCode={"dxb"}
+          departureCity={"dubai"}
+          departureTime={"12:00:00"}
+        />
       </div>
       <section className="taxes-container">
         <div className="taxes">

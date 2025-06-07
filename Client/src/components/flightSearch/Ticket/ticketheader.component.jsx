@@ -29,13 +29,11 @@ function TicketHeader(props) {
 export default TicketHeader;
 
 {/* <TicketHeader
-  originCode={stopOver.departure.iataCode}
-  originCity={iataLookup[stopOver.departure.iataCode]?.city || ""}
-  originTime={stopOver.departure.at.slice(11) || ""}
+  originCode={"ebb"}
+  originCity={"kampala"}
+  originTime={""}
   arrowColor="#F5F7F8"
-  departureCode={stopOver.arrival.iataCode || ""}
-  departureCity={
-    iataLookup[stopOver.arrival.iataCode]?.city || ""
-  }
-  departureTime={stopOver.arrival.at.slice(11) || ""}
+  departureCode={""}
+  departureCity={""}
+  departureTime={""}
 />; */}
