@@ -7,9 +7,6 @@ body {
 }
 
 .reviewFlight {
-  background: $page_color;
-  font-family: $textFont, sans-serif;
-  // color: $deemFontColor;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,73 +20,12 @@ body {
     margin-top: 10px;
   }
 }
-// flight ticket
-.mainReview {
-  background: $ticketColor;
-  width: 95%;
-  padding: 8px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .departureReview {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // background: #fff;
-    h1 {
-      text-align: center;
-      font-family: $cityFont, sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      margin: 10px 10px 30px 10px;
-      color: $page_color;
-    }
-  }
-}
-// flight data
 
-.flightData {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  align-items: center;
-  margin-top: 10px;
-
-  h5 {
-    background: #f5f7f8;
-    padding: 5px 8px;
-    margin: 0;
-    text-transform: capitalize;
-    border-radius: 15px;
-    font-family: $textFont, sans-serif;
-    font-size: 10px;
-    font-weight: 100;
-  }
-}
 
 .border {
   color: $page_color;
   opacity: 70%;
   margin-top: 10px;
-}
-.infoHighlights {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 5px;
-  h5 {
-    font-size: 8px;
-    font-family: $textFont, sans-serif;
-    color: $page_color;
-    background: $actionBlue;
-    padding: 5px 10px;
-    text-transform: capitalize;
-    font-weight: 500;
-    border-radius: 10px;
-  }
 }
 
 .taxes {
