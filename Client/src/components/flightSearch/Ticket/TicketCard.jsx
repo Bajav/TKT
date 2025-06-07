@@ -302,8 +302,15 @@ function FlightCard() {
 
               return (
                 <div key={index} className="flightDealContainer">
-        <AirlineInfo logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""} carrierCode={segmentOne[0].carrierCode || ""} airlineName={fareBrandMap[travelerPricings[0].fareDetailsBySegment[0].brandedFare] ||
-      "economy premium"}/>
+                  <AirlineInfo
+                    logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
+                    carrierCode={segmentOne[0].carrierCode || ""}
+                    airlineName={
+                      fareBrandMap[
+                        travelerPricings[0].fareDetailsBySegment[0].brandedFare
+                      ] || "economy premium"
+                    }
+                  />
                   <TicketHeader
                     originCode={departureObject.iataCode || ""}
                     originCity={
@@ -418,23 +425,13 @@ function FlightCard() {
             <div className="flightContainer">
               <div className="main-cards" key={index}>
                 <div className="flights-res">
-                  <div className="flights-header">
-                    <div className="airLineIcone">
-                      <div className="icon">
-                        <img
-                          src={
-                            airlinesLookUp[segments[0]?.carrierCode]?.logo || ""
-                          }
-                          alt="Airline Logo"
-                          className="airline-logo"
-                        />
-                      </div>
-                      <h4>
-                        {airlinesLookUp[segments[0]?.carrierCode]?.name || ""}
-                      </h4>
-                    </div>
-                    <h4>{segments[0]?.aircraft?.code || ""}</h4>
-                  </div>
+                  <AirlineInfo
+                    logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
+                    carrierCode={
+                      airlinesLookUp[segments[0]?.carrierCode]?.name || ""
+                    }
+                    airlineName={segments[0]?.aircraft?.code || ""}
+                  />
                   <TicketHeader
                     originCode={segments[0]?.departure.iataCode || ""}
                     originCity={
@@ -504,27 +501,24 @@ function FlightCard() {
                       {segmentOne.map((stopOver, setStopIndex) => (
                         <SwiperSlide key={setStopIndex}>
                           <div className="ticket-header">
-                            <div className="stopFlight">
-                              <div className="origin">
-                                <h2>{stopOver.departure.iataCode}</h2>
-                                <h5>
-                                  {iataLookup[stopOver.departure.iataCode]
-                                    ?.city || ""}
-                                </h5>
-                                <h5>{stopOver.departure.at.slice(11)}</h5>
-                              </div>
-                              <div className="center">
-                                <Arrow color="#F5F7F8" width="200px" />
-                              </div>
-                              <div className="item">
-                                <h2>{stopOver.arrival.iataCode}</h2>
-                                <h5>
-                                  {iataLookup[stopOver.arrival.iataCode]
-                                    ?.city || "ddd"}
-                                </h5>
-                                <h5>{stopOver.arrival.at.slice(11)}</h5>
-                              </div>
-                            </div>
+                            <TicketHeader
+                              originCode={stopOver.departure.iataCode}
+                              originCity={
+                                iataLookup[stopOver.departure.iataCode]?.city ||
+                                ""
+                              }
+                              originTime={stopOver.departure.at.slice(11) || ""}
+                              arrowColor="#F5F7F8"
+                              departureCode={stopOver.arrival.iataCode || ""}
+                              departureCity={
+                                iataLookup[stopOver.arrival.iataCode]?.city ||
+                                ""
+                              }
+                              departureTime={
+                                stopOver.arrival.at.slice(11) || ""
+                              }
+                            />
+                            ;
                             <div className="lineOne">
                               <h5>
                                 --------------------------------------------
@@ -551,6 +545,7 @@ function FlightCard() {
                               <h5>DURATION: {stopOver.duration.slice(2)}</h5>
                             </div>
                           </div>
+                          ;
                         </SwiperSlide>
                       ))}
                     </Swiper>
