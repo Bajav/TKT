@@ -38,7 +38,7 @@ body {
   font-family: $textFont, sans-serif;
   width: 100%;
   border-radius: 15px;
-  padding: 5px;
+  padding: 3px;
   .border {
     color: $ticketColor;
     text-align: center;
@@ -133,12 +133,12 @@ body {
 {
   background: $actionsDar_color;
   margin-bottom: 10px;
-  padding: 5px 0px 5px 0px;
-  width: 99vw;
+  padding: 4px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 25px;
 }
 .trip-container
 {
@@ -147,7 +147,7 @@ body {
   flex-direction: column;
   padding: 10px;
   background: $page_color;
-  width: 97vw;
+  width: 100%;
   border-radius: 20px;
   height: 200px;
   h1
