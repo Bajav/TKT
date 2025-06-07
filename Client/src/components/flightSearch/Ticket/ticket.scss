@@ -202,7 +202,7 @@
     color: $page_color;
     width: 95%;
   }
-  .ticket-header {
+  .stops-details {
     display: flex;
     position: relative;
     height: 125px;
@@ -234,8 +234,9 @@
   height: 30px;
   gap: 10px;
   position: relative;
-  top: -10px;
-  left: 10px;
+  // top: -10px;
+  // left: 10px;
+  color: $page_color;
   h5 {
     //   margin: 0px 10px 0px 10px;
     font-size: 10px;
@@ -359,9 +360,9 @@
       }
     }
   }
-  .ticket-header {
-    width: 100%;
-  }
+  // .ticket-header {
+  //   width: 100%;
+  // }
   .flights-header {
     width: 100%;
     color: $page_color;

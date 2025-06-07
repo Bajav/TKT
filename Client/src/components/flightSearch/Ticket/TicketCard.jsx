@@ -507,7 +507,7 @@ function FlightCard() {
                     >
                       {segmentOne.map((stopOver, setStopIndex) => (
                         <SwiperSlide key={setStopIndex}>
-                          <div className="ticket-header">
+                          <div className="stops-details">
                             <TicketHeader
                               originCode={stopOver.departure.iataCode}
                               originCity={
