@@ -27,7 +27,7 @@ function FlightCard() {
   const { bookedFlight, setBookedFlight } = useContext(FlightContext);
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
   const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
-  const { setUpsellError } = useContext(FlightContext);
+  const {upsellError, setUpsellError } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
@@ -171,6 +171,9 @@ function FlightCard() {
   const cancelBTN = () => {
     setBrandedUpSell([]);
     setOverlay(false);
+    setUpsellError(null);
+    console.log(upsellError);
+
   };
 
   const fareBrandMap = {
