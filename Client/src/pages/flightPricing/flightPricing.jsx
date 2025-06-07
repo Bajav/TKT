@@ -49,6 +49,7 @@ function FlightPricing() {
           className="tickets"
         >
           <SwiperSlide >
+            <div className="flight-container">
             <TicketHeader
               originCode={"ebb"}
               originCity={"kampala"}
@@ -60,6 +61,13 @@ function FlightPricing() {
               originTerminal={"Terminal:1A"}
               destinationTerminal={"Terminal:7A"}
             />
+            <div className="detail">
+              <h5>AIRLINE : KQ A380</h5>
+              <h5>CO2 : 93 KG</h5>
+              <h5>THU 05-DEC-24</h5>
+              <h5>CLASS : R ECONOMY</h5>
+            </div>
+            </div>
           </SwiperSlide>
              <SwiperSlide >
             <TicketHeader
@@ -70,6 +78,8 @@ function FlightPricing() {
               departureCode={"dxb"}
               departureCity={"dubai"}
               departureTime={"12:00:00"}
+               originTerminal={"Terminal:N/A"}
+              destinationTerminal={"Terminal:7A"}
             />
           </SwiperSlide>
         </Swiper>
