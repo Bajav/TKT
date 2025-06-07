@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState, useContext } from "react";
 import { FlightContext } from "../../context/flightSearch.context";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from 'swiper/modules';
 import axios from "axios";
 import Loader from "../../loader";
 // import scss
@@ -280,7 +281,7 @@ function FlightCard() {
               <h5>{"Kampala, Uganda" || ""}</h5>
             </div>
             <div className="center">
-              <Arrow color="#1D1D1D" width="200px" />
+              <Arrow color="#222222" width="200px" />
               <h5>23.DEC.24</h5>
             </div>
             <div className="item">
@@ -321,12 +322,14 @@ function FlightCard() {
                     originCity={
                       iataLookup[departureObject.iataCode]?.city || ""
                     }
+                    arrowColor="#F5F7F8"
                     originTime={departureObject.at.slice(11) || ""}
                     departureCode={arrivalObject.iataCode || ""}
                     departureCity={
                       iataLookup[arrivalObject.iataCode]?.city || ""
                     }
                     departureTime={arrivalObject.at.slice(11) || ""}
+
                   />
                   <h6 className="lineNew">
                     --------------------------------------------------------
@@ -501,6 +504,7 @@ function FlightCard() {
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
                       className="stopOvers"
+                      modules={[Pagination]}
                     >
                       {segmentOne.map((stopOver, setStopIndex) => (
                         <SwiperSlide key={setStopIndex}>

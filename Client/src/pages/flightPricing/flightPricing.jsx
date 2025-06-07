@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from 'swiper/modules';
 import axios from "axios";
 import Border from "../../components/flightSearch/border";
 import confirmOder from "../../data/flightConfirmOrder";
@@ -52,6 +53,7 @@ function FlightPricing() {
             onSlideChange={() => console.log("slide change")}
             onSwiper={(swiper) => console.log(swiper)}
             className="tickets"
+            modules={[Pagination]}
           >
             <SwiperSlide>
               <div className="flight-container">
@@ -117,6 +119,7 @@ function FlightPricing() {
             onSlideChange={() => console.log("slide change")}
             onSwiper={(swiper) => console.log(swiper)}
             className="tickets"
+            modules={[Pagination]}
           >
             <SwiperSlide>
               <div className="flight-container">
