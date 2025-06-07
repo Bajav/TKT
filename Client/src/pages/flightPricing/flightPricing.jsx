@@ -57,8 +57,8 @@ function FlightPricing() {
                   originCity={"kampala"}
                   originTime={"12:00:00"}
                   arrowColor="#222222"
-                  departureCode={"dxb"}
-                  departureCity={"dubai"}
+                  departureCode={"nbo"}
+                  departureCity={"nairobi"}
                   departureTime={"12:00:00"}
                   originTerminal={"Terminal:1A"}
                   destinationTerminal={"Terminal:7A"}
@@ -79,12 +79,77 @@ function FlightPricing() {
             <SwiperSlide>
               <div className="flight-container">
                 <TicketHeader
-                  originCode={"ebb"}
-                  originCity={"kampala"}
+                  originCode={"nbo"}
+                  originCity={"nairobi"}
                   originTime={"12:00:00"}
                   arrowColor="#222222"
                   departureCode={"dxb"}
                   departureCity={"dubai"}
+                  departureTime={"12:00:00"}
+                  originTerminal={"Terminal:1A"}
+                  destinationTerminal={"Terminal:7A"}
+                />
+                <div className="detail">
+                  <h5>AIRLINE : KQ A380</h5>
+                  <h5>CO2 : 93 KG</h5>
+                  <h5>THU 05-DEC-24</h5>
+                  <h5>CLASS : R ECONOMY</h5>
+                </div>
+                <div className="detail">
+                  <h5>CARRY ON 1PC 8KG</h5>
+                  <h5>LAYOVER : 3HR40MINS</h5>
+                  <h5>CHECKED BAGS : 2 PCS 23KG/EACH</h5>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+        </div>
+      </div>
+       <div className="main-trip-container">
+        <div className="trip-container">
+          <h1>return flight</h1>
+          <Swiper
+            spaceBetween={0}
+            slidesPerView="auto"
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+            className="tickets"
+          >
+            <SwiperSlide>
+              <div className="flight-container">
+                <TicketHeader
+                  originCode={"dxb"}
+                  originCity={"dubai"}
+                  originTime={"12:00:00"}
+                  arrowColor="#222222"
+                  departureCode={"nbo"}
+                  departureCity={"nairobi"}
+                  departureTime={"12:00:00"}
+                  originTerminal={"Terminal:1A"}
+                  destinationTerminal={"Terminal:7A"}
+                />
+                <div className="detail">
+                  <h5>AIRLINE : KQ A380</h5>
+                  <h5>CO2 : 93 KG</h5>
+                  <h5>THU 05-DEC-24</h5>
+                  <h5>CLASS : R ECONOMY</h5>
+                </div>
+                <div className="detail">
+                  <h5>CARRY ON 1PC 8KG</h5>
+                  <h5>LAYOVER : 3HR40MINS</h5>
+                  <h5>CHECKED BAGS : 2 PCS 23KG/EACH</h5>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="flight-container">
+                <TicketHeader
+                  originCode={"nbo"}
+                  originCity={"nairobi"}
+                  originTime={"12:00:00"}
+                  arrowColor="#222222"
+                  departureCode={"ebb"}
+                  departureCity={"kampala"}
                   departureTime={"12:00:00"}
                   originTerminal={"Terminal:1A"}
                   destinationTerminal={"Terminal:7A"}
