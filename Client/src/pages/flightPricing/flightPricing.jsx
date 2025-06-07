@@ -53,6 +53,7 @@ function FlightPricing() {
             onSlideChange={() => console.log("slide change")}
             onSwiper={(swiper) => console.log(swiper)}
             className="tickets"
+            pagination={true}
             modules={[Pagination]}
           >
             <SwiperSlide>
@@ -119,6 +120,7 @@ function FlightPricing() {
             onSlideChange={() => console.log("slide change")}
             onSwiper={(swiper) => console.log(swiper)}
             className="tickets"
+            pagination={true}
             modules={[Pagination]}
           >
             <SwiperSlide>

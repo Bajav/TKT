@@ -504,7 +504,6 @@ function FlightCard() {
                       onSlideChange={() => console.log("slide change")}
                       onSwiper={(swiper) => console.log(swiper)}
                       className="stopOvers"
-                      modules={[Pagination]}
                     >
                       {segmentOne.map((stopOver, setStopIndex) => (
                         <SwiperSlide key={setStopIndex}>
@@ -526,7 +525,6 @@ function FlightCard() {
                                 stopOver.arrival.at.slice(11) || ""
                               }
                             />
-                            ;
                             <div className="lineOne">
                               <h5>
                                 --------------------------------------------
@@ -553,7 +551,6 @@ function FlightCard() {
                               <h5>DURATION: {stopOver.duration.slice(2)}</h5>
                             </div>
                           </div>
-                          ;
                         </SwiperSlide>
                       ))}
                     </Swiper>
