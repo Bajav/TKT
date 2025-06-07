@@ -10,7 +10,7 @@ function BearLoader() {
 
       <div className="uppsellError">
         <img src={errorIcon} alt="errorIcon" />
-        <h1>{upsellError}</h1>
+        <h1>{upsellError[0].detail}</h1>
       </div>
     </div>
   );

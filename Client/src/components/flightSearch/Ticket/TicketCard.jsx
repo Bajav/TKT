@@ -24,7 +24,7 @@ function FlightCard() {
   const { iataCodes } = useContext(FlightContext);
   const { airlineData } = useContext(FlightContext);
   const { flightResults } = useContext(FlightContext);
-  const { setBookedFlight } = useContext(FlightContext);
+  const {bookedFlight, setBookedFlight } = useContext(FlightContext);
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
   const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
   const { upsellError, setUpsellError } = useContext(FlightContext);
@@ -143,8 +143,8 @@ function FlightCard() {
       setBrandedUpSell(response.data); // likely want .data, not full response
       console.log("brandedUpsell res", response.data);
     } catch (err) {
-      console.error("Axios error:", err?.response?.data?.message[0].detail);
-      setUpsellError(err?.response?.data?.message[0].detail);
+      console.error("Axios error:", err?.response?.data?.message);
+      setUpsellError(err?.response?.data?.message);
     }
   };
 
@@ -158,6 +158,7 @@ function FlightCard() {
       });
       setBookedFlight(response.data);
       console.log("response", response);
+      console.log("booked", bookedFlight);
       // navigate("/lastprice");
     } catch (err) {
       console.error("Error posting data:", err);

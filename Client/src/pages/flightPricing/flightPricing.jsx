@@ -1,4 +1,4 @@
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
@@ -12,7 +12,7 @@ function FlightPricing() {
   const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
   const { bookedFlight } = useContext(FlightContext);
-  console.log("bookedFlight",bookedFlight);
+  console.log("bookedFlight", bookedFlight);
   const [res, setRes] = useState([]);
 
   // const fetchFlightPricing = async () => {
@@ -33,7 +33,10 @@ function FlightPricing() {
   //   // console.log("Updated res:", res);
   // }, []);
   // // define navigation
-
+  const fakeArray = [
+    { id: 1, name: "hussein", class: "f4" },
+    { id: 2, name: "hussein", class: "f4" },
+  ];
   const navigate = useNavigate();
 
   return (
@@ -76,7 +79,7 @@ function FlightPricing() {
                 </div>
               </div>
             </SwiperSlide>
-            <SwiperSlide>
+             <SwiperSlide>
               <div className="flight-container">
                 <TicketHeader
                   originCode={"nbo"}
@@ -105,7 +108,7 @@ function FlightPricing() {
           </Swiper>
         </div>
       </div>
-       <div className="main-trip-container">
+      <div className="main-trip-container">
         <div className="trip-container">
           <h1>return flight</h1>
           <Swiper
