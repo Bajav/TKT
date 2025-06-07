@@ -16,7 +16,7 @@ import { FormContextProvider } from "../Hooks/Context/formData.context";
 import { Fragment } from "react";
 
 function AllRoutes() {
-  // const location = useLocation();
+  const location = useLocation();
 
   // Define all routes where Navbar should be hidden
   const hideNavRoutes = [
