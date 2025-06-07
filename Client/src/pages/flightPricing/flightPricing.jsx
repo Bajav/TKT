@@ -13,7 +13,6 @@ function FlightPricing() {
   const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
   const { bookedFlight } = useContext(FlightContext);
-  console.log("bookedFlight", bookedFlight);
   const [res, setRes] = useState([]);
 
   // const fetchFlightPricing = async () => {
@@ -34,17 +33,13 @@ function FlightPricing() {
   //   // console.log("Updated res:", res);
   // }, []);
   // // define navigation
-  const fakeArray = [
-    { id: 1, name: "hussein", class: "f4" },
-    { id: 2, name: "hussein", class: "f4" },
-  ];
   const navigate = useNavigate();
 
   return (
     <section className="reviewFlight">
       <BackBTN to={"/"} btnName="cancel" />
       <h1>Review Flight</h1>
-      <div className="main-trip-container">
+      <div className="main-trip-container OUTBOUND">
         <div className="trip-container">
           <h1>departure flight</h1>
           <Swiper
@@ -53,10 +48,16 @@ function FlightPricing() {
             onSlideChange={() => console.log("slide change")}
             onSwiper={(swiper) => console.log(swiper)}
             className="tickets"
-            pagination={true}
-            modules={[Pagination]}
           >
             <SwiperSlide>
+              {bookedFlight.flightOffers.map(({itineraries,price,travelerPricings,validatingAirlineCodes})=>{
+               console.log("itineraries",itineraries);
+               const segmnetOne = itineraries[0].segments;
+               console.log("segmnetOne",segmnetOne);
+               segmnetOne.map((item)=>{
+                console.log("item",item);
+               })
+              })}
               <div className="flight-container">
                 <TicketHeader
                   originCode={"ebb"}
@@ -120,8 +121,6 @@ function FlightPricing() {
             onSlideChange={() => console.log("slide change")}
             onSwiper={(swiper) => console.log(swiper)}
             className="tickets"
-            pagination={true}
-            modules={[Pagination]}
           >
             <SwiperSlide>
               <div className="flight-container">
