@@ -5,6 +5,7 @@ import { Arrow } from "../../components/flightSearch/flightArrowSvg";
 import Border from "../../components/flightSearch/border";
 import confirmOder from "../../data/flightConfirmOrder";
 import BackBTN from "../../components/features/BackButton/BackBTN";
+import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
 
 function FlightPricing() {
   const flightOffers = confirmOder.flightOffers;
@@ -37,6 +38,10 @@ function FlightPricing() {
     <section className="reviewFlight">
       <BackBTN to={"/"} btnName="cancel" />
       <h1>Review Flight</h1>
+      <div className="trip-container">
+        <h1>departure flight</h1>
+        <TicketHeader />
+      </div>
       <section className="taxes-container">
         <div className="taxes">
           <div className="taxesHeader">

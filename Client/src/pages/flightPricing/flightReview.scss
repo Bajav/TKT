@@ -125,3 +125,19 @@ body {
     padding: 5px 5px;
   }
 }
+.trip-container
+{
+  background: $ticketColor;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  h1
+  {
+    color: $page_color;
+    font-family: $cityFont,sans-serif;
+    font-size: 30px;
+    padding: 5px 0px 0px 5px;
+    margin: 0;
+    text-align: center;
+  }
+}
