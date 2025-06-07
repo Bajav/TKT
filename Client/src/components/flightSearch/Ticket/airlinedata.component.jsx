@@ -1,44 +1,38 @@
 import "./ticket.scss";
 
-import React from "react";
-
-function AirlineInfo() {
+function AirlineInfo(props) {
   return (
     <div className="flights-header">
       <div className="airLineIcone">
         <div className="icon">
-          <img
-            src={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
-            alt="Airline Logo"
-            className="airline-logo"
-          />
+          <img src={props.logo} alt="Airline Logo" className="airline-logo" />
         </div>
-        <h4>{segmentOne[0].carrierCode || ""}</h4>
+        <h4>{props.carrierCode}</h4>
       </div>
-      <h3>
-        {fareBrandMap[
-          travelerPricings[0].fareDetailsBySegment[0].brandedFare
-        ] || "economy premium"}
-      </h3>
+      <h3>{props.airlineName}</h3>
     </div>
   );
 }
 
 export default AirlineInfo;
+{/* <AirlineInfo
+  logo={}
+  carrierCode={}
+  airlineName={
+    
+  }
+/> */}
 
 {/* <div className="flights-header">
   <div className="airLineIcone">
     <div className="icon">
       <img
-        src={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
+        src={airlinesLookUp[segments[0]?.carrierCode]?.logo || ""}
         alt="Airline Logo"
         className="airline-logo"
       />
     </div>
-    <h4>{segmentOne[0].carrierCode || ""}</h4>
+    <h4>{airlinesLookUp[segments[0]?.carrierCode]?.name || ""}</h4>
   </div>
-  <h3>
-    {fareBrandMap[travelerPricings[0].fareDetailsBySegment[0].brandedFare] ||
-      "economy premium"}
-  </h3>
+  <h4>{segments[0]?.aircraft?.code || ""}</h4>
 </div>; */}
