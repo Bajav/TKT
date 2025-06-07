@@ -144,7 +144,7 @@ function FlightCard() {
       console.log("brandedUpsell res", response.data);
     } catch (err) {
       console.error("Axios error:", err?.response?.data?.message);
-      setUpsellError(err?.response?.data?.message);
+      setUpsellError(err?.response?.data?.message[0].detail);
     }
   };
 
@@ -159,7 +159,7 @@ function FlightCard() {
       setBookedFlight(response.data);
       console.log("response", response);
       console.log("booked", bookedFlight);
-      // navigate("/lastprice");
+      navigate("/flights/lastprice", { replace: true });
     } catch (err) {
       console.error("Error posting data:", err);
     }
