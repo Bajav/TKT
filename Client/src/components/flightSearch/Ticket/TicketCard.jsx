@@ -148,19 +148,23 @@ function FlightCard() {
     }
   };
 
-  const bookNow = async (index) => {
-    setBookedFlight(brandedUpSell[index]);
-    console.log(brandedUpSell[index]);
-    console.log("bookedFlight", bookedFlight);
-    try {
-      const response = await axios.post("http://localhost:3000/findLastPrice", {
-        bookedFlight,
-      });
-      console.log("response", response);
-    } catch (err) {
-      console.error("Error posting data:", err);
-    }
-  };
+const bookNow = async (index) => {
+  const flight = brandedUpSell[index];
+  console.log("book now btn hit");
+  console.log("Flight to book:", flight);
+
+  try {
+    const response = await axios.post("http://localhost:3000/findLastPrice", {
+      bookedFlight: flight,
+    });
+
+    console.log("response", response);
+    navigate("flights/lastprice");
+  } catch (err) {
+    console.error("Error posting data:", err);
+  }
+};
+
 
   const showFilterDropDown = () => setFilterDropDown(!filterDropDown);
   // Handle filter changes

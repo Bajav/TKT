@@ -27,7 +27,7 @@ function TicketHeader(props) {
 
 export default TicketHeader;
 
-<TicketHeader
+{/* <TicketHeader
   originCode={stopOver.departure.iataCode}
   originCity={iataLookup[stopOver.departure.iataCode]?.city || ""}
   originTime={stopOver.departure.at.slice(11) || ""}
@@ -37,4 +37,4 @@ export default TicketHeader;
     iataLookup[stopOver.arrival.iataCode]?.city || ""
   }
   departureTime={stopOver.arrival.at.slice(11) || ""}
-/>;
+/>; */}

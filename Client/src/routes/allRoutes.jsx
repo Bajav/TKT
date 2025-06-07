@@ -23,6 +23,7 @@ function AllRoutes() {
     "/flights/pricing",
     "/flights/results",
     "/flights/travelerData",
+    "/flights/lastprice"
   ];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>
@@ -41,46 +42,10 @@ function AllRoutes() {
         <Route path="/packages" element={<Packages />} />
 
         {/* Flights Route Group */}
-        <Route
-          path="/flights"
-          element={
-            <FormContextProvider>
-              <Flights />
-            </FormContextProvider>
-          }
-        />
-        <Route
-          path="flights/results"
-          element={
-            <FormContextProvider>
-              <FlightResult />
-            </FormContextProvider>
-          }
-        />
-        <Route
-          path="flights/brandedDeals"
-          element={
-            <FormContextProvider>
-              <Home />
-            </FormContextProvider>
-          }
-        />
-        <Route
-          path="flights/lastprice"
-          element={
-            <FormContextProvider>
-              <FlightPricing />
-            </FormContextProvider>
-          }
-        />
-        <Route
-          path="flights/confirmFlight"
-          element={
-            <FormContextProvider>
-              <TravelerForm />
-            </FormContextProvider>
-          }
-        />
+        <Route path="/flights" element={<Flights />} />
+        <Route path="flights/results" element={<FlightResult />} />
+        <Route path="flights/lastprice" element={<FlightPricing />} />
+        <Route path="flights/confirmFlight" element={<TravelerForm />} />
         {/* <Route path="/" element={<Home />} /> */}
         {/* Catch-All for Unknown Routes */}
         {/* <Route path="*" element={<NotFound />} /> */}
