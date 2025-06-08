@@ -218,11 +218,6 @@
     margin-bottom: 0px;
   }
 }
-.line {
-  h5 {
-    font-size: 15px;
-  }
-}
 .flightsDetails.open {
   max-height: 200px;
 }
@@ -244,27 +239,7 @@
     font-weight: 10;
   }
 }
-.lineOne {
-  color: $page_color;
-  letter-spacing: 4px;
-  position: relative;
-  left: -1px;
-  text-align: center;
-  width: 100%;
-  h5 {
-    text-align: center;
-    margin: 0;
-  }
-}
-.line {
-  // background: #c8c1c1;
-  // margin-top: 30px;
-  position: relative;
-  top: 127px;
-  color: $page_color;
-  letter-spacing: 4px;
-  text-align: center;
-}
+
 .Alldetails {
   display: flex;
   justify-content: center;

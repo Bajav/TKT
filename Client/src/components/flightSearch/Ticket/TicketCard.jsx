@@ -549,9 +549,6 @@ function FlightCard() {
                         </SwiperSlide>
                       ))}
                     </Swiper>
-                    <div className="line">
-                      <h5>-------------------------------------------</h5>
-                    </div>
                     <div className="Alldetails">
                       <h5>SEATS LEFT: {itinerary.numberOfBookableSeats}</h5>
                       <h5>
