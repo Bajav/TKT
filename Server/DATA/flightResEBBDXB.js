@@ -14,7 +14,7 @@
 //     "price": {5 items},
 //     "pricingOptions": {2 items},
 //     "validatingAirlineCodes": [
-//     "FZ"
+//     "FZ"B
 //     ],
 //     "travelerPricings": [
 //     {
