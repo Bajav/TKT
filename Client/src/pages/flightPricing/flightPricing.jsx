@@ -66,12 +66,12 @@ function FlightPricing() {
                             originTerminal={
                               departure.terminal
                                 ? `Terminal: ${departure.terminal}`
-                                : ""
+                                : "Terminal: NULL"
                             }
                             destinationTerminal={
                               arrival.terminal
                                 ? `Terminal: ${arrival.terminal}`
-                                : ""
+                                : "Terminal: NULL"
                             }
                           />
                           <div className="detail">
