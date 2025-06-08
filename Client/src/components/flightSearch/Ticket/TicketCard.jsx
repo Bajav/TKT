@@ -525,11 +525,6 @@ function FlightCard() {
                                 stopOver.arrival.at.slice(11) || ""
                               }
                             />
-                            <div className="lineOne">
-                              <h5>
-                                --------------------------------------------
-                              </h5>
-                            </div>
                             <div className="stop-details">
                               <h5>
                                 LAYOVER TIME:{" "}

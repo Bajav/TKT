@@ -14,25 +14,7 @@ function FlightPricing() {
   // const itineraries = confirmOder.itineraries;
   const { bookedFlight } = useContext(FlightContext);
   const [res, setRes] = useState([]);
-
-  // const fetchFlightPricing = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       "http://localhost:3000/flights/flightsResults/flightPricing"
-  //     );
-  //     console.log("RESPONSE DATA IS BACK", response.data);
-  //     setRes(response.data);
-  //   } catch (err) {
-  //     console.log("Error fetching data:", err);
-  //   }
-  // };
-
-  // Log updated state when it changes
-  // useEffect(() => {
-  //   fetchFlightPricing();
-  //   // console.log("Updated res:", res);
-  // }, []);
-  // // define navigation
+  
   const navigate = useNavigate();
 
   return (
