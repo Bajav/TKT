@@ -14,7 +14,7 @@ function FlightPricing() {
   // const itineraries = confirmOder.itineraries;
   const { bookedFlight } = useContext(FlightContext);
   const { iataCodes } = useContext(FlightContext);
-  const [res, setRes] = useState([]);
+  const [res, setRes] = useState(false);
 
   const navigate = useNavigate();
 
@@ -110,7 +110,7 @@ function FlightPricing() {
                               CO2 : {co2Emissions[0].weight}{" "}
                               {co2Emissions[0].weightUnit}
                             </h5>
-                            <h5>{arrival.at.slice(0,10)}</h5>
+                            <h5>{arrival.at.slice(0, 10)}</h5>
                             <h5>
                               CLASS : {fareClass} {cabin}
                             </h5>
@@ -130,7 +130,6 @@ function FlightPricing() {
           </Swiper>
         </div>
       </div>
-
       <div className="main-trip-container">
         <div className="trip-container">
           <h1>return flight</h1>
@@ -204,6 +203,7 @@ function FlightPricing() {
           </Swiper>
         </div>
       </div>
+
       <section className="taxes-container">
         <div className="taxes">
           <div className="taxesHeader">
@@ -252,3 +252,9 @@ function FlightPricing() {
 }
 
 export default FlightPricing;
+// code to look at 
+  // const fareDetail = travelerPricings[0].fareDetailsBySegment.find(
+  //   (f) => f.segmentId === segment.id
+  // );
+  // const fareClass = fareDetail?.class || "Unknown";
+  // const cabin = fareDetail?.cabin || "Unknown";
