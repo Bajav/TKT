@@ -14,6 +14,7 @@ function FlightPricing() {
   // const itineraries = confirmOder.itineraries;
   const { bookedFlight } = useContext(FlightContext);
   const { iataCodes } = useContext(FlightContext);
+  const { lastFlight } = useContext(FlightContext);
   const [res, setRes] = useState(false);
 
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function FlightPricing() {
     };
     return lookup;
   }, {});
+  console.log("lastFlight",lastFlight);
 
   return (
     <section className="reviewFlight">

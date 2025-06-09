@@ -29,6 +29,7 @@ function FlightCard() {
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
   const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
   const { upsellError, setUpsellError } = useContext(FlightContext);
+  const { setlastFlight} = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
@@ -153,6 +154,7 @@ function FlightCard() {
     const flight = brandedUpSell[index];
     console.log("book now btn hit");
     console.log("Flight to book:", flight);
+    setlastFlight(flight);
     try {
       const response = await axios.post("http://localhost:3000/findLastPrice", {
         bookedFlight: flight,
