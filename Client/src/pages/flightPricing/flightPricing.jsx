@@ -10,13 +10,14 @@ import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.comp
 import { FlightContext } from "../../components/context/flightSearch.context";
 
 function FlightPricing() {
-  const flightOffers = confirmOder.flightOffers;
+  // const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
   const { bookedFlight } = useContext(FlightContext);
   const { iataCodes } = useContext(FlightContext);
   const { lastFlight } = useContext(FlightContext);
   const [price, setPrice] = useState([]);
   const [taxes, setTaxes] = useState([]);
+  const [travelerPricings, setTravelerPricings] = useState([]);
 
   const navigate = useNavigate();
 
@@ -27,6 +28,7 @@ function FlightPricing() {
     };
     return lookup;
   }, {});
+  console.log(bookedFlight);
 
   return (
     <section className="reviewFlight">
@@ -52,6 +54,7 @@ function FlightPricing() {
                 useEffect(()=>{
                   setPrice(price);
                   setTaxes(travelerPricings[0].price.taxes);
+                  setTravelerPricings(travelerPricings);
                 });
                 const segmnetOne = itineraries[0].segments;
                 return segmnetOne.map(
@@ -226,14 +229,15 @@ function FlightPricing() {
           </div>
           <div className="paxData">
             <div className="paxDataContainer">
+              {console.log(travelerPricings)}
               <div className="data">
-                <h4>Travelers: 4</h4>
+                <h4>Travelers: </h4>
               </div>
               <div className="pax">
-                <h4>Adults: 1</h4>
+                <h4>Adults: </h4>
               </div>
               <div className="pax">
-                <h4>Children: 1</h4>
+                <h4>Children: </h4>
               </div>
               <div className="pax">
                 <h4>Infants: 0</h4>
