@@ -13,9 +13,18 @@ function FlightPricing() {
   const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
   const { bookedFlight } = useContext(FlightContext);
+  const { iataCodes } = useContext(FlightContext);
   const [res, setRes] = useState([]);
-  
+
   const navigate = useNavigate();
+
+  const iataLookup = iataCodes.reduce((lookup, item) => {
+    lookup[item.AirportCode] = {
+      city: item.City,
+      country: item.Country,
+    };
+    return lookup;
+  }, {});
 
   return (
     <section className="reviewFlight">
@@ -57,11 +66,11 @@ function FlightPricing() {
                         <div className="flight-container">
                           <TicketHeader
                             originCode={departure.iataCode}
-                            originCity={"kampala"}
+                            originCity={iataLookup[departure.iataCode]?.city || ""}
                             originTime={"12:00:00"}
                             arrowColor="#222222"
                             departureCode={arrival.iataCode}
-                            departureCity={"nairobi"}
+                            departureCity={iataLookup[arrival.iataCode]?.city || ""}
                             departureTime={"12:00:00"}
                             originTerminal={
                               departure.terminal
@@ -78,7 +87,10 @@ function FlightPricing() {
                             <h5>
                               AIRLINE : {carrierCode} {aircraft.code}
                             </h5>
-                            <h5>CO2 : {co2Emissions[0].weight} {co2Emissions[0].weightUnit}</h5>
+                            <h5>
+                              CO2 : {co2Emissions[0].weight}{" "}
+                              {co2Emissions[0].weightUnit}
+                            </h5>
                             <h5>THU 05-DEC-24</h5>
                             <h5>CLASS : R {co2Emissions[0].cabin}</h5>
                           </div>
@@ -131,7 +143,7 @@ function FlightPricing() {
                     return (
                       <SwiperSlide>
                         <div className="flight-container">
-                        <TicketHeader
+                          <TicketHeader
                             originCode={departure.iataCode}
                             originCity={"kampala"}
                             originTime={"12:00:00"}
