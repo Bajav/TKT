@@ -75,11 +75,6 @@ body {
     font-weight: 100;
   }
 }
-.tax
-{
-  display: grid;
-  grid-template-columns: repeat(1f,3);
-}
 .continueBtn {
   background: $actionOrange;
   color: $page_color;
