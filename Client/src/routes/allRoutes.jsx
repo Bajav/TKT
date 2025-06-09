@@ -11,6 +11,7 @@ import Flights from "../pages/flights";
 import FlightPricing from "../pages/flightPricing/flightPricing";
 import FlightResult from "../pages/flightResult/flightResults";
 import TravelerForm from "../pages/TravelerForm/TravelerForm";
+import Passengers from "../pages/pasengerInputPage/passengers";
 // import context
 import { FormContextProvider } from "../Hooks/Context/formData.context";
 import { Fragment } from "react";
@@ -45,7 +46,7 @@ function AllRoutes() {
         <Route path="/flights" element={<Flights />} />
         <Route path="flights/results" element={<FlightResult />} />
         <Route path="flights/lastprice" element={<FlightPricing />} />
-        <Route path="flights/confirmFlight" element={<TravelerForm />} />
+        <Route path="PassengerData" element={<Passengers />} />
         {/* <Route path="/" element={<Home />} /> */}
         {/* Catch-All for Unknown Routes */}
         {/* <Route path="*" element={<NotFound />} /> */}
