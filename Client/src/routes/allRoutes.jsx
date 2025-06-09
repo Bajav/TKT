@@ -24,7 +24,8 @@ function AllRoutes() {
     "/flights/pricing",
     "/flights/results",
     "/flights/travelerData",
-    "/flights/lastprice"
+    "/flights/lastprice",
+    "/flights/PassengerData"
   ];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>
@@ -46,7 +47,7 @@ function AllRoutes() {
         <Route path="/flights" element={<Flights />} />
         <Route path="flights/results" element={<FlightResult />} />
         <Route path="flights/lastprice" element={<FlightPricing />} />
-        <Route path="PassengerData" element={<Passengers />} />
+        <Route path="flights/PassengerData" element={<Passengers />} />
         {/* <Route path="/" element={<Home />} /> */}
         {/* Catch-All for Unknown Routes */}
         {/* <Route path="*" element={<NotFound />} /> */}

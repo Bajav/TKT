@@ -28,7 +28,7 @@ function FlightPricing() {
     };
     return lookup;
   }, {});
-  const coninueBtn = () => navigate("/PassengerData", { replace: true });
+  const coninueBtn = () => navigate("/flights/PassengerData", { replace: true });
   console.log(bookedFlight);
 
   return (
