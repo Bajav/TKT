@@ -131,7 +131,7 @@ function FlightPricing() {
                     return (
                       <SwiperSlide>
                         <div className="flight-container">
-                          <TicketHeader
+                        <TicketHeader
                             originCode={departure.iataCode}
                             originCity={"kampala"}
                             originTime={"12:00:00"}
@@ -142,12 +142,12 @@ function FlightPricing() {
                             originTerminal={
                               departure.terminal
                                 ? `Terminal: ${departure.terminal}`
-                                : ""
+                                : "Terminal: NULL"
                             }
                             destinationTerminal={
                               arrival.terminal
                                 ? `Terminal: ${arrival.terminal}`
-                                : ""
+                                : "Terminal: NULL"
                             }
                           />
                           <div className="detail">
