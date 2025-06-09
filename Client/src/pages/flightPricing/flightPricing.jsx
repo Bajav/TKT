@@ -28,6 +28,7 @@ function FlightPricing() {
     };
     return lookup;
   }, {});
+  const coninueBtn = () => navigate("/PassengerData", { replace: true });
   console.log(bookedFlight);
 
   return (
@@ -51,7 +52,7 @@ function FlightPricing() {
                 travelerPricings,
                 validatingAirlineCodes,
               }) => {
-                useEffect(()=>{
+                useEffect(() => {
                   setPrice(price);
                   setTaxes(travelerPricings[0].price.taxes);
                   setTravelerPricings(travelerPricings);
@@ -222,9 +223,13 @@ function FlightPricing() {
               <h4>grand Total: ${price.grandTotal}</h4>
             </div>
             <div className="bodyOne tax">
-              {taxes.map((tax,index)=>{
-                return <h4 key={index}>{tax.code} - ${tax.amount}</h4>
-                })}
+              {taxes.map((tax, index) => {
+                return (
+                  <h4 key={index}>
+                    {tax.code} - ${tax.amount}
+                  </h4>
+                );
+              })}
             </div>
           </div>
           <div className="paxData">
@@ -246,7 +251,7 @@ function FlightPricing() {
           </div>
         </div>
       </section>
-      <button className="continueBtn" onClick={() => navigate("/travelerData")}>
+      <button className="continueBtn" onClick={coninueBtn}>
         Continue
       </button>
     </section>
