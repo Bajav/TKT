@@ -431,8 +431,8 @@ function FlightCard() {
           const segmentTwo = itinerary.itineraries[1].segments;
           return (
             <div className="flightContainer">
-              <div className="main-cards" key={index}>
-                <div className="flights-res">
+              <div className="main-cards">
+                <div className="flights-res"  key={index}>
                   <AirlineInfo
                     logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
                     carrierCode={
