@@ -9,3 +9,4 @@ check for rules of a flight
 use chill guy for the waiting 
 implement cookies for user preferences
 conditionally render components
+rendering leaving and landing times

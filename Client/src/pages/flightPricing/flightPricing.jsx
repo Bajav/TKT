@@ -47,40 +47,59 @@ function FlightPricing() {
                 travelerPricings,
                 validatingAirlineCodes,
               }) => {
-                console.log("itineraries", itineraries);
+                // console.log("itineraries", itineraries);
                 const segmnetOne = itineraries[0].segments;
                 console.log("segmnetOne", segmnetOne);
+                // console.log(
+                //   "travelerPricings",
+                //   travelerPricings[0].fareDetailsBySegment[0].class
+                // );
                 return segmnetOne.map(
-                  ({
-                    aircraft,
-                    arrival,
-                    carrierCode,
-                    co2Emissions,
-                    departure,
-                    duration,
-                    operating,
-                  }) => {
-                    console.log(aircraft.code);
+                  (
+                    {
+                      aircraft,
+                      arrival,
+                      carrierCode,
+                      co2Emissions,
+                      departure,
+                      duration,
+                      operating,
+                    },
+                    index
+                  ) => {
+                    const fareDetails =
+                      travelerPricings[0].fareDetailsBySegment[index];
+                    const fareClass = fareDetails?.class || "Unknown";
+                    const cabin = fareDetails?.cabin || "Unknown";
+                    // console.log(aircraft.code);
+                    console.log(
+                      "travelerPricings",
+                      travelerPricings[0].fareDetailsBySegment
+                    );
                     return (
-                      <SwiperSlide>
+                      <SwiperSlide key={index}>
                         <div className="flight-container">
                           <TicketHeader
                             originCode={departure.iataCode}
-                            originCity={iataLookup[departure.iataCode]?.city || ""}
-                            originTime={"12:00:00"}
+                            originCity={
+                              iataLookup[departure.iataCode]?.city || ""
+                            }
+                            originTime={departure.at.slice(11)}
                             arrowColor="#222222"
                             departureCode={arrival.iataCode}
-                            departureCity={iataLookup[arrival.iataCode]?.city || ""}
-                            departureTime={"12:00:00"}
+                            departureCity={
+                              iataLookup[arrival.iataCode]?.city || ""
+                            }
+                            departureTime={arrival.at.slice(11)}
                             originTerminal={
                               departure.terminal
                                 ? `Terminal: ${departure.terminal}`
-                                : "Terminal: NULL"
+                                : "Terminal: N/A"
                             }
                             destinationTerminal={
                               arrival.terminal
                                 ? `Terminal: ${arrival.terminal}`
-                                : "Terminal: NULL"
+                                : "Terminal: N/A"
                             }
                           />
                           <div className="detail">
@@ -91,8 +110,10 @@ function FlightPricing() {
                               CO2 : {co2Emissions[0].weight}{" "}
                               {co2Emissions[0].weightUnit}
                             </h5>
-                            <h5>THU 05-DEC-24</h5>
-                            <h5>CLASS : R {co2Emissions[0].cabin}</h5>
+                            <h5>{arrival.at.slice(0,10)}</h5>
+                            <h5>
+                              CLASS : {fareClass} {cabin}
+                            </h5>
                           </div>
                           <div className="detail">
                             <h5>CARRY ON 1PC 8KG</h5>
@@ -127,9 +148,9 @@ function FlightPricing() {
                 travelerPricings,
                 validatingAirlineCodes,
               }) => {
-                console.log("itineraries", itineraries);
+                // console.log("itineraries", itineraries);
                 const segmnetTwo = itineraries[1].segments;
-                console.log("segmnetOne", segmnetTwo);
+                // console.log("segmnetOne", segmnetTwo);
                 return segmnetTwo.map(
                   ({
                     aircraft,
