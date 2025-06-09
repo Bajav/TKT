@@ -15,7 +15,8 @@ function FlightPricing() {
   const { bookedFlight } = useContext(FlightContext);
   const { iataCodes } = useContext(FlightContext);
   const { lastFlight } = useContext(FlightContext);
-  const [res, setRes] = useState(false);
+  const [price, setPrice] = useState([]);
+  const [taxes, setTaxes] = useState([]);
 
   const navigate = useNavigate();
 
@@ -26,7 +27,6 @@ function FlightPricing() {
     };
     return lookup;
   }, {});
-  console.log("lastFlight",lastFlight);
 
   return (
     <section className="reviewFlight">
@@ -49,13 +49,11 @@ function FlightPricing() {
                 travelerPricings,
                 validatingAirlineCodes,
               }) => {
-                // console.log("itineraries", itineraries);
+                useEffect(()=>{
+                  setPrice(price);
+                  setTaxes(travelerPricings[0].price.taxes);
+                });
                 const segmnetOne = itineraries[0].segments;
-                console.log("segmnetOne", segmnetOne);
-                // console.log(
-                //   "travelerPricings",
-                //   travelerPricings[0].fareDetailsBySegment[0].class
-                // );
                 return segmnetOne.map(
                   (
                     {
@@ -74,10 +72,10 @@ function FlightPricing() {
                     const fareClass = fareDetails?.class || "Unknown";
                     const cabin = fareDetails?.cabin || "Unknown";
                     // console.log(aircraft.code);
-                    console.log(
-                      "travelerPricings",
-                      travelerPricings[0].fareDetailsBySegment
-                    );
+                    // console.log(
+                    //   "travelerPricings",
+                    //   travelerPricings
+                    // );
                     return (
                       <SwiperSlide key={index}>
                         <div className="flight-container">
@@ -215,17 +213,15 @@ function FlightPricing() {
           <Border />
           <div className="taxesBody">
             <div className="bodyOne">
-              <h4>Base: $230</h4>
+              <h4>Base: ${price.base}</h4>
               <h4>Taxes: $330</h4>
-              <h4>Total: $560</h4>
+              <h4>Total: ${price.total}</h4>
+              <h4>grand Total: ${price.grandTotal}</h4>
             </div>
-            <div className="bodyOne">
-              <h4>F6 YQ - Carrier-Imposed Surcharge: $10</h4>
-              <h4>UL - Passenger Service Charges: $10</h4>
-              <h4>AE - UAE Passenger Service Charge: $10</h4>
-              <h4>F6 - UAE Passenger Facility Charge: $10</h4>
-              <h4>UG - Security Charge: $10</h4>
-              <h4>TP - UAE Passenger Security and Safety Fee: $10</h4>
+            <div className="bodyOne tax">
+              {taxes.map((tax,index)=>{
+                return <h4 key={index}>{tax.code} - ${tax.amount}</h4>
+                })}
             </div>
           </div>
           <div className="paxData">
@@ -254,9 +250,9 @@ function FlightPricing() {
 }
 
 export default FlightPricing;
-// code to look at 
-  // const fareDetail = travelerPricings[0].fareDetailsBySegment.find(
-  //   (f) => f.segmentId === segment.id
-  // );
-  // const fareClass = fareDetail?.class || "Unknown";
-  // const cabin = fareDetail?.cabin || "Unknown";
+// code to look at
+// const fareDetail = travelerPricings[0].fareDetailsBySegment.find(
+//   (f) => f.segmentId === segment.id
+// );
+// const fareClass = fareDetail?.class || "Unknown";
+// const cabin = fareDetail?.cabin || "Unknown";

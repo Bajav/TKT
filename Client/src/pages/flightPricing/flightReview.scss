@@ -63,8 +63,8 @@ body {
 .taxesBody {
   display: flex;
   align-items: center;
-  gap: 5%;
-  justify-content: center;
+  gap: 15%;
+  justify-content: space-evenly;
 }
 
 .bodyOne {
@@ -74,6 +74,11 @@ body {
     margin-bottom: 5px;
     font-weight: 100;
   }
+}
+.tax
+{
+  display: grid;
+  grid-template-columns: repeat(1f,3);
 }
 .continueBtn {
   background: $actionOrange;
