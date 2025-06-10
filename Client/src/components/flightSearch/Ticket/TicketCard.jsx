@@ -235,11 +235,11 @@ function FlightCard() {
     isChargeable: false,
   };
 
-  useEffect(() => {
-    amenity.isChargeable
-      ? console.log("its chargable")
-      : console.log("its free");
-  }, []);
+  // useEffect(() => {
+  //   amenity.isChargeable
+  //     ? console.log("its chargable")
+  //     : console.log("its free");
+  // }, []);
 
   return (
     <Fragment>
@@ -351,7 +351,6 @@ function FlightCard() {
 
                   <div className="flightDetails">
                     {perks.map((perk) => {
-                      console.log("perk", perk);
                       return (
                         <div className="detailsSect">
                           <img
