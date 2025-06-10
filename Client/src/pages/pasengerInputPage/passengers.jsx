@@ -1,12 +1,26 @@
-import './passenger.styles.scss';
-import TicketHeader from '../../components/flightSearch/Ticket/ticketheader.component';
-
+import "./passenger.styles.scss";
+import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
+import PaxForm from "../../components/features/PaxForm/PaxForm";
 function Passengers() {
   return (
-    <section className='passengers'>
-       <TicketHeader originCode="ebb" originCity="kampala" originTime="12:05:00" departureCode="lhr" departureCity="london" departureTime="00:11:00" arrowColor="#222"/>
+    <section className="passengers">
+      <TicketHeader
+        originCode="ebb"
+        originCity="kampala"
+        originTime="12:05:00"
+        departureCode="lhr"
+        departureCity="london"
+        departureTime="00:11:00"
+        arrowColor="#222"
+      />
+
+      <div className="form">
+        <form>
+          <PaxForm />
+        </form>
+      </div>
     </section>
-  )
+  );
 }
 
-export default Passengers
+export default Passengers;

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FlexInput from "../../../props/FlexInput/FlexInput";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-// import './PaxForm.scss';
+import './PaxForm.scss';
 
 function PaxForm() {
   // define navigation

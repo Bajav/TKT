@@ -1,5 +1,3 @@
-import React from 'react'
-
 function FlexInput(props) {
   return (
     <div className='LabelInput'>
