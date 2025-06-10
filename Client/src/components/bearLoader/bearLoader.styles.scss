@@ -124,3 +124,12 @@
     transform: translateX(0px);
   }
 }
+.finding-deals {
+  h1 {
+    margin-top: 40px;
+    font-size: 15px;
+    text-transform: capitalize;
+    color: $ticketColor;
+    font-family: $textFont, sans-serif;
+  }
+}

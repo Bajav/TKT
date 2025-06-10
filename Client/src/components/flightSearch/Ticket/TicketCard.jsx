@@ -29,7 +29,7 @@ function FlightCard() {
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
   const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
   const { upsellError, setUpsellError } = useContext(FlightContext);
-  const { setlastFlight} = useContext(FlightContext);
+  const {setlastFlight} = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
@@ -146,7 +146,7 @@ function FlightCard() {
       console.log("brandedUpsell res", response.data);
     } catch (err) {
       console.error("Axios error:", err?.response?.data?.message);
-      setUpsellError(err?.response?.data?.message[0].detail);
+      setUpsellError(err?.response?.data?.message[0]);
     }
   };
 
