@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useContext } from "react";
+import { Fragment, useEffect, useState, useContext,useRef } from "react";
 import { FlightContext } from "../../context/flightSearch.context";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,7 +16,20 @@ import TicketHeader from "./ticketheader.component";
 import AirlineInfo from "./airlinedata.component";
 import dollarIcon from "../../../assets/icons/dollar-minimalistic-svgrepo-com.svg";
 import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
+
+// gsap
+import { gsap,Power2 } from "gsap";
+
+
 function FlightCard() {
+  let flightTicket = useRef(null);
+useEffect(() => {
+    gsap.to(
+      flightTicket.current,
+      { x: -100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1, ease: Power2.easeOut }
+    );
+  }, []);
   // contexts
   const { iataCodes } = useContext(FlightContext);
   const { airlineData } = useContext(FlightContext);
@@ -181,52 +194,6 @@ function FlightCard() {
     ECONVENIEN: "Economy Convenient",
     ECOFLEX: "Economy Flexible",
     ECOBASIC: "Economy Basic",
-  };
-  const normalizeAmenities = (amenities) => {
-    const normalized = {
-      seatChoice: false,
-      meal: false,
-      changeable: false,
-      refundable: false,
-      checkedBag: null,
-      cabinBag: null,
-      qmiles: null,
-    };
-
-    for (const item of amenities) {
-      const desc = item.description.toLowerCase();
-
-      if (desc.includes("seat")) normalized.seatChoice = true;
-      if (
-        desc.includes("meal") ||
-        desc.includes("food") ||
-        desc.includes("snack") ||
-        desc.includes("beverage")
-      ) {
-        normalized.meal = true;
-      }
-      if (desc.includes("change")) normalized.changeable = true;
-      if (desc.includes("refund")) normalized.refundable = true;
-      if (desc.includes("checked bag"))
-        normalized.checkedBag = item.description;
-      if (desc.includes("cabin bag")) normalized.cabinBag = item.description;
-      if (
-        desc.includes("qmile") ||
-        desc.includes("mile accrual") ||
-        desc.includes("mileage")
-      ) {
-        normalized.qmiles = item.description;
-      }
-    }
-
-    return normalized;
-  };
-
-  const amenity = {
-    amenityType: "BAGGAGE",
-    code: "FBC",
-    description: "2 CHECKED BAGS UP TO 32KG EACH",
-    isChargeable: false,
   };
 
   // useEffect(() => {
@@ -405,7 +372,7 @@ function FlightCard() {
           return (
             <div className="flightContainer">
               <div className="main-cards">
-                <div className="flights-res" key={index}>
+                <div className="flights-res" ref={flightTicket} key={index}>
                   <AirlineInfo
                     logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
                     carrierCode={
