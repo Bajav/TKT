@@ -89,6 +89,7 @@ function PaxForm() {
           <FlexInput name="" type="" For="" labelName=" " placeholder="  " />
         </div>
         <FlexInput name="" type="" For="" labelName=" " placeholder="  " />
+        <button>submit</button>
       </form>
     </div>
   );

@@ -13,6 +13,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+   button
+    {
+      background: $actionOrange;
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 15px;
+      color: $page_color;
+      font-family: $textFont,sans-serif;
+      font-weight: 300;
+      text-transform: capitalize;
+    }
 }
 .paxFormContainer {
   background: $ticketColor;
