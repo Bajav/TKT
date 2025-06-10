@@ -1,31 +1,36 @@
 @import '../../../styles/variables.scss';
-
+.LabelInput
+{
+    input
+    {
+        color: $visibleFontColor;
+        text-transform: capitalize;
+        font-family: $textFont,sans-serif;
+        font-size: 10px;
+    }
+    width: 100%;
+}
+.paxForm
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .paxFormContainer
 {
-    margin-top: 30px;
+    background: $ticketColor;
     padding: 10px;
-    border-radius: 10px;
-    background-color: $ticketColor;
-    h1
-    {
-        background: $actionOrange;
-        font-family: $textFont ,sans-serif;
-        color: $page_color;
-        padding: 10px;
-        width: fit-content;
-        border-radius: 20px 40px;
-    }
+    width: 97vw;
 }
 .names
 {
-    display: flex;
-    gap: 10px;
-    // padding: 3px;
+    width: 100%;
+}
+.cell
+{
+    width: 100%;
 }
 .fulls
 {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 3px;
-    // padding: 3px;
+    width: 100%;
 }
