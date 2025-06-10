@@ -20,8 +20,8 @@ import suiteCase from "../../../assets/icons/suiteCase.svg";
 import DummyTicket from "../../features/DummyTicket/DummyTicket";
 import TicketHeader from "./ticketheader.component";
 import AirlineInfo from "./airlinedata.component";
-import dollarIcon from '../../../assets/icons/dollarbill.svg';
-import checkMark from '../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg'
+import dollarIcon from "../../../assets/icons/dollar-minimalistic-svgrepo-com.svg";
+import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
 function FlightCard() {
   // contexts
   const { iataCodes } = useContext(FlightContext);
@@ -235,9 +235,11 @@ function FlightCard() {
     isChargeable: false,
   };
 
-  useEffect(()=>{
-    amenity.isChargeable ? console.log("its chargable") : console.log("its free");
-  },[]);
+  useEffect(() => {
+    amenity.isChargeable
+      ? console.log("its chargable")
+      : console.log("its free");
+  }, []);
 
   return (
     <Fragment>
@@ -308,7 +310,6 @@ function FlightCard() {
             <BearLoader />
           ) : (
             brandedUpSell.map((upsell, index) => {
-              console.log(upsell);
               const segments = upsell.itineraries[0]?.segments || [];
               const segmentNumber = segments.length;
               const lastSegmentIndex = segmentNumber - 1;
@@ -317,10 +318,9 @@ function FlightCard() {
               const travelerPricings = upsell.travelerPricings;
               const departureObject = segmentOne[0].departure;
               const arrivalObject = segmentOne[0].arrival;
-              const perks = normalizeAmenities(
-                travelerPricings[0].fareDetailsBySegment[0].amenities
-              );
-
+              const perks =
+                travelerPricings[0].fareDetailsBySegment[0].amenities;
+              // console.log("perks", perks);
               return (
                 <div key={index} className="flightDealContainer">
                   <AirlineInfo
@@ -350,52 +350,18 @@ function FlightCard() {
                   </h6>
 
                   <div className="flightDetails">
-                    <div className="detailsSect">
-                      <div className="itemContainer">
-                        <img src={seat} />
-                        <li>
-                          {perks.seatChoice
-                            ? "Seat Choice Included"
-                            : "No Seat Selection"}
-                        </li>
-                      </div>
-                      <div className="itemContainer">
-                        <img src={cutlary} />
-                        <li>{perks.meal ? "Meal Beverage" : "No Meal"}</li>
-                      </div>
-                      <div className="itemContainer">
-                        <li>
-                          ${" "}
-                          {perks.changeable
-                            ? "Changeable Ticket"
-                            : "Not Changeable"}
-                        </li>
-                      </div>
-                    </div>
-                    <div className="detailsSect">
-                      <div className="itemContainer">
-                        <img src={carier} />
-                        <li>{perks.checkedBag || "No Checked Bag"}</li>
-                      </div>
-                      <div className="itemContainer">
-                        <li>
-                          {perks.refundable
-                            ? "refundable at a fee"
-                            : " Refundable Ticket"}
-                        </li>
-                      </div>
-                    </div>
-
-                    <div className="detailsSect">
-                      <div className="itemContainer">
-                        <img src={suiteCase} />
-                        <li>{perks.cabinBag || "No Cabin Bag"}</li>
-                      </div>
-                      <div className="itemContainer">
-                        <img src={pctMile} />
-                        <li>{perks.qmiles || "No QMiles Accumulation"}</li>
-                      </div>
-                    </div>
+                    {perks.map((perk) => {
+                      console.log("perk", perk);
+                      return (
+                        <div className="detailsSect">
+                          <img
+                            src={perk.isChargeable ? dollarIcon : checkMark}
+                            alt="perk icon"
+                          />
+                          <li>{perk.description}</li>
+                        </div>
+                      );
+                    })}
                   </div>
                   <div className="flights-actions">
                     <div className="time-details">
@@ -598,3 +564,26 @@ const calculateLayover = (arrival, departure) => {
 };
 
 export default FlightCard;
+
+//  <div className="detailsSect">
+//             <div className="itemContainer">
+//               <img src={suiteCase} />
+//               <li>{perks.cabinBag || "No Cabin Bag"}</li>
+//             </div>
+//             <div className="itemContainer">
+//               <img src={pctMile} />
+//               <li>{perks.qmiles || "No QMiles Accumulation"}</li>
+//             </div>
+//           </div>
+//  <div className="itemContainer">
+//                         <img src={seat} />
+//                         <li>
+//                           {perks.seatChoice
+//                             ? "Seat Choice Included"
+//                             : "No Seat Selection"}
+//                         </li>
+//                       </div>
+//                       <div className="itemContainer">
+//                         <img src={cutlary} />
+//                         <li>{perks.meal ? "Meal Beverage" : "No Meal"}</li>
+//                       </div>
