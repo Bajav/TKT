@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState, useContext } from "react";
 import { FlightContext } from "../../context/flightSearch.context";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from 'swiper/modules';
+import { Pagination } from "swiper/modules";
 import axios from "axios";
 import Loader from "../../loader";
 // import scss
@@ -20,16 +20,18 @@ import suiteCase from "../../../assets/icons/suiteCase.svg";
 import DummyTicket from "../../features/DummyTicket/DummyTicket";
 import TicketHeader from "./ticketheader.component";
 import AirlineInfo from "./airlinedata.component";
+import dollarIcon from '../../../assets/icons/dollarbill.svg';
+import checkMark from '../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg'
 function FlightCard() {
   // contexts
   const { iataCodes } = useContext(FlightContext);
   const { airlineData } = useContext(FlightContext);
   const { flightResults } = useContext(FlightContext);
-  const {bookedFlight, setBookedFlight } = useContext(FlightContext);
+  const { bookedFlight, setBookedFlight } = useContext(FlightContext);
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
   const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
   const { upsellError, setUpsellError } = useContext(FlightContext);
-  const {setlastFlight} = useContext(FlightContext);
+  const { setlastFlight } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
@@ -226,6 +228,17 @@ function FlightCard() {
     return normalized;
   };
 
+  const amenity = {
+    amenityType: "BAGGAGE",
+    code: "FBC",
+    description: "2 CHECKED BAGS UP TO 32KG EACH",
+    isChargeable: false,
+  };
+
+  useEffect(()=>{
+    amenity.isChargeable ? console.log("its chargable") : console.log("its free");
+  },[]);
+
   return (
     <Fragment>
       <div className="filter-form">
@@ -295,6 +308,7 @@ function FlightCard() {
             <BearLoader />
           ) : (
             brandedUpSell.map((upsell, index) => {
+              console.log(upsell);
               const segments = upsell.itineraries[0]?.segments || [];
               const segmentNumber = segments.length;
               const lastSegmentIndex = segmentNumber - 1;
@@ -303,7 +317,6 @@ function FlightCard() {
               const travelerPricings = upsell.travelerPricings;
               const departureObject = segmentOne[0].departure;
               const arrivalObject = segmentOne[0].arrival;
-              // console.log("airline logo link",segmentOne[0].carrierCode);
               const perks = normalizeAmenities(
                 travelerPricings[0].fareDetailsBySegment[0].amenities
               );
@@ -331,7 +344,6 @@ function FlightCard() {
                       iataLookup[arrivalObject.iataCode]?.city || ""
                     }
                     departureTime={arrivalObject.at.slice(11) || ""}
-
                   />
                   <h6 className="lineNew">
                     --------------------------------------------------------
@@ -434,7 +446,7 @@ function FlightCard() {
           return (
             <div className="flightContainer">
               <div className="main-cards">
-                <div className="flights-res"  key={index}>
+                <div className="flights-res" key={index}>
                   <AirlineInfo
                     logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
                     carrierCode={
