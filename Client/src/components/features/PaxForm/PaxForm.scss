@@ -2,7 +2,19 @@
 
 .paxFormContainer
 {
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 10px;
     background-color: $ticketColor;
+    h1
+    {
+        background: $actionOrange;
+        font-family: $textFont ,sans-serif;
+        color: $page_color;
+        padding: 10px;
+        width: fit-content;
+        border-radius: 20px 40px;
+    }
 }
 .names
 {

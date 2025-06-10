@@ -24,6 +24,7 @@ function PaxForm() {
 
   return (
     <div className="paxFormContainer">
+      <h1>pax 01</h1>
       <form className="paxForm">
         <div className="names">
           <FlexInput
