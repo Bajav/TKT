@@ -4,6 +4,7 @@ import PaxForm from "../../components/features/PaxForm/PaxForm";
 function Passengers() {
   return (
     <section className="passengers">
+      <h1>enter traveller details</h1>
       <TicketHeader
         originCode="ebb"
         originCity="kampala"

@@ -5,7 +5,15 @@
     flex-direction: column;
     align-items: center;
     padding: 10px 5px;
+    h1
+    {
+        font-family: $textFont,sans-serif;
+        margin-top:10px ;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+    }
   .ticket-header {
+    margin-bottom: 10px;
     h2 {
       color: $visibleFontColor;
     }
