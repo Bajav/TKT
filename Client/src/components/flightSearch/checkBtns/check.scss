@@ -1,43 +1,38 @@
-@import '../../../styles/variables.scss';
+@import "../../../styles/variables.scss";
 
-.flex-option
-{
-    display: flex;
-    justify-content: space-evenly;
-    gap: 2px;
-    padding: 10px 5px;
-    // margin-top: 10px;
+.flex-option {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2px;
+  padding: 10px 5px 5px;
+  // margin-top: 10px;
 }
-.btn-flex
-{
-    display: flex;
-    background:$ticketColor ;
-    border: 2px solid $page_color;
-    flex-direction: column;
-    // width: 100px;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 27px;
-    text-transform: capitalize;
-    border-radius: 30px;
-    color: $page_color;
+.btn-flex {
+  display: flex;
+  background: $ticketColor;
+  border: 2px solid $page_color;
+  flex-direction: column;
+  // width: 100px;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 27px;
+  text-transform: capitalize;
+  border-radius: 30px;
+  color: $page_color;
 
-    input
-    {
-        position: absolute;
-        z-index: 30;
-        opacity: 1%;
-        
-    }
-    label
-    {
-        font-size: 15px;
-        position: relative;
-        z-index: 20;
-        font-family: $textFont,sans-serif;
-    }
+  input {
+    position: absolute;
+    z-index: 30;
+    opacity: 1%;
+  }
+  label {
+    font-size: 15px;
+    position: relative;
+    z-index: 20;
+    font-family: $textFont, sans-serif;
+  }
 }
 .btn-flex.active {
-    background-color: $page_color;
-    color: $visibleFontColor;
-  }
+  background-color: $page_color;
+  color: $visibleFontColor;
+}
