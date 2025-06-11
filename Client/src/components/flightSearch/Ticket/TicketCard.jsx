@@ -16,20 +16,12 @@ import TicketHeader from "./ticketheader.component";
 import AirlineInfo from "./airlinedata.component";
 import dollarIcon from "../../../assets/icons/dollar-minimalistic-svgrepo-com.svg";
 import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
+// motion
+import { motion } from "motion/react";
 
-// gsap
-import { gsap,Power2 } from "gsap";
 
 
 function FlightCard() {
-  let flightTicket = useRef(null);
-useEffect(() => {
-    gsap.to(
-      flightTicket.current,
-      { x: -100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: Power2.easeOut }
-    );
-  }, []);
   // contexts
   const { iataCodes } = useContext(FlightContext);
   const { airlineData } = useContext(FlightContext);
@@ -372,7 +364,7 @@ useEffect(() => {
           return (
             <div className="flightContainer">
               <div className="main-cards">
-                <div className="flights-res" ref={flightTicket} key={index}>
+                <motion.div initial={{ opacity:0 ,scale:0 }} animate={{ opacity:1 ,scale:1 }} transition={{ type: "spring" }} className="flights-res" key={index}>
                   <AirlineInfo
                     logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
                     carrierCode={
@@ -434,10 +426,10 @@ useEffect(() => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {dropDown === index ? (
-                  <div className="flightsDetails">
+                  <motion.div initial={{ opacity:0 ,y:-60 }} animate={{ opacity:1 ,y:0 }} transition={{ ease: "easeInOut", duration: 0.5 }} className="flightsDetails">
                     <Swiper
                       spaceBetween={20}
                       slidesPerView="auto"
@@ -447,7 +439,7 @@ useEffect(() => {
                     >
                       {segmentOne.map((stopOver, setStopIndex) => (
                         <SwiperSlide key={setStopIndex}>
-                          <div className="stops-details">
+                          <div  className="stops-details">
                             <TicketHeader
                               originCode={stopOver.departure.iataCode}
                               originCity={
@@ -502,7 +494,7 @@ useEffect(() => {
                         pieces
                       </h5>
                     </div>
-                  </div>
+                  </motion.div>
                 ) : null}
               </div>
             </div>

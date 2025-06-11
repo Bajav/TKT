@@ -1,14 +1,15 @@
 import "./ticket.scss";
+import { motion } from "motion/react";
 
 function AirlineInfo(props) {
   return (
     <div className="flights-header">
-      <div className="airLineIcone">
+      <motion.div initial={{ opacity:0 ,scale:0 }} animate={{opacity:1,scale:1}} transition={{ ease: "easeIn", duration: 2 }} className="airLineIcone">
         <div className="icon">
           <img src={props.logo} alt="Airline Logo" className="airline-logo" />
         </div>
         <h4>{props.carrierCode}</h4>
-      </div>
+      </motion.div>
       <h3>{props.airlineName}</h3>
     </div>
   );
