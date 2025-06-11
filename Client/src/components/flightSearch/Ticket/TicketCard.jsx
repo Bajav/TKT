@@ -364,7 +364,7 @@ function FlightCard() {
           return (
             <div className="flightContainer">
               <div className="main-cards">
-                <motion.div  className="flights-res" key={index}>
+                <div  className="flights-res" key={index}>
                   <AirlineInfo
                     logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
                     carrierCode={
@@ -426,7 +426,7 @@ function FlightCard() {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
 
                 {dropDown === index ? (
                   <div className="flightsDetails">
