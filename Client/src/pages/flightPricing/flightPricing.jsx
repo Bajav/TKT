@@ -157,40 +157,55 @@ function FlightPricing() {
                 return segmnetTwo.map(
                   ({
                     aircraft,
-                    arrival,
-                    carrierCode,
-                    departure,
-
-                    duration,
-                    operating,
-                  }) => {
+                      arrival,
+                      carrierCode,
+                      co2Emissions,
+                      departure,
+                      duration,
+                      operating,
+                  },index) => {
+                    const fareDetails =
+                      travelerPricings[0].fareDetailsBySegment[index];
+                    const fareClass = fareDetails?.class || "Unknown";
+                    const cabin = fareDetails?.cabin || "Unknown";
                     return (
                       <SwiperSlide>
-                        <div className="flight-container">
+                      <div className="flight-container">
                           <TicketHeader
                             originCode={departure.iataCode}
-                            originCity={"kampala"}
-                            originTime={"12:00:00"}
+                            originCity={
+                              iataLookup[departure.iataCode]?.city || ""
+                            }
+                            originTime={departure.at.slice(11)}
                             arrowColor="#222222"
                             departureCode={arrival.iataCode}
-                            departureCity={"nairobi"}
-                            departureTime={"12:00:00"}
+                            departureCity={
+                              iataLookup[arrival.iataCode]?.city || ""
+                            }
+                            departureTime={arrival.at.slice(11)}
                             originTerminal={
                               departure.terminal
                                 ? `Terminal: ${departure.terminal}`
-                                : "Terminal: NULL"
+                                : "Terminal: N/A"
                             }
                             destinationTerminal={
                               arrival.terminal
                                 ? `Terminal: ${arrival.terminal}`
-                                : "Terminal: NULL"
+                                : "Terminal: N/A"
                             }
                           />
                           <div className="detail">
-                            <h5>AIRLINE : KQ A380</h5>
-                            <h5>CO2 : 93 KG</h5>
-                            <h5>THU 05-DEC-24</h5>
-                            <h5>CLASS : R ECONOMY</h5>
+                            <h5>
+                              AIRLINE : {carrierCode} {aircraft.code}
+                            </h5>
+                            <h5>
+                              CO2 : {co2Emissions[0].weight}{" "}
+                              {co2Emissions[0].weightUnit}
+                            </h5>
+                            <h5>{arrival.at.slice(0, 10)}</h5>
+                            <h5>
+                              CLASS : {fareClass} {cabin}
+                            </h5>
                           </div>
                           <div className="detail">
                             <h5>CARRY ON 1PC 8KG</h5>
