@@ -363,6 +363,18 @@
   }
 }
 
+.upsell
+{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  h2
+  {
+    color: $visibleFontColor;
+
+  }
+}
+
 .flightDealContainer::before,
 .flightDealContainer::after {
   content: "";

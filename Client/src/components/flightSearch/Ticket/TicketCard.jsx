@@ -23,6 +23,7 @@ function FlightCard() {
   // contexts
   const { iataCodes } = useContext(FlightContext);
   const { airlineData } = useContext(FlightContext);
+  const { flightSearch } = useContext(FlightContext);
   const { flightResults } = useContext(FlightContext);
   const { bookedFlight, setBookedFlight } = useContext(FlightContext);
   const { selectedFlight, setSelectFlight } = useContext(FlightContext);
@@ -243,19 +244,12 @@ function FlightCard() {
             <button onClick={cancelBTN}>cancel</button>
           </div>
           <h3 className="text">choose your best deal</h3>
-          <div className="flightDealsHeader ticket-header">
-            <div className="origin">
-              <h2>{"ebb" || ""}</h2>
-              <h5>{"Kampala, Uganda" || ""}</h5>
-            </div>
-            <div className="center">
-              <Arrow color="#222222" width="200px" />
-              <h5>23.DEC.24</h5>
-            </div>
-            <div className="item">
-              <h2>{"dxb" || ""}</h2>
-              <h5>{"Dubai , UAE" || ""}</h5>
-            </div>
+          <div className="upsell">
+          <TicketHeader
+            originCode={flightSearch?.origin?.slice(0, 3) || ""}
+            arrowColor="#313030"
+            departureCode={flightSearch?.destination?.slice(0, 3) || "XXX"}
+          />
           </div>
           {brandedUpSell.length === 0 ? (
             <BearLoader />
@@ -275,12 +269,7 @@ function FlightCard() {
               const perks =
                 travelerPricings[0].fareDetailsBySegment[0].amenities;
               return (
-                <Swiper
-                  spaceBetween={20}
-                  slidesPerView="auto"
-                  // onSlideChange={() => console.log("slide change")}
-                  // onSwiper={(swiper) => console.log(swiper)}
-                >
+                <Swiper spaceBetween={20} slidesPerView="auto">
                   <SwiperSlide>
                     <div className="flightDealContainer">
                       <AirlineInfo
@@ -356,59 +345,60 @@ function FlightCard() {
 
                   {/* segtment two */}
                   <SwiperSlide>
-                  <div className="flightDealContainer">
-                    <AirlineInfo
-                      logo={
-                        airlinesLookUp[segmentTwo[0].carrierCode]?.logo || ""
-                      }
-                      carrierCode={segmentTwo[0].carrierCode || ""}
-                      airlineName={
-                        travelerPricings[0].fareDetailsBySegment[1].brandedFare
-                      }
-                    />
-                    <TicketHeader
-                      originCode={departureObjectSegTwo.iataCode || ""}
-                      originCity={
-                        iataLookup[departureObjectSegTwo.iataCode]?.city || ""
-                      }
-                      arrowColor="#F5F7F8"
-                      originTime={departureObjectSegTwo.at.slice(11) || ""}
-                      departureCode={arrivalObjectSegTwo.iataCode || ""}
-                      departureCity={
-                        iataLookup[arrivalObjectSegTwo.iataCode]?.city || ""
-                      }
-                      departureTime={arrivalObjectSegTwo.at.slice(11) || ""}
-                    />
-                    <h6 className="lineNew">
-                      --------------------------------------------------------
-                    </h6>
+                    <div className="flightDealContainer">
+                      <AirlineInfo
+                        logo={
+                          airlinesLookUp[segmentTwo[0].carrierCode]?.logo || ""
+                        }
+                        carrierCode={segmentTwo[0].carrierCode || ""}
+                        airlineName={
+                          travelerPricings[0].fareDetailsBySegment[1]
+                            .brandedFare
+                        }
+                      />
+                      <TicketHeader
+                        originCode={departureObjectSegTwo.iataCode || ""}
+                        originCity={
+                          iataLookup[departureObjectSegTwo.iataCode]?.city || ""
+                        }
+                        arrowColor="#F5F7F8"
+                        originTime={departureObjectSegTwo.at.slice(11) || ""}
+                        departureCode={arrivalObjectSegTwo.iataCode || ""}
+                        departureCity={
+                          iataLookup[arrivalObjectSegTwo.iataCode]?.city || ""
+                        }
+                        departureTime={arrivalObjectSegTwo.at.slice(11) || ""}
+                      />
+                      <h6 className="lineNew">
+                        --------------------------------------------------------
+                      </h6>
 
-                    <div className="flightDetails">
-                      {perks.map((perk) => {
-                        return (
-                          <div className="detailsSect">
-                            <img
-                              src={perk.isChargeable ? dollarIcon : checkMark}
-                              alt="perk icon"
-                            />
-                            <li>{perk.description}</li>
+                      <div className="flightDetails">
+                        {perks.map((perk) => {
+                          return (
+                            <div className="detailsSect">
+                              <img
+                                src={perk.isChargeable ? dollarIcon : checkMark}
+                                alt="perk icon"
+                              />
+                              <li>{perk.description}</li>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="flights-actions">
+                        <div className="time-details">
+                          <div className="flex-tim">
+                            <h4>{arrivalObjectSegTwo.at.slice(0, 10)}</h4>
                           </div>
-                        );
-                      })}
-                    </div>
-                    <div className="flights-actions">
-                      <div className="time-details">
-                        <div className="flex-tim">
-                          <h4>{arrivalObjectSegTwo.at.slice(0, 10)}</h4>
-                        </div>
-                        <div className="flex-tim">
-                          <h4>{segmentTwo[0].duration.slice(2)}</h4>
+                          <div className="flex-tim">
+                            <h4>{segmentTwo[0].duration.slice(2)}</h4>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="flightFunction"></div>
-                  </div>
+                      <div className="flightFunction"></div>
+                    </div>
                   </SwiperSlide>
                 </Swiper>
               );
