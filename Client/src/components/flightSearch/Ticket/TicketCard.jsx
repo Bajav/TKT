@@ -290,6 +290,8 @@ function FlightCard() {
                           iataLookup[departureObject.iataCode]?.city || ""
                         }
                         arrowColor="#F5F7F8"
+                        segmentNum={segmentOne.length}
+                        segment={segmentOne.length}
                         originTime={departureObject.at.slice(11) || ""}
                         departureCode={arrivalObject.iataCode || ""}
                         departureCity={
@@ -364,6 +366,8 @@ function FlightCard() {
                           iataLookup[departureObjectSegTwo.iataCode]?.city || ""
                         }
                         arrowColor="#F5F7F8"
+                         segmentNum={segmentTwo.length}
+                        segment={segmentTwo.length}
                         originTime={departureObjectSegTwo.at.slice(11) || ""}
                         departureCode={arrivalObjectSegTwo.iataCode || ""}
                         departureCity={
@@ -394,7 +398,7 @@ function FlightCard() {
                             <h4>{arrivalObjectSegTwo.at.slice(0, 10)}</h4>
                           </div>
                           <div className="flex-tim">
-                            <h4>{segmentTwo[0].duration.slice(2)}</h4>
+                            <h4>{segmentTwo[segTwoIndex].duration.slice(2)}</h4>
                           </div>
                         </div>
                       </div>
