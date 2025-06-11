@@ -364,7 +364,7 @@ function FlightCard() {
           return (
             <div className="flightContainer">
               <div className="main-cards">
-                <motion.div initial={{ opacity:0 ,scale:0 }} animate={{ opacity:1 ,scale:1 }} transition={{ type: "spring" }} className="flights-res" key={index}>
+                <motion.div  className="flights-res" key={index}>
                   <AirlineInfo
                     logo={airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
                     carrierCode={
@@ -429,7 +429,7 @@ function FlightCard() {
                 </motion.div>
 
                 {dropDown === index ? (
-                  <motion.div initial={{ opacity:0 ,y:-60 }} animate={{ opacity:1 ,y:0 }} transition={{ ease: "easeInOut", duration: 0.5 }} className="flightsDetails">
+                  <div className="flightsDetails">
                     <Swiper
                       spaceBetween={20}
                       slidesPerView="auto"
@@ -494,7 +494,7 @@ function FlightCard() {
                         pieces
                       </h5>
                     </div>
-                  </motion.div>
+                  </div>
                 ) : null}
               </div>
             </div>
