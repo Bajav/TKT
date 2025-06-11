@@ -426,3 +426,13 @@
   // height: 70px;
   grid-template-columns: repeat(2, 1fr);
 }
+.container
+{
+  width: 100%;
+  // gap: 100px;
+  gap: 5%;
+  display: flex;
+  align-items: center;
+  overflow-y: scroll;
+  justify-content: space-evenly;
+}
