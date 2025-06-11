@@ -244,6 +244,7 @@ function FlightCard() {
             <button onClick={cancelBTN}>cancel</button>
           </div>
           <h3 className="text">choose your best deal</h3>
+          {/* <h3 className="text">swipe left to view</h3> */}
           <div className="upsell">
           <TicketHeader
             originCode={flightSearch?.origin?.slice(0, 3) || ""}
@@ -259,12 +260,13 @@ function FlightCard() {
               const segmentNumber = segments.length;
               const lastSegmentIndex = segmentNumber - 1;
               const segmentOne = upsell.itineraries[0].segments;
+              const segOneIndex = segmentOne.length -1;
               const segmentTwo = upsell.itineraries[1].segments;
               const travelerPricings = upsell.travelerPricings;
               const departureObject = segmentOne[0].departure;
-              const arrivalObject = segmentOne[0].arrival;
+              const arrivalObject = segmentOne[segOneIndex].arrival;
               const segTwoIndex = segmentTwo.length - 1;
-              const departureObjectSegTwo = segmentTwo[segTwoIndex].departure;
+              const departureObjectSegTwo = segmentTwo[0].departure;
               const arrivalObjectSegTwo = segmentTwo[segTwoIndex].arrival;
               const perks =
                 travelerPricings[0].fareDetailsBySegment[0].amenities;
