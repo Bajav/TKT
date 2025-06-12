@@ -122,7 +122,7 @@
     padding: 12px;
     border-radius: 10px;
     z-index: 1;
-    // top: 100px;
+    top: 50px;
     margin-top: 10px; /* to create some space below the button */
   }
 
@@ -202,21 +202,16 @@
   }
   .btn-submit {
     text-align: center;
-    color: $page_color;
+    color: $visibleFontColor;
     font-size: 15px;
     text-transform: capitalize;
     border-radius: 5px 5px 13px 13px;
     border: none;
     font-family: $textFont, sans-serif;
     padding: 12px 120px;
-    background: $ticketColor;
+    background: $page_color;
     width: 100%;
     font-weight: 200;
-    border: 2px solid $page_color;
-  }
-  .btn-submit:hover {
-    background: $page_color;
-    color: $visibleFontColor;
   }
   input:focus {
     background: transparent;
