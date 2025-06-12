@@ -30,7 +30,7 @@ function FlightPricing() {
     return lookup;
   }, {});
   const coninueBtn = () => navigate("/flights/PassengerData", { replace: true });
-  console.log(flightSearch.passengers);
+  console.log("lastFlight",lastFlight);
 
   return (
     <section className="reviewFlight">
