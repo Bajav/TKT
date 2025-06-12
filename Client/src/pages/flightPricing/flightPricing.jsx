@@ -12,6 +12,7 @@ import { FlightContext } from "../../components/context/flightSearch.context";
 function FlightPricing() {
   // const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
+  const {flightSearch} = useContext(FlightContext);
   const { bookedFlight } = useContext(FlightContext);
   const { iataCodes } = useContext(FlightContext);
   const { lastFlight } = useContext(FlightContext);
@@ -29,7 +30,7 @@ function FlightPricing() {
     return lookup;
   }, {});
   const coninueBtn = () => navigate("/flights/PassengerData", { replace: true });
-  console.log(bookedFlight);
+  console.log(flightSearch.passengers);
 
   return (
     <section className="reviewFlight">
@@ -251,16 +252,16 @@ function FlightPricing() {
             <div className="paxDataContainer">
               {console.log(travelerPricings)}
               <div className="data">
-                <h4>Travelers: </h4>
+                <h4>Travelers:{flightSearch.passengers.adults + flightSearch.passengers.children + flightSearch.passengers.infants} </h4>
               </div>
               <div className="pax">
-                <h4>Adults: </h4>
+                <h4>Adults:{flightSearch.passengers.adults} </h4>
               </div>
               <div className="pax">
-                <h4>Children: </h4>
+                <h4>Children: {flightSearch.passengers.children}</h4>
               </div>
               <div className="pax">
-                <h4>Infants: 0</h4>
+                <h4>Infants: {flightSearch.passengers.infants}</h4>
               </div>
             </div>
           </div>
