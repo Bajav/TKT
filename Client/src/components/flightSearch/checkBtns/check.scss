@@ -5,11 +5,12 @@
   justify-content: space-between;
   gap: 2px;
   border-radius: 5px;
-  padding:10px;
+  padding:1px;
   // margin-top: 10px;
   background: $page_color;
 }
 .btn-flex {
+  padding: 10px;
 
   input {
     position: absolute;
@@ -24,6 +25,7 @@
   }
 }
 .btn-flex.active {
-  background-color: $page_color;
-  color: $visibleFontColor;
+  border-radius: 5px;
+  background-color: $ticketColor;
+  color: $page_color;
 }
