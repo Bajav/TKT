@@ -6,6 +6,7 @@
     background: $ticketColor;
     padding: 5px;
     border-radius: 15px;
+    width: 96vw;
   }
   .cutout-box::before,
   .cutout-box::after {
@@ -53,17 +54,16 @@
   }
 
   .calender {
-    width: 190px;
     border-radius: 5px;
     background: $inputBackGround;
     input {
       width: 150px;
       border-radius: 10px;
-      margin-left: 20px;
+      margin-left: 10px;
       background: $inputBackGround;
     }
     label {
-      margin-left: 20px;
+      margin-left: 10px;
     }
   }
 
@@ -87,7 +87,7 @@
   .passenger-selector {
     position: relative;
     /* display: inline-block; */
-    width: 190px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     font-family: $textFont, sans-serif;
@@ -100,7 +100,6 @@
     border: 1px solid #ccc;
     padding: 3px 0px;
     border-radius: 5px;
-    border-radius: 10px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -162,7 +161,8 @@
     position: relative;
     margin-bottom: 5px;
     z-index: 2;
-    gap: 10px;
+    gap: 5px;
+    margin-top: 5px;
     // background: #007bff;
   }
   .seatClass {
@@ -171,15 +171,15 @@
     background: $inputBackGround;
     // gap: 5px;
     height: 60px;
-    width: 190px;
-    border-radius: 10px;
+    width: 100%;
+    border-radius: 5px;
     font-family: $textFont, sans-serif;
     text-transform: capitalize;
     font-weight: 600;
     select {
       background: transparent;
       border: none;
-      margin-left: 15px;
+      margin-left: 10px;
       text-transform: capitalize;
       color: $visibleFontColor;
       font-weight: 600;
@@ -191,7 +191,7 @@
       outline: none;
     }
     label {
-      margin-left: 20px;
+      margin-left: 10px;
       font-size: 15px;
       color: $deemFontColor;
       margin-top: 5px;
@@ -200,13 +200,12 @@
   .btn-submit {
     text-align: center;
     color: $page_color;
-    font-size: 20px;
+    font-size: 15px;
     text-transform: capitalize;
-    border-radius: 5px 5px 20px 20px;
-    margin-top: 5px;
+    border-radius: 5px 5px 13px 13px;
     border: none;
     font-family: $textFont, sans-serif;
-    padding: 13px 120px;
+    padding: 12px 120px;
     background: $ticketColor;
     width: 100%;
     font-weight: 200;
