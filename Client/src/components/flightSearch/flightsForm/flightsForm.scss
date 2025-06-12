@@ -21,11 +21,11 @@
   }
 
   .cutout-box::before {
-    left: 4px;
+    left: -3px;
   }
 
   .cutout-box::after {
-    right: 4px;
+    right: -3px;
   }
   .flights {
     position: relative;
