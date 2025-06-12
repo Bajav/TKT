@@ -11,20 +11,20 @@
   .cutout-box::after {
     content: "";
     position: absolute;
-    top: 28%;
+    top: 29%;
     width: 25px;
     height: 25px;
-    background-color: $actionOrange;
+    background-color: $page_color;
     border-radius: 50%;
     transform: translateY(-50%);
   }
 
   .cutout-box::before {
-    left: -12px;
+    left: 4px;
   }
 
   .cutout-box::after {
-    right: -12px;
+    right: 4px;
   }
   .flights {
     position: relative;
