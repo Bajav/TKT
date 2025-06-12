@@ -1,43 +1,30 @@
 @import "../../../styles/variables.scss";
 @media only screen and (max-width: 600px) {
-  .cutout-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    border-radius: 40px;
-    background-color: $ticketColor;
-    // background: url(../../../assets/images/bg.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    z-index: 2;
-    background-size: cover;
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  .cutout-box::before,
-  .cutout-box::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 25px;
-    height: 25px;
-    background-color: $page_color;
-    border-radius: 50%;
-    transform: translateY(-50%);
-  }
 
-  .cutout-box::before {
-    left: -12px;
+  .cutout-box
+  {
+    background: $ticketColor;
+    padding: 5px;
   }
+  // .cutout-box::before,
+  // .cutout-box::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 50%;
+  //   width: 25px;
+  //   height: 25px;
+  //   background-color: $page_color;
+  //   border-radius: 50%;
+  //   transform: translateY(-50%);
+  // }
 
-  .cutout-box::after {
-    right: -12px;
-  }
+  // .cutout-box::before {
+  //   left: -12px;
+  // }
+
+  // .cutout-box::after {
+  //   right: -12px;
+  // }
   .flights {
     position: relative;
     z-index: 2;
@@ -83,7 +70,6 @@
     width: 100%;
     margin-top: 10px;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -145,7 +131,7 @@
   // }
 
   .passenger-type button {
-    background-color: #007bff;
+    background-color: $actionOrange;
     border: none;
     color: white;
     padding: 5px 10px;
