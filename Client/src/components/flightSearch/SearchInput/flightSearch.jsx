@@ -61,10 +61,10 @@ function FlightSearchInput(props) {
         />
       </div>
         {/* props.value && */}
-      {showDropdown && filteredCodes.length > 0 ? (
+      {props.value && showDropdown && filteredCodes.length > 0 ? (
         <div className="dropDown">
           <ul>
-            {filteredCodes.slice(0, 5).map((code, index) => (
+            {filteredCodes.slice(0, 50).map((code, index) => (
               <li 
                 className='dropDownRow' 
                 key={index} 

@@ -68,16 +68,25 @@
   background-color: #f9f9f9;
   border-color: #2196f3;
 }
+.newFlex{
+  width: 100%;
+  .dropDown {
+     top: 260px;
+  }  
+}
 .dropDown {
+  overflow-y: scroll;
   padding: 5px;
   position: absolute;
   top: 190px;
+  border-radius: 5px;
   left: 10px;
   width: 95%;
-  background-color: #fefefe;
+  background-color: $ticketColor;
   border: 1px solid #ccc;
   max-height: 200px;
-  overflow-y: auto;
+  height: 100px;
+  // overflow-y: auto;
   z-index: 10;
   .dropDown:empty {
     border: none;
@@ -89,12 +98,14 @@
     margin: 0;
   }
   li {
+    color: $page_color;
     text-decoration: none;
     text-overflow: clip;
     list-style: none;
-    font-size: 10px;
+    font-size: 13px;
     font-family: $textFont, sans-serif;
-    font-weight: 600;
+    // font-weight: 600;
+    letter-spacing: 1px;
   }
   .dropDownRow {
     display: flex;

@@ -9,7 +9,7 @@ import ClickOption from "../checkBtns/ClickOption";
 import Calender from "../Calender/calenderInput";
 import RoundTripIcon from "../../../assets/icons/arrows-svgrepo-com (1).svg";
 // import styles
-import './flightsForm.scss';
+import "./flightsForm.scss";
 
 function FlightsForm() {
   // contexts
@@ -96,7 +96,8 @@ function FlightsForm() {
     const formData = { ...inputs, passengers };
     try {
       const response = await axios.post(
-        "http://localhost:3000/results",formData
+        "http://localhost:3000/results",
+        formData
       );
       setFlightResults(response.data);
       console.log(response.data[0]);
@@ -150,15 +151,17 @@ function FlightsForm() {
                 <button className="switchBtn" onClick={handleSwitch}>
                   <img src={RoundTripIcon} alt="" />
                 </button>
-                <FlightSearchInput
-                  classOne="flexInput inputTwo"
-                  labelFor="Destination"
-                  label="Destination"
-                  placeholder="Input place of destination"
-                  InputName="destination"
-                  change={handleChange}
-                  value={inputs.destination}
-                />
+                <div className="newFlex">
+                  <FlightSearchInput
+                    classOne="flexInput inputTwo"
+                    labelFor="Destination"
+                    label="Destination"
+                    placeholder="Input place of destination"
+                    InputName="destination"
+                    change={handleChange}
+                    value={inputs.destination}
+                  />
+                </div>
               </div>
             </div>
             <div className="calendersUI">
