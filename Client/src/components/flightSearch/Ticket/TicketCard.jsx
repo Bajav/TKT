@@ -14,7 +14,7 @@ import line from "../../../assets/icons/line.svg";
 import DummyTicket from "../../features/DummyTicket/DummyTicket";
 import TicketHeader from "./ticketheader.component";
 import AirlineInfo from "./airlinedata.component";
-import dollarIcon from "../../../assets/icons/dollar-minimalistic-svgrepo-com.svg";
+import dollarIcon from "../../../assets/icons/dollarbill.svg";
 import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
 // motion
 import { motion } from "motion/react";

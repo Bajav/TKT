@@ -1,6 +1,6 @@
-some of the itineraries have a different validating code with carrier code {render the validating flight}
+some of the itineraries have a different validating code with carrier code {render the validating flight} "---DONE---"
 the muliflights 
-the amenities logic
+the amenities logic "---DONE---"
 routing from one page to another when animated (gsap,barba)
 classes to render incase passengers are more than one
 work on the flight type logic , one way , roundtrip , multicity
@@ -13,3 +13,14 @@ rendering leaving and landing times
 info below should be consistent
 info on the last pricing for infants and other travelers
 flight cheap dates
+
+---FIX DURATIONS---
+UPSELL OFFERS
+
+---trip---
+
+some trips have diffrent flight for each leg, 
+work on the logic to show client
+eg  outbound flight is different, inbound flight is different
+some flights are operated by a different airline 
+while another issues the ticket
