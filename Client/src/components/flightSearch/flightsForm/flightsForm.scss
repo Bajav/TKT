@@ -1,9 +1,12 @@
 @import "../../../styles/variables.scss";
 @media only screen and (max-width: 600px) {
-
-  .cutout-box
-  {
-    background: $ticketColor;
+  .cutout-box {
+    // background-image: url("../../../assets/images/bgimage.jpg");
+    // background-position: center;
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    background-color: $ticketColor;
+    // background-blend-mode: overlay;
     padding: 5px;
     border-radius: 15px;
     width: 96vw;
