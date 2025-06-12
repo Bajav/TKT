@@ -11,7 +11,7 @@ implement cookies for user preferences
 conditionally render components
 rendering leaving and landing times
 info below should be consistent
-info on the last pricing for infants and other travelers
+info on the last pricing for infants and other travelers ---DONE--- 
 flight cheap dates
 
 ---FIX DURATIONS---
