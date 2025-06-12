@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   gap: 2px;
-  border-radius: 5px;
+  border-radius: 10px;
   padding:1px;
   // margin-top: 10px;
   background: $page_color;
@@ -22,12 +22,11 @@
     font-size: 15px;
     position: relative;
     z-index: 20;
-    font-weight: 400;
     font-family: $textFont, sans-serif;
   }
 }
 .btn-flex.active {
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: $ticketColor;
   color: $page_color;
 }
