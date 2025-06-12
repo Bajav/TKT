@@ -24,3 +24,8 @@ work on the logic to show client
 eg  outbound flight is different, inbound flight is different
 some flights are operated by a different airline 
 while another issues the ticket
+
+
+---CREATE---
+we create a function that gets user recent searches , like 4 of them , then 
+from each search we get the lowest fare for each itinerary for home when user signs in 
