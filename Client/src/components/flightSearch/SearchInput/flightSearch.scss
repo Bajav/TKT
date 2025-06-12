@@ -1,81 +1,80 @@
-@import '../../../styles/variables.scss';
+@import "../../../styles/variables.scss";
 
 .flexInput {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    background: $inputBackGround;
-    margin-top: 5px;
-    width: 100%;
-    z-index: 1;
-    // margin-left: 10px;
-    border-radius: 5px;
-    height: 60px;
-    label {
-      color: $deemFontColor;
-      font-family: $textFont, sans-serif;
-      text-transform: capitalize;
-      font-size: 10px;
-      font-weight: 600;
-      opacity: 70%;
-      margin-left: 10px;
-    }
-    input {
-      border: none;
-      width: 95%;
-      margin-left: 10px;
-      height: 30px;
-      font-family: $textFont, sans-serif;
-      background: transparent;
-      color: $visibleFontColor;
-      // font-weight: 600;
-      text-transform: capitalize;
-    }
-    input:focus {
-      outline: none;
-    }
-    input::placeholder {
-      margin-left: 20px;
-    }
-  }
-  .switchBtn
-  {
-    position: absolute;
-    z-index: 20;
-    background: $visibleFontColor;
-    color: $visibleFontColor;
-    font-family: $textFont,sans-serif;
-    text-transform: capitalize;
-    font-size: 20px;
-    padding: 10px;
-    rotate: 90deg;
-    border-radius: 30px;
-    // left: 30px;
-    right: 10%;
-    border: 2px solid $page_color;
-    img
-    {
-      width: 30px;
-    }
-  }
-  .flightInputs {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .oneWayStyle {
-    background-color: #f9f9f9;
-    border-color: #2196f3;
-  }
-  .dropDown {
-  position: absolute;
-  top: 135px;
-  left: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: $inputBackGround;
+  margin-top: 5px;
   width: 100%;
-  background-color: $inputBackGround;
+  z-index: 1;
+  // margin-left: 10px;
+  border-radius: 5px;
+  height: 60px;
+  label {
+    color: $deemFontColor;
+    font-family: $textFont, sans-serif;
+    text-transform: capitalize;
+    font-size: 10px;
+    font-weight: 600;
+    opacity: 70%;
+    margin-left: 10px;
+  }
+  input {
+    border: none;
+    width: 95%;
+    margin-left: 10px;
+    height: 30px;
+    font-family: $textFont, sans-serif;
+    background: transparent;
+    color: $visibleFontColor;
+    // font-weight: 600;
+    text-transform: capitalize;
+  }
+  input:focus {
+    outline: none;
+  }
+  input::placeholder {
+    margin-left: 20px;
+  }
+}
+.switchBtn {
+  position: absolute;
+  z-index: 20;
+  background: $visibleFontColor;
+  color: $visibleFontColor;
+  font-family: $textFont, sans-serif;
+  text-transform: capitalize;
+  font-size: 20px;
+  padding: 10px;
+  rotate: 90deg;
+  border-radius: 30px;
+  // left: 30px;
+  right: 10%;
+  border: 2px solid $page_color;
+  img {
+    width: 30px;
+  }
+}
+.flightInputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.oneWayStyle {
+  background-color: #f9f9f9;
+  border-color: #2196f3;
+}
+.dropDown {
+  padding: 5px;
+  position: absolute;
+  top: 190px;
+  left: 10px;
+  width: 95%;
+  background-color: #fefefe;
   border: 1px solid #ccc;
   max-height: 200px;
   overflow-y: auto;

@@ -8,7 +8,7 @@ function FlightSearchInput(props) {
   const {iataCodes,setIataCodes} = useContext(FlightContext);
   const {setAirlineData} = useContext(FlightContext);
   // state
-  const [showDropdown, setShowDropdown] = useState(false);  
+  const [showDropdown, setShowDropdown] = useState(true);  
 // fetch
   useEffect(() => {
     const fetchData = async () => {
@@ -60,8 +60,8 @@ function FlightSearchInput(props) {
           autoComplete="off"
         />
       </div>
-      
-      {props.value && showDropdown && filteredCodes.length > 0 ? (
+        {/* props.value && */}
+      {showDropdown && filteredCodes.length > 0 ? (
         <div className="dropDown">
           <ul>
             {filteredCodes.slice(0, 5).map((code, index) => (
