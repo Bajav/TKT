@@ -8,6 +8,7 @@ import FlightSearchInput from "../SearchInput/flightSearch";
 import ClickOption from "../checkBtns/ClickOption";
 import Calender from "../Calender/calenderInput";
 import RoundTripIcon from "../../../assets/icons/arrows-svgrepo-com (1).svg";
+import line from '../../../assets/icons/line.svg'
 // import styles
 import "./flightsForm.scss";
 
@@ -164,6 +165,7 @@ function FlightsForm() {
                 </div>
               </div>
             </div>
+                    <img  className="lines" src={line}/>
             <div className="calendersUI">
               <Calender
                 label="Date of Departure"
@@ -187,7 +189,6 @@ function FlightsForm() {
                 />
               )}
             </div>
-
             <div className="seatType">
               <div className="passenger-selector">
                 <div className="dropdown-header" onClick={toggleDropdown}>
