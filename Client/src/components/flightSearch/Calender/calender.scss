@@ -1,0 +1,26 @@
+ $primary-color: #333;
+    $input-bg: #f9f9f9;
+    $border-color: #ddd;
+
+    .date-picker-container {
+      display: flex;
+      gap: 10px;
+      margin: 20px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .date-input {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      background-color: $input-bg;
+      color: $primary-color;
+      width: 200px;
+      outline: none;
+
+      &:focus {
+        border-color: darken($border-color, 10%);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+    }

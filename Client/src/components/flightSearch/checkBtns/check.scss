@@ -7,7 +7,7 @@
   border-radius: 10px;
   padding:1px;
   // margin-top: 10px;
-  background: $page_color;
+  background: $inputBackGround;
 }
 .btn-flex {
   padding: 10px 25px;
@@ -27,6 +27,7 @@
 }
 .btn-flex.active {
   border-radius: 10px;
-  background-color: $ticketColor;
+  background-color: $visibleFontColor;
   color: $page_color;
+  box-shadow: 0px 0px 48px 11px rgba(0,0,0,0.1);
 }
