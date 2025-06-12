@@ -37,6 +37,7 @@ function FlightResult() {
       <div className="FlightResults">
         <h3 className="text"> <span>{ resLength }</span> Results for your search </h3>
         <div className="FlightResult-header">
+
           <div className="ticket-header">
             <div className="origin">
               <h2>{flightSearch?.origin?.slice(0, 3) || "XXX"}</h2>
@@ -48,6 +49,7 @@ function FlightResult() {
               <h2>{flightSearch?.destination?.slice(0, 3) || "XXX"}</h2>
             </div>
           </div>
+          
         </div>
         <div className="results">
           <FlightCard />
