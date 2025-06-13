@@ -262,10 +262,8 @@ const FlightSearchExample = () => {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
-      <h2>Flight Search Calendar</h2>
-      
-      <div style={{ marginBottom: '20px' }}>
+    <div>
+      {/* <div style={{ marginBottom: '20px' }}>
         <label>
           <input
             type="checkbox"
@@ -275,38 +273,26 @@ const FlightSearchExample = () => {
           />
           Enable Range Picker
         </label>
-      </div>
+      </div> */}
 
       <div style={{ display: 'grid', gridTemplateColumns: isRangeEnabled ? '1fr' : '1fr 1fr', gap: '20px' }}>
         {!isRangeEnabled && (
-          <>
+        
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>
-                Departure Date
-              </label>
               <FlightCalendar
                 onDateSelect={handleDepartureSelect}
                 placeholder="Select departure date"
               />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>
-                Return Date
-              </label>
               <FlightCalendar
                 onDateSelect={handleDepartureSelect}
                 placeholder="Select return date"
               />
             </div>
-          </>
+
         )}
 
         {isRangeEnabled && (
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>
-              Travel Dates (Range)
-            </label>
             <FlightCalendar
               onRangeSelect={handleReturnRangeSelect}
               placeholder="Select travel dates"
@@ -316,18 +302,18 @@ const FlightSearchExample = () => {
         )}
       </div>
 
-      <div style={{ marginTop: '30px', padding: '15px', background: '#f8f9fa', borderRadius: '8px' }}>
+      {/* <div style={{ marginTop: '30px', padding: '15px', background: '#f8f9fa', borderRadius: '8px' }}>
         <h4>Selected Dates:</h4>
         {!isRangeEnabled ? (
           <p><strong>Departure:</strong> {departureDate ? departureDate.toLocaleDateString() : 'Not selected'}</p>
         ) : (
-          <p><strong>Travel Period:</strong> {
+          <p>{
             returnDate.start && returnDate.end 
               ? `${returnDate.start.toLocaleDateString()} - ${returnDate.end.toLocaleDateString()}`
               : 'Not selected'
           }</p>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
