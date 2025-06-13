@@ -29,3 +29,7 @@ while another issues the ticket
 ---CREATE---
 we create a function that gets user recent searches , like 4 of them , then 
 from each search we get the lowest fare for each itinerary for home when user signs in 
+
+
+---COOKIES AND SESSIONS ---
+REFRESH COOKIES
