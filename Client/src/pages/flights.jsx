@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Header from '../components/header';
 import FlightsForm from '../components/flightSearch/flightsForm/flightsFormInput';
 import Gallery from '../components/flightSearch/galler';
+import LocationComponent from '../components/LOCATION/location.component';
 // import axios from 'axios';
 
 
@@ -21,7 +22,7 @@ function Flights() {
   <Header />
   <div className="flights-console">
     <FlightsForm />
-    <Gallery />
+    <LocationComponent />
   </div>
  </main>
   )
