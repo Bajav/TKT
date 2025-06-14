@@ -170,7 +170,7 @@ function FlightsForm() {
               </div>
             </div>
             <img className="lines" src={line} />
-            <div className="calendersUI">
+            {/* <div className="calendersUI"> */}
               {/* <Calender
                 label="Date of Departure"
                 labelName="Date of Departure"
@@ -193,7 +193,7 @@ function FlightsForm() {
                 />
               )} */}
               <FlightSearchExample />
-            </div>
+            {/* </div> */}
             <div className="seatType">
               <div className="passenger-selector">
                 <div className="dropdown-header" onClick={toggleDropdown}>

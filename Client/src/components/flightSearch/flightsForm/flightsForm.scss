@@ -56,19 +56,19 @@
     white-space: nowrap;
   }
 
-  .calender {
-    border-radius: 5px;
-    background: $inputBackGround;
-    input {
-      width: 95%;
-      border-radius: 10px;
-      margin-left: 10px;
-      background: $inputBackGround;
-    }
-    label {
-      margin-left: 10px;
-    }
-  }
+  // .calender {
+  //   border-radius: 5px;
+  //   background: $inputBackGround;
+  //   input {
+  //     width: 95%;
+  //     border-radius: 10px;
+  //     margin-left: 10px;
+  //     background: $inputBackGround;
+  //   }
+  //   label {
+  //     margin-left: 10px;
+  //   }
+  // }
 
   .calendersUI {
     width: 100%;
@@ -212,9 +212,6 @@
     background: $page_color;
     width: 100%;
     font-weight: 200;
-  }
-  input:focus {
-    background: transparent;
   }
 }
 .swipes {

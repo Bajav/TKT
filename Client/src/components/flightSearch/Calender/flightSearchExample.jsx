@@ -1,41 +1,58 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './calender.scss';
+import React, { useState, useEffect, useRef, Fragment } from "react";
+import "./calender.scss";
 
-const FlightCalendar = ({ 
+const FlightCalendar = ({
   onDateSelect,
   onRangeSelect,
   placeholder = "Select date",
   isRangePicker = false,
   disabled = false,
-  className = ''
+  className = "",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedRange, setSelectedRange] = useState({ start: null, end: null });
+  const [selectedRange, setSelectedRange] = useState({
+    start: null,
+    end: null,
+  });
   const [viewDate, setViewDate] = useState(new Date());
   const [hoverDate, setHoverDate] = useState(null);
-  
+
   const calendarRef = useRef(null);
   const inputRef = useRef(null);
 
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
-  const weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+  const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
   // Close calendar when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (calendarRef.current && !calendarRef.current.contains(event.target) &&
-          inputRef.current && !inputRef.current.contains(event.target)) {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.target) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const getDaysInMonth = (date) => {
@@ -59,21 +76,25 @@ const FlightCalendar = ({
 
   const isSelected = (date) => {
     if (isRangePicker) {
-      return (selectedRange.start && date.toDateString() === selectedRange.start.toDateString()) ||
-             (selectedRange.end && date.toDateString() === selectedRange.end.toDateString());
+      return (
+        (selectedRange.start &&
+          date.toDateString() === selectedRange.start.toDateString()) ||
+        (selectedRange.end &&
+          date.toDateString() === selectedRange.end.toDateString())
+      );
     }
     return selectedDate && date.toDateString() === selectedDate.toDateString();
   };
 
   const isInRange = (date) => {
     if (!isRangePicker || !selectedRange.start) return false;
-    
+
     const rangeEnd = selectedRange.end || hoverDate;
     if (!rangeEnd) return false;
 
     const start = selectedRange.start;
     const end = rangeEnd;
-    
+
     return date > start && date < end;
   };
 
@@ -88,7 +109,7 @@ const FlightCalendar = ({
         // Complete range
         const start = selectedRange.start;
         const end = date;
-        
+
         if (end < start) {
           setSelectedRange({ start: end, end: start });
           if (onRangeSelect) onRangeSelect({ start: end, end: start });
@@ -118,23 +139,25 @@ const FlightCalendar = ({
   };
 
   const formatDate = (date) => {
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
     });
   };
 
   const getInputValue = () => {
     if (isRangePicker) {
       if (selectedRange.start && selectedRange.end) {
-        return `${formatDate(selectedRange.start)} - ${formatDate(selectedRange.end)}`;
+        return `${formatDate(selectedRange.start)} - ${formatDate(
+          selectedRange.end
+        )}`;
       } else if (selectedRange.start) {
         return `${formatDate(selectedRange.start)} - Select end date`;
       }
-      return '';
+      return "";
     }
-    return selectedDate ? formatDate(selectedDate) : '';
+    return selectedDate ? formatDate(selectedDate) : "";
   };
 
   const renderCalendarDays = () => {
@@ -144,7 +167,12 @@ const FlightCalendar = ({
 
     // Empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
-      days.push(<div key={`empty-${i}`} className="calendar__day calendar__day--empty"></div>);
+      days.push(
+        <div
+          key={`empty-${i}`}
+          className="calendar__day calendar__day--empty"
+        ></div>
+      );
     }
 
     // Days of the month
@@ -158,7 +186,11 @@ const FlightCalendar = ({
       days.push(
         <div
           key={day}
-          className={`calendar__day ${disabled ? 'calendar__day--disabled' : ''} ${today ? 'calendar__day--today' : ''} ${selected ? 'calendar__day--selected' : ''} ${inRange ? 'calendar__day--in-range' : ''}`}
+          className={`calendar__day ${
+            disabled ? "calendar__day--disabled" : ""
+          } ${today ? "calendar__day--today" : ""} ${
+            selected ? "calendar__day--selected" : ""
+          } ${inRange ? "calendar__day--in-range" : ""}`}
           onClick={() => handleDateClick(date)}
           onMouseEnter={() => setHoverDate(date)}
           onMouseLeave={() => setHoverDate(null)}
@@ -173,9 +205,11 @@ const FlightCalendar = ({
 
   return (
     <div className={`flight-calendar ${className}`}>
-      <div 
+      <div
         ref={inputRef}
-        className={`flight-calendar__input ${isOpen ? 'flight-calendar__input--open' : ''} ${disabled ? 'flight-calendar__input--disabled' : ''}`}
+        className={`flight-calendar__input ${
+          isOpen ? "flight-calendar__input--open" : ""
+        } ${disabled ? "flight-calendar__input--disabled" : ""}`}
         onClick={() => !disabled && setIsOpen(!isOpen)}
       >
         <input
@@ -187,7 +221,14 @@ const FlightCalendar = ({
           className="flight-calendar__input-field"
         />
         <div className="flight-calendar__input-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="16" y1="2" x2="16" y2="6"></line>
             <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -228,9 +269,7 @@ const FlightCalendar = ({
             ))}
           </div>
 
-          <div className="calendar__days">
-            {renderCalendarDays()}
-          </div>
+          <div className="calendar__days">{renderCalendarDays()}</div>
 
           {isRangePicker && selectedRange.start && !selectedRange.end && (
             <div className="calendar__range-info">
@@ -239,7 +278,6 @@ const FlightCalendar = ({
           )}
         </div>
       )}
-
     </div>
   );
 };
@@ -253,16 +291,16 @@ const FlightSearchExample = () => {
 
   const handleDepartureSelect = (date) => {
     setDepartureDate(date);
-    console.log('Departure date:', date);
+    console.log("Departure date:", date);
   };
 
   const handleReturnRangeSelect = (range) => {
     setReturnDate(range);
-    console.log('Return date range:', range);
+    console.log("Return date range:", range);
   };
 
   return (
-    <div>
+    <Fragment>
       {/* <div style={{ marginBottom: '20px' }}>
         <label>
           <input
@@ -274,33 +312,31 @@ const FlightSearchExample = () => {
           Enable Range Picker
         </label>
       </div> */}
-
-      <div style={{ display: 'grid', gridTemplateColumns: isRangeEnabled ? '1fr' : '1fr 1fr', gap: '20px' }}>
+      {/*  style={{ display: 'grid', gridTemplateColumns: isRangeEnabled ? '1fr' : '1fr 1fr', gap: '20px' } */}
+      <Fragment>
         {!isRangeEnabled && (
-        
-            <div>
-              <FlightCalendar
-                onDateSelect={handleDepartureSelect}
-                placeholder="Select departure date"
-              />
-              <FlightCalendar
-                onDateSelect={handleDepartureSelect}
-                placeholder="Select return date"
-              />
-            </div>
-
+          <div className="calender">
+            <FlightCalendar
+              onDateSelect={handleDepartureSelect}
+              placeholder="Select departure date"
+            />
+            <FlightCalendar
+              onDateSelect={handleDepartureSelect}
+              placeholder="Select return date"
+            />
+          </div>
         )}
 
         {isRangeEnabled && (
-          <div>
+          <Fragment>
             <FlightCalendar
               onRangeSelect={handleReturnRangeSelect}
               placeholder="Select travel dates"
               isRangePicker={true}
             />
-          </div>
+          </Fragment>
         )}
-      </div>
+      </Fragment>
 
       {/* <div style={{ marginTop: '30px', padding: '15px', background: '#f8f9fa', borderRadius: '8px' }}>
         <h4>Selected Dates:</h4>
@@ -314,7 +350,7 @@ const FlightSearchExample = () => {
           }</p>
         )}
       </div> */}
-    </div>
+    </Fragment>
   );
 };
 
