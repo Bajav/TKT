@@ -8,7 +8,7 @@ const FlightCalendar = ({
   isRangePicker = false,
   disabled = false,
   className = "",
-  props
+  props,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -221,6 +221,7 @@ const FlightCalendar = ({
           readOnly
           disabled={disabled}
           className="flight-calendar__input-field"
+           required
         />
         <div className="flight-calendar__input-icon">
           <svg

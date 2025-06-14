@@ -95,10 +95,24 @@ function FlightsForm() {
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
-
+  if (inputs.flightType === "oneWay") {
+    inputs.returnDate = null;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = { ...inputs, passengers };
+    const formData = {
+      ...inputs,
+      departureDate:
+        inputs.departureDate instanceof Date
+          ? inputs.departureDate.toISOString()
+          : null,
+      returnDate:
+        inputs.returnDate instanceof Date
+          ? inputs.returnDate.toISOString()
+          : null,
+      passengers,
+    };
+
     // try {
     //   const response = await axios.post(
     //     "http://localhost:3000/results",
@@ -111,7 +125,7 @@ function FlightsForm() {
     // } catch (error) {
     //   console.error("Error posting flight:", error);
     // }
-    console.log("formData",formData);
+    console.log("formData", formData);
   };
 
   const handleSwitch = (e) => {
@@ -129,14 +143,21 @@ function FlightsForm() {
   const [isRangeEnabled, setIsRangeEnabled] = useState(false);
 
   const handleDepartureSelect = (date) => {
-    setDepartureDate(date);
-    console.log("Departure date:", date);
+    setDepartureDate(date); // optional, if you want separate state
+    setInputs((prev) => ({
+      ...prev,
+      departureDate: date,
+    }));
   };
 
   const handleReturnRangeSelect = (range) => {
-    setReturnDate(range);
-    console.log("Return date range:", range);
+    setReturnDate(range); // optional
+    setInputs((prev) => ({
+      ...prev,
+      returnDate: range.end, // or { start: range.start, end: range.end } if you need both
+    }));
   };
+
   useEffect(() => {
     setIsRangeEnabled(true);
   });
@@ -212,11 +233,10 @@ function FlightsForm() {
                 />
               )} */}
             <FlightCalendar
-              change={handleChange}
-              value={inputs.returnDate && inputs.departureDate}
               onDateSelect={handleDepartureSelect}
+              onRangeSelect={handleReturnRangeSelect}
+              isRangePicker={inputs.flightType !== "oneWay"}
               placeholder="Select departure date"
-              isRangePicker={true}
             />
             {/* </div> */}
             <div className="seatType">
