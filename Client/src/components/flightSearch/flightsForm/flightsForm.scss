@@ -33,12 +33,17 @@
   .flights {
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: red;
     height: 100vh;
     width: 100vw;
     .flights-console {
       display: flex;
       flex-direction: column;
       gap: 5%;
+      margin-top: 40px;
       align-items: center;
     }
   }
