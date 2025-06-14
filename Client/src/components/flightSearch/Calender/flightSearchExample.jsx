@@ -8,6 +8,7 @@ const FlightCalendar = ({
   isRangePicker = false,
   disabled = false,
   className = "",
+  props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -214,8 +215,9 @@ const FlightCalendar = ({
       >
         <input
           type="text"
-          value={getInputValue()}
-          placeholder={placeholder}
+          value={porps.value}
+          onChange={props.change}
+          placeholder={props.placeholder}
           readOnly
           disabled={disabled}
           className="flight-calendar__input-field"

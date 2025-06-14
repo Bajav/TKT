@@ -136,9 +136,9 @@ function FlightsForm() {
     setReturnDate(range);
     console.log("Return date range:", range);
   };
-  useEffect(()=>{
+  useEffect(() => {
     setIsRangeEnabled(true);
-  })
+  });
 
   return (
     <div>
@@ -211,6 +211,8 @@ function FlightsForm() {
                 />
               )} */}
             <FlightCalendar
+              change={handleChange}
+              value={inputs.returnDate && inputs.departureDate}
               onDateSelect={handleDepartureSelect}
               placeholder="Select departure date"
               isRangePicker={true}
