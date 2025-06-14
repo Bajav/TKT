@@ -1,5 +1,4 @@
-  import React from 'react';
-  import Header from '../components/header';
+  import LocationHeader from '../components/Header/header';
   import Africa from '../components/places/africa';
   import Asia from '../components/places/asia';
   import Australia from '../components/places/australia';
@@ -11,7 +10,7 @@
   function Places() {
     return (
       <main className='places default'>
-      <Header  />
+      <LocationHeader  />
       <Africa />
       <Asia />
       <Australia />

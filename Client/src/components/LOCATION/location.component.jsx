@@ -21,7 +21,6 @@ const LocationComponent = () => {
       async (position) => {
         try {
           const { latitude, longitude } = position.coords;
-          console.log(`latitude :: ${latitude} while ${longitude}`);
 
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`
@@ -75,9 +74,10 @@ const LocationComponent = () => {
 
   return (
     <div className="location-container">
-      <h1>{userLocation.city},{userLocation.country}</h1>
-
-</div>
+      <h1>
+        {userLocation?.city},{userLocation?.country || " "} 
+      </h1>
+    </div>
   );
 };
 

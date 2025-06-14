@@ -1,5 +1,4 @@
-import React from 'react'
-import Header from '../components/header';
+import LocationHeader from '../components/Header/header';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Location from '../components/places/location';
 import Loader from '../components/loader';
@@ -7,7 +6,7 @@ import 'swiper/css';
 function Home() {
   return (
     <main className='home'>
-        <Header />
+        <LocationHeader />
         <h1>welcome dennin</h1>
         <div className="activites">
           <h2>Activities to do this summer.</h2>

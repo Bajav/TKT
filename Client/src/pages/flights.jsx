@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import Header from '../components/header';
 import FlightsForm from '../components/flightSearch/flightsForm/flightsFormInput';
 import Gallery from '../components/flightSearch/galler';
-import LocationComponent from '../components/LOCATION/location.component';
+import LocationHeader from '../components/Header/header'
 // import axios from 'axios';
 
 
@@ -19,10 +18,9 @@ function Flights() {
  },[]);
   return (
  <main className='flights'>
-  <Header />
+  <LocationHeader />
   <div className="flights-console">
     <FlightsForm />
-    <LocationComponent />
   </div>
  </main>
   )
