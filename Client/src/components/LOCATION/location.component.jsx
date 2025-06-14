@@ -7,7 +7,9 @@ const LocationComponent = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const getCurrentLocation = () => {
+ 
+  useEffect(()=>{
+     const getCurrentLocation = () => {
     setLoading(true);
     setError(null);
     
@@ -85,16 +87,13 @@ const LocationComponent = () => {
       }
     );
   };
+  getCurrentLocation();
+  },[]);
 
   return (
     <div className="location-container">
-      
-      <div className="header">
-        <h2 className="title">Your Location</h2>
-        <p className="subtitle">Click the button to get your current location</p>
-      </div>
 
-      <div className="button-container">
+      {/* <div className="button-container">
         <button
           onClick={getCurrentLocation}
           disabled={loading}
@@ -103,7 +102,7 @@ const LocationComponent = () => {
           {loading ? (
             <>
               <Loader2 className="button-icon spinner" />
-              Getting Location...
+              <h1>getting location...</h1>
             </>
           ) : (
             <>
@@ -112,7 +111,7 @@ const LocationComponent = () => {
             </>
           )}
         </button>
-      </div>
+      </div> */}
 
       {error && (
         <div className="error-container">
@@ -142,26 +141,26 @@ const LocationComponent = () => {
                 <span className="detail-value">{location.country}</span>
               </div>
               
-              <div className="detail-row">
+              {/* <div className="detail-row">
                 <span className="detail-label">Coordinates:</span>
                 <span className="detail-value coordinates">
                   {location.latitude}, {location.longitude}
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
           
-          <div className="address-container">
+          {/* <div className="address-container">
             <p className="address-label">Full Address:</p>
             <p className="address-text">{location.fullAddress}</p>
-          </div>
+          </div> */}
         </div>
       )}
 
-      <div className="footer">
+      {/* <div className="footer">
         <p>Location data provided by OpenStreetMap Nominatim API</p>
         <p>Your location data is processed locally and not stored</p>
-      </div>
+      </div> */}
     </div>
   );
 };
