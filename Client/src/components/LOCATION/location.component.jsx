@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useContext} from 'react';
 import { MapPin, Loader2, AlertCircle } from 'lucide-react';
+import { LocationContext } from '../context/location.context';
 import './location.styles.scss';
 
 const LocationComponent = () => {
-  const [location, setLocation] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const {location,setLocation} = useContext(LocationContext);
+  const {error,setError} = useContext(LocationContext);
+  const {loading,setLoading} = useContext(LocationContext);
 
  
   useEffect(()=>{
