@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 // hooks
 import { FlightContext } from "../../context/flightSearch.context";
+import { LocationContext } from "../../context/location.context";
 // components
 import FlightSearchInput from "../SearchInput/flightSearch";
 import ClickOption from "../checkBtns/ClickOption";
@@ -18,6 +19,9 @@ function FlightsForm() {
   const { setFormData } = useContext(FlightContext);
   const { setIataCodes } = useContext(FlightContext);
   const { setFlightResults } = useContext(FlightContext);
+  const { userLocation } = useContext(LocationContext);
+
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -39,6 +43,7 @@ function FlightsForm() {
   const [airlines, setAirlines] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  console.log("userLocation",userLocation);
   useEffect(() => {
     const fetchData = async () => {
       try {

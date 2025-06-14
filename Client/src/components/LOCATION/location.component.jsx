@@ -1,21 +1,18 @@
-import React, { useState, useEffect ,useContext} from 'react';
-import { MapPin, Loader2, AlertCircle } from 'lucide-react';
-import { LocationContext } from '../context/location.context';
-import './location.styles.scss';
+import React, { useState, useEffect, useContext } from "react";
+import { MapPin, Loader2, AlertCircle } from "lucide-react";
+import { LocationContext } from "../context/location.context";
+import "./location.styles.scss";
 
 const LocationComponent = () => {
-  const {location,setLocation} = useContext(LocationContext);
-  const {error,setError} = useContext(LocationContext);
-  const {loading,setLoading} = useContext(LocationContext);
+  const { userLocation, setLocation, error, setError, loading, setLoading } =
+    useContext(LocationContext);
 
- 
-  useEffect(()=>{
-     const getCurrentLocation = () => {
+  const getCurrentLocation = () => {
     setLoading(true);
     setError(null);
-    
+
     if (!navigator.geolocation) {
-      setError('Geolocation is not supported by this browser');
+      setError("Geolocation is not supported by this browser");
       setLoading(false);
       return;
     }
@@ -24,76 +21,70 @@ const LocationComponent = () => {
       async (position) => {
         try {
           const { latitude, longitude } = position.coords;
-          console.log(`latitude :: ${latitude} while ${longitude}`)
-          
-          // Using OpenStreetMap's Nominatim API (free and no API key required)
+          console.log(`latitude :: ${latitude} while ${longitude}`);
+
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`
           );
-          
+
           if (!response.ok) {
-            throw new Error('Failed to fetch location data');
+            throw new Error("Failed to fetch location data");
           }
-          
+
           const data = await response.json();
-          
+          console.log("location data", data.address
+);
           // Extract city and country from the response
           const address = data.address || {};
-          const city = address.city || 
-                      address.town || 
-                      address.village || 
-                      address.municipality || 
-                      address.county || 
-                      'Unknown City';
-          
-          const country = address.country || 'Unknown Country';
-          
-          setLocation({
-            city,
-            country,
-            latitude: latitude.toFixed(6),
-            longitude: longitude.toFixed(6),
-            fullAddress: data.display_name
-          });
+          // const city =
+          //   address.city ||
+          //   address.town ||
+          //   address.village ||
+          //   address.municipality ||
+          //   address.county ||
+          //   "Unknown City";
+
+          const country = address.country || "Unknown Country";
+          setLocation(data.address);
         } catch (err) {
-          setError('Failed to get location details: ' + err.message);
+          setError("Failed to get location details: " + err.message);
         } finally {
           setLoading(false);
         }
       },
       (err) => {
-        let errorMessage = 'Failed to get your location';
-        
+        let errorMessage = "Failed to get your location";
+
         switch (err.code) {
           case err.PERMISSION_DENIED:
-            errorMessage = 'Location access denied by user';
+            errorMessage = "Location access denied by user";
             break;
           case err.POSITION_UNAVAILABLE:
-            errorMessage = 'Location information unavailable';
+            errorMessage = "Location information unavailable";
             break;
           case err.TIMEOUT:
-            errorMessage = 'Location request timed out';
+            errorMessage = "Location request timed out";
             break;
           default:
-            errorMessage = 'An unknown error occurred';
+            errorMessage = "An unknown error occurred";
         }
-        
+
         setError(errorMessage);
         setLoading(false);
       },
       {
         enableHighAccuracy: true,
         timeout: 10000,
-        maximumAge: 300000 // 5 minutes
+        maximumAge: 300000, // 5 minutes
       }
     );
   };
-  getCurrentLocation();
-  },[]);
+  useEffect(() => {
+    getCurrentLocation();
+  }, []);
 
   return (
     <div className="location-container">
-
       {/* <div className="button-container">
         <button
           onClick={getCurrentLocation}
@@ -123,25 +114,25 @@ const LocationComponent = () => {
         </div>
       )}
 
-      {location && (
+      {userLocation && (
         <div className="location-results">
           <div className="success-container">
             <div className="success-header">
               <MapPin className="success-icon" />
               <h3 className="success-title">Location Found!</h3>
             </div>
-            
+
             <div className="location-details">
               <div className="detail-row">
                 <span className="detail-label">City:</span>
-                <span className="detail-value">{location.city}</span>
+                <span className="detail-value">{userLocation.city}</span>
               </div>
-              
+
               <div className="detail-row">
                 <span className="detail-label">Country:</span>
-                <span className="detail-value">{location.country}</span>
+                <span className="detail-value">{userLocation.country}</span>
               </div>
-              
+
               {/* <div className="detail-row">
                 <span className="detail-label">Coordinates:</span>
                 <span className="detail-value coordinates">
@@ -150,7 +141,7 @@ const LocationComponent = () => {
               </div> */}
             </div>
           </div>
-          
+
           {/* <div className="address-container">
             <p className="address-label">Full Address:</p>
             <p className="address-text">{location.fullAddress}</p>

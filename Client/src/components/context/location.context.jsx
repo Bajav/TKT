@@ -1,7 +1,7 @@
 import { useState, createContext } from "react";
 
 export const LocationContext = createContext({
-  location: null,
+  userLocation: null,
   setLocation: () => {},
    loading: false,
   setLoading: () => {},
@@ -10,10 +10,10 @@ export const LocationContext = createContext({
 });
 
 export const LocationProvider = ({ children }) => {
-  const [location, setLocation] = useState(null);
+  const [userLocation, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const value = { location, setLocation,loading, setLoading,error, setError };
+  const value = { userLocation, setLocation,loading, setLoading,error, setError };
   return (
     <LocationContext.Provider value={value}>
       {children}
