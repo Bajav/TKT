@@ -244,6 +244,7 @@ const FlightCalendar = ({
   );
 };
 
+
 // usage
 
 const FlightSearchExample = () => {
@@ -332,4 +333,4 @@ const FlightSearchExample = () => {
   );
 };
 
-export default FlightSearchExample;
+export {FlightCalendar,FlightSearchExample};

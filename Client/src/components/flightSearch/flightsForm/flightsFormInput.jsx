@@ -10,7 +10,8 @@ import ClickOption from "../checkBtns/ClickOption";
 import Calender from "../Calender/calenderInput";
 import RoundTripIcon from "../../../assets/icons/arrows-svgrepo-com (1).svg";
 import line from "../../../assets/icons/line.svg";
-import FlightSearchExample from "../Calender/flightSearchExample";
+// import  from "../Calender/flightSearchExample";
+import { FlightCalendar, FlightSearchExample } from "../Calender/newCalender";
 // import styles
 import "./flightsForm.scss";
 
@@ -20,7 +21,6 @@ function FlightsForm() {
   const { setIataCodes } = useContext(FlightContext);
   const { setFlightResults } = useContext(FlightContext);
   const { userLocation } = useContext(LocationContext);
-
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -122,6 +122,24 @@ function FlightsForm() {
     }));
   };
 
+  // calender
+  const [departureDate, setDepartureDate] = useState(null);
+  const [returnDate, setReturnDate] = useState({ start: null, end: null });
+  const [isRangeEnabled, setIsRangeEnabled] = useState(false);
+
+  const handleDepartureSelect = (date) => {
+    setDepartureDate(date);
+    console.log("Departure date:", date);
+  };
+
+  const handleReturnRangeSelect = (range) => {
+    setReturnDate(range);
+    console.log("Return date range:", range);
+  };
+  useEffect(()=>{
+    setIsRangeEnabled(true);
+  })
+
   return (
     <div>
       {location.pathname === "/flights" && (
@@ -171,7 +189,7 @@ function FlightsForm() {
             </div>
             <img className="lines" src={line} />
             {/* <div className="calendersUI"> */}
-              {/* <Calender
+            {/* <Calender
                 label="Date of Departure"
                 labelName="Date of Departure"
                 inputType="date"
@@ -192,7 +210,11 @@ function FlightsForm() {
                   flightType={inputs.flightType}
                 />
               )} */}
-              <FlightSearchExample />
+            <FlightCalendar
+              onDateSelect={handleDepartureSelect}
+              placeholder="Select departure date"
+              isRangePicker={true}
+            />
             {/* </div> */}
             <div className="seatType">
               <div className="passenger-selector">
