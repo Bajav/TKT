@@ -92,25 +92,23 @@
 }
 
 .calendar__nav-btn {
-  background: none;
-  border: 1px solid #e0e0e0;
+  background: $ticketColor;
+  border: none;
   border-radius: 4px;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 16px;
-  color: #333;
+  padding: 2px 16px;
+  font-size: 30px;
+  color: $page_color;
   transition: all 0.2s ease;
 }
 
 .calendar__nav-btn:hover {
-  background: #f5f5f5;
-  border-color: #007bff;
+  background: $actionOrange;
 }
 
 .calendar__title {
   font-weight: 600;
   font-size: 16px;
-  color: #333;
+  color: $visibleFontColor;
 }
 
 .calendar__weekdays {
@@ -169,14 +167,14 @@
 }
 
 .calendar__day--selected {
-  background: #007bff !important;
-  color: white !important;
+  background: $ticketColor !important;
+  color: $page_color !important;
   font-weight: 700;
 }
 
 .calendar__day--in-range {
-  background: #e3f2fd !important;
-  color: #007bff !important;
+  background: #3230302e !important;
+  color: $ticketColor !important;
 }
 
 .calendar__range-info {

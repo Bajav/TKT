@@ -130,7 +130,7 @@ const FlightCalendar = ({
       if (selectedRange.start && selectedRange.end) {
         return `${formatDate(selectedRange.start)} - ${formatDate(selectedRange.end)}`;
       } else if (selectedRange.start) {
-        return `${formatDate(selectedRange.start)} - Select end date`;
+        return `${formatDate(selectedRange.start)} - Select return date`;
       }
       return '';
     }
@@ -234,7 +234,7 @@ const FlightCalendar = ({
 
           {isRangePicker && selectedRange.start && !selectedRange.end && (
             <div className="calendar__range-info">
-              Select end date for your trip
+              Select return date
             </div>
           )}
         </div>
