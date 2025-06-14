@@ -215,7 +215,7 @@ const FlightCalendar = ({
       >
         <input
           type="text"
-          value={porps.value}
+          value={props.value}
           onChange={props.change}
           placeholder={props.placeholder}
           readOnly

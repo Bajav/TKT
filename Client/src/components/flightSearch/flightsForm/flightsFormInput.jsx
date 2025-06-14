@@ -99,18 +99,19 @@ function FlightsForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = { ...inputs, passengers };
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/results",
-        formData
-      );
-      setFlightResults(response.data);
-      console.log(response.data[0]);
-      setFormData(formData);
-      navigate("results");
-    } catch (error) {
-      console.error("Error posting flight:", error);
-    }
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:3000/results",
+    //     formData
+    //   );
+    //   setFlightResults(response.data);
+    //   console.log(response.data[0]);
+    //   setFormData(formData);
+    //   navigate("results");
+    // } catch (error) {
+    //   console.error("Error posting flight:", error);
+    // }
+    console.log("formData",formData);
   };
 
   const handleSwitch = (e) => {
