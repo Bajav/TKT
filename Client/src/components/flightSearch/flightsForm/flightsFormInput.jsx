@@ -42,8 +42,6 @@ function FlightsForm() {
 
   const [airlines, setAirlines] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  console.log("userLocation",userLocation);
   useEffect(() => {
     const fetchData = async () => {
       try {

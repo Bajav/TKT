@@ -3,7 +3,9 @@
   h1 {
     font-family: $textFont, sans-serif;
     font-size: 12px;
+    font-weight: 600;
     color: $text_color;
     text-align: center;
+    padding: 5px 15px;
   }
 }
