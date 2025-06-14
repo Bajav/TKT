@@ -32,20 +32,10 @@ const LocationComponent = () => {
           }
 
           const data = await response.json();
-          console.log("location data", data.address
-);
           // Extract city and country from the response
           const address = data.address || {};
-          // const city =
-          //   address.city ||
-          //   address.town ||
-          //   address.village ||
-          //   address.municipality ||
-          //   address.county ||
-          //   "Unknown City";
-
           const country = address.country || "Unknown Country";
-          setLocation(data.address);
+          setLocation(address);
         } catch (err) {
           setError("Failed to get location details: " + err.message);
         } finally {
@@ -85,75 +75,9 @@ const LocationComponent = () => {
 
   return (
     <div className="location-container">
-      {/* <div className="button-container">
-        <button
-          onClick={getCurrentLocation}
-          disabled={loading}
-          className="location-button"
-        >
-          {loading ? (
-            <>
-              <Loader2 className="button-icon spinner" />
-              <h1>getting location...</h1>
-            </>
-          ) : (
-            <>
-              <MapPin className="button-icon" />
-              Get My Location
-            </>
-          )}
-        </button>
-      </div> */}
+      <h1>{userLocation.city},{userLocation.country}</h1>
 
-      {error && (
-        <div className="error-container">
-          <div className="error-content">
-            <AlertCircle className="error-icon" />
-            <p className="error-text">{error}</p>
-          </div>
-        </div>
-      )}
-
-      {userLocation && (
-        <div className="location-results">
-          <div className="success-container">
-            <div className="success-header">
-              <MapPin className="success-icon" />
-              <h3 className="success-title">Location Found!</h3>
-            </div>
-
-            <div className="location-details">
-              <div className="detail-row">
-                <span className="detail-label">City:</span>
-                <span className="detail-value">{userLocation.city}</span>
-              </div>
-
-              <div className="detail-row">
-                <span className="detail-label">Country:</span>
-                <span className="detail-value">{userLocation.country}</span>
-              </div>
-
-              {/* <div className="detail-row">
-                <span className="detail-label">Coordinates:</span>
-                <span className="detail-value coordinates">
-                  {location.latitude}, {location.longitude}
-                </span>
-              </div> */}
-            </div>
-          </div>
-
-          {/* <div className="address-container">
-            <p className="address-label">Full Address:</p>
-            <p className="address-text">{location.fullAddress}</p>
-          </div> */}
-        </div>
-      )}
-
-      {/* <div className="footer">
-        <p>Location data provided by OpenStreetMap Nominatim API</p>
-        <p>Your location data is processed locally and not stored</p>
-      </div> */}
-    </div>
+</div>
   );
 };
 
