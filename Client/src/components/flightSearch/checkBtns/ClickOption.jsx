@@ -1,7 +1,8 @@
-// import 'check.scss';
+// import './check.scss';
 
 function ClickOption(props) {
   return (
+    // 
     <div className={`btn-flex ${props.isActive ? "active" : ""}`}>
       <label htmlFor={props.labelName}>{props.label}</label>
       <input

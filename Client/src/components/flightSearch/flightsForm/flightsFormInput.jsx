@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, Fragment } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 // hooks
@@ -174,17 +174,21 @@ function FlightsForm() {
           <form onSubmit={handleSubmit}>
             <div className="flightSearch">
               <div className="flex-option">
+                <div id="active" />
                 {["oneWay", "roundTrip", "multiCity"].map((type) => (
-                  <ClickOption
-                    key={type}
-                    labelName={type}
-                    label={type.replace(/([A-Z])/g, " $1").toLowerCase()}
-                    checkName="flightType"
-                    changeFunc={() => handleTripTypeClick(type)}
-                    checkedName={inputs.flightType === type}
-                    click={() => handleTripTypeClick(type)}
-                    isActive={inputs.flightType === type}
-                  />
+                  <Fragment>
+    
+                    <ClickOption
+                      key={type}
+                      labelName={type}
+                      label={type.replace(/([A-Z])/g, " $1").toLowerCase()}
+                      checkName="flightType"
+                      changeFunc={() => handleTripTypeClick(type)}
+                      checkedName={inputs.flightType === type}
+                      click={() => handleTripTypeClick(type)}
+                      isActive={inputs.flightType === type}
+                    />
+                  </Fragment>
                 ))}
               </div>
 
@@ -278,8 +282,8 @@ function FlightsForm() {
                   <option value="FIRST">First Class</option>
                 </select>
               </div>
-                  
-                  {/* <div className="seat">
+
+              {/* <div className="seat">
                     {["economy", "business", "first class"].map((type) => (
                      <li>{type}</li>
                     ))}

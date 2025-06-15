@@ -278,3 +278,48 @@
 //     z-index: 100;
 //   }
 // }
+.flex-option {
+  display: flex;
+  justify-content: space-between;
+  gap: 2px;
+  border-radius: 10px;
+  padding:1px;
+  // margin-top: 10px;
+  background: $inputBackGround;
+  position: relative;
+}
+.btn-flex {
+  padding: 10px 25px;
+  text-transform: capitalize;
+
+  input {
+    position: absolute;
+    z-index: 30;
+    opacity: 1%;
+  }
+  label {
+    font-size: 15px;
+    position: relative;
+    z-index: 20;
+    font-family: $textFont, sans-serif;
+  }
+}
+.btn-flex.active {
+  border-radius: 10px;
+  background-color: $visibleFontColor;
+  color: $page_color;
+  box-shadow: 0px 0px 48px 11px rgba(0,0,0,0.1);
+}
+
+// #active
+// {
+//   position: absolute;
+//   background:red;
+//   width: 40px;
+//   height: 98%;
+//   left: 15px;
+// }
+// .flex-option .btn-flex:nth-child(1):hover~#active
+// {
+//    left: 300px;
+// }
