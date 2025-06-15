@@ -9,16 +9,14 @@ function Passengers() {
         originCode="ebb"
         originCity="kampala"
         originTime="12:05:00"
-        departureCode="lhr"
-        departureCity="london"
-        departureTime="00:11:00"
+        destinationCode="lhr"
+        destinationCity="london"
+        destinationTime="00:11:00"
         arrowColor="#222"
       />
 
       <div className="form">
-        <form>
           <PaxForm />
-        </form>
       </div>
     </section>
   );

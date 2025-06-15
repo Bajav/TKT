@@ -33,11 +33,6 @@ function PaxForm() {
         <FlexInput  labelName="email" value={inputs.email || " "} type="email" placeholder="input email address" name="email" change={handleChange} />
         <FlexInput  labelName="phone number" value={inputs.pNumber || " "} type="tel" placeholder="input phone number" name="pNumber" change={handleChange} />
         <FlexInput  labelName="" value={inputs.name || " "} type="" placeholder="" name="" change={handleChange} />
-        <select>
-          <option value="male">male</option>
-          <option value="female">female</option>
-          <option value=""></option>
-        </select>
         <FlexInput  labelName="" value={inputs.name || " "} type="" placeholder="" name="" change={handleChange} />
         <button>submit</button>
       </form>
