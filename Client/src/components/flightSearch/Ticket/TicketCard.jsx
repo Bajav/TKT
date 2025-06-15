@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import axios from "axios";
-import Loader from "../../loader";
+import Loader from "../../EyesLoader/loader";
 // import scss
 import "./ticket.scss";
 // import components
