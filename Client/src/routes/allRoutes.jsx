@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
-import Home from "../pages/home";
+import Home from "../pages/Home/home";
 import Places from "../pages/places";
 import Hotels from "../pages/hotels";
 import Packages from "../pages/packages";
@@ -10,7 +10,6 @@ import Navbar from "../components/navBar";
 import Flights from "../pages/flights";
 import FlightPricing from "../pages/flightPricing/flightPricing";
 import FlightResult from "../pages/flightResult/flightResults";
-import TravelerForm from "../pages/TravelerForm/TravelerForm";
 import Passengers from "../pages/pasengerInputPage/passengers";
 // import context
 import { FormContextProvider } from "../Hooks/Context/formData.context";
