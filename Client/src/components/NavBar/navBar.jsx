@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Link, Outlet } from "react-router-dom";
 import './navBar.scss';
 // import {browser}
@@ -24,6 +24,7 @@ function Navbar() {
                     <Link to='/packages'>
                     <li>packages</li>
                     </Link>
+                    <span></span>
                 </ul>
             </nav>
         </header>
