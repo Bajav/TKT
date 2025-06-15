@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Link, Outlet } from "react-router-dom";
+import './navBar.scss';
 // import {browser}
 
 function Navbar() {

@@ -4,7 +4,7 @@ import Home from "../pages/Home/home";
 import Places from "../pages/places";
 import Hotels from "../pages/hotels";
 import Packages from "../pages/packages";
-import Navbar from "../components/navBar";
+import Navbar from "../components/NavBar/navBar";
 
 // FLIGHTS PAGES
 import Flights from "../pages/flights";
