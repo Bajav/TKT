@@ -61,6 +61,15 @@ body
         }
     }
 }
+.container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    background-color: aqua;
+    width: 100%;
+}
 // .swiper {
 //     width: 415px;
 //     // background: #313030;

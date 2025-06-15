@@ -52,7 +52,9 @@ function Home() {
           </Swiper>
           
         </div>
-        <Alert img={Succes} alertText="form submitted successfully"/>
+        <div className="container">
+        <Alert img={Succes} alertText="Email address changed successfully"/>
+        </div>
     </main>
     );
   }
