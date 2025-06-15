@@ -91,11 +91,11 @@ function FlightPricing() {
                             }
                             originTime={departure.at.slice(11)}
                             arrowColor="#222222"
-                            departureCode={arrival.iataCode}
-                            departureCity={
+                            destinationCode={arrival.iataCode}
+                            destinationCity={
                               iataLookup[arrival.iataCode]?.city || ""
                             }
-                            departureTime={arrival.at.slice(11)}
+                            destinationTime={arrival.at.slice(11)}
                             originTerminal={
                               departure.terminal
                                 ? `Terminal: ${departure.terminal}`
@@ -179,11 +179,11 @@ function FlightPricing() {
                             }
                             originTime={departure.at.slice(11)}
                             arrowColor="#222222"
-                            departureCode={arrival.iataCode}
-                            departureCity={
+                            destinationCode={arrival.iataCode}
+                            destinationCity={
                               iataLookup[arrival.iataCode]?.city || ""
                             }
-                            departureTime={arrival.at.slice(11)}
+                            destinationTime={arrival.at.slice(11)}
                             originTerminal={
                               departure.terminal
                                 ? `Terminal: ${departure.terminal}`

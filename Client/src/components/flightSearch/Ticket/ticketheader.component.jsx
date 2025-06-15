@@ -19,9 +19,9 @@ function TicketHeader(props) {
         )}
       </div>
       <div className="item">
-        <h2>{props.departureCode}</h2>
-        <h5>{props.departureCity}</h5>
-        <h5>{props.departureTime}</h5>
+        <h2>{props.destinationCode}</h2>
+        <h5>{props.destinationCity}</h5>
+        <h5>{props.destinationTime}</h5>
         <h5>{props.destinationTerminal}</h5>
       </div>
     </div>

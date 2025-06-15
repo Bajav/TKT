@@ -293,8 +293,8 @@ function FlightCard() {
                         segmentNum={segmentOne.length}
                         segment={segmentOne.length}
                         originTime={departureObject.at.slice(11) || ""}
-                        departureCode={arrivalObject.iataCode || ""}
-                        departureCity={
+                        destinationCode={arrivalObject.iataCode || ""}
+                        destinationCity={
                           iataLookup[arrivalObject.iataCode]?.city || ""
                         }
                         departureTime={arrivalObject.at.slice(11) || ""}
@@ -369,11 +369,11 @@ function FlightCard() {
                          segmentNum={segmentTwo.length}
                         segment={segmentTwo.length}
                         originTime={departureObjectSegTwo.at.slice(11) || ""}
-                        departureCode={arrivalObjectSegTwo.iataCode || ""}
-                        departureCity={
+                        destinationCode={arrivalObjectSegTwo.iataCode || ""}
+                        destinationCity={
                           iataLookup[arrivalObjectSegTwo.iataCode]?.city || ""
                         }
-                        departureTime={arrivalObjectSegTwo.at.slice(11) || ""}
+                        destinationTime={arrivalObjectSegTwo.at.slice(11) || ""}
                       />
                       <h6 className="lineNew">
                         --------------------------------------------------------
@@ -443,14 +443,14 @@ function FlightCard() {
                     segmentNum={segmentNumber}
                     segment={segmentNumber}
                     arrowColor="#F5F7F8"
-                    departureCode={
+                    destinationCode={
                       segments[lastSegmentIndex]?.arrival.iataCode || ""
                     }
-                    departureCity={
+                    destinationCity={
                       iataLookup[segments[lastSegmentIndex]?.arrival.iataCode]
                         ?.city || "xxx"
                     }
-                    departureTime={
+                    destinationTime={
                       segments[lastSegmentIndex]?.arrival.at.slice(11) || ""
                     }
                   />
@@ -510,12 +510,12 @@ function FlightCard() {
                               }
                               originTime={stopOver.departure.at.slice(11) || ""}
                               arrowColor="#F5F7F8"
-                              departureCode={stopOver.arrival.iataCode || ""}
-                              departureCity={
+                              destinationCode={stopOver.arrival.iataCode || ""}
+                              destinationCity={
                                 iataLookup[stopOver.arrival.iataCode]?.city ||
                                 ""
                               }
-                              departureTime={
+                              destinationTime={
                                 stopOver.arrival.at.slice(11) || ""
                               }
                             />
