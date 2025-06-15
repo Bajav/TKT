@@ -1,8 +1,10 @@
-import LocationHeader from '../components/Header/header';
+import LocationHeader from '../../components/Header/header';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Location from '../components/places/location';
-import Loader from '../components/loader';
+import Location from '../../components/places/location';
+import Loader from '../../components/loader';
 import 'swiper/css';
+import './home.scss';
+
 function Home() {
   return (
     <main className='home'>
