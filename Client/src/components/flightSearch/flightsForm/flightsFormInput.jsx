@@ -7,19 +7,17 @@ import { LocationContext } from "../../context/location.context";
 // components
 import FlightSearchInput from "../SearchInput/flightSearch";
 import ClickOption from "../checkBtns/ClickOption";
-import Calender from "../Calender/calenderInput";
 import RoundTripIcon from "../../../assets/icons/arrows-svgrepo-com (1).svg";
 import line from "../../../assets/icons/line.svg";
 // import  from "../Calender/flightSearchExample";
-import { FlightCalendar, FlightSearchExample } from "../Calender/newCalender";
+import { FlightCalendar } from "../Calender/newCalender";
 // import styles
 import "./flightsForm.scss";
 
 function FlightsForm() {
   // contexts
-  const { setFormData } = useContext(FlightContext);
-  const { setIataCodes } = useContext(FlightContext);
-  const { setFlightResults } = useContext(FlightContext);
+  const { setFormData, setIataCodes, setFlightResults } =
+    useContext(FlightContext);
   const { userLocation } = useContext(LocationContext);
 
   const location = useLocation();
@@ -42,6 +40,7 @@ function FlightsForm() {
 
   const [airlines, setAirlines] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -112,7 +111,8 @@ function FlightsForm() {
           : null,
       passengers,
     };
-
+    setFormData(formData);
+    navigate("results");
     // try {
     //   const response = await axios.post(
     //     "http://localhost:3000/results",
@@ -120,7 +120,7 @@ function FlightsForm() {
     //   );
     //   setFlightResults(response.data);
     //   console.log(response.data[0]);
-    //   setFormData(formData);
+    //
     //   navigate("results");
     // } catch (error) {
     //   console.error("Error posting flight:", error);
@@ -141,6 +141,7 @@ function FlightsForm() {
   const [departureDate, setDepartureDate] = useState(null);
   const [returnDate, setReturnDate] = useState({ start: null, end: null });
   const [isRangeEnabled, setIsRangeEnabled] = useState(false);
+  // const [calenderType, setIsRangeEnabled] = useState(false);
 
   const handleDepartureSelect = (date) => {
     setDepartureDate(date); // optional, if you want separate state
@@ -159,7 +160,11 @@ function FlightsForm() {
   };
 
   useEffect(() => {
-    setIsRangeEnabled(true);
+    if (inputs.flightType === "roundTrip") {
+      setIsRangeEnabled(true);
+    } else {
+      setIsRangeEnabled(false);
+    }
   });
 
   return (
@@ -210,39 +215,16 @@ function FlightsForm() {
               </div>
             </div>
             <img className="lines" src={line} />
-            {/* <div className="calendersUI"> */}
-            {/* <Calender
-                label="Date of Departure"
-                labelName="Date of Departure"
-                inputType="date"
-                inputName="departureDate"
-                change={handleChange}
-                value={inputs.departureDate}
-                flightType={inputs.flightType}
-              />
-              {(inputs.flightType === "roundTrip" ||
-                inputs.flightType === "multiCity") && (
-                <Calender
-                  label="Date of Return"
-                  labelName="Date of Return"
-                  inputType="date"
-                  inputName="returnDate"
-                  change={handleChange}
-                  value={inputs.returnDate}
-                  flightType={inputs.flightType}
-                />
-              )} */}
             <FlightCalendar
               onDateSelect={handleDepartureSelect}
               onRangeSelect={handleReturnRangeSelect}
-              isRangePicker={inputs.flightType !== "oneWay"}
+              isRangePicker={isRangeEnabled}
               placeholder="Select departure date"
             />
-            {/* </div> */}
             <div className="seatType">
               <div className="passenger-selector">
                 <div className="dropdown-header" onClick={toggleDropdown}>
-                  <span>Passengers: {getTotalPassengers()}</span>
+                  <span>Passengers : {getTotalPassengers()}</span>
                   <span className="arrow">{isDropdownOpen ? "▲" : "▼"}</span>
                 </div>
 
@@ -253,28 +235,30 @@ function FlightsForm() {
                         <div className="passenger-label">
                           {type.charAt(0).toUpperCase() + type.slice(1)}
                         </div>
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            decrement(type);
-                          }}
-                          disabled={
-                            type === "adults"
-                              ? passengers[type] <= 1
-                              : passengers[type] <= 0
-                          }
-                        >
-                          -
-                        </button>
-                        <span>{passengers[type]}</span>
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            increment(type);
-                          }}
-                        >
-                          +
-                        </button>
+                        <div className="pax">
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              decrement(type);
+                            }}
+                            disabled={
+                              type === "adults"
+                                ? passengers[type] <= 1
+                                : passengers[type] <= 0
+                            }
+                          >
+                            -
+                          </button>
+                          <span>{passengers[type]}</span>
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              increment(type);
+                            }}
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -294,6 +278,12 @@ function FlightsForm() {
                   <option value="FIRST">First Class</option>
                 </select>
               </div>
+                  
+                  {/* <div className="seat">
+                    {["economy", "business", "first class"].map((type) => (
+                     <li>{type}</li>
+                    ))}
+                  </div> */}
             </div>
 
             <button className="btn-submit" type="submit">

@@ -104,8 +104,7 @@
   }
 
   .dropdown-header {
-    background-color: #f2f2f2;
-    border: 1px solid #ccc;
+    background-color: $inputBackGround;
     padding: 3px 0px;
     border-radius: 5px;
     cursor: pointer;
@@ -114,12 +113,18 @@
     gap: 8px;
     justify-content: space-between;
     align-items: center;
+    // transition: all 0.2s ease;
     span {
       font-size: 15px;
+      font-weight: 200;
+      color: $visibleFontColor;
+      // opacity: 60%;
+      font-family: $textFont,sans-serif
     }
   }
 
   .dropdown-content {
+     animation: slideDown 0.3s ease-in-out;
     position: absolute;
     background-color: #fff;
     min-width: 200px;
@@ -130,13 +135,25 @@
     top: 50px;
     margin-top: 10px; /* to create some space below the button */
   }
-
+  @keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
   // .passenger-type {
   //   display: flex;
   //   justify-content: space-between;
   //   align-items: center;
   //   margin-bottom: 8px;
   // }
+  .passenger-label{
+    margin-bottom: 10px;
+  }
 
   .passenger-type button {
     background-color: $actionOrange;
@@ -218,6 +235,13 @@
     width: 100%;
     font-weight: 200;
   }
+}
+.pax{
+  display: flex;
+  // background: red;
+  justify-content: center;
+  gap: 24%;
+  align-items: center;
 }
 .swipes {
   .swiper {

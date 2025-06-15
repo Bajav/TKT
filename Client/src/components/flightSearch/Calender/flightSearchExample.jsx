@@ -221,7 +221,7 @@ const FlightCalendar = ({
           readOnly
           disabled={disabled}
           className="flight-calendar__input-field"
-           required
+          required
         />
         <div className="flight-calendar__input-icon">
           <svg
