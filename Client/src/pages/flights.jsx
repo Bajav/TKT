@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react'
 import FlightsForm from '../components/flightSearch/flightsForm/flightsFormInput';
 import Gallery from '../components/flightSearch/galler';
 import LocationHeader from '../components/Header/header'
+import Alert from '../components/features/Error&Sucess/alert.component';
 // import axios from 'axios';
+import success from '../assets/icons/white-heavy-check-mark-svgrepo-com.svg';
 
 
 
@@ -22,6 +24,7 @@ function Flights() {
   <div className="flights-console">
     <FlightsForm />
   </div>
+          <Alert img={success} alertText="Email address changed successfully"/>
  </main>
   )
 }

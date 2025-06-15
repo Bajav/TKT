@@ -97,8 +97,9 @@ function FlightsForm() {
   if (inputs.flightType === "oneWay") {
     inputs.returnDate = null;
   }
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e,req) => {
     e.preventDefault();
+    console.log(req);
     const formData = {
       ...inputs,
       departureDate:
