@@ -34,6 +34,7 @@
         padding: 0;
         position: relative;
         span {
+          display: none;
           position: absolute;
           top: 0;
           left: 0;
@@ -56,22 +57,27 @@
 ul a:nth-child(1):hover ~ span {
   left: -13px;
   padding: 0px 42px;
+  display: block;
 }
 ul a:nth-child(2):hover ~ span {
   left: 60px;
   padding: 0px 41px;
+   display: block;
 }
 ul a:nth-child(3):hover ~ span {
   left: 134px;
   padding: 0px 45px;
+   display: block;
 }
 ul a:nth-child(4):hover ~ span {
   left: 211px;
   padding: 0px 42px;
+   display: block;
 }
 ul a:nth-child(5):hover ~ span {
   left: 285px;
   padding: 0px 57px;
+   display: block;
 }
 ul a:hover {
   color: $visibleFontColor;
