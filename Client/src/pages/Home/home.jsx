@@ -1,9 +1,12 @@
-import LocationHeader from '../../components/Header/header';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Location from '../../components/places/location';
-import Loader from '../../components/EyesLoader/loader';
+// import styles
 import 'swiper/css';
 import './home.scss';
+// import components
+import LocationHeader from '../../components/Header/header';
+import Location from '../../components/places/location';
+import Alert from '../../components/features/Error&Sucess/alert.component';
+import Succes from '../../assets/icons/white-heavy-check-mark-svgrepo-com.svg';
 
 function Home() {
   return (
@@ -16,8 +19,8 @@ function Home() {
           <Swiper
           spaceBetween={40}
           slidesPerView={1}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log('slide change')}
+          // onSwiper={(swiper) => console.log(swiper)}
            className="activity-rail"
            >
 
@@ -49,13 +52,7 @@ function Home() {
           </Swiper>
           
         </div>
-        <div className="toView">
-          <h1>have you seen these?</h1>
-          <div className="viewCards">
-            <Loader loaderTag="Searching for flights"/>
-            <div className="viewCard"></div>
-          </div>
-        </div>
+        <Alert img={Succes} alertText="form submitted successfully"/>
     </main>
     );
   }
