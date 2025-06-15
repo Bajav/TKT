@@ -9,7 +9,9 @@ function PaxForm() {
   // define navigation
   const navigate = useNavigate();
   // defineState
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({
+
+  });
   // handle form changes
   const handleChange = (e) => {
     const name = e.target.name;
@@ -26,69 +28,17 @@ function PaxForm() {
     <div className="paxFormContainer">
       <h1>pax 01</h1>
       <form className="paxForm">
-        <div className="names">
-          <FlexInput
-            name="fName"
-            type="text"
-            For="fName"
-            labelName="first name"
-            placeholder="enter first name"
-          />
-          <FlexInput
-            name="lName"
-            type="text"
-            For="lName"
-            labelName="last name"
-            placeholder="enter last name"
-          />
-        </div>
-        <div className="fulls">
-          <FlexInput
-            name="DOB"
-            type="date"
-            For="DOB"
-            labelName="date of birth"
-          />
-          <FlexInput
-            name="Nationality"
-            type="text"
-            For="Nationality"
-            labelName="Nationality"
-            placeholder="enter Nationality"
-          />
-          <FlexInput
-            name="otherName"
-            type="text"
-            For="otherName"
-            labelName="Other Names"
-            placeholder="enter otehr names"
-          />
-          {/* <h4>passport details</h4> */}
-          <FlexInput
-            name="IssuanceDate"
-            type="date"
-            For="Issuance date"
-            labelName="IssuanceDate"
-          />
-          <FlexInput
-            name="expiryDate"
-            type="date"
-            For="expiry date"
-            labelName="expiry Date"
-          />
-          <FlexInput
-            name="DocumentType"
-            type="text"
-            For="Document Type"
-            labelName="Document Type"
-            placeholder=" enter Document Type "
-          />
-        </div>
-        <div className="cell">
-          {/* <PhoneInput placeholder="enter phone number" name="phone number" /> */}
-          <FlexInput name="" type="" For="" labelName=" " placeholder="  " />
-        </div>
-        <FlexInput name="" type="" For="" labelName=" " placeholder="  " />
+        <FlexInput  labelName="first name" value={inputs.fName || " "} type="text" placeholder="input first name" name="fName" change={handleChange} />
+        <FlexInput  labelName="last name" value={inputs.lName || " "} type="text" placeholder="input last name" name="lName" change={handleChange} />
+        <FlexInput  labelName="email" value={inputs.email || " "} type="email" placeholder="input email address" name="email" change={handleChange} />
+        <FlexInput  labelName="phone number" value={inputs.pNumber || " "} type="tel" placeholder="input phone number" name="pNumber" change={handleChange} />
+        <FlexInput  labelName="" value={inputs.name || " "} type="" placeholder="" name="" change={handleChange} />
+        <select>
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value=""></option>
+        </select>
+        <FlexInput  labelName="" value={inputs.name || " "} type="" placeholder="" name="" change={handleChange} />
         <button>submit</button>
       </form>
     </div>
