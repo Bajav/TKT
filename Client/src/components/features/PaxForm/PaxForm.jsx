@@ -133,7 +133,7 @@ function PaxForm() {
           placeholder="Select Issue and Expiry Date"
         />
 
-        <button type="submit">submit</button>
+        <button className="submit" type="submit">submit</button>
       </form>
     </div>
   );
