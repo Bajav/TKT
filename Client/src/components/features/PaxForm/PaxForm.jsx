@@ -75,6 +75,8 @@ function PaxForm() {
           name="lName"
           change={handleChange}
         />
+        <div className="flex-items">
+
         <FlexInput
           labelName="email"
           value={inputs.email || " "}
@@ -94,6 +96,7 @@ function PaxForm() {
           selectedGender={setInputs.gender}
           onChange={(gender) => setInputs((prev) => ({ ...prev, gender }))}
         />
+        </div>
           <FlexInput
           labelName="date of birth"
           value={inputs.docNumber || " "}
