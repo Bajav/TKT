@@ -33,7 +33,6 @@ function DocumentTypeDropdown({ selectedType, onChange }) {
 
   return (
     <div className="document-dropdown" ref={dropdownRef}>
-      <label className="dropdown-label">Document Type</label>
       <div
         className="dropdown-selected"
         onClick={() => setIsOpen((prev) => !prev)}

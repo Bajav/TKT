@@ -1,8 +1,10 @@
+@import "../../../styles/variables.scss";
+
 .document-dropdown {
   width: 100%;
   margin-top: 1rem;
   position: relative;
-  font-family: Arial, sans-serif;
+  font-family: $textFont sans-serif;
 
   .dropdown-label {
     font-weight: 600;
@@ -12,20 +14,25 @@
 
   .dropdown-selected {
     padding: 0.6rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background: #fff;
+    border: 1px #1e1e1e solid;
+    // border-radius: 8px;
+    background: $inputBackGround;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    font-family: $textFont,sans-serif;
+    font-size: 10px;
+    color: $visibleFontColor;
+    height: 50px;
   }
 
   .dropdown-options {
     position: absolute;
     width: 100%;
-    background: #fff;
+    background: $inputBackGround;
     border: 1px solid #ddd;
+    font-family: $textFont,sans-serif;
     border-radius: 6px;
     margin-top: 0.4rem;
     max-height: 200px;

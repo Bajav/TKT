@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  // overflow-y: scroll;
   .submit {
     background: $actionOrange;
     width: 100%;
@@ -81,6 +82,9 @@ option {
   }
   .flight-calendar__input-field {
     height: 50px;
+  }
+  .flight-calendar__dropdown {
+    width: 300px;
   }
 }
 .cell {
