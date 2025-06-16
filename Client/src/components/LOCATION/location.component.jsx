@@ -75,7 +75,7 @@ const LocationComponent = () => {
   return (
     <div className="location-container">
       <h1>
-        {userLocation?.city || "kampala"}, {userLocation?.country || " uganda "} 
+        {userLocation?.city }, {userLocation?.country} 
       </h1>
     </div>
   );
