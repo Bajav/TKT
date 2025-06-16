@@ -22,13 +22,12 @@ const GenderDropDown = ({ onChange, selectedGender }) => {
   }, []);
   return (
     <div className="gender-dropdown" ref={dropdownRef}>
-      <label htmlFor="gender">Gender</label>
       <div
         className="dropdown-input"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {selectedGender || "Select gender"}
-        <span className="arrow">{isOpen ? "▲" : "▼"}</span>
+        {/* <span className="arrow">{isOpen ? "▲" : "▼"}</span> */}
       </div>
       {isOpen && (
         <ul className="dropdown-menu">
