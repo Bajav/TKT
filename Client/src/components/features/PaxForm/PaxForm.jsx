@@ -78,6 +78,19 @@ function PaxForm() {
         <div className="flex-items">
 
         <FlexInput
+          labelName="date of birth"
+          value={inputs.docNumber || " "}
+          type="date"
+          placeholder="select Date of birth"
+          name="DOB"
+          change={handleChange}
+        />
+        <GenderDropDown
+          selectedGender={setInputs.gender}
+          onChange={(gender) => setInputs((prev) => ({ ...prev, gender }))}
+        />
+        </div>
+            <FlexInput
           labelName="email"
           value={inputs.email || " "}
           type="email"
@@ -85,25 +98,12 @@ function PaxForm() {
           name="email"
           change={handleChange}
         />
-        <PhoneInput
+            <PhoneInput
           international
           countryCallingCodeEditable={false}
           defaultCountry="UG"
           // value={value}
           // onChange={setValue}
-        />
-        <GenderDropDown
-          selectedGender={setInputs.gender}
-          onChange={(gender) => setInputs((prev) => ({ ...prev, gender }))}
-        />
-        </div>
-          <FlexInput
-          labelName="date of birth"
-          value={inputs.docNumber || " "}
-          type="date"
-          placeholder="select Date of birth"
-          name="DOB"
-          change={handleChange}
         />
         <FlexInput
           labelName="Docoment Type"

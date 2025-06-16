@@ -1,9 +1,11 @@
 @import "../../../styles/variables.scss";
 
 .gender-dropdown {
-  margin-bottom: 1rem;
   position: relative;
   width: 100%;
+  border: 1px #1e1e1e solid;
+  margin-bottom: 10px;
+  margin-top: 5px;
 
   .dropdown-input {
     padding: 10px;
@@ -12,8 +14,12 @@
     font-family: $textFont, sans-serif;
     background: $inputBackGround;
     border: 1px solid #eee;
+    color: $visibleFontColor;
+    font-weight: 600;
     display: flex;
     justify-content: space-between;
+    height: 50px;
+    font-size: 10px;
     align-items: center;
     color: $visibleFontColor;
   }
