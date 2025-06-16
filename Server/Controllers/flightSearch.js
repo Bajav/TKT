@@ -152,6 +152,8 @@ const findLastPrice = async (req, res) => {
 // A full example can be found at https://git.io/JtnYo
 
 const getFlightOrder = async (req, res) => {
+  const formData = req.body;
+  console.log("formData",formData);
   try {
     const response = await amadeus.booking.flightOrders.post({
       data: {
