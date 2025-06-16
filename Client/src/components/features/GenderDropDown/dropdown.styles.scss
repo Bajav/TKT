@@ -1,0 +1,47 @@
+@import '../../../styles/variables.scss';
+
+.gender-dropdown {
+  margin-bottom: 1rem;
+  position: relative;
+  width: 100%;
+
+  label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .dropdown-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 6px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 6px;
+    margin-top: 4px;
+    z-index: 10;
+
+    li {
+      padding: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background: #f0f0f0;
+      }
+    }
+  }
+
+  .arrow {
+    font-size: 0.8rem;
+  }
+}
