@@ -21,15 +21,22 @@ import { motion } from "motion/react";
 
 function FlightCard() {
   // contexts
-  const { iataCodes } = useContext(FlightContext);
-  const { airlineData } = useContext(FlightContext);
-  const { flightSearch } = useContext(FlightContext);
-  const { flightResults } = useContext(FlightContext);
-  const { bookedFlight, setBookedFlight } = useContext(FlightContext);
-  const { selectedFlight, setSelectFlight } = useContext(FlightContext);
-  const { brandedUpSell, setBrandedUpSell } = useContext(FlightContext);
-  const { upsellError, setUpsellError } = useContext(FlightContext);
-  const { setlastFlight } = useContext(FlightContext);
+  const {
+    iataCodes,
+    airlineData,
+    flightSearch,
+    flightResults,
+    setFlightResults,
+    bookedFlight,
+    setBookedFlight,
+    selectedFlight,
+    setSelectFlight,
+    brandedUpSell,
+    setBrandedUpSell,
+    upsellError,
+    setUpsellError,
+    setlastFlight,
+  } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
@@ -56,6 +63,19 @@ function FlightCard() {
         console.log("Error status:", err.response?.status);
       }
     };
+    const fetchFlights = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/results",
+          flightSearch
+        );
+        setFlightResults(response.data);
+        console.log(response.data[0]);
+      } catch (error) {
+        console.error("Error posting flight:", error);
+      }
+    };
+    fetchFlights();
     fetchData();
   }, []);
 
@@ -187,12 +207,6 @@ function FlightCard() {
     ECOBASIC: "Economy Basic",
   };
 
-  // useEffect(() => {
-  //   amenity.isChargeable
-  //     ? console.log("its chargable")
-  //     : console.log("its free");
-  // }, []);
-
   return (
     <Fragment>
       <div className="filter-form">
@@ -246,11 +260,11 @@ function FlightCard() {
           <h3 className="text">choose your best deal</h3>
           {/* <h3 className="text">swipe left to view</h3> */}
           <div className="upsell">
-          <TicketHeader
-            originCode={flightSearch?.origin?.slice(0, 3) || ""}
-            arrowColor="#313030"
-            departureCode={flightSearch?.destination?.slice(0, 3) || "XXX"}
-          />
+            <TicketHeader
+              originCode={flightSearch?.origin?.slice(0, 3) || ""}
+              arrowColor="#313030"
+              departureCode={flightSearch?.destination?.slice(0, 3) || "XXX"}
+            />
           </div>
           {brandedUpSell.length === 0 ? (
             <BearLoader />
@@ -260,7 +274,7 @@ function FlightCard() {
               const segmentNumber = segments.length;
               const lastSegmentIndex = segmentNumber - 1;
               const segmentOne = upsell.itineraries[0].segments;
-              const segOneIndex = segmentOne.length -1;
+              const segOneIndex = segmentOne.length - 1;
               const segmentTwo = upsell.itineraries[1].segments;
               const travelerPricings = upsell.travelerPricings;
               const departureObject = segmentOne[0].departure;
@@ -366,7 +380,7 @@ function FlightCard() {
                           iataLookup[departureObjectSegTwo.iataCode]?.city || ""
                         }
                         arrowColor="#F5F7F8"
-                         segmentNum={segmentTwo.length}
+                        segmentNum={segmentTwo.length}
                         segment={segmentTwo.length}
                         originTime={departureObjectSegTwo.at.slice(11) || ""}
                         destinationCode={arrivalObjectSegTwo.iataCode || ""}

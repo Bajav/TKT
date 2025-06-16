@@ -45,8 +45,8 @@ const searchFlights = async (req, res) => {
     const response = await amadeus.shopping.flightOffersSearch.get({
       originLocationCode: originCode,
       destinationLocationCode: destinationCode,
-      departureDate: departureDate,
-      returnDate: returnDate,
+      departureDate: departureDate.slice(0,10),
+      returnDate: returnDate.slice(0,10),
       adults: passengers.adults,
       children: passengers.children,
       infants: passengers.infants,
