@@ -14,7 +14,7 @@ function Passengers() {
     name: "",
     gender: ""
   });
-  
+
   const [selectedCountry, setSelectedCountry] = useState(null);
   return (
     <section className="passengers">
@@ -30,15 +30,15 @@ function Passengers() {
       />
 
       <div className="form">
-        {/* <PaxForm /> */}
-        <GenderDropDown
+        <PaxForm />
+        {/* <GenderDropDown
           selectedGender={formData.gender}
           onChange={(gender) => setFormData((prev) => ({ ...prev, gender }))}
         />
         <CountryDropdown
           selectedCountry={selectedCountry}
           onSelect={setSelectedCountry}
-        />
+        /> */}
       </div>
     </section>
   );

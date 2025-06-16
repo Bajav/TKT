@@ -8,7 +8,7 @@ const countryList = [
   { name: "United States", code: "US" },
   { name: "India", code: "IN" },
   { name: "United Kingdom", code: "GB" },
-  { name: "Germany", code: "DE" },
+  { name: "GerBmany", code: "DE" },
   { name: "France", code: "FR" },
   // Add more as needed
 ];
