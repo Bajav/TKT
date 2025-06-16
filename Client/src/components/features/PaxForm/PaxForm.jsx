@@ -5,7 +5,7 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import GenderDropDown from "../GenderDropDown/genderDromDown.component";
 import CountryDropdown from "../CountryDropDown/country.drop.down";
-// import DocumentTypeDropdown from "../DocumentTypeDropDown/DocumentTypeDropdown";
+import DocumentTypeDropdown from "../DocumentDropDown/document.dropDown";
 import { FlightCalendar } from "../../flightSearch/Calender/newCalender";
 import "./PaxForm.scss";
 
@@ -113,10 +113,10 @@ function PaxForm() {
           />
         </div>
 
-        {/* <DocumentTypeDropdown
+        <DocumentTypeDropdown
           selectedType={inputs.docType}
           onSelect={(docType) => setInputs((prev) => ({ ...prev, docType }))}
-        /> */}
+        />
 
         <FlexInput
           labelName="document number"
