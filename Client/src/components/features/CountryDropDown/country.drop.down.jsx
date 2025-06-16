@@ -40,7 +40,6 @@ const CountryDropdown = ({ onSelect }) => {
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {selected ? `${selected.name} (${selected.code})` : "Select country"}
-        <span className="arrow">{isOpen ? "▲" : "▼"}</span>
       </div>
       {isOpen && (
         <div className="dropdown-body">

@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 .country-dropdown {
   position: relative;
   width: 100%;
@@ -6,8 +8,8 @@
 
   .dropdown-header {
     padding: 10px 12px;
-    background: #f0f0f0;
-    border: 1px solid #ccc;
+    background: $inputBackGround;
+    border: 1px solid #eee;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -16,8 +18,8 @@
   .dropdown-body {
     position: absolute;
     width: 100%;
-    background: white;
-    border: 1px solid #ccc;
+    background: $page_color;
+    border: 1px solid #eee;
     border-top: none;
     max-height: 250px;
     overflow-y: auto;
@@ -26,8 +28,9 @@
     input {
       width: 100%;
       padding: 8px 10px;
+      font-family: $textFont,sans-serif;
       border: none;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid #eee;
       outline: none;
     }
 
@@ -39,8 +42,6 @@
       .dropdown-item {
         padding: 10px;
         cursor: pointer;
-        // transition: background 0.2s;
-
         &:hover {
           background: #eee;
         }
