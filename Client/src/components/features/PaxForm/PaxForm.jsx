@@ -30,18 +30,21 @@ function PaxForm() {
       nationality: selectedCountry?.code || null,
     };
     console.log("Submitted Data:", fullForm);
-    navigate("/");
+    // navigate("/");
   };
 
   const handleDOBSelect = (date) => {
-    setInputs((prev) => ({ ...prev, DOB: date }));
-  };
-
-  const handleDocRangeSelect = (range) => {
     setInputs((prev) => ({
       ...prev,
-      docIssueDate: range.start,
-      docExpiryDate: range.end,
+      DOB: date?.toISOString().split("T")[0], // YYYY-MM-DD
+    }));
+  };
+
+  const handleDocDateRange = (range) => {
+    setInputs((prev) => ({
+      ...prev,
+      docIssueDate: range.start?.toISOString().split("T")[0],
+      docExpiryDate: range.end?.toISOString().split("T")[0],
     }));
   };
 
@@ -113,27 +116,30 @@ function PaxForm() {
           />
         </div>
 
-        <DocumentTypeDropdown
-          selectedType={inputs.docType}
-          onSelect={(docType) => setInputs((prev) => ({ ...prev, docType }))}
-        />
+        <div className="flex-items">
+          <DocumentTypeDropdown
+            selectedType={inputs.docType}
+            onChange={(docType) => setInputs((prev) => ({ ...prev, docType }))}
+          />
 
-        <FlexInput
-          labelName="document number"
-          value={inputs.docNumber || ""}
-          type="text"
-          placeholder="input document number"
-          name="docNumber"
-          change={handleChange}
-        />
-
+          <FlexInput
+            labelName="document number"
+            value={inputs.docNumber || ""}
+            type="text"
+            placeholder="input document number"
+            name="docNumber"
+            change={handleChange}
+          />
+        </div>
         <FlightCalendar
-          onRangeSelect={handleDocRangeSelect}
+          onRangeSelect={handleDocDateRange}
           isRangePicker={true}
-          placeholder="Select Issue and Expiry Date"
+          placeholder="Select Issue & Expiry Dates"
         />
 
-        <button className="submit" type="submit">submit</button>
+        <button className="submit" type="submit">
+          submit
+        </button>
       </form>
     </div>
   );

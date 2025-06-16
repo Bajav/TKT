@@ -14,6 +14,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  .flight-calendar {
+    border: 1px #1e1e1e solid;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  .flight-calendar__input-field {
+    height: 50px;
+  }
+  .flight-calendar__dropdown {
+    width: 300px;
+  }
   // overflow-y: scroll;
   .submit {
     background: $actionOrange;
@@ -75,17 +86,6 @@ option {
   display: flex;
   align-items: center;
   gap: 5px;
-  .flight-calendar {
-    border: 1px #1e1e1e solid;
-    margin-bottom: 10px;
-    margin-top: 5px;
-  }
-  .flight-calendar__input-field {
-    height: 50px;
-  }
-  .flight-calendar__dropdown {
-    width: 300px;
-  }
 }
 .cell {
   width: 100%;
