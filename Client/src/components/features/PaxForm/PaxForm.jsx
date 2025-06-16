@@ -3,56 +3,56 @@ import { useNavigate } from "react-router-dom";
 import FlexInput from "../../../props/FlexInput/FlexInput";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-// import 'react-phone-number-input/style.css'
 import GenderDropDown from "../GenderDropDown/genderDromDown.component";
 import CountryDropdown from "../CountryDropDown/country.drop.down";
-import "./PaxForm.scss";
+// import DocumentTypeDropdown from "../DocumentTypeDropDown/DocumentTypeDropdown";
 import { FlightCalendar } from "../../flightSearch/Calender/newCalender";
+import "./PaxForm.scss";
 
 function PaxForm() {
-  // define navigation
   const navigate = useNavigate();
-  // defineState
+
   const [inputs, setInputs] = useState({});
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [isRangeEnabled, setIsRangeEnabled] = useState(false);
-  // handle form changes
+  const [phone, setPhone] = useState("");
+  const [isRangeEnabled] = useState(true); // Always use range picker for document dates
+
   const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
+    const { name, value } = e.target;
+    setInputs((prev) => ({ ...prev, [name]: value }));
   };
-  // handle form submits
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const fullForm = {
+      ...inputs,
+      phone,
+      nationality: selectedCountry?.code || null,
+    };
+    console.log("Submitted Data:", fullForm);
     navigate("/");
   };
 
-  const handleDepartureSelect = (date) => {
-    setDepartureDate(date); // optional, if you want separate state
-    setInputs((prev) => ({
-      ...prev,
-      departureDate: date,
-    }));
+  const handleDOBSelect = (date) => {
+    setInputs((prev) => ({ ...prev, DOB: date }));
   };
 
-  const handleReturnRangeSelect = (range) => {
-    setReturnDate(range);
+  const handleDocRangeSelect = (range) => {
     setInputs((prev) => ({
       ...prev,
-      departureDate: range.start,
-      returnDate: range.end,
+      docIssueDate: range.start,
+      docExpiryDate: range.end,
     }));
   };
 
   return (
     <div className="paxFormContainer">
       <h1>pax 01</h1>
-      <form className="paxForm">
+      <form className="paxForm" onSubmit={handleSubmit}>
         <div className="flex-items">
           <FlexInput
             labelName="first name"
-            value={inputs.fName || " "}
+            value={inputs.fName || ""}
             type="text"
             placeholder="input first name"
             name="fName"
@@ -60,89 +60,80 @@ function PaxForm() {
           />
           <FlexInput
             labelName="other name"
-            value={inputs.oName || " "}
+            value={inputs.oName || ""}
             type="text"
             placeholder="input other name"
             name="oName"
             change={handleChange}
           />
         </div>
+
         <FlexInput
           labelName="last name"
-          value={inputs.lName || " "}
+          value={inputs.lName || ""}
           type="text"
           placeholder="input last name"
           name="lName"
           change={handleChange}
         />
+
         <div className="flex-items">
-          <FlexInput
-            labelName="date of birth"
-            value={inputs.docNumber || " "}
-            type="date"
-            placeholder="select Date of birth"
-            name="DOB"
-            change={handleChange}
+          <FlightCalendar
+            onDateSelect={handleDOBSelect}
+            isRangePicker={false}
+            placeholder="Select Date of Birth"
           />
+
           <GenderDropDown
-            selectedGender={setInputs.gender}
+            selectedGender={inputs.gender}
             onChange={(gender) => setInputs((prev) => ({ ...prev, gender }))}
           />
         </div>
 
         <FlexInput
           labelName="email"
-          value={inputs.email || " "}
+          value={inputs.email || ""}
           type="email"
           placeholder="input email address"
           name="email"
           change={handleChange}
         />
+
         <div className="flex-items">
           <PhoneInput
             international
-            countryCallingCodeEditable={false}
             defaultCountry="UG"
-            // value={value}
-            // onChange={setValue}
+            value={phone}
+            onChange={setPhone}
           />
+
           <CountryDropdown
             selectedCountry={selectedCountry}
             onSelect={setSelectedCountry}
           />
         </div>
-          <FlexInput
-            labelName="Docoment Type"
-            value={inputs.docType || " "}
-            type="text"
-            placeholder="input docment type"
-            name="docType"
-            change={handleChange}
-          />
+
+        {/* <DocumentTypeDropdown
+          selectedType={inputs.docType}
+          onSelect={(docType) => setInputs((prev) => ({ ...prev, docType }))}
+        /> */}
 
         <FlexInput
           labelName="document number"
-          value={inputs.docNumber || " "}
+          value={inputs.docNumber || ""}
           type="text"
           placeholder="input document number"
           name="docNumber"
           change={handleChange}
         />
+
         <FlightCalendar
-          onDateSelect={handleDepartureSelect}
-          onRangeSelect={handleReturnRangeSelect}
-          isRangePicker={isRangeEnabled}
-          placeholder="Select date of birth"
+          onRangeSelect={handleDocRangeSelect}
+          isRangePicker={true}
+          placeholder="Select Issue and Expiry Date"
         />
-        <FlexInput
-          labelName="date of expiry"
-          value={inputs.dateExpiry || " "}
-          type="date"
-          placeholder="input date dateExpiry"
-          name="dateExpiry"
-          change={handleChange}
-        />
-        <button>submit</button>
+
+        <button type="submit">submit</button>
       </form>
     </div>
   );
