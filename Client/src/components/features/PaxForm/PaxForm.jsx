@@ -7,6 +7,7 @@ import PhoneInput from "react-phone-number-input";
 import GenderDropDown from "../GenderDropDown/genderDromDown.component";
 import CountryDropdown from "../CountryDropDown/country.drop.down";
 import "./PaxForm.scss";
+import { FlightCalendar } from "../../flightSearch/Calender/newCalender";
 
 function PaxForm() {
   // define navigation
@@ -14,6 +15,7 @@ function PaxForm() {
   // defineState
   const [inputs, setInputs] = useState({});
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [isRangeEnabled, setIsRangeEnabled] = useState(false);
   // handle form changes
   const handleChange = (e) => {
     const name = e.target.name;
@@ -24,6 +26,23 @@ function PaxForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/");
+  };
+
+  const handleDepartureSelect = (date) => {
+    setDepartureDate(date); // optional, if you want separate state
+    setInputs((prev) => ({
+      ...prev,
+      departureDate: date,
+    }));
+  };
+
+  const handleReturnRangeSelect = (range) => {
+    setReturnDate(range);
+    setInputs((prev) => ({
+      ...prev,
+      departureDate: range.start,
+      returnDate: range.end,
+    }));
   };
 
   return (
@@ -65,11 +84,11 @@ function PaxForm() {
           selectedGender={setInputs.gender}
           onChange={(gender) => setInputs((prev) => ({ ...prev, gender }))}
         />
-        <FlexInput
+          <FlexInput
           labelName="date of birth"
-          value={inputs.DOB || " "}
+          value={inputs.docNumber || " "}
           type="date"
-          placeholder="input date of birth"
+          placeholder="select Date of birth"
           name="DOB"
           change={handleChange}
         />
@@ -93,13 +112,11 @@ function PaxForm() {
           name="docNumber"
           change={handleChange}
         />
-        <FlexInput
-          labelName="date of issuance"
-          value={inputs.dateIssuance || " "}
-          type="date"
-          placeholder="input date issuance"
-          name="dateIssuance"
-          change={handleChange}
+        <FlightCalendar
+          onDateSelect={handleDepartureSelect}
+          onRangeSelect={handleReturnRangeSelect}
+          isRangePicker={isRangeEnabled}
+          placeholder="Select date of birth"
         />
         <FlexInput
           labelName="date of expiry"

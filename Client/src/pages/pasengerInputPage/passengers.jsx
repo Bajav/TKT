@@ -2,8 +2,6 @@ import { useState } from "react";
 import "./passenger.styles.scss";
 import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
 import PaxForm from "../../components/features/PaxForm/PaxForm";
-import GenderDropDown from "../../components/features/GenderDropDown/genderDromDown.component";
-import CountryDropdown from "../../components/features/CountryDropDown/country.drop.down";
 
 function Passengers() {
   const handleSubmit = (e) => {
@@ -31,14 +29,6 @@ function Passengers() {
 
       <div className="form">
         <PaxForm />
-        {/* <GenderDropDown
-          selectedGender={formData.gender}
-          onChange={(gender) => setFormData((prev) => ({ ...prev, gender }))}
-        />
-        <CountryDropdown
-          selectedCountry={selectedCountry}
-          onSelect={setSelectedCountry}
-        /> */}
       </div>
     </section>
   );
