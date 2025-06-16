@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import "../../../styles/variables.scss";
 
 .gender-dropdown {
   margin-bottom: 1rem;
@@ -9,7 +9,7 @@
     padding: 10px;
     cursor: pointer;
     border-radius: 6px;
-     font-family: $textFont,sans-serif;
+    font-family: $textFont, sans-serif;
     background: $inputBackGround;
     border: 1px solid #eee;
     display: flex;
@@ -26,18 +26,28 @@
     border-radius: 6px;
     margin-top: 4px;
     z-index: 10;
+    animation: slideDown 0.2s ease-in-out;
 
     li {
       text-align: center;
       padding: 10px;
       cursor: pointer;
       color: $visibleFontColor;
-      font-family: $textFont,sans-serif;
+      font-family: $textFont, sans-serif;
 
       &:hover {
         background: $page_color;
       }
     }
   }
-
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
