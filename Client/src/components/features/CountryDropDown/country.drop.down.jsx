@@ -1,52 +1,67 @@
+import{ useState } from "react";
 import "./countryDropDown.styles.scss";
 
-import { useState, useEffect, useRef } from "react";
-import countryList from "./countryList"; 
-import "./CountryDropdown.styles.scss";
+const countries = [
+  { name: "Afghanistan", code: "AF" },
+  { name: "Albania", code: "AL" },
+  { name: "Algeria", code: "DZ" },
+  { name: "American Samoa", code: "AS" },
+  { name: "Andorra", code: "AD" },
+  { name: "Angola", code: "AO" },
+  { name: "Anguilla", code: "AI" },
+  { name: "Antarctica", code: "AQ" },
+  { name: "Antigua and Barbuda", code: "AG" },
+  { name: "Argentina", code: "AR" },
+  { name: "Uganda", code: "UG" },
+  { name: "Zambia", code: "ZM" },
+  { name: "Zimbabwe", code: "ZW" },
+];
 
-const CountryDropdown = ({ selectedCountry, onSelect }) => {
+const CountryDropdown = ({ onSelect }) => {
+  const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const [selected, setSelected] = useState(null);
 
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
+  const filtered = countries.filter((country) =>
+    country.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   const handleSelect = (country) => {
-    onSelect(country);
+    setSelected(country);
+    onSelect && onSelect(country);
     setIsOpen(false);
+    setSearch("");
   };
 
-  // Close on outside click
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   return (
-    <div className="country-dropdown" ref={dropdownRef}>
-      <label htmlFor="country">Country</label>
-      <div className="dropdown-header" onClick={toggleDropdown}>
-        {selectedCountry
-          ? `${selectedCountry.name} (${selectedCountry.code})`
-          : "Select a country"}
+    <div className="country-dropdown">
+      <div
+        className="dropdown-header"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        {selected ? `${selected.name} (${selected.code})` : "Select country"}
         <span className="arrow">{isOpen ? "▲" : "▼"}</span>
       </div>
       {isOpen && (
-        <ul className="dropdown-list">
-          {countryList.map((country) => (
-            <li
-              key={country.code}
-              onClick={() => handleSelect(country)}
-              className="dropdown-item"
-            >
-              {country.name} ({country.code})
-            </li>
-          ))}
-        </ul>
+        <div className="dropdown-body">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search countries..."
+          />
+          <ul className="dropdown-list">
+            {filtered.map((country) => (
+              <li
+                key={country.code}
+                onClick={() => handleSelect(country)}
+                className="dropdown-item"
+              >
+                {country.name} ({country.code})
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
