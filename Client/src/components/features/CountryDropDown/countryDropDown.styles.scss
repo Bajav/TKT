@@ -5,6 +5,7 @@
   width: 100%;
   max-width: 300px;
   font-family: sans-serif;
+  border: 1px #1e1e1e solid;
 
   .dropdown-header {
     padding: 10px 12px;
@@ -13,6 +14,7 @@
     cursor: pointer;
     display: flex;
     justify-content: space-between;
+    height: 54px;
   }
 
   .dropdown-body {
@@ -25,7 +27,8 @@
     max-height: 250px;
     overflow-y: auto;
     z-index: 10;
-      animation: slideDown .5s ease-in-out;
+
+    animation: slideDown 0.5s ease-in-out;
 
     input {
       width: 100%;
