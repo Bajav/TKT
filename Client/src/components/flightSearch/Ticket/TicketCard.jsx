@@ -263,7 +263,7 @@ function FlightCard() {
             <TicketHeader
               originCode={flightSearch?.origin?.slice(0, 3) || ""}
               arrowColor="#313030"
-              departureCode={flightSearch?.destination?.slice(0, 3) || "XXX"}
+              destinationCode={flightSearch?.destination?.slice(0, 3) || "XXX"}
             />
           </div>
           {brandedUpSell.length === 0 ? (
