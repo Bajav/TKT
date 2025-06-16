@@ -49,6 +49,7 @@ function PaxForm() {
     <div className="paxFormContainer">
       <h1>pax 01</h1>
       <form className="paxForm">
+        <div className="flex-items">
         <FlexInput
           labelName="first name"
           value={inputs.fName || " "}
@@ -57,6 +58,15 @@ function PaxForm() {
           name="fName"
           change={handleChange}
         />
+          <FlexInput
+          labelName="other name"
+          value={inputs.oName || " "}
+          type="text"
+          placeholder="input other name"
+          name="oName"
+          change={handleChange}
+        />
+        </div>
         <FlexInput
           labelName="last name"
           value={inputs.lName || " "}
