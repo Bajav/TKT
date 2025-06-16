@@ -1,4 +1,6 @@
 import "./dropdown.styles.scss";
+import { useState,useRef,useEffect } from "react";
+
 
 const GenderDropDown = ({ onChange, selectedGender }) => {
   const [isOpen, setIsOpen] = useState(false);
