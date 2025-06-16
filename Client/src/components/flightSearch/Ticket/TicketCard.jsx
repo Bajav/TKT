@@ -43,7 +43,7 @@ function FlightCard() {
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
-  const [showTickets, setShowTickets] = useState(false);
+  const [showTickets, setShowTickets] = useState(true);
   // const [outBoundFlight, setFlight] = useState({});
   const [availableAirlines, setAvailableAirlines] = useState([]);
   const [filters, setFilters] = useState({

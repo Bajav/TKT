@@ -2,9 +2,10 @@
 
 .document-dropdown {
   width: 100%;
-  margin-top: 1rem;
   position: relative;
   font-family: $textFont sans-serif;
+  margin-bottom: 10px;
+  margin-top: 5px;
 
   .dropdown-label {
     font-weight: 600;
@@ -21,7 +22,7 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    font-family: $textFont,sans-serif;
+    font-family: $textFont, sans-serif;
     font-size: 10px;
     color: $visibleFontColor;
     height: 50px;
@@ -32,7 +33,7 @@
     width: 100%;
     background: $inputBackGround;
     border: 1px solid #ddd;
-    font-family: $textFont,sans-serif;
+    font-family: $textFont, sans-serif;
     border-radius: 6px;
     margin-top: 0.4rem;
     max-height: 200px;
