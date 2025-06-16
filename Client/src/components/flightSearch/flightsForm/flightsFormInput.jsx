@@ -153,13 +153,15 @@ function FlightsForm() {
     }));
   };
 
-  const handleReturnRangeSelect = (range) => {
-    setReturnDate(range); // optional
-    setInputs((prev) => ({
-      ...prev,
-      returnDate: range.end, // or { start: range.start, end: range.end } if you need both
-    }));
-  };
+ const handleReturnRangeSelect = (range) => {
+  setReturnDate(range);
+  setInputs((prev) => ({
+    ...prev,
+    departureDate: range.start,
+    returnDate: range.end,
+  }));
+};
+
 
   useEffect(() => {
     if (inputs.flightType === "roundTrip") {
