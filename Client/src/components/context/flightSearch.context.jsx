@@ -19,6 +19,8 @@ export const FlightContext = createContext({
   setUpsellError: () => {},
   lastFlight: [],
   setlastFlight: () => {},
+  alert: false,
+  setAlert: () => {},
 });
 
 export const FlightSearchProvider = ({ children }) => {
@@ -31,6 +33,7 @@ export const FlightSearchProvider = ({ children }) => {
   const [brandedUpSell, setBrandedUpSell] = useState([]);
   const [upsellError, setUpsellError] = useState("");
   const [lastFlight, setlastFlight] = useState([]);
+  const [alert, setAlert] = useState(false);
 
   const value = {
     flightSearch,
@@ -51,6 +54,8 @@ export const FlightSearchProvider = ({ children }) => {
     setUpsellError,
     lastFlight,
     setlastFlight,
+    alert,
+    setAlert,
   };
   return (
     <FlightContext.Provider value={value}>{children}</FlightContext.Provider>

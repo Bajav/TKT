@@ -16,7 +16,7 @@ import "./flightsForm.scss";
 
 function FlightsForm() {
   // contexts
-  const { setFormData, setIataCodes, setFlightResults } =
+  const { setFormData, setIataCodes, setFlightResults,setAlert } =
     useContext(FlightContext);
   const { userLocation } = useContext(LocationContext);
 
@@ -97,7 +97,7 @@ function FlightsForm() {
   if (inputs.flightType === "oneWay") {
     inputs.returnDate = null;
   }
-  const handleSubmit = async (e,req) => {
+  const handleSubmit = async (e, req) => {
     e.preventDefault();
     console.log(req);
     const formData = {
@@ -113,6 +113,7 @@ function FlightsForm() {
       passengers,
     };
     setFormData(formData);
+    setAlert(false);
     navigate("results");
     // try {
     //   const response = await axios.post(
@@ -166,7 +167,15 @@ function FlightsForm() {
     } else {
       setIsRangeEnabled(false);
     }
-  });
+    const cookie = () => {
+      if (navigator.cookieEnabled === false) {
+        // alert("Error: cookies not enabled!");
+      } else {
+        // alert("cookies are en3abled!");
+      }
+    };
+    cookie();
+  }, []);
 
   return (
     <div>
@@ -175,21 +184,17 @@ function FlightsForm() {
           <form onSubmit={handleSubmit}>
             <div className="flightSearch">
               <div className="flex-option">
-                <div id="active" />
                 {["oneWay", "roundTrip", "multiCity"].map((type) => (
-                  <Fragment>
-    
-                    <ClickOption
-                      key={type}
-                      labelName={type}
-                      label={type.replace(/([A-Z])/g, " $1").toLowerCase()}
-                      checkName="flightType"
-                      changeFunc={() => handleTripTypeClick(type)}
-                      checkedName={inputs.flightType === type}
-                      click={() => handleTripTypeClick(type)}
-                      isActive={inputs.flightType === type}
-                    />
-                  </Fragment>
+                  <ClickOption
+                    key={type}
+                    labelName={type}
+                    label={type.replace(/([A-Z])/g, " $1").toLowerCase()}
+                    checkName="flightType"
+                    changeFunc={() => handleTripTypeClick(type)}
+                    checkedName={inputs.flightType === type}
+                    click={() => handleTripTypeClick(type)}
+                    isActive={inputs.flightType === type}
+                  />
                 ))}
               </div>
 
