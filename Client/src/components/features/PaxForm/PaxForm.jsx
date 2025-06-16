@@ -50,22 +50,22 @@ function PaxForm() {
       <h1>pax 01</h1>
       <form className="paxForm">
         <div className="flex-items">
-        <FlexInput
-          labelName="first name"
-          value={inputs.fName || " "}
-          type="text"
-          placeholder="input first name"
-          name="fName"
-          change={handleChange}
-        />
           <FlexInput
-          labelName="other name"
-          value={inputs.oName || " "}
-          type="text"
-          placeholder="input other name"
-          name="oName"
-          change={handleChange}
-        />
+            labelName="first name"
+            value={inputs.fName || " "}
+            type="text"
+            placeholder="input first name"
+            name="fName"
+            change={handleChange}
+          />
+          <FlexInput
+            labelName="other name"
+            value={inputs.oName || " "}
+            type="text"
+            placeholder="input other name"
+            name="oName"
+            change={handleChange}
+          />
         </div>
         <FlexInput
           labelName="last name"
@@ -76,21 +76,21 @@ function PaxForm() {
           change={handleChange}
         />
         <div className="flex-items">
+          <FlexInput
+            labelName="date of birth"
+            value={inputs.docNumber || " "}
+            type="date"
+            placeholder="select Date of birth"
+            name="DOB"
+            change={handleChange}
+          />
+          <GenderDropDown
+            selectedGender={setInputs.gender}
+            onChange={(gender) => setInputs((prev) => ({ ...prev, gender }))}
+          />
+        </div>
 
         <FlexInput
-          labelName="date of birth"
-          value={inputs.docNumber || " "}
-          type="date"
-          placeholder="select Date of birth"
-          name="DOB"
-          change={handleChange}
-        />
-        <GenderDropDown
-          selectedGender={setInputs.gender}
-          onChange={(gender) => setInputs((prev) => ({ ...prev, gender }))}
-        />
-        </div>
-            <FlexInput
           labelName="email"
           value={inputs.email || " "}
           type="email"
@@ -98,25 +98,28 @@ function PaxForm() {
           name="email"
           change={handleChange}
         />
-            <PhoneInput
-          international
-          countryCallingCodeEditable={false}
-          defaultCountry="UG"
-          // value={value}
-          // onChange={setValue}
-        />
-        <FlexInput
-          labelName="Docoment Type"
-          value={inputs.docType || " "}
-          type="text"
-          placeholder="input docment type"
-          name="docType"
-          change={handleChange}
-        />
-        <CountryDropdown
-          selectedCountry={selectedCountry}
-          onSelect={setSelectedCountry}
-        />
+        <div className="flex-items">
+          <PhoneInput
+            international
+            countryCallingCodeEditable={false}
+            defaultCountry="UG"
+            // value={value}
+            // onChange={setValue}
+          />
+          <CountryDropdown
+            selectedCountry={selectedCountry}
+            onSelect={setSelectedCountry}
+          />
+        </div>
+          <FlexInput
+            labelName="Docoment Type"
+            value={inputs.docType || " "}
+            type="text"
+            placeholder="input docment type"
+            name="docType"
+            change={handleChange}
+          />
+
         <FlexInput
           labelName="document number"
           value={inputs.docNumber || " "}
