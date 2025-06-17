@@ -40,3 +40,7 @@ if user submits a form and flights arent given back ,
 we should have a helper function that will help us to get the number of 
 days a user has selected for a new auto req, 
 we should also be able to handle errors like when no flights supporting a given city 
+
+---BACK HOME ---
+when user clicks back after searching for flights then search again , they get the same flights they searched before 
+regardless changing the route
