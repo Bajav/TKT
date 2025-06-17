@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import FlexInput from "../../../props/FlexInput/FlexInput";
 import "react-phone-number-input/style.css";
@@ -7,22 +7,25 @@ import GenderDropDown from "../GenderDropDown/genderDromDown.component";
 import CountryDropdown from "../CountryDropDown/country.drop.down";
 import DocumentTypeDropdown from "../DocumentDropDown/document.dropDown";
 import { FlightCalendar } from "../../flightSearch/Calender/newCalender";
+import { FlightContext } from "../../context/flightSearch.context";
 import "./PaxForm.scss";
+import axios from "axios";
 
 function PaxForm() {
   const navigate = useNavigate();
-
   const [inputs, setInputs] = useState({});
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [phone, setPhone] = useState("");
   const [isRangeEnabled] = useState(true); // Always use range picker for document dates
 
+  const { bookedFlight } = useContext(FlightContext);
+  console.log(bookedFlight.flightOffers);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const fullForm = {
       ...inputs,
@@ -30,9 +33,22 @@ function PaxForm() {
       nationality: selectedCountry?.code || null,
     };
     console.log("Submitted Data:", fullForm);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/getFlightOrder",{
+          formData:fullForm,
+          bookedFlight:bookedFlight.flightOffers
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error posting flight:", error);
+    }
     // navigate("/");
   };
 
+  // fecth flight order
+  useEffect(() => {}, []);
   const handleDOBSelect = (date) => {
     setInputs((prev) => ({
       ...prev,

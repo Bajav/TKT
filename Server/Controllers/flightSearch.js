@@ -152,13 +152,14 @@ const findLastPrice = async (req, res) => {
 // A full example can be found at https://git.io/JtnYo
 
 const getFlightOrder = async (req, res) => {
-  const formData = req.body;
+  const {formData,bookedFlight} = req.body;
   console.log("formData",formData);
+  console.log("bookedFlight",bookedFlight);
   try {
     const response = await amadeus.booking.flightOrders.post({
       data: {
         type: "flight-order",
-        flightOffers: [responsse[1]],
+        flightOffers: [bookedFlight[0]],
         travelers: [
           {
             id: "1",
@@ -196,6 +197,7 @@ const getFlightOrder = async (req, res) => {
         ],
       },
     });
+    console.log(response.data);
     oderId = response.data.id;
     return res.json(response.data);
   } catch (err) {
