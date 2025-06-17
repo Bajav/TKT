@@ -182,8 +182,8 @@ function FlightCard() {
         bookedFlight: flight,
       });
       setBookedFlight(response.data);
-      console.log("response", response);
-      console.log("booked", bookedFlight);
+      console.log("response", response.data);
+      // console.log("booked", bookedFlight);
       navigate("/flights/lastprice", { replace: true });
     } catch (err) {
       console.error("Error posting data:", err);

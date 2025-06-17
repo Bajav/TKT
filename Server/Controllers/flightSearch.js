@@ -119,15 +119,17 @@ const findLastPrice = async (req, res) => {
   const response = req.body;
   console.log("findLastPrice",response.bookedFlight);
   try {
-    const pricingResponse = await amadeus.shopping.flightOffers.pricing.post({
-      data: {
-        type: "flight-offers-pricing",
-        flightOffers: [response.bookedFlight],
+    const pricingResponse = await amadeus.shopping.flightOffers.pricing.post(
+        {
+        data: {
+          type: "flight-offers-pricing",
+          flightOffers: [response.bookedFlight]
+        }
       },
-      params: {
-        include: ["bags","detailed-fare-rules"]
-      },
-    });
+      {
+        include: 'bags'
+      }
+    );
 
     console.log("responce from server",pricingResponse.data)
     return res.json(pricingResponse.data);
