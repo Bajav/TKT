@@ -2,8 +2,8 @@ import express from "express";
 import iataRoutes from './Routes/iataRoutes.js'
 import searchFlight from './Routes/searchFlightRt.js'
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
-
-
+import cookieParserMiddleware from "./Middleware/cookie.middleware.js";
+import loggerMiddleware from "./Middleware/logger.middleware.js";
 const port = 3000;
 const app = express();
 
@@ -12,9 +12,13 @@ const app = express();
 // Middleware setup
 app.use(express.json());
 app.use(corsMiddleware);
+app.use(cookieParserMiddleware);
+app.use(loggerMiddleware);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
+
+// routes
 app.use('/',iataRoutes);
 // app.use('/',flightRoutes);
 app.use('/',searchFlight);
