@@ -45,4 +45,12 @@ we should also be able to handle errors like when no flights supporting a given 
 when user clicks back after searching for flights then search again , they get the same flights they searched before 
 regardless changing the route
 
+
+
 --- book ---
+
+
+
+[1,2,3,4].map(()=>{
+    <PaxForm />
+ })
