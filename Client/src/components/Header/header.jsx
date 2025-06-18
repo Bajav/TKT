@@ -4,36 +4,45 @@ import { useState, useContext, useEffect } from "react";
 import { motion } from "motion/react";
 import popUpSignIn from "../../Controllers/signinwithpopup.controller";
 import { UserContext } from "../context/user.context";
-
+import defaultProfile from "../../assets/icons/profile-default-svgrepo-com.svg";
 const LocationHeader = () => {
   const { userData, setUserData } = useContext(UserContext);
   const [dropDown, setDropDown] = useState(false);
   const [signedIn, setSigninedIn] = useState(false);
   const showDropdown = () => setDropDown(!dropDown);
 
- const signinwithpopup = async () => {
-  try {
-    const signinedInUser = await popUpSignIn();
-    setUserData(signinedInUser.user);
-    console.log("✅ User signed in:", signinedInUser.user);
-    setSigninedIn(true);
-  } catch (err) {
-    console.log("❌ Error signing in:", err);
-  }
-};
-useEffect(() => {
-  if (userData) {
-    console.log("✅ userData has been updated:", userData);
-  }
-}, [userData]);
+  const signinwithpopup = async () => {
+    try {
+      const signinedInUser = await popUpSignIn();
+      setUserData(signinedInUser.user);
+      console.log("✅ User signed in:", signinedInUser.user);
+      setSigninedIn(true);
+    } catch (err) {
+      console.log("❌ Error signing in:", err);
+    }
+  };
+  useEffect(() => {
+    if (userData) {
+      console.log("✅ userData has been updated:", userData);
+    }
+  }, [userData]);
 
   return (
     <div className="header">
       {console.log(userData?.photoURL)}
       <LocationComponent />
       <div onClick={showDropdown} className="icon">
-        <img src={userData?.photoURL || " "} alt="user image" />
+        <img
+          src={userData?.photoURL || defaultProfile}
+          alt="user image"
+          referrerPolicy="no-referrer"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = defaultProfile;
+          }}
+        />
       </div>
+
       {dropDown && (
         <motion.div
           initial={{ opacity: 0, height: 0, width: 0 }}
@@ -62,8 +71,7 @@ useEffect(() => {
           ) : (
             <div className="signIn-container">
               <div className="display">
-
-              <p>sign in / up to view console</p>
+                <p>sign in / up to view console</p>
               </div>
               <button onClick={signinwithpopup}>sign in</button>
             </div>

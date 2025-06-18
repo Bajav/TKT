@@ -36,7 +36,7 @@
   border-radius: 15px;
 }
 .user-drop-down-header {
-  padding: 0px 0px 10px 0px;
+  padding: 5px 0px 10px 10px;
   h3 {
     font-size: 11px;
     font-family: $roboto, sans-serif;
@@ -74,6 +74,7 @@
   li {
     border-bottom: 1px solid rgba(197, 195, 195, 0.5);
     margin-bottom: 10px;
+    padding: 0px 0px 0px 8px;
   }
 }
 
