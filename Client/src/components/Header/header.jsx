@@ -2,11 +2,19 @@ import "./headr.styles.scss";
 import LocationComponent from "../LOCATION/location.component";
 import { useState } from "react";
 import { motion } from "motion/react";
+import popUpSignIn from "../../Controllers/signinwithpopup.controller";
 
-function LocationHeader() {
+
+function LocationHeader() {  
   const [dropDown, setDropDown] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const showDropdown = () => setDropDown(!dropDown);
+
+  const signinwithpopup = async()=>{
+    const signinedInUser = await popUpSignIn();
+    console.log(signinedInUser);
+  };
+
   return (
     <div className="header">
       <LocationComponent />
@@ -34,7 +42,7 @@ function LocationHeader() {
           ):(
             <div className="signIn-container">
               <p>sign in / up to view console</p>
-              <button>sign in</button>
+              <button onClick={signinwithpopup}>sign in</button>
             </div>
           )}
         </motion.div>
