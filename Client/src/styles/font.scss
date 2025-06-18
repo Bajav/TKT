@@ -1,12 +1,18 @@
 @font-face {
     font-family: 'Poppins';
     src: url('../fonts/Poppins-Light.ttf') format('truetype');
-    font-weight: 400;
+    font-weight: normal;
     font-style: normal;
   };
   @font-face {
     font-family: 'Bebas Neue';
     src: url('../fonts/BebasNeue-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'RobotoFlex';
+    src: url('../fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght') format('truetype');
     font-weight: normal;
     font-style: normal;
   }

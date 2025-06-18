@@ -1,16 +1,24 @@
 @font-face {
-    font-family: "poppins";
-    src: url('../fonts/Poppins-Black.ttf') format('ttf'), 
-         url('../fonts/Poppins-Bold.ttf') format('ttf'); 
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-      font-family: "bebbasNeue";
-      src: url('../fonts/BebasNeue-Regular.ttf') format('ttf');
-      font-weight: normal;
-      font-style: normal;
-    }
+  font-family: "poppins";
+  src: url("../fonts/Poppins-Black.ttf") format("ttf"),
+    url("../fonts/Poppins-Bold.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "bebbasNeue";
+  src: url("../fonts/BebasNeue-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RobotoFlex";
+  src: url("../fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 // $page_color:#F5F7F8;
 // $page_color:#323030;
@@ -24,15 +32,16 @@
 // $textFont:poppins;
 // $cityFont:bebbasNeue;
 
-$page_color:#F5F7F8;
-$text_color:#323030;
-$actionsDar_color:#222222;
-$ticketColor:#222222;
-$buttonColor:#222222;
-$actionBlue :#65B7F5;
-$actionOrange:#E88D67;
-$deemFontColor:#313030;
-$visibleFontColor:#313030;
-$inputBackGround:#fefefe;
-$textFont:poppins;
-$cityFont:bebbasNeue;
+$page_color: #f5f7f8;
+$text_color: #323030;
+$actionsDar_color: #222222;
+$ticketColor: #222222;
+$buttonColor: #222222;
+$actionBlue: #65b7f5;
+$actionOrange: #e88d67;
+$deemFontColor: #313030;
+$visibleFontColor: #313030;
+$inputBackGround: #fefefe;
+$textFont: poppins;
+$cityFont: bebbasNeue;
+$roboto: RobotoFlex;
