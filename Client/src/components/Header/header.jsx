@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 
 function LocationHeader() {
   const [dropDown, setDropDown] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
   const showDropdown = () => setDropDown(!dropDown);
   return (
     <div className="header">
@@ -17,6 +18,7 @@ function LocationHeader() {
           transition={{ delay: 0.2, duration: 0.5, type:"tween" }}
           className="user-drop-down"
         >
+          {signedIn ? (
           <motion.div initial={{display:"none"}} animate={{display:"block"}} transition={{ delay: 0.8, duration: 0.3, type:"tween" }} className="drop-down-contents">
             <div className="user-drop-down-header">
               <h3>balijawa hussein</h3>
@@ -29,6 +31,12 @@ function LocationHeader() {
               <li>log out</li>
             </ul>
           </motion.div>
+          ):(
+            <div className="signIn-container">
+              <p>sign in / up to view console</p>
+              <button>sign in</button>
+            </div>
+          )}
         </motion.div>
       )}
     </div>

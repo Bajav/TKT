@@ -77,3 +77,32 @@
     margin-bottom: 10px;
   }
 }
+
+.signIn-container
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  p
+  {
+    font-family: $roboto,sans-serif;
+    font-size: 10px;
+    text-align: center;
+    color: $page_color;
+    text-transform: lowercase;
+    margin-top: 40px;
+    opacity: 80%;
+  }
+  button
+  {
+    background: $actionOrange;
+    padding: 10px 30px;
+    font-family: $roboto,sans-serif;
+    color: $page_color;
+    font-size: 12px;
+    width: 100%;
+    border-radius: 3px;
+  }
+}
