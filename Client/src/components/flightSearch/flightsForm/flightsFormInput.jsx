@@ -17,7 +17,7 @@ import "./flightsForm.scss";
 
 function FlightsForm() {
   // contexts
-  const { setFormData, setIataCodes, setFlightResults,setAlert } =
+  const { setFormData, setIataCodes, setFlightResults, setAlert } =
     useContext(FlightContext);
   const { userLocation } = useContext(LocationContext);
 
@@ -73,6 +73,7 @@ function FlightsForm() {
       ...prev,
       flightType: type,
     }));
+    console.log(type);
   };
 
   const increment = (type) => {
@@ -133,7 +134,7 @@ function FlightsForm() {
   };
 
   const handleSwitch = (e) => {
-    setClicked(!clicked)
+    setClicked(!clicked);
     e.preventDefault();
     setInputs((prev) => ({
       ...prev,
@@ -156,15 +157,14 @@ function FlightsForm() {
     }));
   };
 
- const handleReturnRangeSelect = (range) => {
-  setReturnDate(range);
-  setInputs((prev) => ({
-    ...prev,
-    departureDate: range.start,
-    returnDate: range.end,
-  }));
-};
-
+  const handleReturnRangeSelect = (range) => {
+    setReturnDate(range);
+    setInputs((prev) => ({
+      ...prev,
+      departureDate: range.start,
+      returnDate: range.end,
+    }));
+  };
 
   useEffect(() => {
     if (inputs.flightType === "roundTrip") {
@@ -213,7 +213,14 @@ function FlightsForm() {
                   change={handleChange}
                   value={inputs.origin}
                 />
-                <motion.button initial={{rotate:0}} animate={clicked ?{rotate:360,type:"spring"}:{rotate: 0}} className="switchBtn" onClick={handleSwitch}>
+                <motion.button
+                  initial={{ rotate: 0 }}
+                  animate={
+                    clicked ? { rotate: 360, type: "spring" } : { rotate: 0 }
+                  }
+                  className="switchBtn"
+                  onClick={handleSwitch}
+                >
                   <img src={RoundTripIcon} alt="" />
                 </motion.button>
                 <div className="newFlex">
