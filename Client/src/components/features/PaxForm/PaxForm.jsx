@@ -8,6 +8,7 @@ import CountryDropdown from "../CountryDropDown/country.drop.down";
 import DocumentTypeDropdown from "../DocumentDropDown/document.dropDown";
 import { FlightCalendar } from "../../flightSearch/Calender/newCalender";
 import { FlightContext } from "../../context/flightSearch.context";
+import DatePicker from "../../flightSearch/Calender/calender.component";
 import "./PaxForm.scss";
 import axios from "axios";
 
@@ -20,6 +21,7 @@ function PaxForm() {
 
   const { bookedFlight } = useContext(FlightContext);
   console.log(bookedFlight.flightOffers);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
@@ -32,19 +34,19 @@ function PaxForm() {
       phone,
       nationality: selectedCountry?.code || null,
     };
-    console.log("Submitted Data:", fullForm);
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/getFlightOrder",{
-          formData:fullForm,
-          bookedFlight:bookedFlight.flightOffers
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error posting flight:", error);
-    }
-    // navigate("/");
+    console.log(fullForm);
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:3000/getFlightOrder",
+    //     {
+    //       formData: fullForm,
+    //       bookedFlight: bookedFlight.flightOffers,
+    //     }
+    //   );
+    //   console.log(response.data);
+    // } catch (error) {
+    //   console.error("Error posting flight:", error);
+    // }
   };
 
   // fecth flight order
@@ -97,10 +99,10 @@ function PaxForm() {
         />
 
         <div className="flex-items">
-          <FlightCalendar
-            onDateSelect={handleDOBSelect}
-            isRangePicker={false}
+          <DatePicker
             placeholder="Select Date of Birth"
+            isRangePicker={false}
+            onDateSelect={handleDOBSelect}
           />
 
           <GenderDropDown
@@ -147,10 +149,12 @@ function PaxForm() {
             change={handleChange}
           />
         </div>
-        <FlightCalendar
-          onRangeSelect={handleDocDateRange}
+
+        <DatePicker
           isRangePicker={true}
-          placeholder="Select Issue & Expiry Dates"
+          enableRange={true}
+          placeholder="Select Document Issue and Expiry Dates"
+          onRangeSelect={handleDocDateRange}
         />
 
         <button className="submit" type="submit">
