@@ -11,7 +11,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border: 1px solid #0e0e0e;
+    border: 2px solid #0e0e0e;
     width: 40px;
     height: 40px;
     margin-right: 10px;
@@ -25,13 +25,35 @@
 // user drop down
 
 .user-drop-down {
+  position: absolute;
+  z-index: 40;
   background: $ticketColor;
   padding: 10px;
-  border-radius: 10px;
+  right: 8px;
+  top: 30px;
+  width: 200px;
+  border-radius: 15px;
+  .icon {
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    background: url(../../assets/placesImages/Greece.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 2px solid $ticketColor;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .user-drop-down-header {
   h3 {
-    font-size: 13px;
+    font-size: 11px;
     font-family: $textFont, sans-serif;
     color: $page_color;
     text-transform: capitalize;
@@ -46,18 +68,25 @@
     font-family: $textFont, sans-serif;
     color: $page_color;
     opacity: 70%;
-    text-transform: capitalize;
   }
   ul {
     margin: 0;
     padding: 0;
   }
+  border-bottom: 1px solid rgba(197, 195, 195, 0.5);
+  margin-bottom: 10px;
 }
 .drop-down-links {
   font-size: 10px;
   font-family: $textFont, sans-serif;
   color: $page_color;
   text-transform: capitalize;
+  font-weight: 600;
+
   margin: 0;
   padding: 0;
+  li {
+    border-bottom: 1px solid rgba(197, 195, 195, 0.5);
+    margin-bottom: 10px;
+  }
 }
