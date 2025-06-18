@@ -39,18 +39,18 @@
 .user-drop-down-header {
   h3 {
     font-size: 11px;
-    font-family: $textFont, sans-serif;
+    font-family: $roboto, sans-serif;
     color: $page_color;
     text-transform: capitalize;
     margin: 0;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0;
   }
   p {
     margin: 0;
     padding: 0;
     font-size: 10px;
-    font-family: $textFont, sans-serif;
+    font-family: $roboto, sans-serif;
     color: $page_color;
     opacity: 70%;
   }
@@ -63,10 +63,10 @@
 }
 .drop-down-links {
   font-size: 10px;
-  font-family: $textFont, sans-serif;
+  font-family: $roboto, sans-serif;
   color: $page_color;
   text-transform: capitalize;
-  font-weight: 600;
+  font-weight: 400;
 
   margin: 0;
   padding: 0;
