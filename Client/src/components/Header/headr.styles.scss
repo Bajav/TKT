@@ -1,4 +1,4 @@
-@import '../../styles//variables.scss';
+@import "../../styles//variables.scss";
 .header {
   display: flex;
   justify-content: space-between;
@@ -6,20 +6,58 @@
   height: 70px;
   align-items: center;
   width: 100%;
-        .icon
-        {
-            background: url(../assets/placesImages/Greece.jpg);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            border: 1px solid #0e0e0e;
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            border-radius: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+  .icon {
+    background: url(../../assets/placesImages/Greece.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1px solid #0e0e0e;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
-        }
-    }
+// user drop down
+
+.user-drop-down {
+  background: $ticketColor;
+  padding: 10px;
+  border-radius: 10px;
+}
+.user-drop-down-header {
+  h3 {
+    font-size: 13px;
+    font-family: $textFont, sans-serif;
+    color: $page_color;
+    text-transform: capitalize;
+    margin: 0;
+    font-weight: 600;
+    padding: 0;
+  }
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    font-family: $textFont, sans-serif;
+    color: $page_color;
+    opacity: 70%;
+    text-transform: capitalize;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+.drop-down-links {
+  font-size: 10px;
+  font-family: $textFont, sans-serif;
+  color: $page_color;
+  text-transform: capitalize;
+  margin: 0;
+  padding: 0;
+}
