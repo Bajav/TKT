@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { motion } from "motion/react";
 import axios from "axios";
 // hooks
 import { FlightContext } from "../../context/flightSearch.context";
@@ -210,9 +211,9 @@ function FlightsForm() {
                   change={handleChange}
                   value={inputs.origin}
                 />
-                <button className="switchBtn" onClick={handleSwitch}>
+                <motion.button initial={{rotate:90}} className="switchBtn" onClick={handleSwitch}>
                   <img src={RoundTripIcon} alt="" />
-                </button>
+                </motion.button>
                 <div className="newFlex">
                   <FlightSearchInput
                     classOne="flexInput inputTwo"

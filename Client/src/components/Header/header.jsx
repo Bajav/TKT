@@ -13,7 +13,7 @@ function LocationHeader() {
       {dropDown && (
         <motion.div
           initial={{ opacity: 0 ,height:0,width:0}}
-          animate={{ opacity: 1 ,height:160,width:200}}
+          animate={{ opacity: 1 ,height:175,width:200}}
           transition={{ delay: 0.2, duration: 0.5, type:"tween" }}
           className="user-drop-down"
         >
