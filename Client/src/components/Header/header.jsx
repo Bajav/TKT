@@ -17,9 +17,9 @@ const LocationHeader = () => {
     try {
       const signinedInUser = await popUpSignIn();
       setUserData(signinedInUser.user);
-      createUserFromAuth(signinedInUser.user);
+      await createUserFromAuth(signinedInUser.user);
       setSigninedIn(true);
-      console.log("✅ User signed in:", userData);
+      // console.log("✅ User signed in:", userData);
     } catch (err) {
       console.log("❌ Error signing in:", err);
     }
