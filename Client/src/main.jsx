@@ -5,15 +5,18 @@ import "./styles/index.scss";
 import { BrowserRouter } from "react-router-dom";
 import { FlightSearchProvider } from "./components/context/flightSearch.context.jsx";
 import { LocationProvider } from "./components/context/location.context.jsx";
+import { UserContextProvider } from "./components/context/user.context.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <FlightSearchProvider>
-        <LocationProvider>
-          <App />
-        </LocationProvider>
-      </FlightSearchProvider>
+      <UserContextProvider>
+        <FlightSearchProvider>
+          <LocationProvider>
+            <App />
+          </LocationProvider>
+        </FlightSearchProvider>
+      </UserContextProvider>
     </BrowserRouter>
   </StrictMode>
 );

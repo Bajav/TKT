@@ -5,10 +5,10 @@ const UserContext = createContext({
   setUserData: () => {},
 });
 
-const userContextProvider = ({ children }) => {
+const UserContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const value = { userData, setUserData };
-  <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
-export { UserContext,userContextProvider};
+export { UserContext,UserContextProvider};
