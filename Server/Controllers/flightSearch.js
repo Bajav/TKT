@@ -16,6 +16,7 @@ const searchFlights = async (req, res) => {
       passengers,
     } = await req.body;
     console.log("form data recieved",req.body);
+    
     // console.log("passengers",passengers);
 
     if (
