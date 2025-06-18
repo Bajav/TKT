@@ -41,6 +41,7 @@ function FlightsForm() {
 
   const [airlines, setAirlines] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,6 +133,7 @@ function FlightsForm() {
   };
 
   const handleSwitch = (e) => {
+    setClicked(!clicked)
     e.preventDefault();
     setInputs((prev) => ({
       ...prev,
@@ -211,7 +213,7 @@ function FlightsForm() {
                   change={handleChange}
                   value={inputs.origin}
                 />
-                <motion.button initial={{rotate:90}} className="switchBtn" onClick={handleSwitch}>
+                <motion.button initial={{rotate:0}} animate={clicked ?{rotate:360,type:"spring"}:{rotate: 0}} className="switchBtn" onClick={handleSwitch}>
                   <img src={RoundTripIcon} alt="" />
                 </motion.button>
                 <div className="newFlex">
