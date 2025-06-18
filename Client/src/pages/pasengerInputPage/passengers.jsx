@@ -22,7 +22,7 @@ function Passengers() {
         originCity="kampala"
         originTime="12:05:00"
         destinationCode="lhr"
-        destinationCity="london"
+        destinabtionCity="london"
         destinationTime="00:11:00"
         arrowColor="#222"
       />

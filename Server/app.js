@@ -1,8 +1,5 @@
-// import dotenv from "dotenv";
-// import cors from 'cors';
 import express from "express";
 import iataRoutes from './Routes/iataRoutes.js'
-import flightRoutes from './Routes/anotherFlightRoute.js';
 import searchFlight from './Routes/searchFlightRt.js'
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
 
