@@ -3,6 +3,7 @@ import express from "express";
 import cookieRoutes from './Routes/cookie.routes.js'
 import iataRoutes from './Routes/iataRoutes.js'
 import searchFlight from './Routes/searchFlightRt.js'
+import stripeRoutes from './Routes/stripe.routes.js'
 // middleware
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
 import cookieParserMiddleware from "./Middleware/cookie.middleware.js";
@@ -25,6 +26,7 @@ app.use(express.static("public"));
 app.use('/',iataRoutes);
 app.use('/',cookieRoutes);
 app.use('/',searchFlight);
+app.use('/',stripeRoutes);
 
 
 // Start server
