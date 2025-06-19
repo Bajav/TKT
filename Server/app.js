@@ -1,6 +1,9 @@
 import express from "express";
+// routes
+import cookieRoutes from './Routes/cookie.routes.js'
 import iataRoutes from './Routes/iataRoutes.js'
 import searchFlight from './Routes/searchFlightRt.js'
+// middleware
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
 import cookieParserMiddleware from "./Middleware/cookie.middleware.js";
 import loggerMiddleware from "./Middleware/logger.middleware.js";
@@ -20,7 +23,7 @@ app.use(express.static("public"));
 
 // routes
 app.use('/',iataRoutes);
-// app.use('/',flightRoutes);
+app.use('/',cookieRoutes);
 app.use('/',searchFlight);
 
 
