@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@barba/core": "^2.10.3",
+    "@lottiefiles/dotlottie-web": "^0.46.0",
     "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^7.3.1",
     "@tailwindcss/vite": "^4.1.4",
