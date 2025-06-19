@@ -1,8 +1,9 @@
 export const cookieController = (req, res) => {
   const body = req.body;
-  console.log(body.uid);
+  // const uidString = body.uid.toString();
+  console.log("uiddd ::: ", body.email);
   try {
-    res.cookie("user_ID", body.uid);
+    res.cookie("user_ID", body.email);
     res.send("cookie created");
     console.log("cookie created");
   } catch (error) {
@@ -12,7 +13,7 @@ export const cookieController = (req, res) => {
 };
 
 export const readCookie = (req, res) => {
-  const body = req.body;
+  // const body = req.body;
   try {
     const cookies = req.cookies;
     console.log("cookies found", cookies);

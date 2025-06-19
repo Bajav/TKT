@@ -24,12 +24,15 @@ const LocationHeader = () => {
       console.log("❌ Error signing in:", err);
     }
   };
-  
+
   useEffect(() => {
     if (!userData) return;
     const postUserData = async () => {
       try {
-        await axios.post("http://localhost:3000/createCookie", userData);
+        await axios.post(
+          "http://localhost:3000/createCookie",
+          { uid: "hussein is my name"}
+        );
       } catch (err) {
         console.log("error posting user data", err);
       }
