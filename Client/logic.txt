@@ -1,0 +1,10 @@
+---USER SIGN IN AND AUTH---
+user signs in by google OAUTH creates uID which is stored on the 
+firestore database with other credentials, however as user signs in 
+or up  we also trigger another route on the express server , to which
+the uID is posted and a cookie is created containing that user ID,
+after this incase user refreshs the browser , we get to send a get req to
+the back end (express) to check if user cookie is available , if it is
+we get the user ID stored in init to the frontend which is used to check 
+whether user is signed in on firestore db until user logs out thats when the 
+cookie is destroyed 
