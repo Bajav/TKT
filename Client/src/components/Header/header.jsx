@@ -1,5 +1,6 @@
 import "./headr.styles.scss";
 import LocationComponent from "../LOCATION/location.component";
+import axios from 'axios';
 import { useState, useContext, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import popUpSignIn from "../../Controllers/signinwithpopup.controller";
@@ -19,16 +20,22 @@ const LocationHeader = () => {
       setUserData(signinedInUser.user);
       await createUserFromAuth(signinedInUser.user);
       setSigninedIn(true);
-      // console.log("✅ User signed in:", userData);
     } catch (err) {
       console.log("❌ Error signing in:", err);
     }
   };
   useEffect(() => {
+    // console.log(userData);
+    // const postUserData = async(userData.)=>
+    //   {
+
+    //   }
     if (userData) {
       console.log("✅ userData has been updated:", userData);
     }
-  }, [userData]);
+
+
+  }, []);
 
   return (
     <div className="header">
