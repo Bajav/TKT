@@ -22,3 +22,20 @@ export const readCookie = (req, res) => {
     res.status(500).send("no cookies found");
   }
 };
+
+export const deleteCookie = (req, res) => {
+  try {
+    res.clearCookie("user_ID", {
+      path: "/", // ensure the same path used when setting
+      httpOnly: true, // match the original cookie attributes
+      secure: false,  // set `true` if using HTTPS
+      sameSite: "Lax",
+    });
+    console.log("✅ Cookie deleted");
+    res.status(200).send("Cookie deleted");
+  } catch (err) {
+    console.error("❌ Error deleting cookie", err);
+    res.status(500).send("Failed to delete cookie");
+  }
+};
+
