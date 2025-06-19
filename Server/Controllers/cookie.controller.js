@@ -1,7 +1,8 @@
 export const cookieController = (req, res) => {
   const body = req.body;
+  console.log(body.uid);
   try {
-    res.cookie("user_ID", "sfdkgerjsf");
+    res.cookie("user_ID", body.uid);
     res.send("cookie created");
     console.log("cookie created");
   } catch (error) {

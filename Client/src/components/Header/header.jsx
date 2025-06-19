@@ -1,6 +1,6 @@
 import "./headr.styles.scss";
 import LocationComponent from "../LOCATION/location.component";
-import axios from 'axios';
+import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import popUpSignIn from "../../Controllers/signinwithpopup.controller";
@@ -24,18 +24,18 @@ const LocationHeader = () => {
       console.log("❌ Error signing in:", err);
     }
   };
+  
   useEffect(() => {
-    // console.log(userData);
-    // const postUserData = async(userData.)=>
-    //   {
-
-    //   }
-    if (userData) {
-      console.log("✅ userData has been updated:", userData);
-    }
-
-
-  }, []);
+    if (!userData) return;
+    const postUserData = async () => {
+      try {
+        await axios.post("http://localhost:3000/createCookie", userData);
+      } catch (err) {
+        console.log("error posting user data", err);
+      }
+    };
+    postUserData();
+  }, [userData]);
 
   return (
     <div className="header">

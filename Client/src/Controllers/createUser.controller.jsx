@@ -1,5 +1,8 @@
 import { db } from "../Utils/firestore.utils";
 import { setDoc, getDoc, doc } from "firebase/firestore";
+import {UserContext} from '../components/context/user.context'
+import { useContext } from "react";
+
 
 const createUserFromAuth = async (user) => {
   // check if document ecxists
