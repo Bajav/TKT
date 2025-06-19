@@ -8,6 +8,8 @@ import stripeRoutes from './Routes/stripe.routes.js'
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
 import cookieParserMiddleware from "./Middleware/cookie.middleware.js";
 import loggerMiddleware from "./Middleware/logger.middleware.js";
+
+// set up
 const port = 3000;
 const app = express();
 
