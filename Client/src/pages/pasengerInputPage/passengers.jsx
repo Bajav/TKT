@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useContext } from "react";
 import "./passenger.styles.scss";
 import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
 import PaxForm from "../../components/features/PaxForm/PaxForm";
 import Checkout from "../../components/Model/checkout.model";
 import { motion } from "motion/react";
+import { UiContext } from "../../components/context/ui.context";
 
 function Passengers() {
-  const [isModel, setModel] = useState(false);
-
+  
+  const {isModel} = useContext(UiContext);
   return (
     <section className="passengers">
       <h1>enter traveller details</h1>

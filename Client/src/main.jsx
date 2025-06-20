@@ -6,15 +6,18 @@ import { BrowserRouter } from "react-router-dom";
 import { FlightSearchProvider } from "./components/context/flightSearch.context.jsx";
 import { LocationProvider } from "./components/context/location.context.jsx";
 import { UserContextProvider } from "./components/context/user.context.jsx";
+import { UiContextProvider } from "./components/context/ui.context.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <UserContextProvider>
         <FlightSearchProvider>
-          <LocationProvider>
-            <App />
-          </LocationProvider>
+          <UiContextProvider>
+            <LocationProvider>
+              <App />
+            </LocationProvider>
+          </UiContextProvider>
         </FlightSearchProvider>
       </UserContextProvider>
     </BrowserRouter>
