@@ -1,5 +1,6 @@
 import FlexInput from "../../props/FlexInput/FlexInput";
 import DatePicker from "../flightSearch/Calender/calender.component";
+import './checkout.styles.scss';
 
 function Checkout() {
   return (
@@ -31,6 +32,10 @@ function Checkout() {
             change={() => {}}
           />
           <DatePicker />
+        </div>
+        <div className="btn-container">
+          <button className="cancelBtn">cancel</button>
+          <button className="paymentBtn">pay{"$300"}</button>
         </div>
       </form>
     </div>
