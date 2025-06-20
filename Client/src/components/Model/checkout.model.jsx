@@ -31,7 +31,11 @@ function Checkout() {
             name={""}
             change={() => {}}
           />
-          <DatePicker />
+            <DatePicker
+            placeholder="enter card expiry date"
+            isRangePicker={false}
+            onDateSelect={()=>{}}
+          />
         </div>
         <div className="btn-container">
           <button className="cancelBtn">cancel</button>

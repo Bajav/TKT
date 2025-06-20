@@ -6,7 +6,6 @@ import PhoneInput from "react-phone-number-input";
 import GenderDropDown from "../GenderDropDown/genderDromDown.component";
 import CountryDropdown from "../CountryDropDown/country.drop.down";
 import DocumentTypeDropdown from "../DocumentDropDown/document.dropDown";
-import { FlightCalendar } from "../../flightSearch/Calender/newCalender";
 import { FlightContext } from "../../context/flightSearch.context";
 import DatePicker from "../../flightSearch/Calender/calender.component";
 import "./PaxForm.scss";
@@ -17,7 +16,7 @@ function PaxForm() {
   const [inputs, setInputs] = useState({});
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [phone, setPhone] = useState("");
-  const [isRangeEnabled] = useState(true); // Always use range picker for document dates
+  const [isRangeEnabled] = useState(true); 
 
   const { bookedFlight } = useContext(FlightContext);
   console.log(bookedFlight.flightOffers);
