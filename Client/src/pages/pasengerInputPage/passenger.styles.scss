@@ -23,13 +23,6 @@
     }
   }
 }
-.succes-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100%;
-}
 .model-overlay {
   background: #f5f7f8ad;
   // background: red;
@@ -46,4 +39,14 @@
     margin-top: 40px;
     margin-bottom: 50px;
   }
+}
+
+.success-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  position: relative;
+  top: 35%;
+  width: 100%;
 }
