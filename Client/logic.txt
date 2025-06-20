@@ -8,3 +8,7 @@ the back end (express) to check if user cookie is available , if it is
 we get the user ID stored in init to the frontend which is used to check 
 whether user is signed in on firestore db until user logs out thats when the 
 cookie is destroyed 
+
+---go to check out logic---
+UI logic 
+submit btn opens the checkout model
