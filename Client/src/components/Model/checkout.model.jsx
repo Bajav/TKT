@@ -19,8 +19,8 @@ function Checkout() {
 
   const style = {
     base: {
-      fontSize: "16px",
-      color: "#32325d",
+      fontSize: "14px",
+      color: "#323030",
       "::placeholder": { color: "#a0aec0" },
     },
     invalid: {
