@@ -51,7 +51,7 @@ function Checkout() {
       setStatus("✅ Payment successful!");
     }
 
-    setSuccess(false)
+    setSuccess(false);
   };
 
   return (
@@ -78,7 +78,8 @@ function Checkout() {
           <div className="card-input half">
             <label>CVC</label>
             <div className="stripe-input">
-              <CardCvcElement options={{ style }} />
+              <CardCvcElement options={{ style, iconStyle: "default",
+    hideIcon: false  }} />
             </div>
           </div>
 

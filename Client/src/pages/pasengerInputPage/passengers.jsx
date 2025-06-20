@@ -5,7 +5,6 @@ import PaxForm from "../../components/features/PaxForm/PaxForm";
 import Checkout from "../../components/Model/checkout.model";
 import { motion, AnimatePresence } from "motion/react";
 import { UiContext } from "../../components/context/ui.context";
-import { Fragment } from "react";
 import SuccessfulPayment from "../../components/CheckoutSuccess/success.component";
 
 // stripe
@@ -38,7 +37,7 @@ function Passengers() {
       >
         <PaxForm />
       </motion.div>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isModel && (
           <motion.div
             className="model-overlay"

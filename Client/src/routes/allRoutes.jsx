@@ -15,15 +15,13 @@ import { Fragment } from "react";
 
 function AllRoutes() {
   const location = useLocation();
-
-  // Define all routes where Navbar should be hidden
-  const hideNavRoutes = [
-    "/flights/pricing",
-    "/flights/results",
-    "/flights/travelerData",
-    "/flights/lastprice",
-    "/flights/PassengerData"
-  ];
+const hideNavRoutes = [
+  "/flights/pricing",
+  "/flights/results",
+  "/flights/travelerData",
+  "/flights/lastprice",
+  "/flights/passengerData" 
+];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>
     location.pathname.startsWith(path)
