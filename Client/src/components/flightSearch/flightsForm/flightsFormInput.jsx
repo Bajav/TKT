@@ -167,20 +167,15 @@ function FlightsForm() {
   };
 
   useEffect(() => {
-    if (inputs.flightType === "roundTrip") {
-      setIsRangeEnabled(true);
-    } else {
-      setIsRangeEnabled(false);
-    }
-    const cookie = () => {
-      if (navigator.cookieEnabled === false) {
-        // alert("Error: cookies not enabled!");
-      } else {
-        // alert("cookies are en3abled!");
+    const checkFlightType = () => {
+      if (inputs.flightType === "oneWay") {
+        setIsRangeEnabled(false);
+      } else if (inputs.flightType === "roundTrip") {
+        setIsRangeEnabled(true);
       }
     };
-    cookie();
-  }, []);
+    checkFlightType();
+  }, [inputs]);
 
   return (
     <div>
@@ -189,18 +184,57 @@ function FlightsForm() {
           <form onSubmit={handleSubmit}>
             <div className="flightSearch">
               <div className="flex-option">
-                {["oneWay", "roundTrip", "multiCity"].map((type) => (
-                  <ClickOption
-                    key={type}
-                    labelName={type}
-                    label={type.replace(/([A-Z])/g, " $1").toLowerCase()}
-                    checkName="flightType"
-                    changeFunc={() => handleTripTypeClick(type)}
-                    checkedName={inputs.flightType === type}
-                    click={() => handleTripTypeClick(type)}
-                    isActive={inputs.flightType === type}
-                  />
-                ))}
+                <ClickOption
+                  key="oneWay"
+                  className="trav"
+                  labelName="oneWay"
+                  label="one way"
+                  checkName="flightType"
+                  changeFunc={() => handleTripTypeClick("oneWay")}
+                  checkedName={inputs.flightType === "oneWay"}
+                  click={() => handleTripTypeClick("oneWay")}
+                  isActive={inputs.flightType === "oneWay"}
+                />
+
+                <ClickOption
+                  key="roundTrip"
+                  className="trav"
+                  labelName="roundTrip"
+                  label="round trip"
+                  checkName="flightType"
+                  changeFunc={() => handleTripTypeClick("roundTrip")}
+                  checkedName={inputs.flightType === "roundTrip"}
+                  click={() => handleTripTypeClick("roundTrip")}
+                  isActive={inputs.flightType === "roundTrip"}
+                />
+
+                <ClickOption
+                  key="multiCity"
+                  className="trav"
+                  labelName="multiCity"
+                  label="multi city"
+                  checkName="flightType"
+                  changeFunc={() => handleTripTypeClick("multiCity")}
+                  checkedName={inputs.flightType === "multiCity"}
+                  click={() => handleTripTypeClick("multiCity")}
+                  isActive={inputs.flightType === "multiCity"}
+                />
+                <div
+                  className="actives"
+                  style={{
+                    left:
+                      inputs.flightType === "oneWay"
+                        ? "1px"
+                        : inputs.flightType === "roundTrip"
+                        ? "140px"
+                        : "270px",
+                        width:inputs.flightType === "oneWay"
+                        ? "120px"
+                        : inputs.flightType === "roundTrip"
+                        ? "120px"
+                        : "132px",
+                  }}
+                />
               </div>
 
               <div className="flightInputs">

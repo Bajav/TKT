@@ -1,17 +1,27 @@
-// import './check.scss';
-
-function ClickOption(props) {
+function ClickOption({
+  label,
+  labelName,
+  checkName,
+  changeFunc,
+  checkedName,
+  click,
+  isActive,
+}) {
   return (
-    // 
-    <div className={`btn-flex ${props.isActive ? "active" : ""}`}>
-      <label htmlFor={props.labelName}>{props.label}</label>
+    <div className="btn-flex">
+      <label
+        className={`click-option-label ${isActive ? "active" : ""}`}
+        htmlFor={labelName}
+      >
+        {label}
+      </label>
       <input
         type="radio"
-        id={props.labelName}
-        name={props.checkName}
-        onChange={props.changeFunc}
-        checked={props.checkedName}
-        onClick={props.click}
+        id={labelName}
+        name={checkName}
+        onChange={changeFunc}
+        checked={checkedName}
+        onClick={click}
       />
     </div>
   );
