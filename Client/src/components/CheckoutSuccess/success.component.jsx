@@ -1,5 +1,6 @@
 import "./success.styles.scss";
 import successIcon from "../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
+import {DotLottieReact} from '@lottiefiles/dotlottie-react';
 
 function SuccessfulPayment() {
   return (
@@ -12,7 +13,10 @@ function SuccessfulPayment() {
         </p>
       </div>
       <div className="success-icon-anime">
-        <img src={successIcon} alt="success-checkMark" />
+         <DotLottieReact
+      src="https://lottie.host/6d11ce08-378c-4029-ab17-f194ae45a9ad/6kFfz7gcJD.lottie"
+      autoplay
+    />
       </div>
       <button>view ticket</button>
     </div>
