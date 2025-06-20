@@ -3,7 +3,7 @@ import "./passenger.styles.scss";
 import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
 import PaxForm from "../../components/features/PaxForm/PaxForm";
 import Checkout from "../../components/Model/checkout.model";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { UiContext } from "../../components/context/ui.context";
 import { Fragment } from "react";
 import SuccessfulPayment from "../../components/CheckoutSuccess/success.component";
@@ -17,8 +17,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
 
 function Passengers() {
   const { isModel, isSuccess } = useContext(UiContext);
-  // const [isModel, setModel] = useState(true);
-  // const [isSuccess, setSuccess] = useState(true);
+
   return (
     <section className="passengers">
       <h1>enter traveller details</h1>
@@ -39,26 +38,45 @@ function Passengers() {
       >
         <PaxForm />
       </motion.div>
-      {isModel && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, type: "tween", duration: 0.5 }}
-          className="model-overlay"
-        >
-          <motion.div className="check-out-container">
-            <h1>enter card details to book the flight</h1>
-            <Elements stripe={stripePromise}>
-              <Checkout />
-            </Elements>
+      <AnimatePresence>
+        {isModel && (
+          <motion.div
+            className="model-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <AnimatePresence mode="wait">
+              {isSuccess ? (
+                <motion.div
+                  key="checkout"
+                  className="check-out-container"
+                  initial={{ y: 400, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -400, opacity: 0, scale: 0.7 }}
+                  transition={{ type: "tween", duration: 0.5 }}
+                >
+                  <h1>Enter card details to book the flight</h1>
+                  <Elements stripe={stripePromise}>
+                    <Checkout />
+                  </Elements>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="success"
+                  className="success-container"
+                  initial={{ y: 400, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -400, opacity: 0, scale: 0.5 }}
+                  transition={{ type: "tween", duration: 0.5 }}
+                >
+                  <SuccessfulPayment />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
-        </motion.div>
-      )}
-      {/* {isSuccess && (
-        <motion.div className="succes-container">
-          <SuccessfulPayment />
-        </motion.div>
-      )} */}
+        )}
+      </AnimatePresence>
     </section>
   );
 }

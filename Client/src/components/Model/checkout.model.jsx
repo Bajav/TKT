@@ -13,7 +13,7 @@ import axios from "axios";
 function Checkout() {
   const stripe = useStripe();
   const elements = useElements();
-  const { setModel } = useContext(UiContext);
+  const { setModel, setSuccess } = useContext(UiContext);
   const [cardHolder, setCardHolder] = useState("");
   const [status, setStatus] = useState("");
 
@@ -32,8 +32,8 @@ function Checkout() {
     e.preventDefault();
     setStatus("Processing...");
 
-    const { data } = await axios.post("/api/payment-intent", {
-      amount: 70000, // $700
+    const { data } = await axios.post("http://localhost:3000/checkout", {
+      amount: 70000,
     });
 
     const clientSecret = data.clientSecret;
@@ -50,6 +50,8 @@ function Checkout() {
     } else if (result.paymentIntent.status === "succeeded") {
       setStatus("✅ Payment successful!");
     }
+
+    setSuccess(false)
   };
 
   return (
