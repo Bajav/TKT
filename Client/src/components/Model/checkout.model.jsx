@@ -1,8 +1,11 @@
-import FlexInput from "../../props/FlexInput/FlexInput";
+import { useContext } from "react";
 import DatePicker from "../flightSearch/Calender/calender.component";
 import "./checkout.styles.scss";
+import { UiContext } from "../context/ui.context";
 
 function Checkout() {
+
+    const {setModel} = useContext(UiContext)
   return (
     <div className="main-container">
       <form className="form-container">
@@ -49,7 +52,7 @@ function Checkout() {
           </div>
         </div>
         <div className="btn-container">
-          <button className="cancelBtn">cancel</button>
+          <button className="cancelBtn" onClick={()=>setModel(true)}>cancel</button>
           <button className="paymentBtn">pay{"$300"}</button>
         </div>
       </form>

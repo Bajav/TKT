@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 const UiContext = createContext({
-  isModel: false,
+  isModel: true,
   setModel: () => {},
 });
 

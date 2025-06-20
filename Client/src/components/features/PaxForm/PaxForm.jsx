@@ -10,6 +10,7 @@ import { FlightContext } from "../../context/flightSearch.context";
 import DatePicker from "../../flightSearch/Calender/calender.component";
 import "./PaxForm.scss";
 import axios from "axios";
+import { UiContext } from "../../context/ui.context";
 
 function PaxForm() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function PaxForm() {
   const [isRangeEnabled] = useState(true); 
 
   const { bookedFlight } = useContext(FlightContext);
+  const {setModel} = useContext(UiContext);
   console.log(bookedFlight.flightOffers);
 
   const handleChange = (e) => {
@@ -34,6 +36,7 @@ function PaxForm() {
       nationality: selectedCountry?.code || null,
     };
     console.log(fullForm);
+    setModel(false);
     // try {
     //   const response = await axios.post(
     //     "http://localhost:3000/getFlightOrder",
