@@ -11,18 +11,15 @@
     // font-weight: 600;
     font-family: $roboto, sans-serif;
   }
-  .flight-calendar__input-field {
-    height: 40px;
-  }
-  .flight-calendar {
-    margin-top: 0;
-  }
-  .flight-calendar__dropdown {
-    left: -49px;
-    width: 235px;
-  }
 }
-
+.stripe-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fdfdfd;
+}
 .main-container {
   position: relative;
   background: $ticketColor;
@@ -72,13 +69,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 12px;
   button {
     color: $page_color;
     font-family: $roboto, sans-serif;
     font-size: 12px;
     text-transform: capitalize;
-    padding: 10px 75px;
+    padding: 15px 70px;
     border-radius: 5px;
   }
 

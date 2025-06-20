@@ -2,14 +2,15 @@
 .success-payment-container {
   width: 95vw;
   height: 50vh;
-  background-color: $ticketColor;
+  background-color: #1A1A1A;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 40px;
-  gap: 20%;
+  gap: 18%;
+  margin-top: 10px;
   h3 {
     font-family: $roboto, sans-serif;
     color: #eee;
@@ -17,7 +18,7 @@
     text-transform: capitalize;
     // font-weight: 600;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
   p {
     font-family: $roboto, sans-serif;

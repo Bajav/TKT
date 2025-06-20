@@ -8,6 +8,13 @@ import { UiContext } from "../../components/context/ui.context";
 import { Fragment } from "react";
 import SuccessfulPayment from "../../components/CheckoutSuccess/success.component";
 
+// stripe
+
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
+
 function Passengers() {
   const { isModel, isSuccess } = useContext(UiContext);
   return (
@@ -42,7 +49,9 @@ function Passengers() {
           {isSuccess ? (
             <motion.div className="check-out-container">
               <h1>enter card details to book the flight</h1>
-              <Checkout />
+              <Elements stripe={stripePromise}>
+                <Checkout />
+              </Elements>
             </motion.div>
           ) : (
             <motion.div className="succes-container">

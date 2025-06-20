@@ -1,60 +1,107 @@
-import { useContext } from "react";
-import DatePicker from "../flightSearch/Calender/calender.component";
-import "./checkout.styles.scss";
+import {
+  CardNumberElement,
+  CardCvcElement,
+  CardExpiryElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+import { useState, useContext } from "react";
 import { UiContext } from "../context/ui.context";
+import "./checkout.styles.scss";
+import axios from "axios";
 
 function Checkout() {
+  const stripe = useStripe();
+  const elements = useElements();
+  const { setModel } = useContext(UiContext);
+  const [cardHolder, setCardHolder] = useState("");
+  const [status, setStatus] = useState("");
 
-    const {setModel} = useContext(UiContext)
+  const style = {
+    base: {
+      fontSize: "16px",
+      color: "#32325d",
+      "::placeholder": { color: "#a0aec0" },
+    },
+    invalid: {
+      color: "#e53e3e",
+    },
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("Processing...");
+
+    const { data } = await axios.post("/api/payment-intent", {
+      amount: 70000, // $700
+    });
+
+    const clientSecret = data.clientSecret;
+
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardNumberElement),
+        billing_details: { name: cardHolder },
+      },
+    });
+
+    if (result.error) {
+      setStatus(`❌ ${result.error.message}`);
+    } else if (result.paymentIntent.status === "succeeded") {
+      setStatus("✅ Payment successful!");
+    }
+  };
+
   return (
     <div className="main-container">
-      <form className="form-container">
+      <form className="form-container" onSubmit={handleSubmit}>
         <div className="card-input">
-          <label>card holder</label>
+          <label>Card Holder</label>
           <input
-            name="holderDetails"
-            value={""}
-            placeholder="enter card holder names"
             type="text"
-            onChange={() => {}}
+            placeholder="Enter Card Holder Names"
+            value={cardHolder}
+            onChange={(e) => setCardHolder(e.target.value)}
           />
         </div>
 
         <div className="card-input">
-          <label>card number</label>
-          <input
-            name="cardNumber"
-            value={""}
-            placeholder="enter card number"
-            type="text"
-            onChange={() => {}}
-          />
+          <label>Card Number</label>
+          <div className="stripe-input">
+            <CardNumberElement options={{ style }} />
+          </div>
         </div>
 
         <div className="flexed">
-          <div className="card-input">
-            <label>cvc</label>
-            <input
-              name="cvc"
-              value={""}
-              placeholder="enter cvc"
-              type="text"
-              onChange={() => {}}
-            />
+          <div className="card-input half">
+            <label>CVC</label>
+            <div className="stripe-input">
+              <CardCvcElement options={{ style }} />
+            </div>
           </div>
-          <div className="card-input">
-            <label>expiry date</label>
-            <DatePicker
-              placeholder="enter card expiry date"
-              isRangePicker={false}
-              onDateSelect={() => {}}
-            />
+
+          <div className="card-input half">
+            <label>Expiry Date</label>
+            <div className="stripe-input">
+              <CardExpiryElement options={{ style }} />
+            </div>
           </div>
         </div>
+
         <div className="btn-container">
-          <button className="cancelBtn" onClick={()=>setModel(true)}>cancel</button>
-          <button className="paymentBtn">pay{"$300"}</button>
+          <button
+            type="button"
+            className="cancelBtn"
+            onClick={() => setModel(true)}
+          >
+            Cancel
+          </button>
+          <button type="submit" className="paymentBtn" disabled={!stripe}>
+            Pay $700
+          </button>
         </div>
+
+        {status && <p>{status}</p>}
       </form>
     </div>
   );
