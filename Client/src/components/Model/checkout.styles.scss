@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+.main-container
+{
+    background: $ticketColor;
+    padding: 3px;
+    .model-overlay
+    {
+        height: 40vh;
+        width: 100vw;
+        background: $page_color;
+    }
+    .form-container
+    {
+        background: $page_color;
+    }
+}
+.card-input
+{
+    font-family: $roboto,sans-serif;
+    display: flex;
+    flex-direction: column;
+    label
+    {
+        font-size: 13px;
+        font-weight: 400;
+        text-transform: capitalize;
+    }
+}

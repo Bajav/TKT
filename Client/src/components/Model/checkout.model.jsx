@@ -1,40 +1,47 @@
 import FlexInput from "../../props/FlexInput/FlexInput";
 import DatePicker from "../flightSearch/Calender/calender.component";
-import './checkout.styles.scss';
+import "./checkout.styles.scss";
 
 function Checkout() {
   return (
     <div className="main-container">
       <form className="form-container">
-        <FlexInput
-          labelName="card holder"
-          value={""}
-          type="text"
-          placeholder="enter card holder names"
-          name={""}
-          change={() => {}}
-        />
-        <FlexInput
-          labelName="card number"
-          value={""}
-          type=""
-          placeholder="enter card number"
-          name={""}
-          change={() => {}}
-        />
-        <div className="flexed">
-          <FlexInput
-            labelName="CVC"
+        <div className="card-input">
+          <label>card holder</label>
+          <input
+            name="holderDetails"
             value={""}
+            placeholder="enter card holder names"
             type="text"
-            placeholder="enter cVC"
-            name={""}
-            change={() => {}}
+            onChange={() => {}}
           />
-            <DatePicker
+        </div>
+        <div className="card-input">
+          <label>card number</label>
+          <input
+            name="cardNumber"
+            value={""}
+            placeholder="enter card number"
+            type="text"
+            onChange={() => {}}
+          />
+        </div>
+
+        <div className="flexed">
+          <div className="card-input">
+            <label>cvc</label>
+            <input
+              name="cvc"
+              value={""}
+              placeholder="enter cvc"
+              type="text"
+              onChange={() => {}}
+            />
+          </div>
+          <DatePicker
             placeholder="enter card expiry date"
             isRangePicker={false}
-            onDateSelect={()=>{}}
+            onDateSelect={() => {}}
           />
         </div>
         <div className="btn-container">

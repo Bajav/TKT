@@ -2,18 +2,13 @@ import { useState } from "react";
 import "./passenger.styles.scss";
 import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
 import PaxForm from "../../components/features/PaxForm/PaxForm";
+import Checkout from "../../components/Model/checkout.model";
 
 function Passengers() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Selected Country:", selectedCountry);
-  };
-  const [formData, setFormData] = useState({
-    name: "",
-    gender: ""
-  });
+  const [isModel,setModel]= useState(false);
 
-  const [selectedCountry, setSelectedCountry] = useState(null);
+
+
   return (
     <section className="passengers">
       <h1>enter traveller details</h1>
@@ -27,9 +22,13 @@ function Passengers() {
         arrowColor="#222"
       />
 
-      <div className="form">
+     {isModel ? (<div className="form">
         <PaxForm />
-      </div>
+      </div>):(
+        <div className="model-overlay">
+          <Checkout />
+        </div>
+      )}
     </section>
   );
 }
