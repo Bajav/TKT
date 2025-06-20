@@ -16,6 +16,7 @@ function Checkout() {
             onChange={() => {}}
           />
         </div>
+
         <div className="card-input">
           <label>card number</label>
           <input
@@ -38,11 +39,14 @@ function Checkout() {
               onChange={() => {}}
             />
           </div>
-          <DatePicker
-            placeholder="enter card expiry date"
-            isRangePicker={false}
-            onDateSelect={() => {}}
-          />
+          <div className="card-input">
+            <label>expiry date</label>
+            <DatePicker
+              placeholder="enter card expiry date"
+              isRangePicker={false}
+              onDateSelect={() => {}}
+            />
+          </div>
         </div>
         <div className="btn-container">
           <button className="cancelBtn">cancel</button>
