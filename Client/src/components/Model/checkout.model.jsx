@@ -28,42 +28,30 @@ function Checkout() {
     },
   };
 
-  const elementOptions = {
-    style,
-    iconStyle: "default",   // ✅ show card brand icon
-    hideIcon: false,
-    paymentRequest: null,   // ✅ disable Link autofill prompt
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Processing...");
 
-    try {
-      const { data } = await axios.post("http://localhost:3000/checkout", {
-        amount: 70000,
-      });
+    const { data } = await axios.post("http://localhost:3000/checkout", {
+      amount: 70000,
+    });
 
-      const clientSecret = data.clientSecret;
+    const clientSecret = data.clientSecret;
 
-      const result = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardNumberElement),
-          billing_details: { name: cardHolder },
-        },
-      });
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardNumberElement),
+        billing_details: { name: cardHolder },
+      },
+    });
 
-      if (result.error) {
-        setStatus(`❌ ${result.error.message}`);
-      } else if (result.paymentIntent.status === "succeeded") {
-        setStatus("✅ Payment successful!");
-        setSuccess(true);
-        setModel(false); // optionally close modal
-      }
-    } catch (err) {
-      setStatus("⚠️ Something went wrong, please try again.");
-      console.error(err);
+    if (result.error) {
+      setStatus(`❌ ${result.error.message}`);
+    } else if (result.paymentIntent.status === "succeeded") {
+      setStatus("✅ Payment successful!");
     }
+
+    setSuccess(false);
   };
 
   return (
@@ -82,7 +70,7 @@ function Checkout() {
         <div className="card-input">
           <label>Card Number</label>
           <div className="stripe-input">
-            <CardNumberElement options={elementOptions} />
+            <CardNumberElement options={{ style }} />
           </div>
         </div>
 
@@ -90,14 +78,15 @@ function Checkout() {
           <div className="card-input half">
             <label>CVC</label>
             <div className="stripe-input">
-              <CardCvcElement options={elementOptions} />
+              <CardCvcElement options={{ style, iconStyle: "default",
+    hideIcon: false  }} />
             </div>
           </div>
 
           <div className="card-input half">
             <label>Expiry Date</label>
             <div className="stripe-input">
-              <CardExpiryElement options={elementOptions} />
+              <CardExpiryElement options={{ style }} />
             </div>
           </div>
         </div>

@@ -202,7 +202,7 @@ const DatePicker = ({
               value={year}
               onChange={(e) => setYear(Number(e.target.value))}
             >
-              {Array.from({ length: 130 }, (_, i) => 1900 + i).map((y) => (
+              {Array.from({ length: 190 }, (_, i) => 1900 + i).map((y) => (
                 <option key={y} value={y}>
                   {y}
                 </option>

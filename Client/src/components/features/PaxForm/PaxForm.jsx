@@ -67,7 +67,7 @@ function PaxForm() {
       docExpiryDate: range.end?.toISOString().split("T")[0],
     }));
   };
-  const array = [1, 2, 3, 5];
+  const array = [1];
 
   return (
     <div className="paxFormContainer">
@@ -75,7 +75,7 @@ function PaxForm() {
         {array.map(() => {
           return (
             <div className="formContainer">
-               <h1>pax {array.length - 1}</h1>
+               <h1>pax {array.length}</h1>
               <div className="flex-items">
                 <FlexInput
                   labelName="first name"
