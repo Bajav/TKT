@@ -1,50 +1,54 @@
 @import "../../styles/variables.scss";
 
-
-
 .flexed {
   display: flex;
   align-items: center;
+  gap: 5px;
+  justify-content: center;
   label {
     text-transform: uppercase;
     font-size: 11px;
-    font-weight: 600;
+    // font-weight: 600;
+    font-family: $roboto, sans-serif;
   }
   .flight-calendar__input-field {
     height: 40px;
   }
-  .flight-calendar 
-  {
+  .flight-calendar {
     margin-top: 0;
+  }
+  .flight-calendar__dropdown {
+    left: -49px;
+    width: 235px;
   }
 }
 
 .main-container {
+  position: relative;
   background: $ticketColor;
+  top: 24%;
   padding: 3px;
-  width: 80vw;
+  width: 90vw;
   border-radius: 15px;
   // height: 40vh;
-  .model-overlay {
-    height: 40vh;
-    width: 100vw;
-    background: $page_color;
-  }
   .form-container {
     padding: 5px;
     border-radius: 13px;
-    background: $page_color;
+    background: $inputBackGround;
   }
 }
 .card-input {
   font-family: $roboto, sans-serif;
   display: flex;
   flex-direction: column;
+  width: 100%;
   label {
     font-size: 13px;
-    font-weight: 600;
+    // font-weight: 600;
     font-size: 11px;
+    margin-bottom: 10px;
     text-transform: capitalize;
+    font-family: $roboto, sans-serif;
     color: $visibleFontColor;
     margin-top: 5px;
   }
@@ -58,5 +62,30 @@
     color: $visibleFontColor;
     border-radius: 5px;
     // padding: 10px 0px 0px 0px;
+  }
+}
+
+.btn-container {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  button {
+    color: $page_color;
+    font-family: $roboto, sans-serif;
+    font-size: 12px;
+    text-transform: capitalize;
+    padding: 10px 70px;
+    border-radius: 5px;
+  }
+
+  .cancelBtn {
+    background: #ff5c56;
+  }
+  .paymentBtn {
+    background: $actionBlue;
   }
 }
