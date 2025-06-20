@@ -29,7 +29,7 @@ function FlightPricing() {
     };
     return lookup;
   }, {});
-  const coninueBtn = () => navigate("/flights/PassengerData", { replace: true });
+  const coninueBtn = () => navigate("/flights/Passengerdata", { replace: true });
   console.log("lastFlight",lastFlight);
 
   return (

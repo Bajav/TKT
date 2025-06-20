@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import { Fragment } from "react";
 
 import Home from "../pages/Home/home";
 import Places from "../pages/places";
@@ -11,20 +12,18 @@ import Flights from "../pages/flights";
 import FlightPricing from "../pages/flightPricing/flightPricing";
 import FlightResult from "../pages/flightResult/flightResults";
 import Passengers from "../pages/pasengerInputPage/passengers";
-import { Fragment } from "react";
 
 function AllRoutes() {
   const location = useLocation();
-const hideNavRoutes = [
-  "/flights/pricing",
-  "/flights/results",
-  "/flights/travelerData",
-  "/flights/lastprice",
-  "/flights/passengerData" 
-];
+
+  const hideNavRoutes = [
+    "/flights/results",
+    "/flights/lastprice",
+    "/flights/passengerdata"
+  ];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>
-    location.pathname.startsWith(path)
+    location.pathname.toLowerCase().startsWith(path)
   );
 
   return (
@@ -39,12 +38,11 @@ const hideNavRoutes = [
         <Route path="/packages" element={<Packages />} />
 
         {/* Flights Route Group */}
-        <Route path="/flights" element={<Flights />} />
-        <Route path="flights/results" element={<FlightResult />} />
-        <Route path="flights/lastprice" element={<FlightPricing />} />
-        <Route path="flights/PassengerData" element={<Passengers />} />
-        {/* Catch-All for Unknown Routes */}
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="/flights" element={<Flights />} >
+          <Route path="results" element={<FlightResult />} />
+          <Route path="lastprice" element={<FlightPricing />} />
+          <Route path="passengerdata" element={<Passengers />} />
+        </Route>
       </Routes>
     </Fragment>
   );
