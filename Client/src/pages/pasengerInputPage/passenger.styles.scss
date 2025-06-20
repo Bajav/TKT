@@ -1,19 +1,18 @@
 @import "../../styles/variables.scss";
 
 .passengers {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #F5F7F8;
-    padding: 10px 5px;
-    height: 100vh;
-    h1
-    {
-        font-family: $textFont,sans-serif;
-        margin-top:10px ;
-        margin-bottom: 10px;
-        text-transform: capitalize;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f5f7f8;
+  padding: 10px 5px;
+  height: 100vh;
+  h1 {
+    font-family: $textFont, sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+  }
   .ticket-header {
     margin-bottom: 10px;
     h2 {
@@ -24,27 +23,27 @@
     }
   }
 }
-.succes-container
-{
+.succes-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100%;
 }
-.model-overlay
-{
-  background: $page_color;
-  position:absolute;
+.model-overlay {
+  background: #f5f7f8ad;
+  // background: red;
+  position: absolute;
   height: 100vh;
   width: 100vw;
+  opacity: 90%;
   top: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  h1
-  {
-    margin-top: 50px;
+  h1 {
+    margin-top: 40px;
+    margin-bottom: 50px;
   }
 }
