@@ -1,0 +1,44 @@
+@import "../../styles/variables.scss";
+.success-payment-container {
+  width: 95vw;
+  height: 65vh;
+  background-color: $ticketColor;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 40px;
+  h3 {
+    font-family: $roboto, sans-serif;
+    color: #eee;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-weight: 600;
+    text-align: center;
+  }
+  p {
+    font-family: $roboto, sans-serif;
+    font-size: 13px;
+    color: #eee;
+    text-transform: capitalize;
+    text-align: center;
+  }
+  button
+  {
+    width: 100%;
+    height: 40px;
+    font-family: $roboto,sans-serif;
+    font-size: 13px;
+    text-transform: capitalize;
+    color: $page_color;
+  }
+}
+.success-icon-anime {
+    background: green;
+    padding: 3px;
+    border-radius: 40px;
+  img {
+    width: 70px;
+  }
+}

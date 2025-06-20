@@ -12,3 +12,6 @@ cookie is destroyed
 ---go to check out logic---
 UI logic 
 submit btn opens the checkout model
+
+
+dependency card-validator
