@@ -36,7 +36,7 @@ function PaxForm() {
       nationality: selectedCountry?.code || null,
     };
     console.log(fullForm);
-    setModel(false);
+    setModel(true);
     // try {
     //   const response = await axios.post(
     //     "http://localhost:3000/getFlightOrder",

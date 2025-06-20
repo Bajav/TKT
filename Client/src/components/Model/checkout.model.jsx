@@ -92,7 +92,7 @@ function Checkout() {
           <button
             type="button"
             className="cancelBtn"
-            onClick={() => setModel(true)}
+            onClick={() => setModel(false)}
           >
             Cancel
           </button>

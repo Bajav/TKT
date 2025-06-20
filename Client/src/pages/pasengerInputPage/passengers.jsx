@@ -17,6 +17,8 @@ const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
 
 function Passengers() {
   const { isModel, isSuccess } = useContext(UiContext);
+  // const [isModel, setModel] = useState(true);
+  // const [isSuccess, setSuccess] = useState(true);
   return (
     <section className="passengers">
       <h1>enter traveller details</h1>
@@ -29,37 +31,34 @@ function Passengers() {
         destinationTime="00:11:00"
         arrowColor="#222"
       />
-
-      {isModel ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, type: "tween", duration: 0.5 }}
-          className="form"
-        >
-          <PaxForm />
-        </motion.div>
-      ) : (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, type: "tween", duration: 0.5 }}
+        className="form"
+      >
+        <PaxForm />
+      </motion.div>
+      {isModel && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, type: "tween", duration: 0.5 }}
           className="model-overlay"
         >
-          {isSuccess ? (
-            <motion.div className="check-out-container">
-              <h1>enter card details to book the flight</h1>
-              <Elements stripe={stripePromise}>
-                <Checkout />
-              </Elements>
-            </motion.div>
-          ) : (
-            <motion.div className="succes-container">
-              <SuccessfulPayment />
-            </motion.div>
-          )}
+          <motion.div className="check-out-container">
+            <h1>enter card details to book the flight</h1>
+            <Elements stripe={stripePromise}>
+              <Checkout />
+            </Elements>
+          </motion.div>
         </motion.div>
       )}
+      {/* {isSuccess && (
+        <motion.div className="succes-container">
+          <SuccessfulPayment />
+        </motion.div>
+      )} */}
     </section>
   );
 }
