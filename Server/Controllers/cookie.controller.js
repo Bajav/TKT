@@ -1,13 +1,20 @@
 export const cookieController = (req, res) => {
   const body = req.body;
-  // const uidString = body.uid.toString();
-  console.log("uiddd ::: ", body.email);
+  console.log("=== COOKIE CONTROLLER DEBUG ===");
+  console.log("Request origin:", req.headers.origin);
+  console.log("Request method:", req.method);
+  console.log("Body received:", body);
+  console.log("Body type:", typeof body);
+  console.log("UID value:", body.uid);
+  console.log("UID type:", typeof body.uid);
+  
   try {
-    res.cookie("user_ID", body.email);
+    res.cookie("user_ID", body.uid);
+    console.log("✅ Cookie set successfully");
+    console.log("Response headers will include Set-Cookie");
     res.send("cookie created");
-    console.log("cookie created");
   } catch (error) {
-    console.error("Error creating cookie:", error);
+    console.error("❌ Error creating cookie:", error);
     res.status(500).send("Failed to create cookie");
   }
 };

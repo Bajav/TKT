@@ -25,20 +25,33 @@ const LocationHeader = () => {
     }
   };
 
-  useEffect(() => {
-    if (!userData) return;
-    const postUserData = async () => {
-      try {
-        await axios.post(
-          "http://localhost:3000/createCookie",
-          { uid: "hussein is my name"}
-        );
-      } catch (err) {
-        console.log("error posting user data", err);
-      }
-    };
-    postUserData();
-  }, [userData]);
+useEffect(() => {
+  if (!userData) return;
+  const postUserData = async () => {
+    try {
+      console.log("🚀 Sending cookie request...");
+      const response = await axios.post(
+        "http://localhost:3000/createCookie",
+        { uid: "hussein is my name" },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("✅ Cookie response:", response);
+      console.log("✅ Response headers:", response.headers);
+      
+      // Test if cookie was actually set
+      // const cookieCheck = await axios.get("http://localhost:3000/readCookie", {
+      //   withCredentials: true
+      // });
+      console.log("🍪 Cookie check:", cookieCheck.data);
+      
+    } catch (err) {
+      console.log("❌ Error posting user data", err.response?.data || err.message);
+    }
+  };
+  postUserData();
+}, [userData]);
 
   return (
     <div className="header">
