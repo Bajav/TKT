@@ -6,4 +6,4 @@ const data = async () => {
     .then(()=>console.log("data deleted succesfuly"))
     .catch(err => console.log(err));
 };
-data();
+// data();

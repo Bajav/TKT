@@ -16,7 +16,7 @@ export async function migrateData(req,res) {
     const atlasCollection = atlasDb.collection("airline");
     
     // Insert into Atlas DB collection
-    await atlasCollection.insertMany(documents);
+    // await atlasCollection.insertMany(documents);
     console.log('Data migrated successfully');
 
 

@@ -1,6 +1,6 @@
 import { atlasDb } from "../Config/DB/mongoAtlas.js";
 
-const encodedPassword = encodeURIComponent('d!*%XJMLJBN29PP');
+
 
 export const startAtlas = async (req, res) => {
   try {

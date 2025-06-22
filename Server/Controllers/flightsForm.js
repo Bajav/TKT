@@ -1,4 +1,3 @@
-import express from 'express';
 
 const formData = async (req,res)=>
     {
