@@ -210,6 +210,219 @@ function FlightCard() {
     ECOBASIC: "Economy Basic",
   };
 
+  // helper functioms
+
+  // Flight offer analysis functions
+  function analyzeFlightOffers(flightOffers) {
+    const results = {
+      multiAirlineTrips: [],
+      codeSharingTrips: [],
+      cheapestOffer: null,
+      mostExpensiveOffer: null,
+      priceRange: {
+        min: Infinity,
+        max: -Infinity,
+      },
+      airlineFrequency: {},
+      summary: {},
+    };
+
+    flightOffers.forEach((offer) => {
+      const price = parseFloat(offer.price.grandTotal);
+      const airlines = extractAirlines(offer);
+
+      // Track price range
+      if (price < results.priceRange.min) {
+        results.priceRange.min = price;
+        results.cheapestOffer = offer;
+      }
+      if (price > results.priceRange.max) {
+        results.priceRange.max = price;
+        results.mostExpensiveOffer = offer;
+      }
+
+      // Check for multi-airline trips
+      if (airlines.unique.length > 1) {
+        results.multiAirlineTrips.push({
+          offerId: offer.id,
+          airlines: airlines.unique,
+          price: price,
+          currency: offer.price.currency,
+          segments: airlines.segmentDetails,
+        });
+      }
+
+      // Check for code sharing (operating vs marketing carriers)
+      const codeSharingInfo = checkCodeSharing(offer);
+      if (codeSharingInfo.hasCodeSharing) {
+        results.codeSharingTrips.push({
+          offerId: offer.id,
+          price: price,
+          currency: offer.price.currency,
+          codeSharingDetails: codeSharingInfo.details,
+        });
+      }
+
+      // Track airline frequency
+      airlines.all.forEach((airline) => {
+        results.airlineFrequency[airline] =
+          (results.airlineFrequency[airline] || 0) + 1;
+      });
+    });
+
+    // Generate summary
+    results.summary = {
+      totalOffers: flightOffers.length,
+      multiAirlineCount: results.multiAirlineTrips.length,
+      codeSharingCount: results.codeSharingTrips.length,
+      priceSpread: results.priceRange.max - results.priceRange.min,
+      mostFrequentAirline: getMostFrequentAirline(results.airlineFrequency),
+    };
+
+    return results;
+  }
+
+  function extractAirlines(offer) {
+    const allAirlines = [];
+    const segmentDetails = [];
+
+    offer.itineraries.forEach((itinerary, itinIndex) => {
+      itinerary.segments.forEach((segment, segIndex) => {
+        // Marketing carrier (the airline selling the ticket)
+        if (segment.carrierCode) {
+          allAirlines.push(segment.carrierCode);
+          segmentDetails.push({
+            itinerary: itinIndex,
+            segment: segIndex,
+            marketingCarrier: segment.carrierCode,
+            operatingCarrier:
+              segment.operating?.carrierCode || segment.carrierCode,
+            flightNumber: segment.number,
+            from: segment.departure?.iataCode,
+            to: segment.arrival?.iataCode,
+          });
+        }
+
+        // Operating carrier (the airline actually operating the flight)
+        if (segment.operating?.carrierCode) {
+          allAirlines.push(segment.operating.carrierCode);
+        }
+      });
+    });
+
+    // Add validating airlines
+    if (offer.validatingAirlineCodes) {
+      allAirlines.push(...offer.validatingAirlineCodes);
+    }
+
+    return {
+      all: allAirlines,
+      unique: [...new Set(allAirlines)],
+      segmentDetails: segmentDetails,
+    };
+  }
+
+  function checkCodeSharing(offer) {
+    const codeSharingDetails = [];
+    let hasCodeSharing = false;
+
+    offer.itineraries.forEach((itinerary, itinIndex) => {
+      itinerary.segments.forEach((segment, segIndex) => {
+        const marketingCarrier = segment.carrierCode;
+        const operatingCarrier = segment.operating?.carrierCode;
+
+        if (operatingCarrier && marketingCarrier !== operatingCarrier) {
+          hasCodeSharing = true;
+          codeSharingDetails.push({
+            itinerary: itinIndex,
+            segment: segIndex,
+            marketingCarrier: marketingCarrier,
+            operatingCarrier: operatingCarrier,
+            flightNumber: segment.number,
+            route: `${segment.departure?.iataCode}-${segment.arrival?.iataCode}`,
+          });
+        }
+      });
+    });
+
+    return {
+      hasCodeSharing,
+      details: codeSharingDetails,
+    };
+  }
+
+  function getMostFrequentAirline(airlineFrequency) {
+    let maxCount = 0;
+    let mostFrequent = null;
+
+    for (const [airline, count] of Object.entries(airlineFrequency)) {
+      if (count > maxCount) {
+        maxCount = count;
+        mostFrequent = airline;
+      }
+    }
+
+    return { airline: mostFrequent, count: maxCount };
+  }
+
+  // Helper function to get specific filtered results
+  function getFilteredResults(flightOffers, filters = {}) {
+    const analysis = analyzeFlightOffers(flightOffers);
+    const filtered = {};
+
+    if (filters.multiAirlineOnly) {
+      filtered.multiAirlineTrips = analysis.multiAirlineTrips;
+    }
+
+    if (filters.codeSharingOnly) {
+      filtered.codeSharingTrips = analysis.codeSharingTrips;
+    }
+
+    if (filters.priceRange) {
+      const { min, max } = filters.priceRange;
+      filtered.priceFiltered = flightOffers.filter((offer) => {
+        const price = parseFloat(offer.price.grandTotal);
+        return price >= min && price <= max;
+      });
+    }
+
+    if (filters.specificAirline) {
+      filtered.airlineSpecific = flightOffers.filter((offer) => {
+        const airlines = extractAirlines(offer);
+        return airlines.unique.includes(filters.specificAirline);
+      });
+    }
+
+    return {
+      ...analysis,
+      filtered,
+    };
+  }
+
+  useEffect(() => {
+    const results = analyzeFlightOffers(flightResults);
+    console.log("Multi-airline trips:", results.multiAirlineTrips.length);
+    console.log("Code sharing flights:", results.codeSharingTrips.length);
+    console.log("Cheapest offer:", results.cheapestOffer?.price.grandTotal);
+    console.log(
+      "Most expensive offer:",
+      results.mostExpensiveOffer?.price.grandTotal
+    );
+    console.log("Most frequent airline:", results.summary.mostFrequentAirline);
+    const filtered = getFilteredResults(flightResults, {
+      multiAirlineOnly: true,
+      priceRange: { min: 200, max: 600 },
+    });
+  }, []);
+  // Usage example:
+  /*
+const results = analyzeFlightOffers(flightOffersArray);
+
+
+// Get specific filtered results
+});
+*/
+
   return (
     <Fragment>
       <div className="filter-form">

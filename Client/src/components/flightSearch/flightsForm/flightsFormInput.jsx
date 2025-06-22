@@ -168,10 +168,10 @@ function FlightsForm() {
 
   useEffect(() => {
     const checkFlightType = () => {
-      if (inputs.flightType === "oneWay") {
-        setIsRangeEnabled(false);
-      } else if (inputs.flightType === "roundTrip") {
+      if (inputs.flightType === "roundTrip") {
         setIsRangeEnabled(true);
+      } else {
+        setIsRangeEnabled(false);
       }
     };
     checkFlightType();
