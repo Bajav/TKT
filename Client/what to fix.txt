@@ -54,3 +54,18 @@ regardless changing the route
 [1,2,3,4].map(()=>{
     <PaxForm />
  })
+
+automatic
+or
+ self transfer flight
+
+ visa requiremnet for destination country
+ timing in time zones 
+ notfying user when they should leave and return 
+
+ other payment methods
+ support 
+ create trust to the support
+ instant ticketing
+ CREATE ACCESSBLE SUPPORT 
+ cheap
