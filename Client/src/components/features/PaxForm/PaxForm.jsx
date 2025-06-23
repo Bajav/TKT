@@ -37,18 +37,18 @@ function PaxForm() {
     };
     console.log(fullForm);
     setModel(true);
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3000/getFlightOrder",
-    //     {
-    //       formData: fullForm,
-    //       bookedFlight: bookedFlight.flightOffers,
-    //     }
-    //   );
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error("Error posting flight:", error);
-    // }
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/getFlightOrder",
+        {
+          formData: fullForm,
+          bookedFlight: bookedFlight.flightOffers,
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error posting flight:", error);
+    }
   };
 
   // fecth flight order
