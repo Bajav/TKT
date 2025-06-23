@@ -178,7 +178,7 @@ const getFlightOrder = async (req, res) => {
                 {
                   deviceType: "MOBILE",
                   countryCallingCode: "256",
-                  number: "480080076",
+                  number: "781372789",
                 },
               ],
             },
