@@ -13,7 +13,7 @@ router.get("/checkin",getCheckIn);
 router.get("/findLastPrice",findLastPrice);
 router.post("/findLastPrice",findLastPrice);
 router.post("/getFlightOrder",getFlightOrder);
-router.get("/getFlightOrder",getFlightOrder);
+// router.get("/getFlightOrder",getFlightOrder);
 router.get("/retriveOrder",retriveOrder);
 router.get("/seatMap",seatMap);
 router.get("/deleteOrder",deleteOrder);
