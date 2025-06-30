@@ -10,6 +10,7 @@ import { stripe } from "../Config/Stripe/stripe.config.js";
       currency,
       // Optional: metadata, receipt_email, etc.
     });
+    console.log("paymentIntent",paymentIntent);
 
     res.status(200).json({ clientSecret: paymentIntent.client_secret });
   } catch (err) {

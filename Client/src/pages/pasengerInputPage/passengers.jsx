@@ -16,6 +16,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
 
 function Passengers() {
   const { isModel, isSuccess } = useContext(UiContext);
+  // const [isModel, setModel] = useState(false);
 
   return (
     <section className="passengers">
@@ -36,8 +37,13 @@ function Passengers() {
         className="form"
       >
         <PaxForm />
+        {isModel && (
+          <Elements stripe={stripePromise}>
+            <Checkout />
+          </Elements>
+        )}
       </motion.div>
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         {isModel && (
           <motion.div
             className="model-overlay"
@@ -75,7 +81,7 @@ function Passengers() {
             </AnimatePresence>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </section>
   );
 }

@@ -37,10 +37,11 @@ function Checkout() {
     });
 
     const clientSecret = data.clientSecret;
-
+    const cardElement = elements.getElement(CardNumberElement);
+    console.log("Card Element:", cardElement);
     const result = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
-        card: elements.getElement(CardNumberElement),
+        card: cardElement,
         billing_details: { name: cardHolder },
       },
     });
@@ -70,7 +71,9 @@ function Checkout() {
         <div className="card-input">
           <label>Card Number</label>
           <div className="stripe-input">
-            <CardNumberElement options={{ style }} />
+            <CardNumberElement
+              options={{ style, iconStyle: "default", hideIcon: false }}
+            />
           </div>
         </div>
 
@@ -78,8 +81,7 @@ function Checkout() {
           <div className="card-input half">
             <label>CVC</label>
             <div className="stripe-input">
-              <CardCvcElement options={{ style, iconStyle: "default",
-    hideIcon: false  }} />
+              <CardCvcElement options={{ style }} />
             </div>
           </div>
 
