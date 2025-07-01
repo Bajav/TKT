@@ -1,19 +1,7 @@
 import axios from "axios";
 import { createMyFareBoxSession } from "../Config/mytifly/mytifly.config.js";
-import { parseStringPromise } from "xml2js";
+// import { parseStringPromise } from "xml2js";
 
-const startSession = async (req, res) => {
-  try {
-    // A2CB667D-8FAC-4581-A666-6E2AF54BEDC9-6648
-    const xmlResponse = await createMyFareBoxSession();
-    //  const parsed = await parseStringPromise(xmlResponse.data);
-    console.log(xmlResponse.data.Data.SessionId);
-    res.send("session id created");
-  } catch (err) {
-    console.error("Failed to create MyFareBox session:", err.message);
-    res.status(500).json({ error: "Session creation failed" });
-  }
-};
 
 const searchFlight = async (req, res) => {
   try {
@@ -90,4 +78,4 @@ const searchFlight = async (req, res) => {
   }
 };
 
-export { startSession, searchFlight };
+export { searchFlight };
