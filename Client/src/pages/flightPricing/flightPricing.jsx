@@ -34,7 +34,7 @@ function FlightPricing() {
 
   return (
     <section className="reviewFlight">
-      <BackBTN to={"/"} btnName="cancel" />
+      <BackBTN onClick={()=>navigate("/flights")} btnName="cancel" />
       <h1>Review Flight</h1>
       <div className="main-trip-container OUTBOUND">
         <div className="trip-container">

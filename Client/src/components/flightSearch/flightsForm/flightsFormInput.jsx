@@ -17,7 +17,7 @@ import "./flightsForm.scss";
 
 function FlightsForm() {
   // contexts
-  const { setFormData, setIataCodes, setFlightResults, setAlert } =
+  const { setFormData, setIataCodes, setFlightResults,setFilteredFlights,setBrandedUpSell,setBookedFlight, setAlert } =
     useContext(FlightContext);
   const { userLocation } = useContext(LocationContext);
 
@@ -56,9 +56,18 @@ function FlightsForm() {
         console.error("Error fetching flight data:", error);
       }
     };
-
+    const resetState =()=>
+      {
+        setFilteredFlights([]);
+        setFlightResults([]);
+        setBrandedUpSell([]);
+        setBookedFlight([]);
+        console.log("state reseted");
+      }
     fetchData();
+    resetState();
   }, []);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
