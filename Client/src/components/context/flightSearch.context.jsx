@@ -21,6 +21,8 @@ export const FlightContext = createContext({
   setlastFlight: () => {},
   alert: false,
   setAlert: () => {},
+  filteredFlights: [],
+  setFilteredFlights: () => {},
 });
 
 export const FlightSearchProvider = ({ children }) => {
@@ -34,7 +36,7 @@ export const FlightSearchProvider = ({ children }) => {
   const [upsellError, setUpsellError] = useState("");
   const [lastFlight, setlastFlight] = useState([]);
   const [alert, setAlert] = useState(false);
-
+  const [filteredFlights, setFilteredFlights] = useState([]);
   const value = {
     flightSearch,
     setFormData,
@@ -56,6 +58,8 @@ export const FlightSearchProvider = ({ children }) => {
     setlastFlight,
     alert,
     setAlert,
+    filteredFlights,
+    setFilteredFlights,
   };
   return (
     <FlightContext.Provider value={value}>{children}</FlightContext.Provider>

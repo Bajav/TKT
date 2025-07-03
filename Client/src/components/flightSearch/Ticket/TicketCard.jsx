@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState, useContext, useRef } from "react";
 import { FlightContext } from "../../context/flightSearch.context";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import axios from "axios";
@@ -36,11 +36,15 @@ function FlightCard() {
     upsellError,
     setUpsellError,
     setlastFlight,
+    setFormData,
+    setIataCodes,
+    setAirlineData,
+    filteredFlights,
+    setFilteredFlights,
   } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [filterDropDown, setFilterDropDown] = useState(false);
-  const [filteredFlights, setFilteredFlights] = useState([]);
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
   const [showTickets, setShowTickets] = useState(true);
@@ -58,9 +62,9 @@ function FlightCard() {
 
   console.log(formData);
 
-
   // Fetch data --- use effects ---
   useEffect(() => {
+    const setdata = () => setFormData(formData);
     const fetchData = () => {
       try {
         setFilteredFlights(flightResults);
@@ -82,8 +86,23 @@ function FlightCard() {
         console.error("Error posting flight:", error);
       }
     };
+    const fetchAirlines = async () => {
+      try {
+        const [iataRes, airlineRes] = await Promise.all([
+          axios.get("http://localhost:3000/iataCodes"),
+          axios.get("http://localhost:3000/airlines"),
+        ]);
+        setIataCodes(iataRes.data);
+        setAirlineData(airlineRes.data);
+      } catch (error) {
+        console.error("Error fetching flight data:", error);
+      }
+    };
+
+    setdata();
     fetchFlights();
     fetchData();
+    fetchAirlines();
   }, []);
 
   useEffect(() => {
@@ -420,7 +439,7 @@ function FlightCard() {
       priceRange: { min: 200, max: 600 },
     });
 
-    console.log("form data",formData);
+    console.log("form data", formData);
   }, []);
   // Usage example:
   /*

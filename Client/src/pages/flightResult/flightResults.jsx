@@ -10,11 +10,10 @@ import BackBTN from "../../components/features/BackButton/BackBTN";
 import { FlightContext } from "../../components/context/flightSearch.context";
 
 function FlightResult() {
-  const { flightSearch } = useContext(FlightContext);
-  const { flightResults } = useContext(FlightContext);
+  const { flightSearch,setFlightResults,flightResults,setFilteredFlights } = useContext(FlightContext);
+  const resLength = flightResults.length;
   // define location
   const location = useLocation();
-  const resLength = flightResults.length;
   const [error, setError] = useState([]);
   // define navigate
   const navigate = useNavigate();
@@ -31,22 +30,27 @@ function FlightResult() {
     fetchData();
   }, []);
 
+  const backBtn =()=>{
+    setFlightResults([]);
+    setFilteredFlights([]);
+    navigate("/flights");
+  };
   return (
     <main className="FlightResult-page">
-      <BackBTN to={"/flights"} btnName="back" />
+      <BackBTN onClick={backBtn} btnName="back" />
       <div className="FlightResults">
         <h3 className="text"> <span>{ resLength }</span> Results for your search </h3>
         <div className="FlightResult-header">
 
           <div className="ticket-header">
             <div className="origin">
-              <h2>{flightSearch?.origin?.slice(0, 3) || "XXX"}</h2>
+              <h2>{flightSearch?.origin?.slice(0, 3) || " "}</h2>
             </div>
             <div className="item">
               <Arrow color="#313030" width="200px" />
             </div>
             <div className="item">
-              <h2>{flightSearch?.destination?.slice(0, 3) || "XXX"}</h2>
+              <h2>{flightSearch?.destination?.slice(0, 3) || " "}</h2>
             </div>
           </div>
           
