@@ -3,10 +3,15 @@ import { createMyFareBoxSession } from "../Config/mytifly/mytifly.config.js";
 // import { parseStringPromise } from "xml2js";
 
 
+let fareSourceCode ;
+let conversationId;
+let sessionID;
+
 const searchFlight = async (req, res) => {
   try {
     const sessionRes = await createMyFareBoxSession();
     const sessionId = sessionRes.data.Data.SessionId;
+    sessionID=sessionId;
     console.log("Session ID type:", typeof sessionId);
     console.log(sessionId);
     if (!sessionId) {
@@ -17,13 +22,13 @@ const searchFlight = async (req, res) => {
       OriginDestinationInformations: [
         {
           DepartureDateTime: "2025-09-11T00:00:00",
-          OriginLocationCode: "LOS",
+          OriginLocationCode: "EBB",
           DestinationLocationCode: "LHR",
         },
         {
           DepartureDateTime: "2025-09-16T00:00:00",
           OriginLocationCode: "LHR",
-          DestinationLocationCode: "LOS",
+          DestinationLocationCode: "EBB",
         },
       ],
       TravelPreferences: {
@@ -70,7 +75,14 @@ const searchFlight = async (req, res) => {
       }
     );
 
-    console.log("Flight Search Response:", response.data.Data.PricedItineraries.length);
+    // console.log(
+    //   "Flight Search Response:",
+    //   response.data.Data.PricedItineraries.length
+    // );
+    // fareSourceCode=response.data.Data.PricedItineraries[0].AirItineraryPricingInfo.FareSourceCode;
+    // conversationId = response.data.Data.ConversationId;
+    // console.log("fareSourceCode ::: " ,fareSourceCode);
+    // console.log("conversationId ::: " ,conversationId);
     res.status(200).json(response.data);
   } catch (err) {
     console.error("Flight search error:", err);
@@ -78,4 +90,29 @@ const searchFlight = async (req, res) => {
   }
 };
 
-export { searchFlight };
+const revalidateFlight = async (req, res) => {
+  try {
+    const response = await axios.post(
+      "https://restapidemo.myfarebox.com/api/v1/Revalidate/Flight",
+      {
+        FareSourceCode:fareSourceCode,
+        Target: "Test",
+        ConversationId: conversationId,
+      },
+           {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${sessionID}`,
+        },
+      }
+    );
+    console.log("revalidate :: ", response.data);
+    res.json(response.data);
+  } catch (err) {
+    console.error("Flight search error:", err);
+    res.status(500).json({ error: err });
+  }
+};
+
+export { searchFlight,revalidateFlight };
