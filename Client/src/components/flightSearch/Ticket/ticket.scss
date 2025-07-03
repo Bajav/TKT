@@ -5,7 +5,7 @@
   align-items: center;
   gap: 10px;
   width: 100vw;
-  overflow-x: scroll;
+  // overflow-x: scroll;
 }
 .flights-res {
   // background: url("../assets/images/ticketBG\ \(1\).png");
@@ -18,7 +18,7 @@
   align-items: center;
   background-position: center;
   width: 420px;
-  height: 185px;
+  height: 200px;
   color: $page_color;
   position: relative;
   box-shadow: 0px 24px 15px -3px rgba(1, 1, 1, 0.253);
@@ -375,6 +375,29 @@
   }
 }
 
+ .flights-res::before,
+.flights-res::after {
+  content: "";
+  position: absolute;
+  top: 75%;
+  width: 20px;
+  height: 20px;
+  background-color: $page_color;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.flights-res::before {
+  left: -10px;
+}
+
+.flights-res::after {
+  right: -10px;
+}
+.border
+{
+  margin: 10px 0px 10px 0px;
+}
 // .flightDealContainer::before,
 // .flightDealContainer::after {
 //   content: "";

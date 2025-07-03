@@ -686,6 +686,9 @@ const results = analyzeFlightOffers(flightOffersArray);
                         segments[lastSegmentIndex]?.arrival.at.slice(11) || ""
                       }
                     />
+                    <div className="border">
+                      <img src={line} />
+                    </div>
                     <div className="flights-actions">
                       <div className="time-details">
                         <div className="flex-tim">
