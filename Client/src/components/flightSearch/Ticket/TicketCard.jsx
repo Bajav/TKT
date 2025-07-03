@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState, useContext, useRef } from "react";
 import { FlightContext } from "../../context/flightSearch.context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import axios from "axios";
@@ -51,7 +51,13 @@ function FlightCard() {
     // stops: 0, // Options: "any", "0"
     airline: "",
   });
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const formData = location.state;
+
+  console.log(formData);
+
 
   // Fetch data --- use effects ---
   useEffect(() => {
@@ -68,7 +74,7 @@ function FlightCard() {
       try {
         const response = await axios.post(
           "http://localhost:3000/results",
-          flightSearch
+          formData
         );
         setFlightResults(response.data);
         console.log(response.data[0]);
@@ -413,6 +419,8 @@ function FlightCard() {
       multiAirlineOnly: true,
       priceRange: { min: 200, max: 600 },
     });
+
+    console.log("form data",formData);
   }, []);
   // Usage example:
   /*

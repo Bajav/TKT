@@ -117,20 +117,7 @@ function FlightsForm() {
     };
     setFormData(formData);
     setAlert(false);
-    navigate("results");
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3000/results",
-    //     formData
-    //   );
-    //   setFlightResults(response.data);
-    //   console.log(response.data[0]);
-    //
-    //   navigate("results");
-    // } catch (error) {
-    //   console.error("Error posting flight:", error);
-    // }
-    console.log("formData", formData);
+    navigate("/flights/results",{state:formData});
   };
 
   const handleSwitch = (e) => {
@@ -150,7 +137,7 @@ function FlightsForm() {
   // const [calenderType, setIsRangeEnabled] = useState(false);
 
   const handleDepartureSelect = (date) => {
-    setDepartureDate(date); // optional, if you want separate state
+    setDepartureDate(date); 
     setInputs((prev) => ({
       ...prev,
       departureDate: date,
