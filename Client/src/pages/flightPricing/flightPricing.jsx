@@ -12,7 +12,7 @@ import { FlightContext } from "../../components/context/flightSearch.context";
 function FlightPricing() {
   // const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
-  const {flightSearch} = useContext(FlightContext);
+  const { flightSearch } = useContext(FlightContext);
   const { bookedFlight } = useContext(FlightContext);
   const { iataCodes } = useContext(FlightContext);
   const { lastFlight } = useContext(FlightContext);
@@ -29,12 +29,13 @@ function FlightPricing() {
     };
     return lookup;
   }, {});
-  const coninueBtn = () => navigate("/flights/Passengerdata", { replace: true });
-  console.log("lastFlight",lastFlight);
+  const coninueBtn = () =>
+    navigate("/flights/Passengerdata", { replace: true });
+  console.log("lastFlight", lastFlight);
 
   return (
     <section className="reviewFlight">
-      <BackBTN onClick={()=>navigate("/flights")} btnName="cancel" />
+      <BackBTN onClick={() => navigate("/flights")} btnName="cancel" />
       <h1>Review Flight</h1>
       <div className="main-trip-container OUTBOUND">
         <div className="trip-container">
@@ -81,141 +82,7 @@ function FlightPricing() {
                     //   "travelerPricings",
                     //   travelerPricings
                     // );
-                    return (
-                      <SwiperSlide key={index}>
-                        <div className="flight-container">
-                          <TicketHeader
-                            originCode={departure.iataCode}
-                            originCity={
-                              iataLookup[departure.iataCode]?.city || ""
-                            }
-                            originTime={departure.at.slice(11)}
-                            arrowColor="#222222"
-                            destinationCode={arrival.iataCode}
-                            destinationCity={
-                              iataLookup[arrival.iataCode]?.city || ""
-                            }
-                            destinationTime={arrival.at.slice(11)}
-                            originTerminal={
-                              departure.terminal
-                                ? `Terminal: ${departure.terminal}`
-                                : "Terminal: N/A"
-                            }
-                            destinationTerminal={
-                              arrival.terminal
-                                ? `Terminal: ${arrival.terminal}`
-                                : "Terminal: N/A"
-                            }
-                          />
-                          <div className="detail">
-                            <h5>
-                              AIRLINE : {carrierCode} {aircraft.code}
-                            </h5>
-                            <h5>
-                              CO2 : {co2Emissions[0].weight}{" "}
-                              {co2Emissions[0].weightUnit}
-                            </h5>
-                            <h5>{arrival.at.slice(0, 10)}</h5>
-                            <h5>
-                              CLASS : {fareClass} {cabin}
-                            </h5>
-                          </div>
-                          <div className="detail">
-                            <h5>CARRY ON 1PC 8KG</h5>
-                            <h5>LAYOVER : 3HR40MINS</h5>
-                            <h5>CHECKED BAGS : 2 PCS 23KG/EACH</h5>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    );
-                  }
-                );
-              }
-            )}
-          </Swiper>
-        </div>
-      </div>
-      <div className="main-trip-container">
-        <div className="trip-container">
-          <h1>return flight</h1>
-          <Swiper
-            spaceBetween={0}
-            slidesPerView="auto"
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
-            className="tickets"
-          >
-            {bookedFlight.flightOffers.map(
-              ({
-                itineraries,
-                price,
-                travelerPricings,
-                validatingAirlineCodes,
-              }) => {
-                // console.log("itineraries", itineraries);
-                const segmnetTwo = itineraries[1].segments;
-                // console.log("segmnetOne", segmnetTwo);
-                return segmnetTwo.map(
-                  ({
-                    aircraft,
-                      arrival,
-                      carrierCode,
-                      co2Emissions,
-                      departure,
-                      duration,
-                      operating,
-                  },index) => {
-                    const fareDetails =
-                      travelerPricings[0].fareDetailsBySegment[index];
-                    const fareClass = fareDetails?.class || "Unknown";
-                    const cabin = fareDetails?.cabin || "Unknown";
-                    return (
-                      <SwiperSlide>
-                      <div className="flight-container">
-                          <TicketHeader
-                            originCode={departure.iataCode}
-                            originCity={
-                              iataLookup[departure.iataCode]?.city || ""
-                            }
-                            originTime={departure.at.slice(11)}
-                            arrowColor="#222222"
-                            destinationCode={arrival.iataCode}
-                            destinationCity={
-                              iataLookup[arrival.iataCode]?.city || ""
-                            }
-                            destinationTime={arrival.at.slice(11)}
-                            originTerminal={
-                              departure.terminal
-                                ? `Terminal: ${departure.terminal}`
-                                : "Terminal: N/A"
-                            }
-                            destinationTerminal={
-                              arrival.terminal
-                                ? `Terminal: ${arrival.terminal}`
-                                : "Terminal: N/A"
-                            }
-                          />
-                          <div className="detail">
-                            <h5>
-                              AIRLINE : {carrierCode} {aircraft.code}
-                            </h5>
-                            <h5>
-                              CO2 : {co2Emissions[0].weight}{" "}
-                              {co2Emissions[0].weightUnit}
-                            </h5>
-                            <h5>{arrival.at.slice(0, 10)}</h5>
-                            <h5>
-                              CLASS : {fareClass} {cabin}
-                            </h5>
-                          </div>
-                          <div className="detail">
-                            <h5>CARRY ON 1PC 8KG</h5>
-                            <h5>LAYOVER : 3HR40MINS</h5>
-                            <h5>CHECKED BAGS : 2 PCS 23KG/EACH</h5>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    );
+             
                   }
                 );
               }
@@ -252,7 +119,12 @@ function FlightPricing() {
             <div className="paxDataContainer">
               {console.log(travelerPricings)}
               <div className="data">
-                <h4>Travelers:{flightSearch.passengers.adults + flightSearch.passengers.children + flightSearch.passengers.infants} </h4>
+                <h4>
+                  Travelers:
+                  {flightSearch.passengers.adults +
+                    flightSearch.passengers.children +
+                    flightSearch.passengers.infants}{" "}
+                </h4>
               </div>
               <div className="pax">
                 <h4>Adults:{flightSearch.passengers.adults} </h4>
