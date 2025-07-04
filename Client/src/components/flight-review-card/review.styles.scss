@@ -1,27 +1,52 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
-.travel-date
-{
-    background: $ticketColor;
-    width: fit-content;
-    padding: 5px 15px;
-    border-radius: 5px;
-    h4
-    {
-        font-family: $roboto,sans-serif;
-        color: $page_color;
-        font-size: 10px;
-        text-transform: capitalize;
-        letter-spacing: 1px;
-    }
+.travel-date {
+  background: $ticketColor;
+  width: fit-content;
+  padding: 5px 15px;
+  border-radius: 5px;
+  h4 {
+    font-family: $roboto, sans-serif;
+    color: $page_color;
+    font-size: 10px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+  }
 }
 
-.flight
-{
-    background: #fcfcfc;
-    width: 98vw;
-    margin-top: 10px;
-    border: 1px solid #0e0e0e;
-    padding: 5px;
-    border-radius: 10px;
+.flight {
+  background: #fcfcfc;
+  width: 98vw;
+  margin-top: 10px;
+  border: 1px solid #0e0e0e;
+  padding: 5px;
+  border-radius: 10px;
+
+  .flight-header {
+    display: flex;
+    width: 100%;
+    // background: red;
+    justify-content: space-between;
+    padding: 4px;
+  }
+  .airline-details {
+    h4 {
+      font-size: 14px;
+      font-family: $roboto, sans-serif;
+      text-transform: capitalize;
+      color: $ticketColor;
+      margin-bottom: 10px;
+    }
+    h3 {
+      font-family: $roboto, sans-serif;
+      text-transform: capitalize;
+      color: $ticketColor;
+      font-size: 10px;
+      opacity: 80%;
+      // font-weight: 2s00;
+    }
+  }
+  .airline-logo {
+    width: 140px;
+  }
 }

@@ -11,10 +11,12 @@ function ReviewCard() {
         <div className="flight">
           <div className="flight-header">
             <div className="airline-details">
-              <h3>qatar air</h3>
+              <h4>qatar air</h4>
               <h3>AA67 . operated by qatar air</h3>
             </div>
-            <div className="hide-flag"></div>
+            <div className="hide-flag">
+                
+            </div>
             <div className="airline-logo">
               <img src={airlineLogo} alt="ariline-logo" />
             </div>
