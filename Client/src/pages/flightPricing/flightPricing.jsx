@@ -37,7 +37,13 @@ function FlightPricing() {
     <section className="reviewFlight">
       <BackBTN onClick={() => navigate("/flights")} btnName="cancel" />
       <h1>Review Flight</h1>
-
+      <TicketHeader
+        originCode={"ebb"}
+        originCity={"kampala,uganda"}
+        destinationCode={"dxb"}
+        arrowColor="#333"
+        destinationCity={"dubai,uae"}
+      />
       <button className="continueBtn" onClick={coninueBtn}>
         Continue
       </button>
