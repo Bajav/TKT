@@ -46,3 +46,90 @@ function ReviewCard() {
 }
 
 export default ReviewCard;
+
+// {
+//   bookedFlight.flightOffers.map(
+//     ({ itineraries, price, travelerPricings, validatingAirlineCodes }) => {
+//       useEffect(() => {
+//         setPrice(price);
+//         setTaxes(travelerPricings[0].price.taxes);
+//         setTravelerPricings(travelerPricings);
+//       });
+//       const segmnetOne = itineraries[0].segments;
+//       return segmnetOne.map(
+//         (
+//           {
+//             aircraft,
+//             arrival,
+//             carrierCode,
+//             co2Emissions,
+//             departure,
+//             duration,
+//             operating,
+//           },
+//           index
+//         ) => {
+//           const fareDetails = travelerPricings[0].fareDetailsBySegment[index];
+//           const fareClass = fareDetails?.class || "Unknown";
+//           const cabin = fareDetails?.cabin || "Unknown";
+//           // console.log(aircraft.code);
+//           // console.log(
+//           //   "travelerPricings",
+//           //   travelerPricings
+//           // );
+//         }
+//       );
+//     }
+//   );
+// }
+
+// taxes
+
+//   <section className="taxes-container">
+//         <div className="taxes">
+//           <div className="taxesHeader">
+//             <h5>fare breakdown </h5>
+//             <h5>taxes breakdown </h5>
+//           </div>
+//           <Border />
+//           <div className="taxesBody">
+//             <div className="bodyOne">
+//               <h4>Base: ${price.base}</h4>
+//               <h4>Taxes: $330</h4>
+//               <h4>Total: ${price.total}</h4>
+//               <h4>grand Total: ${price.grandTotal}</h4>
+//             </div>
+//             <div className="bodyOne tax">
+//               {taxes.map((tax, index) => {
+//                 return (
+//                   <h4 key={index}>
+//                     {tax.code} - ${tax.amount}
+//                   </h4>
+//                 );
+//               })}
+//             </div>
+//           </div>
+//           <div className="paxData">
+//             <div className="paxDataContainer">
+//               {console.log(travelerPricings)}
+//               <div className="data">
+//                 <h4>
+//                   Travelers:
+//                   {flightSearch.passengers.adults +
+//                     flightSearch.passengers.children +
+//                     flightSearch.passengers.infants}{" "}
+//                 </h4>
+//               </div>
+//               <div className="pax">
+//                 <h4>Adults:{flightSearch.passengers.adults} </h4>
+//               </div>
+//               <div className="pax">
+//                 <h4>Children: {flightSearch.passengers.children}</h4>
+//               </div>
+//               <div className="pax">
+//                 <h4>Infants: {flightSearch.passengers.infants}</h4>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
