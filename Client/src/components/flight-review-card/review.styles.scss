@@ -25,6 +25,7 @@
   .flight-header {
     display: flex;
     width: 100%;
+    align-items: center;
     // background: red;
     justify-content: space-between;
     padding: 4px;
@@ -44,6 +45,21 @@
       font-size: 10px;
       opacity: 80%;
       // font-weight: 2s00;
+    }
+  }
+  .hide-flag {
+    display: none;
+    position: relative;
+    top: -17px;
+    padding: 3px 5px;
+    border-radius: 2px;
+    background-color: #fcff4a;
+    h4 {
+      font-size: 10px;
+      font-family: $roboto, sans-serif;
+      text-transform: capitalize;
+    //   font-weight: 600;
+      color: $ticketColor;
     }
   }
   .airline-logo {

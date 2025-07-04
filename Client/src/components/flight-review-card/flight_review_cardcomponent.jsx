@@ -15,7 +15,7 @@ function ReviewCard() {
               <h3>AA67 . operated by qatar air</h3>
             </div>
             <div className="hide-flag">
-                
+                <h4>multiple airlines</h4>
             </div>
             <div className="airline-logo">
               <img src={airlineLogo} alt="ariline-logo" />
