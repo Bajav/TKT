@@ -1,11 +1,9 @@
 import {
-  CardNumberElement,
-  CardCvcElement,
-  CardExpiryElement,
   useStripe,
   useElements,
+  PaymentElement,
 } from "@stripe/react-stripe-js";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UiContext } from "../context/ui.context";
 import "./checkout.styles.scss";
 import axios from "axios";
@@ -27,72 +25,28 @@ function Checkout() {
       color: "#e53e3e",
     },
   };
+  useEffect(() => {
+    const fetchPaymentIntent = async () => {
+     try
+     {
+       const response = await axios.post(URL,{amount:80});
+      
+     }catch(Err){
+      console.log("error ")
+     }
+    };
+    fetchPaymentIntent();
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Processing...");
-
-    const { data } = await axios.post("http://localhost:3000/checkout", {
-      amount: 70000,
-    });
-
-    const clientSecret = data.clientSecret;
-    const cardElement = elements.getElement(CardNumberElement);
-    console.log("Card Element:", cardElement);
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: cardElement,
-        billing_details: { name: cardHolder },
-      },
-    });
-
-    if (result.error) {
-      setStatus(`❌ ${result.error.message}`);
-    } else if (result.paymentIntent.status === "succeeded") {
-      setStatus("✅ Payment successful!");
-    }
-
-    setSuccess(false);
   };
 
   return (
     <div className="main-container">
       <form className="form-container" onSubmit={handleSubmit}>
-        <div className="card-input">
-          <label>Card Holder</label>
-          <input
-            type="text"
-            placeholder="Enter Card Holder Names"
-            value={cardHolder}
-            onChange={(e) => setCardHolder(e.target.value)}
-          />
-        </div>
-
-        <div className="card-input">
-          <label>Card Number</label>
-          <div className="stripe-input">
-            <CardNumberElement
-              options={{ style, iconStyle: "default", hideIcon: false }}
-            />
-          </div>
-        </div>
-
-        <div className="flexed">
-          <div className="card-input half">
-            <label>CVC</label>
-            <div className="stripe-input">
-              <CardCvcElement options={{ style }} />
-            </div>
-          </div>
-
-          <div className="card-input half">
-            <label>Expiry Date</label>
-            <div className="stripe-input">
-              <CardExpiryElement options={{ style }} />
-            </div>
-          </div>
-        </div>
-
+        <PaymentElement />
         <div className="btn-container">
           <button
             type="button"
@@ -105,7 +59,6 @@ function Checkout() {
             Pay $700
           </button>
         </div>
-
         {status && <p>{status}</p>}
       </form>
     </div>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./passenger.styles.scss";
 import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
 import PaxForm from "../../components/features/PaxForm/PaxForm";
@@ -9,10 +9,20 @@ import SuccessfulPayment from "../../components/CheckoutSuccess/success.componen
 
 // stripe
 
-import { Elements } from "@stripe/react-stripe-js";
+import { Elements,useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
+
+const stripe = useStripe()
 const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
+const [clientSecret,setClientSecret] = useState("");
+useEffect(()=>{
+  axios.post("url",{amount:90})
+  .then(res=>setClientSecret(res.data));
+
+})
+
 
 function Passengers() {
   const { isModel, isSuccess } = useContext(UiContext);
