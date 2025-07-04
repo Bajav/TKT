@@ -8,39 +8,31 @@ import { UiContext } from "../../components/context/ui.context";
 import SuccessfulPayment from "../../components/CheckoutSuccess/success.component";
 
 // stripe
-
 import { Elements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
-const stripe = useStripe();
-const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
-const [clientSecret, setClientSecret] = useState("");
-useEffect(() => {
-  axios
-    .post("http://localhost:3000/createpaymentintent", { amount: 90 })
-    .then((res) => {
-      setClientSecret(res.data.clientSecret);
-    })
-    .catch((err) => {
-      console.error("Error fetching client secret:", err);
-    });
-});
-
-const options = {
-  appearance: {
-    theme: "flat", // You can use 'flat', 'night', etc.
-  },
-  clientSecret: clientSecret,
-};
-
 function Passengers() {
   const { isModel, isSuccess } = useContext(UiContext);
-  // const [isModel, setModel] = useState(false);
+  const [clientSecret, setClientSecret] = useState("");
+
+  const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:3000/createpaymentintent", { amount: 9000 }) // amount in cents
+      .then((res) => setClientSecret(res.data.clientSecret))
+      .catch((err) => console.error("Error fetching client secret:", err));
+  }, []);
+
+  const options = {
+    appearance: { theme: "flat" },
+    clientSecret,
+  };
 
   return (
     <section className="passengers">
-      <h1>enter traveller details</h1>
+      <h1>Enter traveller details</h1>
       <TicketHeader
         originCode="ebb"
         originCity="kampala"
@@ -57,13 +49,9 @@ function Passengers() {
         className="form"
       >
         <PaxForm />
-        {isModel && (
-          <Elements stripe={stripePromise} options={options}>
-            <Checkout />
-          </Elements>
-        )}
       </motion.div>
-      {/* <AnimatePresence mode="wait">
+
+      <AnimatePresence mode="wait">
         {isModel && (
           <motion.div
             className="model-overlay"
@@ -82,7 +70,7 @@ function Passengers() {
                   transition={{ type: "tween", duration: 0.5 }}
                 >
                   <h1>Enter card details to book the flight</h1>
-                  <Elements stripe={stripePromise}>
+                  <Elements stripe={stripePromise} options={options}>
                     <Checkout />
                   </Elements>
                 </motion.div>
@@ -101,7 +89,7 @@ function Passengers() {
             </AnimatePresence>
           </motion.div>
         )}
-      </AnimatePresence> */}
+      </AnimatePresence>
     </section>
   );
 }
