@@ -1,5 +1,5 @@
 import "./review.styles.scss";
-
+import airlineLogo from '../../assets/icons/qatar_airline_logo.png'
 function ReviewCard() {
   return (
     <section className="flight-review">
@@ -16,7 +16,7 @@ function ReviewCard() {
             </div>
             <div className="hide-flag"></div>
             <div className="airline-logo">
-              {/* <img src={} alt="ariline-logo" /> */}
+              <img src={airlineLogo} alt="ariline-logo" />
             </div>
           </div>
           <div className="border-line"></div>
