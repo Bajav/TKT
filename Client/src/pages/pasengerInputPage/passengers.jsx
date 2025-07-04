@@ -9,20 +9,30 @@ import SuccessfulPayment from "../../components/CheckoutSuccess/success.componen
 
 // stripe
 
-import { Elements,useStripe } from "@stripe/react-stripe-js";
+import { Elements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
-
-const stripe = useStripe()
+const stripe = useStripe();
 const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
-const [clientSecret,setClientSecret] = useState("");
-useEffect(()=>{
-  axios.post("url",{amount:90})
-  .then(res=>setClientSecret(res.data));
+const [clientSecret, setClientSecret] = useState("");
+useEffect(() => {
+  axios
+    .post("http://localhost:3000/createpaymentintent", { amount: 90 })
+    .then((res) => {
+      setClientSecret(res.data.clientSecret);
+    })
+    .catch((err) => {
+      console.error("Error fetching client secret:", err);
+    });
+});
 
-})
-
+const options = {
+  appearance: {
+    theme: "flat", // You can use 'flat', 'night', etc.
+  },
+  clientSecret: clientSecret,
+};
 
 function Passengers() {
   const { isModel, isSuccess } = useContext(UiContext);
@@ -48,7 +58,7 @@ function Passengers() {
       >
         <PaxForm />
         {isModel && (
-          <Elements stripe={stripePromise}>
+          <Elements stripe={stripePromise} options={options}>
             <Checkout />
           </Elements>
         )}

@@ -3,6 +3,6 @@ import e from "express";
 
 const router = e.Router();
 
-router.post('/checkout',createPaymentIntent);
+router.post('/createpaymentintent',createPaymentIntent);
 
 export default router;
