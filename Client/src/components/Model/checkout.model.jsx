@@ -6,13 +6,12 @@ import {
 import { useState, useContext, useEffect } from "react";
 import { UiContext } from "../context/ui.context";
 import "./checkout.styles.scss";
-import axios from "axios";
+
 
 function Checkout() {
   const stripe = useStripe();
   const elements = useElements();
   const { setModel, setSuccess } = useContext(UiContext);
-  const [cardHolder, setCardHolder] = useState("");
   const [status, setStatus] = useState("");
 
   const style = {
@@ -25,19 +24,6 @@ function Checkout() {
       color: "#e53e3e",
     },
   };
-  useEffect(() => {
-    const fetchPaymentIntent = async () => {
-     try
-     {
-       const response = await axios.post(URL,{amount:80});
-      
-     }catch(Err){
-      console.log("error ")
-     }
-    };
-    fetchPaymentIntent();
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Processing...");
