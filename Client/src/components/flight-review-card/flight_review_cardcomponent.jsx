@@ -4,7 +4,9 @@ function ReviewCard() {
   return (
     <section className="flight-review">
       <div className="outbound-flight">
-        <div className="travel-date">outbound :{"Wednesday,26,jun 2025"}</div>
+        <div className="travel-date">
+          <h4>outbound : {"Wednesday,26,jun 2025"}</h4>
+        </div>
 
         <div className="flight">
           <div className="flight-header">
