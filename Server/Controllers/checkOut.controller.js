@@ -6,12 +6,11 @@ import { stripe } from "../Config/Stripe/stripe.config.js";
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount:amount*100, // e.g. 2000 = $20.00
+      amount:amount*100,
       currency,
-      // Optional: metadata, receipt_email, etc.
+      automatic_payment_methods: { enabled: true }
     });
     console.log("paymentIntent",paymentIntent);
-
     res.status(200).json({ clientSecret: paymentIntent.client_secret });
   } catch (err) {
     res.status(500).json({ error: err.message });
