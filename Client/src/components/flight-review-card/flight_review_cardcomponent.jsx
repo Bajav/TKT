@@ -12,7 +12,7 @@ function ReviewCard(props) {
     <section className="flight-review">
       <div className="outbound-flight">
         <div className="travel-date">
-          <h4>outbound</h4>
+          <h4>{props.tripType}</h4>
           <img src={lineDeg} />
           <h4>{props.travelDate}</h4>
         </div>

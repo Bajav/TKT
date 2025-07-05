@@ -45,7 +45,7 @@ function FlightPricing() {
         destinationCity={"dubai,uae"}
       />
 
-      <ReviewCard />
+      <ReviewCard tripType="outbound" travelDate="Wednesday ,26, jun 2025" airlineName="qatar air" equipmentNumb="AA67." operator="operated by qatar air" departureTime="8:38 am" originCode="ebb" originCityCountry="entebbe kampala uganda" originTerminal="n/a" duration="8h40m" tripstops="direct" arrivalTime="11:05 " destinationCode="ebb" destinationCityCountry=", entebbe kampala uganda" destinationTerminal="n/a" cabin="k" cabinClass="economy" carryWeight="1pc" carryOnUnit="7kg"  checkedWeight="2pcs" checkedOnUnit="23kg each" c02Weight="936kg"  />
       <button className="continueBtn" onClick={coninueBtn}>
         Continue
       </button>
@@ -54,6 +54,7 @@ function FlightPricing() {
 }
 
 export default FlightPricing;
+{/* <ReviewCard tripType="" travelDate="" airlineName="" equipmentNumb="" operator="" departureTime="" originCode="" originCityCountry="" originTerminal="" duration="" tripstops="" arrivalTime="" destinationCode="" destinationCityCountry="" destinationTerminal="" cabin="" cabinClass="" carryWeight="" carryOnUnit=""  checkedWeight="" checkedOnUnit="" c02Weight=""  /> */}
 // code to look at
 // const fareDetail = travelerPricings[0].fareDetailsBySegment.find(
 //   (f) => f.segmentId === segment.id
