@@ -16,9 +16,10 @@
 
 .flight {
   background: #fcfcfc;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   width: 98vw;
   margin-top: 10px;
-  border: 1px solid #0e0e0e;
+  // border: 1px solid #0e0e0e;
   padding: 5px;
   border-radius: 10px;
 
@@ -114,6 +115,16 @@
     color: #339dbb;
     text-transform: capitalize;
     font-size: 9px;
+  }
+}
+.travel-date
+{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  img
+  {
+    height: 20px;
   }
 }
 .flight-data-container {

@@ -5,13 +5,16 @@ import { Clock } from "lucide-react";
 import FlightFlag from "../flightarrival/flightflag.component";
 import fromTo from "../../assets/icons/fromto.svg";
 import { OctagonAlert } from "lucide-react";
+import lineDeg from "../../assets/icons/90deg.svg"
 
 function ReviewCard() {
   return (
     <section className="flight-review">
       <div className="outbound-flight">
         <div className="travel-date">
-          <h4>outbound : {"Wednesday,26,jun 2025"}</h4>
+          <h4>outbound</h4>
+          <img src={lineDeg} />
+          <h4>{"Wednesday,26,jun 2025"}</h4>
         </div>
 
         <div className="flight">
