@@ -222,6 +222,13 @@ $babas_nue: "Bebas Neue", sans-serif;
     width: 100%;
     margin-top: 15px;
   }
+    .ticket-header
+  {
+    h2
+    {
+      height: 35px;
+    }
+  }
   h2 {
     font-size: 25px;
     // margin-bottom: 1px;
@@ -230,6 +237,7 @@ $babas_nue: "Bebas Neue", sans-serif;
     font-size: 10px;
     margin-bottom: 0px;
   }
+  
 }
 .flightsDetails.open {
   max-height: 200px;
@@ -245,12 +253,14 @@ $babas_nue: "Bebas Neue", sans-serif;
   position: relative;
   // top: -10px;
   // left: 10px;
+  
   color: $page_color;
   h5 {
     //   margin: 0px 10px 0px 10px;
     font-size: 10px;
-    font-family: $textFont, sans-serif;
-    font-weight: 10;
+    font-family: $roboto_mono;
+    // letter-spacing: 0.3px;
+    font-weight: 200;
   }
 }
 
@@ -267,9 +277,9 @@ $babas_nue: "Bebas Neue", sans-serif;
     margin: 0;
     text-transform: capitalize;
     border-radius: 15px;
-    font-family: $textFont, sans-serif;
+    font-family: $roboto_mono;
     font-size: 10px;
-    font-weight: 100;
+    font-weight: 400;
   }
 }
 // overlayUpsell

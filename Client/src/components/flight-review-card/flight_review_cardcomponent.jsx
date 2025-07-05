@@ -55,7 +55,7 @@ function ReviewCard(props) {
           </div>
           <div className="flight-data">
             <div className="trip-ameneties">
-              <h6>class : {props.cabin}{props.cabinClass}</h6>
+              <h6>class : {props.cabin} {props.cabinClass}</h6>
               <h6>carry on : {props.carryWeight} {props.carryOnUnit} </h6>
               <h6>checked bags : {props.checkedWeight} {props.checkedOnUnit} each</h6>
               <h6>co2 : {props.c02Weight}</h6>
