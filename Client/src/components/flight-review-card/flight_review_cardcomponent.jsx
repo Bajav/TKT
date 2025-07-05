@@ -7,21 +7,21 @@ import fromTo from "../../assets/icons/fromto.svg";
 import { OctagonAlert } from "lucide-react";
 import lineDeg from "../../assets/icons/90deg.svg"
 
-function ReviewCard() {
+function ReviewCard(props) {
   return (
     <section className="flight-review">
       <div className="outbound-flight">
         <div className="travel-date">
           <h4>outbound</h4>
           <img src={lineDeg} />
-          <h4>{"Wednesday,26,jun 2025"}</h4>
+          <h4>{props.travelDate}</h4>
         </div>
 
         <div className="flight">
           <div className="flight-header">
             <div className="airline-details">
-              <h4>qatar air</h4>
-              <h3>AA67 . operated by qatar air</h3>
+              <h4>{props.airlineName}</h4>
+              <h3>{props.equipmentNumb} {props.operator}</h3>
             </div>
             <div className="hide-flag">
               <h4>multiple airlines</h4>
@@ -38,27 +38,27 @@ function ReviewCard() {
 
             <div className="det">
               <div className="trip-data">
-                <h3>8:38 ebb, entebbe kampala uganda</h3>
-                <h3 className="terminal">terminal : n/a</h3>
+                <h3>{props.departureTime} {props.originCode}, {props.originCityCountry}</h3>
+                <h3 className="terminal">terminal : {props.originTerminal}</h3>
               </div>
               {/* { <Clock />} */}
               <div className="flight-time">
                 <Clock size={12} opacity={70} color="#323030"/>
-                <h5>8h40m</h5>
-                <h5 className="terminal">direct</h5>
+                <h5>{props.duration}</h5>
+                <h5 className="terminal">{props.tripstops}</h5>
               </div>
               <div className="trip-data">
-                <h3> 11:05 london heathrow united kingdom</h3>
-                <h3 className="terminal">terminal : n/a</h3>
+                <h3>{props.arrivalTime} {props.destinationCode}, {props.destinationCityCountry}</h3>
+                <h3 className="terminal">terminal : {props.destinationTerminal}</h3>
               </div>
             </div>
           </div>
           <div className="flight-data">
             <div className="trip-ameneties">
-              <h6>class : k economy</h6>
-              <h6>carry on : 1pc 7kg</h6>
-              <h6>checked bags : 2pcs 23kg each</h6>
-              <h6>co2 : 936kg</h6>
+              <h6>class : {props.cabin}{props.cabinClass}</h6>
+              <h6>carry on : {props.carryWeight} {props.carryOnUnit} </h6>
+              <h6>checked bags : {props.checkedWeight} {props.checkedOnUnit} each</h6>
+              <h6>co2 : {props.c02Weight}</h6>
             </div>
 
             <FlightFlag
