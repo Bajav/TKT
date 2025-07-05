@@ -1,6 +1,8 @@
 import "./review.styles.scss";
-import airlineLogo from '../../assets/icons/qatar_airline_logo.png'
-import line from '../../assets/icons/Line 5.svg'
+import airlineLogo from "../../assets/icons/qatar_airline_logo.png";
+import line from "../../assets/icons/Line 5.svg";
+import { Clock } from "lucide-react";
+import Alert from "../features/Error&Sucess/alert.component";
 function ReviewCard() {
   return (
     <section className="flight-review">
@@ -16,35 +18,38 @@ function ReviewCard() {
               <h3>AA67 . operated by qatar air</h3>
             </div>
             <div className="hide-flag">
-                <h4>multiple airlines</h4>
+              <h4>multiple airlines</h4>
             </div>
             <div className="airline-logo">
               <img src={airlineLogo} alt="ariline-logo" />
             </div>
           </div>
-    
+
           <div className="flight-data">
             <div className="trip-data">
               <h3>8:38 ebb, entebbe kampala uganda</h3>
               <h3>terminal : n/a</h3>
             </div>
+            {/* { <Clock />} */}
             <div className="flight-time">
               <h5>8h40m</h5>
               <h5>direct</h5>
             </div>
             <div className="trip-data">
-              <h3>11:05 london heathrow united kingdom</h3>
+              <h3> 11:05 london heathrow united kingdom</h3>
               <h3>terminal : n/a</h3>
             </div>
-   <div className="border-line">
-            <img src={line}  />
-          </div>
+            <div className="border-line">
+              <img src={line} />
+            </div>
             <div className="trip-ameneties">
               <h6>class : k economy</h6>
               <h6>carry on : 1pc 7kg</h6>
               <h6>checked bags : 2pcs 23kg each</h6>
               <h6>co2 : 936kg</h6>
             </div>
+
+            <Alert bgColor="#FFDDDD" fontColor="#E82929"  alertText="arrives the next day" />
           </div>
         </div>
       </div>
