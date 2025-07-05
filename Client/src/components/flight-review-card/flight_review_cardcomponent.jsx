@@ -3,6 +3,7 @@ import airlineLogo from "../../assets/icons/qatar_airline_logo.png";
 import line from "../../assets/icons/Line 5.svg";
 import { Clock } from "lucide-react";
 import FlightFlag from "../flightarrival/flightflag.component";
+import fromTo from '../../assets/icons/fromto.svg'
 
 function ReviewCard() {
   return (
@@ -28,6 +29,11 @@ function ReviewCard() {
           <div className="border-line">
             <img src={line} />
           </div>
+        <div className="flight-data-container">
+          <img src={fromTo} alt="" />
+
+          
+        </div>
           <div className="flight-data">
             <div className="trip-data">
               <h3>8:38 ebb, entebbe kampala uganda</h3>
