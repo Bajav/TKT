@@ -92,18 +92,21 @@ $babas_nue: "Bebas Neue", sans-serif;
     text-transform: capitalize;
     font-size: 12px;
   }
+  .terminal {
+    font-size: 10px;
+    font-weight: 300;
+    opacity: 80%;
+  }
 }
 .reviewFlight {
   .ticket-header {
     width: 100%;
-    h2
-    {
+    h2 {
       color: #323030;
       font-family: $babas_nue;
       font-size: 50px;
     }
-    h5
-    {
+    h5 {
       color: #323030;
       font-family: $roboto_mono;
       font-weight: 400;
@@ -123,6 +126,11 @@ $babas_nue: "Bebas Neue", sans-serif;
     color: #323030;
     text-transform: capitalize;
     font-size: 12px;
+  }
+  .terminal {
+    font-size: 10px;
+    font-weight: 300;
+    opacity: 80%;
   }
 }
 .border-line {
@@ -145,6 +153,7 @@ $babas_nue: "Bebas Neue", sans-serif;
     color: #339dbb;
     text-transform: capitalize;
     font-size: 9px;
+    font-weight: 600;
   }
 }
 .travel-date {

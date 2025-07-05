@@ -39,17 +39,17 @@ function ReviewCard() {
             <div className="det">
               <div className="trip-data">
                 <h3>8:38 ebb, entebbe kampala uganda</h3>
-                <h3>terminal : n/a</h3>
+                <h3 className="terminal">terminal : n/a</h3>
               </div>
               {/* { <Clock />} */}
               <div className="flight-time">
                 <Clock size={12} opacity={70} color="#323030"/>
                 <h5>8h40m</h5>
-                <h5>direct</h5>
+                <h5 className="terminal">direct</h5>
               </div>
               <div className="trip-data">
                 <h3> 11:05 london heathrow united kingdom</h3>
-                <h3>terminal : n/a</h3>
+                <h3 className="terminal">terminal : n/a</h3>
               </div>
             </div>
           </div>
