@@ -1,10 +1,8 @@
-import { useNavigate } from 'react-router-dom'
 import "./backBtn.scss";
 import { ArrowLeft } from 'lucide-react';
 import { useState } from 'react';
 
 function BackBTN({btnName = "back",to = -1,onClick}) {
-    const navigate = useNavigate();
     const [style,setStyles]= useState(false);
     const changeColor ={
       color :"#3e3e3e"
@@ -17,4 +15,4 @@ function BackBTN({btnName = "back",to = -1,onClick}) {
   )
 }
 
-export default BackBTN
+export default BackB
