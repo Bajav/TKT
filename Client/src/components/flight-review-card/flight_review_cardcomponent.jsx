@@ -2,7 +2,8 @@ import "./review.styles.scss";
 import airlineLogo from "../../assets/icons/qatar_airline_logo.png";
 import line from "../../assets/icons/Line 5.svg";
 import { Clock } from "lucide-react";
-import Alert from "../features/Error&Sucess/alert.component";
+import FlightFlag from "../flightarrival/flightflag.component";
+
 function ReviewCard() {
   return (
     <section className="flight-review">
@@ -24,7 +25,9 @@ function ReviewCard() {
               <img src={airlineLogo} alt="ariline-logo" />
             </div>
           </div>
-
+          <div className="border-line">
+            <img src={line} />
+          </div>
           <div className="flight-data">
             <div className="trip-data">
               <h3>8:38 ebb, entebbe kampala uganda</h3>
@@ -39,9 +42,6 @@ function ReviewCard() {
               <h3> 11:05 london heathrow united kingdom</h3>
               <h3>terminal : n/a</h3>
             </div>
-            <div className="border-line">
-              <img src={line} />
-            </div>
             <div className="trip-ameneties">
               <h6>class : k economy</h6>
               <h6>carry on : 1pc 7kg</h6>
@@ -49,7 +49,12 @@ function ReviewCard() {
               <h6>co2 : 936kg</h6>
             </div>
 
-            <Alert bgColor="#FFDDDD" fontColor="#E82929"  alertText="arrives the next day" />
+            <FlightFlag
+              icon={<Clock size={14} color="#E82929" />}
+              bgColor="#FFDDDD"
+              fontColor="#E82929"
+              alertText="arrives the next day"
+            />
           </div>
         </div>
       </div>

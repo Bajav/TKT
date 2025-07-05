@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+
+.flag-container{
+    width: 100% !important;
+    padding: 5px 0px;
+    border-radius: 3px;
+    margin-top:5px ;
+}
+.alerts
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 10px;
+    p
+    {
+        font-family: $roboto,sans-serif;
+        font-size: 10px;
+        text-transform: capitalize;
+    }
+}
