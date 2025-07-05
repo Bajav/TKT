@@ -3,7 +3,8 @@ import airlineLogo from "../../assets/icons/qatar_airline_logo.png";
 import line from "../../assets/icons/Line 5.svg";
 import { Clock } from "lucide-react";
 import FlightFlag from "../flightarrival/flightflag.component";
-import fromTo from '../../assets/icons/fromto.svg'
+import fromTo from "../../assets/icons/fromto.svg";
+import { OctagonAlert } from "lucide-react";
 
 function ReviewCard() {
   return (
@@ -29,25 +30,27 @@ function ReviewCard() {
           <div className="border-line">
             <img src={line} />
           </div>
-        <div className="flight-data-container">
-          <img src={fromTo} alt="" />
+          <div className="flight-data-container">
+            <img src={fromTo} alt="" />
 
-          
-        </div>
+            <div className="det">
+              <div className="trip-data">
+                <h3>8:38 ebb, entebbe kampala uganda</h3>
+                <h3>terminal : n/a</h3>
+              </div>
+              {/* { <Clock />} */}
+              <div className="flight-time">
+                <Clock size={12} opacity={70} color="#323030"/>
+                <h5>8h40m</h5>
+                <h5>direct</h5>
+              </div>
+              <div className="trip-data">
+                <h3> 11:05 london heathrow united kingdom</h3>
+                <h3>terminal : n/a</h3>
+              </div>
+            </div>
+          </div>
           <div className="flight-data">
-            <div className="trip-data">
-              <h3>8:38 ebb, entebbe kampala uganda</h3>
-              <h3>terminal : n/a</h3>
-            </div>
-            {/* { <Clock />} */}
-            <div className="flight-time">
-              <h5>8h40m</h5>
-              <h5>direct</h5>
-            </div>
-            <div className="trip-data">
-              <h3> 11:05 london heathrow united kingdom</h3>
-              <h3>terminal : n/a</h3>
-            </div>
             <div className="trip-ameneties">
               <h6>class : k economy</h6>
               <h6>carry on : 1pc 7kg</h6>
@@ -56,7 +59,7 @@ function ReviewCard() {
             </div>
 
             <FlightFlag
-              icon={<Clock size={14} color="#E82929" />}
+              icon={<OctagonAlert size={14} color="#E82929" />}
               bgColor="#FFDDDD"
               fontColor="#E82929"
               alertText="arrives the next day"

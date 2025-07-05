@@ -53,12 +53,12 @@
     top: -17px;
     padding: 3px 5px;
     border-radius: 2px;
-    background-color: #FFD91C;
+    background-color: #ffd91c;
     h4 {
       font-size: 8px;
       font-family: $roboto, sans-serif;
       text-transform: capitalize;
-        font-weight: 600;
+      font-weight: 600;
       // letter-spacing: 0.3px;
       color: #323030;
       opacity: 80%;
@@ -78,15 +78,15 @@
     color: #323030;
     text-transform: capitalize;
     font-size: 12px;
-
   }
 }
 .flight-time {
   display: flex;
+  align-items: center;
   gap: 10px;
   align-items: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 14px;
+  margin-bottom: 14px;
   h5 {
     font-family: $roboto, sans-serif;
     color: #323030;
@@ -94,8 +94,7 @@
     font-size: 12px;
   }
 }
-.border-line
-{
+.border-line {
   width: 100%;
   display: flex;
   align-items: center;
@@ -112,8 +111,16 @@
   margin-bottom: 10px;
   h6 {
     font-family: $roboto, sans-serif;
-    color: #339DBB;
+    color: #339dbb;
     text-transform: capitalize;
     font-size: 9px;
   }
+}
+.flight-data-container {
+  img {
+    height: 80px;
+  }
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
