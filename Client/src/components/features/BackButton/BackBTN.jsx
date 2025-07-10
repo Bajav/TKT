@@ -15,4 +15,4 @@ function BackBTN({btnName = "back",to = -1,onClick}) {
   )
 }
 
-export default BackB
+export default BackBTN

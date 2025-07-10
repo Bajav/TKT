@@ -9,6 +9,8 @@ import BackBTN from "../../components/features/BackButton/BackBTN";
 import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
 import { FlightContext } from "../../components/context/flightSearch.context";
 import ReviewCard from "../../components/flight-review-card/flight_review_cardcomponent";
+
+
 function FlightPricing() {
   // const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
