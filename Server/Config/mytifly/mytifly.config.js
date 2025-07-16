@@ -8,4 +8,7 @@ export const createMyFareBoxSession = () =>
     UserName: process.env.USERNAMEE,
     Password: process.env.PASSWORDS,
     AccountNumber: process.env.ACCOUNT_NUMBER,
+    // UserName:"TKT_API",
+    // Password:"Welcome@123",
+    // AccountNumber:"MCN006334"
   });

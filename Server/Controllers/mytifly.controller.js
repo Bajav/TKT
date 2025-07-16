@@ -7,6 +7,23 @@ let fareSourceCode ;
 let conversationId;
 let sessionID;
 
+const createSession = async (req, res) => {
+  try {
+    const sessionRes = await createMyFareBoxSession();
+    const sessionId = sessionRes.data.Data.SessionId;
+    // sessionID=sessionId;
+    console.log("Session ID type:", typeof sessionId);
+    console.log(sessionId);
+    if (!sessionId) {
+      return res.status(401).json({ error: "Failed to get session ID" });
+    }
+    res.json(sessionRes.data);
+  }catch(err){
+      console.log("error creatinf session", err);
+      res.json(err);
+    }
+  };
+
 const searchFlight = async (req, res) => {
   try {
     const sessionRes = await createMyFareBoxSession();
@@ -21,14 +38,14 @@ const searchFlight = async (req, res) => {
     const flightSearchPayload = {
       OriginDestinationInformations: [
         {
-          DepartureDateTime: "2025-09-11T00:00:00",
-          OriginLocationCode: "EBB",
-          DestinationLocationCode: "LHR",
+          DepartureDateTime: "2025-09-12T00:00:00",
+          OriginLocationCode: "LHR",
+          DestinationLocationCode: "DXB",
         },
         {
           DepartureDateTime: "2025-09-16T00:00:00",
-          OriginLocationCode: "LHR",
-          DestinationLocationCode: "EBB",
+          OriginLocationCode: "DXB",
+          DestinationLocationCode: "LHR",
         },
       ],
       TravelPreferences: {
@@ -115,4 +132,5 @@ const revalidateFlight = async (req, res) => {
   }
 };
 
-export { searchFlight,revalidateFlight };
+
+export { searchFlight,revalidateFlight,createSession };
