@@ -1,7 +1,7 @@
 import {Router} from 'express'
 const router = Router();
 
-router.post("/recent-searches", (req, res) => {
+const postCookie = (req,res) => {
   const { search } = req.body;
 
   if (!req.session.recentSearches) {
@@ -20,11 +20,11 @@ router.post("/recent-searches", (req, res) => {
   req.session.recentSearches = searches;
 
   res.json({ success: true, recentSearches: searches });
-});
+};
 
-router.get("/recent-searches", (req, res) => {
+const getCookies = (req,res) => {
   const searches = req.session.recentSearches || [];
   res.json({ recentSearches: searches });
-});
+};
 
-export default router;
+export {postCookie,getCookies};

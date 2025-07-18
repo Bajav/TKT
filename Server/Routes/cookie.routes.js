@@ -1,13 +1,10 @@
-import express from 'express';
-import { cookieController,readCookie,deleteCookie } from '../Controllers/cookie.controller.js';
-// import { startAtlas } sfrom '../Controllers/atlast.controller.js';
-// import { migrateData } from '../Controllers/migrate.controller.js';
-const router = express.Router();
+import {Router} from 'express';
+import { getCookies,postCookie } from '../Controllers/cookie.controller.js';
 
-router.post('/createCookie',cookieController);
-router.get('/findCookie',readCookie);
-router.get('/deleteCookie',deleteCookie);
-// router.get('/startAtlas',startAtlas);
-// router.get('/migrateData',migrateData);
+const router = Router();
+
+router.get('/recent-search',getCookies);
+router.post('/recent-search',postCookie);
+
 
 export default router;
