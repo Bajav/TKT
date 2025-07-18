@@ -1,13 +1,44 @@
-// this is a controller , this handles all data manipulation
 // models/User.js
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-// we create a user schema , 
-// we use it to create a new user to our mongoose DB
+const flightSearchSchema = new mongoose.Schema({
+  origin: { type: String, required: true },
+  destination: { type: String, required: true },
+  departureDate: { type: String, required: true },
+  isOneWay: { type: Boolean, required: true },
+  returnDate: { type: String },
+}, { _id: false });
+
+const hotelSearchSchema = new mongoose.Schema({
+  locationSearched: { type: String, required: true },
+  checkInDate: { type: String, required: true },
+  checkOutDate: { type: String },
+}, { _id: false });
+
+const staySearchSchema = new mongoose.Schema({
+  locationSearched: { type: String, required: true },
+  checkInDate: { type: String, required: true },
+  checkOutDate: { type: String },
+}, { _id: false });
+
+const activitySearchSchema = new mongoose.Schema({
+  locationSearched: { type: String, required: true },
+  checkInDate: { type: String, required: true },
+  checkOutDate: { type: String },
+}, { _id: false });
+
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  sessionId: { type: String, unique: true },
+  recentSearches: {
+    flights: [flightSearchSchema],
+    hotels: [hotelSearchSchema],
+    stays: [staySearchSchema],
+    activities: [activitySearchSchema],
+  },
 });
 
-// we export the mongoose model
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
+
+export default User;
