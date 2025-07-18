@@ -7,9 +7,9 @@ import stripeRoutes from './Routes/stripe.routes.js'
 import mytiflyroutes from './Routes/mystifly.routes.js'
 // middleware
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
-import cookieParserMiddleware from "./Middleware/cookie.middleware.js";
+import sessionSetUp from "./Middleware/cookie.middleware.js";
 import loggerMiddleware from "./Middleware/logger.middleware.js";
-
+ 
 // set up
 const port = 3000;
 const app = express();
@@ -17,7 +17,7 @@ const app = express();
 // Middleware setup
 app.use(express.json());
 app.use(corsMiddleware);
-app.use(cookieParserMiddleware);
+app.use(sessionSetUp);
 app.use(loggerMiddleware);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
