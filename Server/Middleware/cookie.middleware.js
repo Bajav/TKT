@@ -1,5 +1,10 @@
-import cookieParser from 'cookie-parser';
+import session from "express-session";
 
-const cookieParserMiddleware = cookieParser('your-secret-key'); // same secret as sessions
+const sessionSetUp = session({
+  secret: "keyboard cat",          
+  resave: false,                  
+  saveUninitialized: true,
+  cookie: { secure: false },   
+});
 
-export default cookieParserMiddleware;
+export default sessionSetUp;
