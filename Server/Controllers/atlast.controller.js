@@ -1,5 +1,5 @@
 import {getAtlasDb} from '../Config/DB/mongoAtlas.config.js'
-import { createUserModel } from "../Models/User.model.js";
+import { createUserModel } from "../Models/User.js";
 
 export const checkDbStatus = (req, res) => {
   const atlasDb = getAtlasDb();
