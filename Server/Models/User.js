@@ -39,21 +39,24 @@ const activitySearchSchema = new mongoose.Schema(
   { _id: false }
 );
 
-const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  session: {
-  sessionId: { type: String },
-  createdAt: { type: Date, default: Date.now },
-},
-  recentSearches: {
-    flights: [flightSearchSchema],
-    hotels: [hotelSearchSchema],
-    stays: [staySearchSchema],
-    activities: [activitySearchSchema],
-  },
-});
+export const createUserModel = (dbConnection) => {
+  const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    session: [
+      {
+        sessionId: { type: String, required: true },
+        createdAt: { type: Date, default: Date.now },
+      },
+    ],
+    recentSearches: {
+      flights: [flightSearchSchema],
+      hotels: [hotelSearchSchema],
+      stays: [staySearchSchema],
+      activities: [activitySearchSchema],
+    },
+  });
 
-const User = mongoose.model("User", userSchema);
+  return dbConnection.model("User", userSchema);
+};
 
-export default User;
