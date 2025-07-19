@@ -5,13 +5,13 @@ import "./home.scss";
 // import components
 import LocationHeader from "../../components/Header/header";
 import Location from "../../components/places/location";
-import Alert from "../../components/features/Error&Sucess/alert.component";
-import Succes from "../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
+import { Outlet } from "react-router-dom";
 import DatePicker from "../../components/flightSearch/Calender/calender.component";
 
 function Home() {
   return (
     <main className="home">
+      <Outlet />
       <LocationHeader />
       <h1>welcome dennin</h1>
       <div className="activites">
