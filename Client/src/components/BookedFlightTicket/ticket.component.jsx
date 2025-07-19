@@ -1,6 +1,6 @@
 import "./ticket.styles.scss";
 import TicketHeader from "../flightSearch/Ticket/ticketheader.component";
-
+import klmLogo from '../../assets/images/klmLogo.png'
 function BookedTicket() {
   const defaults = {
     color: "#1e1e1e",
@@ -8,7 +8,9 @@ function BookedTicket() {
   return (
     <div className="booked-ticket">
       <div className="booked-ticket-header">
-        <div className="airlinelogo"></div>
+        <div className="airlinelogo">
+          <img src={klmLogo}  />
+        </div>
         <div className="airline-data">
           <div className="flexed-text">
             <h3>KL 920</h3>
