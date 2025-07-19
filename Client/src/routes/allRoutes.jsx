@@ -22,7 +22,7 @@ function AllRoutes() {
     "/flights/results",
     "/flights/lastprice",
     "/flights/passengerdata",
-    "/bookedflights"
+    "/myflights"
   ];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>

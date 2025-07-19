@@ -1,5 +1,5 @@
 import './tripdate.styles.scss';
-import straightBoarder from '../../assets/icons/90deg.svg'
+import straightBoarder from '../../../assets/icons/90deg.svg'
 
 function TripDateContainer({tripType,dates}) {
   return (
