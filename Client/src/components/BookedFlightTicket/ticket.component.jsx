@@ -9,12 +9,20 @@ function BookedTicket() {
     <div className="booked-ticket">
       <div className="booked-ticket-header">
         <div className="airlinelogo">
-          <img src={klmLogo}  />
+          <img src={klmLogo} />
         </div>
         <div className="airline-data">
           <div className="flexed-text">
             <h3>KL 920</h3>
             <h3>A232/FL</h3>
+          </div>
+             <div className="flexed-text">
+            <h3>travel date </h3>
+            <h3>23-03-2025</h3>
+          </div>
+             <div className="flexed-text">
+            <h3>booking ref</h3>
+            <h3>kl/xynfte</h3>
           </div>
         </div>
       </div>

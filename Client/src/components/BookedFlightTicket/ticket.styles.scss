@@ -38,6 +38,13 @@ $samedayalerttextcolor: #79cc77;
     gap: 10px;
     // justify-content: space-between;
     padding: 2px;
+    .airline-data
+    {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        // gap: 5px;
+        width: 100%;
+    }
   }
   .airlinelogo
   {
@@ -61,10 +68,12 @@ $samedayalerttextcolor: #79cc77;
     // gap: 7px;
     h3
     {
-        font-size: 10px;
+        font-size: 12px;
         font-family: $roboto_mono;
         color: $paxDataBg;
-        opacity: 80%;
+        // opacity: %;
+        text-transform: uppercase;
+        font-weight: 300;
     }
      h3:last-of-type
     {
