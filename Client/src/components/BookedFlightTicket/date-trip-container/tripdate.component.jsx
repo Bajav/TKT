@@ -3,7 +3,7 @@ import straightBoarder from '../../../assets/icons/90deg.svg'
 
 function TripDateContainer({tripType,dates}) {
   return (
-    <div className='container'>
+    <div className='date-container'>
         <h3>{tripType}</h3>
         <img src={straightBoarder} />
         <h3>{dates}</h3>

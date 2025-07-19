@@ -17,3 +17,27 @@ $paxDataBg: #F5F5F5;
 $samealertBg:#D3F3D5;
 $samedayalerttextcolor: #79CC77;
 
+.date-container
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: $datesbg;
+    height: 30px;
+    padding: 5px 10px;
+    width: 270px;
+    margin-top: 20px;
+    margin-left: 10px;
+    border-radius: 10px;
+    h3
+    {
+        color: $paxDataBg;
+        font-family: $roboto_flex;
+        text-transform: capitalize;
+        font-size: 12px;
+    }
+    h3:last-of-type 
+    {
+        font-family: $roboto_mono;
+    }
+}
