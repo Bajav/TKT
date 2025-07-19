@@ -27,8 +27,7 @@ $samedayalerttextcolor: #79cc77;
   background: $ticketBg;
   padding: 3px;
   border-radius: 10px;
-  .booked-ticket-header
-  {
+  .booked-ticket-header {
     background: $arilindetailbg;
     width: 100%;
     border-radius: 7px;
@@ -38,26 +37,23 @@ $samedayalerttextcolor: #79cc77;
     gap: 10px;
     // justify-content: space-between;
     padding: 2px;
-    .airline-data
-    {
-        display: grid;
-        grid-template-columns: repeat(3,1fr);
-        // gap: 5px;
-        width: 100%;
+    .airline-data {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      // gap: 5px;
+      width: 100%;
     }
   }
-  .airlinelogo
-  {
+  .airlinelogo {
     // object-fit: cover;
     width: 75px;
     height: 100%;
     border-radius: 5px;
-    background-color:$pagebg ;
-    img
-    {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    background-color: $pagebg;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
   .flexed-text {
@@ -66,18 +62,62 @@ $samedayalerttextcolor: #79cc77;
     // align-items: center;
     // position: relative;
     // gap: 7px;
-    h3
-    {
-        font-size: 12px;
-        font-family: $roboto_mono;
-        color: $paxDataBg;
-        // opacity: %;
-        text-transform: uppercase;
-        font-weight: 300;
+    h3 {
+      font-size: 12px;
+      font-family: $roboto_mono;
+      color: $paxDataBg;
+      // opacity: %;
+      text-transform: uppercase;
+      font-weight: 300;
     }
-     h3:last-of-type
-    {
-        margin-top: 10px;
+    h3:last-of-type {
+      margin-top: 10px;
     }
   }
+  .flight-details {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 3 columns
+    gap: 12px;
+    background: $paxDataBg;
+    padding: 10px;
+    border: 1px solid #1e1e1e;
+    border-radius: 7px;
+    width: 100%;
+
+    // padding: 4px;
+    .detail-flex {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    //   margin-bottom: 10px;
+      h3 {
+        font-family: $roboto_mono;
+        font-size: 12px;
+        font-weight: 400;
+        text-transform: capitalize;
+        opacity: 60%;
+      }
+      h3:last-of-type 
+      {
+        opacity: 100%;
+      } 
+    }
+  }
+  .ticket-border
+  {
+    height: 20px;
+    // background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    img
+    {
+        height: 3px;
+        width: 100%;
+    }
+
+}
 }
