@@ -91,7 +91,7 @@ $samedayalerttextcolor: #79cc77;
       flex-direction: column;
       align-items: flex-start;
       gap: 10px;
-    //   margin-bottom: 10px;
+      //   margin-bottom: 10px;
       h3 {
         font-family: $roboto_mono;
         font-size: 12px;
@@ -99,25 +99,21 @@ $samedayalerttextcolor: #79cc77;
         text-transform: capitalize;
         opacity: 60%;
       }
-      h3:last-of-type 
-      {
+      h3:last-of-type {
         opacity: 100%;
-      } 
+      }
     }
   }
-  .ticket-border
-  {
-    height: 20px;
+  .ticket-border {
+    height: 30px;
     // background: black;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    img
-    {
-        height: 3px;
-        width: 100%;
+    img {
+      height: 3px;
+      width: 100%;
     }
-
-}
+  }
 }
