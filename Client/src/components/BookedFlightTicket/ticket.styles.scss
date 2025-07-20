@@ -8,7 +8,7 @@ $roboto_flex: "Roboto Flex", sans-serif;
 $poppins_font: "Poppins", sans-serif;
 $babas_nue: "Bebas Neue", sans-serif;
 
-$pagebg: #f5f7f8;
+$pagebg: #f7fcff;
 $datesbg: #1e1e1e;
 $arilindetailbg: #222222;
 $bluredtext: #313030 55%;
@@ -25,7 +25,8 @@ $samedayalerttextcolor: #79cc77;
   align-items: center;
   width: 100%;
   background: $ticketBg;
-  padding: 3px;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
   .booked-ticket-header {
     background: $arilindetailbg;
