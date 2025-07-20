@@ -29,10 +29,16 @@ $samedayalerttextcolor: #79CC77;
 
     .tickets-actions
     {
+        margin-top: 20px;
+        margin-bottom: 30px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        .flexButtons 
+        {
+            padding: 0px;
+        }
     }
     .download-btn
     {
