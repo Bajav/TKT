@@ -71,7 +71,7 @@ function BookedTicket() {
           <h3>cabin class</h3>
           <h3>economy</h3>
         </div>
-        <div className="detail-flex">
+        <div className="detail-flex small-width">
           <h3>seat number</h3>
           <h3>18A</h3>
         </div>
@@ -85,7 +85,7 @@ function BookedTicket() {
           <h3>a380 KQC3</h3>
         </div>
 
-        <div className="detail-flex">
+        <div className="detail-flex small-width">
           <h3>Terminal</h3>
           <h3>T1</h3>
         </div>
