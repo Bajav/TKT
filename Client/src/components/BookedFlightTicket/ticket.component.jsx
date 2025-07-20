@@ -1,4 +1,5 @@
 import "./ticket.styles.scss";
+import Barcode from 'react-barcode'
 import TicketHeader from "../flightSearch/Ticket/ticketheader.component";
 import klmLogo from "../../assets/images/klmLogo.png";
 import border from "../../assets/icons/border-line.svg";
@@ -6,6 +7,27 @@ function BookedTicket() {
   const defaults = {
     color: "#1e1e1e",
   };
+  const barcodeOptions = {
+  width: 2,
+  height: 50,
+  format: "CODE128",
+  displayValue: false,
+  fontOptions: "",
+  font: "monospace",
+  textAlign: "center",
+  textPosition: "bottom",
+  textMargin: 2,
+  fontSize: 20,
+  background: "transparent",
+  lineColor: "#222",
+  margin: 10,
+  marginTop: undefined,
+  marginBottom: undefined,
+  marginLeft: undefined,
+  marginRight: undefined,
+  id: undefined,
+  className: undefined
+}
   return (
     <div className="booked-ticket">
       <div className="booked-ticket-header">
@@ -68,6 +90,7 @@ function BookedTicket() {
       <div className="ticket-border">
       <img src={border} />
       </div>
+      <Barcode height={barcodeOptions.height} displayValue={barcodeOptions.displayValue} background={barcodeOptions.background} lineColor={barcodeOptions.lineColor} value="barcode-example" />
     </div>
   );
 }
