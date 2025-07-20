@@ -58,3 +58,13 @@ $samedayalerttextcolor: #79CC77;
         }
     }
 }
+.submmit-btn
+{
+    background-color: $datesbg;
+    color: $pagebg;
+    font-family: $roboto_mono;
+    padding: 15px ;
+    font-size: 15px;
+    width: 100%;
+    border-radius: 5px;
+}
