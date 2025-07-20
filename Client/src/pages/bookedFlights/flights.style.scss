@@ -65,8 +65,9 @@ $samedayalerttextcolor: #79CC77;
     font-family: $roboto_mono;
     padding: 15px ;
     font-size: 15px;
-    width: 100%;
+    width: 98%;
     border-radius: 5px;
-    position: relative;
-    top: 25%;
+    position: absolute;
+    z-index: 20;
+    top: 90%;
 }

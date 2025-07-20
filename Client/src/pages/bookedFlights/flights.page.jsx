@@ -16,6 +16,7 @@ function BookedFlights() {
         </div>
       </div>
       <BookedTicket />
+      <BookedTicket />
       <button className='submmit-btn'>
           go to check in
       </button>
