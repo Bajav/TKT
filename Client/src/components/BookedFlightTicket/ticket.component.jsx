@@ -35,7 +35,7 @@ function BookedTicket() {
   };
   return (
     <div className="tickets-container">
-      <TripDateContainer tripType="departure" dates="Wednesday ,26, jun 2025" />
+      <TripDateContainer tripType="departure" dates="Wednesday,26,jun 2025" />
       <div className="booked-ticket">
         <div className="booked-ticket-header">
           <div className="airlinelogo">
