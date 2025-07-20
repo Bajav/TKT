@@ -11,7 +11,7 @@ function BookedFlights() {
           <BackBTN />
         </div>
         <div className="download-btn">
-          <ArrowDown size={20} color='#f7f7f7' />
+          <ArrowDown size={12} color='#f7f7f7' />
           <h4>download</h4>
         </div>
       </div>
