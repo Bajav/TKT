@@ -78,10 +78,10 @@ $samedayalerttextcolor: #79cc77;
     margin-top: 15px;
     display: grid;
     grid-template-columns: repeat(3, 1fr); // 3 columns
-    gap: 12px;
+    column-gap: 12px;
     background: $paxDataBg;
     padding: 10px;
-    border: 1px solid #1e1e1e;
+    // border: 1px solid #1e1e1e;
     border-radius: 7px;
     width: 100%;
 
@@ -90,7 +90,7 @@ $samedayalerttextcolor: #79cc77;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 10px;
+      gap: 5px;
       //   margin-bottom: 10px;
       h3 {
         font-family: $roboto_mono;
@@ -116,4 +116,5 @@ $samedayalerttextcolor: #79cc77;
       width: 100%;
     }
   }
+
 }
