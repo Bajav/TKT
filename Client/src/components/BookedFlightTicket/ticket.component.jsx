@@ -3,6 +3,10 @@ import Barcode from "react-barcode";
 import TicketHeader from "../flightSearch/Ticket/ticketheader.component";
 import klmLogo from "../../assets/images/klmLogo.png";
 import border from "../../assets/icons/border-line.svg";
+// import Alert from "../features/Error&Sucess/alert.component";
+import FlightFlag from "../flightarrival/flightflag.component";
+import { AlertOctagon } from "lucide-react";
+
 function BookedTicket() {
   const defaults = {
     color: "#1e1e1e",
@@ -101,6 +105,7 @@ function BookedTicket() {
         lineColor={barcodeOptions.lineColor}
         value="212334721921233492334233423211"
       />
+      <FlightFlag icon={<AlertOctagon size={15}/>} bgColor="" fontColor="" alertText="arrives the next day"/>
     </div>
   );
 }
