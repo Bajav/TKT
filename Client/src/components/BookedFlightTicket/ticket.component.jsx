@@ -5,7 +5,7 @@ import klmLogo from "../../assets/images/klmLogo.png";
 import border from "../../assets/icons/border-line.svg";
 // import Alert from "../features/Error&Sucess/alert.component";
 import FlightFlag from "../flightarrival/flightflag.component";
-import { AlertOctagon } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 
 function BookedTicket() {
   const defaults = {
@@ -105,7 +105,7 @@ function BookedTicket() {
         lineColor={barcodeOptions.lineColor}
         value="212334721921233492334233423211"
       />
-      <FlightFlag icon={<AlertOctagon size={15}/>} bgColor="" fontColor="" alertText="arrives the next day"/>
+      <FlightFlag icon={<CircleAlert style={{rotate:"180deg"}} size={15} color="#79CC77"/>} bgColor="#D3F3D5" fontColor="#79CC77" alertText="arrives the next day"/>
     </div>
   );
 }
