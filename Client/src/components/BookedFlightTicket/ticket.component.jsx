@@ -20,7 +20,7 @@ function BookedTicket() {
   fontSize: 20,
   background: "transparent",
   lineColor: "#222",
-  margin: 10,
+  margin: 0,
   marginTop: undefined,
   marginBottom: undefined,
   marginLeft: undefined,
@@ -90,7 +90,7 @@ function BookedTicket() {
       <div className="ticket-border">
       <img src={border} />
       </div>
-      <Barcode height={barcodeOptions.height} displayValue={barcodeOptions.displayValue} background={barcodeOptions.background} lineColor={barcodeOptions.lineColor} value="barcode-example" />
+      <Barcode height={barcodeOptions.height} margin={barcodeOptions.margin} displayValue={barcodeOptions.displayValue} background={barcodeOptions.background} lineColor={barcodeOptions.lineColor} value="212334721921233492334233423211" />
     </div>
   );
 }

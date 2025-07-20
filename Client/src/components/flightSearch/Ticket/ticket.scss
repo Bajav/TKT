@@ -135,7 +135,7 @@ $babas_nue: "Bebas Neue", sans-serif;
     }
   }
   .price-details h4 {
-   font-family: $poppins_font;
+    font-family: $poppins_font;
     font-size: 15px;
     font-weight: 500;
     span {
@@ -143,6 +143,11 @@ $babas_nue: "Bebas Neue", sans-serif;
       font-weight: -800;
     }
   }
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: self-end;
 }
 .actions {
   display: flex;
@@ -221,14 +226,12 @@ $babas_nue: "Bebas Neue", sans-serif;
     flex-direction: column;
     width: 100%;
     margin-top: 15px;
-      .border {
-    margin: 15px 0px 0px 0px;
-}
+    .border {
+      margin: 15px 0px 0px 0px;
+    }
   }
-    .ticket-header
-  {
-    h2
-    {
+  .ticket-header {
+    h2 {
       height: 35px;
     }
   }
@@ -240,7 +243,6 @@ $babas_nue: "Bebas Neue", sans-serif;
     font-size: 10px;
     margin-bottom: 0px;
   }
-  
 }
 .flightsDetails.open {
   max-height: 200px;
@@ -256,7 +258,7 @@ $babas_nue: "Bebas Neue", sans-serif;
 
   // top: -10px;
   // left: 10px;
-  
+
   color: $page_color;
   h5 {
     //   margin: 0px 10px 0px 10px;
@@ -389,19 +391,16 @@ $babas_nue: "Bebas Neue", sans-serif;
   }
 }
 
-.upsell
-{
+.upsell {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  h2
-  {
+  h2 {
     color: $visibleFontColor;
-
   }
 }
 
- .flights-res::before,
+.flights-res::before,
 .flights-res::after {
   content: "";
   position: absolute;
@@ -420,8 +419,7 @@ $babas_nue: "Bebas Neue", sans-serif;
 .flights-res::after {
   right: -10px;
 }
-.border
-{
+.border {
   margin: 15px 0px 10px 0px;
 }
 // .flightDealContainer::before,
@@ -466,15 +464,13 @@ $babas_nue: "Bebas Neue", sans-serif;
   align-items: center;
   gap: 10px;
   padding: 2px;
-  img
-  {
+  img {
     width: 15px;
   }
-  li
-  {
+  li {
     list-style: none;
     color: $page_color;
-    font-family: $textFont,sans-serif;
+    font-family: $textFont, sans-serif;
     font-size: 10px;
     // text-align: start;
   }
@@ -487,8 +483,7 @@ $babas_nue: "Bebas Neue", sans-serif;
   // height: 70px;
   grid-template-columns: repeat(2, 1fr);
 }
-.container
-{
+.container {
   width: 100%;
   // gap: 100px;
   gap: 5%;
