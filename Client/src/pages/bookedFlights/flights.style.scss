@@ -26,4 +26,29 @@ $samedayalerttextcolor: #79CC77;
     background: $pagebg;
     height: 100vh;
     padding: 0px 5px;
+
+    .tickets-actions
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .download-btn
+    {
+        display: flex;
+        background: $datesbg;
+        align-items: center;
+        justify-content: center;
+        padding: 3px 6px;
+        border-radius: 3px;
+        gap: 5px;
+        h4
+        {
+            font-family: $roboto_mono;
+            color: $paxDataBg;
+            text-transform: capitalize;
+            font-size: 12px;
+        }
+    }
 }
