@@ -31,8 +31,8 @@ useEffect(() => {
     try {
       console.log("🚀 Sending cookie request...");
       const response = await axios.post(
-        "http://localhost:3000/createCookie",
-        { uid: "hussein is my name" },
+        "http://localhost:3000/find-user",
+        { userData:userData},
         {
           withCredentials: true,
         }
