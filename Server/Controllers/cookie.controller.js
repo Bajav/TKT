@@ -1,13 +1,4 @@
-import { Router } from "express";
-const router = Router();
-
-const postCookie = (req, res) => {
-  const { search } = req.body;
-  console.log();
-  res.json({ success: true, recentSearches: "hello winner" });
-};
-
-const getCookies = (req, res) => {
+export const getCookies = (req, res) => {
   if (!req.session.views) {
     req.session.views = 1;
   } else {
@@ -21,5 +12,3 @@ const getCookies = (req, res) => {
     session: req.session,
   });
 };
-
-export { postCookie, getCookies };
