@@ -40,8 +40,12 @@ const activitySearchSchema = new mongoose.Schema(
 );
 
 export const createUserModel = (dbConnection) => {
+  if (dbConnection.models.User) {
+    return dbConnection.models.User;
+  }
+
   const userSchema = new mongoose.Schema({
-    name: { type: String, required: true },
+    username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     session: [
       {
