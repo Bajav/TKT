@@ -12,10 +12,25 @@ export const createUserHandler = async (req, res) => {
   try {
     const atlasDb = getAtlasDb();
     const UserModel = createUserModel(atlasDb);
+
+    // Check if user already exists
+    const existingUser = await UserModel.findOne({
+      $or: [{ username }, { email }],
+    });
+
+    if (existingUser) {
+      return res.status(200).json({
+        success: false,
+        message: "User already exists",
+        user: existingUser,
+      });
+    }
+
+    // Create new user if not found
     const newUser = await UserModel.create({
-      username: "testuser",
-      email: "test@example.com",
-      session: [{ sessionId: "abc123" }],
+      username,
+      email,
+      session: [{ sessionId }],
       recentSearches: {
         flights: [],
         hotels: [],
@@ -23,6 +38,7 @@ export const createUserHandler = async (req, res) => {
         activities: [],
       },
     });
+
     res.status(201).json({
       success: true,
       message: "User created successfully",
