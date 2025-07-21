@@ -28,8 +28,8 @@ export const createUserHandler = async (req, res) => {
 
     // Create new user if not found
     const newUser = await UserModel.create({
-      username,
-      email,
+      username:username,
+      email:email,
       session: [{ sessionId }],
       recentSearches: {
         flights: [],
