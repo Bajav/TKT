@@ -1,10 +1,12 @@
 import session from "express-session";
 
 const sessionSetUp = session({
-  secret: "keyboard cat",          
-  resave: false,                  
+  secret: "keyboard cat",
+  resave: false,
   saveUninitialized: true,
-  cookie: { secure: false },   
+  cookie: { secure: false,
+    maxAge:60000*60
+   },
 });
 
 export default sessionSetUp;

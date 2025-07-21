@@ -3,7 +3,7 @@ import { getCookies,postCookie } from '../Controllers/cookie.controller.js';
 
 const router = Router();
 
-router.get('/recent-search',getCookies);
+router.get('/',getCookies);
 router.post('/recent-search',postCookie);
 
 
