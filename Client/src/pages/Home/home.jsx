@@ -1,4 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useEffect } from "react";
+import axios from "axios";
 // import styles
 import "swiper/css";
 import "./home.scss";
@@ -9,6 +11,18 @@ import { Outlet } from "react-router-dom";
 import DatePicker from "../../components/flightSearch/Calender/calender.component";
 
 function Home() {
+  const startSession = async () => {
+    try {
+      await axios.get("http://localhost:3000/", {
+        withCredentials: true, // ⬅️ very important
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  useEffect(() => {
+    startSession();
+  }, []);
   return (
     <main className="home">
       <Outlet />
