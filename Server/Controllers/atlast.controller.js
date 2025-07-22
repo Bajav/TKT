@@ -9,59 +9,58 @@ export const checkDbStatus = (req, res) => {
 
 export const createUserHandler = async (req, res) => {
   const sessionId = req.session.id;
-  console.log(req.body);
-  const userData = req.body;
   const {uid,email,displayName} = userData.userData;
+  // console.log(req.body);
+  req.session.uid = firebaseUser.uid;
+  const userData = req.body;
   console.log("USER-DATA :: " , userData);
   console.log("session id :: ",sessionId)
   console.log("uid:: ",uid);
   console.log("displayName :: ", displayName)
   console.log("email :: ",email);
   // console.log("  :: ")
-  // try {
-  //   const atlasDb = getAtlasDb();
-  //   const UserModel = createUserModel(atlasDb);
+  try {
+    const atlasDb = getAtlasDb();
+    const UserModel = createUserModel(atlasDb);
 
-  //   // Check if user already exists
-  //   const existingUser = await UserModel.findOne({
-  //     $or: [{ username }, { email }],
-  //   });
+    // Check if user already exists
+    const existingUser = await UserModel.findOne({
+      $or: [{ username }, { email }],
+    });
 
-  //   if (existingUser) {
-  //     return res.status(200).json({
-  //       success: false,
-  //       message: "User already exists",
-  //       user: existingUser,
-  //     });
-  //   }
+    if (existingUser) {
+      return res.status(200).json({
+        success: false,
+        message: "User already exists",
+        user: existingUser,
+      });
+    }
 
-  //   // Create new user if not found
-  //   const newUser = await UserModel.create({
-  //     username:displayName,
-  //     email:email,
-  //     uId:uId,
-  //     session: [{ sessionId }],
-  //     recentSearches: {
-  //       flights: [],
-  //       hotels: [],
-  //       stays: [],
-  //       activities: [],
-  //     },
-  //   });
+    // Create new user if not found
+    const newUser = await UserModel.create({
+      username:displayName,
+      email:email,
+      recentSearches: {
+        flights: [],
+        hotels: [],
+        stays: [],
+        activities: [],
+      },
+    });
 
-  //   res.status(201).json({
-  //     success: true,
-  //     message: "User created successfully",
-  //     user: newUser,
-  //   });
-  // } catch (error) {
-  //   console.error("Error creating user:", error);
-  //   res.status(500).json({
-  //     success: false,
-  //     message: "Failed to create user",
-  //     error: error.message,
-  //   });
-  // }
+    res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      user: newUser,
+    });
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to create user",
+      error: error.message,
+    });
+  }
 };
 
 export const findUsers = async (req, res) => {

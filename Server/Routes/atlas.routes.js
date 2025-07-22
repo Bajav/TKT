@@ -5,7 +5,7 @@ const router = Router();
 router.get('/atlas-status',checkDbStatus);
 router.post('/create-user',createUserHandler);
 router.get('/find-user',findUsers);
-router.post('/find-user',findUsers);
+router.post('/find-user',createUserHandler);
 
 
 export default router;

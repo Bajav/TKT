@@ -48,12 +48,12 @@ export const createUserModel = (dbConnection) => {
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     uId: { type: String, required: true, unique: true },
-    session: [
-      {
-        sessionId: { type: String, required: true },
-        createdAt: { type: Date, default: Date.now },
-      },
-    ],
+    // session: [
+    //   {
+    //     sessionId: { type: String, required: true },
+    //     createdAt: { type: Date, default: Date.now },
+    //   },
+    // ],
     recentSearches: {
       flights: [flightSearchSchema],
       hotels: [hotelSearchSchema],
