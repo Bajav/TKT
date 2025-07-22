@@ -8,9 +8,16 @@ export const checkDbStatus = (req, res) => {
 };
 
 export const createUserHandler = async (req, res) => {
+  const sessionId = req.session.id;
   console.log(req.body);
-  // const { username, email, sessionId } = req.body;
-  // let username,email,sessionId;
+  const userData = req.body;
+  const {uid,email,displayName} = userData.userData;
+  console.log("USER-DATA :: " , userData);
+  console.log("session id :: ",sessionId)
+  console.log("uid:: ",uid);
+  console.log("displayName :: ", displayName)
+  console.log("email :: ",email);
+  // console.log("  :: ")
   // try {
   //   const atlasDb = getAtlasDb();
   //   const UserModel = createUserModel(atlasDb);
@@ -30,8 +37,9 @@ export const createUserHandler = async (req, res) => {
 
   //   // Create new user if not found
   //   const newUser = await UserModel.create({
-  //     username:username,
+  //     username:displayName,
   //     email:email,
+  //     uId:uId,
   //     session: [{ sessionId }],
   //     recentSearches: {
   //       flights: [],
@@ -60,15 +68,15 @@ export const findUsers = async (req, res) => {
   if(!req.body) return;
   console.log("USER-DATA :: " , req.body);
   // res.json(req.body);
-  try {
-    const atlasDb = getAtlasDb();
-    const UserModel = createUserModel(atlasDb);
-    const users = await UserModel.find();
-    console.log(users);
-    console.log("users found");
-    res.status(200).json(users);
-  } catch (err) {
-    console.log(err.message);
-    res.status(404).send("no users found");
-  }
+  // try {
+  //   const atlasDb = getAtlasDb();
+  //   const UserModel = createUserModel(atlasDb);
+  //   const users = await UserModel.find();
+  //   console.log(users);
+  //   console.log("users found");
+  //   res.status(200).json(users);
+  // } catch (err) {
+  //   console.log(err.message);
+  //   res.status(404).send("no users found");
+  // }
 };

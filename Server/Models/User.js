@@ -47,6 +47,7 @@ export const createUserModel = (dbConnection) => {
   const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    uId: { type: String, required: true, unique: true },
     session: [
       {
         sessionId: { type: String, required: true },
