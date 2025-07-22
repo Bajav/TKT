@@ -25,7 +25,7 @@ export const createUserHandler = async (req, res) => {
 
     // Check if user already exists
     const existingUser = await UserModel.findOne({
-      $or: [{ username }, { email }],
+      $or:[{ email }],
     });
 
     if (existingUser) {
