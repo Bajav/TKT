@@ -1,11 +1,13 @@
 import session from "express-session";
+import MongoStore from 'connect-mongo';
 
+const encodedPassword = encodeURIComponent('d!*%XJMLJBN29PP');
 const sessionSetUp = session({
   secret: "keyboard cat",
   resave: false,
   saveUninitialized: true,
     store: MongoStore.create({
-    mongoUrl: process.env.MONGO_DB_STRING,
+    mongoUrl: `mongodb+srv://tkt_development:${encodedPassword}@tktdb.arfqreg.mongodb.net/?retryWrites=true&w=majority&appName=TKTDB`,
     ttl: 60 * 60 // 1 hour
   }),
   cookie: { secure: false,
