@@ -9,10 +9,10 @@ export const checkDbStatus = (req, res) => {
 
 export const createUserHandler = async (req, res) => {
   const sessionId = req.session.id;
+  const userData = req.body;
   const {uid,email,displayName} = userData.userData;
   // console.log(req.body);
-  req.session.uid = firebaseUser.uid;
-  const userData = req.body;
+  req.session.uid = uid;
   console.log("USER-DATA :: " , userData);
   console.log("session id :: ",sessionId)
   console.log("uid:: ",uid);
