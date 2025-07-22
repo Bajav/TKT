@@ -57,6 +57,9 @@ export const createUserHandler = async (req, res) => {
 };
 
 export const findUsers = async (req, res) => {
+  if(!req.body) return;
+  console.log("USER-DATA :: " , req.body);
+  // res.json(req.body);
   try {
     const atlasDb = getAtlasDb();
     const UserModel = createUserModel(atlasDb);
