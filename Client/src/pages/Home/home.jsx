@@ -9,7 +9,6 @@ import LocationHeader from "../../components/Header/header";
 import Location from "../../components/places/location";
 import { Outlet } from "react-router-dom";
 import DatePicker from "../../components/flightSearch/Calender/calender.component";
-import { SessionContext } from "../../components/context/session.context";
 
 function Home() {
   return (
