@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import axios from "axios";
 // import styles
 import "swiper/css";
@@ -9,20 +9,23 @@ import LocationHeader from "../../components/Header/header";
 import Location from "../../components/places/location";
 import { Outlet } from "react-router-dom";
 import DatePicker from "../../components/flightSearch/Calender/calender.component";
+import { SessionContext } from "../../components/context/session.context";
 
 function Home() {
-  const startSession = async () => {
-    try {
-      await axios.get("http://localhost:3000/", {
-        withCredentials: true, // ⬅️ very important
-      });
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-  useEffect(() => {
-    startSession();
-  }, []);
+  const {session,loading} = useContext(SessionContext);
+  console.log(session);
+  // const startSession = async () => {
+  //   try {
+  //      await axios.get("http://localhost:3000/", {
+  //       withCredentials: true, 
+  //     });
+  //   } catch (err) {
+  //     console.log(err.message);
+  //   }
+  // };
+  // useEffect(() => {
+  //   startSession();
+  // }, []);
   return (
     <main className="home">
       <Outlet />
