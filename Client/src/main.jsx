@@ -7,6 +7,7 @@ import { FlightSearchProvider } from "./components/context/flightSearch.context.
 import { LocationProvider } from "./components/context/location.context.jsx";
 import { UserContextProvider } from "./components/context/user.context.jsx";
 import { UiContextProvider } from "./components/context/ui.context.jsx";
+import { SessionProvider } from "./components/context/session.context.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")).render(
         <FlightSearchProvider>
           <UiContextProvider>
             <LocationProvider>
-              <App />
+              <SessionProvider>
+                <App />
+              </SessionProvider>
             </LocationProvider>
           </UiContextProvider>
         </FlightSearchProvider>
