@@ -12,20 +12,6 @@ import DatePicker from "../../components/flightSearch/Calender/calender.componen
 import { SessionContext } from "../../components/context/session.context";
 
 function Home() {
-  const {session,loading} = useContext(SessionContext);
-  console.log(session);
-  // const startSession = async () => {
-  //   try {
-  //      await axios.get("http://localhost:3000/", {
-  //       withCredentials: true, 
-  //     });
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // };
-  // useEffect(() => {
-  //   startSession();
-  // }, []);
   return (
     <main className="home">
       <Outlet />
