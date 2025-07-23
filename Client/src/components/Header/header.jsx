@@ -39,13 +39,6 @@ useEffect(() => {
       );
       console.log("✅ Cookie response:", response);
       console.log("✅ Response headers:", response.headers);
-      
-      // Test if cookie was actually set
-      // const cookieCheck = await axios.get("http://localhost:3000/readCookie", {
-      //   withCredentials: true
-      // });
-      console.log("🍪 Cookie check:", cookieCheck.data);
-      
     } catch (err) {
       console.log("❌ Error posting user data", err.response?.data || err.message);
     }
