@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useContext, useEffect } from "react";
-import axios from "axios";
+// import { useContext, useEffect } from "react";
+// import axios from "axios";
 // import styles
 import "swiper/css";
 import "./home.scss";
