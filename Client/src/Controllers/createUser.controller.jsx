@@ -7,7 +7,7 @@ import { useContext } from "react";
 const createUserFromAuth = async (user) => {
   // check if document ecxists
   const userRef = doc(db, "user", user.uid);
-  // read user
+  // read use
   const userSnapShot = await getDoc(userRef);
   if (userSnapShot.exists()) {
     const userData = userSnapShot.data();
