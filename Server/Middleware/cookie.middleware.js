@@ -5,7 +5,7 @@ const encodedPassword = encodeURIComponent('d!*%XJMLJBN29PP');
 const sessionSetUp = session({
   secret: "keyboard cat",
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
     store: MongoStore.create({
     mongoUrl: `mongodb+srv://tkt_development:${encodedPassword}@tktdb.arfqreg.mongodb.net/?retryWrites=true&w=majority&appName=TKTDB`,
     ttl: 60 * 60 // 1 hour

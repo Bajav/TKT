@@ -1,9 +1,9 @@
 import {Router} from 'express';
-import { getCookies } from '../Controllers/cookie.controller.js';
+import { getCookies,findCookies } from '../Controllers/cookie.controller.js';
 
 const router = Router();
 
-router.get('/',getCookies);
+router.get('/',findCookies);
 router.post('/',getCookies);
 
 
