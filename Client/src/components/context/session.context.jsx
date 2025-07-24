@@ -15,11 +15,12 @@ import { UserContext } from "./user.context";
     try {
       const res = await axiosInstance.get("/"); 
       setSession(res.data); 
+      console.log(res.data)
       const userData = await getUserByUID(res.data.session.uid);
-      // console.log(userData);
+      console.log(userData);
       setUserData(userData);
       setSigninedIn(true);
-      // console.log(res.data.session.uid);
+      console.log(res.data.session.uid);
     } catch (err) {
       setSession(null);
     } finally {
