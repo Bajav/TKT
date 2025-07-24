@@ -9,11 +9,6 @@ const UserContext = createContext({
 
 const UserContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
-  if(userData){
-    console.log(true);
-  }else{
-    console.log("fuck yo");
-  }
   const [signedIn, setSigninedIn] = useState(false);
   const value = { userData, setUserData, signedIn, setSigninedIn };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
