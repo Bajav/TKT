@@ -9,9 +9,9 @@ import defaultProfile from "../../assets/icons/profile-default-svgrepo-com.svg";
 import createUserFromAuth from "../../Controllers/createUser.controller";
 
 const LocationHeader = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData,signedIn,setSigninedIn } = useContext(UserContext);
   const [dropDown, setDropDown] = useState(false);
-  const [signedIn, setSigninedIn] = useState(false);
+  
   const showDropdown = () => setDropDown(!dropDown);
 
   const signinwithpopup = async () => {

@@ -3,12 +3,20 @@ import { createContext, useState } from "react";
 const UserContext = createContext({
   userData: null,
   setUserData: () => {},
+  signedIn: false,
+  setSigninedIn: () => {},
 });
 
 const UserContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
-  const value = { userData, setUserData };
+  if(userData){
+    console.log(true);
+  }else{
+    console.log("fuck yo");
+  }
+  const [signedIn, setSigninedIn] = useState(false);
+  const value = { userData, setUserData, signedIn, setSigninedIn };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
-export { UserContext,UserContextProvider};
+export { UserContext, UserContextProvider };

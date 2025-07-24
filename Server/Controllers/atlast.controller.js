@@ -13,11 +13,11 @@ export const createUserHandler = async (req, res) => {
   const {uid,email,displayName} = userData.userData;
   // console.log(req.body);
   req.session.uid = uid;
-  console.log("USER-DATA :: " , userData);
-  console.log("session id :: ",sessionId)
-  console.log("uid:: ",uid);
-  console.log("displayName :: ", displayName)
-  console.log("email :: ",email);
+  // console.log("USER-DATA :: " , userData);
+  // console.log("session id :: ",sessionId)
+  // console.log("uid:: ",uid);
+  // console.log("displayName :: ", displayName)
+  // console.log("email :: ",email);
   // console.log("  :: ")
   try {
     const atlasDb = getAtlasDb();
