@@ -65,15 +65,15 @@ function FlightPricing() {
             tripstops="direct"
             arrivalTime={itinerary.segments[0].arrival.at.slice(11) || ""}
             destinationCode={itinerary.segments[0].arrival.iataCode || ""}
-            destinationCityCountry=", entebbe kampala uganda"
-            destinationTerminal="n/a"
-            cabin="k"
-            cabinClass="economy"
-            carryWeight="1pc"
-            carryOnUnit="7kg"
+            destinationCityCountry={", entebbe kampala uganda" || ""}
+            destinationTerminal={"n/a" || ""}
+            cabin={"k" || ""}
+            cabinClass={"economy" || ""}
+            carryWeight={"1pc" || ""}
+            carryOnUnit={"7kg" || ""}
             // checkedWeight={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(12,17)}
             // checkedOnUnit={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(17)}
-            c02Weight="936kg"
+            c02Weight={"936kg" || ""}
           />
         );
       })}
