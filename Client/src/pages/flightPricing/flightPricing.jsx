@@ -32,7 +32,7 @@ function FlightPricing() {
   }, {});
   const coninueBtn = () =>
     navigate("/flights/Passengerdata", { replace: true });
-  console.log("lastFlight", flightSearch);
+  console.log("lastFlight", lastFlight);
 
   return (
     <section className="reviewFlight">
@@ -46,7 +46,7 @@ function FlightPricing() {
         destinationCity={"dubai,uae"}
       />
       {lastFlight.itineraries.map((itinerary) => {
-        console.log("itinerary :::", itinerary);
+        console.log("amaneties :::", lastFlight.travelerPricings[0].fareDetailsBySegment);
 
         return (
           <ReviewCard
