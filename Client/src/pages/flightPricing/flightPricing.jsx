@@ -32,7 +32,7 @@ function FlightPricing() {
   }, {});
   const coninueBtn = () =>
     navigate("/flights/Passengerdata", { replace: true });
-  console.log("lastFlight",  lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(12,17));
+  console.log("lastFlight",  lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[1].description.slice(10,17));
 
   return (
     <section className="reviewFlight">
@@ -69,8 +69,8 @@ function FlightPricing() {
             destinationTerminal={"n/a" || ""}
             cabin={"k" || ""}
             cabinClass={"economy" || ""}
-            carryWeight={"1pc" || ""}
-            carryOnUnit={"7kg" || ""}
+            carryWeight={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[1].description.slice(10,17) || ""}
+            carryOnUnit={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[1].description.slice(17) || ""}
             checkedWeight={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(12,17) || ""}
             checkedOnUnit={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(17) || ""}
             c02Weight={"936kg" || ""}
