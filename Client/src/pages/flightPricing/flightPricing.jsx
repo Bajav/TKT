@@ -19,6 +19,7 @@ function FlightPricing() {
   const { lastFlight } = useContext(FlightContext);
   const [price, setPrice] = useState([]);
   const [taxes, setTaxes] = useState([]);
+  const [direct , setDirect]= useState("");
   const [travelerPricings, setTravelerPricings] = useState([]);
 
   const navigate = useNavigate();
@@ -32,8 +33,13 @@ function FlightPricing() {
   }, {});
   const coninueBtn = () =>
     navigate("/flights/Passengerdata", { replace: true });
-  console.log("lastFlight",  lastFlight.travelerPricings[0].fareDetailsBySegment[0].cabin);
-
+  // console.log("lastFlight",  lastFlight.itineraries[0].segments.length);
+// check if the flight is direct function
+  // if(lastFlight.itineraries[0].segments.length > 1){
+  //   setDirect(`${lastFlight.itineraries[0].segments.length} stops`)
+  // }else{
+  //   setDirect("direct")
+  // }
   return (
     <section className="reviewFlight">
       <BackBTN onClick={() => navigate("/flights")} btnName="cancel" />
@@ -44,6 +50,7 @@ function FlightPricing() {
         destinationCode={"dxb"}
         arrowColor="#333"
         destinationCity={"dubai,uae"}
+        
       />
       {lastFlight.itineraries.map((itinerary) => {
         // console.log("amaneties :::", lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(12));
@@ -62,7 +69,7 @@ function FlightPricing() {
             originCityCountry={flightSearch.origin || ""}
             // originTerminal="n/a"
             duration={itinerary.segments[0].duration.slice(2) || ""}
-            tripstops="direct"
+            tripstops={lastFlight.itineraries[0].segments.length > 1 ? lastFlight.itineraries[0].segments.length +" " + "stops" : "direct flight"}
             arrivalTime={itinerary.segments[0].arrival.at.slice(11) || ""}
             destinationCode={itinerary.segments[0].arrival.iataCode || ""}
             destinationCityCountry={", entebbe kampala uganda" || ""}
