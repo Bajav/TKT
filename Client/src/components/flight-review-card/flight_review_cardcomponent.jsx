@@ -58,7 +58,7 @@ function ReviewCard(props) {
               <h6>class : {props.cabin} {props.cabinClass}</h6>
               <h6>carry on : {props.carryWeight} {props.carryOnUnit} </h6>
               <h6>checked bags : {props.checkedWeight} {props.checkedOnUnit}</h6>
-              <h6>co2 : {props.c02Weight}</h6>
+              {/* <h6>co2 : {props.c02Weight}</h6> */}
             </div>
 
             <FlightFlag
