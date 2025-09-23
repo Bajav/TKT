@@ -32,7 +32,7 @@ function FlightPricing() {
   }, {});
   const coninueBtn = () =>
     navigate("/flights/Passengerdata", { replace: true });
-  console.log("lastFlight", lastFlight.itineraries.length);
+  console.log("lastFlight", flightSearch);
 
   return (
     <section className="reviewFlight">
@@ -54,12 +54,12 @@ function FlightPricing() {
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
             }
             travelDate={itinerary.segments[0].departure.at.slice(0, 10)}
-            airlineName="qatar air"
-            equipmentNumb="AA67."
+            airlineName={itinerary.segments[0].carrierCode}
+            equipmentNumb={itinerary.segments[0].aircraft.code}
             operator="operated by qatar air"
             departureTime={itinerary.segments[0].departure.at.slice(11)}
             originCode={itinerary.segments[0].departure.iataCode}
-            originCityCountry="entebbe kampala uganda"
+            originCityCountry={flightSearch.origin}
             originTerminal="n/a"
             duration={itinerary.segments[0].duration}
             tripstops="direct"
