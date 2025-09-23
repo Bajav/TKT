@@ -39,7 +39,7 @@ function FlightPricing() {
   }, {});
   const coninueBtn = () =>
     navigate("/flights/Passengerdata", { replace: true });
-  console.log("lastFlight",  lastFlight.itineraries[0].segments[0]);
+  console.log("lastFlight",  lastFlight.itineraries[0].segments[0].carrierCode);
 // check if the flight is direct function
   // if(lastFlight.itineraries[0].segments.length > 1){
   //   setDirect(`${lastFlight.itineraries[0].segments.length} stops`)
@@ -63,7 +63,7 @@ function FlightPricing() {
 
         return (
           <ReviewCard
-          // airlineLogo={ airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
+          airlineLogo={ airlinesLookUp[lastFlight.itineraries[0].segments[0].carrierCode]?.logo || ""}
             tripType={
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
             }
