@@ -9,9 +9,17 @@ import FlightFlag from "../flightarrival/flightflag.component";
 import { CircleAlert } from "lucide-react";
 
 function BookedTicket() {
+  // flag functions
+  // if (departureDate){
+  //   flagText = "sameDay arrival"
+  // }else{
+  //   flagText = "arrival next day"
+  // };
   const defaults = {
     color: "#1e1e1e",
   };
+
+  // barcode options
   const barcodeOptions = {
     width: 2,
     height: 50,
@@ -33,6 +41,7 @@ function BookedTicket() {
     id: undefined,
     className: undefined,
   };
+
   return (
     <div className="tickets-container">
       <TripDateContainer tripType="departure" dates="Wednesday,26,jun 2025" />

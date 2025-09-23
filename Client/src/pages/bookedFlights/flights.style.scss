@@ -58,6 +58,11 @@ $samedayalerttextcolor: #79CC77;
         }
     }
 }
+.available-tickets
+{
+    position: relative;
+    z-index: 10;
+}
 .submmit-btn
 {
     background-color: $datesbg;

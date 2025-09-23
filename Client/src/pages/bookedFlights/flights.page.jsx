@@ -15,8 +15,10 @@ function BookedFlights() {
           <h4>download</h4>
         </div>
       </div>
+      <div className="available-tickets">
       <BookedTicket />
       <BookedTicket />
+      </div>
       <button className='submmit-btn'>
           go to check in
       </button>

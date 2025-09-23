@@ -24,7 +24,7 @@ import loggerMiddleware from "./Middleware/logger.middleware.js";
 // set up
 const port = 3000;
 const app = express();
-
+  
 // Middleware setup
 app.use(express.json());
 app.use(corsMiddleware);
