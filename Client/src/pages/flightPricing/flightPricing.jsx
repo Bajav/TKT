@@ -58,13 +58,13 @@ function FlightPricing() {
             equipmentNumb="AA67."
             operator="operated by qatar air"
             departureTime={itinerary.segments[0].departure.at.slice(11)}
-            originCode="ebb"
+            originCode={itinerary.segments[0].departure.iataCode}
             originCityCountry="entebbe kampala uganda"
             originTerminal="n/a"
-            duration="8h40m"
+            duration={itinerary.segments[0].duration}
             tripstops="direct"
-            arrivalTime="11:05 "
-            destinationCode="ebb"
+            arrivalTime={itinerary.segments[0].arrival.at.slice(11)}
+            destinationCode={itinerary.segments[0].arrival.iataCode}
             destinationCityCountry=", entebbe kampala uganda"
             destinationTerminal="n/a"
             cabin="k"
