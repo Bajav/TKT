@@ -13,10 +13,9 @@ import ReviewCard from "../../components/flight-review-card/flight_review_cardco
 function FlightPricing() {
   // const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
-  const { flightSearch } = useContext(FlightContext);
-  const { bookedFlight } = useContext(FlightContext);
-  const { iataCodes } = useContext(FlightContext);
-  const { lastFlight } = useContext(FlightContext);
+  const { flightSearch,bookedFlight,iataCodes,lastFlight,airlineData } = useContext(FlightContext);
+
+
   const [price, setPrice] = useState([]);
   const [taxes, setTaxes] = useState([]);
   const [direct , setDirect]= useState("");
@@ -31,9 +30,16 @@ function FlightPricing() {
     };
     return lookup;
   }, {});
+    const airlinesLookUp = airlineData.reduce((airlineLookUp, item) => {
+    airlineLookUp[item.code] = {
+      logo: item.logo,
+      name: item.name,
+    };
+    return airlineLookUp;
+  }, {});
   const coninueBtn = () =>
     navigate("/flights/Passengerdata", { replace: true });
-  // console.log("lastFlight",  lastFlight.itineraries[0].segments.length);
+  console.log("lastFlight",  lastFlight.itineraries[0].segments[0]);
 // check if the flight is direct function
   // if(lastFlight.itineraries[0].segments.length > 1){
   //   setDirect(`${lastFlight.itineraries[0].segments.length} stops`)
@@ -57,6 +63,7 @@ function FlightPricing() {
 
         return (
           <ReviewCard
+          // airlineLogo={ airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""}
             tripType={
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
             }

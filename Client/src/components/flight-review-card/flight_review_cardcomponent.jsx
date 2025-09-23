@@ -27,7 +27,7 @@ function ReviewCard(props) {
               <h4>multiple airlines</h4>
             </div>
             <div className="airline-logo">
-              <img src={airlineLogo} alt="ariline-logo" />
+              <img src={props.airlineLogo} alt="ariline-logo" />
             </div>
           </div>
           <div className="border-line">
