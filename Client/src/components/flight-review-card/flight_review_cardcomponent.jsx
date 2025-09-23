@@ -57,15 +57,15 @@ function ReviewCard(props) {
             <div className="trip-ameneties">
               <h6>class : {props.cabin} {props.cabinClass}</h6>
               <h6>carry on : {props.carryWeight} {props.carryOnUnit} </h6>
-              <h6>checked bags : {props.checkedWeight} {props.checkedOnUnit} each</h6>
+              <h6>checked bags : {props.checkedWeight} {props.checkedOnUnit}</h6>
               <h6>co2 : {props.c02Weight}</h6>
             </div>
 
             <FlightFlag
-              icon={<OctagonAlert size={14} color="#E82929" />}
-              bgColor="#FFDDDD"
-              fontColor="#E82929"
-              alertText="arrives the next day"
+              icon={<OctagonAlert size={14} color={props.iconcolor} />}
+              bgColor={props.flagBgcolor}
+              fontColor={props.fontColor}
+              alertText={props.arrivalText}
             />
           </div>
         </div>
@@ -75,6 +75,13 @@ function ReviewCard(props) {
 }
 
 export default ReviewCard;
+
+  // <FlightFlag
+  //             icon={<OctagonAlert size={14} color={"#E82929"} />}
+  //             bgColor="#FFDDDD"
+  //             fontColor="#E82929"
+  //             alertText="arrives the next day"
+  //           />
 
 // {
 //   bookedFlight.flightOffers.map(

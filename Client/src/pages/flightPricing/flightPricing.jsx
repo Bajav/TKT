@@ -32,7 +32,7 @@ function FlightPricing() {
   }, {});
   const coninueBtn = () =>
     navigate("/flights/Passengerdata", { replace: true });
-  console.log("lastFlight", lastFlight);
+  console.log("lastFlight",  lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(12,17));
 
   return (
     <section className="reviewFlight">
@@ -61,7 +61,7 @@ function FlightPricing() {
             originCode={itinerary.segments[0].departure.iataCode || ""}
             originCityCountry={flightSearch.origin || ""}
             originTerminal="n/a"
-            duration={itinerary.segments[0].duration || ""}
+            duration={itinerary.segments[0].duration.slice(2) || ""}
             tripstops="direct"
             arrivalTime={itinerary.segments[0].arrival.at.slice(11) || ""}
             destinationCode={itinerary.segments[0].arrival.iataCode || ""}
@@ -71,9 +71,13 @@ function FlightPricing() {
             cabinClass={"economy" || ""}
             carryWeight={"1pc" || ""}
             carryOnUnit={"7kg" || ""}
-            // checkedWeight={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(12,17)}
-            // checkedOnUnit={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(17)}
+            checkedWeight={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(12,17) || ""}
+            checkedOnUnit={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(17) || ""}
             c02Weight={"936kg" || ""}
+            iconcolor={"#E82929"}
+            flagBgcolor={"#FFDDDD"}
+            fontColor={"#E82929"}
+            arrivalText={"arrives the next day"}
           />
         );
       })}
