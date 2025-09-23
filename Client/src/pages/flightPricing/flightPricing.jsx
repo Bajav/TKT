@@ -68,18 +68,18 @@ function FlightPricing() {
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
             }
             travelDate={itinerary.segments[0].departure.at.slice(0, 10) || ""}
-            airlineName={itinerary.segments[0].carrierCode || ""}
+            airlineName={`${airlinesLookUp[lastFlight.itineraries[0].segments[0].carrierCode]?.name}`|| ""}
             equipmentNumb={itinerary.segments[0].aircraft.code || ""}
-            operator="operated by qatar air"
+            operator={`operated by ${airlinesLookUp[lastFlight.itineraries[0].segments[0].carrierCode]?.name || ""}` }
             departureTime={itinerary.segments[0].departure.at.slice(11) || ""}
             originCode={itinerary.segments[0].departure.iataCode || ""}
-            originCityCountry={flightSearch.origin || ""}
+            originCityCountry={iataLookup[itinerary.segments[0].departure.iataCode]?.city  || ""}
             // originTerminal="n/a"
             duration={itinerary.segments[0].duration.slice(2) || ""}
             tripstops={lastFlight.itineraries[0].segments.length > 1 ? lastFlight.itineraries[0].segments.length +" " + "stops" : "direct flight"}
             arrivalTime={itinerary.segments[0].arrival.at.slice(11) || ""}
             destinationCode={itinerary.segments[0].arrival.iataCode || ""}
-            destinationCityCountry={", entebbe kampala uganda" || ""}
+            destinationCityCountry={iataLookup[itinerary.segments[0].arrival.iataCode]?.city || "" }
             // destinationTerminal={"n/a" || ""}
             cabin={lastFlight.travelerPricings[0].fareDetailsBySegment[0].class || ""}
             cabinClass={lastFlight.travelerPricings[0].fareDetailsBySegment[0].cabin || ""}
