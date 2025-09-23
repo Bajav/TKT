@@ -46,33 +46,33 @@ function FlightPricing() {
         destinationCity={"dubai,uae"}
       />
       {lastFlight.itineraries.map((itinerary) => {
-        console.log("amaneties :::", lastFlight.travelerPricings[0].fareDetailsBySegment);
+        // console.log("amaneties :::", lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(12));
 
         return (
           <ReviewCard
             tripType={
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
             }
-            travelDate={itinerary.segments[0].departure.at.slice(0, 10)}
-            airlineName={itinerary.segments[0].carrierCode}
-            equipmentNumb={itinerary.segments[0].aircraft.code}
+            travelDate={itinerary.segments[0].departure.at.slice(0, 10) || ""}
+            airlineName={itinerary.segments[0].carrierCode || ""}
+            equipmentNumb={itinerary.segments[0].aircraft.code || ""}
             operator="operated by qatar air"
-            departureTime={itinerary.segments[0].departure.at.slice(11)}
-            originCode={itinerary.segments[0].departure.iataCode}
-            originCityCountry={flightSearch.origin}
+            departureTime={itinerary.segments[0].departure.at.slice(11) || ""}
+            originCode={itinerary.segments[0].departure.iataCode || ""}
+            originCityCountry={flightSearch.origin || ""}
             originTerminal="n/a"
-            duration={itinerary.segments[0].duration}
+            duration={itinerary.segments[0].duration || ""}
             tripstops="direct"
-            arrivalTime={itinerary.segments[0].arrival.at.slice(11)}
-            destinationCode={itinerary.segments[0].arrival.iataCode}
+            arrivalTime={itinerary.segments[0].arrival.at.slice(11) || ""}
+            destinationCode={itinerary.segments[0].arrival.iataCode || ""}
             destinationCityCountry=", entebbe kampala uganda"
             destinationTerminal="n/a"
             cabin="k"
             cabinClass="economy"
             carryWeight="1pc"
             carryOnUnit="7kg"
-            checkedWeight="2pcs"
-            checkedOnUnit="23kg each"
+            // checkedWeight={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(12,17)}
+            // checkedOnUnit={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(17)}
             c02Weight="936kg"
           />
         );
