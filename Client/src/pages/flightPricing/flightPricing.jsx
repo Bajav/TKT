@@ -76,7 +76,7 @@ function FlightPricing() {
             originCityCountry={iataLookup[itinerary.segments[0].departure.iataCode]?.city  || ""}
             // originTerminal="n/a"
             duration={itinerary.segments[0].duration.slice(2) || ""}
-            tripstops={lastFlight.itineraries[0].segments.length > 1 ? lastFlight.itineraries[0].segments.length +" " + "stops" : "direct flight"}
+            tripstops={lastFlight.itineraries[0].segments.length > 1 ? lastFlight.itineraries[0].segments.length - 1 +" " + "stop's'" : "direct flight"}
             arrivalTime={itinerary.segments[0].arrival.at.slice(11) || ""}
             destinationCode={itinerary.segments[0].arrival.iataCode || ""}
             destinationCityCountry={iataLookup[itinerary.segments[0].arrival.iataCode]?.city || "" }
