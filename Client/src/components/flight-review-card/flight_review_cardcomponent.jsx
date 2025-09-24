@@ -39,7 +39,7 @@ function ReviewCard(props) {
             <div className="det">
               <div className="trip-data">
                 <h3>{props.departureTime} {props.originCode}, {props.originCityCountry}</h3>
-                <h3 className="terminal">terminal : {props.originTerminal}</h3>
+                {/* <h3 className="terminal">terminal : {props.originTerminal}</h3> */}
               </div>
               {/* { <Clock />} */}
               <div className="flight-time">
@@ -49,7 +49,7 @@ function ReviewCard(props) {
               </div>
               <div className="trip-data">
                 <h3>{props.arrivalTime} {props.destinationCode}, {props.destinationCityCountry}</h3>
-                <h3 className="terminal">terminal : {props.destinationTerminal}</h3>
+                {/* <h3 className="terminal">terminal : {props.destinationTerminal}</h3> */}
               </div>
             </div>
           </div>
