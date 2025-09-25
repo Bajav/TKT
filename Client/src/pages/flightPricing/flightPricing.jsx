@@ -60,6 +60,11 @@ function FlightPricing() {
       />
       {lastFlight.itineraries.map((itinerary) => {
         // console.log("amaneties :::", lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(12));
+// trun the recently searched ui on the search form page to 
+// mostly searched , 
+// recently searched 
+// popular by name
+
 
         return (
           <ReviewCard
