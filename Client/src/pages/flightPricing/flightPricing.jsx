@@ -13,12 +13,12 @@ import ReviewCard from "../../components/flight-review-card/flight_review_cardco
 function FlightPricing() {
   // const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
-  const { flightSearch,bookedFlight,iataCodes,lastFlight,airlineData } = useContext(FlightContext);
-
+  const { flightSearch, bookedFlight, iataCodes, lastFlight, airlineData } =
+    useContext(FlightContext);
 
   const [price, setPrice] = useState([]);
   const [taxes, setTaxes] = useState([]);
-  const [direct , setDirect]= useState("");
+  const [direct, setDirect] = useState("");
   const [travelerPricings, setTravelerPricings] = useState([]);
 
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function FlightPricing() {
     };
     return lookup;
   }, {});
-    const airlinesLookUp = airlineData.reduce((airlineLookUp, item) => {
+  const airlinesLookUp = airlineData.reduce((airlineLookUp, item) => {
     airlineLookUp[item.code] = {
       logo: item.logo,
       name: item.name,
@@ -39,8 +39,8 @@ function FlightPricing() {
   }, {});
   const coninueBtn = () =>
     navigate("/flights/Passengerdata", { replace: true });
-  console.log("lastFlight",  lastFlight.itineraries[0].segments[0].carrierCode);
-// check if the flight is direct function
+  // console.log("lastFlight", segementOne.carrierCode);
+  // check if the flight is direct function
   // if(lastFlight.itineraries[0].segments.length > 1){
   //   setDirect(`${lastFlight.itineraries[0].segments.length} stops`)
   // }else{
@@ -56,42 +56,91 @@ function FlightPricing() {
         destinationCode={"dxb"}
         arrowColor="#333"
         destinationCity={"dubai,uae"}
-        
       />
-      {lastFlight.itineraries.map((itinerary) => {
-        // console.log("amaneties :::", lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].slice(12));
-// trun the recently searched ui on the search form page to 
-// mostly searched , 
-// recently searched 
-// popular by name
+      {lastFlight.itineraries.map((itinerary,index) => {
+        const segments = itinerary.segments;
+        const segementOne = segments[0];
+        const segementTwo = segments[1];
+        const segmentTwo = itinerary.segments[1];
+        console.log("segmentOne ::",segementOne);
+        // console.log("segmentTwo ::",segmentTwo);
+        // segmentOne.map((itine)=>{
+        //   console.log(itine);
+        // })
 
 
         return (
+          // <li>hello</li>
           <ReviewCard
-          airlineLogo={ airlinesLookUp[lastFlight.itineraries[0].segments[0].carrierCode]?.logo || ""}
+            airlineLogo={
+              airlinesLookUp[segementOne.carrierCode]
+                ?.logo || ""
+            }
             tripType={
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
             }
             travelDate={itinerary.segments[0].departure.at.slice(0, 10) || ""}
-            airlineName={`${airlinesLookUp[lastFlight.itineraries[0].segments[0].carrierCode]?.name}`|| ""}
+            airlineName={
+              `${
+                airlinesLookUp[
+                  segementOne.carrierCode
+                ]?.name
+              }` || ""
+            }
             equipmentNumb={itinerary.segments[0].aircraft.code || ""}
-            operator={`operated by ${airlinesLookUp[lastFlight.itineraries[0].segments[0].carrierCode]?.name || ""}` }
+            operator={`operated by ${
+              airlinesLookUp[segementOne.carrierCode]
+                ?.name || ""
+            }`}
             departureTime={itinerary.segments[0].departure.at.slice(11) || ""}
             originCode={itinerary.segments[0].departure.iataCode || ""}
-            originCityCountry={iataLookup[itinerary.segments[0].departure.iataCode]?.city  || ""}
+            originCityCountry={
+              iataLookup[itinerary.segments[0].departure.iataCode]?.city || ""
+            }
             // originTerminal="n/a"
             duration={itinerary.segments[0].duration.slice(2) || ""}
-            tripstops={lastFlight.itineraries[0].segments.length > 1 ? lastFlight.itineraries[0].segments.length - 1 +" " + "stop's'" : "direct flight"}
+            tripstops={
+              lastFlight.itineraries[0].segments.length > 1
+                ? lastFlight.itineraries[0].segments.length -
+                  1 +
+                  " " +
+                  "stop's'"
+                : "direct flight"
+            }
             arrivalTime={itinerary.segments[0].arrival.at.slice(11) || ""}
             destinationCode={itinerary.segments[0].arrival.iataCode || ""}
-            destinationCityCountry={iataLookup[itinerary.segments[0].arrival.iataCode]?.city || "" }
+            destinationCityCountry={
+              iataLookup[itinerary.segments[0].arrival.iataCode]?.city || ""
+            }
             // destinationTerminal={"n/a" || ""}
-            cabin={lastFlight.travelerPricings[0].fareDetailsBySegment[0].class || ""}
-            cabinClass={lastFlight.travelerPricings[0].fareDetailsBySegment[0].cabin || ""}
-            carryWeight={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[1].description.slice(10,17) || ""}
-            carryOnUnit={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[1].description.slice(17) || ""}
-            checkedWeight={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(12,17) || ""}
-            checkedOnUnit={lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(17) || ""}
+            cabin={
+              lastFlight.travelerPricings[0].fareDetailsBySegment[0].class || ""
+            }
+            cabinClass={
+              lastFlight.travelerPricings[0].fareDetailsBySegment[0].cabin || ""
+            }
+            carryWeight={
+              lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[1].description.slice(
+                10,
+                17
+              ) || ""
+            }
+            carryOnUnit={
+              lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[1].description.slice(
+                17
+              ) || ""
+            }
+            checkedWeight={
+              lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(
+                12,
+                17
+              ) || ""
+            }
+            checkedOnUnit={
+              lastFlight.travelerPricings[0].fareDetailsBySegment[0].amenities[0].description.slice(
+                17
+              ) || ""
+            }
             // c02Weight={"936kg" || ""}
             iconcolor={"#E82929"}
             flagBgcolor={"#FFDDDD"}
