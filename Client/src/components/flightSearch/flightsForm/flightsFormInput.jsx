@@ -167,7 +167,7 @@ function FlightsForm() {
     }));
   };
 
-  const multiCityFlights = [0,1,2];
+  const multiCityFlights = [2,3];
 
   useEffect(() => {
     const checkFlightType = () => {
@@ -353,54 +353,54 @@ function FlightsForm() {
             </form>
           </div>
 
-          {multiCityFlights.map((flight,index)=>{
+          {multiCityFlights.map((flight, index) => {
             // console.log(flight);
-            return(
-                <div className="multicity-flight" key={index}>
-            <div className="multicity-header">
-              <h4>flight {0}</h4>
-              <button>add flight</button>
-            </div>
-            <div className="flightInputs">
-              <FlightSearchInput
-                classOne="flexInput"
-                labelFor="Origin"
-                label="Origin"
-                placeholder="Input place of origin"
-                InputName="origin"
-                change={handleChange}
-                value={inputs.origin}
-              />
-              <motion.button
-                initial={{ rotate: 0 }}
-                animate={
-                  clicked ? { rotate: 360, type: "spring" } : { rotate: 0 }
-                }
-                className="switchBtn"
-                onClick={handleSwitch}
-              >
-                <img src={RoundTripIcon} alt="" />
-              </motion.button>
-              <div className="newFlex">
-                <FlightSearchInput
-                  classOne="flexInput inputTwo"
-                  labelFor="Destination"
-                  label="Destination"
-                  placeholder="Input place of destination"
-                  InputName="destination"
-                  change={handleChange}
-                  value={inputs.destination}
+            return (
+              <div className="multicity-flight" key={index}>
+                <div className="multicity-header">
+                  <h4>flight {flight}</h4>
+                  <button>add flight</button>
+                </div>
+                <div className="flightInputs">
+                  <FlightSearchInput
+                    classOne="flexInput"
+                    labelFor="Origin"
+                    label="Origin"
+                    placeholder="Input place of origin"
+                    InputName="origin"
+                    change={handleChange}
+                    value={inputs.origin}
+                  />
+                  <motion.button
+                    initial={{ rotate: 0 }}
+                    animate={
+                      clicked ? { rotate: 360, type: "spring" } : { rotate: 0 }
+                    }
+                    className="switchBtn"
+                    onClick={handleSwitch}
+                  >
+                    <img src={RoundTripIcon} alt="" />
+                  </motion.button>
+                  <div className="newFlex">
+                    <FlightSearchInput
+                      classOne="flexInput inputTwo"
+                      labelFor="Destination"
+                      label="Destination"
+                      placeholder="Input place of destination"
+                      InputName="destination"
+                      change={handleChange}
+                      value={inputs.destination}
+                    />
+                  </div>
+                </div>
+                <FlightCalendar
+                  onDateSelect={handleDepartureSelect}
+                  onRangeSelect={handleReturnRangeSelect}
+                  isRangePicker={isRangeEnabled}
+                  placeholder="Select departure date"
                 />
               </div>
-            </div>
-            <FlightCalendar
-              onDateSelect={handleDepartureSelect}
-              onRangeSelect={handleReturnRangeSelect}
-              isRangePicker={isRangeEnabled}
-              placeholder="Select departure date"
-            />
-          </div>
-            )
+            );
           })}
         </div>
       )}
