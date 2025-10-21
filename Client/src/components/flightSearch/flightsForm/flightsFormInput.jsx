@@ -2,6 +2,8 @@ import { useState, useEffect, useContext, Fragment } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "motion/react";
 import axios from "axios";
+import { PlusCircleIcon } from "lucide-react";
+import { MinusCircleIcon } from "lucide-react";
 // hooks
 import { FlightContext } from "../../context/flightSearch.context";
 import { LocationContext } from "../../context/location.context";
@@ -352,79 +354,80 @@ function FlightsForm() {
                   </div> */}
               </div>
 
-              <button className="btn-submit" type="submit">
-                Search Flights
-              </button>
+              {(inputs.flightType === "oneWay" ||
+                inputs.flightType === "roundTrip") && (
+                <button className="btn-submit" type="submit">
+                  Search Flights
+                </button>
+              )}
             </form>
           </div>
 
-          { console.log(inputs.flightType)}
+          {console.log(inputs.flightType)}
+          <div className="multicity-container">
           {inputs.flightType === "multiCity" &&
             multicityArray.map((flight, index) => {
-             return( <div className="multicity-flight" key={index}>
-                <div className="multicity-header">
-                  <h4>Flight {index + 1}</h4>
-                  {index === multicityArray.length - 1 && (
-                    <button type="button" onClick={e=>{console.log("add flight btn is working")}}>
-                      Add Flight
-                    </button>
-                  )}
-                  {multicityArray.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveFlight(index)}
-                    >
-                      Remove
-                    </button>
-                  )}
-                </div>
-
-                <div className="flightInputs">
-                  <FlightSearchInput
-                    classOne="flexInput"
-                    labelFor="Origin"
-                    label="Origin"
-                    placeholder="Input place of origin"
-                    InputName="origin"
-                    change={handleChange
-                    }
-                    value={flight.origin}
-                  />
-
-                  <motion.button
-                    initial={{ rotate: 0 }}
-                    animate={
-                      clicked ? { rotate: 360, type: "spring" } : { rotate: 0 }
-                    }
-                    className="switchBtn"
-                    onClick={() => handleSwitch(index)}
-                  >
-                    <img src={RoundTripIcon} alt="" />
-                  </motion.button>
-
-                  <div className="newFlex">
-                    <FlightSearchInput
-                      classOne="flexInput inputTwo"
-                      labelFor="Destination"
-                      label="Destination"
-                      placeholder="Input place of destination"
-                      InputName="destination"
-                      change={handleChange
-                      }
-                      value={flight.destination}
-                    />
+              return (
+                
+                <div className="multicity-flight" key={index}>
+                  <div className="multicity-header">
+                    <h4>Flight {index + 1}</h4>
+                    <div className="addflight">
+                      <PlusCircleIcon size={30} />
+                    </div>
+                    <MinusCircleIcon size={30} />
+                    <div className="removeFlight"></div>
                   </div>
-                </div>
 
-                <FlightCalendar
-                onDateSelect={handleDepartureSelect}
-                onRangeSelect={handleReturnRangeSelect}
-                isRangePicker={isRangeEnabled}
-                placeholder="Select departure date"
-                />
-              </div>)
-            }
-            )}
+                  <div className="flightInputs">
+                    <FlightSearchInput
+                      classOne="flexInput"
+                      labelFor="Origin"
+                      label="Origin"
+                      placeholder="Input place of origin"
+                      InputName="origin"
+                      change={handleChange}
+                      value={flight.origin}
+                    />
+
+                    <motion.button
+                      initial={{ rotate: 0 }}
+                      animate={
+                        clicked
+                          ? { rotate: 360, type: "spring" }
+                          : { rotate: 0 }
+                      }
+                      className="switchBtn"
+                      onClick={() => handleSwitch(index)}
+                    >
+                      <img src={RoundTripIcon} alt="" />
+                    </motion.button>
+
+                    <div className="newFlex">
+                      <FlightSearchInput
+                        classOne="flexInput inputTwo"
+                        labelFor="Destination"
+                        label="Destination"
+                        placeholder="Input place of destination"
+                        InputName="destination"
+                        change={handleChange}
+                        value={flight.destination}
+                      />
+                    </div>
+                  </div>
+
+                  <FlightCalendar
+                    onDateSelect={handleDepartureSelect}
+                    onRangeSelect={handleReturnRangeSelect}
+                    isRangePicker={isRangeEnabled}
+                    placeholder="Select departure date"
+                  />
+                </div>
+                
+              );
+            })}
+            <div className="backUpBlock"></div>
+            </div>
         </div>
       )}
       {/* <Outlet /> */}
