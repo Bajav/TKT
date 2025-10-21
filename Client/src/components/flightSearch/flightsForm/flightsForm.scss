@@ -342,11 +342,15 @@
   .flexInput {
     width: 100%;
   }
+  .flight-calendar 
+  {
+    margin-top: 5px;
+  }
   .multicity-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 98%;
+    width: 99%;
     font-family: $textFont;
     color: $page_color;
     text-transform: capitalize;
@@ -355,9 +359,9 @@
       padding: 4px 6px;
       background-color: $actionBlue;
       border-radius: 13px;
-    text-transform: capitalize;
-    font-size: 14px;
-    font-weight: 500;
+      text-transform: capitalize;
+      font-size: 14px;
+      font-weight: 500;
     }
   }
 }
