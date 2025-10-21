@@ -167,7 +167,7 @@ function FlightsForm() {
     }));
   };
 
-  const multiCityFlights = [2,3];
+  const multiCityFlights = [2, 3,4,5];
 
   useEffect(() => {
     const checkFlightType = () => {
