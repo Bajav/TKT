@@ -40,6 +40,10 @@ function FlightsForm() {
     seatClass: "ECONOMY",
   });
 
+  // const [multiCityFlights, setMultiCityFlights] = useState([
+  //   { origin: "", destination: "", departureDate: "" },
+  // ]);
+
   const [passengers, setPassengers] = useState({
     adults: 1,
     children: 0,
@@ -87,7 +91,7 @@ function FlightsForm() {
       ...prev,
       flightType: type,
     }));
-    console.log(type);
+    console.log("flight type:::", type);
   };
 
   const increment = (type) => {
@@ -167,8 +171,6 @@ function FlightsForm() {
     }));
   };
 
-  const multiCityFlights = [2, 3,4,5];
-
   useEffect(() => {
     const checkFlightType = () => {
       if (inputs.flightType === "roundTrip") {
@@ -179,6 +181,9 @@ function FlightsForm() {
     };
     checkFlightType();
   }, [inputs]);
+
+  // multicity handler functions
+  const multicityArray = [2, 3];
 
   return (
     <div>
@@ -353,14 +358,27 @@ function FlightsForm() {
             </form>
           </div>
 
-          {multiCityFlights.map((flight, index) => {
-            // console.log(flight);
-            return (
-              <div className="multicity-flight" key={index}>
+          { console.log(inputs.flightType)}
+          {inputs.flightType === "multiCity" &&
+            multicityArray.map((flight, index) => {
+             return( <div className="multicity-flight" key={index}>
                 <div className="multicity-header">
-                  <h4>flight {flight}</h4>
-                  <button>add flight</button>
+                  <h4>Flight {index + 1}</h4>
+                  {index === multicityArray.length - 1 && (
+                    <button type="button" onClick={e=>{console.log("add flight btn is working")}}>
+                      Add Flight
+                    </button>
+                  )}
+                  {multicityArray.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveFlight(index)}
+                    >
+                      Remove
+                    </button>
+                  )}
                 </div>
+
                 <div className="flightInputs">
                   <FlightSearchInput
                     classOne="flexInput"
@@ -368,19 +386,22 @@ function FlightsForm() {
                     label="Origin"
                     placeholder="Input place of origin"
                     InputName="origin"
-                    change={handleChange}
-                    value={inputs.origin}
+                    change={handleChange
+                    }
+                    value={flight.origin}
                   />
+
                   <motion.button
                     initial={{ rotate: 0 }}
                     animate={
                       clicked ? { rotate: 360, type: "spring" } : { rotate: 0 }
                     }
                     className="switchBtn"
-                    onClick={handleSwitch}
+                    onClick={() => handleSwitch(index)}
                   >
                     <img src={RoundTripIcon} alt="" />
                   </motion.button>
+
                   <div className="newFlex">
                     <FlightSearchInput
                       classOne="flexInput inputTwo"
@@ -388,20 +409,22 @@ function FlightsForm() {
                       label="Destination"
                       placeholder="Input place of destination"
                       InputName="destination"
-                      change={handleChange}
-                      value={inputs.destination}
+                      change={handleChange
+                      }
+                      value={flight.destination}
                     />
                   </div>
                 </div>
+
                 <FlightCalendar
-                  onDateSelect={handleDepartureSelect}
-                  onRangeSelect={handleReturnRangeSelect}
-                  isRangePicker={isRangeEnabled}
-                  placeholder="Select departure date"
+                onDateSelect={handleDepartureSelect}
+                onRangeSelect={handleReturnRangeSelect}
+                isRangePicker={isRangeEnabled}
+                placeholder="Select departure date"
                 />
-              </div>
-            );
-          })}
+              </div>)
+            }
+            )}
         </div>
       )}
       {/* <Outlet /> */}
