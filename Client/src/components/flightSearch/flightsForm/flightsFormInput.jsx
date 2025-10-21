@@ -167,6 +167,8 @@ function FlightsForm() {
     }));
   };
 
+  const multiCityFlights = [0,1,2];
+
   useEffect(() => {
     const checkFlightType = () => {
       if (inputs.flightType === "roundTrip") {
@@ -350,9 +352,13 @@ function FlightsForm() {
               </button>
             </form>
           </div>
-          <div className="multicity-flight">
+
+          {multiCityFlights.map((flight,index)=>{
+            // console.log(flight);
+            return(
+                <div className="multicity-flight" key={index}>
             <div className="multicity-header">
-              <h4>flight {2}</h4>
+              <h4>flight {0}</h4>
               <button>add flight</button>
             </div>
             <div className="flightInputs">
@@ -394,6 +400,8 @@ function FlightsForm() {
               placeholder="Select departure date"
             />
           </div>
+            )
+          })}
         </div>
       )}
       {/* <Outlet /> */}
