@@ -2,8 +2,8 @@ import { useState, useEffect, useContext, Fragment } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "motion/react";
 import axios from "axios";
-import { PlusCircleIcon } from "lucide-react";
-import { MinusCircleIcon } from "lucide-react";
+import { Plus } from "lucide-react";
+import { Minus } from "lucide-react";
 // hooks
 import { FlightContext } from "../../context/flightSearch.context";
 import { LocationContext } from "../../context/location.context";
@@ -185,7 +185,7 @@ function FlightsForm() {
   }, [inputs]);
 
   // multicity handler functions
-  const multicityArray = [2, 3];
+  const multicityArray = [2, 3,4,5];
 
   return (
     <div>
@@ -372,11 +372,14 @@ function FlightsForm() {
                 <div className="multicity-flight" key={index}>
                   <div className="multicity-header">
                     <h4>Flight {index + 1}</h4>
-                    <div className="addflight">
-                      <PlusCircleIcon size={30} />
+                    <div className="function-btns">
+                    <div className="addflight funcBTN">
+                      <Plus size={20} />
                     </div>
-                    <MinusCircleIcon size={30} />
-                    <div className="removeFlight"></div>
+                    <div className="removeFlight funcBTN">
+                    <Minus size={20} />
+                    </div>
+                    </div>
                   </div>
 
                   <div className="flightInputs">
