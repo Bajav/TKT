@@ -5,6 +5,11 @@ let brandedFlight;
 let oderId;
 
 const searchFlights = async (req, res) => {
+  if(req.body){
+    req.session.userSearch = req.body;
+  }
+  console.log(req.session);
+  console.log(req.sessionID);
   try {
     const {
       origin,
@@ -15,8 +20,8 @@ const searchFlights = async (req, res) => {
       seatClass,
       passengers,
     } = await req.body;
-    console.log("form data recieved",req.body);
-    
+    console.log("form data recieved", req.body);
+
     // console.log("passengers",passengers);
 
     if (
@@ -46,8 +51,8 @@ const searchFlights = async (req, res) => {
     const response = await amadeus.shopping.flightOffersSearch.get({
       originLocationCode: originCode,
       destinationLocationCode: destinationCode,
-      departureDate: departureDate.slice(0,10),
-      returnDate: returnDate.slice(0,10),
+      departureDate: departureDate.slice(0, 10),
+      returnDate: returnDate.slice(0, 10),
       adults: passengers.adults,
       children: passengers.children,
       infants: passengers.infants,
@@ -76,8 +81,9 @@ const searchFlights = async (req, res) => {
   }
 };
 
-
 const brandedUpSell = async (req, res) => {
+  console.log(req.session);
+  console.log(req.sessionID);
   const selectedFlight = req.body;
   console.log("selectedFlight received:", selectedFlight.id);
 
@@ -85,7 +91,7 @@ const brandedUpSell = async (req, res) => {
     const response = await amadeus.shopping.flightOffers.upselling.post({
       data: {
         type: "flight-offers-upselling",
-        flightOffers: [selectedFlight],  // Use selectedFlight, not responsse
+        flightOffers: [selectedFlight], // Use selectedFlight, not responsse
         include: ["bags"],
         payments: [
           {
@@ -106,11 +112,12 @@ const brandedUpSell = async (req, res) => {
 
     console.log("brandedFlight", response.data);
     return res.json(response.data);
-
   } catch (err) {
     console.error("Error getting branded flights:", err);
     const statusCode = err.response?.status || 500;
-    return res.status(statusCode).json({ message: err.description || err.message });
+    return res
+      .status(statusCode)
+      .json({ message: err.description || err.message });
   }
 };
 
@@ -118,21 +125,21 @@ const brandedUpSell = async (req, res) => {
 
 const findLastPrice = async (req, res) => {
   const response = req.body;
-  console.log("findLastPrice",response.bookedFlight);
+  console.log("findLastPrice", response.bookedFlight);
   try {
     const pricingResponse = await amadeus.shopping.flightOffers.pricing.post(
-        {
+      {
         data: {
           type: "flight-offers-pricing",
-          flightOffers: [response.bookedFlight]
-        }
+          flightOffers: [response.bookedFlight],
+        },
       },
       {
-        include: 'bags'
+        include: "bags",
       }
     );
 
-    console.log("responce from server",pricingResponse.data)
+    console.log("responce from server", pricingResponse.data);
     return res.json(pricingResponse.data);
   } catch (err) {
     console.error("Error fetching last price:", err);
@@ -155,9 +162,9 @@ const findLastPrice = async (req, res) => {
 // A full example can be found at https://git.io/JtnYo
 
 const getFlightOrder = async (req, res) => {
-  const {formData,bookedFlight} = req.body;
-  console.log("formData",formData);
-  console.log("bookedFlight",bookedFlight);
+  const { formData, bookedFlight } = req.body;
+  console.log("formData", formData);
+  console.log("bookedFlight", bookedFlight);
   try {
     const response = await amadeus.booking.flightOrders.post({
       data: {

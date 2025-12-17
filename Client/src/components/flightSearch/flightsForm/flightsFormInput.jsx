@@ -42,10 +42,6 @@ function FlightsForm() {
     seatClass: "ECONOMY",
   });
 
-  // const [multiCityFlights, setMultiCityFlights] = useState([
-  //   { origin: "", destination: "", departureDate: "" },
-  // ]);
-
   const [passengers, setPassengers] = useState({
     adults: 1,
     children: 0,
@@ -185,7 +181,28 @@ function FlightsForm() {
   }, [inputs]);
 
   // multicity handler functions
-  const multicityArray = [2, 3,4,5];
+  const multicityArray = [2, 3, 4, 5];
+
+  const [multiCityFlights, setMultiCityFlights] = useState([
+    { origin: "", destination: "", departureDate: "" },
+  ]);
+
+  const handleMultiChange = (index, field, value) => {
+    const updated = [...multiCityFlights];
+    updated[index][field] = value;
+    setMultiCityFlights(updated);
+  };
+
+  const handleAddFlight = () => {
+    setMultiCityFlights([
+      ...multiCityFlights,
+      { origin: "", destination: "", departureDate: "" },
+    ]);
+  };
+
+  const handleRemoveFlight = (index) => {
+    setMultiCityFlights(multiCityFlights.filter((_, i) => i !== index));
+  };
 
   return (
     <div>
@@ -365,20 +382,26 @@ function FlightsForm() {
 
           {console.log(inputs.flightType)}
           <div className="multicity-container">
-          {inputs.flightType === "multiCity" &&
-            multicityArray.map((flight, index) => {
-              return (
-                
+            {inputs.flightType === "multiCity" &&
+              multiCityFlights.map((flight, index) => (
                 <div className="multicity-flight" key={index}>
                   <div className="multicity-header">
                     <h4>Flight {index + 1}</h4>
                     <div className="function-btns">
-                    <div className="addflight funcBTN">
-                      <Plus size={20} />
-                    </div>
-                    <div className="removeFlight funcBTN">
-                    <Minus size={20} />
-                    </div>
+                      <div
+                        className="addflight funcBTN"
+                        onClick={handleAddFlight}
+                      >
+                        <Plus size={20} />
+                      </div>
+                      {multiCityFlights.length > 1 && (
+                        <div
+                          className="removeFlight funcBTN"
+                          onClick={() => handleRemoveFlight(index)}
+                        >
+                          <Minus size={20} />
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -389,19 +412,25 @@ function FlightsForm() {
                       label="Origin"
                       placeholder="Input place of origin"
                       InputName="origin"
-                      change={handleChange}
+                      change={(e) =>
+                        handleMultiChange(index, "origin", e.target.value)
+                      }
                       value={flight.origin}
                     />
 
                     <motion.button
                       initial={{ rotate: 0 }}
-                      animate={
-                        clicked
-                          ? { rotate: 360, type: "spring" }
-                          : { rotate: 0 }
-                      }
+                      animate={clicked ? { rotate: 360 } : { rotate: 0 }}
                       className="switchBtn"
-                      onClick={() => handleSwitch(index)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const updated = [...multiCityFlights];
+                        [updated[index].origin, updated[index].destination] = [
+                          updated[index].destination,
+                          updated[index].origin,
+                        ];
+                        setMultiCityFlights(updated);
+                      }}
                     >
                       <img src={RoundTripIcon} alt="" />
                     </motion.button>
@@ -413,24 +442,29 @@ function FlightsForm() {
                         label="Destination"
                         placeholder="Input place of destination"
                         InputName="destination"
-                        change={handleChange}
+                        change={(e) =>
+                          handleMultiChange(
+                            index,
+                            "destination",
+                            e.target.value
+                          )
+                        }
                         value={flight.destination}
                       />
                     </div>
                   </div>
 
                   <FlightCalendar
-                    onDateSelect={handleDepartureSelect}
-                    onRangeSelect={handleReturnRangeSelect}
-                    isRangePicker={isRangeEnabled}
+                    onDateSelect={(date) =>
+                      handleMultiChange(index, "departureDate", date)
+                    }
                     placeholder="Select departure date"
                   />
                 </div>
-                
-              );
-            })}
+              ))}
+
             <div className="backUpBlock"></div>
-            </div>
+          </div>
         </div>
       )}
       {/* <Outlet /> */}
