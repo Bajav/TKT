@@ -473,3 +473,19 @@ function FlightsForm() {
 }
 
 export default FlightsForm;
+
+
+
+// const array = ["UR", "QR","QR","WB","UR","ET"];
+// const findDupes =(db)=>{
+//     const availableFlights = new Set();
+//     const dupeFlights = new Set();
+//     for(i of db){
+//         console.log(i);
+//         if(availableFlights.has(i)){
+//             dupeFlights.add(i)};
+//         availableFlights.add(i);
+//         console.log(dupeFlights);
+//     }
+//   };
+//     findDupes(array);
