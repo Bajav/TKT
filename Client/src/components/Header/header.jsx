@@ -3,7 +3,7 @@ import LocationComponent from "../LOCATION/location.component";
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import signInWithPopup from "../../Controllers/signinwithpopup.controller";
+import SignInButton from "../../Controllers/signinwithpopup.controller";
 import { UserContext } from "../context/user.context";
 import defaultProfile from "../../assets/icons/profile-default-svgrepo-com.svg";
 
@@ -12,7 +12,7 @@ const LocationHeader = () => {
   const [dropDown, setDropDown] = useState(false);
   
   const showDropdown = () => setDropDown(!dropDown);
-  signInWithPopup();
+  
 
 useEffect(() => {
   if (!userData) return;
@@ -81,7 +81,7 @@ useEffect(() => {
                 <div className="display">
                   <p>sign in / up to view console</p>
                 </div>
-                <button onClick={signinwithpopup}>sign in</button>
+          <SignInButton />
               </div>
             )}
           </motion.div>

@@ -1,21 +1,30 @@
-import { signInWithPopup } from "firebase/auth";
-import { provider, auth } from "../Utils/firebase.utils";
-import { UserContext } from "../components/context/user.context";
 import { useContext } from "react";
-import createUserFromAuth from '../Controllers/createUser.controller';
+import { UserContext } from "../components/context/user.context";
+import { provider, auth } from "../Utils/firebase.utils";
+import { signInWithPopup } from "firebase/auth";
+import createUserFromAuth from "../Controllers/createUser.controller";
 
-const popUpSignIn = () => signInWithPopup(auth, provider);
-
-const signinwithpopup = async () => {
-      const { setUserData} = useContext(UserContext);
-  try {
-    const signinedInUser = await popUpSignIn();
-    setUserData(signinedInUser.user);
-    console.log("signinedInUser ::", signinedInUser.user);
-    await createUserFromAuth(signinedInUser.user);
-    setSigninedIn(true);
-  } catch (err) {
-    console.log("❌ Error signing in:", err);
-  }
+const SignInButton = () => {
+  const { setUserData, setSigninedIn } = useContext(UserContext);
+  const popUpSignIn = () => signInWithPopup(auth, provider);
+  const signinwithpopup = async () => {
+    try {
+      const result = await popUpSignIn();
+      const user = result.user;
+      setUserData(user);
+    //   await createUserFromAuth(user);
+      setSigninedIn(true);
+      console.log("Signed in user:", user);
+    } catch (err) {
+      console.error("❌ Error signing in:", err);
+    }
+  };
+    return (
+    <button onClick={signinwithpopup}>
+      sign in
+    </button>
+  );
 };
-export default signinwithpopup;
+
+
+export default SignInButton;
