@@ -1,4 +1,5 @@
 import express from "express";
+import MongoStore from "connect-mongo/dist/index.cjs";
 // routes
 import cookieRoutes from "./Routes/cookie.routes.js";
 import iataRoutes from "./Routes/iataRoutes.js";
@@ -11,6 +12,7 @@ import corsMiddleware from "./Middleware/corsMiddleWare.js";
 // import sessionSetUp from "./Middleware/cookie.middleware.js";
 import loggerMiddleware from "./Middleware/logger.middleware.js";
 import session from "express-session";
+import mongoose from "mongoose";
 // DB
 // import {connectAtlasDb} from './Config/DB/mongoAtlas.config.js'
 
@@ -41,6 +43,9 @@ app.use(
       httpOnly: true,
       maxAge: 6000 * 60,
     },
+    store: MongoStore.create({
+      client: mongoose.connection.get(client)
+    }),
   })
 );
 
