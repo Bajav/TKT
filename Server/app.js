@@ -1,5 +1,5 @@
 import express from "express";
-import MongoStore from "connect-mongo/dist/index.cjs";
+import MongoStore from "connect-mongo";
 // routes
 import cookieRoutes from "./Routes/cookie.routes.js";
 import iataRoutes from "./Routes/iataRoutes.js";
@@ -38,13 +38,14 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: true },
     cookie: {
       httpOnly: true,
       maxAge: 6000 * 60,
     },
     store: MongoStore.create({
-      client: mongoose.connection.get(client)
+      mongoUrl: process.env.DB_HOST,
+      collectionName: "sessions",
+      ttl: 60 * 60, // 1 hour
     }),
   })
 );

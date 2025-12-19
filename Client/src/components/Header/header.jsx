@@ -3,27 +3,16 @@ import LocationComponent from "../LOCATION/location.component";
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import popUpSignIn from "../../Controllers/signinwithpopup.controller";
+import signInWithPopup from "../../Controllers/signinwithpopup.controller";
 import { UserContext } from "../context/user.context";
 import defaultProfile from "../../assets/icons/profile-default-svgrepo-com.svg";
-import createUserFromAuth from "../../Controllers/createUser.controller";
 
 const LocationHeader = () => {
-  const { userData, setUserData,signedIn,setSigninedIn } = useContext(UserContext);
+  const { userData,signedIn,setSigninedIn } = useContext(UserContext);
   const [dropDown, setDropDown] = useState(false);
   
   const showDropdown = () => setDropDown(!dropDown);
-
-  const signinwithpopup = async () => {
-    try {
-      const signinedInUser = await popUpSignIn();
-      setUserData(signinedInUser.user);
-      await createUserFromAuth(signinedInUser.user);
-      setSigninedIn(true);
-    } catch (err) {
-      console.log("❌ Error signing in:", err);
-    }
-  };
+  signInWithPopup();
 
 useEffect(() => {
   if (!userData) return;
@@ -37,8 +26,8 @@ useEffect(() => {
           withCredentials: true,
         }
       );
-      console.log("✅ Cookie response:", response);
-      console.log("✅ Response headers:", response.headers);
+      // console.log("✅ Cookie response:", response);
+      // console.log("✅ Response headers:", response.headers);
     } catch (err) {
       console.log("❌ Error posting user data", err.response?.data || err.message);
     }
