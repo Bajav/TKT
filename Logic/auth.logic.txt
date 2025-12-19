@@ -1,0 +1,6 @@
+user signs with firebase from frontend with react, 
+a post req is sent to the backend to save the user UID 
+in the cookie, when the user refreshes the brower, a get req is made 
+and cookie is sent out to frontend, the cookie is opened to exposing 
+the UID which is used to check if user exists in the firestore DB if he/she does
+the user snapshot is sent back to authenticate and retrieve user
