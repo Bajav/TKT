@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../components/context/user.context";
 import { provider, auth } from "../Utils/firebase.utils";
 import { signInWithPopup } from "firebase/auth";
-import createUserFromAuth from "../Controllers/createUser.controller";
+// import createUserFromAuth from "../Controllers/createUser.controller";
 
 const SignInButton = () => {
   const { setUserData, setSigninedIn } = useContext(UserContext);
@@ -14,7 +14,7 @@ const SignInButton = () => {
       setUserData({
         displayName: user.displayName,
         email: user.email,
-        imageUrl: user.photoURL,
+        photoURL: user.photoURL,
       });
       //   await createUserFromAuth(user);
       setSigninedIn(true);

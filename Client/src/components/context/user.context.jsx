@@ -16,7 +16,7 @@ const UserContextProvider = ({ children }) => {
         setUserData({
           displayName:user.displayName,
           email:user.email,
-          imageUrl:user.photoURL
+          photoURL:user.photoURL
         });
         setSigninedIn(true);
       } else {
