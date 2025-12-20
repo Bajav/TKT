@@ -39,25 +39,65 @@ const ACTIONS = {
   SET_ALERT: "SET_ALERT",
 };
 
-const flightReducer =(state, action)=>{
-  switch(action.type){
-    case ACTIONS.SET_FORM_DATA : return{
-      ...state, flightSearch : action.payload
-    };
+const flightReducer = (state, action) => {
+  switch (action.type) {
+    case ACTIONS.SET_FORM_DATA:
+      return {
+        ...state,
+        flightSearch: action.payload,
+      };
     // case ACTIONS.SET_FORM_DATA : return{}
-    case ACTIONS.SET_IATA_CODES : return{
-      ...state, iataCodes :action.payload
-    }
-    case ACTIONS.SET_AIRLINE_DATA : return{
-      ...state, airlineData: action.payload
-    }
-    case ACTIONS.SET_ALERT : return{}
-    case ACTIONS.SET_BOOKED_FLIGHT : return{}
-    case ACTIONS.SET_BRANDED_UPSELL : return{}
-    case ACTIONS.SET_SELECTED_FLIGHTS : return{}
-    case ACTIONS.SET_UPSELL_ERROR : return{}
+    case ACTIONS.SET_IATA_CODES:
+      return {
+        ...state,
+        iataCodes: action.payload,
+      };
+    case ACTIONS.SET_AIRLINE_DATA:
+      return {
+        ...state,
+        airlineData: action.payload,
+      };
+    case ACTIONS.SET_ALERT:
+      return {
+        ...state,
+        alert: action.payload,
+      };
+    case ACTIONS.SET_BOOKED_FLIGHT:
+      return {
+        ...state,
+        bookedFlight: action.payload,
+      };
+    case ACTIONS.SET_BRANDED_UPSELL:
+      return {
+        ...state,
+        brandedUpSell: action.payload,
+      };
+    case ACTIONS.SET_SELECTED_FLIGHTS:
+      return {
+        ...state,
+        brandedUpSell: action.payload,
+      };
+    case ACTIONS.SET_UPSELL_ERROR:
+      return {
+        ...state,
+        brandedUpSell: action.payload,
+      };
   }
-}
+};
+
+const INITIAL_STATE = {
+  flightSearch: null,
+  iataCodes: [],
+  airlineData: [],
+  lightResults: [],
+  selectedFlight: [],
+  bookedFlight: [],
+  brandedUpSell: [],
+  upsellError: "",
+  lastFlight: [],
+  alert: false,
+  filteredFlights: [],
+};
 
 export const FlightSearchProvider = ({ children }) => {
   // const [flightSearch, setFormData] = useState(null);
