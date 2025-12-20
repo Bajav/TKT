@@ -11,7 +11,7 @@ const createUserFromAuth = async (user) => {
   const userSnapShot = await getDoc(userRef);
   if (userSnapShot.exists()) {
     const userData = userSnapShot.data();
-    console.log("✅ User found:", userData);
+    // console.log("✅ User found:", userData);
   } else {
     const { displayName, email, photoURL } = user;
     const timeCreated = new Date();

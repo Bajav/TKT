@@ -10,7 +10,7 @@ const SignInButton = () => {
   const signinwithpopup = async () => {
     try {
       const result = await popUpSignIn();
-      const user = result.user;
+      const user = result.user;   
       setUserData({
         displayName: user.displayName,
         email: user.email,

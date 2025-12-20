@@ -4,3 +4,8 @@ in the cookie, when the user refreshes the brower, a get req is made
 and cookie is sent out to frontend, the cookie is opened to exposing 
 the UID which is used to check if user exists in the firestore DB if he/she does
 the user snapshot is sent back to authenticate and retrieve user
+
+or 
+
+we can also store the user details upon signin ie email, displayname, 
+image url etc in the cookie, then use the cookie to authenticate user upon browser refresh .
