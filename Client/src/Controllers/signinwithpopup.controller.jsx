@@ -11,20 +11,19 @@ const SignInButton = () => {
     try {
       const result = await popUpSignIn();
       const user = result.user;
-      setUserData(user);
-    //   await createUserFromAuth(user);
+      setUserData({
+        displayName: user.displayName,
+        email: user.email,
+        imageUrl: user.photoURL,
+      });
+      //   await createUserFromAuth(user);
       setSigninedIn(true);
       console.log("Signed in user:", user);
     } catch (err) {
       console.error("❌ Error signing in:", err);
     }
   };
-    return (
-    <button onClick={signinwithpopup}>
-      sign in
-    </button>
-  );
+  return <button onClick={signinwithpopup}>sign in</button>;
 };
-
 
 export default SignInButton;

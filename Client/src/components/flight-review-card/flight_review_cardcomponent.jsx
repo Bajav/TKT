@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import "./review.styles.scss";
 import airlineLogo from "../../assets/icons/qatar_airline_logo.png";
 import line from "../../assets/icons/Line 5.svg";
@@ -7,7 +8,11 @@ import fromTo from "../../assets/icons/fromto.svg";
 import { OctagonAlert } from "lucide-react";
 import lineDeg from "../../assets/icons/90deg.svg"
 
+import { UserContext } from "../context/user.context";
+
 function ReviewCard(props) {
+  const {userData} = useContext(UserContext);
+  console.log("i am userData",userData);
   return (
     <section className="flight-review">
       <div className="outbound-flight">
