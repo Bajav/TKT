@@ -47,7 +47,6 @@ export const UserContextProvider = ({ children }) => {
       setUserData(user);
       setSigninedIn(!!user);
     });
-
     return unsubscribe;
   }, []);
 
