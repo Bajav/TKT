@@ -450,7 +450,18 @@ const results = analyzeFlightOffers(flightOffersArray);
 // Get specific filtered results
 });
 */
+function flagMultipleAirlines(itinerary) {
+  const carrierCodes = itinerary.segments.map(
+    s => s.carrierCode
+  );
 
+  return new Set(carrierCodes).size > 1;
+};
+// flightResults.map(itinerary=>{const hasMultipleAirlines = flagMultipleAirlines(itinerary)
+
+//   console.log("hasMultipleAirlines",hasMultipleAirlines);
+// });
+// const hasMultipleAirlines = flagMultipleAirlines();
   return (
     <Fragment>
       <div className="filter-form">
@@ -677,11 +688,11 @@ const results = analyzeFlightOffers(flightOffersArray);
           filteredFlights.map((itinerary, index) => {
             const segments = itinerary.itineraries[0]?.segments || [];
             const segmentNumber = segments.length;
-            // const segmentOneNum = segments.
-            // const segmentOneNum = segments.length;
             const lastSegmentIndex = segmentNumber - 1;
             const segmentOne = itinerary.itineraries[0].segments;
             const segmentTwo = itinerary.itineraries[1]?.segments;
+            // const segmentOneNum = segments.
+            // const segmentOneNum = segments.length;
             // console.log("segmentOne:::",segmentOne);
             
             return (
@@ -695,6 +706,8 @@ const results = analyzeFlightOffers(flightOffersArray);
                       carrierCode={
                         airlinesLookUp[segments[segmentOne.length - 1]?.carrierCode]?.name || ""
                       }
+                      multicityAirline={true}
+                      multicityCode="Multiple airlines"
                       airlineName={segments[0]?.aircraft?.code || ""}
                     />
                     <TicketHeader

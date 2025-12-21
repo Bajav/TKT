@@ -8,7 +8,10 @@ function AirlineInfo(props) {
         <div className="icon">
           <img src={props.logo} alt="Airline Logo" className="airline-logo" />
         </div>
+        <div className="airlines-header">
         <h4>{props.carrierCode}</h4>
+        {!props.multicityAirline?null:<h4>{props.multicityCode}</h4>}
+        </div>
       </div>
       <h3>{props.airlineName}</h3>
     </div>
