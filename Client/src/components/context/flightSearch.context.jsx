@@ -26,7 +26,7 @@ export const FlightContext = createContext({
 });
 
 const ACTIONS = {
-  SET_FORM_DATA: "SET_FORM_DATA ",
+  SET_FORM_DATA: "SET_FORM_DATA",
   SET_IATA_CODES: "SET_IATA_CODES",
   SET_AIRLINE_DATA: "SET_AIRLINE_DATA",
   SET_FLIGHT_RESULTS: "SET_FLIGHT_RESULTS",
@@ -42,48 +42,43 @@ const ACTIONS = {
 const flightReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.SET_FORM_DATA:
-      return {
-        ...state,
-        flightSearch: action.payload,
-      };
-    // case ACTIONS.SET_FORM_DATA : return{}
+      return { ...state, flightSearch: action.payload };
+
     case ACTIONS.SET_IATA_CODES:
-      return {
-        ...state,
-        iataCodes: action.payload,
-      };
+      return { ...state, iataCodes: action.payload };
+
     case ACTIONS.SET_AIRLINE_DATA:
-      return {
-        ...state,
-        airlineData: action.payload,
-      };
-    case ACTIONS.SET_ALERT:
-      return {
-        ...state,
-        alert: action.payload,
-      };
-    case ACTIONS.SET_BOOKED_FLIGHT:
-      return {
-        ...state,
-        bookedFlight: action.payload,
-      };
-    case ACTIONS.SET_BRANDED_UPSELL:
-      return {
-        ...state,
-        brandedUpSell: action.payload,
-      };
+      return { ...state, airlineData: action.payload };
+
+    case ACTIONS.SET_FLIGHT_RESULTS:
+      return { ...state, flightResults: action.payload };
+
     case ACTIONS.SET_SELECTED_FLIGHTS:
-      return {
-        ...state,
-        brandedUpSell: action.payload,
-      };
+      return { ...state, selectedFlight: action.payload };
+
+    case ACTIONS.SET_FILTERED_FLIGHTS:
+      return { ...state, filteredFlights: action.payload };
+
+    case ACTIONS.SET_BOOKED_FLIGHT:
+      return { ...state, bookedFlight: action.payload };
+
+    case ACTIONS.SET_BRANDED_UPSELL:
+      return { ...state, brandedUpSell: action.payload };
+
     case ACTIONS.SET_UPSELL_ERROR:
-      return {
-        ...state,
-        brandedUpSell: action.payload,
-      };
+      return { ...state, upsellError: action.payload };
+
+    case ACTIONS.SET_LAST_FLIGHT:
+      return { ...state, lastFlight: action.payload };
+
+    case ACTIONS.SET_ALERT:
+      return { ...state, alert: action.payload };
+
+    default:
+      return state;
   }
 };
+
 
 const INITIAL_STATE = {
   flightSearch: null,
@@ -111,6 +106,32 @@ export const FlightSearchProvider = ({ children }) => {
   // const [lastFlight, setlastFlight] = useState([]);
   // const [alert, setAlert] = useState(false);
   // const [filteredFlights, setFilteredFlights] = useState([]);
+  const [state, dispatch] = useReducer(flightReducer, INITIAL_STATE);
+  const {
+    flightSearch,
+    iataCodes,
+    airlineData,
+    selectedFlight,
+    bookedFlight,
+    brandedUpSell,
+    upsellError,
+    lastFlight,
+    alert,
+    filteredFlights,
+    flightResults
+  } = state;
+
+  const setFormData = (data) => dispatch({ type: ACTIONS.SET_FORM_DATA, payload: data });;
+  const setIataCodes = (data) => dispatch({ type: ACTIONS.SET_IATA_CODES, payload: data });;
+  const setAirlineData = (data) => dispatch({ type: ACTIONS.SET_AIRLINE_DATA, payload: data });;
+  const setFlightResults = (data) => dispatch({ type: ACTIONS.SET_FLIGHT_RESULTS, payload: data });;
+  const setBookedFlight = (data) => dispatch({ type: ACTIONS.SET_BOOKED_FLIGHT, payload: data });;
+  const setBrandedUpSell = (data) => dispatch({ type: ACTIONS.SET_BRANDED_UPSELL, payload: data });;
+  const setUpsellError = (data) => dispatch({ type: ACTIONS.SET_UPSELL_ERROR, payload: data });;
+  const setlastFlight = (data) => dispatch({ type: ACTIONS.SET_LAST_FLIGHT, payload: data });;
+  const setAlert = (data) => dispatch({ type: ACTIONS.SET_ALERT, payload: data });;
+  const setFilteredFlights = (data) => dispatch({ type: ACTIONS.SET_FILTERED_FLIGHTS, payload: data });;
+  const setSelectFlight = (data) => dispatch({ type: ACTIONS.SET_SELECTED_FLIGHTS, payload: data });;
   const value = {
     flightSearch,
     setFormData,
