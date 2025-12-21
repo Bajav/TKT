@@ -677,20 +677,23 @@ const results = analyzeFlightOffers(flightOffersArray);
           filteredFlights.map((itinerary, index) => {
             const segments = itinerary.itineraries[0]?.segments || [];
             const segmentNumber = segments.length;
+            // const segmentOneNum = segments.
+            // const segmentOneNum = segments.length;
             const lastSegmentIndex = segmentNumber - 1;
             const segmentOne = itinerary.itineraries[0].segments;
             const segmentTwo = itinerary.itineraries[1]?.segments;
-
+            // console.log("segmentOne:::",segmentOne);
+            
             return (
-              <div className="flightContainer" key={index}>
+              <div className="flightContainer"  key={index}>
                 <div className="main-cards">
                   <div className="flights-res">
                     <AirlineInfo
                       logo={
-                        airlinesLookUp[segmentOne[0].carrierCode]?.logo || ""
+                        airlinesLookUp[segmentOne[segmentOne.length - 1].carrierCode]?.logo || ""
                       }
                       carrierCode={
-                        airlinesLookUp[segments[0]?.carrierCode]?.name || ""
+                        airlinesLookUp[segments[segmentOne.length - 1]?.carrierCode]?.name || ""
                       }
                       airlineName={segments[0]?.aircraft?.code || ""}
                     />
@@ -762,6 +765,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                       >
                         {segmentOne.map((stopOver, setStopIndex) => (
                           <SwiperSlide key={setStopIndex}>
+                            {/* {console.log("stopOver",stopOver)} */}
                             <div className="stops-details">
                               <TicketHeader
                                 originCode={stopOver.departure.iataCode}
