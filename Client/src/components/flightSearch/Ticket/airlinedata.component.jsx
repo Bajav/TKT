@@ -10,7 +10,7 @@ function AirlineInfo(props) {
         </div>
         <div className="airlines-header">
         <h4>{props.carrierCode}</h4>
-        {!props.multicityAirline?null:<h4>{props.multicityCode}</h4>}
+        {!props.multicityAirline?null:<h4 className="multi">{props.multicityCode}</h4>}
         </div>
       </div>
       <h3>{props.airlineName}</h3>

@@ -16,7 +16,7 @@ import TicketHeader from "./ticketheader.component";
 import AirlineInfo from "./airlinedata.component";
 import dollarIcon from "../../../assets/icons/dollarbill.svg";
 import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
-import borderLine from "../../../assets/icons/line.svg"
+import borderLine from "../../../assets/icons/line.svg";
 // motion
 import { motion } from "motion/react";
 
@@ -49,6 +49,7 @@ function FlightCard() {
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
   const [showTickets, setShowTickets] = useState(true);
+  const [multiple, setMultiple] = useState(false);
   // const [outBoundFlight, setFlight] = useState({});
   const [availableAirlines, setAvailableAirlines] = useState([]);
   const [filters, setFilters] = useState({
@@ -450,18 +451,12 @@ const results = analyzeFlightOffers(flightOffersArray);
 // Get specific filtered results
 });
 */
-function flagMultipleAirlines(itinerary) {
-  const carrierCodes = itinerary.segments.map(
-    s => s.carrierCode
-  );
 
-  return new Set(carrierCodes).size > 1;
-};
-// flightResults.map(itinerary=>{const hasMultipleAirlines = flagMultipleAirlines(itinerary)
+  // flightResults.map(itinerary=>{const hasMultipleAirlines = flagMultipleAirlines(itinerary)});
 
-//   console.log("hasMultipleAirlines",hasMultipleAirlines);
-// });
-// const hasMultipleAirlines = flagMultipleAirlines();
+  //   console.log("hasMultipleAirlines",hasMultipleAirlines);
+  // });
+  // const hasMultipleAirlines = flagMultipleAirlines();
   return (
     <Fragment>
       <div className="filter-form">
@@ -693,21 +688,35 @@ function flagMultipleAirlines(itinerary) {
             const segmentTwo = itinerary.itineraries[1]?.segments;
             // const segmentOneNum = segments.
             // const segmentOneNum = segments.length;
-            // console.log("segmentOne:::",segmentOne);
-            
+            console.log("segments:::",segments);
+
+            function flagMultipleAirlines(data) {
+              const carrierCodes = data.segments.map((s) => s.carrierCode);
+              return new Set(carrierCodes).size > 1;
+            }
+            const hasMultipleAirlines = flagMultipleAirlines(itinerary.itineraries[0]);
+            // console.log("hasMultipleAirlines",hasMultipleAirlines)
+
             return (
-              <div className="flightContainer"  key={index}>
+              <div className="flightContainer" key={index}>
                 <div className="main-cards">
                   <div className="flights-res">
                     <AirlineInfo
                       logo={
-                        airlinesLookUp[segmentOne[segmentOne.length - 1].carrierCode]?.logo || ""
+                        airlinesLookUp[
+                          segmentOne[segmentOne.length - 1].carrierCode
+                        ]?.logo || ""
                       }
                       carrierCode={
-                        airlinesLookUp[segments[segmentOne.length - 1]?.carrierCode]?.name || ""
+                        airlinesLookUp[
+                          segments[segmentOne.length - 1]?.carrierCode
+                        ]?.name || ""
                       }
-                      multicityAirline={true}
-                      multicityCode="Multiple airlines"
+                      multicityAirline={hasMultipleAirlines}
+                      // multicityCode={airlinesLookUp[
+                      //     segments[0]?.carrierCode
+                      //   ]?.name || ""}
+                      multicityCode={`multiple airlines (${segmentOne[0].carrierCode || ""})`}
                       airlineName={segments[0]?.aircraft?.code || ""}
                     />
                     <TicketHeader
