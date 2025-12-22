@@ -57,40 +57,31 @@ function FlightPricing() {
         arrowColor="#333"
         destinationCity={"dubai,uae"}
       />
-      {lastFlight.itineraries.map((itinerary,index) => {
+      {lastFlight.itineraries.map((itinerary, index) => {
         const segments = itinerary.segments;
         const segementOne = segments[0];
         const segementTwo = segments[1];
         const segmentTwo = itinerary.segments[1];
-        console.log("segmentOne ::",segementOne);
+        // console.log("segmentOne ::", segementOne);
         // console.log("segmentTwo ::",segmentTwo);
         // segmentOne.map((itine)=>{
         //   console.log(itine);
         // })
 
-
         return (
           // <li>hello</li>
           <ReviewCard
-            airlineLogo={
-              airlinesLookUp[segementOne.carrierCode]
-                ?.logo || ""
-            }
+            airlineLogo={airlinesLookUp[segementOne.carrierCode]?.logo || ""}
             tripType={
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
             }
             travelDate={itinerary.segments[0].departure.at.slice(0, 10) || ""}
             airlineName={
-              `${
-                airlinesLookUp[
-                  segementOne.carrierCode
-                ]?.name
-              }` || ""
+              `${airlinesLookUp[segementOne.carrierCode]?.name}` || ""
             }
             equipmentNumb={itinerary.segments[0].aircraft.code || ""}
             operator={`operated by ${
-              airlinesLookUp[segementOne.carrierCode]
-                ?.name || ""
+              airlinesLookUp[segementOne.carrierCode]?.name || ""
             }`}
             departureTime={itinerary.segments[0].departure.at.slice(11) || ""}
             originCode={itinerary.segments[0].departure.iataCode || ""}
