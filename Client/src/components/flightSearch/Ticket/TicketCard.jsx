@@ -688,35 +688,53 @@ const results = analyzeFlightOffers(flightOffersArray);
             const segmentTwo = itinerary.itineraries[1]?.segments;
             // const segmentOneNum = segments.
             // const segmentOneNum = segments.length;
-            console.log("segments:::",segments);
+            // console.log("segments:::", segments);
 
             function flagMultipleAirlines(data) {
               const carrierCodes = data.segments.map((s) => s.carrierCode);
               return new Set(carrierCodes).size > 1;
             }
-            const hasMultipleAirlines = flagMultipleAirlines(itinerary.itineraries[0]);
-            // console.log("hasMultipleAirlines",hasMultipleAirlines)
+            const hasMultipleAirlines = flagMultipleAirlines(
+              itinerary.itineraries[0]
+            );
+
+            function getPrimaryAirline(segments) {
+              const count = {};
+              for (const s of segments) {
+                count[s.carrierCode] = (count[s.carrierCode] || 0) + 1;
+              }
+              return Object.entries(count).sort((a, b) => b[1] - a[1])[0][0];
+            }
+            const primaryAirlineCode = getPrimaryAirline(segmentOne);
+            function getSecondaryAirlines(segments, primaryAirline) {
+              const uniqueCarriers = new Set(
+                segments.map((s) => s.carrierCode)
+              );
+              uniqueCarriers.delete(primaryAirline);
+              return [...uniqueCarriers];
+            }
+            const secondaryAirlines = getSecondaryAirlines(
+              segmentOne,
+              primaryAirlineCode
+            );
+            console.log("secondaryAirlines", secondaryAirlines);
 
             return (
               <div className="flightContainer" key={index}>
                 <div className="main-cards">
                   <div className="flights-res">
                     <AirlineInfo
-                      logo={
-                        airlinesLookUp[
-                          segmentOne[segmentOne.length - 1].carrierCode
-                        ]?.logo || ""
-                      }
+                      logo={airlinesLookUp[primaryAirlineCode]?.logo || ""}
                       carrierCode={
-                        airlinesLookUp[
-                          segments[segmentOne.length - 1]?.carrierCode
-                        ]?.name || ""
+                        airlinesLookUp[primaryAirlineCode]?.name || ""
                       }
                       multicityAirline={hasMultipleAirlines}
                       // multicityCode={airlinesLookUp[
                       //     segments[0]?.carrierCode
                       //   ]?.name || ""}
-                      multicityCode={`multiple airlines (${segmentOne[0].carrierCode || ""})`}
+                      multicityCode={`multiple airlines (${
+                        secondaryAirlines || ""
+                      })`}
                       airlineName={segments[0]?.aircraft?.code || ""}
                     />
                     <TicketHeader
