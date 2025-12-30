@@ -6,6 +6,7 @@ import iataRoutes from "./Routes/iataRoutes.js";
 import searchFlight from "./Routes/searchFlightRt.js";
 import stripeRoutes from "./Routes/stripe.routes.js";
 import mytiflyroutes from "./Routes/mystifly.routes.js";
+import hotelRoutes from './Routes/Hotels/hotelbeds.routes.js'
 // import atlasRoutes from './Routes/atlas.routes.js'
 // middleware
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
@@ -32,6 +33,7 @@ app.use(express.json());
 app.use(corsMiddleware);
 app.use(loggerMiddleware);
 app.set("view engine", "ejs");
+app.use(express.json());
 app.use(express.static("public"));
 app.use(
   session({
@@ -56,6 +58,7 @@ app.use("/", cookieRoutes);
 app.use("/", searchFlight);
 app.use("/", stripeRoutes);
 app.use("/", mytiflyroutes);
+app.use("/", hotelRoutes);
 // app.use('/',atlasRoutes);
 
 // Start server
