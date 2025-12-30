@@ -1,0 +1,13 @@
+==For hotels==
+- hotelbeds api
+- amadeus api (hotels)
+
+==for flights== 
+--amadeus (gds) 
+--mystifly (aggregator)
+--TPConnects (ndc flights)
+--tripNinja (algo)
+
+==authentication==
+google authenticate
+express session
