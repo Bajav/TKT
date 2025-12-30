@@ -38,7 +38,7 @@ const HotelForm = () => {
         <div className="payload-header">
           <div className="toggles">
             <div className="toggle-container">
-              <label>Stays</label>
+              <label className='active'>Stays</label>
               <input
                 type="radio"
                 name="accommodationType"
@@ -49,7 +49,7 @@ const HotelForm = () => {
             </div>
 
             <div className="toggle-container">
-              <label>Hotels</label>
+              <label className='hote'>Hotels</label>
               <input
                 type="radio"
                 name="accommodationType"
