@@ -20,6 +20,9 @@ const hotelSearch = async (req, res) => {
       destination: {
         code: "LON",
       },
+      filter:{
+        maxHotels:1
+      }
     });
     // console.log("hotel response", response);
     res.json(response);
