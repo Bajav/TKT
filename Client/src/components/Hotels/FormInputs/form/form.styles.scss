@@ -4,9 +4,22 @@ $black :#222;
 
 .hotelform
 {
+    margin-top: 30px;
     border: 1px solid #222;
     border-radius: 10px;
     width: 95vw;
+    background-color: #fff;
+    padding: 5px;
+    button{
+        color: $inputBackGround;
+        text-transform: lowercase;
+        font-family: $textFont,sans-serif;
+        background: $ticketColor;
+        border-radius: 10px;
+        border: none;
+        height: 40px;
+        width: 100%;
+    }
 }
 .header{
     h1{
@@ -14,6 +27,8 @@ $black :#222;
         font-size: 30px;
         text-transform: capitalize;
         line-height: 35px;
+        margin:0;
+        padding: 0;
     }
     span
     {
@@ -22,4 +37,12 @@ $black :#222;
     .bold-span{
         font-weight: 600;
     }
+}
+.toggles
+{
+    display: flex;
+    width: 100px;
+    align-items: center;
+    justify-content: space-between;
+
 }
