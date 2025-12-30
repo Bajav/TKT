@@ -27,7 +27,7 @@ const HotelForm = () => {
 
   return (
     <div className="hotelform">
-      <div className="header">
+      <div className="form-header">
         <h1>
           Experience <span className="bold-span">luxury </span> 
             on a level never <span>seen before.</span>
