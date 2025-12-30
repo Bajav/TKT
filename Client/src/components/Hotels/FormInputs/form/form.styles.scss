@@ -1,5 +1,25 @@
+@import '../../../../styles/variables.scss';
+$orange :#E88D67;
+$black :#222;
+
 .hotelform
 {
     border: 1px solid #222;
-    border-radius: 10px
+    border-radius: 10px;
+    width: 95vw;
+}
+.header{
+    h1{
+        font-family: $textFont,sans-serif;
+        font-size: 30px;
+        text-transform: capitalize;
+        line-height: 35px;
+    }
+    span
+    {
+        color:$orange;
+    }
+    .bold-span{
+        font-weight: 600;
+    }
 }

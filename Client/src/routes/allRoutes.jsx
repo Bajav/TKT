@@ -3,7 +3,7 @@ import { Fragment } from "react";
 
 import Home from "../pages/Home/home";
 import Places from "../pages/places";
-import Hotels from "../pages/hotels";
+import Hotels from "../pages/Hotels/hotels";
 import Packages from "../pages/packages";
 import Navbar from "../components/NavBar/navBar";
 

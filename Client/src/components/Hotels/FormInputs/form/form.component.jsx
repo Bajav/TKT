@@ -29,8 +29,8 @@ const HotelForm = () => {
     <div className="hotelform">
       <div className="header">
         <h1>
-          Experience <span className="bold-span">luxury</span>
-          on a level never <span>seen before.</span>
+          Experience <span className="bold-span">luxury </span> 
+            on a level never <span>seen before.</span>
         </h1>
       </div>
 
