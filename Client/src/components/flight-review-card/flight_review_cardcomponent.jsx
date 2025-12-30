@@ -6,13 +6,13 @@ import { Clock } from "lucide-react";
 import FlightFlag from "../flightarrival/flightflag.component";
 import fromTo from "../../assets/icons/fromto.svg";
 import { OctagonAlert } from "lucide-react";
-import lineDeg from "../../assets/icons/90deg.svg"
+import lineDeg from "../../assets/icons/90deg.svg";
 
 import { UserContext } from "../context/user.context";
 
 function ReviewCard(props) {
-  const {userData} = useContext(UserContext);
-  console.log("i am userData",userData);
+  const { userData } = useContext(UserContext);
+  console.log("i am userData", userData);
   return (
     <section className="flight-review">
       <div className="outbound-flight">
@@ -26,11 +26,15 @@ function ReviewCard(props) {
           <div className="flight-header">
             <div className="airline-details">
               <h4>{props.airlineName}</h4>
-              <h3>{props.equipmentNumb} {props.operator}</h3>
+              <h3>
+                {props.equipmentNumb} {props.operator}
+              </h3>
             </div>
-            <div className="hide-flag">
-              <h4>multiple airlines</h4>
-            </div>
+            {props.isMultipleAirlines ? (
+              <div className="hide-flag">
+                <h4>multiple airlines{props.secondaryAirline}</h4>
+              </div>
+            ) : null}
             <div className="airline-logo">
               <img src={props.airlineLogo} alt="ariline-logo" />
             </div>
@@ -43,26 +47,38 @@ function ReviewCard(props) {
 
             <div className="det">
               <div className="trip-data">
-                <h3>{props.departureTime} {props.originCode}, {props.originCityCountry}</h3>
+                <h3>
+                  {props.departureTime} {props.originCode},{" "}
+                  {props.originCityCountry}
+                </h3>
                 {/* <h3 className="terminal">terminal : {props.originTerminal}</h3> */}
               </div>
               {/* { <Clock />} */}
               <div className="flight-time">
-                <Clock size={12} opacity={70} color="#323030"/>
+                <Clock size={12} opacity={70} color="#323030" />
                 <h5>{props.duration}</h5>
                 <h5 className="terminal">{props.tripstops}</h5>
               </div>
               <div className="trip-data">
-                <h3>{props.arrivalTime} {props.destinationCode}, {props.destinationCityCountry}</h3>
+                <h3>
+                  {props.arrivalTime} {props.destinationCode},{" "}
+                  {props.destinationCityCountry}
+                </h3>
                 {/* <h3 className="terminal">terminal : {props.destinationTerminal}</h3> */}
               </div>
             </div>
           </div>
           <div className="flight-data">
             <div className="trip-ameneties">
-              <h6>class : {props.cabin} {props.cabinClass}</h6>
-              <h6>carry on : {props.carryWeight} {props.carryOnUnit} </h6>
-              <h6>checked bags : {props.checkedWeight} {props.checkedOnUnit}</h6>
+              <h6>
+                class : {props.cabin} {props.cabinClass}
+              </h6>
+              <h6>
+                carry on : {props.carryWeight} {props.carryOnUnit}{" "}
+              </h6>
+              <h6>
+                checked bags : {props.checkedWeight} {props.checkedOnUnit}
+              </h6>
               {/* <h6>co2 : {props.c02Weight}</h6> */}
             </div>
 
@@ -81,12 +97,12 @@ function ReviewCard(props) {
 
 export default ReviewCard;
 
-  // <FlightFlag
-  //             icon={<OctagonAlert size={14} color={"#E82929"} />}
-  //             bgColor="#FFDDDD"
-  //             fontColor="#E82929"
-  //             alertText="arrives the next day"
-  //           />
+// <FlightFlag
+//             icon={<OctagonAlert size={14} color={"#E82929"} />}
+//             bgColor="#FFDDDD"
+//             fontColor="#E82929"
+//             alertText="arrives the next day"
+//           />
 
 // {
 //   bookedFlight.flightOffers.map(

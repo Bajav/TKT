@@ -46,6 +46,7 @@ function FlightPricing() {
   // }else{
   //   setDirect("direct")
   // }
+
   return (
     <section className="reviewFlight">
       <BackBTN onClick={() => navigate("/flights")} btnName="cancel" />
@@ -67,21 +68,48 @@ function FlightPricing() {
         // segmentOne.map((itine)=>{
         //   console.log(itine);
         // })
+        function flagMultipleAirlines(res) {
+          const carrierCodes = res.segments.map((s) => s.carrierCode);
+          return new Set(carrierCodes).size > 1;
+        }
+        const hasMultipleAirlines = flagMultipleAirlines(
+          itinerary
+        );
 
+        function getPrimaryAirline(res) {
+          const count = {};
+          for (const s of res) {
+            count[s.carrierCode] = (count[s.carrierCode] || 0) + 1;
+          }
+          return Object.entries(count).sort((a, b) => b[1] - a[1])[0][0];
+        }
+        const primaryAirlineCode = getPrimaryAirline(segementOne);
+        function getSecondaryAirlines(segments, primaryAirline) {
+          const uniqueCarriers = new Set(segments.map((s) => s.carrierCode));
+          uniqueCarriers.delete(primaryAirline);
+          return [...uniqueCarriers];
+        }
+        console.log(typeof segementOne)
+        console.log("primaryAirlineCode",primaryAirlineCode)
+        const secondaryAirlines = getSecondaryAirlines(
+          segementOne,
+          primaryAirlineCode
+        );
+        console.log("secondaryAirlines", secondaryAirlines);
         return (
           // <li>hello</li>
           <ReviewCard
-            airlineLogo={airlinesLookUp[segementOne.carrierCode]?.logo || ""}
+            airlineLogo={primaryAirlineCode?.logo || ""}
             tripType={
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
             }
             travelDate={itinerary.segments[0].departure.at.slice(0, 10) || ""}
             airlineName={
-              `${airlinesLookUp[segementOne.carrierCode]?.name}` || ""
+              `${airlinesLookUp[primaryAirlineCode]?.name}` || ""
             }
             equipmentNumb={itinerary.segments[0].aircraft.code || ""}
             operator={`operated by ${
-              airlinesLookUp[segementOne.carrierCode]?.name || ""
+              primaryAirlineCode?.name || ""
             }`}
             departureTime={itinerary.segments[0].departure.at.slice(11) || ""}
             originCode={itinerary.segments[0].departure.iataCode || ""}
