@@ -1,9 +1,9 @@
-import React from "react";
+import HotelForm from "../components/Hotels/FormInputs/form/form.component";
 
 function Hotels (){
     return(
        <div>
-        <h1>hotels</h1>
+        <HotelForm />
        </div>
     );
 }
