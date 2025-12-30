@@ -1,3 +1,4 @@
+import './form.styles.scss';
 import { useState } from "react";
 import FlightSearchInput from "../../../flightSearch/SearchInput/flightSearch";
 
