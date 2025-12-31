@@ -9,6 +9,9 @@ $black: #222;
   width: 95vw;
   background-color: #fff;
   padding: 5px;
+  .flight-calendar__dropdown {
+    width: 350px;
+  }
   .btn-sub {
     color: $inputBackGround;
     text-transform: lowercase;
@@ -19,14 +22,14 @@ $black: #222;
     border: none;
     height: 50px;
     width: 100%;
+    margin-top: 5px;
   }
 }
-.guests
-{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+.guests {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 .flight-calendar__input-field {
   height: 50px;
@@ -124,8 +127,8 @@ $black: #222;
     }
   }
 }
-.guests-selector{
-    width: 50%;
+.guests-selector {
+  width: 50%;
 }
 
 .cities {

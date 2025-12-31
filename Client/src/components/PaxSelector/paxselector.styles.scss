@@ -23,11 +23,10 @@
   align-items: center;
   // transition: all 0.2s ease;
   span {
+    font-family: $roboto, sans-serif;
     font-size: 15px;
-    font-weight: 200;
+    font-weight: 500;
     color: $visibleFontColor;
-    // opacity: 60%;
-    font-family: $textFont, sans-serif;
   }
 }
 
@@ -64,6 +63,7 @@
 }
 .pax button {
   background-color: $actionOrange;
+
   border: none;
   color: white;
   padding: 0px 10px;
@@ -166,25 +166,39 @@
   height: 50px;
   // transition: all 0.2s ease;
   span {
-    font-size: 15px;
-    font-weight: 200;
+    font-size: 12px;
+    font-weight: 400;
     color: $visibleFontColor;
     // opacity: 60%;
-    font-family: $textFont, sans-serif;
+    text-transform: capitalize;
+    font-family: $roboto, sans-serif;
   }
+}
+.guest-label
+{
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+.pax {
+    margin-bottom: 5px;
+    span
+    {
+        font-size: 12px;
+    }
 }
 
 .pax-content {
   animation: slideDown 0.3s ease-in-out;
   position: absolute;
   background-color: #fff;
-  min-width: 200px;
+  min-width: 150px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   padding: 12px;
   border-radius: 10px;
   z-index: 1;
   top: 33%;
-  font-family: $roboto,sans-serif;
+  right: 20px;
+  font-family: $roboto, sans-serif;
   margin-top: 10px; /* to create some space below the button */
 }
 
