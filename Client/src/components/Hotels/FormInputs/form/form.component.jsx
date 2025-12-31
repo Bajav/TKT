@@ -87,24 +87,25 @@ const HotelForm = () => {
               <option value="9">9</option>
             </select>
           </div>
-          </div>
-          <div className="searchInputs">
-            <input
-              type="text"
-              name="cityName"
-              value={inputs.cityName}
-              onChange={handleChanges}
-              placeholder="enter city name"
+        </div>
+        <div className="searchInputs">
+          <input
+            type="text"
+            name="cityName"
+            value={inputs.cityName}
+            onChange={handleChanges}
+            className="cities"
+            placeholder="enter city name"
+          />
+          <div className="guests">
+            <FlightCalendar
+              isRangePicker={true}
+              onRangeSelect={handleRangeSelect}
+              placeholder="Check-in → Check-out"
             />
-            <div className="guests">
-              <FlightCalendar
-                isRangePicker={true}
-                onRangeSelect={handleRangeSelect}
-                placeholder="Check-in → Check-out"
-              />
-          <GuestsSelector value={guests} onChange={setGuests}/>
-            </div>
+            <GuestsSelector value={guests} onChange={setGuests} />
           </div>
+        </div>
 
         <button type="submit">Search</button>
       </form>
