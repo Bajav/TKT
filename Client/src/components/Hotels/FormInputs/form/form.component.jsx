@@ -1,23 +1,28 @@
 import "./form.styles.scss";
-import { useState } from "react";
-import FlightSearchInput from "../../../flightSearch/SearchInput/flightSearch";
-import { FlightCalendar } from "../../../flightSearch/Calender/newCalender";
+import { useState, useRef } from "react";
 import DestinationSearchInput from "../inputs/inputs.component";
+import { FlightCalendar } from "../../../flightSearch/Calender/newCalender";
 import GuestsSelector from "../../../PaxSelector/paxselector.component";
+
 const HotelForm = () => {
   const [inputs, setInputs] = useState({
-    stays: false,
-    hotels: false,
-    rooms: 1,
+    accommodationType: "stays",
     destination: "",
+    rooms: 1,
   });
 
-  const HotelDateSelector = () => {
-    const [dates, setDates] = useState({
-      checkIn: null,
-      checkOut: null,
-    });
-  };
+  const [dates, setDates] = useState({
+    checkIn: null,
+    checkOut: null,
+  });
+
+  const [guests, setGuests] = useState({
+    adults: 2,
+    children: 0,
+    infants: 0,
+  });
+
+  const roomSelectRef = useRef(null);
 
   const handleRangeSelect = ({ start, end }) => {
     setDates({
@@ -27,30 +32,37 @@ const HotelForm = () => {
   };
 
   const handleChanges = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
 
     setInputs((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     }));
   };
-  const [guests, setGuests] = useState({
-    adults: 2,
-    children: 0,
-    rooms: 1,
-  });
-  const handleSubmit = (e) => e.preventDefault();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const payload = {
+      ...inputs,
+      guests,
+      dates,
+    };
+    console.log("Hotel search payload:", payload);
+  };
+
   return (
     <div className="hotelform">
       <div className="form-header">
         <h1>
-          Experience <span className="bold-span">luxury </span>
-          on a level never <span>seen before.</span>
+          Experience <span className="bold-span">luxury</span> on a level never{" "}
+          <span>seen before.</span>
         </h1>
       </div>
 
       <form onSubmit={handleSubmit} className="payload-inputs">
+        {/* HEADER */}
         <div className="payload-header">
+          {/* TOGGLES */}
           <div className="toggles">
             <div
               className={`toggle-slider ${
@@ -66,10 +78,10 @@ const HotelForm = () => {
                 checked={inputs.accommodationType === "stays"}
                 onChange={handleChanges}
               />
-          <span>Stays</span>
+              <span>Stays</span>
             </label>
 
-            <label  className="toggle-option">
+            <label className="toggle-option">
               <input
                 type="radio"
                 name="accommodationType"
@@ -78,39 +90,47 @@ const HotelForm = () => {
                 onChange={handleChanges}
               />
               <span>Hotels</span>
-              
             </label>
           </div>
 
-          <div className="room-input">
-            <label htmlFor="rooms">Rooms::</label>
-            <select name="rooms" id="rooms">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
+          {/* ROOMS */}
+          <div
+            className="room-input"
+            onClick={() => roomSelectRef.current?.focus()}
+          >
+            <label>Rooms</label>
+            <select
+              ref={roomSelectRef}
+              name="rooms"
+              value={inputs.rooms}
+              onChange={handleChanges}
+            >
+              {[...Array(9)].map((_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
             </select>
           </div>
         </div>
+
+        {/* SEARCH INPUTS */}
         <div className="searchInputs">
           <DestinationSearchInput
             label="Destination"
             name="destination"
             value={inputs.destination}
             onChange={handleChanges}
-            placeholder="Enter City or country"
+            placeholder="Enter city or country"
           />
+
           <div className="guests">
             <FlightCalendar
-              isRangePicker={true}
+              isRangePicker
               onRangeSelect={handleRangeSelect}
               placeholder="Check-in → Check-out"
             />
+
             <GuestsSelector value={guests} onChange={setGuests} />
           </div>
         </div>
