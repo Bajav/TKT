@@ -22,10 +22,10 @@ const GuestsSelector = ({ value, onChange }) => {
 
   const getSummary = () => {
     const { adults, children, rooms } = value;
-    return `${adults} adult${adults > 1 ? "s" : ""}, ${
-      children
-    } child${children !== 1 ? "ren" : ""}, ${rooms} room${
-      rooms > 1 ? "s" : ""
+    const guests = adults + children;
+
+    return `${rooms} room${rooms > 1 ? "s" : ""}, ${guests} guest${
+      guests > 1 ? "s" : ""
     }`;
   };
 

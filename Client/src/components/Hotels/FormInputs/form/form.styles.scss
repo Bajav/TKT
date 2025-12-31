@@ -62,7 +62,7 @@ $black: #222;
   }
   label {
     font-family: $roboto;
-    font-size: 13px;
+    font-size: 13px
   }
   input {
     // opacity: 1%;
@@ -114,9 +114,13 @@ $black: #222;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0px;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid #222;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     // transition: all 0.2s ease;
     span {
       font-size: 15px;
