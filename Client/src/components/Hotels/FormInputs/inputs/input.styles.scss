@@ -1,0 +1,45 @@
+@import '../../../../styles/variables.scss';
+.destination-dropdown {
+  position: absolute;
+  width: 70%;
+  max-height: 100px;
+  overflow-y: scroll;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  z-index: 1000;
+  font-family: $roboto,sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  border: 1px solid #222;
+}
+
+.destination-row {
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.destination-row:hover {
+  background: #f2f4f7;
+}
+
+.meta {
+  color: #666;
+  font-size: 0.85rem;
+}
+.destination-input {
+  input {
+    height: 50px;
+    border: 1px solid #222;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+    padding: 0px 15px;
+    font-size: 12px;
+    font-family: $roboto, sans-serif;
+    font-weight: 400;
+    text-transform: capitalize;
+    margin: 5px 0px;
+  }
+}

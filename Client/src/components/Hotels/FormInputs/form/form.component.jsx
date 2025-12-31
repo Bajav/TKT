@@ -2,13 +2,14 @@ import "./form.styles.scss";
 import { useState } from "react";
 import FlightSearchInput from "../../../flightSearch/SearchInput/flightSearch";
 import { FlightCalendar } from "../../../flightSearch/Calender/newCalender";
+import DestinationSearchInput from "../inputs/inputs.component";
 import GuestsSelector from "../../../PaxSelector/paxselector.component";
 const HotelForm = () => {
   const [inputs, setInputs] = useState({
     stays: false,
     hotels: false,
     rooms: 1,
-    cityName: "",
+    destination: "",
   });
 
   const HotelDateSelector = () => {
@@ -51,8 +52,13 @@ const HotelForm = () => {
       <form onSubmit={handleSubmit} className="payload-inputs">
         <div className="payload-header">
           <div className="toggles">
-            <div className="toggle-container">
-              <label className="active">Stays</label>
+            <div
+              className={`toggle-slider ${
+                inputs.accommodationType === "hotels" ? "right" : "left"
+              }`}
+            />
+
+            <label className="toggle-option">
               <input
                 type="radio"
                 name="accommodationType"
@@ -60,19 +66,21 @@ const HotelForm = () => {
                 checked={inputs.accommodationType === "stays"}
                 onChange={handleChanges}
               />
-            </div>
+              Stays
+            </label>
 
-            <div className="toggle-container">
-              <label className="hote">Hotels</label>
+            <label className="toggle-option">
               <input
                 type="radio"
                 name="accommodationType"
-                value="stays"
+                value="hotels"
                 checked={inputs.accommodationType === "hotels"}
                 onChange={handleChanges}
               />
-            </div>
+              Hotels
+            </label>
           </div>
+
           <div className="room-input">
             <label htmlFor="rooms">Rooms::</label>
             <select name="rooms" id="rooms">
@@ -89,13 +97,12 @@ const HotelForm = () => {
           </div>
         </div>
         <div className="searchInputs">
-          <input
-            type="text"
-            name="cityName"
-            value={inputs.cityName}
+          <DestinationSearchInput
+            label="Destination"
+            name="destination"
+            value={inputs.destination}
             onChange={handleChanges}
-            className="cities"
-            placeholder="enter city name"
+            placeholder="Enter City or country"
           />
           <div className="guests">
             <FlightCalendar
@@ -107,7 +114,9 @@ const HotelForm = () => {
           </div>
         </div>
 
-        <button className="btn-sub" type="submit">Search</button>
+        <button className="btn-sub" type="submit">
+          Search
+        </button>
       </form>
     </div>
   );
