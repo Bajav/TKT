@@ -9,3 +9,6 @@ or
 
 we can also store the user details upon signin ie email, displayname, 
 image url etc in the cookie, then use the cookie to authenticate user upon browser refresh .
+
+
+users like a place and travel agencies bid on them
