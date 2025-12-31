@@ -1,0 +1,153 @@
+@import '../../styles/variables.scss';
+  // passenger
+  .passenger-selector {
+    position: relative;
+    /* display: inline-block; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: $textFont, sans-serif;
+    font-weight: 600;
+    color: $deemFontColor;
+  }
+
+  .dropdown-header {
+    background-color: $inputBackGround;
+    padding: 3px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    // transition: all 0.2s ease;
+    span {
+      font-size: 15px;
+      font-weight: 200;
+      color: $visibleFontColor;
+      // opacity: 60%;
+      font-family: $textFont, sans-serif;
+    }
+  }
+
+  .dropdown-content {
+    animation: slideDown 0.3s ease-in-out;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border-radius: 10px;
+    z-index: 1;
+    top: 50px;
+    margin-top: 10px; /* to create some space below the button */
+  }
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  // .passenger-type {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   margin-bottom: 8px;
+  // }
+  .passenger-label {
+    margin-bottom: 10px;
+  }
+
+  .passenger-type button {
+    background-color: $actionOrange;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .passenger-type button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .arrow {
+    margin-left: 10px;
+  }
+
+  .dropdown-content span {
+    font-size: 16px;
+    margin: 0 10px;
+  }
+
+  .seatType {
+    display: flex;
+    align-items: center;
+    // margin-top: 2px;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 5px;
+    z-index: 2;
+    gap: 5px;
+    margin-top: 5px;
+    // background: #007bff;
+  }
+  .seatClass {
+    display: flex;
+    flex-direction: column;
+    background: $inputBackGround;
+    // gap: 5px;
+    height: 60px;
+    width: 100%;
+    border-radius: 5px;
+    font-family: $textFont, sans-serif;
+    text-transform: capitalize;
+    font-weight: 600;
+    select {
+      background: transparent;
+      border: none;
+      margin-left: 10px;
+      text-transform: capitalize;
+      color: $visibleFontColor;
+      font-weight: 600;
+      font-size: 14px;
+      // margin-top: 7px;
+      width: 160px;
+    }
+    select:focus {
+      outline: none;
+    }
+    label {
+      margin-left: 10px;
+      font-size: 15px;
+      color: $deemFontColor;
+      margin-top: 5px;
+    }
+  }
+  .btn-submit {
+    text-align: center;
+    color: $visibleFontColor;
+    font-size: 15px;
+    text-transform: capitalize;
+    border-radius: 5px 5px 13px 13px;
+    border: none;
+    font-family: $textFont, sans-serif;
+    padding: 12px 120px;
+    background: $page_color;
+    width: 100%;
+    font-weight: 200;
+  }
+
+.pax {
+  display: flex;
+  // background: red;
+  justify-content: center;
+  gap: 24%;
+  align-items: center;
+}

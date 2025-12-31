@@ -1,15 +1,29 @@
-import './form.styles.scss';
+import "./form.styles.scss";
 import { useState } from "react";
 import FlightSearchInput from "../../../flightSearch/SearchInput/flightSearch";
-
+import { FlightCalendar } from "../../../flightSearch/Calender/newCalender";
+import GuestsSelector from "../../../PaxSelector/paxselector.component";
 const HotelForm = () => {
   const [inputs, setInputs] = useState({
     stays: false,
     hotels: false,
     rooms: 1,
-    cityName:"",
-
+    cityName: "",
   });
+
+  const HotelDateSelector = () => {
+    const [dates, setDates] = useState({
+      checkIn: null,
+      checkOut: null,
+    });
+  };
+
+  const handleRangeSelect = ({ start, end }) => {
+    setDates({
+      checkIn: start,
+      checkOut: end,
+    });
+  };
 
   const handleChanges = (e) => {
     const { name, value, type, checked } = e.target;
@@ -19,18 +33,18 @@ const HotelForm = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputs); // payload ready for API
-  };
-
+  const [guests, setGuests] = useState({
+    adults: 2,
+    children: 0,
+    rooms: 1,
+  });
+  const handleSubmit = (e) => e.preventDefault();
   return (
     <div className="hotelform">
       <div className="form-header">
         <h1>
-          Experience <span className="bold-span">luxury </span> 
-            on a level never <span>seen before.</span>
+          Experience <span className="bold-span">luxury </span>
+          on a level never <span>seen before.</span>
         </h1>
       </div>
 
@@ -38,7 +52,7 @@ const HotelForm = () => {
         <div className="payload-header">
           <div className="toggles">
             <div className="toggle-container">
-              <label className='active'>Stays</label>
+              <label className="active">Stays</label>
               <input
                 type="radio"
                 name="accommodationType"
@@ -49,7 +63,7 @@ const HotelForm = () => {
             </div>
 
             <div className="toggle-container">
-              <label className='hote'>Hotels</label>
+              <label className="hote">Hotels</label>
               <input
                 type="radio"
                 name="accommodationType"
@@ -59,16 +73,20 @@ const HotelForm = () => {
               />
             </div>
           </div>
-
           <div className="room-input">
-            <label htmlFor="rooms">Rooms ::</label>
-            <input
-              type="number"
-              value={inputs.rooms}
-              name="rooms"
-              min={1}
-              onChange={handleChanges}
-            />
+            <label htmlFor="rooms">Rooms::</label>
+            <select name="rooms" id="rooms">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
           </div>
           <div className="searchInputs">
             <input
@@ -79,11 +97,14 @@ const HotelForm = () => {
               placeholder="enter city name"
             />
             <div className="guests">
-                <input type="date" name="calnder" value={inputs.checkIn} onChange={handleChanges} />
-                <input type="num" name="adults" value={inputs.guests} onChange={handleChanges} />
+              <FlightCalendar
+                isRangePicker={true}
+                onRangeSelect={handleRangeSelect}
+                placeholder="Check-in → Check-out"
+              />
+          <GuestsSelector value={guests} onChange={setGuests}/>
             </div>
           </div>
-        </div>
 
         <button type="submit">Search</button>
       </form>

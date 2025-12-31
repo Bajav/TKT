@@ -12,7 +12,7 @@ $black: #222;
   button {
     color: $inputBackGround;
     text-transform: lowercase;
-    font-family: $textFont, sans-serif;
+    font-family: $roboto sans-serif;
     background: $ticketColor;
     border-radius: 10px;
     border: none;
@@ -20,14 +20,25 @@ $black: #222;
     width: 100%;
   }
 }
+.flight-calendar__input-field 
+{
+    height: 50px;
+    border: 1px #222 solid;
+}
+.flight-calendar 
+{
+    margin-top: 0;
+}
 .form-header {
   h1 {
-    font-family: $textFont, sans-serif;
-    font-size: 30px;
+    font-family: $roboto, sans-serif;
+    font-size: 25px;
+    font-weight: 400;
     text-transform: capitalize;
     line-height: 35px;
     margin: 0;
     padding: 0;
+    color: $black;
   }
   span {
     color: $orange;
@@ -42,7 +53,7 @@ $black: #222;
   justify-content: space-between;
   border-radius: 15px;
   border: 1px solid #222;
-  width: 30%;
+  width: 34%;
   height: 30px;
   padding: 0px 2px;
   .toggle-container {
@@ -50,7 +61,7 @@ $black: #222;
     align-items: center;
   }
   label {
-    font-family: $textFont;
+    font-family: $roboto;
     font-size: 13px;
   }
   input {
@@ -68,3 +79,73 @@ $black: #222;
     padding: 3px 10px;
   }
 }
+.payload-header
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+    .room-input{
+        border: 1px solid #222;
+        border-radius: 15px;
+        padding: 2px 14px;
+        font-family: $roboto,sans-serif;
+        font-size: 14px;
+        height: 30px;
+        option{
+            color:$black;
+        }
+        select
+        {
+            color: $orange;
+            font-size: 11px;
+        }
+        label{
+             color: $orange;
+             font-weight: 500;
+             font-size: 11px;
+        }
+    }
+}
+.dropdown-header {
+    background-color: $inputBackGround;
+    padding: 3px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    // transition: all 0.2s ease;
+    span {
+      font-size: 15px;
+      font-weight: 200;
+      color: $visibleFontColor;
+      // opacity: 60%;
+      font-family: $textFont, sans-serif;
+    }
+  }
+
+  .dropdown-content {
+    animation: slideDown 0.3s ease-in-out;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border-radius: 10px;
+    z-index: 1;
+    top: 50px;
+    margin-top: 10px; /* to create some space below the button */
+  }
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

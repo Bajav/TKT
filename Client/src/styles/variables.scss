@@ -19,6 +19,12 @@
   font-weight: 100 900;
   font-style: normal;
 }
+@font-face {
+  font-family: "RobotoMono";
+  src: url("../fonts/RobotoMono-VariableFont_wght.ttf")  format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
 
 // $page_color:#F5F7F8;
 // $page_color:#323030;
@@ -45,3 +51,4 @@ $inputBackGround: #fefefe;
 $textFont: poppins;
 $cityFont: bebbasNeue;
 $roboto: RobotoFlex;
+$robotoMono: RobotoMono;
