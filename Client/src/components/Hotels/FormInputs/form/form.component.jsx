@@ -107,7 +107,7 @@ const HotelForm = () => {
           </div>
         </div>
 
-        <button type="submit">Search</button>
+        <button className="btn-sub" type="submit">Search</button>
       </form>
     </div>
   );

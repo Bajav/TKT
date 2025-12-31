@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import './paxselector.styles.scss';
 const GuestsSelector = ({ value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,24 +21,24 @@ const GuestsSelector = ({ value, onChange }) => {
   };
 
   const getSummary = () => {
-    const { adults, children, rooms } = value;
+    const { adults, children } = value;
     const guests = adults + children;
 
-    return `${rooms} room${rooms > 1 ? "s" : ""}, ${guests} guest${
+    return `${guests} guest${
       guests > 1 ? "s" : ""
     }`;
   };
 
   return (
     <div className="guests-selector">
-      <div className="dropdown-header" onClick={() => setIsOpen(!isOpen)}>
-        <span>Guests: {getSummary()}</span>
+      <div className="pax-header" onClick={() => setIsOpen(!isOpen)}>
+        <span>{getSummary()}</span>
         <span className="arrow">{isOpen ? "▲" : "▼"}</span>
       </div>
 
       {isOpen && (
-        <div className="dropdown-content">
-          {["adults", "children", "rooms"].map((type) => (
+        <div className="pax-content">
+          {["adults", "children"].map((type) => (
             <div className="guest-type" key={type}>
               <div className="guest-label">
                 {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -52,9 +52,9 @@ const GuestsSelector = ({ value, onChange }) => {
                   }}
                   disabled={
                     (type === "adults" && value.adults <= 1) ||
-                    (type === "rooms" && value.rooms <= 1) ||
                     (type === "children" && value.children <= 0)
                   }
+                  className="pax-btn"
                 >
                   -
                 </button>
@@ -66,6 +66,7 @@ const GuestsSelector = ({ value, onChange }) => {
                     e.preventDefault();
                     increment(type);
                   }}
+                  className="pax-btn"
                 >
                   +
                 </button>
