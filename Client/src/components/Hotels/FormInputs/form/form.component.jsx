@@ -29,7 +29,7 @@ const HotelForm = () => {
       checkIn: formatDateToYMD(start),
       checkOut: formatDateToYMD(end),
     });
-  };
+  }
 
   const handleChanges = (e) => {
     const { name, value } = e.target;
