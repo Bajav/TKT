@@ -66,10 +66,10 @@ const HotelForm = () => {
                 checked={inputs.accommodationType === "stays"}
                 onChange={handleChanges}
               />
-              Stays
+          <span>Stays</span>
             </label>
 
-            <label className="toggle-option">
+            <label  className="toggle-option">
               <input
                 type="radio"
                 name="accommodationType"
@@ -77,7 +77,8 @@ const HotelForm = () => {
                 checked={inputs.accommodationType === "hotels"}
                 onChange={handleChanges}
               />
-              Hotels
+              <span>Hotels</span>
+              
             </label>
           </div>
 
