@@ -1,19 +1,17 @@
 // styles
-import './hotelresults.styles.scss';
+import "./hotelresults.styles.scss";
 // components
 import hotelJson from "../../../data/hotelsJson.json";
 import HotelCard from "../../../components/Hotels/HotelCard/hotelcard.component";
-import hotelImg from "../../../assets/images/hotelImg.jpg"
+import hotelImg from "../../../assets/images/hotelImg.jpg";
 function HotelResults() {
   return (
     <main className="hotel-results">
-        <div className="results-header">
-            <button className='cancelBtn'>
-                cancel
-            </button>
-        </div>
-        <h1>hotel results</h1>
-      {hotelJson.hotels.hotels.map((hotel,index) => {
+      <div className="results-header">
+        <button className="cancelBtn">cancel</button>
+      </div>
+      <h1>hotel results</h1>
+      {hotelJson.hotels.hotels.map((hotel, index) => {
         const { name, destinationName, categoryName, minRate } = hotel;
         return (
           <HotelCard
