@@ -25,7 +25,7 @@ const HotelCard = ({
           <div className="hotel-name-country">
             <h1>{hotelName}</h1>
             <h4>
-              {city}, {country}
+             {country}
             </h4>
           </div>
 
