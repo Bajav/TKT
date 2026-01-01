@@ -1,9 +1,12 @@
+// styles
+import './hotelresults.styles.scss';
+// components
 import hotelJson from "../../../data/hotelsJson.json";
 import HotelCard from "../../../components/Hotels/HotelCard/hotelcard.component";
 import hotelImg from "../../../assets/images/hotelImg.jpg"
 function HotelResults() {
   return (
-    <main>
+    <main className="hotel-results">
         <h1>hotel results</h1>
       {hotelJson.hotels.hotels.map((hotel) => {
         const { name, destinationName, categoryName, minRate } = hotel;

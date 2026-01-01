@@ -1,1 +1,16 @@
 @import '../../../styles/variables.scss';
+*
+{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.hotel-results
+{
+    display: flex;
+    height: auto;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 10px;
+}
