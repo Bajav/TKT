@@ -37,16 +37,17 @@ const HotelCard = ({
         {/* <p>{description}</p> */}
 
         <div className="amenities-price">
-          <div className="amenities">
-            {amenities.slice(0, 8).map((item) => (
+          {/* <div className="amenities">
+           {amenities.slice(0, 8).map((item) => (
               <span key={item}>{item}</span>
-            ))}
-          </div>
+            ))} 
+          </div> */}
 
           <div className="price">
             <h2>€{mainPrice}</h2>
             <h5>€{pricePerNight} per night</h5>
           </div>
+          <button className="browseBtn">browse rooms</button>
         </div>
       </div>
     </div>

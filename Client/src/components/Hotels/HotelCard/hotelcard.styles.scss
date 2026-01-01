@@ -111,3 +111,14 @@ h6 {
     opacity: 80%;
   }
 }
+.browseBtn
+{
+    background: $actionOrange;
+    font-family: $roboto,sans-serif;
+    font-size:8px;
+    color: $inputBackGround;
+    font-weight: 500;
+    text-transform: capitalize;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
