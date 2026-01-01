@@ -12,6 +12,7 @@ const HotelCard = ({
   reviewCount,
   amenities = [],
   rateNum,
+  off
 }) => {
   return (
     <div className="hotel-card">
@@ -53,6 +54,7 @@ const HotelCard = ({
             <h2>${mainPrice}</h2>
             <h5>${pricePerNight} per night</h5>
           </div>
+          <h4 className="off">{off}%</h4>
           <button className="browseBtn">browse rooms</button>
         </div>
       </div>

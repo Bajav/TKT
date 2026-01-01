@@ -13,6 +13,7 @@ h6 {
   color: $blue;
 }
 .hotel-card {
+  background-color: #fff;
   display: flex;
   width: 95%;
   align-items: center;
@@ -67,17 +68,20 @@ h6 {
   }
   .amenities-price {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
     width: 100%;
     // background: red;
     h2 {
+      font-family: $robotoMono, sans-serif;
       color: $text_color;
       font-size: 11px;
       font-weight: 700;
     }
   }
 }
+.off
+{font-size: 8px;}
 .stars {
   align-items: center;
   justify-content: space-between;
@@ -112,6 +116,7 @@ h6 {
 }
 .price {
   h5 {
+    font-family: $robotoMono, sans-serif;
     font-weight: 700;
     font-size: 8px;
     opacity: 80%;
