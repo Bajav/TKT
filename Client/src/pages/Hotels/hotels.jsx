@@ -24,6 +24,7 @@ function Hotels() {
             pricePerNight={100}
             rating={"9.0"}
             reviewCount={25}
+            rateNum={3}
           />
         );
       })}

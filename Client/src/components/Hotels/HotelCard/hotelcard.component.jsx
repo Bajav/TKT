@@ -1,5 +1,5 @@
 import "./hotelcard.styles.scss";
-
+import star from "../../../assets/icons/star.png";
 const HotelCard = ({
   hotelName,
   city,
@@ -11,6 +11,7 @@ const HotelCard = ({
   rating,
   reviewCount,
   amenities = [],
+  rateNum,
 }) => {
   return (
     <div className="hotel-card">
@@ -22,13 +23,18 @@ const HotelCard = ({
         <div className="hotel-header">
           <div className="hotel-name-country">
             <h1>{hotelName}</h1>
-            <h4>{city}, {country}</h4>
+            <h4>
+              {city}, {country}
+            </h4>
           </div>
 
           <div className="reviews">
             <div className="stars">
               <h5>{rating}</h5>
               <div className="rate-stars" />
+              {Array.from({ length: Math.min(rateNum, 5) }).map((_, i) => (
+                <img key={i} src={star} alt="star" />
+              ))}
             </div>
             <h4>{reviewCount} reviews</h4>
           </div>
@@ -44,8 +50,8 @@ const HotelCard = ({
           </div> */}
 
           <div className="price">
-            <h2>€{mainPrice}</h2>
-            <h5>€{pricePerNight} per night</h5>
+            <h2>${mainPrice}</h2>
+            <h5>${pricePerNight} per night</h5>
           </div>
           <button className="browseBtn">browse rooms</button>
         </div>
