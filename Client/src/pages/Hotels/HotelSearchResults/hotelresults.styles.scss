@@ -1,16 +1,31 @@
-@import '../../../styles/variables.scss';
-*
-{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+@import "../../../styles/variables.scss";
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
-.hotel-results
-{
-    display: flex;
-    height: auto;
-    width: 100vw;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px 10px;
+.hotel-results {
+  display: flex;
+  height: auto;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 10px;
+}
+.results-header {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  padding: 10px 0px;
+  button {
+    padding: 5px 15px;
+    background: $actionsDar_color;
+    font-family: $roboto,sans-serif;
+    font-size: 10px;
+    text-transform: capitalize;
+    color: $inputBackGround;
+    font-weight: 500;
+    // letter-spacing: 0.5px;
+    border-radius: 15px;
+}
 }

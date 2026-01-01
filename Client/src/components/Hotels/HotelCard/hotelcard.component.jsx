@@ -1,5 +1,7 @@
 import "./hotelcard.styles.scss";
 import star from "../../../assets/icons/star.png";
+import { useNavigate } from "react-router-dom";
+
 const HotelCard = ({
   hotelName,
   city,
@@ -12,10 +14,12 @@ const HotelCard = ({
   reviewCount,
   amenities = [],
   rateNum,
-  off
+  off,
+  key
 }) => {
+    const navigate = useNavigate();
   return (
-    <div className="hotel-card">
+    <div className="hotel-card" key={key}>
       <div className="hotel-img">
         <img src={image} alt={hotelName} />
       </div>
@@ -24,8 +28,7 @@ const HotelCard = ({
         <div className="hotel-header">
           <div className="hotel-name-country">
             <h1>{hotelName}</h1>
-            <h4>
-             {country}
+            <h4>             {country}
             </h4>
           </div>
 
@@ -55,7 +58,7 @@ const HotelCard = ({
             <h5>${pricePerNight} per night</h5>
           </div>
           <h4 className="off">{off}%</h4>
-          <button className="browseBtn">browse rooms</button>
+          <button className="browseBtn" onClick={()=>navigate("/searchhotels/availablerooms")}>browse rooms</button>
         </div>
       </div>
     </div>

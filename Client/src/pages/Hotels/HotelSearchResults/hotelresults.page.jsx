@@ -7,13 +7,18 @@ import hotelImg from "../../../assets/images/hotelImg.jpg"
 function HotelResults() {
   return (
     <main className="hotel-results">
+        <div className="results-header">
+            <button className='cancelBtn'>
+                cancel
+            </button>
+        </div>
         <h1>hotel results</h1>
-      {hotelJson.hotels.hotels.map((hotel) => {
+      {hotelJson.hotels.hotels.map((hotel,index) => {
         const { name, destinationName, categoryName, minRate } = hotel;
         return (
           <HotelCard
             hotelName={name}
-            city={"Paris"}
+            // city={"Paris"}
             country={destinationName}
             description={
               "Ritz Paris is a renowned 5-star luxury hotel located in the heart of Paris,France. Famous for its classic architecture, refined service."
@@ -24,7 +29,7 @@ function HotelResults() {
             rating={"9.0"}
             reviewCount={25}
             rateNum={3}
-            // off={30}
+            key={index}
           />
         );
       })}
