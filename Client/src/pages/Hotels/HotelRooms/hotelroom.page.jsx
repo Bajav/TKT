@@ -1,0 +1,1 @@
+import './hotelroom.styles.scss';
