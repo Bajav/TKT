@@ -1,0 +1,1 @@
+import './hotelresults.styles.scss';
