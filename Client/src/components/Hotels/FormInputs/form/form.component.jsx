@@ -3,8 +3,10 @@ import { useState, useRef } from "react";
 import DestinationSearchInput from "../inputs/inputs.component";
 import { FlightCalendar } from "../../../flightSearch/Calender/newCalender";
 import GuestsSelector from "../../../PaxSelector/paxselector.component";
+import { useNavigate } from "react-router-dom";
 
 const HotelForm = () => {
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     accommodationType: "stays",
     destination: "",
@@ -47,6 +49,8 @@ const HotelForm = () => {
       guests,
       dates,
     };
+    navigate("/", { state: formData });
+    // navigate("/flights/results", { state: formData });
     console.log("Hotel search payload:", payload);
   };
 
@@ -56,7 +60,6 @@ const HotelForm = () => {
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, "0");
     const day = String(d.getDate()).padStart(2, "0");
-
     return `${year}-${month}-${day}`;
   };
 

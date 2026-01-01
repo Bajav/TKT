@@ -22,8 +22,6 @@ function Hotels() {
           <HotelForm />
         </div>
       )}
-
-      {/* Always render nested routes */}
       <Outlet />
     </Fragment>
   );
