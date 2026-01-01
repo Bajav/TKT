@@ -1,35 +1,32 @@
 import "./hotels.styles.scss";
 import HotelForm from "../../components/Hotels/FormInputs/form/form.component";
 import LocationHeader from "../../components/Header/header";
-import HotelCard from "../../components/Hotels/HotelCard/hotelcard.component";
-import hotelJson from "../../data/hotelsJson.json";
-import hotelImg from '../../assets/images/hotelImg.jpg'
+import { Outlet, useLocation } from "react-router-dom";
+import { Fragment } from "react";
+
 function Hotels() {
+  const location = useLocation();
+
+  const hideLayoutRoutes = [
+    "/searchhotels/results",
+    "/searchhotels/availablerooms",
+  ];
+
+  const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
+
   return (
-    <div className="hotel-home">
-      <LocationHeader />
-      <HotelForm />
-      {hotelJson.hotels.hotels.map((hotel) => {
-        const { name, destinationName,categoryName,minRate } = hotel;
-        return (
-          <HotelCard
-            hotelName={name}
-            city={"Paris"}
-            country={destinationName}
-            description={
-              "Ritz Paris is a renowned 5-star luxury hotel located in the heart of Paris,France. Famous for its classic architecture, refined service."
-            }
-            image={hotelImg}
-            mainPrice={minRate}
-            pricePerNight={100}
-            rating={"9.0"}
-            reviewCount={25}
-            rateNum={3}
-            off={30}
-          />
-        );
-      })}
-    </div>
+    <Fragment>
+      {!shouldHideLayout && (
+        <div className="hotel-home">
+          <LocationHeader />
+          <HotelForm />
+        </div>
+      )}
+
+      {/* Always render nested routes */}
+      <Outlet />
+    </Fragment>
   );
 }
+
 export default Hotels;

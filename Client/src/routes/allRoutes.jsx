@@ -14,7 +14,9 @@ import FlightResult from "../pages/flightResult/flightResults";
 import Passengers from "../pages/pasengerInputPage/passengers";
 import BookedFlights from "../pages/bookedFlights/flights.page";
 
-
+// hotelpages
+import HotelResults from "../pages/Hotels/HotelSearchResults/hotelresults.page";
+import HotelRoom from "../pages/Hotels/HotelRooms/hotelroom.page";
 function AllRoutes() {
   const location = useLocation();
 
@@ -22,7 +24,9 @@ function AllRoutes() {
     "/flights/results",
     "/flights/lastprice",
     "/flights/passengerdata",
-    "/myflights"
+    "/myflights",
+    "/searchhotels/results",
+    "/searchhotels/availablerooms",
   ];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>
@@ -46,6 +50,11 @@ function AllRoutes() {
           <Route path="results" element={<FlightResult />} />
           <Route path="lastprice" element={<FlightPricing />} />
           <Route path="passengerdata" element={<Passengers />} />
+        </Route>
+           <Route path="/searchhotels" element={<Hotels />} >
+          <Route path="results" element={<HotelResults />} />
+          <Route path="availablerooms" element={<HotelRoom />} />
+          {/* <Route path="passengerdata" element={<Passengers />} /> */}
         </Route>
       </Routes>
     </Fragment>
