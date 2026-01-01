@@ -24,7 +24,7 @@ function HotelResults() {
             rating={"9.0"}
             reviewCount={25}
             rateNum={3}
-            off={30}
+            // off={30}
           />
         );
       })}
