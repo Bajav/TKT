@@ -6,7 +6,7 @@ import hotelJson from "../../data/hotelsJson.json";
 import hotelImg from '../../assets/images/hotelImg.jpg'
 function Hotels() {
   return (
-    <div className="home">
+    <div className="hotel-home">
       <LocationHeader />
       <HotelForm />
       {hotelJson.hotels.hotels.map((hotel) => {
@@ -22,7 +22,7 @@ function Hotels() {
             image={hotelImg}
             mainPrice={minRate}
             pricePerNight={100}
-            rating={9.0}
+            rating={"9.0"}
             reviewCount={25}
           />
         );

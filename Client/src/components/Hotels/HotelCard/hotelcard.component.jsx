@@ -34,7 +34,7 @@ const HotelCard = ({
           </div>
         </div>
 
-        <p>{description}</p>
+        {/* <p>{description}</p> */}
 
         <div className="amenities-price">
           <div className="amenities">

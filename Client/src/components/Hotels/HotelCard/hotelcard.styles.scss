@@ -1,29 +1,45 @@
 @import "../../../styles/variables.scss";
 
+$blue: #2f7bc8;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0px;
+  margin: 0px;
+  font-family: $roboto, sans-serif;
+  color: $text_color;
+}
 .hotel-card {
   display: flex;
   width: 95%;
   align-items: center;
-  height: 120px;
+  height: auto;
+  max-height: 150px;
   border-radius: 5px;
   border: 1px solid #222;
   padding: 2px;
-  margin-bottom: 5px;
+  gap: 5px;
+  //   justify-content: space-between;
+  margin-top: 5px;
   .hotel-img {
-    width: 300px;
-    height: 115px;
-    img
-    {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 3px;
+    width: 35%;
+    height: 120px;
+    // min-height: 10px;
+    // background: red;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 3px;
     }
   }
   p {
     color: $text_color;
     font-family: $roboto, sans-serif;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 500;
     margin: 0;
     line-height: 12px;
@@ -31,26 +47,67 @@
   }
   .hotel-header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    margin-bottom: 10px;
     justify-content: space-between;
     .hotel-name-country {
       h1 {
-        font-family: $roboto, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 400;
         color: $text_color;
-        margin: 0;
-        padding: 0;
-        max-width: 140px;
+        width: auto;
+        max-width: 145px;
       }
       h4 {
-        font-family: $roboto, sans-serif;
-        font-size: 12px;
         font-weight: 400;
+        font-size: 10px;
         color: $text_color;
-        margin: 0;
-        padding: 0;
       }
     }
+  }
+  .amenities-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    // background: red;
+    h2 {
+      color: $text_color;
+      font-size: 11px;
+      font-weight: 700;
+    }
+  }
+}
+.stars {
+  h5 {
+    font-size: 8px;
+    width: fit-content;
+    padding: 5px 6px;
+    border-radius: 2px;
+    font-weight: 600;
+    color: $inputBackGround;
+    background: $blue;
+  }
+}
+.hotel-data {
+  display: flex;
+  width: 63%;
+  height: 115px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+}
+.reviews {
+  h4 {
+    font-weight: 700;
+    opacity: 70%;
+    font-size: 8px;
+  }
+}
+.price {
+  h5 {
+    font-weight: 700;
+    font-size: 8px;
+    opacity: 80%;
   }
 }
