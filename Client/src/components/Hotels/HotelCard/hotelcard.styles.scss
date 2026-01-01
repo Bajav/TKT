@@ -1,0 +1,56 @@
+@import "../../../styles/variables.scss";
+
+.hotel-card {
+  display: flex;
+  width: 95%;
+  align-items: center;
+  height: 120px;
+  border-radius: 5px;
+  border: 1px solid #222;
+  padding: 2px;
+  margin-bottom: 5px;
+  .hotel-img {
+    width: 300px;
+    height: 115px;
+    img
+    {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 3px;
+    }
+  }
+  p {
+    color: $text_color;
+    font-family: $roboto, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 12px;
+    padding: 0;
+  }
+  .hotel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .hotel-name-country {
+      h1 {
+        font-family: $roboto, sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        color: $text_color;
+        margin: 0;
+        padding: 0;
+        max-width: 140px;
+      }
+      h4 {
+        font-family: $roboto, sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        color: $text_color;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
