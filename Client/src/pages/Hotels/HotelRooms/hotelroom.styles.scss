@@ -13,14 +13,18 @@
     background-color: $visibleFontColor;
     background-blend-mode: overlay;
   }
-  .overlay {
-    position: absolute;
-    border-radius: 0px 0px 20px 20px;
-    inset: 0;
-    background-image:linear-gradient(to top, #222222e8, #22222278, #2222224d, #2222221f, #22222200);
-    height: 100%;
-    // adjust opacity
+  .overlay
+  {
+    display:none;
   }
+//   .overlay {
+//     position: absolute;
+//     border-radius: 0px 0px 20px 20px;
+//     inset: 0;
+//     // background-color:linear-gradient(to top, #222222e8, #22222278, #2222224d, #2222221f, #22222200);
+//     height: 100%;
+//     // adjust opacity
+//   }
 }
 .flexButtons{
     position: absolute;

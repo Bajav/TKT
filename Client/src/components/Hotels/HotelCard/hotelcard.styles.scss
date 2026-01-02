@@ -86,23 +86,7 @@ h6 {
 .off {
   font-size: 8px;
 }
-.stars {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  width: auto;
-  /* gap: 5px; */
-  min-width: 65px;
-  h5 {
-    font-size: 8px;
-    width: fit-content;
-    padding: 3px 4px;
-    border-radius: 2px;
-    font-weight: 500;
-    color: $inputBackGround;
-    background: $blue;
-  }
-}
+
 .hotel-data {
   display: flex;
   width: 63%;
@@ -110,13 +94,6 @@ h6 {
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
-}
-.reviews {
-  h4 {
-    font-weight: 500;
-    opacity: 70%;
-    font-size: 8px;
-  }
 }
 .price {
   h5 {

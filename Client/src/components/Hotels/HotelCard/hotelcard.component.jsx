@@ -1,6 +1,7 @@
 import "./hotelcard.styles.scss";
 import star from "../../../assets/icons/star.png";
 import { useNavigate } from "react-router-dom";
+import Rates from "../../../pages/Hotels/Rates/rates.component";
 
 const HotelCard = ({
   hotelName,
@@ -15,9 +16,9 @@ const HotelCard = ({
   amenities = [],
   rateNum,
   off,
-  key
+  key,
 }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className="hotel-card" key={key}>
       <div className="hotel-img">
@@ -28,20 +29,9 @@ const HotelCard = ({
         <div className="hotel-header">
           <div className="hotel-name-country">
             <h1>{hotelName}</h1>
-            <h4>             {country}
-            </h4>
+            <h4> {country}</h4>
           </div>
-
-          <div className="reviews">
-            <div className="stars">
-              <h5>{rating}</h5>
-              <div className="rate-stars" />
-              {Array.from({ length: Math.min(rateNum, 5) }).map((_, i) => (
-                <img key={i} src={star} alt="star" />
-              ))}
-            </div>
-            <h4>{reviewCount} reviews</h4>
-          </div>
+          <Rates rateNum={rateNum} reviewCount={reviewCount}  rating={rating}/>
         </div>
 
         {/* <p>{description}</p> */}
@@ -58,7 +48,12 @@ const HotelCard = ({
             <h5>${pricePerNight} per night</h5>
           </div>
           <h4 className="off">{off}%</h4>
-          <button className="browseBtn" onClick={()=>navigate("/searchhotels/availablerooms")}>browse rooms</button>
+          <button
+            className="browseBtn"
+            onClick={() => navigate("/searchhotels/availablerooms")}
+          >
+            browse rooms
+          </button>
         </div>
       </div>
     </div>
