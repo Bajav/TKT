@@ -6,6 +6,7 @@ import HotelCard from "../../../components/Hotels/HotelCard/hotelcard.component"
 import hotelImg from "../../../assets/images/hotelImg.jpg";
 import { SlidersHorizontal } from "lucide-react";
 
+
 function HotelResults() {
   return (
     <main className="hotel-results">
