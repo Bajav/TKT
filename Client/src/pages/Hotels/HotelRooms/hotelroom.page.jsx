@@ -4,6 +4,7 @@ import HotelCard from "../../../components/Hotels/HotelCard/hotelcard.component"
 import { useNavigate } from "react-router-dom";
 import BackBTN from "../../../components/features/BackButton/BackBTN";
 import hotelImgTwo from "../../../assets/images/hotelTwo.jpg";
+import Rates from "../Rates/rates.component";
 function HotelRoom() {
   const navigate = useNavigate();
   const backBtn = () => {
@@ -13,10 +14,13 @@ function HotelRoom() {
   };
   return (
     <section className="hotel-results">
-      <BackBTN onClick={backBtn} btnName="back" />
+      <div className="main-header">
+        <BackBTN onClick={backBtn} btnName="back" />
+        <Rates rateNum={3} reviewCount={30} rating={4} />
+      </div>
       <div className="rooms-header">
         <img src={hotelImgTwo} alt="" />
-         <div className="overlay" />
+        <div className="overlay" />
       </div>
     </section>
   );

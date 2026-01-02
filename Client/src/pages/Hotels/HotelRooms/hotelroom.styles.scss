@@ -13,20 +13,26 @@
     background-color: $visibleFontColor;
     background-blend-mode: overlay;
   }
-  .overlay
-  {
-    display:none;
+  .overlay {
+    display: none;
   }
-//   .overlay {
-//     position: absolute;
-//     border-radius: 0px 0px 20px 20px;
-//     inset: 0;
-//     // background-color:linear-gradient(to top, #222222e8, #22222278, #2222224d, #2222221f, #22222200);
-//     height: 100%;
-//     // adjust opacity
-//   }
+  //   .overlay {
+  //     position: absolute;
+  //     border-radius: 0px 0px 20px 20px;
+  //     inset: 0;
+  //     // background-color:linear-gradient(to top, #222222e8, #22222278, #2222224d, #2222221f, #22222200);
+  //     height: 100%;
+  //     // adjust opacity
+  //   }
 }
-.flexButtons{
-    position: absolute;
-    z-index: 4;
- }
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 4;
+  align-items: center;
+  width: 100%;
+  .flexButtons {
+    width: 10%;
+  }
+}
