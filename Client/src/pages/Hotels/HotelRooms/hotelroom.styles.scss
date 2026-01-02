@@ -2,8 +2,8 @@
 
 .rooms-header {
   width: 100vw;
-  position: absolute;
-  z-index: 0;
+//   position: absolute;
+//   z-index: 0;
   height: 30vh;
   img {
     border-radius: 0px 0px 20px 20px;
@@ -28,11 +28,24 @@
 .main-header {
   display: flex;
   justify-content: space-between;
-  position: relative;
+  position: absolute;
   z-index: 4;
   align-items: center;
   width: 100%;
   .flexButtons {
     width: 10%;
   }
+}
+.main-results
+{
+    width: 100%;
+    height: auto;
+    h4
+    {
+        text-transform: capitalize;
+        text-align: left;
+        font-family: $robotoMono,sans-serif;
+        color: $visibleFontColor;
+        margin-top: 30px;
+    }
 }

@@ -22,6 +22,9 @@ function HotelRoom() {
         <img src={hotelImgTwo} alt="" />
         <div className="overlay" />
       </div>
+      <div className="main-results">
+        <h4>available rooms</h4>
+      </div>
     </section>
   );
 }
