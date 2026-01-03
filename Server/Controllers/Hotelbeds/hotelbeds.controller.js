@@ -2,7 +2,8 @@ import {
   searchHotels,
   getHotelContents,
   getBoards,
-  getAccomodations
+  getAccomodations,
+  typeHandler
 } from "../../Services/Hotelbeds/hotelbeds.service.js";
 
 const hotelSearch = async (req, res) => {
@@ -103,4 +104,18 @@ const findBoards =async(req,res)=>
       data:err,
     })}
   }
-export { hotelSearch,hotelContents,findBoards,findAccomodation };
+
+    const getFacilities =async(req,res)=>
+  {
+    try{
+      const facilities = await typeHandler("types/facilities");
+      res.json({
+        success:true,
+        message:"facilities working",
+        data:facilities
+      })
+    }catch(err){res.json({success:false,message:"error getting facilities",
+      data:err,
+    })}
+  }
+export { hotelSearch,hotelContents,findBoards,findAccomodation ,getFacilities};
