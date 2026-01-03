@@ -1,0 +1,1719 @@
+{
+  "success": true,
+  "message": "rooms working",
+  "data": {
+    "from": 1,
+    "to": 100,
+    "total": 14773,
+    "auditData": {
+      "processTime": "83",
+      "timestamp": "2026-01-03 01:33:26.502",
+      "requestHost": "41.210.154.75",
+      "serverId": "hotel-content-api-69f775d8b9-cgqmb",
+      "environment": "[int, awseucentral1, k8s, secret, hotel-content-api-69f775d8b9-cgqmb]",
+      "release": ""
+    },
+    "rooms": [
+      {
+        "code": "APT.0E",
+        "type": "APT",
+        "characteristic": "0E",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT basement",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "basement"
+        }
+      },
+      {
+        "code": "APT.1B",
+        "type": "APT",
+        "characteristic": "1B",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT ONE BED",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "ONE BED"
+        }
+      },
+      {
+        "code": "APT.1B-1",
+        "type": "APT",
+        "characteristic": "1B-1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT ONE BED",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "ONE BED"
+        }
+      },
+      {
+        "code": "APT.1B-DX",
+        "type": "APT",
+        "characteristic": "1B-DX",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT DELUXE ONE BED",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "DELUXE ONE BED"
+        }
+      },
+      {
+        "code": "APT.1W-B1",
+        "type": "APT",
+        "characteristic": "1W-B1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT ONE BEDROOM ONE BATHROOM",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "ONE BEDROOM ONE BATHROOM"
+        }
+      },
+      {
+        "code": "APT.1W-B2",
+        "type": "APT",
+        "characteristic": "1W-B2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO BEDROOMS ONE BATHROOM",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO BEDROOMS ONE BATHROOM"
+        }
+      },
+      {
+        "code": "APT.1W-B3",
+        "type": "APT",
+        "characteristic": "1W-B3",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT THREE BEDROOMS ONE BATHROOM",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "THREE BEDROOMS ONE BATHROOM"
+        }
+      },
+      {
+        "code": "APT.1W-B4",
+        "type": "APT",
+        "characteristic": "1W-B4",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT FOUR BEDROOMS ONE BATHROOM",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "FOUR BEDROOMS ONE BATHROOM"
+        }
+      },
+      {
+        "code": "APT.2B",
+        "type": "APT",
+        "characteristic": "2B",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO BEDS"
+        }
+      },
+      {
+        "code": "APT.2B-1",
+        "type": "APT",
+        "characteristic": "2B-1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO BEDS"
+        }
+      },
+      {
+        "code": "APT.2B-2",
+        "type": "APT",
+        "characteristic": "2B-2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO BEDS"
+        }
+      },
+      {
+        "code": "APT.2B-CV",
+        "type": "APT",
+        "characteristic": "2B-CV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CITY VIEW TWO BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CITY VIEW TWO BEDS"
+        }
+      },
+      {
+        "code": "APT.2B-DX",
+        "type": "APT",
+        "characteristic": "2B-DX",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT DELUXE TWO BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "DELUXE TWO BEDS"
+        }
+      },
+      {
+        "code": "APT.2D",
+        "type": "APT",
+        "characteristic": "2D",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-1",
+        "type": "APT",
+        "characteristic": "2D-1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-2",
+        "type": "APT",
+        "characteristic": "2D-2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-3",
+        "type": "APT",
+        "characteristic": "2D-3",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-4",
+        "type": "APT",
+        "characteristic": "2D-4",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-5",
+        "type": "APT",
+        "characteristic": "2D-5",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-6",
+        "type": "APT",
+        "characteristic": "2D-6",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-AS",
+        "type": "APT",
+        "characteristic": "2D-AS",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-B1",
+        "type": "APT",
+        "characteristic": "2D-B1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS ONE BEDROOM ",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS ONE BEDROOM "
+        }
+      },
+      {
+        "code": "APT.2D-CV",
+        "type": "APT",
+        "characteristic": "2D-CV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CITY VIEW TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CITY VIEW TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-DX",
+        "type": "APT",
+        "characteristic": "2D-DX",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT DELUXE TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "DELUXE TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-EJ",
+        "type": "APT",
+        "characteristic": "2D-EJ",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT EXECUTIVE 2 DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "EXECUTIVE 2 DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-JK",
+        "type": "APT",
+        "characteristic": "2D-JK",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS SMOKING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS SMOKING"
+        }
+      },
+      {
+        "code": "APT.2D-NM",
+        "type": "APT",
+        "characteristic": "2D-NM",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS NON SMOKING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS NON SMOKING"
+        }
+      },
+      {
+        "code": "APT.2D-OF",
+        "type": "APT",
+        "characteristic": "2D-OF",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT OCEAN FRONT TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "OCEAN FRONT TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-OV",
+        "type": "APT",
+        "characteristic": "2D-OV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT OCEAN VIEW TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "OCEAN VIEW TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-PI",
+        "type": "APT",
+        "characteristic": "2D-PI",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS PREMIUM",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS PREMIUM"
+        }
+      },
+      {
+        "code": "APT.2D-PO",
+        "type": "APT",
+        "characteristic": "2D-PO",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT PARTIAL OCEAN VIEW TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "PARTIAL OCEAN VIEW TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-SU",
+        "type": "APT",
+        "characteristic": "2D-SU",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT SUPERIOR TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "SUPERIOR TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-VP",
+        "type": "APT",
+        "characteristic": "2D-VP",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT POOL VIEW TWO DOUBLE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "POOL VIEW TWO DOUBLE BEDS"
+        }
+      },
+      {
+        "code": "APT.2D-WV",
+        "type": "APT",
+        "characteristic": "2D-WV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO DOUBLE BEDS WITH VIEWS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO DOUBLE BEDS WITH VIEWS"
+        }
+      },
+      {
+        "code": "APT.2K",
+        "type": "APT",
+        "characteristic": "2K",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO KING BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO KING BEDS"
+        }
+      },
+      {
+        "code": "APT.2K-1",
+        "type": "APT",
+        "characteristic": "2K-1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO KING BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO KING BEDS"
+        }
+      },
+      {
+        "code": "APT.2K-2",
+        "type": "APT",
+        "characteristic": "2K-2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO KING BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO KING BEDS"
+        }
+      },
+      {
+        "code": "APT.2K-4",
+        "type": "APT",
+        "characteristic": "2K-4",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO KING BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO KING BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q",
+        "type": "APT",
+        "characteristic": "2Q",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-1",
+        "type": "APT",
+        "characteristic": "2Q-1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-2",
+        "type": "APT",
+        "characteristic": "2Q-2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-3",
+        "type": "APT",
+        "characteristic": "2Q-3",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-4",
+        "type": "APT",
+        "characteristic": "2Q-4",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-6",
+        "type": "APT",
+        "characteristic": "2Q-6",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-AS",
+        "type": "APT",
+        "characteristic": "2Q-AS",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-B1",
+        "type": "APT",
+        "characteristic": "2Q-B1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS ONE BEDROOM",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS ONE BEDROOM"
+        }
+      },
+      {
+        "code": "APT.2Q-CB",
+        "type": "APT",
+        "characteristic": "2Q-CB",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLUB TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLUB TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-CV",
+        "type": "APT",
+        "characteristic": "2Q-CV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CITY VIEW TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CITY VIEW TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-DX",
+        "type": "APT",
+        "characteristic": "2Q-DX",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT DELUXE TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "DELUXE TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-EJ",
+        "type": "APT",
+        "characteristic": "2Q-EJ",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT EXECUTIVE TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "EXECUTIVE TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-GV",
+        "type": "APT",
+        "characteristic": "2Q-GV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT GARDEN VIEW TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "GARDEN VIEW TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-JK",
+        "type": "APT",
+        "characteristic": "2Q-JK",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS SMOKING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS SMOKING"
+        }
+      },
+      {
+        "code": "APT.2Q-NM",
+        "type": "APT",
+        "characteristic": "2Q-NM",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS NON SMOKING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS NON SMOKING"
+        }
+      },
+      {
+        "code": "APT.2Q-OV",
+        "type": "APT",
+        "characteristic": "2Q-OV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT OCEAN VIEW TWO QUEEN BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "OCEAN VIEW TWO QUEEN BEDS"
+        }
+      },
+      {
+        "code": "APT.2Q-PE",
+        "type": "APT",
+        "characteristic": "2Q-PE",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS PREMIER",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS PREMIER"
+        }
+      },
+      {
+        "code": "APT.2Q-PI",
+        "type": "APT",
+        "characteristic": "2Q-PI",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS PREMIUM",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS PREMIUM"
+        }
+      },
+      {
+        "code": "APT.2Q-SU",
+        "type": "APT",
+        "characteristic": "2Q-SU",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS SUPERIOR",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS SUPERIOR"
+        }
+      },
+      {
+        "code": "APT.2Q-VP",
+        "type": "APT",
+        "characteristic": "2Q-VP",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO QUEEN BEDS POOL VIEW",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO QUEEN BEDS POOL VIEW"
+        }
+      },
+      {
+        "code": "APT.2W-B1",
+        "type": "APT",
+        "characteristic": "2W-B1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT ONE BEDROOM TWO BATHROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "ONE BEDROOM TWO BATHROOMS"
+        }
+      },
+      {
+        "code": "APT.2W-B2",
+        "type": "APT",
+        "characteristic": "2W-B2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO BEDROOMS TWO BATHROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO BEDROOMS TWO BATHROOMS"
+        }
+      },
+      {
+        "code": "APT.2W-B3",
+        "type": "APT",
+        "characteristic": "2W-B3",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT THREE BEDROOMS TWO BATHROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "THREE BEDROOMS TWO BATHROOMS"
+        }
+      },
+      {
+        "code": "APT.2W-B4",
+        "type": "APT",
+        "characteristic": "2W-B4",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT FOUR BEDROOMS TWO BATHROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "FOUR BEDROOMS TWO BATHROOMS"
+        }
+      },
+      {
+        "code": "APT.2W-B6",
+        "type": "APT",
+        "characteristic": "2W-B6",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT SIX BEDROOMS TWO BATHROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "SIX BEDROOMS TWO BATHROOMS"
+        }
+      },
+      {
+        "code": "APT.3B",
+        "type": "APT",
+        "characteristic": "3B",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT THREE BEDS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "THREE BEDS"
+        }
+      },
+      {
+        "code": "APT.3W-B2",
+        "type": "APT",
+        "characteristic": "3W-B2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO BEDROOMS THREE BATHROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO BEDROOMS THREE BATHROOMS"
+        }
+      },
+      {
+        "code": "APT.3W-B3",
+        "type": "APT",
+        "characteristic": "3W-B3",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT THREE BEDROOMS THREE BATHROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "THREE BEDROOMS THREE BATHROOMS"
+        }
+      },
+      {
+        "code": "APT.3W-B4",
+        "type": "APT",
+        "characteristic": "3W-B4",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT FOUR BEDROOMS THREE BATHROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "FOUR BEDROOMS THREE BATHROOMS"
+        }
+      },
+      {
+        "code": "APT.3W-B5",
+        "type": "APT",
+        "characteristic": "3W-B5",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT FIVE BEDROOMS THREE BATHROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "FIVE BEDROOMS THREE BATHROOMS"
+        }
+      },
+      {
+        "code": "APT.6S",
+        "type": "APT",
+        "characteristic": "6S",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT Presidential",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "Presidential"
+        }
+      },
+      {
+        "code": "APT.6S-1",
+        "type": "APT",
+        "characteristic": "6S-1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT Presidential",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "Presidential"
+        }
+      },
+      {
+        "code": "APT.6S-2",
+        "type": "APT",
+        "characteristic": "6S-2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT Presidential",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "Presidential"
+        }
+      },
+      {
+        "code": "APT.6S-3",
+        "type": "APT",
+        "characteristic": "6S-3",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT Presidential",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "Presidential"
+        }
+      },
+      {
+        "code": "APT.6S-4",
+        "type": "APT",
+        "characteristic": "6S-4",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT Presidential",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "Presidential"
+        }
+      },
+      {
+        "code": "APT.6S-WV",
+        "type": "APT",
+        "characteristic": "6S-WV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT Presidential WITH VIEWS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "Presidential WITH VIEWS"
+        }
+      },
+      {
+        "code": "APT.AC",
+        "type": "APT",
+        "characteristic": "AC",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT WITH AIR CONDITIONING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "WITH AIR CONDITIONING"
+        }
+      },
+      {
+        "code": "APT.AC-1",
+        "type": "APT",
+        "characteristic": "AC-1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT WITH AIR CONDITIONING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "WITH AIR CONDITIONING"
+        }
+      },
+      {
+        "code": "APT.AC-B1",
+        "type": "APT",
+        "characteristic": "AC-B1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT ONE BEDROOM WITH AIR CONDITIONING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "ONE BEDROOM WITH AIR CONDITIONING"
+        }
+      },
+      {
+        "code": "APT.AC-B2",
+        "type": "APT",
+        "characteristic": "AC-B2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT TWO BEDROOMS WITH AIR CONDITIONING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "TWO BEDROOMS WITH AIR CONDITIONING"
+        }
+      },
+      {
+        "code": "APT.AC-B3",
+        "type": "APT",
+        "characteristic": "AC-B3",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT THREE BEDROOMS WITH AIR CONDITIONING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "THREE BEDROOMS WITH AIR CONDITIONING"
+        }
+      },
+      {
+        "code": "APT.AC-C2",
+        "type": "APT",
+        "characteristic": "AC-C2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CAPACITY 2 WITH AIR CONDITIONING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CAPACITY 2 WITH AIR CONDITIONING"
+        }
+      },
+      {
+        "code": "APT.AC-DX",
+        "type": "APT",
+        "characteristic": "AC-DX",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT DELUXE WITH AIR CONDITIONING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "DELUXE WITH AIR CONDITIONING"
+        }
+      },
+      {
+        "code": "APT.AC-SU",
+        "type": "APT",
+        "characteristic": "AC-SU",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT SUPERIOR WITH AIR CONDITIONING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "SUPERIOR WITH AIR CONDITIONING"
+        }
+      },
+      {
+        "code": "APT.AC-VM",
+        "type": "APT",
+        "characteristic": "AC-VM",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT SEA VIEW WITH AIR CONDITIONING",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "SEA VIEW WITH AIR CONDITIONING"
+        }
+      },
+      {
+        "code": "APT.AS",
+        "type": "APT",
+        "characteristic": "AS",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC"
+        }
+      },
+      {
+        "code": "APT.AS-1",
+        "type": "APT",
+        "characteristic": "AS-1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC"
+        }
+      },
+      {
+        "code": "APT.AS-2",
+        "type": "APT",
+        "characteristic": "AS-2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC"
+        }
+      },
+      {
+        "code": "APT.AS-3",
+        "type": "APT",
+        "characteristic": "AS-3",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC"
+        }
+      },
+      {
+        "code": "APT.AS-4",
+        "type": "APT",
+        "characteristic": "AS-4",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC"
+        }
+      },
+      {
+        "code": "APT.AS-5",
+        "type": "APT",
+        "characteristic": "AS-5",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC"
+        }
+      },
+      {
+        "code": "APT.AS-6",
+        "type": "APT",
+        "characteristic": "AS-6",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC"
+        }
+      },
+      {
+        "code": "APT.AS-B1",
+        "type": "APT",
+        "characteristic": "AS-B1",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC ONE BEDROOM",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC ONE BEDROOM"
+        }
+      },
+      {
+        "code": "APT.AS-B2",
+        "type": "APT",
+        "characteristic": "AS-B2",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC TWO BEDROOMS",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC TWO BEDROOMS"
+        }
+      },
+      {
+        "code": "APT.AS-BL",
+        "type": "APT",
+        "characteristic": "AS-BL",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC WITH BALCONY",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC WITH BALCONY"
+        }
+      },
+      {
+        "code": "APT.AS-CV",
+        "type": "APT",
+        "characteristic": "AS-CV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC CITY VIEW",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC CITY VIEW"
+        }
+      },
+      {
+        "code": "APT.AS-DB",
+        "type": "APT",
+        "characteristic": "AS-DB",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC DOUBLE BED",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC DOUBLE BED"
+        }
+      },
+      {
+        "code": "APT.AS-DX",
+        "type": "APT",
+        "characteristic": "AS-DX",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC DELUXE",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC DELUXE"
+        }
+      },
+      {
+        "code": "APT.AS-GV",
+        "type": "APT",
+        "characteristic": "AS-GV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC GARDEN VIEW",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC GARDEN VIEW"
+        }
+      },
+      {
+        "code": "APT.AS-KG",
+        "type": "APT",
+        "characteristic": "AS-KG",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC KING BED",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC KING BED"
+        }
+      },
+      {
+        "code": "APT.AS-LV",
+        "type": "APT",
+        "characteristic": "AS-LV",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC LAND VIEW",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC LAND VIEW"
+        }
+      },
+      {
+        "code": "APT.AS-OF",
+        "type": "APT",
+        "characteristic": "AS-OF",
+        "minPax": 1,
+        "maxPax": 10,
+        "maxAdults": 10,
+        "maxChildren": 6,
+        "minAdults": 1,
+        "description": "APARTMENT CLASSIC OCEAN FRONT",
+        "typeDescription": {
+          "content": "APARTMENT"
+        },
+        "characteristicDescription": {
+          "content": "CLASSIC OCEAN FRONT"
+        }
+      }
+    ]
+  }
+}

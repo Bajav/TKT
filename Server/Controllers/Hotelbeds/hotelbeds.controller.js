@@ -3,7 +3,8 @@ import {
   getHotelContents,
   getBoards,
   getAccomodations,
-  typeHandler
+  typeHandler,
+  getHotelData,
 } from "../../Services/Hotelbeds/hotelbeds.service.js";
 
 const hotelSearch = async (req, res) => {
@@ -132,4 +133,18 @@ const findBoards =async(req,res)=>
       data:err,
     })}
   }
-export { hotelSearch,hotelContents,findBoards,findAccomodation ,getFacilities,getRooms};
+
+     const hotelData =async(req,res)=>
+  {
+    try{
+      const rooms = await getHotelData(6547);
+      res.json({
+        success:true,
+        message:"rooms working",
+        data:rooms
+      })
+    }catch(err){res.json({success:false,message:"error getting rooms",
+      data:err,
+    })}
+  }
+export { hotelSearch,hotelContents,findBoards,findAccomodation ,getFacilities,getRooms,hotelData};
