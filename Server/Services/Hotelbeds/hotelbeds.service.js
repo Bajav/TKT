@@ -36,3 +36,21 @@ export async function getHotelContents(hotelCodes) {
 
   return response.data;
 }
+
+export async function getBoards() {
+  const response = await axios.get(
+    `${BASE_URL}/hotel-content-api/1.0/types/boards`,
+    {
+      params: {
+        language: "ENG",
+      },
+      headers: {
+        "Api-key": API_KEY,
+        "X-Signature": getSignature(),
+        Accept: "application/json",
+      },
+    }
+  );
+
+  return response.data;
+}

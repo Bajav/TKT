@@ -1,6 +1,7 @@
 import {
   searchHotels,
   getHotelContents,
+  getBoards
 } from "../../Services/Hotelbeds/hotelbeds.service.js";
 
 const hotelSearch = async (req, res) => {
@@ -75,4 +76,17 @@ const hotelContents = async (req, res) => {
   }
 };
 
-export { hotelSearch,hotelContents };
+const findBoards =async(req,res)=>
+  {
+    try{
+      const boards = await getBoards();
+      res.json({
+        success:true,
+        message:"baords working",
+        data:boards
+      })
+    }catch(err){res.json({success:false,message:"error getting boards",
+      data:err,
+    })}
+  }
+export { hotelSearch,hotelContents,findBoards };

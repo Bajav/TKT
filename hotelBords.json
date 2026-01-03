@@ -1,0 +1,243 @@
+{
+  "success": true,
+  "message": "baords working",
+  "data": {
+    "from": 1,
+    "to": 100,
+    "total": 32,
+    "auditData": {
+      "processTime": "0",
+      "timestamp": "2026-01-03 00:35:23.033",
+      "requestHost": "41.210.154.75",
+      "serverId": "hotel-content-api-69f775d8b9-cgqmb",
+      "environment": "[int, awseucentral1, k8s, secret, hotel-content-api-69f775d8b9-cgqmb]",
+      "release": ""
+    },
+    "boards": [
+      {
+        "code": "AB",
+        "description": {
+          "content": "AMERICAN BREAKFAST"
+        },
+        "multiLingualCode": "AB"
+      },
+      {
+        "code": "AI",
+        "description": {
+          "content": "ALL INCLUSIVE"
+        },
+        "multiLingualCode": "AI"
+      },
+      {
+        "code": "AS",
+        "description": {
+          "content": "All Inclusive Premium"
+        },
+        "multiLingualCode": "AS"
+      },
+      {
+        "code": "B1",
+        "description": {
+          "content": "Breakfast for one guest"
+        },
+        "multiLingualCode": "B1"
+      },
+      {
+        "code": "B2",
+        "description": {
+          "content": "Breakfast for two guests"
+        },
+        "multiLingualCode": "B2"
+      },
+      {
+        "code": "BB",
+        "description": {
+          "content": "BED AND BREAKFAST"
+        },
+        "multiLingualCode": "BB"
+      },
+      {
+        "code": "CB",
+        "description": {
+          "content": "CONTINENTAL BREAKFAST"
+        },
+        "multiLingualCode": "CB"
+      },
+      {
+        "code": "CE",
+        "description": {
+          "content": "DINNER INCLUDED"
+        },
+        "multiLingualCode": "DI"
+      },
+      {
+        "code": "CO",
+        "description": {
+          "content": "LUNCH INCLUDED"
+        },
+        "multiLingualCode": "LU"
+      },
+      {
+        "code": "DB",
+        "description": {
+          "content": "BUFFET BREAKFAST"
+        },
+        "multiLingualCode": "BF"
+      },
+      {
+        "code": "DD",
+        "description": {
+          "content": "DISNEY DINING"
+        },
+        "multiLingualCode": "DD"
+      },
+      {
+        "code": "FB",
+        "description": {
+          "content": "FULL BOARD"
+        },
+        "multiLingualCode": "FB"
+      },
+      {
+        "code": "FE",
+        "description": {
+          "content": "DISNEY FULL BOARD EXTRA PLUS"
+        },
+        "multiLingualCode": "FE"
+      },
+      {
+        "code": "FL",
+        "description": {
+          "content": "DISNEY FULL BOARD PLUS"
+        },
+        "multiLingualCode": "FL"
+      },
+      {
+        "code": "FR",
+        "description": {
+          "content": "DISNEY FULL BOARD PREMIUM"
+        },
+        "multiLingualCode": "FR"
+      },
+      {
+        "code": "FS",
+        "description": {
+          "content": "DISNEY FULL BOARD STANDARD"
+        },
+        "multiLingualCode": "FS"
+      },
+      {
+        "code": "GB",
+        "description": {
+          "content": "ENGLISH BREAKFAST"
+        },
+        "multiLingualCode": "EB"
+      },
+      {
+        "code": "HB",
+        "description": {
+          "content": "HALF BOARD"
+        },
+        "multiLingualCode": "HB"
+      },
+      {
+        "code": "HL",
+        "description": {
+          "content": "DISNEY HALF BOARD PLUS"
+        },
+        "multiLingualCode": "HL"
+      },
+      {
+        "code": "HR",
+        "description": {
+          "content": "DISNEY HALF BOARD PREMIUM"
+        },
+        "multiLingualCode": "HR"
+      },
+      {
+        "code": "HS",
+        "description": {
+          "content": "DISNEY HALF BOARD STANDARD"
+        },
+        "multiLingualCode": "HS"
+      },
+      {
+        "code": "IB",
+        "description": {
+          "content": "IRISH BREAKFAST"
+        },
+        "multiLingualCode": "IB"
+      },
+      {
+        "code": "LB",
+        "description": {
+          "content": "LIGHT BREAKFAST"
+        },
+        "multiLingualCode": "LB"
+      },
+      {
+        "code": "MB",
+        "description": {
+          "content": "HALF BOARD WITH BEVERAGES INCLUDED"
+        },
+        "multiLingualCode": "HV"
+      },
+      {
+        "code": "PB",
+        "description": {
+          "content": "FULL BOARD BEVERAGES INCLUDED"
+        },
+        "multiLingualCode": "FV"
+      },
+      {
+        "code": "QB",
+        "description": {
+          "content": "DISNEY QUICK SERVICE BREAKFAST"
+        },
+        "multiLingualCode": "QB"
+      },
+      {
+        "code": "QM",
+        "description": {
+          "content": "DISNEY QUICK SERVICE MEAL"
+        },
+        "multiLingualCode": "QM"
+      },
+      {
+        "code": "QS",
+        "description": {
+          "content": "DISNEY QUICK SERVICE"
+        },
+        "multiLingualCode": "QS"
+      },
+      {
+        "code": "RO",
+        "description": {
+          "content": "ROOM ONLY"
+        },
+        "multiLingualCode": "RO"
+      },
+      {
+        "code": "SB",
+        "description": {
+          "content": "SCOTTISH BREAKFAST"
+        },
+        "multiLingualCode": "SB"
+      },
+      {
+        "code": "SC",
+        "description": {
+          "content": "SELF CATERING"
+        },
+        "multiLingualCode": "SC"
+      },
+      {
+        "code": "TL",
+        "description": {
+          "content": "ALL INCLUSIVE SOFT"
+        },
+        "multiLingualCode": "AA"
+      }
+    ]
+  }
+}
