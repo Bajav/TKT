@@ -74,7 +74,7 @@ export async function getAccomodations() {
 }
 export async function typeHandler(route) {
   const response = await axios.get(
-    `${BASE_URL}/hotel-content-api/1.0/${route}`,
+    `${BASE_URL}/hotel-content-api/1.0/types${route}`,
     {
       params: {
         language: "ENG",

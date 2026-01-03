@@ -108,7 +108,7 @@ const findBoards =async(req,res)=>
     const getFacilities =async(req,res)=>
   {
     try{
-      const facilities = await typeHandler("types/facilities");
+      const facilities = await typeHandler("/facilities");
       res.json({
         success:true,
         message:"facilities working",
@@ -118,4 +118,18 @@ const findBoards =async(req,res)=>
       data:err,
     })}
   }
-export { hotelSearch,hotelContents,findBoards,findAccomodation ,getFacilities};
+
+      const getRooms =async(req,res)=>
+  {
+    try{
+      const rooms = await typeHandler("/rooms");
+      res.json({
+        success:true,
+        message:"rooms working",
+        data:rooms
+      })
+    }catch(err){res.json({success:false,message:"error getting rooms",
+      data:err,
+    })}
+  }
+export { hotelSearch,hotelContents,findBoards,findAccomodation ,getFacilities,getRooms};
