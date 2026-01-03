@@ -1,4 +1,7 @@
-import { searchHotels } from "../../Services/Hotelbeds/hotelbeds.service.js";
+import {
+  searchHotels,
+  getHotelContents,
+} from "../../Services/Hotelbeds/hotelbeds.service.js";
 
 const hotelSearch = async (req, res) => {
   const bodyData = req.body;
@@ -20,9 +23,9 @@ const hotelSearch = async (req, res) => {
       destination: {
         code: "LON",
       },
-      filter:{
-        maxHotels:1
-      }
+      filter: {
+        maxHotels: 1,
+      },
     });
     // console.log("hotel response", response);
     res.json(response);
@@ -36,4 +39,40 @@ const hotelSearch = async (req, res) => {
   }
 };
 
-export { hotelSearch };
+const hotelContents = async (req, res) => {
+  const {hoteCodes} = req.body;
+  // console.log(hoteCodes);
+  // res.json({
+  //   success:true,
+  //   message:"its working",
+  //   data:hoteCodes
+  // });
+  try {
+    // hotelCodes = ["12345", "67890"]
+
+    if (!hoteCodes || hoteCodes.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: "HOTEL_CODES_REQUIRED",
+        message: "Hotel codes are required to fetch hotel contents",
+      });
+    }
+
+    const response = await getHotelContents(hoteCodes);
+
+    res.json({
+      success: true,
+      data: response,
+    });
+  } catch (err) {
+    console.error("HOTEL_CONTENT_ERROR:", err.message);
+
+    return res.status(500).json({
+      success: false,
+      error: "HOTEL_CONTENT_FAILED",
+      message: err.message,
+    });
+  }
+};
+
+export { hotelSearch,hotelContents };

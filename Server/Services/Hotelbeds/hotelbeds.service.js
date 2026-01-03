@@ -17,3 +17,22 @@ export async function searchHotels(payload) {
 
   return response.data;
 }
+export async function getHotelContents(hotelCodes) {
+  // hotelCodes = ["12345", "67890"]
+  const response = await axios.get(
+    `${BASE_URL}/hotel-content-api/1.0/hotels`,
+    {
+      params: {
+        hotelCodes: hotelCodes.join(","), 
+        language: "ENG",
+      },
+      headers: {
+        "Api-key": API_KEY,
+        "X-Signature": getSignature(),
+        Accept: "application/json",
+      },
+    }
+  );
+
+  return response.data;
+}
