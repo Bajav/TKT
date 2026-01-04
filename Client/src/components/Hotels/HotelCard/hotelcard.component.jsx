@@ -23,16 +23,18 @@ const HotelCard = ({
   off,
   key,
 }) => {
-  const { selectedHotel,setSelectedHotel } = useContext(HotelContext);
+  const { selectedHotel,setSelectedHotel,setHotelInfo } = useContext(HotelContext);
   const navigate = useNavigate();
   const selectButton =async (index) => {
     if (!hotelJson?.hotels?.hotels?.[index]) return;
-    const hotel = hotelJson.hotels.hotels[index];
-    setSelectedHotel(hotel);
-    console.log(selectedHotel);
+    const selectHotel = hotelJson.hotels.hotels[index];
+    setSelectedHotel(selectHotel);
+    // console.log(selectedHotel);
     try{
-      const response = await axios.post("http://localhost:3000/hotels/hoteldata",hotel);
-      console.log(response);
+      const {data} = await axios.post("http://localhost:3000/hotels/hoteldata",selectHotel);
+      const {hotel} = data.data;
+      setHotelInfo(hotel);
+      // console.log(hotel);
     }catch(err)
     {
       console.log(err);

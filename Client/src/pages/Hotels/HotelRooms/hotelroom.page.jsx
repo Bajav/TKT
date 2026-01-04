@@ -12,10 +12,10 @@ import { AirVent } from "lucide-react";
 
 
 function HotelRoom() {
-  const {selectedHotel} = useContext(HotelContext);
+  const {selectedHotel,hotelInfo} = useContext(HotelContext);
   const {categoryCode,code,currency,destinationName,name,maxRate,minRate,rooms} = selectedHotel;
   // console.log("this is the selected hotel",selectedHotel);
-  // console.log(name,rooms);
+  console.log(hotelInfo);
   const navigate = useNavigate();
   const backBtn = () => {
     navigate("/searchhotels/results");
@@ -61,7 +61,7 @@ function HotelRoom() {
           <h2>rooms available</h2>
         {rooms.map((room,index)=>{
           const {name,code,rates}= room;
-          console.log(rates)
+          // console.log(rates)
           return(  <div className="rooms">
             <div className="room" key={index}>
               <div className="images"></div>
