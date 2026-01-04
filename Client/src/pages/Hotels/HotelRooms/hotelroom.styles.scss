@@ -1,5 +1,5 @@
 @import "../../../styles/variables.scss";
-
+$bg-color:#DCF2FF;
 .rooms-header {
   width: 100vw;
 //   position: absolute;
@@ -47,4 +47,28 @@
         color: $visibleFontColor;
         margin-top: 30px;
     }
+}
+
+.facilites-container
+{
+  width: 100vw;
+}
+.facility
+{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: auto;
+  max-width: 180px;
+  justify-content: space-between;
+  background: $bg-color;
+  padding: 5px 15px;
+  border: 2px $blue solid;
+  border-radius: 5px;
+  h4
+  {
+    font-family: $roboto,sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+  }
 }

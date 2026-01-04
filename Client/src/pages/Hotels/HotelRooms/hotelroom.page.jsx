@@ -30,7 +30,7 @@ accommodation, fine dining, and premium service</p>
       <div className="facilites-container">
       <div className="facilites">
         <div className="facility">
-          <AirVent size={20} color="#222"/>
+          <AirVent size={20} color="#2f7bc8 "/>
           <h4>Air conditioning</h4>
         </div>
       </div>
