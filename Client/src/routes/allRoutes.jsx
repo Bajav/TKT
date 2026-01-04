@@ -41,7 +41,7 @@ function AllRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="places" element={<Places />} />
-        <Route path="hotels" element={<Hotels />} />
+        <Route path="searchhotels" element={<Hotels />} />
         <Route path="packages" element={<Packages />} />
         <Route path="myflights" element={<BookedFlights />} />
 

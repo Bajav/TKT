@@ -49,7 +49,7 @@ const HotelForm = () => {
       guests,
       dates,
     };
-    navigate("/", { state: formData });
+    navigate("/hotels/results");
     // navigate("/flights/results", { state: formData });
     console.log("Hotel search payload:", payload);
   };

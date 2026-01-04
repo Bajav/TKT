@@ -37,6 +37,7 @@ function HotelResults() {
             reviewCount={25}
             rateNum={3}
             key={index}
+            index={index}
           />
         );
       })}

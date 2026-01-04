@@ -15,10 +15,15 @@ const HotelCard = ({
   reviewCount,
   amenities = [],
   rateNum,
+  index,
   off,
   key,
 }) => {
   const navigate = useNavigate();
+  const selectButton = async(index)=>{
+    console.log(index);
+    // navigate("/searchhotels/availablerooms")
+  }
   return (
     <div className="hotel-card" key={key}>
       <div className="hotel-img">
@@ -50,7 +55,7 @@ const HotelCard = ({
           <h4 className="off">{off}%</h4>
           <button
             className="browseBtn"
-            onClick={() => navigate("/searchhotels/availablerooms")}
+            onClick={() => selectButton(index)}
           >
             browse rooms
           </button>
