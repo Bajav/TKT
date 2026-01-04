@@ -40,6 +40,32 @@ function HotelRoom() {
           </div>
         </div>
       </div>
+      <div className="hotel-reviews">
+        <h4>hotel reviews</h4>
+        <div className="reviews-container">
+          <div className="review-card">
+            <div className="review-header">
+              <div className="review-icon"></div>
+              <h3>hussein balijawa</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="rooms-container">
+        <h2>rooms available</h2>
+        <div className="rooms">
+          <div className="room">
+          <div className="images">
+
+          </div>
+          <div className="room-header">
+            <h1>Classic Room</h1>
+            <h3>Luxury Collection</h3>
+            <h4>No refund</h4>
+          </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
