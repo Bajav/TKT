@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import BackBTN from "../../../components/features/BackButton/BackBTN";
 import hotelImgTwo from "../../../assets/images/hotelTwo.jpg";
 import Rates from "../Rates/rates.component";
+import { AirVent } from "lucide-react";
 function HotelRoom() {
   const navigate = useNavigate();
   const backBtn = () => {
@@ -14,16 +15,25 @@ function HotelRoom() {
   };
   return (
     <section className="hotel-results">
-      <div className="main-header">
-        <BackBTN onClick={backBtn} btnName="back" />
-        <Rates rateNum={3} reviewCount={30} rating={4} />
-      </div>
+      <BackBTN onClick={backBtn} btnName="back" />
       <div className="rooms-header">
         <img src={hotelImgTwo} alt="" />
         <div className="overlay" />
       </div>
+      <Rates rateNum={3} reviewCount={30} rating={4} />
       <div className="main-results">
-        <h4>available rooms</h4>
+        <h4>The Beverly Hills Hotel</h4>
+        <p>The Beverly Hills Hotel is a legendary 5-star luxury hotel located in Beverly Hills,
+California, United States. Known as “The Pink Palace,” it offers world-class
+accommodation, fine dining, and premium service</p>
+      </div>
+      <div className="facilites-container">
+      <div className="facilites">
+        <div className="facility">
+          <AirVent size={20} color="#222"/>
+          <h4>Air conditioning</h4>
+        </div>
+      </div>
       </div>
     </section>
   );
