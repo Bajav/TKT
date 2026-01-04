@@ -10,7 +10,7 @@ body {
   width: 100vw;
   //   position: absolute;
   //   z-index: 0;
-  height: 30vh;
+  height: 40vh;
   img {
     border-radius: 0px 0px 20px 20px;
     width: 100%;
@@ -106,7 +106,8 @@ body {
     font-family: $roboto, sans-serif;
     font-size: 12px;
     font-weight: 600;
-    color: $text_color;
+    margin-top: 0px;
+    color: $blue;
   }
 }
 .hotel-reviews {
@@ -119,26 +120,65 @@ body {
     color: $text_color;
   }
 }
-.review-card
-{
+.review-card {
+  margin-top: 10px;
   background: $ticketColor;
-  height: 80px;
+  height: 100px;
   max-height: 200px;
   width: 250px;
   padding: 5px;
   border-radius: 5px;
-  .review-header
-  {
+
+  .review-header {
     display: flex;
     align-items: center;
     width: 100%;
     gap: 10px;
-    .review-icon
-    {
+    h3 {
+      font-family: $textFont, sans-serif;
+      text-transform: capitalize;
+      font-size: 13px;
+      color: $inputBackGround;
+      font-weight: 400;
+    }
+    .review-icon {
       height: 30px;
       width: 30px;
       border-radius: 20px;
       background: $blue;
+    }
+  }
+}
+.rooms-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  h2 {
+    font-family: $textFont, sans-serif;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: $text_color;
+  }
+  .rooms {
+    margin-top: 10px;
+  }
+  .room {
+    background: $inputBackGround;
+    padding: 3px;
+    border: 1px solid #222;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    // justify-content: space-between;
+    height: 160px;
+    width: 100%;
+    .images {
+      height: 100%;
+      background: $blue;
+      border-radius: 5px;
+      width: 40%;
     }
   }
 }
