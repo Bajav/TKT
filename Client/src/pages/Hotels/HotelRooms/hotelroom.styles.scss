@@ -43,6 +43,9 @@ body {
   }
 }
 .hotel-rooms {
+  height: 100vh;
+  max-height: 200vh;
+  overflow: scroll;
   // padding: 5px;
   .flexButtons {
     position: absolute;
@@ -103,5 +106,39 @@ body {
     font-family: $roboto, sans-serif;
     font-size: 12px;
     font-weight: 600;
+    color: $text_color;
+  }
+}
+.hotel-reviews {
+  margin-top: 10px;
+  h4 {
+    font-family: $textFont, sans-serif;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: $text_color;
+  }
+}
+.review-card
+{
+  background: $ticketColor;
+  height: 80px;
+  max-height: 200px;
+  width: 250px;
+  padding: 5px;
+  border-radius: 5px;
+  .review-header
+  {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    .review-icon
+    {
+      height: 30px;
+      width: 30px;
+      border-radius: 20px;
+      background: $blue;
+    }
   }
 }

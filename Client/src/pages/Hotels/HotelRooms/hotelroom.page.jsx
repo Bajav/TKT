@@ -30,8 +30,7 @@ function HotelRoom() {
           Beverly Hills, California, United States. Known as “The Pink Palace,”
           it offers world-class accommodation, fine dining, and premium service
         </p>
-      </div>
-      <div className="facilites-container">
+           <div className="facilites-container">
         <h4 className="facilities-header">facilites</h4>
         <div className="facilites">
           <div className="facility">
@@ -65,6 +64,7 @@ function HotelRoom() {
           </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
