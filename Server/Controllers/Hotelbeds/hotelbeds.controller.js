@@ -136,15 +136,18 @@ const findBoards =async(req,res)=>
 
      const hotelData =async(req,res)=>
   {
-    try{
-      const rooms = await getHotelData(6547);
-      res.json({
-        success:true,
-        message:"rooms working",
-        data:rooms
-      })
-    }catch(err){res.json({success:false,message:"error getting rooms",
-      data:err,
-    })}
+    const body = req.body;
+    console.log(body);
+    res.send("hotelData is working");
+    // try{
+    //   const rooms = await getHotelData(6547);
+    //   res.json({
+    //     success:true,
+    //     message:"rooms working",
+    //     data:rooms
+    //   })
+    // }catch(err){res.json({success:false,message:"error getting rooms",
+    //   data:err,
+    // })}
   }
 export { hotelSearch,hotelContents,findBoards,findAccomodation ,getFacilities,getRooms,hotelData};

@@ -1,5 +1,6 @@
 import "./hotelcard.styles.scss";
 import star from "../../../assets/icons/star.png";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { HotelContext } from "../../context/hotels.contenxt";
@@ -22,13 +23,20 @@ const HotelCard = ({
   off,
   key,
 }) => {
-  const { setSelectedHotel } = useContext(HotelContext);
+  const { selectedHotel,setSelectedHotel } = useContext(HotelContext);
   const navigate = useNavigate();
-  const selectButton = (index) => {
+  const selectButton =async (index) => {
     if (!hotelJson?.hotels?.hotels?.[index]) return;
-    const selectedHotel = hotelJson.hotels.hotels[index];
-    setSelectedHotel(selectedHotel);
+    const hotel = hotelJson.hotels.hotels[index];
+    setSelectedHotel(hotel);
     console.log(selectedHotel);
+    try{
+      const response = await axios.post("http://localhost:3000/hotels/hoteldata",hotel);
+      console.log(response);
+    }catch(err)
+    {
+      console.log(err);
+    }
     navigate("/searchhotels/availablerooms");
   };
   return (
