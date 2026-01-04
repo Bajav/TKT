@@ -17,5 +17,8 @@ router.post("/hotelscontents", hotelContents);
 router.get("/hotelscontents/boards", findBoards);
 router.get("/hotelscontents/accomodation", findAccomodation);
 router.get("/hotelscontents/facilities", getFacilities);
+// gets the details of the hotel. including [facilities and their descriptions,
+// contacts,boards,segments,rooms and their descriptions, terminals and their 
+// distances with description ]
 router.get("/hotelscontents/rooms", getRooms);
 export default router;
