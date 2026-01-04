@@ -38,8 +38,20 @@ body {
   align-items: center;
   padding: 5px;
   .reviews {
-    width: 60px;
-    max-width: 80px;
+    width: 80px;
+    max-width: 100px;
+    img {
+      width: 15px;
+    }
+    .stars h5 {
+      font-size: 12px;
+      padding: 3px 7px;
+    }
+    h4{
+      font-family: $textFont,sans-serif;
+    font-weight: 600;
+    opacity: 70%;
+    font-size: 13px;}
   }
 }
 .hotel-rooms {
@@ -172,13 +184,13 @@ body {
     align-items: flex-start;
     gap: 10px;
     // justify-content: space-between;
-    height: 160px;
+    height: 140px;
     width: 100%;
     .images {
       height: 100%;
       background: $blue;
       border-radius: 5px;
-      width: 40%;
+      width: 35%;
     }
   }
 }
