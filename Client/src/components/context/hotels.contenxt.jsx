@@ -1,6 +1,5 @@
 import { createContext, useReducer } from "react";
 
-/* ---------------- CONTEXT ---------------- */
 
 export const HotelContext = createContext({
   hotelJson: null,
@@ -13,7 +12,6 @@ export const HotelContext = createContext({
   setHotelError: () => {},
 });
 
-/* ---------------- ACTIONS ---------------- */
 
 export const HotelActions = {
   SET_HOTEL_JSON: "SET_HOTEL_JSON",
@@ -22,7 +20,6 @@ export const HotelActions = {
   SET_HOTEL_ERROR: "SET_HOTEL_ERROR",
 };
 
-/* ---------------- REDUCER ---------------- */
 
 const HotelReducer = (state, action) => {
   switch (action.type) {
@@ -43,7 +40,6 @@ const HotelReducer = (state, action) => {
   }
 };
 
-/* ---------------- INITIAL STATE ---------------- */
 
 const INITIAL_STATE = {
   hotelJson: null,
@@ -52,7 +48,6 @@ const INITIAL_STATE = {
   hotelError: null,
 };
 
-/* ---------------- PROVIDER ---------------- */
 
 export const HotelProvider = ({ children }) => {
   const [state, dispatch] = useReducer(HotelReducer, INITIAL_STATE);
