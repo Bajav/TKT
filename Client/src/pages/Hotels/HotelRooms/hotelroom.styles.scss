@@ -207,7 +207,8 @@ body {
 
 .room {
   height: 330px;
-  width: 100%;
+  width: 85%;
+  flex: 0 0 auto;
   padding: 5px;
   border: 1px solid $ticketColor;
   // background: red;
@@ -218,8 +219,7 @@ body {
     background: $blue;
     border-radius: 5px;
   }
-  .amenity
-  {
+  .amenity {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -233,8 +233,7 @@ body {
       margin-top: 0px;
     }
   }
-  .room-data
-  {
+  .room-data {
     h4 {
       font-family: $roboto, sans-serif;
       font-size: 14px;
@@ -254,10 +253,10 @@ body {
       padding: 5px 10px;
       background: $blue;
       border: none;
-        font-family: $roboto, sans-serif;
-        font-size: 12px;
-        color: $inputBackGround;
-        text-transform: capitalize;
+      font-family: $roboto, sans-serif;
+      font-size: 12px;
+      color: $inputBackGround;
+      text-transform: capitalize;
       border-radius: 5px;
       font-weight: 500;
       h4 {
@@ -269,4 +268,15 @@ body {
       }
     }
   }
+}
+.rooms-segment {
+  width: 100%;
+  // background: red;
+  display: flex;
+  max-width: 2000px;
+  gap: 10px;
+    overflow-x: auto;     
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 5px 0px;
 }

@@ -56,7 +56,7 @@ function HotelRoom() {
     web,
   } = hotelInfo;
   // console.log("this is the selected hotel",selectedHotel);
-  console.log(hotelInfo);
+  console.log(selectedHotel);
   const navigate = useNavigate();
   const backBtn = () => {
     navigate("/searchhotels/results");
@@ -131,22 +131,27 @@ function HotelRoom() {
                 <h5>{name}</h5>
                 <div className="border"></div>
                 <div className="rooms-segment">
-                  <div className="room">
-                  <div className="img-container"></div>
-                  <div className="room-data">
-                    <h4>room only</h4>
-                    <div className="amenities">
-                      <div className="amenity">
-                        <AirVent size={13} color="#2f7bc8" />
-                        <h5>air conditioning</h5>
+                  {rates.map((rate, idx) => {
+                    const { net, rateType, boardCode, boardName } = rate;
+                    return (
+                      <div className="room">
+                        <div className="img-container"></div>
+                        <div className="room-data">
+                          <h4>{boardName}</h4>
+                          <div className="amenities">
+                            <div className="amenity">
+                              <AirVent size={13} color="#2f7bc8" />
+                              <h5>air conditioning</h5>
+                            </div>
+                          </div>
+                          <div className="room-actives">
+                            <h6>free cancellation</h6>
+                            <button className="book-now">${net} book room</button>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="room-actives">
-                      <h6>free cancellation</h6>
-                      <button className="book-now">$300 book room</button>
-                    </div>
-                  </div>
-                </div>
+                    );
+                  })}
                 </div>
               </div>
             );
