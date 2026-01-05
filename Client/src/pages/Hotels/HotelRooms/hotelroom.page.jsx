@@ -61,46 +61,36 @@ function HotelRoom() {
   const backBtn = () => {
     navigate("/searchhotels/results");
   };
-  // group images
-  function getRoomTypeKey(code) {
-    return code.split("-")[0];
-  }
-  function buildRoomTypeImageSets(images = []) {
-    const map = new Map();
 
-    images.forEach((img) => {
-      if (img.imageTypeCode !== "HAB") return;
-      if (!img.roomCode) return;
+  // Filter only room images (type.code === "HAB") and group by roomCode
+  const roomImagesByCode = images
+    .filter((img) => img.type.code === "HAB" && img.roomCode) // only room photos with a roomCode
+    .reduce((acc, img) => {
+      const code = img.roomCode; // e.g., "DBL.RV-1", "SUI.ST-4", etc.
 
-      const key = getRoomTypeKey(img.roomCode);
-
-      if (!map.has(key)) {
-        map.set(key, new Map()); // path-based dedupe
+      if (!acc[code]) {
+        acc[code] = [];
       }
+      acc[code].push({
+        path: img.path,
+        // Build full URL if needed - HotelBeds usually serves via:
+        url: `https://photos.hotelbeds.com/giata/bigger/${img.path}`,
+        // or smaller: `https://photos.hotelbeds.com/giata/${img.path}`
+        order: img.order,
+        visualOrder: img.visualOrder,
+      });
 
-      map.get(key).set(img.path, img);
-    });
+      // console.log(acc);
+      return acc;
+    }, {});
 
-    // convert inner Maps to arrays
-    return new Map(
-      [...map.entries()].map(([key, imgMap]) => [
-        key,
-        [...imgMap.values()].sort((a, b) => a.order - b.order),
-      ])
-    );
-  }
-
-  const roomTypeImages = buildRoomTypeImageSets(images);
-
-  const roomsWithImages = rooms.map((room) => {
-    const key = getRoomTypeKey(room.code);
-
-    return {
-      ...room,
-      images: roomTypeImages.get(key) || [],
-    };
+  // Optional: sort images inside each roomCode by visualOrder or order
+  Object.keys(roomImagesByCode).forEach((code) => {
+    roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
+    // or use a.order - b.order if you prefer that
   });
-
+  const roomImages = roomImagesByCode;
+  console.log("room images", roomImages);
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
@@ -118,7 +108,7 @@ function HotelRoom() {
             return (
               <SwiperSlide key={index}>
                 <img
-                  src={`https://photos.hotelbeds.com/giata/${img.path}`}
+                  src={`https://photos.hotelbeds.com/giata/bigger/${img.path}`}
                   alt=""
                 />
               </SwiperSlide>
@@ -162,59 +152,75 @@ function HotelRoom() {
           </div>
         </div>
         <div className="rooms-container">
-          <h2>rooms available</h2>
-          {roomsWithImages.map((room, index) => {
+          <h2>Rooms available</h2>
+          {rooms.map((room, index) => {
             const { name, code, rates } = room;
-            // console.log(rates)
+            const roomSpecificImages = roomImages[code] || [];
+
             return (
-              <div className="rooms">
+              <div key={index} className="rooms">
                 <h5>{name}</h5>
                 <div className="border"></div>
+
+                {/* Room Image Swiper */}
                 <div className="img-container">
-                  {room.images.length > 0 ? (
-                    <Swiper slidesPerView={1} pagination>
-                      {room.images.slice(0, 5).map((img, i) => (
+                  {roomSpecificImages.length > 0 ? (
+                    <Swiper
+                      slidesPerView={1}
+                      pagination={{ clickable: true }}
+                      navigation={true}
+                      modules={[Pagination, Navigation]}
+                      className="room-swiper"
+                    >
+                      {roomSpecificImages.map((img, i) => (
                         <SwiperSlide key={i}>
                           <img
-                            src={`https://photos.hotelbeds.com/giata/${img.path}`}
-                            alt={room.name}
+                            src={img.url}
+                            alt={`${name} - view ${i + 1}`}
                             loading="lazy"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                            }}
                           />
                         </SwiperSlide>
                       ))}
                     </Swiper>
                   ) : (
-                    <img
-                      src={`https://photos.hotelbeds.com/giata/${images?.[0]?.path}`}
-                      alt={room.name}
-                    />
+                    <div className="no-images">
+                      <p>No specific images available for this room</p>
+                    </div>
                   )}
                 </div>
-                <h4 className="room-rates">available rates for the room</h4>
+
+                <h4 className="room-rates">Available rates for this room</h4>
                 <div className="rooms-segment">
                   {rates.map((rate, idx) => {
-                    const {
-                      net,
-                      rateType,
-                      boardCode,
-                      boardName,
-                      cancellationPolicies,
-                      paymentType,
-                    } = rate;
+                    const { net, boardName, cancellationPolicies } = rate;
+
+                    const hasFreeCancellation =
+                      cancellationPolicies &&
+                      cancellationPolicies.some(
+                        (policy) => new Date(policy.from) > new Date()
+                      );
+
                     return (
-                      <div className="room">
+                      <div key={idx} className="room">
                         <div className="room-data">
-                          <h4>{boardName}</h4>
+                          <h4>{boardName || "Room Only"}</h4>
                           <div className="amenities">
                             <div className="amenity">
                               <AirVent size={13} color="#2f7bc8" />
-                              <h5>air conditioning</h5>
+                              <h5>Air conditioning</h5>
                             </div>
                           </div>
                           <div className="room-actives">
-                            <h6>free cancellation</h6>
+                            {hasFreeCancellation && (
+                              <h6 className="free-cancel">Free cancellation</h6>
+                            )}
                             <button className="book-now">
-                              ${net} book room
+                              ${net} Book now
                             </button>
                           </div>
                         </div>
