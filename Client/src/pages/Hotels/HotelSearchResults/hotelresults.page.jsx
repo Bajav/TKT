@@ -21,7 +21,9 @@ function HotelResults() {
         </div>
       </div>
       {hotelJson.hotels.hotels.map((hotel, index) => {
-        const { name, destinationName, categoryName, minRate } = hotel;
+        // console.log(hotel);
+        const { name, destinationName, categoryName, minRate,categoryCode } = hotel;
+        // console.log(hotel);
         return (
           <HotelCard
             hotelName={name}
@@ -38,6 +40,7 @@ function HotelResults() {
             rateNum={3}
             key={index}
             index={index}
+            categoryCode={categoryCode}
           />
         );
       })}

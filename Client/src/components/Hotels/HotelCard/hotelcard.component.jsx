@@ -22,6 +22,7 @@ const HotelCard = ({
   index,
   off,
   key,
+  categoryCode,
 }) => {
   const { selectedHotel,setSelectedHotel,setHotelInfo } = useContext(HotelContext);
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const HotelCard = ({
             <h1>{hotelName}</h1>
             <h4> {country}</h4>
           </div>
-          <Rates rateNum={rateNum} reviewCount={reviewCount} rating={rating} />
+          <Rates categoryCode={categoryCode} reviewCount={30} rating={4.2} />
         </div>
 
         {/* <p>{description}</p> */}

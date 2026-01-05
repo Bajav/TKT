@@ -2,11 +2,8 @@ import "./hotelroom.styles.scss";
 // hooks
 import { useContext } from "react";
 import { HotelContext } from "../../../components/context/hotels.contenxt";
-import hotelJson from "../../../data/hotelsJson.json";
-import HotelCard from "../../../components/Hotels/HotelCard/hotelcard.component";
 import { useNavigate } from "react-router-dom";
 import BackBTN from "../../../components/features/BackButton/BackBTN";
-import hotelImgTwo from "../../../assets/images/hotelTwo.jpg";
 import Rates from "../Rates/rates.component";
 import { AirVent } from "lucide-react";
 // plugins
@@ -56,7 +53,7 @@ function HotelRoom() {
     web,
   } = hotelInfo;
   // console.log("this is the selected hotel",selectedHotel);
-  console.log(images);
+  console.log(selectedHotel);
   const navigate = useNavigate();
   const backBtn = () => {
     navigate("/searchhotels/results");
@@ -118,7 +115,7 @@ function HotelRoom() {
         <div className="overlay" />
       </div>
       <div className="flex-rates">
-        <Rates rateNum={3} reviewCount={30} rating={4} />
+        <Rates categoryCode={categoryCode} reviewCount={30} rating={4.2} />
       </div>
       <div className="main-results">
         <h4>{name}</h4>

@@ -5,7 +5,7 @@
   display: flex;
   width: auto;
   /* gap: 5px; */
-  min-width: 65px;
+  min-width: 120px;
   h5 {
     font-size: 8px;
     width: fit-content;
@@ -15,6 +15,12 @@
     color: $inputBackGround;
     background: $blue;
   }
+}
+.rate-stars
+{
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 .reviews {
   position: relative;
