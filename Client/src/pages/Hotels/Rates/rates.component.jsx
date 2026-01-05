@@ -1,5 +1,5 @@
 import "./rates.component.styles.scss";
-import star from '../../../assets/icons/star.png';
+import star from '../../../assets/icons/star.svg';
 
 function Rates({ rateNum, reviewCount,rating  }) {
   return (
