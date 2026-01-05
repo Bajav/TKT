@@ -137,13 +137,13 @@ function HotelRoom() {
                     <h4>room only</h4>
                     <div className="amenities">
                       <div className="amenity">
-                        <AirVent size={20} color="#2f7bc8" />
+                        <AirVent size={13} color="#2f7bc8" />
                         <h5>air conditioning</h5>
                       </div>
                     </div>
                     <div className="room-actives">
                       <h6>free cancellation</h6>
-                      <button>$300 book room</button>
+                      <button className="book-now">$300 book room</button>
                     </div>
                   </div>
                 </div>
