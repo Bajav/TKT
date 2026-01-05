@@ -39,8 +39,8 @@ body {
   align-items: center;
   padding: 5px;
   .reviews {
-    width: 80px;
-    max-width: 100px;
+    width: auto;
+    max-width: 300px;
     img {
       width: 15px;
     }
@@ -109,24 +109,31 @@ body {
     margin-top: 10px;
   }
 }
+.facilities{
+      display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: auto;
+    gap: 10px;
+    padding: 5px 0px;
+}
 .facility {
-  display: flex;
-  align-items: center;
+
+  flex: 0 0 auto;
   gap: 5px;
   width: auto;
-  max-width: 150px;
-  justify-content: space-evenly;
-  background: #dcf2ff;
+  max-width: 300px;
+  // background: ;
   padding: 5px 5px;
-  border: 2px $blue solid;
+  border: 1px $ticketColor solid;
   border-radius: 5px;
   margin-top: 5px;
   h4 {
-    font-family: $roboto, sans-serif;
+    font-family: $robotoMono, monospace;
     font-size: 12px;
     font-weight: 600;
     margin-top: 0px;
-    color: $blue;
+    color: $visibleFontColor;
   }
 }
 .hotel-reviews {

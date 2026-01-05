@@ -16,6 +16,20 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
+// icons
+import {
+  Wifi,
+  Dumbbell,
+  Car,
+  Coffee,
+  Tv,
+  Wind, // or AirVent as you're using
+  Waves,
+  Utensils,
+  Bubbles,
+  Cigarette, // for smoking areas
+  Baby,
+} from "lucide-react";
 
 function HotelRoom() {
   const imgEndPoint = `https://photos.hotelbeds.com/`;
@@ -58,17 +72,48 @@ function HotelRoom() {
     navigate("/searchhotels/results");
   };
 
+  // const facilityIconMap = {
+  //   wifi: { icon: Wifi, label: "Free WiFi" },
+  //   "wi-fi": { icon: Wifi, label: "Free WiFi" },
+  //   internet: { icon: Wifi, label: "Internet Access" },
+
+  //   gym: { icon: Dumbbell, label: "Gym / Fitness Center" },
+  //   fitness: { icon: Dumbbell, label: "Fitness Facilities" },
+
+  //   parking: { icon: Car, label: "Parking Available" },
+  //   "car park": { icon: Car, label: "Car Park" },
+
+  //   "air conditioning": { icon: Wind, label: "Air Conditioning" },
+  //   "air conditioned": { icon: Wind, label: "Air Conditioned" },
+
+  //   "swimming pool": { icon: Waves, label: "Swimming Pool" },
+  //   pool: { icon: Waves, label: "Pool" },
+
+  //   restaurant: { icon: Utensils, label: "Restaurant" },
+  //   bar: { icon: Coffee, label: "Bar / Lounge" },
+
+  //   spa: { icon: Bubbles, label: "Spa & Wellness" },
+  //   sauna: { icon: Bubbles, label: "Sauna" },
+
+  //   "non smoking": {
+  //     icon: Cigarette,
+  //     label: "Non-smoking Rooms",
+  //     color: "#ff4444",
+  //   },
+  //   "family rooms": { icon: Baby, label: "Family Rooms" },
+  //   tv: { icon: Tv, label: "Satellite TV" },
+  // };
   const roomImagesByCode = images
     .filter((img) => img.type.code === "HAB" && img.roomCode)
     .reduce((acc, img) => {
-      const code = img.roomCode; 
+      const code = img.roomCode;
 
       if (!acc[code]) {
         acc[code] = [];
       }
       acc[code].push({
         path: img.path,
-       
+
         url: `https://photos.hotelbeds.com/giata/bigger/${img.path}`,
         // or smaller: `https://photos.hotelbeds.com/giata/${img.path}`
         order: img.order,
@@ -79,11 +124,11 @@ function HotelRoom() {
       return acc;
     }, {});
 
-  // Optional: sort images inside each roomCode by visualOrder or order
-  Object.keys(roomImagesByCode).forEach((code) => {
-    roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
-    // or use a.order - b.order if you prefer that
-  });
+  //  sort images inside each roomCode by visualOrder or order
+  // Object.keys(roomImagesByCode).forEach((code) => {
+  //   roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
+  //   // or use a.order - b.order if you prefer that
+  // });
   const roomImages = roomImagesByCode;
   // console.log("room images", roomImages);
   return (
@@ -120,20 +165,60 @@ function HotelRoom() {
         <p>{description?.content}</p>
         <div className="facilites-container">
           <h4 className="facilities-header">facilites</h4>
-          <div className="facilites">
-            {facilities.map((facility, index) => {
-              const { description, number } = facility;
-              return (
-                <li key={index}>
-                  {description.content} {number ? number : ""}
-                </li>
-              );
-            })}
-            <div className="facility">
-              <AirVent size={20} color="#2f7bc8" />
-              <h4>Air conditioning</h4>
-            </div>
+          <div className="facilities">
+            {facilities?.slice(0).map((facility, index) => (
+              <div key={index} className="facility plain">
+                <span className="dot" />
+                <h4>{facility.description.content}</h4>
+              </div>
+            ))}
           </div>
+          {/* <div className="facilites"> */}
+            {/* Highlighted / important facilities with icons */}
+            {/* {facilities.slice(0, 12).map((facility, index) => {
+              // limit to avoid clutter
+              const desc = facility.description.content.toLowerCase();
+              const matched = Object.entries(facilityIconMap).find(([key]) =>
+                desc.includes(key)
+              );
+              if (matched) {
+                const [, { icon: Icon, label, color }] = matched;
+                return (
+                  <div key={index} className="facility">
+                    <Icon size={20} color={color || "#2f7bc8"} />
+                    <h4>{label}</h4>
+                  </div>
+                );
+              }
+              return null;
+            })} */}
+
+
+            {/* {facilities.slice(0, 12).map((facility, index) => {
+              const desc = facility.description.content.toLowerCase();
+              const isMapped = Object.keys(facilityIconMap).some((key) =>
+                desc.includes(key)
+              );
+
+              if (!isMapped) {
+                return (
+                  <div key={index} className="facility plain">
+                    <span className="dot" />
+                    <h4>{facility.description.content}</h4>
+                  </div>
+                );
+              }
+              return null;
+            })} */}
+          {/* </div> */}
+          {/* <div className="facilities">
+            {facilities?.slice(0,1).map((facility, index) => (
+              <div key={index} className="facility plain">
+                <span className="dot" />
+                <h4>{facility.description.content}</h4>
+              </div>
+            ))}
+          </div> */}
         </div>
         <div className="hotel-reviews">
           <h4>hotel reviews</h4>
