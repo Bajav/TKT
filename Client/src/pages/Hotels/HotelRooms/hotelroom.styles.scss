@@ -89,7 +89,13 @@ body {
     font-size: 17px;
   }
 }
-
+.swiper-slide
+{
+  height:40vh;
+  img{
+    height: 100%;
+  }
+}
 .facilites-container {
   width: 100vw;
   padding: 0px 5px;

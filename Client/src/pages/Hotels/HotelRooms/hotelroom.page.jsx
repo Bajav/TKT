@@ -9,6 +9,16 @@ import BackBTN from "../../../components/features/BackButton/BackBTN";
 import hotelImgTwo from "../../../assets/images/hotelTwo.jpg";
 import Rates from "../Rates/rates.component";
 import { AirVent } from "lucide-react";
+// plugins
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+// import required modules
+import { Pagination, Navigation } from "swiper/modules";
 
 function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
@@ -41,10 +51,10 @@ function HotelRoom() {
     postalCode,
     terminals,
     wildcards,
-    web
+    web,
   } = hotelInfo;
   // console.log("this is the selected hotel",selectedHotel);
-  console.log(hotelInfo);
+  console.log(rooms);
   const navigate = useNavigate();
   const backBtn = () => {
     navigate("/searchhotels/results");
@@ -53,7 +63,24 @@ function HotelRoom() {
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
       <div className="rooms-header">
-        <img src={hotelImgTwo} alt="" />
+        <Swiper
+          pagination={{
+            type: "fraction",
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <img src={hotelImgTwo} alt="" />
+          </SwiperSlide>
+             <SwiperSlide>
+            <img src={hotelImgTwo} alt="" />
+          </SwiperSlide>
+             <SwiperSlide>
+            <img src={hotelImgTwo} alt="" />
+          </SwiperSlide>
+        </Swiper>
         <div className="overlay" />
       </div>
       <div className="flex-rates">
@@ -65,6 +92,14 @@ function HotelRoom() {
         <div className="facilites-container">
           <h4 className="facilities-header">facilites</h4>
           <div className="facilites">
+            {facilities.map((facility, index) => {
+              const { description, number } = facility;
+              return (
+                <li key={index}>
+                  {description.content} {number ? number : ""}
+                </li>
+              );
+            })}
             <div className="facility">
               <AirVent size={20} color="#2f7bc8" />
               <h4>Air conditioning</h4>
@@ -90,7 +125,7 @@ function HotelRoom() {
             return (
               <div className="rooms">
                 <div className="room" key={index}>
-                  <div className="images"></div>
+                  <div className="images">{/* <img src={} alt="" /> */}</div>
                   <div className="data-side">
                     <div className="room-header">
                       <h1>{name}</h1>

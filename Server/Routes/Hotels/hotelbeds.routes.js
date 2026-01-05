@@ -13,6 +13,9 @@ const router = Router();
 router.post("/hotels", hotelSearch);
 router.get("/hotels", hotelSearch);
 // isclean
+// gets the details of the hotel. including [facilities and their descriptions,
+// contacts,boards,segments,rooms and their descriptions, terminals and their 
+// distances with description ]s
 router.post("/hotels/hoteldata", hotelData);
 // router.get("/hotels/hoteldata", hotelData); 
 // isclean
