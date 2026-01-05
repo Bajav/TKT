@@ -21,7 +21,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 
 function HotelRoom() {
-  const imgEndPoint = `https://photos.hotelbeds.com/`
+  const imgEndPoint = `https://photos.hotelbeds.com/`;
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
   const {
     categoryCode,
@@ -73,13 +73,17 @@ function HotelRoom() {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {images.map((img,index)=>{
+          {images.map((img, index) => {
             // console.log(img.path);
-          return(<SwiperSlide key={index}>
-            <img src={`https://photos.hotelbeds.com/giata/${img.path}`} alt="" />
-          </SwiperSlide>)
+            return (
+              <SwiperSlide key={index}>
+                <img
+                  src={`https://photos.hotelbeds.com/giata/${img.path}`}
+                  alt=""
+                />
+              </SwiperSlide>
+            );
           })}
-      
         </Swiper>
         <div className="overlay" />
       </div>
@@ -124,18 +128,25 @@ function HotelRoom() {
             // console.log(rates)
             return (
               <div className="rooms">
-                <div className="room" key={index}>
-                  <div className="images">{/* <img src={} alt="" /> */}</div>
-                  <div className="data-side">
-                    <div className="room-header">
-                      <h1>{name}</h1>
-                      <h3>Luxury Collection</h3>
-                      <h4>No refund</h4>
+                <h5>{name}</h5>
+                <div className="border"></div>
+                <div className="rooms-segment">
+                  <div className="room">
+                  <div className="img-container"></div>
+                  <div className="room-data">
+                    <h4>room only</h4>
+                    <div className="amenities">
+                      <div className="amenity">
+                        <AirVent size={20} color="#2f7bc8" />
+                        <h5>air conditioning</h5>
+                      </div>
                     </div>
-                    <div className="other-info">
-                      <h4>$300</h4>
+                    <div className="room-actives">
+                      <h6>free cancellation</h6>
+                      <button>$300 book room</button>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             );

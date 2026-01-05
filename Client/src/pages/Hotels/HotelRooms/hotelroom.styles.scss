@@ -171,33 +171,36 @@ body {
 .rooms-container {
   margin-top: 10px;
   margin-bottom: 10px;
-
   h2 {
-    font-family: $roboto, sans-serif;
-    font-size: 15px;
+    font-size: 20px;
     text-transform: capitalize;
-    font-weight: 600;
+    font-family: $roboto, sans-serif;
     color: $text_color;
+    font-weight: 400;
   }
-  .rooms {
+}
+.rooms {
+  h5 {
+    color: $text_color;
+    font-weight: 600;
+    font-family: $roboto, sans-serif;
     margin-top: 10px;
   }
-  .room {
-    background: $inputBackGround;
-    padding: 3px;
-    border: 1px solid #222;
-    border-radius: 5px;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    // justify-content: space-between;
-    height: 140px;
-    width: 100%;
-    .images {
-      height: 100%;
-      background: $blue;
-      border-radius: 5px;
-      width: 35%;
+  .border {
+    position: relative;
+    text-align: center;
+    padding-top: 5px;
+    margin: 0px;
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 1px;
+      background-color: $ticketColor;
     }
   }
 }
