@@ -21,6 +21,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 
 function HotelRoom() {
+  const imgEndPoint = `https://photos.hotelbeds.com/`
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
   const {
     categoryCode,
@@ -48,13 +49,14 @@ function HotelRoom() {
     images,
     interestPoints,
     phones,
+    giataCode,
     postalCode,
     terminals,
     wildcards,
     web,
   } = hotelInfo;
   // console.log("this is the selected hotel",selectedHotel);
-  console.log(rooms);
+  console.log(hotelInfo);
   const navigate = useNavigate();
   const backBtn = () => {
     navigate("/searchhotels/results");
@@ -71,15 +73,13 @@ function HotelRoom() {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          <SwiperSlide>
-            <img src={hotelImgTwo} alt="" />
-          </SwiperSlide>
-             <SwiperSlide>
-            <img src={hotelImgTwo} alt="" />
-          </SwiperSlide>
-             <SwiperSlide>
-            <img src={hotelImgTwo} alt="" />
-          </SwiperSlide>
+          {images.map((img,index)=>{
+            // console.log(img.path);
+          return(<SwiperSlide key={index}>
+            <img src={`https://photos.hotelbeds.com/giata/${img.path}`} alt="" />
+          </SwiperSlide>)
+          })}
+      
         </Swiper>
         <div className="overlay" />
       </div>
