@@ -10,10 +10,39 @@ import hotelImgTwo from "../../../assets/images/hotelTwo.jpg";
 import Rates from "../Rates/rates.component";
 import { AirVent } from "lucide-react";
 
-
 function HotelRoom() {
-  const {selectedHotel,hotelInfo} = useContext(HotelContext);
-  const {categoryCode,code,currency,destinationName,name,maxRate,minRate,rooms} = selectedHotel;
+  const { selectedHotel, hotelInfo } = useContext(HotelContext);
+  const {
+    categoryCode,
+    code,
+    currency,
+    destinationName,
+    name,
+    maxRate,
+    minRate,
+    rooms,
+  } = selectedHotel;
+  const {
+    S2C,
+    address,
+    boards,
+    category,
+    categoryGroup,
+    chain,
+    city,
+    coordinates,
+    country,
+    description,
+    email,
+    facilities,
+    images,
+    interestPoints,
+    phones,
+    postalCode,
+    terminals,
+    wildcards,
+    web
+  } = hotelInfo;
   // console.log("this is the selected hotel",selectedHotel);
   console.log(hotelInfo);
   const navigate = useNavigate();
@@ -30,13 +59,9 @@ function HotelRoom() {
       <div className="flex-rates">
         <Rates rateNum={3} reviewCount={30} rating={4} />
       </div>
-       <div className="main-results">
+      <div className="main-results">
         <h4>{name}</h4>
-        <p>
-          The Beverly Hills Hotel is a legendary 5-star luxury hotel located in
-          Beverly Hills, California, United States. Known as “The Pink Palace,”
-          it offers world-class accommodation, fine dining, and premium service
-        </p>
+        <p>{description?.content}</p>
         <div className="facilites-container">
           <h4 className="facilities-header">facilites</h4>
           <div className="facilites">
@@ -59,25 +84,27 @@ function HotelRoom() {
         </div>
         <div className="rooms-container">
           <h2>rooms available</h2>
-        {rooms.map((room,index)=>{
-          const {name,code,rates}= room;
-          // console.log(rates)
-          return(  <div className="rooms">
-            <div className="room" key={index}>
-              <div className="images"></div>
-              <div className="data-side">
-                <div className="room-header">
-                  <h1>{name}</h1>
-                  <h3>Luxury Collection</h3>
-                  <h4>No refund</h4>
-                </div>
-                <div className="other-info">
-                  <h4>$300</h4>
+          {rooms.map((room, index) => {
+            const { name, code, rates } = room;
+            // console.log(rates)
+            return (
+              <div className="rooms">
+                <div className="room" key={index}>
+                  <div className="images"></div>
+                  <div className="data-side">
+                    <div className="room-header">
+                      <h1>{name}</h1>
+                      <h3>Luxury Collection</h3>
+                      <h4>No refund</h4>
+                    </div>
+                    <div className="other-info">
+                      <h4>$300</h4>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>  
-          </div>)
-        })}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -85,7 +112,3 @@ function HotelRoom() {
 }
 
 export default HotelRoom;
-
-
-
-  

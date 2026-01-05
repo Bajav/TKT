@@ -1,187 +1,187 @@
 {
-  "success": true,
-  "message": "baords working",
-  "data": {
-    "from": 1,
-    "to": 100,
-    "total": 24,
-    "auditData": {
-      "processTime": "1",
-      "timestamp": "2026-01-03 00:45:23.087",
-      "requestHost": "41.210.154.75",
-      "serverId": "hotel-content-api-69f775d8b9-cgqmb",
-      "environment": "[int, awseucentral1, k8s, secret, hotel-content-api-69f775d8b9-cgqmb]",
-      "release": ""
-    },
-    "accommodations": [
-      {
-        "code": "D",
-        "typeMultiDescription": {
-          "content": "Lodge"
+    "success": true,
+    "message": "accomodations working",
+    "data": {
+        "from": 1,
+        "to": 100,
+        "total": 24,
+        "auditData": {
+            "processTime": "1",
+            "timestamp": "2026-01-05 00:09:04.204",
+            "requestHost": "41.210.154.75",
+            "serverId": "hotel-content-api-69f775d8b9-cgqmb",
+            "environment": "[int, awseucentral1, k8s, secret, hotel-content-api-69f775d8b9-cgqmb]",
+            "release": ""
         },
-        "typeDescription": "Lodge"
-      },
-      {
-        "code": "Q",
-        "typeMultiDescription": {
-          "content": "Boutique"
-        },
-        "typeDescription": "Boutique"
-      },
-      {
-        "code": "I",
-        "typeMultiDescription": {
-          "content": "Riad"
-        },
-        "typeDescription": "Riad"
-      },
-      {
-        "code": "A",
-        "typeMultiDescription": {
-          "content": "Apartment"
-        },
-        "typeDescription": "Apartment"
-      },
-      {
-        "code": "G",
-        "typeMultiDescription": {
-          "content": "Guest house"
-        },
-        "typeDescription": "Guest house"
-      },
-      {
-        "code": "Z",
-        "typeMultiDescription": {
-          "content": "Rural hotel"
-        },
-        "typeDescription": "Rural hotel"
-      },
-      {
-        "code": "M",
-        "typeMultiDescription": {
-          "content": "Motel"
-        },
-        "typeDescription": "Motel"
-      },
-      {
-        "code": "Y",
-        "typeMultiDescription": {
-          "content": "Rural house"
-        },
-        "typeDescription": "Rural house"
-      },
-      {
-        "code": "N",
-        "typeMultiDescription": {
-          "content": "Residence"
-        },
-        "typeDescription": "Residence"
-      },
-      {
-        "code": "K",
-        "typeMultiDescription": {
-          "content": "Bed and breakfast"
-        },
-        "typeDescription": "Bed and breakfast"
-      },
-      {
-        "code": "H",
-        "typeMultiDescription": {
-          "content": "Hotel"
-        },
-        "typeDescription": "Hotel"
-      },
-      {
-        "code": "L",
-        "typeMultiDescription": {
-          "content": "Boat"
-        },
-        "typeDescription": "Boat"
-      },
-      {
-        "code": "R",
-        "typeMultiDescription": {
-          "content": "Vacation resort"
-        },
-        "typeDescription": "Vacation resort"
-      },
-      {
-        "code": "C",
-        "typeMultiDescription": {
-          "content": "Vacation condo or apartment"
-        },
-        "typeDescription": "Vacation condo or apartment"
-      },
-      {
-        "code": "V",
-        "typeMultiDescription": {
-          "content": "Vacation home or villa"
-        },
-        "typeDescription": "Vacation home or villa"
-      },
-      {
-        "code": "U",
-        "typeMultiDescription": {
-          "content": "Cruise"
-        },
-        "typeDescription": "Cruise"
-      },
-      {
-        "code": "T",
-        "typeMultiDescription": {
-          "content": "Vacation Townhouse"
-        },
-        "typeDescription": "Vacation Townhouse"
-      },
-      {
-        "code": "S",
-        "typeMultiDescription": {
-          "content": "Hostel"
-        },
-        "typeDescription": "Hostel"
-      },
-      {
-        "code": "W",
-        "typeMultiDescription": {
-          "content": "Resort"
-        },
-        "typeDescription": "Resort"
-      },
-      {
-        "code": "X",
-        "typeMultiDescription": {
-          "content": "Historical hotel Luxurious"
-        },
-        "typeDescription": "Historical hotel Luxurious"
-      },
-      {
-        "code": "E",
-        "typeMultiDescription": {
-          "content": "Camping"
-        },
-        "typeDescription": "Camping"
-      },
-      {
-        "code": "P",
-        "typeMultiDescription": {
-          "content": "Aparthotel"
-        },
-        "typeDescription": "Aparthotel"
-      },
-      {
-        "code": "O",
-        "typeMultiDescription": {
-          "content": "Pousada"
-        },
-        "typeDescription": "Pousada"
-      },
-      {
-        "code": "B",
-        "typeMultiDescription": {
-          "content": "Botel"
-        },
-        "typeDescription": "Botel"
-      }
-    ]
-  }
+        "accommodations": [
+            {
+                "code": "D",
+                "typeMultiDescription": {
+                    "content": "Lodge"
+                },
+                "typeDescription": "Lodge"
+            },
+            {
+                "code": "Q",
+                "typeMultiDescription": {
+                    "content": "Boutique"
+                },
+                "typeDescription": "Boutique"
+            },
+            {
+                "code": "I",
+                "typeMultiDescription": {
+                    "content": "Riad"
+                },
+                "typeDescription": "Riad"
+            },
+            {
+                "code": "A",
+                "typeMultiDescription": {
+                    "content": "Apartment"
+                },
+                "typeDescription": "Apartment"
+            },
+            {
+                "code": "G",
+                "typeMultiDescription": {
+                    "content": "Guest house"
+                },
+                "typeDescription": "Guest house"
+            },
+            {
+                "code": "Z",
+                "typeMultiDescription": {
+                    "content": "Rural hotel"
+                },
+                "typeDescription": "Rural hotel"
+            },
+            {
+                "code": "M",
+                "typeMultiDescription": {
+                    "content": "Motel"
+                },
+                "typeDescription": "Motel"
+            },
+            {
+                "code": "Y",
+                "typeMultiDescription": {
+                    "content": "Rural house"
+                },
+                "typeDescription": "Rural house"
+            },
+            {
+                "code": "N",
+                "typeMultiDescription": {
+                    "content": "Residence"
+                },
+                "typeDescription": "Residence"
+            },
+            {
+                "code": "K",
+                "typeMultiDescription": {
+                    "content": "Bed and breakfast"
+                },
+                "typeDescription": "Bed and breakfast"
+            },
+            {
+                "code": "H",
+                "typeMultiDescription": {
+                    "content": "Hotel"
+                },
+                "typeDescription": "Hotel"
+            },
+            {
+                "code": "L",
+                "typeMultiDescription": {
+                    "content": "Boat"
+                },
+                "typeDescription": "Boat"
+            },
+            {
+                "code": "R",
+                "typeMultiDescription": {
+                    "content": "Vacation resort"
+                },
+                "typeDescription": "Vacation resort"
+            },
+            {
+                "code": "C",
+                "typeMultiDescription": {
+                    "content": "Vacation condo or apartment"
+                },
+                "typeDescription": "Vacation condo or apartment"
+            },
+            {
+                "code": "V",
+                "typeMultiDescription": {
+                    "content": "Vacation home or villa"
+                },
+                "typeDescription": "Vacation home or villa"
+            },
+            {
+                "code": "U",
+                "typeMultiDescription": {
+                    "content": "Cruise"
+                },
+                "typeDescription": "Cruise"
+            },
+            {
+                "code": "T",
+                "typeMultiDescription": {
+                    "content": "Vacation Townhouse"
+                },
+                "typeDescription": "Vacation Townhouse"
+            },
+            {
+                "code": "S",
+                "typeMultiDescription": {
+                    "content": "Hostel"
+                },
+                "typeDescription": "Hostel"
+            },
+            {
+                "code": "W",
+                "typeMultiDescription": {
+                    "content": "Resort"
+                },
+                "typeDescription": "Resort"
+            },
+            {
+                "code": "X",
+                "typeMultiDescription": {
+                    "content": "Historical hotel Luxurious"
+                },
+                "typeDescription": "Historical hotel Luxurious"
+            },
+            {
+                "code": "E",
+                "typeMultiDescription": {
+                    "content": "Camping"
+                },
+                "typeDescription": "Camping"
+            },
+            {
+                "code": "P",
+                "typeMultiDescription": {
+                    "content": "Aparthotel"
+                },
+                "typeDescription": "Aparthotel"
+            },
+            {
+                "code": "O",
+                "typeMultiDescription": {
+                    "content": "Pousada"
+                },
+                "typeDescription": "Pousada"
+            },
+            {
+                "code": "B",
+                "typeMultiDescription": {
+                    "content": "Botel"
+                },
+                "typeDescription": "Botel"
+            }
+        ]
+    }
 }

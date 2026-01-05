@@ -44,7 +44,7 @@ const hotelSearch = async (req, res) => {
 };
 
 const hotelContents = async (req, res) => {
-  const {hoteCodes} = req.body;
+  const { hoteCodes } = req.body;
   // console.log(hoteCodes);
   // res.json({
   //   success:true,
@@ -79,73 +79,85 @@ const hotelContents = async (req, res) => {
   }
 };
 
-const findBoards =async(req,res)=>
-  {
-    try{
-      const boards = await getBoards();
-      res.json({
-        success:true,
-        message:"baords working",
-        data:boards
-      })
-    }catch(err){res.json({success:false,message:"error getting boards",
-      data:err,
-    })}
+const findBoards = async (req, res) => {
+  try {
+    const boards = await getBoards();
+    res.json({
+      success: true,
+      message: "baords working",
+      data: boards,
+    });
+  } catch (err) {
+    res.json({ success: false, message: "error getting boards", data: err });
   }
-  const findAccomodation =async(req,res)=>
-  {
-    try{
-      const accomodations = await getAccomodations();
-      res.json({
-        success:true,
-        message:"baords working",
-        data:accomodations
-      })
-    }catch(err){res.json({success:false,message:"error getting boards",
-      data:err,
-    })}
+};
+const findAccomodation = async (req, res) => {
+  try {
+    const accomodations = await getAccomodations();
+    res.json({
+      success: true,
+      message: "accomodations working",
+      data: accomodations,
+    });
+  } catch (err) {
+    res.json({ success: false, message: "error getting accomodations", data: err });
   }
+};
 
-    const getFacilities =async(req,res)=>
-  {
-    try{
-      const facilities = await typeHandler("/facilities");
-      res.json({
-        success:true,
-        message:"facilities working",
-        data:facilities
-      })
-    }catch(err){res.json({success:false,message:"error getting facilities",
-      data:err,
-    })}
-  }
 
-      const getRooms =async(req,res)=>
-  {
-    try{
-      const rooms = await typeHandler("/rooms");
-      res.json({
-        success:true,
-        message:"rooms working",
-        data:rooms
-      })
-    }catch(err){res.json({success:false,message:"error getting rooms",
-      data:err,
-    })}
+const getFacilities = async (req, res) => {
+  try {
+    const facilities = await typeHandler("/facilities");
+    res.json({
+      success: true,
+      message: "facilities working",
+      data: facilities,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: "error getting facilities",
+      data: err,
+    });
   }
+};
 
-     const hotelData =async(req,res)=>
-  {
-    const {code} = req.body;
-    try{
-      const rooms = await getHotelData(code);
-      res.json({
-        success:true,
-        message:"hotel data is working",
-        data:rooms
-      })
-    }catch(err){res.json({success:false,message:"error getting hotel data",
-      data:err,
-    })}
+const getRooms = async (req, res) => {
+  try {
+    const rooms = await typeHandler("/rooms");
+    res.json({
+      success: true,
+      message: "rooms working",
+      data: rooms,
+    });
+  } catch (err) {
+    res.json({ success: false, message: "error getting rooms", data: err });
   }
-export { hotelSearch,hotelContents,findBoards,findAccomodation ,getFacilities,getRooms,hotelData};
+};
+
+const hotelData = async (req, res) => {
+  const { code } = req.body;
+  try {
+    const rooms = await getHotelData(code);
+    res.json({
+      success: true,
+      message: "hotel data is working",
+      data: rooms,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: "error getting hotel data",
+      data: err,
+    });
+  }
+};
+export {
+  hotelSearch,
+  hotelContents,
+  findBoards,
+  findAccomodation,
+  getFacilities,
+  getRooms,
+  hotelData,
+};
