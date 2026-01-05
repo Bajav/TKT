@@ -56,11 +56,51 @@ function HotelRoom() {
     web,
   } = hotelInfo;
   // console.log("this is the selected hotel",selectedHotel);
-  console.log(selectedHotel);
+  console.log(images);
   const navigate = useNavigate();
   const backBtn = () => {
     navigate("/searchhotels/results");
   };
+  // group images
+  function getRoomTypeKey(code) {
+    return code.split("-")[0];
+  }
+  function buildRoomTypeImageSets(images = []) {
+    const map = new Map();
+
+    images.forEach((img) => {
+      if (img.imageTypeCode !== "HAB") return;
+      if (!img.roomCode) return;
+
+      const key = getRoomTypeKey(img.roomCode);
+
+      if (!map.has(key)) {
+        map.set(key, new Map()); // path-based dedupe
+      }
+
+      map.get(key).set(img.path, img);
+    });
+
+    // convert inner Maps to arrays
+    return new Map(
+      [...map.entries()].map(([key, imgMap]) => [
+        key,
+        [...imgMap.values()].sort((a, b) => a.order - b.order),
+      ])
+    );
+  }
+
+  const roomTypeImages = buildRoomTypeImageSets(images);
+
+  const roomsWithImages = rooms.map((room) => {
+    const key = getRoomTypeKey(room.code);
+
+    return {
+      ...room,
+      images: roomTypeImages.get(key) || [],
+    };
+  });
+
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
@@ -123,19 +163,46 @@ function HotelRoom() {
         </div>
         <div className="rooms-container">
           <h2>rooms available</h2>
-          {rooms.map((room, index) => {
+          {roomsWithImages.map((room, index) => {
             const { name, code, rates } = room;
             // console.log(rates)
             return (
               <div className="rooms">
                 <h5>{name}</h5>
                 <div className="border"></div>
+                <div className="img-container">
+                  {room.images.length > 0 ? (
+                    <Swiper slidesPerView={1} pagination>
+                      {room.images.slice(0, 5).map((img, i) => (
+                        <SwiperSlide key={i}>
+                          <img
+                            src={`https://photos.hotelbeds.com/giata/${img.path}`}
+                            alt={room.name}
+                            loading="lazy"
+                          />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  ) : (
+                    <img
+                      src={`https://photos.hotelbeds.com/giata/${images?.[0]?.path}`}
+                      alt={room.name}
+                    />
+                  )}
+                </div>
+                <h4 className="room-rates">available rates for the room</h4>
                 <div className="rooms-segment">
                   {rates.map((rate, idx) => {
-                    const { net, rateType, boardCode, boardName } = rate;
+                    const {
+                      net,
+                      rateType,
+                      boardCode,
+                      boardName,
+                      cancellationPolicies,
+                      paymentType,
+                    } = rate;
                     return (
                       <div className="room">
-                        <div className="img-container"></div>
                         <div className="room-data">
                           <h4>{boardName}</h4>
                           <div className="amenities">
@@ -146,7 +213,9 @@ function HotelRoom() {
                           </div>
                           <div className="room-actives">
                             <h6>free cancellation</h6>
-                            <button className="book-now">${net} book room</button>
+                            <button className="book-now">
+                              ${net} book room
+                            </button>
                           </div>
                         </div>
                       </div>

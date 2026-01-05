@@ -206,44 +206,40 @@ body {
 }
 
 .room {
-  height: 330px;
+  height: 150px;
   width: 85%;
   flex: 0 0 auto;
+  background: #fff;
   padding: 5px;
   border: 1px solid $ticketColor;
   // background: red;
   border-radius: 10px;
-  .img-container {
-    height: 65%;
-    width: 100%;
-    background: $blue;
-    border-radius: 5px;
+}
+.amenity {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  // margin-top: 5px;
+  h5 {
+    font-family: $roboto, sans-serif;
+    font-size: 10px;
+    color: $blue;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-top: 0px;
   }
-  .amenity {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    // margin-top: 5px;
-    h5 {
-      font-family: $roboto, sans-serif;
-      font-size: 10px;
-      color: $blue;
-      font-weight: 600;
-      text-transform: capitalize;
-      margin-top: 0px;
-    }
+}
+.room-data {
+  h4 {
+    font-family: $roboto, sans-serif;
+    font-size: 14px;
+    color: $text_color;
+    font-weight: 400;
+    text-transform: capitalize;
+    margin-top: 3px;
+    margin-bottom: 2px;
   }
-  .room-data {
-    h4 {
-      font-family: $roboto, sans-serif;
-      font-size: 14px;
-      color: $text_color;
-      font-weight: 400;
-      text-transform: capitalize;
-      margin-top: 3px;
-      margin-bottom: 2px;
-    }
-  }
+}
   .room-actives {
     display: flex;
     align-items: center;
@@ -268,6 +264,18 @@ body {
       }
     }
   }
+.img-container {
+  height: 65%;
+  background: red;
+  width: 100%;
+  background: $blue;
+  border-radius: 5px;
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
 }
 .rooms-segment {
   width: 100%;
@@ -275,8 +283,19 @@ body {
   display: flex;
   max-width: 2000px;
   gap: 10px;
-    overflow-x: auto;     
+  overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
   padding: 5px 0px;
+}
+
+.room-rates
+{
+  font-size: 12px;
+  font-family: $roboto, sans-serif;
+  color: $text_color;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-top: 10px;
+  
 }
