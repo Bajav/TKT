@@ -13,7 +13,7 @@ body {
   padding: 0px 2px 0px 2px;
   height: 40vh;
   img {
-    border-radius: 0px 0px 20px 20px;
+    // border-radius: 0px 0px 20px 20px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -204,7 +204,15 @@ body {
     }
   }
 }
-
+.swiper-pagination {
+  background: $ticketColor;
+  width: fit-content;
+  color: #f5f5f5;
+  font-family: RobotoMono, monospace;
+  padding: 4px 15px;
+  border-radius: 15px;
+  font-size: 13px;
+}
 .room {
   height: 150px;
   width: 85%;
@@ -240,30 +248,30 @@ body {
     margin-bottom: 2px;
   }
 }
-  .room-actives {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 5px;
-    .book-now {
-      padding: 5px 10px;
-      background: $blue;
-      border: none;
+.room-actives {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+  .book-now {
+    padding: 5px 10px;
+    background: $blue;
+    border: none;
+    font-family: $roboto, sans-serif;
+    font-size: 12px;
+    color: $inputBackGround;
+    text-transform: capitalize;
+    border-radius: 5px;
+    font-weight: 500;
+    h4 {
       font-family: $roboto, sans-serif;
       font-size: 12px;
-      color: $inputBackGround;
-      text-transform: capitalize;
-      border-radius: 5px;
-      font-weight: 500;
-      h4 {
-        font-family: $roboto, sans-serif;
-        font-size: 12px;
-        color: white;
-        font-weight: 600;
-        margin: 0px;
-      }
+      color: white;
+      font-weight: 600;
+      margin: 0px;
     }
   }
+}
 .img-container {
   height: 65%;
   background: red;
@@ -275,6 +283,9 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 5px;
+  }
+  .swiper-pagination {
+    background: transparent;
   }
 }
 .rooms-segment {
@@ -289,13 +300,11 @@ body {
   padding: 5px 0px;
 }
 
-.room-rates
-{
+.room-rates {
   font-size: 12px;
   font-family: $roboto, sans-serif;
   color: $text_color;
   font-weight: 600;
   text-transform: capitalize;
   margin-top: 10px;
-  
 }

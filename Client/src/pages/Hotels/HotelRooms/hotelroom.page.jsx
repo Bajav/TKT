@@ -52,25 +52,23 @@ function HotelRoom() {
     wildcards,
     web,
   } = hotelInfo;
-  // console.log("this is the selected hotel",selectedHotel);
-  console.log(selectedHotel);
+  console.log(facilities);
   const navigate = useNavigate();
   const backBtn = () => {
     navigate("/searchhotels/results");
   };
 
-  // Filter only room images (type.code === "HAB") and group by roomCode
   const roomImagesByCode = images
-    .filter((img) => img.type.code === "HAB" && img.roomCode) // only room photos with a roomCode
+    .filter((img) => img.type.code === "HAB" && img.roomCode)
     .reduce((acc, img) => {
-      const code = img.roomCode; // e.g., "DBL.RV-1", "SUI.ST-4", etc.
+      const code = img.roomCode; 
 
       if (!acc[code]) {
         acc[code] = [];
       }
       acc[code].push({
         path: img.path,
-        // Build full URL if needed - HotelBeds usually serves via:
+       
         url: `https://photos.hotelbeds.com/giata/bigger/${img.path}`,
         // or smaller: `https://photos.hotelbeds.com/giata/${img.path}`
         order: img.order,
@@ -87,7 +85,7 @@ function HotelRoom() {
     // or use a.order - b.order if you prefer that
   });
   const roomImages = roomImagesByCode;
-  console.log("room images", roomImages);
+  // console.log("room images", roomImages);
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
