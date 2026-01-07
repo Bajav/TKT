@@ -60,6 +60,7 @@ body {
 .hotel-rooms {
   height: 100vh;
   max-height: 200vh;
+  background: $page_color;
   overflow: scroll;
   // padding: 5px;
   .flexButtons {
