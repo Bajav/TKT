@@ -45,7 +45,16 @@
       gap: 5%;
       margin-top: 40px;
       align-items: center;
+      .flight-calendar__input-field{
+        margin-bottom: 10px;
+        height: 60px;
+      }
     }
+    .flight-calendar {
+    margin-top: 30px;
+    width: 100%;
+    height: 50px;
+}
   }
 
   select:focus {
