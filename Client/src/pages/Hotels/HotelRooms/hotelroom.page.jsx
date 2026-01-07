@@ -15,38 +15,36 @@ import { Pagination, Navigation } from "swiper/modules";
 import {
   Wifi,
   Dumbbell,
-  Car,
+  CarFront as Car,
   Coffee,
-  Tv,
+  Tv,                    // TelevisionSimple → Tv is fine
   Wind,
   Waves,
   Utensils,
-  Bubbles,
+  Martini as Bubbles,    // closest to spa
   Cigarette,
-  Baby,
-  BoomBox,
-  Accessibility,
+  CigaretteSlash as CigaretteOff,
+  BabyCarriage as Baby,
+  RadioButton as Radio,  // exists
+  Shower,
+  ShieldCheck as Safe,   // vault/safe
   Plug,
-  Bath,
-  AlarmSmoke,
-  Cable,
-  ShowerHead,
+  Bath as Bathtub,
   Phone,
-  ShieldCheck,
-  Toilet,
-  Heater,
-  AlarmClockCheck,
+  Cable,
   Bed,
-  Refrigerator,
+  AlarmSmoke,
+  Refrigerator as Fridge,
+  AlarmClock,
+  Wheelchair as Accessibility,
+  BrushCleaning,
 } from "lucide-react";
+import { FaIron } from "react-icons/fa";
+import { SprayBottleIcon } from "@phosphor-icons/react";
 
 function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
-  const {
-    categoryCode,
-    name,
-    rooms: availableRooms,
-  } = selectedHotel;
+  const { categoryCode, name, rooms: availableRooms } = selectedHotel;
 
   const { images, facilities, description } = hotelInfo;
 
@@ -77,55 +75,58 @@ function HotelRoom() {
     map[room.roomCode] = room;
     return map;
   }, {});
-//ICON MAPPING FOR FACILITIES
-  const facilityIconMap = {
-    wifi: { icon: Wifi, label: "Free WiFi" },
-    "wi-fi": { icon: Wifi, label: "Free WiFi" },
-    internet: { icon: Wifi, label: "Internet Access" },
-    wireless: { icon: Wifi, label: "WiFi" },
-    fridge: { icon: Refrigerator, label: "Fridge" },
+  //ICON MAPPING FOR FACILITIES
+const facilityIconMap = {
+  wifi: { icon: Wifi, label: "Free WiFi" },
+  "wi-fi": { icon: Wifi, label: "Free WiFi" },
+  internet: { icon: Wifi, label: "Internet Access" },
+  wireless: { icon: Wifi, label: "WiFi" },
 
-    gym: { icon: Dumbbell, label: "Gym" },
-    fitness: { icon: Dumbbell, label: "Fitness Center" },
+  fridge: { icon: Fridge, label: "Fridge" }, // from Phosphor
 
-    parking: { icon: Car, label: "Parking" },
-    "car park": { icon: Car, label: "Parking" },
+  gym: { icon: Dumbbell, label: "Gym" },
+  fitness: { icon: Dumbbell, label: "Fitness Center" },
+  hairdryer: { icon: SprayBottleIcon, label: "Hair Dryer" }, // from Phosphor
 
-    radio:{icon:BoomBox,label:"Radio"},
-    shower:{icon:ShowerHead,label:"Shower"},
-    safe:{icon:ShieldCheck,label:"Safe"},
-    "individually adjustable heating":{icon:Heater,label:"Individually adjustable heating"},
-    "wake-up service":{icon:AlarmClockCheck,label:"Wake-up service "},
-    "extra beds on demand":{icon:Bed,label:"Extra beds on demand"},
-    "smoking rooms":{icon:Cigarette,label:"Smoking rooms"},
-    "plug adaptor":{icon:Plug,label:"Plug adaptor"},
+  parking: { icon: Car, label: "Parking" },
+  "car park": { icon: Car, label: "Parking" },
 
-    "wheelchair-accessible":{icon:Accessibility,label:"Wheelchair-accessible"},
-    toiletries:{icon:Toilet,label:"Toiletries"},
+  radio: { icon: Radio, label: "Radio" },
+  shower: { icon: Shower, label: "Shower" },
+  safe: { icon: Safe, label: "Safe" },
+  "individually adjustable heating": { icon: Wind, label: "Heating" }, // no exact heater → reuse Wind or fallback
+  "wake-up service": { icon: AlarmClock, label: "Wake-up Service" },
+  "extra beds on demand": { icon: Bed, label: "Extra Beds on Demand" },
+  "smoking rooms": { icon: Cigarette, label: "Smoking Rooms" },
+  "plug adaptor": { icon: Plug, label: "Plug Adaptor" },
+  "ironing set": { icon: FaIron, label: "Ironing Set" }, // perfect from react-icons
 
-    "air conditioning": { icon: Wind, label: "Air Conditioning" },
-    "air conditioned": { icon: Wind, label: "Air Conditioning" },
-    "220V power supply": { icon: Cable, label: "220V Power Supply" },
-    "direct dial telephone": { icon: Phone, label: "Direct Dial Telephone" },
-    "tea and coffee making facilities": { icon: Coffee, label: "Tea and Coffee Making Facilities" },
+  "wheelchair-accessible": { icon: Accessibility, label: "Wheelchair-Accessible" },
+  toiletries: { icon: Shower, label: "Toiletries" }, // reuse Shower or use Drop from Phosphor
 
-    "swimming pool": { icon: Waves, label: "Swimming Pool" },
-    pool: { icon: Waves, label: "Pool" },
-    bathtub: { icon: Bath, label: "Bathtub" },
+  "air conditioning": { icon: Wind, label: "Air Conditioning" },
+  "air conditioned": { icon: Wind, label: "Air Conditioning" },
+  "220v power supply": { icon: Cable, label: "220V Power Supply" },
+  "direct dial telephone": { icon: Phone, label: "Direct Dial Telephone" },
+  "tea and coffee making facilities": { icon: Coffee, label: "Tea & Coffee Facilities" },
+  housekeeping: { icon: BrushCleaning, label: "Housekeeping" },
+  "swimming pool": { icon: Waves, label: "Swimming Pool" },
+  pool: { icon: Waves, label: "Pool" },
+  bathtub: { icon: Bathtub, label: "Bathtub" },
 
-    restaurant: { icon: Utensils, label: "Restaurant" },
-    bar: { icon: Coffee, label: "Bar" },
+  restaurant: { icon: Utensils, label: "Restaurant" },
+  bar: { icon: Coffee, label: "Bar" },
 
-    spa: { icon: Bubbles, label: "Spa" },
-    sauna: { icon: Bubbles, label: "Sauna" },
+  spa: { icon: Bubbles, label: "Spa" },
+  sauna: { icon: Bubbles, label: "Sauna" },
+  housekeeping: { icon: BrushCleaning, label: "Housekeeping" },
+  "smoke detector": { icon: AlarmSmoke, label: "Smoke Detector" },
 
-    "smoke detector": { icon: AlarmSmoke, label: "Smoke Detector" },
-
-    "non smoking": { icon: Cigarette, label: "Non-smoking", color: "#ff4444" },
-    "family rooms": { icon: Baby, label: "Family Rooms" },
-    tv: { icon: Tv, label: "TV" },
-    television: { icon: Tv, label: "Television" },
-  };
+  "non smoking": { icon: CigaretteOff, label: "Non-smoking", color: "#ff4444" },
+  "family rooms": { icon: Baby, label: "Family Rooms" },
+  tv: { icon: Tv, label: "TV" },
+  television: { icon: Tv, label: "Television" },
+};
 
   // Helper to get icon + label for a facility description
   const getFacilityDisplay = (desc) => {
