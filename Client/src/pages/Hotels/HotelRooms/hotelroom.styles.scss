@@ -56,6 +56,7 @@ body {
     }
   }
 }
+
 .hotel-rooms {
   height: 100vh;
   max-height: 200vh;
@@ -109,32 +110,39 @@ body {
     margin-top: 10px;
   }
 }
-.facilities{
-      display: flex;
-    align-items: center;
-    width: 100%;
-    overflow: auto;
-    gap: 10px;
-    padding: 5px 0px;
+.facilities {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: auto;
+  gap: 10px;
+  padding: 5px 0px;
 }
 .facility {
-
+  display: flex;
   flex: 0 0 auto;
   gap: 5px;
   width: auto;
   max-width: 300px;
-  // background: ;
+  background: #dcf2ff;
   padding: 5px 5px;
-  border: 1px $ticketColor solid;
+  border: 1px $blue solid;
   border-radius: 5px;
   margin-top: 5px;
-  h4 {
+  span {
     font-family: $robotoMono, monospace;
     font-size: 12px;
     font-weight: 600;
     margin-top: 0px;
-    color: $visibleFontColor;
+    color: $blue;
   }
+}
+
+.with-icon {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 15px;
 }
 .hotel-reviews {
   margin-top: 10px;
@@ -173,6 +181,28 @@ body {
       border-radius: 20px;
       background: $blue;
     }
+  }
+}
+.hotel-facilities {
+  // display: grid;
+  // overflow: auto;
+  // grid-template-columns: repeat(4, 1fr);
+  // grid-template-rows: repeat(2, 1fr);
+  // align-items: center;
+  // grid-column-gap: 0px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100vw;
+  overflow-x: auto;
+  grid-row-gap: 0px;
+  h4 {
+    font-family: $roboto, sans-serif;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: $blue;
+    margin-top: 0px;
   }
 }
 .rooms-container {
@@ -218,6 +248,7 @@ body {
   font-family: RobotoMono, monospace;
   padding: 4px 15px;
   border-radius: 15px;
+  margin-left: 5px;
   font-size: 13px;
 }
 .room {
