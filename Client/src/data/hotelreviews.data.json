@@ -1,0 +1,122 @@
+[
+  {
+    "country": "United Kingdom",
+    "name": "James Thompson",
+    "review": "The room was spacious and spotlessly clean. The bed was incredibly comfortable, and I slept better than I have in months. Staff were friendly and helpful throughout the stay.",
+    "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Germany",
+    "name": "Anna Müller",
+    "review": "Excellent location, just a short walk from major attractions. Breakfast was varied and delicious with plenty of fresh options. Highly recommend for city travelers.",
+    "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "United States",
+    "name": "Sarah Johnson",
+    "review": "Fantastic service from check-in to check-out. The concierge went above and beyond to help with restaurant recommendations and tickets. Will definitely return.",
+    "imageUrl": "https://images.unsplash.com/photo-1580489940920-6a325f9e2c3d?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "France",
+    "name": "Pierre Dubois",
+    "review": "Beautiful modern design with great attention to detail. The bathroom amenities were high quality and the shower pressure was perfect. Very relaxing stay.",
+    "imageUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Italy",
+    "name": "Giulia Rossi",
+    "review": "Quiet and peaceful despite being in the city center. Soundproofing was excellent. Loved the rooftop terrace with stunning views in the evening.",
+    "imageUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Australia",
+    "name": "Michael Harris",
+    "review": "Family-friendly with thoughtful touches like a kids menu at breakfast and extra pillows available. The pool area was clean and well-maintained.",
+    "imageUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Spain",
+    "name": "Maria Gonzalez",
+    "review": "Outstanding value for money. Everything was clean, modern, and comfortable. The gym facilities were better than expected for this price range.",
+    "imageUrl": "https://images.unsplash.com/photo-1589571894960-20bbe2828d0a?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Canada",
+    "name": "Emily Chen",
+    "review": "Super fast Wi-Fi throughout the property, which was essential for my work trip. Also appreciated the quiet workspace in the lobby area.",
+    "imageUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Netherlands",
+    "name": "Lars van den Berg",
+    "review": "Eco-friendly practices were evident everywhere without compromising comfort. Recycling, energy-saving lights, and organic breakfast options were a nice touch.",
+    "imageUrl": "https://images.unsplash.com/photo-1502767089025-6572583495b7?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Japan",
+    "name": "Aiko Tanaka",
+    "review": "Impeccable cleanliness and attention to detail. Staff were extremely polite and efficient. Felt very welcome from the moment I arrived.",
+    "imageUrl": "https://images.unsplash.com/photo-1532073158816-935e3d6c9f2b?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Brazil",
+    "name": "Lucas Silva",
+    "review": "Great bar with skilled mixologists and a relaxed atmosphere. Perfect place to unwind after a long day of sightseeing.",
+    "imageUrl": "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Sweden",
+    "name": "Olivia Nilsson",
+    "review": "Loved the Scandinavian-inspired minimalist design. Everything felt fresh and calming. The sauna was a wonderful bonus.",
+    "imageUrl": "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "India",
+    "name": "Rahul Patel",
+    "review": "Very accommodating for dietary requirements. The kitchen prepared excellent vegetarian options without any issues.",
+    "imageUrl": "https://images.unsplash.com/photo-1508341591423-4347099e1f19?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "South Korea",
+    "name": "Ji-hoon Kim",
+    "review": "Modern technology throughout – easy mobile check-in, smart room controls, and fast contactless service. Very convenient.",
+    "imageUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Argentina",
+    "name": "Sofia Martinez",
+    "review": "Wonderful views from the higher floors. The room was cozy and warm during the cold weather. Heating worked perfectly.",
+    "imageUrl": "https://images.unsplash.com/photo-1524504388944-b1a0a9c4d6c7?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Portugal",
+    "name": "João Ferreira",
+    "review": "Fantastic location near public transport. Easy to explore the city. Staff gave great local recommendations.",
+    "imageUrl": "https://images.unsplash.com/photo-1472099643365-7e6d8b8f4b5c?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "New Zealand",
+    "name": "Emma Wilson",
+    "review": "Pet-friendly policy was much appreciated. Our dog was welcomed with treats and a bed. Clean and comfortable for all of us.",
+    "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Mexico",
+    "name": "Carlos Ramírez",
+    "review": "The spa facilities were outstanding. Massage was professional and relaxing. Perfect way to end a busy day.",
+    "imageUrl": "https://images.unsplash.com/photo-1503443207922-5c4c25e5d9d9?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Belgium",
+    "name": "Sophie Laurent",
+    "review": "Delicious breakfast with fresh pastries and local specialties. Coffee was excellent – definitely a highlight of the stay.",
+    "imageUrl": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=400&fit=crop&crop=face"
+  },
+  {
+    "country": "Ireland",
+    "name": "Liam O'Connor",
+    "review": "Warm Irish hospitality from start to finish. Everyone was genuinely friendly and made us feel at home.",
+    "imageUrl": "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=400&h=400&fit=crop&crop=face"
+  }
+]

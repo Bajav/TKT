@@ -2,7 +2,7 @@ import "./hotelcard.styles.scss";
 import star from "../../../assets/icons/star.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { HotelContext } from "../../context/hotels.contenxt";
 import Rates from "../../../pages/Hotels/Rates/rates.component";
 import hotelJson from "../../../data/hotelsJson.json";
@@ -22,22 +22,27 @@ const HotelCard = ({
   index,
   off,
   key,
+  offerName,
+  offerAmount,
   categoryCode,
 }) => {
-  const { selectedHotel,setSelectedHotel,setHotelInfo } = useContext(HotelContext);
+  const { selectedHotel, setSelectedHotel, setHotelInfo } =
+    useContext(HotelContext);
   const navigate = useNavigate();
-  const selectButton =async (index) => {
+  const selectButton = async (index) => {
     if (!hotelJson?.hotels?.hotels?.[index]) return;
     const selectHotel = hotelJson.hotels.hotels[index];
     setSelectedHotel(selectHotel);
     // console.log(selectedHotel);
-    try{
-      const {data} = await axios.post("http://localhost:3000/hotels/hoteldata",selectHotel);
-      const {hotel} = data.data;
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3000/hotels/hoteldata",
+        selectHotel
+      );
+      const { hotel } = data.data;
       setHotelInfo(hotel);
       // console.log(hotel);
-    }catch(err)
-    {
+    } catch (err) {
       console.log(err);
     }
     navigate("/searchhotels/availablerooms");
@@ -57,20 +62,19 @@ const HotelCard = ({
           <Rates categoryCode={categoryCode} reviewCount={30} rating={4.2} />
         </div>
 
-        {/* <p>{description}</p> */}
-
         <div className="amenities-price">
-          {/* <div className="amenities">
-           {amenities.slice(0, 8).map((item) => (
-              <span key={item}>{item}</span>
-            ))} 
-          </div> */}
-
-          <div className="price">
-            <h2>${mainPrice}</h2>
-            <h5>${pricePerNight} per night</h5>
+          <div className="pricings">
+            <div className="price">
+              <h2>${mainPrice}</h2>
+              <h5>${pricePerNight} per night</h5>
+            </div>
+            <div className="offer">
+              <h4>
+                {offerName} ${offerAmount}
+              </h4>
+            </div>
           </div>
-          <h4 className="off">{off}%</h4>
+          {/* <h4 className="off">{off}%</h4> */}
           <button className="browseBtn" onClick={() => selectButton(index)}>
             browse rooms
           </button>
