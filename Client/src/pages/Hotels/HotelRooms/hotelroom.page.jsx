@@ -257,7 +257,10 @@ function HotelRoom() {
                     return (
                       <div key={idx} className="room">
                         <div className="room-data">
+                          <div className="room-header">
                           <h4>{boardName || "Room Only"}</h4>
+                            <h2>online payment required</h2>
+                          </div>
                           <div className="room-actives">
                             {hasFreeCancellation && (
                               <h6 className="free-cancel">Free cancellation</h6>
