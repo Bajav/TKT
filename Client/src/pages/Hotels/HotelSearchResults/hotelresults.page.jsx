@@ -8,6 +8,7 @@ import { SlidersHorizontal } from "lucide-react";
 import { useEffect,useContext } from "react";
 import axios from "axios";
 import { HotelContext } from "../../../components/context/hotels.contenxt.jsx";
+import images from '../../../data/images.data.json';
 
 function HotelResults() {
   const {hotelContents,setHotelContents} = useContext(HotelContext);
@@ -83,6 +84,7 @@ const fetchHotelsContent = async (codes) => {
           categoryCode,
           rooms,
         } = hotel;
+        const imageUrl = images[index % images.length];
 
         // Find the best offer across all rates in all rooms
         let bestOfferName = "";
@@ -119,7 +121,7 @@ const fetchHotelsContent = async (codes) => {
             offerAmount={bestOfferAmount} // e.g., "52.00"
             country={destinationName}
             // description="Ritz Paris is a renowned 5-star luxury hotel located in the heart of Paris, France. Famous for its classic architecture, refined service."
-            image={hotelImg}
+            image={imageUrl}
             mainPrice={minRate}
             pricePerNight={100}
             rating="9.0"
