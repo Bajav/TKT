@@ -4,7 +4,7 @@
   justify-content: space-between;
   display: flex;
   width: auto;
-  /* gap: 5px; */
+  gap: 5px;
   max-width: 300px;
   h5 {
     font-size: 8px;
@@ -12,8 +12,8 @@
     padding: 3px 4px;
     border-radius: 2px;
     font-weight: 500;
-    color: $inputBackGround;
-    background: $blue;
+    color: #fefefe;
+    background: $actionOrange;
   }
 }
 .rate-stars
@@ -30,6 +30,7 @@
     font-weight: 500;
     opacity: 70%;
     font-size: 8px;
+    font-family: $robotoMono, monospace;
   }
   img {
     width: 8px;
