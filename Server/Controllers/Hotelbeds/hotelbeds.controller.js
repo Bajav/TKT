@@ -44,17 +44,17 @@ const hotelSearch = async (req, res) => {
 };
 
 const hotelContents = async (req, res) => {
-  const { hoteCodes } = req.body;
-  // console.log(hoteCodes);
+  const { hotelCodes } = req.body;
+  // console.log(hotelCodes);
   // res.json({
   //   success:true,
   //   message:"its working",
-  //   data:hoteCodes
+  //   data:hotelCodes
   // });
   try {
     // hotelCodes = ["12345", "67890"]
 
-    if (!hoteCodes || hoteCodes.length === 0) {
+    if (!hotelCodes || hotelCodes.length === 0) {
       return res.status(400).json({
         success: false,
         error: "HOTEL_CODES_REQUIRED",
@@ -62,7 +62,7 @@ const hotelContents = async (req, res) => {
       });
     }
 
-    const response = await getHotelContents(hoteCodes);
+    const response = await getHotelContents(hotelCodes);
 
     res.json({
       success: true,

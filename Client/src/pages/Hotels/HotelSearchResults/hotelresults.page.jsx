@@ -5,8 +5,63 @@ import hotelJson from "../../../data/hotelsJson.json";
 import HotelCard from "../../../components/Hotels/HotelCard/hotelcard.component";
 import hotelImg from "../../../assets/images/hotelImg.jpg";
 import { SlidersHorizontal } from "lucide-react";
+import { useEffect,useContext } from "react";
+import axios from "axios";
+import { HotelContext } from "../../../components/context/hotels.contenxt.jsx";
 
 function HotelResults() {
+  const {hotelContents,setHotelContents} = useContext(HotelContext);
+// this is a helper function to get hotel codes from hotelJson
+const getHotelCodes = () => {
+    const codes = new Set();
+    hotelJson.hotels.hotels.forEach((hotel) => {
+      if (hotel.code) {
+        codes.add(hotel.code);
+      }
+    });
+    return Array.from(codes);
+  };
+  // this is a helper function to fetch hotel contents from the server
+const fetchHotelsContent = async (codes) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/hotelscontents",
+        { hotelCodes: codes },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return response.data.data || response.data;
+    } catch (error) {
+      console.error("Error fetching hotels content:", error);
+      return null;
+    }
+  };
+
+  // this is the use effect to load hotel contents.
+//  useEffect(() => {
+//     const loadHotelContents = async () => {
+//       const codes = getHotelCodes();
+//       if (codes.length === 0) {
+//         console.log("No hotel codes found");
+//         return;
+//       }
+
+//       console.log(`Fetching content for ${codes.length} hotels...`);
+//       const data = await fetchHotelsContent(codes);
+
+//       if (data && data.hotels) {
+//         setHotelContents(data.hotels);
+//         console.log("Hotel contents loaded:", data.hotels.length, "hotels");
+//       } else {
+//         console.warn("No hotel content received");
+//       }
+//     };
+//     loadHotelContents();
+//   }, []);
   return (
     <main className="hotel-results">
       <div className="results-header">
