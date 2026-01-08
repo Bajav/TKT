@@ -38,6 +38,7 @@ body {
   display: flex;
   align-items: center;
   padding: 5px;
+  justify-content: end;
   .reviews {
     width: auto;
     max-width: 300px;
@@ -46,13 +47,14 @@ body {
     }
     .stars h5 {
       font-size: 12px;
-      padding: 3px 7px;
+      padding: 3px 5px;
     }
     h4 {
       font-family: $textFont, sans-serif;
       font-weight: 600;
+      font-weight: 500;
       opacity: 70%;
-      font-size: 13px;
+      font-size: 11px;
     }
   }
 }
@@ -346,4 +348,78 @@ body {
   font-weight: 600;
   text-transform: capitalize;
   margin-top: 10px;
+}
+
+// reviews
+.hotel-reviews {
+  display: flex;
+  width: 100%;
+  overflow: auto;
+  // height: 15vh;
+  gap: 10px;
+  padding: 5px 0px;
+}
+.review-segments {
+  flex: 0 0 auto;
+  background: $ticketColor;
+  padding: 10px;
+  width: 300px;
+  height: auto;
+  max-height: 150px;
+  border-radius: 8px;
+  .review-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    .reviewImg {
+      width: 50px;
+      height: 50px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 2px solid $inputBackGround;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .review-datta {
+    h4 {
+      font-family: $roboto, sans-serif;
+      font-size: 13px;
+      color: $bg-color;
+      font-weight: 500;
+      margin: 0px;
+    }
+    h5 {
+      font-family: $roboto, sans-serif;
+      font-size: 10px;
+      color: $blue;
+      color: $bg-color;
+      font-weight: 500;
+      opacity: 80%;
+      margin: 0px;
+    }
+    .verified {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      h5 {
+        font-size: 8px;
+      }
+    }
+  }
+  .review-content {
+    p {
+      font-family: $roboto, sans-serif;
+      font-size: 10px;
+      color: $inputBackGround;
+      margin-top: 5px;
+      line-height: 14px;
+      color: $bg-color;
+      opacity: 90%;
+      font-weight: 500;
+    }
+  }
 }

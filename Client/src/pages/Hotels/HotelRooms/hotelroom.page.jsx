@@ -10,6 +10,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
+import { CheckCheckIcon } from "lucide-react";
+import hotelReviews from "../../../data/hotelReviews.data.json";
 
 function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
@@ -45,7 +47,6 @@ function HotelRoom() {
     return map;
   }, {});
   //ICON MAPPING FOR FACILITIES
-
 
   // Helper to get icon + label for a facility description
   const getFacilityDisplay = (desc) => {
@@ -126,7 +127,32 @@ function HotelRoom() {
             })}
           </div>
         </div>
-
+        {/* hotel reviews */}
+        <div className="hotel-reviews">
+        {hotelReviews.map((rev, index) => {
+          const {name, country,review,imageUrl} = rev;
+          return (
+              <div className="review-segments" key={index}>
+                <div className="review-header">
+                  <div className="reviewImg">
+                    <img src={imageUrl} alt={name} />
+                  </div>
+                  <div className="review-datta">
+                    <h4>{name}</h4>
+                    <h5>{country}</h5>
+                    <div className="verified">
+                      <CheckCheckIcon size={14} color="#40C265" />  
+                    <h5>Verified Booking</h5>
+                    </div>
+                  </div>
+                </div>
+                <div className="review-content">
+                  <p>{review}</p>
+                </div>
+              </div>
+          );
+        })}
+        </div>
         {/* Rooms available */}
         <div className="rooms-container">
           <h2>Rooms Available</h2>
