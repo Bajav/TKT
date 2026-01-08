@@ -129,9 +129,9 @@ function HotelRoom() {
         </div>
         {/* hotel reviews */}
         <div className="hotel-reviews">
-        {hotelReviews.map((rev, index) => {
-          const {name, country,review,imageUrl} = rev;
-          return (
+          {hotelReviews.map((rev, index) => {
+            const { name, country, review, imageUrl } = rev;
+            return (
               <div className="review-segments" key={index}>
                 <div className="review-header">
                   <div className="reviewImg">
@@ -141,8 +141,8 @@ function HotelRoom() {
                     <h4>{name}</h4>
                     <h5>{country}</h5>
                     <div className="verified">
-                      <CheckCheckIcon size={14} color="#40C265" />  
-                    <h5>Verified Booking</h5>
+                      <CheckCheckIcon size={14} color="#40C265" />
+                      <h5>Verified Booking</h5>
                     </div>
                   </div>
                 </div>
@@ -150,8 +150,8 @@ function HotelRoom() {
                   <p>{review}</p>
                 </div>
               </div>
-          );
-        })}
+            );
+          })}
         </div>
         {/* Rooms available */}
         <div className="rooms-container">
@@ -262,11 +262,12 @@ function HotelRoom() {
                             {hasFreeCancellation && (
                               <h6 className="free-cancel">Free cancellation</h6>
                             )}
-                            <button className="book-now">
-                              ${net} Book now
-                            </button>
                           </div>
                         </div>
+                        <button className="book-now">
+                          <span>${net}</span> <br />
+                          Book now
+                        </button>
                       </div>
                     );
                   })}
