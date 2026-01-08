@@ -12,7 +12,7 @@ function HotelResults() {
       <div className="results-header">
         <button className="cancelBtn">cancel</button>
       </div>
-      <h1 className="results-head">hotel results</h1>
+      <h1 className="results-head">{hotelJson.hotels.hotels.length} hotels found</h1>
       <div className="results-header">
         <div className="filter">
           <SlidersHorizontal color="#222" size={8} />

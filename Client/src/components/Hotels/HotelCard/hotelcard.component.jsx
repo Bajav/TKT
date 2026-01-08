@@ -33,7 +33,7 @@ const HotelCard = ({
     if (!hotelJson?.hotels?.hotels?.[index]) return;
     const selectHotel = hotelJson.hotels.hotels[index];
     setSelectedHotel(selectHotel);
-    // console.log(selectedHotel);
+    console.log(index);
     try {
       const { data } = await axios.post(
         "http://localhost:3000/hotels/hoteldata",
