@@ -112,7 +112,7 @@ function HotelRoom() {
                     <>
                       <display.Icon
                         size={20}
-                        color={display.color || "#2f7bc8"}
+                        color={display.color || "#E88D67"}
                       />
                       <h4>{display.label}</h4>
                     </>
@@ -218,7 +218,7 @@ function HotelRoom() {
                                   <>
                                     <display.Icon
                                       size={18}
-                                      color={display.color || "#2f7bc8"}
+                                      color={display.color || "#E88D67"}
                                     />
                                     <span>{display.label}</span>
                                   </>

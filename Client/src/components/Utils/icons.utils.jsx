@@ -94,7 +94,7 @@ const facilityIconMap = {
 
   "smoke detector": { icon: AlarmSmoke, label: "Smoke Detector" },
 
-  "non smoking": { icon: CigaretteOff, label: "Non-smoking", color: "#ff4444" },
+  "non smoking": { icon: CigaretteOff, label: "Non-smoking", color: "#E88D67" },
   "family rooms": { icon: Baby, label: "Family Rooms" },
   tv: { icon: Tv, label: "TV" },
   television: { icon: Tv, label: "Television" },
