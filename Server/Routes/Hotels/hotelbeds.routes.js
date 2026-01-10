@@ -6,7 +6,9 @@ import {
   findAccomodation,
   getFacilities,
   getRooms,
-  hotelData
+  hotelData,
+  hotelComments,
+  rateComments,
 } from "../../Controllers/Hotelbeds/hotelbeds.controller.js";
 const router = Router();
 
@@ -30,4 +32,6 @@ router.get("/hotelscontents/accomodation", findAccomodation);
 router.get("/hotelscontents/facilities", getFacilities);
 // isClean
 router.get("/hotelscontents/rooms", getRooms);
+router.post("/hotelscontents/comments", hotelComments);
+router.get("/hotelscontents/ratecomments", rateComments);
 export default router;

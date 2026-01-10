@@ -108,3 +108,39 @@ export async function getHotelData(hotelCode) {
 
   return response.data;
 }
+
+export async function getHotelComments(rateCommentsId) {
+  const response = await axios.get(
+    `${BASE_URL}/hotel-content-api/1.0/ratecommentdetails?code=${rateCommentsId}&fields=all&language=ENG&from=1&to=100`,
+    {
+      params: {
+        language: "ENG",
+      },
+      headers: {
+        "Api-key": API_KEY,
+        "X-Signature": getSignature(),
+        Accept: "application/json",
+      },
+    }
+  );
+
+  return response.data;
+}
+
+export async function getRateComments(rateCommentsId) {
+  const response = await axios.get(
+    `${BASE_URL}/hotel-content-api/1.0/ratecomments?code=${rateCommentsId}&fields=all&language=ENG&from=1&to=100`,
+    {
+      params: {
+        language: "ENG",
+      },
+      headers: {
+        "Api-key": API_KEY,
+        "X-Signature": getSignature(),
+        Accept: "application/json",
+      },
+    }
+  );
+
+  return response.data;
+}

@@ -5,6 +5,8 @@ import {
   getAccomodations,
   typeHandler,
   getHotelData,
+  getHotelComments,
+  getRateComments,
 } from "../../Services/Hotelbeds/hotelbeds.service.js";
 
 const hotelSearch = async (req, res) => {
@@ -63,7 +65,6 @@ const hotelContents = async (req, res) => {
     }
 
     const response = await getHotelContents(hotelCodes);
-
     res.json({
       success: true,
       data: response,
@@ -152,12 +153,53 @@ const hotelData = async (req, res) => {
     });
   }
 };
+
+const hotelComments = async (req, res) => {
+  const {rateCommentsId}  = req.body;
+  console.log(rateCommentsId.split('|')[1]);
+  try {
+    const rateComments = await getHotelComments(rateCommentsId.split('|')[1]);
+    res.json({
+      success: true,
+      message: "hotel rateComments is working",
+      data: rateComments,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: "error getting hotel rateComments",
+      data: err,
+    });
+  }
+};
+
+const rateComments = async (req, res) => {
+  // const {rateCommentsId}  = req.body;
+  // console.log(rateCommentsId.split('|')[1]);
+  try {
+    // const rateComments = await getRateComments(rateCommentsId.split('|')[1]);
+    const rateComments = await getRateComments(59093);
+    res.json({
+      success: true,
+      message: "hotel rateComments is working",
+      data: rateComments,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: "error getting hotel rateComments",
+      data: err,
+    });
+  }
+};
 export {
   hotelSearch,
   hotelContents,
+  rateComments,
   findBoards,
   findAccomodation,
   getFacilities,
   getRooms,
   hotelData,
+  hotelComments,
 };
