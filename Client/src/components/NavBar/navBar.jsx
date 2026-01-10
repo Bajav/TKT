@@ -12,9 +12,9 @@ function Navbar() {
                     <Link to='/'>
                     <li>home</li>
                     </Link>
-                    <Link to='/places'>
+                    {/* <Link to='/places'>
                     <li>places</li>
-                    </Link>
+                    </Link> */}
                     <Link to='/flights'>
                     <li>flights</li>
                     </Link>

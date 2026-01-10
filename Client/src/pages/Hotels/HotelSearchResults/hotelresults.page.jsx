@@ -115,7 +115,7 @@ const fetchHotelsContent = async (codes) => {
 
         return (
           <HotelCard
-            key={index}
+            id={index}
             hotelName={name}
             offerName={bestOfferName} // e.g., "Exclusive discount"
             offerAmount={bestOfferAmount} // e.g., "52.00"

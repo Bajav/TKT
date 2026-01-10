@@ -21,7 +21,7 @@ const HotelCard = ({
   rateNum,
   index,
   off,
-  key,
+  id,
   offerName,
   offerAmount,
   categoryCode,
@@ -48,7 +48,7 @@ const HotelCard = ({
     navigate("/searchhotels/availablerooms");
   };
   return (
-    <div className="hotel-card" key={key}>
+    <div className="hotel-card" key={id}>
       <div className="hotel-img">
         <img src={image} alt={hotelName} />
       </div>
