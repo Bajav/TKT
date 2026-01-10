@@ -187,7 +187,26 @@ const rateComments = async (req, res) => {
   } catch (err) {
     res.json({
       success: false,
-      message: "error getting hotel rateComments",
+      message: `status code ${err.status}  ${err.message}`,
+      data: err,
+    });
+  }
+};
+
+const promotions = async (req, res) => {
+
+  try {
+    // const rateComments = await getRateComments(rateCommentsId.split('|')[1]);
+    const prmos = await typeHandler("/promotions");
+    res.json({
+      success: true,
+      message: "hotel promotions is working",
+      data: prmos,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: `status code ${err.status}  ${err.message}`,
       data: err,
     });
   }
@@ -202,4 +221,5 @@ export {
   getRooms,
   hotelData,
   hotelComments,
+  promotions,
 };

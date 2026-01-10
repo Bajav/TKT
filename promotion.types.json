@@ -1,0 +1,919 @@
+{
+  "success": true,
+  "message": "hotel promotions is working",
+  "data": {
+    "from": 1,
+    "to": 100,
+    "total": 181,
+    "auditData": {
+      "processTime": "0",
+      "timestamp": "2026-01-10 07:38:23.156",
+      "requestHost": "41.75.180.101",
+      "serverId": "hotel-content-api-69f775d8b9-ssdq7",
+      "environment": "[int, awseucentral1, k8s, secret, hotel-content-api-69f775d8b9-ssdq7]",
+      "release": ""
+    },
+    "promotions": [
+      {
+        "code": "0001",
+        "description": {
+          "content": "TEST"
+        },
+        "name": {
+          "content": "TEST"
+        }
+      },
+      {
+        "code": "013",
+        "description": {
+          "content": "Board upgrade applied"
+        },
+        "name": {
+          "content": "Board upgrade applied"
+        }
+      },
+      {
+        "code": "014",
+        "description": {
+          "content": "Transfer included"
+        },
+        "name": {
+          "content": "Transfer included"
+        }
+      },
+      {
+        "code": "022",
+        "description": {
+          "content": "Complimentary Breakfast Offer applied"
+        },
+        "name": {
+          "content": "Complimentary Breakfast Offer"
+        }
+      },
+      {
+        "code": "030",
+        "description": {
+          "content": "Special discount 10% applied"
+        },
+        "name": {
+          "content": "10% Special Discount applied"
+        }
+      },
+      {
+        "code": "031",
+        "description": {
+          "content": "Special discount 20% applied"
+        },
+        "name": {
+          "content": "20% Special Discount applied"
+        }
+      },
+      {
+        "code": "032",
+        "description": {
+          "content": "Special discount 30% applied"
+        },
+        "name": {
+          "content": "30% Special Discount applied"
+        }
+      },
+      {
+        "code": "033",
+        "description": {
+          "content": "Special discount 40% applied"
+        },
+        "name": {
+          "content": "40% Special Discount applied"
+        }
+      },
+      {
+        "code": "034",
+        "description": {
+          "content": "Room upgrade applied"
+        },
+        "name": {
+          "content": "Room upgrade applied"
+        }
+      },
+      {
+        "code": "041",
+        "description": {
+          "content": "Special 25% discount applied"
+        },
+        "name": {
+          "content": "25% Special Discount applied"
+        }
+      },
+      {
+        "code": "042",
+        "description": {
+          "content": "Special Offer"
+        },
+        "name": {
+          "content": "Special Offer"
+        }
+      },
+      {
+        "code": "044",
+        "description": {
+          "content": "Special 15% discount applied"
+        },
+        "name": {
+          "content": "15% Special Discount applied"
+        }
+      },
+      {
+        "code": "046",
+        "description": {
+          "content": "Special 35% discount applied"
+        },
+        "name": {
+          "content": "35% Special Discount applied"
+        }
+      },
+      {
+        "code": "048",
+        "description": {
+          "content": "Free parking applied"
+        },
+        "name": {
+          "content": "Free parking"
+        }
+      },
+      {
+        "code": "052",
+        "description": {
+          "content": "Easter / Spring Break"
+        },
+        "name": {
+          "content": "Easter / Spring Break"
+        }
+      },
+      {
+        "code": "065",
+        "description": {
+          "content": "5% Special Discount applied"
+        },
+        "name": {
+          "content": "5% Special Discount applied"
+        }
+      },
+      {
+        "code": "066",
+        "description": {
+          "content": "Children free in room only applied"
+        },
+        "name": {
+          "content": "Children free in room only"
+        }
+      },
+      {
+        "code": "068",
+        "description": {
+          "content": "50% Special Discount applied"
+        },
+        "name": {
+          "content": "50% Special Discount applied"
+        }
+      },
+      {
+        "code": "071",
+        "description": {
+          "content": "45% Special Discount applied"
+        },
+        "name": {
+          "content": "45% Special Discount applied"
+        }
+      },
+      {
+        "code": "072",
+        "description": {
+          "content": "55% Special Discount applied"
+        },
+        "name": {
+          "content": "55% Special Discount applied"
+        }
+      },
+      {
+        "code": "073",
+        "description": {
+          "content": "Non-refundable rate. No amendments permitted"
+        },
+        "name": {
+          "content": "Non-refundable rate. No amendments permitted"
+        }
+      },
+      {
+        "code": "077",
+        "description": {
+          "content": "60% Special Discount applied"
+        },
+        "name": {
+          "content": "60% Special Discount applied"
+        }
+      },
+      {
+        "code": "078",
+        "description": {
+          "content": "65% Special Discount applied"
+        },
+        "name": {
+          "content": "65% Special Discount applied"
+        }
+      },
+      {
+        "code": "089",
+        "description": {
+          "content": "Special Senior applied"
+        },
+        "name": {
+          "content": "Special Senior. Certificate required"
+        }
+      },
+      {
+        "code": "2001",
+        "description": {
+          "content": "Package Hotel + Spa"
+        },
+        "name": {
+          "content": "Package Hotel + Spa"
+        }
+      },
+      {
+        "code": "2002",
+        "description": {
+          "content": "Package Hotel + Activity"
+        },
+        "name": {
+          "content": "Package Hotel + Activity"
+        }
+      },
+      {
+        "code": "2003",
+        "description": {
+          "content": "Package  Hotel + Excursion"
+        },
+        "name": {
+          "content": "Package  Hotel + Excursion"
+        }
+      },
+      {
+        "code": "2004",
+        "description": {
+          "content": "Package Hotel + Ticket"
+        },
+        "name": {
+          "content": "Package Hotel + Ticket"
+        }
+      },
+      {
+        "code": "2005",
+        "description": {
+          "content": "Package Hotel + Forfait"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass"
+        }
+      },
+      {
+        "code": "2007",
+        "description": {
+          "content": "Package Hotel + Gala"
+        },
+        "name": {
+          "content": "Package Hotel + Gala Dinner"
+        }
+      },
+      {
+        "code": "2008",
+        "description": {
+          "content": "Package Hotel + Theme park"
+        },
+        "name": {
+          "content": "Package Hotel + Theme park"
+        }
+      },
+      {
+        "code": "2009",
+        "description": {
+          "content": "Package Hotel + Golf"
+        },
+        "name": {
+          "content": "Package Hotel + Golf"
+        }
+      },
+      {
+        "code": "2010",
+        "description": {
+          "content": "Package Hotel + Return Transfer"
+        },
+        "name": {
+          "content": "Package Hotel + Return Transfer"
+        }
+      },
+      {
+        "code": "2012",
+        "description": {
+          "content": "Package Couples"
+        },
+        "name": {
+          "content": "Package Couples"
+        }
+      },
+      {
+        "code": "2013",
+        "description": {
+          "content": "Package Hotel + Skipass Vallnord"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Vallnord"
+        }
+      },
+      {
+        "code": "2014",
+        "description": {
+          "content": "Package Hotel + Skipass  Grandvalira"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass  Grandvalira"
+        }
+      },
+      {
+        "code": "2015",
+        "description": {
+          "content": "Package Hotel + Gastronomic experience"
+        },
+        "name": {
+          "content": "Package Hotel + Gastronomic experience"
+        }
+      },
+      {
+        "code": "2016",
+        "description": {
+          "content": "Hotel + Spa Caldea"
+        },
+        "name": {
+          "content": "Hotel + Spa Caldea"
+        }
+      },
+      {
+        "code": "2020",
+        "description": {
+          "content": "Package Hotel + Skipass Astun"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Astun"
+        }
+      },
+      {
+        "code": "2021",
+        "description": {
+          "content": "Package Hotel + Skipass Candanchu"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Candanchu"
+        }
+      },
+      {
+        "code": "2022",
+        "description": {
+          "content": "Package Hotel + Skipass Formigal"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Formigal"
+        }
+      },
+      {
+        "code": "2023",
+        "description": {
+          "content": "Package Hotel + Skipass Cerler"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Cerler"
+        }
+      },
+      {
+        "code": "2024",
+        "description": {
+          "content": "Package Hotel + Skipass Panticosa"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Panticosa"
+        }
+      },
+      {
+        "code": "2025",
+        "description": {
+          "content": "Package Hotel + Skipass La Molina"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass La Molina"
+        }
+      },
+      {
+        "code": "2026",
+        "description": {
+          "content": "Package Hotel + Skipass Masella"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Masella"
+        }
+      },
+      {
+        "code": "2028",
+        "description": {
+          "content": "Package Hotel + Skipass Boi Taüll"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Boi Taüll"
+        }
+      },
+      {
+        "code": "2029",
+        "description": {
+          "content": "Package Hotel + Skipass Baqueria-Beret"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Baqueria-Beret"
+        }
+      },
+      {
+        "code": "2030",
+        "description": {
+          "content": "Package Hotel + Skipass Port Aine-Espot Esqui"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Port Aine-Espot Esqui"
+        }
+      },
+      {
+        "code": "2031",
+        "description": {
+          "content": "Disney Hotel + Ticket Package"
+        },
+        "name": {
+          "content": "Disney Hotel + Ticket Package"
+        }
+      },
+      {
+        "code": "2050",
+        "description": {
+          "content": "Disney Hotel + Ticket + Quick Service Dining Plan Package applied"
+        },
+        "name": {
+          "content": "Disney Hotel + Ticket + Quick Service Dining Plan Package"
+        }
+      },
+      {
+        "code": "2051",
+        "description": {
+          "content": "Disney Hotel + Ticket + Standard Dining Plan Package applied"
+        },
+        "name": {
+          "content": "Disney Hotel + Ticket + Standard Dining Plan Package"
+        }
+      },
+      {
+        "code": "2052",
+        "description": {
+          "content": "Disney Hotel + Ticket + Deluxe Dining Plan Package applied"
+        },
+        "name": {
+          "content": "Disney Hotel + Ticket + Deluxe Dining Plan Package"
+        }
+      },
+      {
+        "code": "2053",
+        "description": {
+          "content": "Package Hotel + Extra"
+        },
+        "name": {
+          "content": "Package Hotel + Extra"
+        }
+      },
+      {
+        "code": "2055",
+        "description": {
+          "content": "Package Hotel + Skipass Pal-Arinsal"
+        },
+        "name": {
+          "content": "Package Hotel + Skipass Pal-Arinsal"
+        }
+      },
+      {
+        "code": "2056",
+        "description": {
+          "content": "Package Skipass Ordino-Arcalis"
+        },
+        "name": {
+          "content": "Package Skipass Ordino-Arcalis"
+        }
+      },
+      {
+        "code": "2058",
+        "description": {
+          "content": "Package Hotel + Activity + Transfer"
+        },
+        "name": {
+          "content": "Package Hotel + Activity + Transfer"
+        }
+      },
+      {
+        "code": "2059",
+        "description": {
+          "content": "Disney Package Hotel HB: Dinner at hotel"
+        },
+        "name": {
+          "content": "Disney Package Hotel HB: Dinner at hotel"
+        }
+      },
+      {
+        "code": "2060",
+        "description": {
+          "content": "Disney Half Board Standard"
+        },
+        "name": {
+          "content": "Disney Half Board Standard"
+        }
+      },
+      {
+        "code": "2061",
+        "description": {
+          "content": "Disney Half Board Plus"
+        },
+        "name": {
+          "content": "Disney Half Board Plus"
+        }
+      },
+      {
+        "code": "2062",
+        "description": {
+          "content": "Disney Half Board Premium"
+        },
+        "name": {
+          "content": "Disney Half Board Premium"
+        }
+      },
+      {
+        "code": "2063",
+        "description": {
+          "content": "Disney Pack Hotel FB: Lunch at park / Hotel Dinner"
+        },
+        "name": {
+          "content": "Disney Pack Hotel FB: Lunch at park / Hotel Dinner"
+        }
+      },
+      {
+        "code": "2064",
+        "description": {
+          "content": "Disney Full Board Standard"
+        },
+        "name": {
+          "content": "Disney Full Board Standard"
+        }
+      },
+      {
+        "code": "2065",
+        "description": {
+          "content": "Disney Full Board Plus"
+        },
+        "name": {
+          "content": "Disney Full Board Plus"
+        }
+      },
+      {
+        "code": "2066",
+        "description": {
+          "content": "Disney Full Board Premium"
+        },
+        "name": {
+          "content": "Disney Full Board Premium"
+        }
+      },
+      {
+        "code": "2067",
+        "description": {
+          "content": "Disney Room Only"
+        },
+        "name": {
+          "content": "Disney Room Only"
+        }
+      },
+      {
+        "code": "2068",
+        "description": {
+          "content": "Disney Bed and Breakfast"
+        },
+        "name": {
+          "content": "Disney Bed and Breakfast"
+        }
+      },
+      {
+        "code": "2069",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket"
+        }
+      },
+      {
+        "code": "2070",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket"
+        }
+      },
+      {
+        "code": "2071",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + Quick Service"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + Quick Service"
+        }
+      },
+      {
+        "code": "2072",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + Disney Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + Disney Dining"
+        }
+      },
+      {
+        "code": "2073",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + Disney Dining Plus"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + Disney Dining Plus"
+        }
+      },
+      {
+        "code": "2074",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + Deluxe Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + Deluxe Dining"
+        }
+      },
+      {
+        "code": "2075",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Quick Service"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Quick Service"
+        }
+      },
+      {
+        "code": "2076",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Quick Breakfast"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Quick Breakfast"
+        }
+      },
+      {
+        "code": "2077",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Disney Dining Plus"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Disney Dining Plus"
+        }
+      },
+      {
+        "code": "2078",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Disney Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Disney Dining"
+        }
+      },
+      {
+        "code": "2079",
+        "description": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Deluxe Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 7 Day Ultimate Ticket + FREE Deluxe Dining"
+        }
+      },
+      {
+        "code": "2080",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket"
+        }
+      },
+      {
+        "code": "2081",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + Quick Service"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + Quick Service"
+        }
+      },
+      {
+        "code": "2082",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + Disney Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + Disney Dining"
+        }
+      },
+      {
+        "code": "2083",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + Disney Dining Plus"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + Disney Dining Plus"
+        }
+      },
+      {
+        "code": "2084",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + Deluxe Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + Deluxe Dining"
+        }
+      },
+      {
+        "code": "2085",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Quick Service"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Quick Service"
+        }
+      },
+      {
+        "code": "2086",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Quick Breakfast"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Quick Breakfast"
+        }
+      },
+      {
+        "code": "2087",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Disney Dining Plus"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Disney Dining Plus"
+        }
+      },
+      {
+        "code": "2088",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Disney Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Disney Dining"
+        }
+      },
+      {
+        "code": "2089",
+        "description": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Deluxe Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 Day Ultimate Ticket + FREE Deluxe Dining"
+        }
+      },
+      {
+        "code": "2090",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + Quick Service"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + Quick Service"
+        }
+      },
+      {
+        "code": "2091",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + Disney Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + Disney Dining"
+        }
+      },
+      {
+        "code": "2092",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + Disney Dining Plus"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + Disney Dining Plus"
+        }
+      },
+      {
+        "code": "2093",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + Deluxe Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + Deluxe Dining"
+        }
+      },
+      {
+        "code": "2094",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Quick Service"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Quick Service"
+        }
+      },
+      {
+        "code": "2095",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Quick Breakfast"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Quick Breakfast"
+        }
+      },
+      {
+        "code": "2096",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Disney Dining Plus"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Disney Dining Plus"
+        }
+      },
+      {
+        "code": "2097",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Disney Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Disney Dining"
+        }
+      },
+      {
+        "code": "2098",
+        "description": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Deluxe Dining"
+        },
+        "name": {
+          "content": "Disney Hotel + 14 for 7 Day Ultimate Ticket + FREE Deluxe Dining"
+        }
+      },
+      {
+        "code": "2099",
+        "description": {
+          "content": "Disney Full Board Extra Plus"
+        },
+        "name": {
+          "content": "Disney Full Board Extra Plus"
+        }
+      },
+      {
+        "code": "2100",
+        "description": {
+          "content": "Hotel+Entrance Palau De Gel"
+        },
+        "name": {
+          "content": "Hotel+Entrance Palau De Gel"
+        }
+      },
+      {
+        "code": "2101",
+        "description": {
+          "content": "Hotel+Entrance Museo Tyssen"
+        },
+        "name": {
+          "content": "Hotel+Entrance Museo Tyssen"
+        }
+      },
+      {
+        "code": "2103",
+        "description": {
+          "content": "Hotel+Hard Rock"
+        },
+        "name": {
+          "content": "Hotel+Hard Rock"
+        }
+      }
+    ]
+  }
+}
