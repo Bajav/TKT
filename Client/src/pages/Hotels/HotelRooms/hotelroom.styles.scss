@@ -126,7 +126,7 @@ body {
   flex: 0 0 auto;
   gap: 5px;
   width: auto;
-  max-width: 300px;
+  max-width: 600px;
   background: $lightOrange;
   padding: 5px 5px;
   border: 1px $darkOrange solid;
@@ -139,6 +139,19 @@ body {
     margin-top: 0px;
     color: $darkOrange;
   }
+  .facility-item.paid {
+  opacity: 0.85;
+  position: relative;
+}
+.paid-badge {
+  font-size: 0.68rem;
+  background: $bg-color;
+  color: $blue;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
 }
 
 .with-icon {
@@ -147,6 +160,8 @@ body {
   gap: 5px;
   padding: 5px 15px;
 }
+
+
 .hotel-reviews {
   margin-top: 10px;
   h4 {

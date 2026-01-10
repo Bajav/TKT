@@ -12,11 +12,12 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import { CheckCheckIcon } from "lucide-react";
 import hotelReviews from "../../../data/hotelReviews.data.json";
+import { FacilityList } from "../../../components/Utils/facilities.utils";
 
 function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
   const { categoryCode, name, rooms: availableRooms } = selectedHotel;
-
+  console.log("hotelInfo", hotelInfo);
   const { images, facilities, description } = hotelInfo;
 
   const navigate = useNavigate();
@@ -48,18 +49,6 @@ function HotelRoom() {
   }, {});
   //ICON MAPPING FOR FACILITIES
 
-  // Helper to get icon + label for a facility description
-  const getFacilityDisplay = (desc) => {
-    const lower = desc.toLowerCase();
-    const match = Object.entries(facilityIconMap).find(([key]) =>
-      lower.includes(key)
-    );
-    if (match) {
-      const [, { icon: Icon, label, color }] = match;
-      return { Icon, label, color };
-    }
-    return null;
-  };
 
   // Clean room code (handles "[STU.ST]" → "STU.ST")
   const cleanRoomCode = (code) => code?.replace(/[\[\]]/g, "").trim();
@@ -101,30 +90,7 @@ function HotelRoom() {
         <div className="facilites-container">
           <h4 className="facilities-header">Hotel Facilities</h4>
           <div className="hotel-facilities">
-            {facilities?.slice(0).map((facility, index) => {
-              const display = getFacilityDisplay(facility.description.content);
-              return (
-                <div
-                  key={index}
-                  className={`facility ${display ? "with-icon" : "plain"}`}
-                >
-                  {display ? (
-                    <>
-                      <display.Icon
-                        size={20}
-                        color={display.color || "#E88D67"}
-                      />
-                      <h4>{display.label}</h4>
-                    </>
-                  ) : (
-                    <>
-                      <span className="dot" />
-                      <h4>{facility.description.content}</h4>
-                    </>
-                  )}
-                </div>
-              );
-            })}
+            <FacilityList facilities={facilities} groupCodes={[71, 80,30,72,80,90]}/>
           </div>
         </div>
         {/* hotel reviews */}
@@ -200,49 +166,12 @@ function HotelRoom() {
                 <div className="amenities-container">
                   <h4>room facilities</h4>
                   <div className="amenities">
-                    {roomFacilities.length > 0 && (
-                      <div className="room-facilities">
-                        <div className="facilities">
-                          {roomFacilities.map((fac, i) => {
-                            const display = getFacilityDisplay(
-                              fac.description.content
-                            );
-                            return (
-                              <div
-                                key={i}
-                                className={`facility ${
-                                  display ? "with-icon" : "plain"
-                                }`}
-                              >
-                                {display ? (
-                                  <>
-                                    <display.Icon
-                                      size={18}
-                                      color={display.color || "#E88D67"}
-                                    />
-                                    <span>{display.label}</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <span className="dot" />
-                                    <span>{fac.description.content}</span>
-                                  </>
-                                )}
-                                {fac.number && (
-                                  <small style={{ marginLeft: 6 }}>
-                                    ({fac.number})
-                                  </small>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    )}
-                    {/* <div className="amenity">
-                      <AirVent size={13} color="#2f7bc8" />
-                      <h5>Air conditioning</h5>
-                    </div> */}
+                    <FacilityList
+                      facilities={roomFacilities}
+                      groupCodes={60}
+                      className="room-facilities"
+                      color="#E88D67"
+                    />
                   </div>
                 </div>
 
