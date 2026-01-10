@@ -7,6 +7,8 @@ import Hotels from "../pages/Hotels/hotels";
 import Packages from "../pages/packages";
 import Navbar from "../components/NavBar/navBar";
 
+import ErrorBoundary from "../pages/ErrorPage/error.page.jsx";
+
 // FLIGHTS PAGES
 import Flights from "../pages/flights";
 import FlightPricing from "../pages/flightPricing/flightPricing";
@@ -37,7 +39,7 @@ function AllRoutes() {
     <Fragment>
       {/* Show Navbar unless on certain routes */}
       {!shouldHideNavbar && <Navbar />}
-
+      <ErrorBoundary>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="places" element={<Places />} />
@@ -57,6 +59,7 @@ function AllRoutes() {
           {/* <Route path="passengerdata" element={<Passengers />} /> */}
         </Route>
       </Routes>
+      </ErrorBoundary>
     </Fragment>
   );
 }
