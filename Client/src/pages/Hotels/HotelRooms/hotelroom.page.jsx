@@ -13,6 +13,7 @@ import { Pagination, Navigation } from "swiper/modules";
 import { CheckCheckIcon } from "lucide-react";
 import hotelReviews from "../../../data/hotelReviews.data.json";
 import { FacilityList } from "../../../components/Utils/facilities.utils";
+import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils.jsx";
 
 function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
@@ -48,7 +49,6 @@ function HotelRoom() {
     return map;
   }, {});
   //ICON MAPPING FOR FACILITIES
-
 
   // Clean room code (handles "[STU.ST]" → "STU.ST")
   const cleanRoomCode = (code) => code?.replace(/[\[\]]/g, "").trim();
@@ -90,7 +90,10 @@ function HotelRoom() {
         <div className="facilites-container">
           <h4 className="facilities-header">Hotel Facilities</h4>
           <div className="hotel-facilities">
-            <FacilityList facilities={facilities} groupCodes={[71, 80,30,72,80,90]}/>
+            <FacilityList
+              facilities={facilities}
+              groupCodes={[71, 80, 30, 72, 80, 90]}
+            />
           </div>
         </div>
         {/* hotel reviews */}
@@ -179,27 +182,30 @@ function HotelRoom() {
                 <h4 className="room-rates">Rates Available for this room</h4>
                 <div className="rooms-segment">
                   {room.rates.map((rate, idx) => {
-                    const { net, boardName, cancellationPolicies } = rate;
-                    const hasFreeCancellation = cancellationPolicies?.some(
-                      (p) => new Date(p.from) > new Date()
-                    );
+                    const { net, boardName } = rate;
+                    const cancellationSummary = getCancellationBadge(rate);
                     return (
                       <div key={idx} className="room">
-                        <div className="room-data">
-                          <div className="room-header">
-                          <h4>{boardName || "Room Only"}</h4>
-                            <h2>online payment required</h2>
-                          </div>
-                          <div className="room-actives">
-                            {hasFreeCancellation && (
-                              <h6 className="free-cancel">Free cancellation</h6>
-                            )}
-                          </div>
+                        <div className="top">
+                          <div className="side-one">
+                              <h4>{boardName || "Room Only"}</h4>
+                              <h2>online payment required</h2>
+                            </div>
+                            <h6>{cancellationSummary.label}</h6>
                         </div>
-                        <button className="book-now">
-                          <span>${net}</span> <br />
-                          Book now
-                        </button>
+                        <div className="bottom">
+                          <div className="room-actives">
+                            <div
+                              className={`cancellation-badge ${cancellationSummary.color}`}
+                            >
+                              <p>{cancellationSummary.details}</p>
+                            </div>
+                          </div>
+                          <button className="book-now">
+                            <span>€{net}</span> {"  "}
+                            <small>book now</small>
+                          </button>
+                        </div>
                       </div>
                     );
                   })}
