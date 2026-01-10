@@ -95,8 +95,10 @@ function HotelResults() {
 
         return (
           <HotelCard
-            id={index}
-           isDeal={bestOffer?.hasDeal || false}
+            hotelJson={hotelJson}
+            key={hotel.code}
+            index={index}
+            isDeal={bestOffer?.hasDeal || false}
             hotelName={name}
             offerName={bestOffer?.name || ""}
             offerAmount={bestOffer?.amount || 0} // e.g., "52.00"
@@ -109,7 +111,6 @@ function HotelResults() {
             reviewCount={25}
             rateNum={parseInt(categoryCode)} // e.g., "3EST" → 3
             categoryCode={categoryCode}
-            index={index}
           />
         );
       })}

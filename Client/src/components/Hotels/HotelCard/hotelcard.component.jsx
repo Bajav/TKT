@@ -22,29 +22,37 @@ const HotelCard = ({
   offerAmount = "0",
   categoryCode,
   isDeal = false,
-  hotel, // ← the full hotel object
+  index,
+  hotelJson,
 }) => {
   const { setSelectedHotel, setHotelInfo } = useContext(HotelContext);
   const navigate = useNavigate();
 
-  const selectButton = async () => {
-    if (!hotel) return;
+ const selectButton = async (index) => {
+  if (!hotelJson?.hotels?.hotels?.[index]) {
+    console.error("Hotel not found at index:", index);
+    return;
+  }
 
-    setSelectedHotel(hotel);
+  const selectedHotel = hotelJson.hotels.hotels[index];
 
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/hotels/hoteldata",
-        { code: hotel.code } // ← safe, minimal payload
-      );
+  setSelectedHotel(selectedHotel);
+  console.log("selectedHotel", selectedHotel);
 
-      const { hotel: fetchedHotel } = response.data.data;
-      setHotelInfo(fetchedHotel);
-      navigate("/searchhotels/availablerooms");
-    } catch (err) {
-      console.error("Error fetching hotel data:", err);
-    }
-  };
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/hotels/hoteldata",
+      { code: selectedHotel.code }
+    );
+
+    const { hotel: fetchedHotel } = response.data.data;
+    setHotelInfo(fetchedHotel);
+
+    navigate("/searchhotels/availablerooms");
+  } catch (err) {
+    console.error("Error fetching hotel data:", err);
+  }
+};
 
   return (
     <div className="hotel-card">
@@ -82,7 +90,7 @@ const HotelCard = ({
           </div>
 
           {/* Fixed: pass function reference, not invocation */}
-          <button className="browseBtn" onClick={selectButton}>
+          <button className="browseBtn" onClick={() => selectButton(index)}>
             Browse Rooms
           </button>
         </div>
