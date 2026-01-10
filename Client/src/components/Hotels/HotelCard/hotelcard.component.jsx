@@ -2,10 +2,9 @@ import "./hotelcard.styles.scss";
 import star from "../../../assets/icons/star.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { HotelContext } from "../../context/hotels.contenxt";
 import Rates from "../../../pages/Hotels/Rates/rates.component";
-import hotelJson from "../../../data/hotelsJson.json";
 
 const HotelCard = ({
   hotelName,
@@ -19,64 +18,72 @@ const HotelCard = ({
   reviewCount,
   amenities = [],
   rateNum,
-  index,
-  off,
-  id,
-  offerName,
-  offerAmount,
+  offerName = "",
+  offerAmount = "0",
   categoryCode,
+  isDeal = false,
+  hotel, // ← the full hotel object
 }) => {
-  const { selectedHotel, setSelectedHotel, setHotelInfo } =
-    useContext(HotelContext);
+  const { setSelectedHotel, setHotelInfo } = useContext(HotelContext);
   const navigate = useNavigate();
-  const selectButton = async (index) => {
-    if (!hotelJson?.hotels?.hotels?.[index]) return;
-    const selectHotel = hotelJson.hotels.hotels[index];
-    setSelectedHotel(selectHotel);
-    console.log(index);
+
+  const selectButton = async () => {
+    if (!hotel) return;
+
+    setSelectedHotel(hotel);
+
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://localhost:3000/hotels/hoteldata",
-        selectHotel
+        { code: hotel.code } // ← safe, minimal payload
       );
-      const { hotel } = data.data;
-      setHotelInfo(hotel);
-      // console.log(hotel);
+
+      const { hotel: fetchedHotel } = response.data.data;
+      setHotelInfo(fetchedHotel);
+      navigate("/searchhotels/availablerooms");
     } catch (err) {
-      console.log(err);
+      console.error("Error fetching hotel data:", err);
     }
-    navigate("/searchhotels/availablerooms");
   };
+
   return (
-    <div className="hotel-card" key={id}>
+    <div className="hotel-card">
       <div className="hotel-img">
-        <img src={image} alt={hotelName} />
+        <img src={image} alt={hotelName} loading="lazy" />
       </div>
 
       <div className="hotel-data">
         <div className="hotel-header">
           <div className="hotel-name-country">
             <h1>{hotelName}</h1>
-            <h4> {country}</h4>
+            <h4>{country}</h4>
           </div>
-          <Rates categoryCode={categoryCode} reviewCount={30} rating={4.2} />
+          <Rates
+            categoryCode={categoryCode}
+            reviewCount={reviewCount || 30}
+            rating={rating || 4.2}
+          />
         </div>
 
         <div className="amenities-price">
           <div className="pricings">
             <div className="price">
-              <h2>${mainPrice}</h2>
-              <h5>${pricePerNight} per night</h5>
+              <h2>€{parseFloat(mainPrice).toFixed(2)}</h2>
+              <h5>€{parseFloat(pricePerNight).toFixed(2)} per night</h5>
             </div>
-            <div className="offer">
-              <h4>
-                {offerName} ${offerAmount}
-              </h4>
-            </div>
+
+            {isDeal && parseFloat(offerAmount) > 0 && (
+              <div className="offer">
+                <h4>
+                  {offerName} <strong>€{offerAmount}</strong>
+                </h4>
+              </div>
+            )}
           </div>
-          {/* <h4 className="off">{off}%</h4> */}
-          <button className="browseBtn" onClick={() => selectButton(index)}>
-            browse rooms
+
+          {/* Fixed: pass function reference, not invocation */}
+          <button className="browseBtn" onClick={selectButton}>
+            Browse Rooms
           </button>
         </div>
       </div>

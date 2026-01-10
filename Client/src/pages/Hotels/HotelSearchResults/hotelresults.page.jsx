@@ -5,15 +5,19 @@ import hotelJson from "../../../data/hotelsJson.json";
 import HotelCard from "../../../components/Hotels/HotelCard/hotelcard.component";
 import hotelImg from "../../../assets/images/hotelImg.jpg";
 import { SlidersHorizontal } from "lucide-react";
-import { useEffect,useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { HotelContext } from "../../../components/context/hotels.contenxt.jsx";
-import images from '../../../data/images.data.json';
+import images from "../../../data/images.data.json";
+import { getBestOffer } from "../../../components/Utils/HotelsUtils/pricing.utils.jsx";
 
 function HotelResults() {
-  const {hotelContents,setHotelContents} = useContext(HotelContext);
-// this is a helper function to get hotel codes from hotelJson
-const getHotelCodes = () => {
+  const { hotelContents, setHotelContents } = useContext(HotelContext);
+  const [isDeal, setDeal] = useState(false);
+  const [dealAmount, setDealAmount] = useState(0);
+  const [bestOfferName, setBestOfferName] = useState("");
+  // this is a helper function to get hotel codes from hotelJson
+  const getHotelCodes = () => {
     const codes = new Set();
     hotelJson.hotels.hotels.forEach((hotel) => {
       if (hotel.code) {
@@ -23,7 +27,7 @@ const getHotelCodes = () => {
     return Array.from(codes);
   };
   // this is a helper function to fetch hotel contents from the server
-const fetchHotelsContent = async (codes) => {
+  const fetchHotelsContent = async (codes) => {
     try {
       const response = await axios.post(
         "http://localhost:3000/hotelscontents",
@@ -43,32 +47,34 @@ const fetchHotelsContent = async (codes) => {
   };
 
   // this is the use effect to load hotel contents.
-//  useEffect(() => {
-//     const loadHotelContents = async () => {
-//       const codes = getHotelCodes();
-//       if (codes.length === 0) {
-//         console.log("No hotel codes found");
-//         return;
-//       }
+  //  useEffect(() => {
+  //     const loadHotelContents = async () => {
+  //       const codes = getHotelCodes();
+  //       if (codes.length === 0) {
+  //         console.log("No hotel codes found");
+  //         return;
+  //       }
 
-//       console.log(`Fetching content for ${codes.length} hotels...`);
-//       const data = await fetchHotelsContent(codes);
+  //       console.log(`Fetching content for ${codes.length} hotels...`);
+  //       const data = await fetchHotelsContent(codes);
 
-//       if (data && data.hotels) {
-//         setHotelContents(data.hotels);
-//         console.log("Hotel contents loaded:", data.hotels.length, "hotels");
-//       } else {
-//         console.warn("No hotel content received");
-//       }
-//     };
-//     loadHotelContents();
-//   }, []);
+  //       if (data && data.hotels) {
+  //         setHotelContents(data.hotels);
+  //         console.log("Hotel contents loaded:", data.hotels.length, "hotels");
+  //       } else {
+  //         console.warn("No hotel content received");
+  //       }
+  //     };
+  //     loadHotelContents();
+  //   }, []);
   return (
     <main className="hotel-results">
       <div className="results-header">
         <button className="cancelBtn">cancel</button>
       </div>
-      <h1 className="results-head">{hotelJson.hotels.hotels.length} hotels found</h1>
+      <h1 className="results-head">
+        {hotelJson.hotels.hotels.length} hotels found
+      </h1>
       <div className="results-header">
         <div className="filter">
           <SlidersHorizontal color="#222" size={8} />
@@ -85,40 +91,15 @@ const fetchHotelsContent = async (codes) => {
           rooms,
         } = hotel;
         const imageUrl = images[index % images.length];
-
-        // Find the best offer across all rates in all rooms
-        let bestOfferName = "";
-        let bestOfferAmount = ""; // e.g., "52.00"
-
-        if (rooms && rooms.length > 0) {
-          let maxDiscount = 0;
-
-          rooms.forEach((room) => {
-            if (room.rates && room.rates.length > 0) {
-              room.rates.forEach((rate) => {
-                if (rate.offers && rate.offers.length > 0) {
-                  rate.offers.forEach((offer) => {
-                    const discountAmount = Math.abs(
-                      parseFloat(offer.amount || 0)
-                    );
-                    if (discountAmount > maxDiscount) {
-                      maxDiscount = discountAmount;
-                      bestOfferName = offer.name || "Special Offer";
-                      bestOfferAmount = discountAmount.toFixed(2);
-                    }
-                  });
-                }
-              });
-            }
-          });
-        }
+        const bestOffer = getBestOffer(hotel);
 
         return (
           <HotelCard
             id={index}
+           isDeal={bestOffer?.hasDeal || false}
             hotelName={name}
-            offerName={bestOfferName} // e.g., "Exclusive discount"
-            offerAmount={bestOfferAmount} // e.g., "52.00"
+            offerName={bestOffer?.name || ""}
+            offerAmount={bestOffer?.amount || 0} // e.g., "52.00"
             country={destinationName}
             // description="Ritz Paris is a renowned 5-star luxury hotel located in the heart of Paris, France. Famous for its classic architecture, refined service."
             image={imageUrl}

@@ -4,7 +4,6 @@ import { HotelContext } from "../../../components/context/hotels.contenxt";
 import { useNavigate } from "react-router-dom";
 import BackBTN from "../../../components/features/BackButton/BackBTN";
 import Rates from "../Rates/rates.component";
-import facilityIconMap from "../../../components/Utils/icons.utils";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";

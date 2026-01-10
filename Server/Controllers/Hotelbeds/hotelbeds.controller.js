@@ -138,14 +138,18 @@ const getRooms = async (req, res) => {
 
 const hotelData = async (req, res) => {
   const { code } = req.body;
+  console.log(code);
+  console.log(req.body);
   try {
     const rooms = await getHotelData(code);
+    console.log("successfully fetched hotel data");
     res.json({
       success: true,
       message: "hotel data is working",
       data: rooms,
     });
   } catch (err) {
+    console.log("error fetching hotel data");
     res.json({
       success: false,
       message: "error getting hotel data",
