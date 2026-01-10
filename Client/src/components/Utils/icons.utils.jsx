@@ -31,16 +31,25 @@ import {
   UtensilsIcon,
 } from "lucide-react";
 
-
 // Phosphor hair dryer icon is called HairDryer (not SprayBottleIcon)
-import { OvenIcon,HairDryerIcon,SprayBottleIcon,DeskIcon,TowelIcon,RugIcon,WheelchairMotionIcon,BeerBottleIcon  } from "@phosphor-icons/react";
+import {
+  OvenIcon,
+  HairDryerIcon,
+  SprayBottleIcon,
+  DeskIcon,
+  TowelIcon,
+  RugIcon,
+  CreditCardIcon,
+  WheelchairMotionIcon,
+  BeerBottleIcon,
+} from "@phosphor-icons/react";
 
 const facilityIconMap = {
   wifi: { icon: Wifi, label: "Free WiFi" },
   "wi-fi": { icon: Wifi, label: "Free WiFi" },
   internet: { icon: Wifi, label: "Internet Access" },
   wireless: { icon: Wifi, label: "WiFi" },
-    "disability-friendly bathroom": {
+  "disability-friendly bathroom": {
     icon: WheelchairMotionIcon,
     label: "Disability-Friendly Bathroom",
   },
@@ -62,18 +71,26 @@ const facilityIconMap = {
   "smoking rooms": { icon: Cigarette, label: "Smoking Rooms" },
   "plug adaptor": { icon: Plug, label: "Plug Adaptor" },
   "ironing set": { icon: Plug, label: "Ironing Set" },
-  "kitchen utensils, plates & cups": { icon: Plug, label: "Kitchen utensils, plates & cups" },
+  "kitchen utensils, plates & cups": {
+    icon: Plug,
+    label: "Kitchen utensils, plates & cups",
+  },
   "kitchen utensils": { icon: Plug, label: "Kitchen Utensils" },
-  "kitchenette": { icon: OvenIcon, label: "Kitchenette" },
+  kitchenette: { icon: OvenIcon, label: "Kitchenette" },
   "wheelchair-accessible": {
     icon: Accessibility,
     label: "Wheelchair-Accessible",
   },
-  toiletries: { icon: Toilet, label: "Toiletries" }, 
+  toiletries: { icon: Toilet, label: "Toiletries" },
   "air conditioning": { icon: AirVent, label: "Air Conditioning" },
   "air conditioned": { icon: AirVent, label: "Air Conditioning" },
   "220v power supply": { icon: Cable, label: "220V Power Supply" },
   "direct dial telephone": { icon: Phone, label: "Direct Dial Telephone" },
+  "american express": { icon: CreditCardIcon, label: "American Express" },
+  "visa": { icon: CreditCardIcon, label: "Visa" },
+  "mastercard": { icon: CreditCardIcon, label: "MasterCard" },
+  "diner's club": { icon: CreditCardIcon, label: "Diner's Club" },
+  "discover": { icon: CreditCardIcon, label: "Discover" },
   "tea and coffee making facilities": {
     icon: Coffee,
     label: "Tea & Coffee Facilities",
@@ -95,6 +112,8 @@ const facilityIconMap = {
   "smoke detector": { icon: AlarmSmoke, label: "Smoke Detector" },
 
   "non smoking": { icon: CigaretteOff, label: "Non-smoking", color: "#E88D67" },
+  "non-smoking area": { icon: CigaretteOff, label: "Non-smoking Area" },
+  "non-smoking rooms": { icon: CigaretteOff, label: "Non-smoking Rooms" },
   "family rooms": { icon: Baby, label: "Family Rooms" },
   tv: { icon: Tv, label: "TV" },
   television: { icon: Tv, label: "Television" },

@@ -87,12 +87,12 @@ body {
   h4 {
     text-transform: capitalize;
     text-align: left;
-    font-family: $roboto, sans-serif;
+    font-family: $textFont, sans-serif;
     color: $text_color;
     margin-top: 10px;
-    font-weight: 400;
+    font-weight: 500;
     color: $text_color;
-    font-size: 17px;
+    font-size: 12px;
   }
 }
 .swiper-slide {
@@ -101,7 +101,7 @@ body {
     height: 100%;
   }
 }
-.facilites-container {  
+.facilites-container {
   width: 100%;
   padding: 0px 5px;
   .facilities-header {
@@ -140,18 +140,18 @@ body {
     color: $darkOrange;
   }
   .facility-item.paid {
-  opacity: 0.85;
-  position: relative;
-}
-.paid-badge {
-  font-size: 0.68rem;
-  background: $bg-color;
-  color: $blue;
-  padding: 2px 6px;
-  border-radius: 4px;
-  margin-left: 8px;
-  vertical-align: middle;
-}
+    opacity: 0.85;
+    position: relative;
+  }
+  .paid-badge {
+    font-size: 0.68rem;
+    background: $bg-color;
+    color: $blue;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
 }
 
 .with-icon {
@@ -160,7 +160,6 @@ body {
   gap: 5px;
   padding: 5px 15px;
 }
-
 
 .hotel-reviews {
   margin-top: 10px;
@@ -229,23 +228,24 @@ body {
   h2 {
     font-size: 20px;
     text-transform: capitalize;
-    font-family: $roboto, sans-serif;
+    font-family: $textFont, sans-serif;
     color: $text_color;
     font-weight: 400;
   }
 }
 .rooms {
   h5 {
-    color: $text_color;
+    color: $darkOrange;
     font-weight: 600;
-    font-family: $roboto, sans-serif;
+    font-size: 10px;
+    font-family: $textFont, sans-serif;
     margin-top: 10px;
   }
   .border {
     position: relative;
     text-align: center;
     padding-top: 5px;
-    margin: 0px;
+    margin: 10px 0px 10px 0px;
     &:before {
       content: "";
       position: absolute;
@@ -255,7 +255,7 @@ body {
       transform: translateX(-50%);
       width: 100%;
       height: 1px;
-      background-color: $ticketColor;
+      background-color: $darkOrange;
     }
   }
 }
@@ -319,9 +319,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  h6
-  {
-    font-family: $robotoMono,monospace;
+  h6 {
+    font-family: $robotoMono, monospace;
     font-size: 10px;
     color: $darkOrange;
     font-weight: 600;
@@ -329,7 +328,6 @@ body {
     margin-left: 5px;
     opacity: 100%;
   }
-
 }
 .book-now {
   padding: 5px 20px;
@@ -343,7 +341,7 @@ body {
   font-weight: 500;
   span {
     font-weight: 600;
-    font-family: $robotoMono,monospace;
+    font-family: $robotoMono, monospace;
     letter-spacing: 1px;
     font-size: 20px;
   }
@@ -373,7 +371,7 @@ body {
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  padding: 5px 0px;
+  padding: 10px 0px;
 }
 
 .room-rates {

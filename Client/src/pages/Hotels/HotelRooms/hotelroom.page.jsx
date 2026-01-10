@@ -176,7 +176,7 @@ function HotelRoom() {
                 </div>
 
                 {/* Rates */}
-                <h4 className="room-rates">Available Rates</h4>
+                <h4 className="room-rates">Rates Available for this room</h4>
                 <div className="rooms-segment">
                   {room.rates.map((rate, idx) => {
                     const { net, boardName, cancellationPolicies } = rate;
