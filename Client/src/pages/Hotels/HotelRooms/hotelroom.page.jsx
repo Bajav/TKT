@@ -1,5 +1,5 @@
 import "./hotelroom.styles.scss";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { HotelContext } from "../../../components/context/hotels.contenxt";
 import { useNavigate } from "react-router-dom";
 import BackBTN from "../../../components/features/BackButton/BackBTN";
@@ -19,7 +19,7 @@ function HotelRoom() {
   const { categoryCode, name, rooms: availableRooms } = selectedHotel;
   console.log("hotelInfo", hotelInfo);
   const { images, facilities, description } = hotelInfo;
-
+  const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
   const backBtn = () => navigate("/searchhotels/results");
 
@@ -51,7 +51,10 @@ function HotelRoom() {
 
   // Clean room code (handles "[STU.ST]" → "STU.ST")
   const cleanRoomCode = (code) => code?.replace(/[\[\]]/g, "").trim();
-
+  // toggle tabs
+  const toggleTab = (i) => {
+    setActiveTab(i);
+  };
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
@@ -82,8 +85,75 @@ function HotelRoom() {
       </div>
 
       <div className="main-results">
-        <h4>{name}</h4>
-        <p>{description?.content}</p>
+        <div className="tabz-container">
+          <div className="tabz">
+            <div
+              className="tab-slider"
+              style={{ transform: `translateX(${activeTab * 100}%)` }}
+            />
+            <div
+              onClick={() => toggleTab(1)}
+              className={activeTab === 1 ? "tab active" : "tab"}
+            >
+              about hotel
+            </div>
+            <div
+              onClick={() => toggleTab(2)}
+              className={activeTab === 2 ? "tab active" : "tab"}
+            >
+              attractions
+            </div>
+            <div
+              onClick={() => toggleTab(3)}
+              className={activeTab === 3 ? "tab active" : "tab"}
+            >
+              food & drinks
+            </div>
+            <div
+              onClick={() => toggleTab(4)}
+              className={activeTab === 4 ? "tab active" : "tab"}
+            >
+              transport
+            </div>
+          </div>
+          <div className="tabz-content">
+            <div
+              className={activeTab === 1 ? "content active-content" : "content"}
+            >
+              <h4>{name}</h4>
+              <p>
+                <p>{description?.content}</p>
+              </p>
+            </div>
+            <div
+              className={activeTab === 2 ? "content active-content" : "content"}
+            >
+              <h4>list of attractions available</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, quod.
+              </p>
+            </div>
+            <div
+              className={activeTab === 3 ? "content active-content" : "content"}
+            >
+              <h4>list of places to eat and drink available</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, quod.
+              </p>
+            </div>
+            <div
+              className={activeTab === 4 ? "content active-content" : "content"}
+            >
+              <h4>transport</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, quod.
+              </p>
+            </div>
+          </div>
+        </div>
 
         {/* Hotel facilities (general) */}
         <div className="facilites-container">
@@ -187,10 +257,10 @@ function HotelRoom() {
                       <div key={idx} className="room">
                         <div className="top">
                           <div className="side-one">
-                              <h4>{boardName || "Room Only"}</h4>
-                              <h2>online payment required</h2>
-                            </div>
-                            <h6>{cancellationSummary.label}</h6>
+                            <h4>{boardName || "Room Only"}</h4>
+                            <h2>online payment required</h2>
+                          </div>
+                          <h6>{cancellationSummary.label}</h6>
                         </div>
                         <div className="bottom">
                           <div className="room-actives">
@@ -214,6 +284,7 @@ function HotelRoom() {
           })}
         </div>
       </div>
+      <div className="footer"></div>
     </section>
   );
 }
