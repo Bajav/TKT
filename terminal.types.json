@@ -1,0 +1,1119 @@
+{
+  "success": true,
+  "message": "hotel terminals is working",
+  "data": {
+    "from": 1,
+    "to": 100,
+    "total": 1297,
+    "auditData": {
+      "processTime": "2",
+      "timestamp": "2026-01-11 00:11:29.598",
+      "requestHost": "41.75.182.152",
+      "serverId": "hotel-content-api-69f775d8b9-ssdq7",
+      "environment": "[int, awseucentral1, k8s, secret, hotel-content-api-69f775d8b9-ssdq7]",
+      "release": ""
+    },
+    "terminals": [
+      {
+        "code": "AAE",
+        "type": "A",
+        "country": "DZ",
+        "name": {
+          "content": "Annaba, Rabah Bitat Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AAGT",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "AGAETE"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AAL",
+        "type": "A",
+        "country": "DK",
+        "name": {
+          "content": "Aalborg, Aalborg Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AAM",
+        "type": "A",
+        "country": "ZA",
+        "name": {
+          "content": "MALA MALA"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AAR",
+        "type": "A",
+        "country": "DK",
+        "name": {
+          "content": "Aarhus, Aarhus Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ABC",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "Albacete, Albacete Los Llanos Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ABJZ",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "NO USAR"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ABZ",
+        "type": "A",
+        "country": "UK",
+        "name": {
+          "content": "Aberdeen, Aberdeen Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ACA",
+        "type": "A",
+        "country": "MX",
+        "name": {
+          "content": "Acapulco, General Juan N Álvarez Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ACE",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "Arrecife, Lanzarote Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ACH",
+        "type": "A",
+        "country": "CH",
+        "name": {
+          "content": "Altenrhein, Altenrhein St Gallen Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ADA",
+        "type": "A",
+        "country": "TR",
+        "name": {
+          "content": "Adana, Adana Sakirpasa Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ADB",
+        "type": "A",
+        "country": "TR",
+        "name": {
+          "content": "Izmir, Adnan Menderes Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ADL",
+        "type": "A",
+        "country": "AU",
+        "name": {
+          "content": "Adelaide, Adelaide Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ADLD",
+        "type": "A",
+        "country": "AU",
+        "name": {
+          "content": "ADELAIDE DOMESTIC TERMINAL"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ADZ",
+        "type": "A",
+        "country": "CO",
+        "name": {
+          "content": "San Andres, Gustavo Rojas Pinilla Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AEAS",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "no usar"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AEG",
+        "type": "P",
+        "country": "GR",
+        "name": {
+          "content": "Aegina, Aegina Harbour"
+        },
+        "description": {
+          "content": "Harbour"
+        }
+      },
+      {
+        "code": "AEGLI",
+        "type": "P",
+        "country": "GR",
+        "name": {
+          "content": "Aegialis, Aegialis Harbour"
+        },
+        "description": {
+          "content": "Harbour"
+        }
+      },
+      {
+        "code": "AEP",
+        "type": "A",
+        "country": "AR",
+        "name": {
+          "content": "Buenos Aires, Jorge Newbery Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AER",
+        "type": "A",
+        "country": "RU",
+        "name": {
+          "content": "Adler, Sochi International Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AGA",
+        "type": "A",
+        "country": "MA",
+        "name": {
+          "content": "Agadir,  Agadir Al Massira Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AGB",
+        "type": "A",
+        "country": "DE",
+        "name": {
+          "content": "MUNICH - AUGSBURG MUEHLHAUSEN"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AGH",
+        "type": "A",
+        "country": "SE",
+        "name": {
+          "content": "Helsingborg, Ängelholm Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AGKP",
+        "type": "P",
+        "country": "GR",
+        "name": {
+          "content": "Athens, Agios Konstantinos Harbour"
+        },
+        "description": {
+          "content": "Harbour"
+        }
+      },
+      {
+        "code": "AGP",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "Málaga, Málaga Costa del Sol Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AGR",
+        "type": "A",
+        "country": "IN",
+        "name": {
+          "content": "Agra, Agra Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AGRS",
+        "type": "T",
+        "country": "IN",
+        "name": {
+          "content": "Agra Cantonment, Train Station"
+        },
+        "description": {
+          "content": "Railway station"
+        }
+      },
+      {
+        "code": "AGS",
+        "type": "A",
+        "country": "US",
+        "name": {
+          "content": "AUGUSTA"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AGU",
+        "type": "A",
+        "country": "MX",
+        "name": {
+          "content": "Aguascalientes, Lic. Jesus Teran Peredo Int. airp"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AHMS",
+        "type": "T",
+        "country": "IN",
+        "name": {
+          "content": "Ahmedabad, Train Station"
+        },
+        "description": {
+          "content": "Railway station"
+        }
+      },
+      {
+        "code": "AHO",
+        "type": "A",
+        "country": "IT",
+        "name": {
+          "content": "Alghero, Alghero Fertilia Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AJA",
+        "type": "A",
+        "country": "FR",
+        "name": {
+          "content": "Ajaccio, Ajaccio Napoleon Bonaparte Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AKL",
+        "type": "A",
+        "country": "NZ",
+        "name": {
+          "content": "Auckland, Auckland Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AKLD",
+        "type": "A",
+        "country": "NZ",
+        "name": {
+          "content": "Auckland, Auckland International Airport "
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ALBT",
+        "type": "T",
+        "country": "PT",
+        "name": {
+          "content": "Albufeira, Train Station"
+        },
+        "description": {
+          "content": "Railway station"
+        }
+      },
+      {
+        "code": "ALC",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "Alicante, Alicante Elche Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ALF",
+        "type": "A",
+        "country": "NO",
+        "name": {
+          "content": "ALTA"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ALG",
+        "type": "A",
+        "country": "DZ",
+        "name": {
+          "content": "Algiers, Houari Boumediene Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ALONI",
+        "type": "P",
+        "country": "GR",
+        "name": {
+          "content": "Alonissos, Alonissos Harbour"
+        },
+        "description": {
+          "content": "Harbour"
+        }
+      },
+      {
+        "code": "AMA",
+        "type": "A",
+        "country": "US",
+        "name": {
+          "content": "AMARILLO"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AMD",
+        "type": "A",
+        "country": "IN",
+        "name": {
+          "content": "Ahmedabad, Sardar Vallabhbhai Patel Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AMI",
+        "type": "A",
+        "country": "ID",
+        "name": {
+          "content": "MATARAM"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AMM",
+        "type": "A",
+        "country": "JO",
+        "name": {
+          "content": "Amman, Queen Alia Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AMS",
+        "type": "A",
+        "country": "NL",
+        "name": {
+          "content": "Amsterdam,  Amsterdam Schiphol Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ANC",
+        "type": "A",
+        "country": "US",
+        "name": {
+          "content": "Anchorage, Ted Stevens Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ANDR",
+        "type": "P",
+        "country": "GR",
+        "name": {
+          "content": "Andros, Harbour"
+        },
+        "description": {
+          "content": "Harbour"
+        }
+      },
+      {
+        "code": "ANE",
+        "type": "A",
+        "country": "FR",
+        "name": {
+          "content": "Angers, Angers-Loire Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ANK",
+        "type": "A",
+        "country": "TR",
+        "name": {
+          "content": "ANKARA"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ANR",
+        "type": "A",
+        "country": "BE",
+        "name": {
+          "content": "Antwerp, Antwerp International (Deurne) Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ANU",
+        "type": "A",
+        "country": "AG",
+        "name": {
+          "content": "Antigua, V. C. Bird Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AOI",
+        "type": "A",
+        "country": "IT",
+        "name": {
+          "content": "Ancona, Ancona Falconara Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AOK",
+        "type": "A",
+        "country": "GR",
+        "name": {
+          "content": "Karpathos, Karpathos Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "APF",
+        "type": "A",
+        "country": "US",
+        "name": {
+          "content": "NAPLES"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "APTO",
+        "type": "P",
+        "country": "AI",
+        "name": {
+          "content": "Anguilla, Port of Blowing Point"
+        },
+        "description": {
+          "content": "Harbour"
+        }
+      },
+      {
+        "code": "ARAX",
+        "type": "A",
+        "country": "GR",
+        "name": {
+          "content": "ARAXOS AIRPORT"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AREA",
+        "type": "B",
+        "country": "ES",
+        "name": {
+          "content": "AREA MONTBLANC"
+        },
+        "description": {
+          "content": "Bus station"
+        }
+      },
+      {
+        "code": "ARGO",
+        "type": "P",
+        "country": "GR",
+        "name": {
+          "content": "Kefalonia, Argostoli Harbour"
+        },
+        "description": {
+          "content": "Harbour"
+        }
+      },
+      {
+        "code": "ARN",
+        "type": "A",
+        "country": "SE",
+        "name": {
+          "content": "Stockholm, Arlanda Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ARTE",
+        "type": "A",
+        "country": "GR",
+        "name": {
+          "content": "ARTY TOURS TERMINAL"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ASCT",
+        "type": "T",
+        "country": "CL",
+        "name": {
+          "content": "Santiago de Chile, Central Train Station"
+        },
+        "description": {
+          "content": "Railway station"
+        }
+      },
+      {
+        "code": "ASDR",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "no usar"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ASP",
+        "type": "A",
+        "country": "AU",
+        "name": {
+          "content": "Alice Springs, Alice Springs Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ASR",
+        "type": "A",
+        "country": "TR",
+        "name": {
+          "content": "Kayseri, Kayseri Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ASU",
+        "type": "A",
+        "country": "PY",
+        "name": {
+          "content": "Asuncion, Silvio Pettirossi Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ASW",
+        "type": "A",
+        "country": "EG",
+        "name": {
+          "content": "Aswan, Aswan Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ATCH",
+        "type": "T",
+        "country": "ES",
+        "name": {
+          "content": "Madrid, Atocha Train Station"
+        },
+        "description": {
+          "content": "Railway station"
+        }
+      },
+      {
+        "code": "ATH",
+        "type": "A",
+        "country": "GR",
+        "name": {
+          "content": "Athens, Eleftherios Venizelos Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "ATL",
+        "type": "A",
+        "country": "US",
+        "name": {
+          "content": "Atlanta, Hartsfield Jackson Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AUA",
+        "type": "A",
+        "country": "AW",
+        "name": {
+          "content": "Aruba, Queen Beatrix Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AUH",
+        "type": "A",
+        "country": "AE",
+        "name": {
+          "content": "Abu Dhabi, Abu Dhabi Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AUR",
+        "type": "A",
+        "country": "FR",
+        "name": {
+          "content": "Aurillac, Aurillac Airport "
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AUS",
+        "type": "A",
+        "country": "US",
+        "name": {
+          "content": "Austin, Bergstrom Int. Austin Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AVI",
+        "type": "A",
+        "country": "CU",
+        "name": {
+          "content": "CIEGO DE AVILA"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AVLL",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "DO NOT USE"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AVN",
+        "type": "A",
+        "country": "FR",
+        "name": {
+          "content": "Avignon, Avignon-Caumont Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AXD",
+        "type": "A",
+        "country": "GR",
+        "name": {
+          "content": "ALEXANDROUPOLIS AIRPORT"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AYQ",
+        "type": "A",
+        "country": "AU",
+        "name": {
+          "content": "Ayers Rock, Airport Connellan Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AYT",
+        "type": "A",
+        "country": "TR",
+        "name": {
+          "content": "Antalya, Antalya Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AYTP",
+        "type": "P",
+        "country": "TR",
+        "name": {
+          "content": "Antalya, Antalya Harbour"
+        },
+        "description": {
+          "content": "Harbour"
+        }
+      },
+      {
+        "code": "AZS",
+        "type": "A",
+        "country": "DO",
+        "name": {
+          "content": "Samaná, El Catey Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "AZSA",
+        "type": "A",
+        "country": "DO",
+        "name": {
+          "content": "Samana, Catey Samana Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BAGP",
+        "type": "B",
+        "country": "ES",
+        "name": {
+          "content": "Malaga, Malaga Bus Station"
+        },
+        "description": {
+          "content": "Bus station"
+        }
+      },
+      {
+        "code": "BAH",
+        "type": "A",
+        "country": "BH",
+        "name": {
+          "content": "Manama, Bahrain Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BALTS",
+        "type": "T",
+        "country": "RU",
+        "name": {
+          "content": "St Petersburg, Baltiysky Train Station"
+        },
+        "description": {
+          "content": "Railway station"
+        }
+      },
+      {
+        "code": "BAQ",
+        "type": "A",
+        "country": "CO",
+        "name": {
+          "content": "Barranquilla, Ernesto Cortissoz Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BBQ",
+        "type": "A",
+        "country": "AG",
+        "name": {
+          "content": "BARBUDA"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BBU",
+        "type": "A",
+        "country": "RO",
+        "name": {
+          "content": "Bucharest, Aurel Vlaicu Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BCN",
+        "type": "A",
+        "country": "ES",
+        "name": {
+          "content": "Barcelona, El Prat Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BCNE",
+        "type": "T",
+        "country": "ES",
+        "name": {
+          "content": "Barcelona, Sants Train Station"
+        },
+        "description": {
+          "content": "Railway station"
+        }
+      },
+      {
+        "code": "BCNEF",
+        "type": "T",
+        "country": "ES",
+        "name": {
+          "content": "Barcelona, France Train Station"
+        },
+        "description": {
+          "content": "Railway station"
+        }
+      },
+      {
+        "code": "BCNP",
+        "type": "P",
+        "country": "ES",
+        "name": {
+          "content": "Barcelona, Barcelona Harbour"
+        },
+        "description": {
+          "content": "Harbour"
+        }
+      },
+      {
+        "code": "BDA",
+        "type": "A",
+        "country": "BM",
+        "name": {
+          "content": "Bermuda, L.F. Wade Int. Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BDJ",
+        "type": "A",
+        "country": "ID",
+        "name": {
+          "content": "BANJARMASIN"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BDS",
+        "type": "A",
+        "country": "IT",
+        "name": {
+          "content": "Brindisi, Papola Casale Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BEG",
+        "type": "A",
+        "country": "RS",
+        "name": {
+          "content": "Belgrade, Nikola Tesla Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BELTS",
+        "type": "T",
+        "country": "RU",
+        "name": {
+          "content": "Moscow, Belorussky Train Station"
+        },
+        "description": {
+          "content": "Railway station"
+        }
+      },
+      {
+        "code": "BEO",
+        "type": "A",
+        "country": "AU",
+        "name": {
+          "content": "NEWCASTLE BELMONT"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BER",
+        "type": "A",
+        "country": "DE",
+        "name": {
+          "content": "Berlin, Berlin Brandenburg Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      },
+      {
+        "code": "BES",
+        "type": "A",
+        "country": "FR",
+        "name": {
+          "content": "Brest, Brest Bretagne Airport"
+        },
+        "description": {
+          "content": "Airport"
+        }
+      }
+    ]
+  }
+}

@@ -213,6 +213,25 @@ const promotions = async (req, res) => {
     });
   }
 };
+
+const terminals = async (req, res) => {
+
+  try {
+    // const rateComments = await getRateComments(rateCommentsId.split('|')[1]);
+    const terminals = await typeHandler("/terminals");
+    res.json({
+      success: true,
+      message: "hotel terminals is working",
+      data: terminals,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: `status code ${err.status}  ${err.message}`,
+      data: err,
+    });
+  }
+};
 export {
   hotelSearch,
   hotelContents,
@@ -224,4 +243,5 @@ export {
   hotelData,
   hotelComments,
   promotions,
+  terminals,
 };

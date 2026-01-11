@@ -37,7 +37,7 @@ const HotelCard = ({
   const selectedHotel = hotelJson.hotels.hotels[index];
 
   setSelectedHotel(selectedHotel);
-  console.log("selectedHotel", selectedHotel);
+  // console.log("selectedHotel", selectedHotel);s
 
   try {
     const response = await axios.post(

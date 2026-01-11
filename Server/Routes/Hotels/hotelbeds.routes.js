@@ -10,6 +10,7 @@ import {
   hotelComments,
   rateComments,
   promotions, 
+  terminals,
 } from "../../Controllers/Hotelbeds/hotelbeds.controller.js";
 const router = Router();
 
@@ -36,4 +37,5 @@ router.get("/hotelscontents/rooms", getRooms);
 router.post("/hotelscontents/comments", hotelComments);
 router.get("/hotelscontents/ratecomments", rateComments);
 router.get("/hotelscontents/promotions", promotions);
+router.get("/hotelscontents/terminals", terminals);
 export default router;

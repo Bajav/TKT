@@ -15,7 +15,7 @@ import { FacilityList } from "../../../components/Utils/HotelsUtils/facilities.u
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils.jsx";
 
 // icons
-import { AirplaneTaxiingIcon,AnchorIcon } from "@phosphor-icons/react";
+import { AirplaneTaxiingIcon,AnchorIcon,TrainIcon,BusIcon } from "@phosphor-icons/react";
 
 function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
@@ -56,6 +56,8 @@ function HotelRoom() {
   };
   const airports = terminals.filter((t) => t?.terminalType === "A");
   const harbours = terminals.filter((t) => t?.terminalType === "P");
+  const railway = terminals.filter((t) => t?.terminalType === "T");
+  const bus = terminals.filter((t) => t?.terminalType === "B");
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
@@ -196,6 +198,52 @@ function HotelRoom() {
                             <span className="distance">
                               {" "}
                               • {harbour.distance} km
+                            </span>
+                          </h5>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                 {railway.length > 0 && (
+                  <div className="harbours">
+                    <h4>Nearest trains</h4>
+                    <div className="harbour-list">
+                      {railway.map((tain) => (
+                        <div
+                          key={tain.terminalId || tain.name?.content}
+                          className="item"
+                        >
+                          <TrainIcon size={10} color="#222" />
+                          <h5>
+                            {tain.name?.content || "Unknown Harbour"}
+                            <span className="distance">
+                              {" "}
+                              • {tain.distance} km
+                            </span>
+                          </h5>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                       {bus.length > 0 && (
+                  <div className="harbours">
+                    <h4>Nearest trains</h4>
+                    <div className="harbour-list">
+                      {bus.map((bus) => (
+                        <div
+                          key={bus.terminalId || bus.name?.content}
+                          className="item"
+                        >
+                          <TrainIcon size={10} color="#222" />
+                          <h5>
+                            {bus.name?.content || "Unknown Harbour"}
+                            <span className="distance">
+                              {" "}
+                              • {bus.distance} km
                             </span>
                           </h5>
                         </div>

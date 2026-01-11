@@ -486,7 +486,7 @@ body {
 // tabs styles
 .tabz-container {
   background-color: #fff;
-  height: 30vh;
+  height: auto;
   max-height: 30vh;
   width: 100%;
   padding: 5px;
@@ -524,6 +524,7 @@ body {
   font-family: $roboto, sans-serif;
   font-size: 12px;
   width: 100%;
+    overflow: auto;
   padding: 5px;
   .content {
     display: none;
