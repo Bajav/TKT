@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@api/fsq-developers-places": "file:.api/apis/fsq-developers-places",
     "amadeus": "^11.0.0",
     "axios": "^1.8.4",
     "body-parser": "^1.20.3",

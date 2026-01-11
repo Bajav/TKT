@@ -15,7 +15,13 @@ import { FacilityList } from "../../../components/Utils/HotelsUtils/facilities.u
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils.jsx";
 
 // icons
-import { AirplaneTaxiingIcon,AnchorIcon,TrainIcon,BusIcon } from "@phosphor-icons/react";
+import {
+  AirplaneTaxiingIcon,
+  AnchorIcon,
+  TrainIcon,
+  BusIcon,
+  SmileyIcon
+} from "@phosphor-icons/react";
 
 function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
@@ -106,12 +112,12 @@ function HotelRoom() {
             >
               attractions
             </div>
-            <div
+            {/* <div
               onClick={() => toggleTab(3)}
               className={activeTab === 3 ? "tab active" : "tab"}
             >
               food & drinks
-            </div>
+            </div> */}
             <div
               onClick={() => toggleTab(4)}
               className={activeTab === 4 ? "tab active" : "tab"}
@@ -168,7 +174,7 @@ function HotelRoom() {
                           key={airport.terminalId || airport.name?.content}
                           className="item"
                         >
-                          <AirplaneTaxiingIcon size={10} color="#222"/>
+                          <AirplaneTaxiingIcon size={10} color="#222" />
                           <h5>
                             {airport.name?.content || "Unknown Airport"}
                             <span className="distance">
@@ -206,7 +212,7 @@ function HotelRoom() {
                   </div>
                 )}
 
-                 {railway.length > 0 && (
+                {railway.length > 0 && (
                   <div className="harbours">
                     <h4>Nearest trains</h4>
                     <div className="harbour-list">
@@ -229,7 +235,7 @@ function HotelRoom() {
                   </div>
                 )}
 
-                       {bus.length > 0 && (
+                {bus.length > 0 && (
                   <div className="harbours">
                     <h4>Nearest trains</h4>
                     <div className="harbour-list">
@@ -238,7 +244,7 @@ function HotelRoom() {
                           key={bus.terminalId || bus.name?.content}
                           className="item"
                         >
-                          <TrainIcon size={10} color="#222" />
+                          <BusIcon size={10} color="#222" />
                           <h5>
                             {bus.name?.content || "Unknown Harbour"}
                             <span className="distance">
@@ -392,7 +398,12 @@ function HotelRoom() {
           })}
         </div>
       </div>
-      <div className="footer"></div>
+      <div className="footer">
+          <div className="footer-container">
+              <h1>footer</h1>
+        <SmileyIcon size={100} color="#f5f5f5" />
+          </div>
+      </div>
     </section>
   );
 }
