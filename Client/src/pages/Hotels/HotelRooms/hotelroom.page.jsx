@@ -14,11 +14,15 @@ import hotelReviews from "../../../data/hotelReviews.data.json";
 import { FacilityList } from "../../../components/Utils/HotelsUtils/facilities.utils.jsx";
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils.jsx";
 
+// icons
+import { AirplaneTaxiingIcon,AnchorIcon } from "@phosphor-icons/react";
+
 function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
   const { categoryCode, name, rooms: availableRooms } = selectedHotel;
-  console.log("hotelInfo", hotelInfo);
-  const { images, facilities, description } = hotelInfo;
+  // console.log("hotelInfo", hotelInfo);
+  const { images, facilities, description, terminals, interestPoints } =
+    hotelInfo;
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
   const backBtn = () => navigate("/searchhotels/results");
@@ -39,15 +43,10 @@ function HotelRoom() {
   // Object.keys(roomImagesByCode).forEach((code) => {
   //   roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
   // });
-
-  // ================================================================
-  // 2. Create lookup map: roomCode → detailed room info (with facilities)
-  // ================================================================
   const roomDetailsMap = (hotelInfo.rooms || []).reduce((map, room) => {
     map[room.roomCode] = room;
     return map;
   }, {});
-  //ICON MAPPING FOR FACILITIES
 
   // Clean room code (handles "[STU.ST]" → "STU.ST")
   const cleanRoomCode = (code) => code?.replace(/[\[\]]/g, "").trim();
@@ -55,6 +54,8 @@ function HotelRoom() {
   const toggleTab = (i) => {
     setActiveTab(i);
   };
+  const airports = terminals.filter((t) => t?.terminalType === "A");
+  const harbours = terminals.filter((t) => t?.terminalType === "P");
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
@@ -129,10 +130,18 @@ function HotelRoom() {
               className={activeTab === 2 ? "content active-content" : "content"}
             >
               <h4>list of attractions available</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quisquam, quod.
-              </p>
+              <div className="poi">
+                {interestPoints?.map((place, index) => {
+                  const { poiName, distance } = place;
+                  return (
+                    <div className="place" key={index}>
+                      <h4>
+                        {poiName} {distance} km
+                      </h4>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
             <div
               className={activeTab === 3 ? "content active-content" : "content"}
@@ -146,11 +155,62 @@ function HotelRoom() {
             <div
               className={activeTab === 4 ? "content active-content" : "content"}
             >
-              <h4>transport</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quisquam, quod.
-              </p>
+              <div className="transport-container">
+                {/* Airports */}
+                {airports.length > 0 && (
+                  <div className="airports">
+                    <h4>Nearest Airports</h4>
+                    <div className="airport-list">
+                      {airports.map((airport) => (
+                        <div
+                          key={airport.terminalId || airport.name?.content}
+                          className="item"
+                        >
+                          <AirplaneTaxiingIcon size={10} color="#222"/>
+                          <h5>
+                            {airport.name?.content || "Unknown Airport"}
+                            <span className="distance">
+                              {" "}
+                              • {airport.distance} km
+                            </span>
+                          </h5>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Harbours / Ports */}
+                {harbours.length > 0 && (
+                  <div className="harbours">
+                    <h4>Nearest Harbours / Ports</h4>
+                    <div className="harbour-list">
+                      {harbours.map((harbour) => (
+                        <div
+                          key={harbour.terminalId || harbour.name?.content}
+                          className="item"
+                        >
+                          <AnchorIcon size={10} color="#222" />
+                          <h5>
+                            {harbour.name?.content || "Unknown Harbour"}
+                            <span className="distance">
+                              {" "}
+                              • {harbour.distance} km
+                            </span>
+                          </h5>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Optional: show nothing found message */}
+                {airports.length === 0 && harbours.length === 0 && (
+                  <p className="no-data">
+                    No nearby airports or harbours found
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>

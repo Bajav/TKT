@@ -551,6 +551,24 @@ body {
     display: block;
   }
 }
+.transport-container
+{
+    .item
+    {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-direction: row;
+      margin: 5px;
+      h5
+      {
+        font-family: $robotoMono,monospace;
+        font-size: 8px;
+        font-weight: 500;
+        color: $text_color;
+      }
+    }
+}
 .footer {
   height: 70vh;
 }

@@ -54,8 +54,6 @@ const hotelContents = async (req, res) => {
   //   data:hotelCodes
   // });
   try {
-    // hotelCodes = ["12345", "67890"]
-
     if (!hotelCodes || hotelCodes.length === 0) {
       return res.status(400).json({
         success: false,
