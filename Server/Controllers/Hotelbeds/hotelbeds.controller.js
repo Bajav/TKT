@@ -37,12 +37,13 @@ const hotelSearch = async (req, res) => {
     });
     // console.log("hotel response", response);
     res.json(response);
-  } catch (err) {
-    console.log(err.message);
-    return res.status(500).json({
+  } catch (error) {
+
+   return res.status(error.status || 500).json({
       success: false,
-      error: "HOTEL_SEARCH_FAILED",
-      message: err.message,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
@@ -54,29 +55,29 @@ const hotelAvailbility = async (req, res) => {
   try {
     const response = await searchHotels(bodyData);
     res.json(response);
-  } catch (err) {
-    console.log(err.message);
-    return res.status(400).json({
+  }catch (error) {
+   return res.status(error.status || 500).json({
       success: false,
-      error: "HOTEL_AVAILABILITY HAS FAILED",
-      message: err.message,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
 
 const bookHotel = async (req, res) => {
   const bodyData = req.body;
-  console.log(bodyData);
-  //   res.send("route is working");
+  console.log("Request Body:", bodyData);
+  
   try {
     const response = await booking(req.body);
     res.json(response);
-  } catch (err) {
-    // console.log(err);
-    return res.status(400).json({
+  } catch (error) {
+   return res.status(error.status || 500).json({
       success: false,
-      error: "HOTEL_BOOKING_HAS_FAILED",
-      message: err,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
@@ -90,12 +91,12 @@ const hotelRates = async (req, res) => {
     const response = await checkRates({rooms});
     // console.log("hotel response", response);
     res.json(response);
-  } catch (err) {
-    console.log(err.message);
-    return res.status(500).json({
+  } catch (error) {
+   return res.status(error.status || 500).json({
       success: false,
-      error: "HOTEL_RATES_FAILED",
-      message: err.message,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
@@ -126,13 +127,12 @@ const hotelContents = async (req, res) => {
       success: true,
       data: response,
     });
-  } catch (err) {
-    console.error("HOTEL_CONTENT_ERROR:", err.message);
-
-    return res.status(500).json({
+  }catch (error) {
+   return res.status(error.status || 500).json({
       success: false,
-      error: "HOTEL_CONTENT_FAILED",
-      message: err.message,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
@@ -145,8 +145,13 @@ const findBoards = async (req, res) => {
       message: "baords working",
       data: boards,
     });
-  } catch (err) {
-    res.json({ success: false, message: "error getting boards", data: err });
+  }catch (error) {
+   return res.status(error.status || 500).json({
+      success: false,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
+    });
   }
 };
 const findAccomodation = async (req, res) => {
@@ -157,8 +162,13 @@ const findAccomodation = async (req, res) => {
       message: "accomodations working",
       data: accomodations,
     });
-  } catch (err) {
-    res.json({ success: false, message: "error getting accomodations", data: err });
+  } catch (error) {
+   return res.status(error.status || 500).json({
+      success: false,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
+    });
   }
 };
 
@@ -171,11 +181,12 @@ const getFacilities = async (req, res) => {
       message: "facilities working",
       data: facilities,
     });
-  } catch (err) {
-    res.json({
+  }catch (error) {
+   return res.status(error.status || 500).json({
       success: false,
-      message: "error getting facilities",
-      data: err,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
@@ -188,8 +199,13 @@ const getRooms = async (req, res) => {
       message: "rooms working",
       data: rooms,
     });
-  } catch (err) {
-    res.json({ success: false, message: "error getting rooms", data: err });
+  } catch (error) {
+   return res.status(error.status || 500).json({
+      success: false,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
+    });
   }
 };
 
@@ -205,12 +221,12 @@ const hotelData = async (req, res) => {
       message: "hotel data is working",
       data: rooms,
     });
-  } catch (err) {
-    console.log("error fetching hotel data");
-    res.json({
+  }catch (error) {
+   return res.status(error.status || 500).json({
       success: false,
-      message: "error getting hotel data",
-      data: err,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
@@ -225,11 +241,12 @@ const hotelComments = async (req, res) => {
       message: "hotel rateComments is working",
       data: rateComments,
     });
-  } catch (err) {
-    res.json({
+  } catch (error) {
+   return res.status(error.status || 500).json({
       success: false,
-      message: "error getting hotel rateComments",
-      data: err,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
@@ -245,11 +262,12 @@ const rateComments = async (req, res) => {
       message: "hotel rateComments is working",
       data: rateComments,
     });
-  } catch (err) {
-    res.json({
+  } catch (error) {
+   return res.status(error.status || 500).json({
       success: false,
-      message: `status code ${err.status}  ${err.message}`,
-      data: err,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
@@ -264,11 +282,12 @@ const promotions = async (req, res) => {
       message: "hotel promotions is working",
       data: prmos,
     });
-  } catch (err) {
-    res.json({
+  }catch (error) {
+   return res.status(error.status || 500).json({
       success: false,
-      message: `status code ${err.status}  ${err.message}`,
-      data: err,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };
@@ -283,11 +302,13 @@ const terminals = async (req, res) => {
       message: "hotel terminals is working",
       data: terminals,
     });
-  } catch (err) {
-    res.json({
+  } catch (error) {
+    console.error("Booking Error:", err);
+   return res.status(error.status || 500).json({
       success: false,
-      message: `status code ${err.status}  ${err.message}`,
-      data: err,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
     });
   }
 };

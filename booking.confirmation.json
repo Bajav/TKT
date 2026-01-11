@@ -1,0 +1,98 @@
+{
+  "auditData": {
+    "processTime": "1439",
+    "timestamp": "2026-01-11 21:00:40.371",
+    "requestHost": "",
+    "serverId": "",
+    "environment": "",
+    "release": "",
+    "token": "58F2CA2168A2447D91B2D68F0B2319C9",
+    "internal": "0|07~~20017d~636141189~N~~~NOR~~FBE642056559404176815471437905AAUK0057000000000121a152|UK|01|57|1|||||||||||R|1|2|~1~2~0|0|0|BAR OPQ ALL|0|3307d0c816747a44333eece69626b3c9||||"
+  },
+  "booking": {
+    "reference": "254-6830790",
+    "clientReference": "TKT-TEST",
+    "creationDate": "2026-01-11",
+    "status": "CONFIRMED",
+    "modificationPolicies": {
+      "cancellation": true,
+      "modification": true
+    },
+    "creationUser": "3307d0c816747a44333eece69626b3c9",
+    "holder": {
+      "name": "HUSSEIN",
+      "surname": "BALIJAWA"
+    },
+    "hotel": {
+      "checkOut": "2026-02-12",
+      "checkIn": "2026-02-10",
+      "code": 107255,
+      "name": "The Manhattan Club",
+      "categoryCode": "4EST",
+      "categoryName": "4 STARS",
+      "destinationCode": "NYC",
+      "destinationName": "New York Area - NY",
+      "zoneCode": 15,
+      "zoneName": "Midtown West",
+      "latitude": "40.76502400000000000000",
+      "longitude": "-73.98099800000000000000",
+      "rooms": [
+        {
+          "status": "CONFIRMED",
+          "id": 1,
+          "code": "SUI.QN",
+          "name": "Executive Jr. Suite",
+          "paxes": [
+            {
+              "roomId": 1,
+              "type": "AD",
+              "name": "Hussein",
+              "surname": "Balijawa"
+            },
+            {
+              "roomId": 1,
+              "type": "AD",
+              "name": "Allen",
+              "surname": "Nakiwewa"
+            }
+          ],
+          "rates": [
+            {
+              "rateClass": "NOR",
+              "net": "338.26",
+              "rateComments": "Car park YES (with additional debit notes) 35.00 USD Per person/night. Check-in hour 16:00 - 00:00. Check-out hour 11:00 - 11:00. Minimum check-in age 21. Arrival Policy: A government photo ID at time of check-in along with a valid credit card is required which matches the name on the reservation. Please note: Guests will not be allowed to check-in if they do not have a valid credit card matching the photo identification. An incidental deposit of $500 plus room and tax is required at check-in. We strongly urge our guests not to use debit cards at time of check in due to the authorization process that takes place. Your funds will be tied up through your bank for up to 10 business days or more. In order to reserve and check in you must be at least 21 years old or older. \n\nWe are open and serving breakfast and beverages for purchase",
+              "paymentType": "AT_WEB",
+              "packaging": false,
+              "boardCode": "RO",
+              "boardName": "ROOM ONLY",
+              "cancellationPolicies": [
+                {
+                  "amount": "169.13",
+                  "from": "2026-02-07T23:59:00-05:00"
+                }
+              ],
+              "rooms": 1,
+              "adults": 2,
+              "children": 0
+            }
+          ]
+        }
+      ],
+      "totalNet": "338.26",
+      "currency": "EUR",
+      "supplier": {
+        "name": "HOTELBEDS USA, INC",
+        "vatNumber": "592952685"
+      }
+    },
+    "remark": "Booking remarks if any",
+    "invoiceCompany": {
+      "code": "E14",
+      "company": "HOTELBEDS S.L.U.",
+      "registrationNumber": "ESB57218372"
+    },
+    "totalNet": 338.26,
+    "pendingAmount": 338.26,
+    "currency": "EUR"
+  }
+}
