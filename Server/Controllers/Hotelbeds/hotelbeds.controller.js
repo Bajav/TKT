@@ -29,11 +29,11 @@ const hotelSearch = async (req, res) => {
         },
       ],
       destination: {
-        code: "DXB",
+        code: "NYC",
       },
-      filter: {
-        maxHotels: 200,
-      },
+      // filter: {
+      //   maxHotels: 200,
+      // },
     });
     // console.log("hotel response", response);
     res.json(response);

@@ -139,10 +139,10 @@ function HotelRoom() {
             >
               <h4>list of attractions available</h4>
               <div className="poi">
-                {interestPoints?.map((place, index) => {
+                    {interestPoints?.map((place, index) => {
                   const { poiName, distance } = place;
                   return (
-                    <div className="place" key={index}>
+                    <div className="item" key={index}>
                       <h4>
                         {poiName} {distance} km
                       </h4>

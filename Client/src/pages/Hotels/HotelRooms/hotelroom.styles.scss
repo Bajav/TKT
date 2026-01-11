@@ -119,7 +119,7 @@ body {
   width: 100%;
   overflow: auto;
   gap: 10px;
-  padding: 5px 0px;
+  padding: 10px 0px;
 }
 .facility {
   display: flex;
@@ -565,11 +565,26 @@ body {
       h5
       {
         font-family: $robotoMono,monospace;
-        font-size: 8px;
+        font-size: 10px;
         font-weight: 500;
         color: $text_color;
       }
     }
+}
+.poi
+{
+  .item
+  {
+    align-items: flex-start;
+      h4
+      {
+         text-align: right;
+         font-family: $robotoMono,monospace;
+        font-size: 10px;
+        font-weight: 500;
+        color: $text_color;
+      }
+  }
 }
 .footer {
   height: 40vh;
