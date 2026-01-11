@@ -4,7 +4,7 @@ import {
   BASE_URL,
   getSignature,
 } from "../../Config/HotelBeds/hotelbeds.config.js";
-
+// availablity
 export async function searchHotels(payload) {
   const response = await axios.post(
     `${BASE_URL}/hotel-api/1.0/hotels`,
@@ -21,6 +21,8 @@ export async function searchHotels(payload) {
 
   return response.data;
 }
+
+// check for hotelRates
 export async function checkRates(payload) {
   const response = await axios.post(
     `${BASE_URL}/hotel-api/1.0/checkrates`,

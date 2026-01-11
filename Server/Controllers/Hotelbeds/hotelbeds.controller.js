@@ -46,6 +46,23 @@ const hotelSearch = async (req, res) => {
   }
 };
 
+const hotelAvailbility = async (req, res) => {
+  const bodyData = req.body;
+  console.log(bodyData);
+  //   res.send("route is working");
+  try {
+    const response = await searchHotels(bodyData);
+    res.json(response);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(400).json({
+      success: false,
+      error: "HOTEL_SEARCH_FAILED",
+      message: err.message,
+    });
+  }
+};
+
 const hotelRates = async (req, res) => {
   const {rooms} = req.body;
   // console.log(rooms);
@@ -64,6 +81,9 @@ const hotelRates = async (req, res) => {
   }
 };
 
+
+
+//CONTENTS 
 
 const hotelContents = async (req, res) => {
   const { hotelCodes } = req.body;
@@ -265,4 +285,5 @@ export {
   promotions,
   terminals,
   hotelRates,
+  hotelAvailbility,
 };
