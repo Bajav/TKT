@@ -1,5 +1,6 @@
 import {
   searchHotels,
+  checkRates,
   getHotelContents,
   getBoards,
   getAccomodations,
@@ -44,6 +45,25 @@ const hotelSearch = async (req, res) => {
     });
   }
 };
+
+const hotelRates = async (req, res) => {
+  const {rooms} = req.body;
+  // console.log(rooms);
+  //   res.send("route is working");
+  try {
+    const response = await checkRates({ rooms });
+    // console.log("hotel response", response);
+    res.json(response);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
+      success: false,
+      error: "HOTEL_RATES_FAILED",
+      message: err.message,
+    });
+  }
+};
+
 
 const hotelContents = async (req, res) => {
   const { hotelCodes } = req.body;
@@ -244,4 +264,5 @@ export {
   hotelComments,
   promotions,
   terminals,
+  hotelRates,
 };

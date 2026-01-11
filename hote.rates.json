@@ -1,0 +1,72 @@
+{
+  "auditData": {
+    "processTime": "36",
+    "timestamp": "2026-01-11 11:24:14.518",
+    "requestHost": "",
+    "serverId": "",
+    "environment": "",
+    "release": "",
+    "token": "AD7CD7131CA7493EBD20A92B18BAA3AE",
+    "internal": "0|07~~22b31b~84491825~N~~~NRF~~C00283DF7E9F42B176710830469005AAUK02440000000001202290|UK|01|244|1|||||||||-107.36|V|R|1|2|~1~2~0|0|0|OPQ NRF|0|3307d0c816747a44333eece69626b3c9||||"
+  },
+  "hotel": {
+    "checkOut": "2026-02-12",
+    "checkIn": "2026-02-10",
+    "code": 6605,
+    "name": "Royal Lancaster London",
+    "categoryCode": "5EST",
+    "categoryName": "5 STARS",
+    "destinationCode": "LON",
+    "destinationName": "London",
+    "zoneCode": 20,
+    "zoneName": "Bayswater",
+    "latitude": "51.51239119075020000000",
+    "longitude": "-0.17499670386314400000",
+    "giata": "20692",
+    "rooms": [
+      {
+        "code": "DBT.AS",
+        "name": "Classic Room",
+        "rates": [
+          {
+            "rateKey": "20260210|20260212|W|164|6605|DBT.AS|OPQ NRF|RO||1~2~0||P@07~~22b31b~84491825~N~~~NRF~~C00283DF7E9F42B176710830469005AAUK02440000000001202290",
+            "rateClass": "NRF",
+            "rateType": "BOOKABLE",
+            "net": "656.02",
+            "allotment": 115,
+            "rateComments": "***A 5% discretionary accommodation service fee will be added to your room bill.*** .  LGTBIQ friendly.Check-in hour 15:00-00:00.Car park YES (With additional debit notes) 55.00 GBP Per unit/night.Electric vehicle charging station.Identification card at arrival.Deposit on arrival.Single-Use Plastic Free.",
+            "paymentType": "AT_WEB",
+            "packaging": true,
+            "boardCode": "RO",
+            "boardName": "ROOM ONLY",
+            "cancellationPolicies": [
+              {
+                "amount": "656.02",
+                "from": "2026-01-10T23:59:00Z"
+              }
+            ],
+            "rateBreakDown": {
+              "rateDiscounts": [
+                {
+                  "code": "AGD",
+                  "name": "HBG select",
+                  "amount": "-137.16"
+                }
+              ]
+            },
+            "rooms": 1,
+            "adults": 2,
+            "children": 0
+          }
+        ]
+      }
+    ],
+    "totalNet": "656.02",
+    "currency": "EUR",
+    "paymentDataRequired": false,
+    "modificationPolicies": {
+      "cancellation": true,
+      "modification": true
+    }
+  }
+}

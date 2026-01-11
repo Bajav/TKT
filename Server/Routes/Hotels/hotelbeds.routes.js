@@ -11,17 +11,18 @@ import {
   rateComments,
   promotions, 
   terminals,
+  hotelRates,
 } from "../../Controllers/Hotelbeds/hotelbeds.controller.js";
 const router = Router();
 
 router.post("/hotels", hotelSearch);
 router.get("/hotels", hotelSearch);
+router.post("/hotels/hotelrates", hotelRates); 
 // isclean
 // gets the details of the hotel. including [facilities and their descriptions,
 // contacts,boards,segments,rooms and their descriptions, terminals and their 
 // distances with description ]s
 router.post("/hotels/hoteldata", hotelData);
-// router.get("/hotels/hoteldata", hotelData); 
 // isclean
 router.post("/hotelscontents", hotelContents);
 // router.get("/hotelscontents", hotelContents);
