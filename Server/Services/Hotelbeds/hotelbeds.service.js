@@ -26,16 +26,36 @@ export async function searchHotels(payload) {
 export async function checkRates(payload) {
   const response = await axios.post(
     `${BASE_URL}/hotel-api/1.0/checkrates`,
-    payload, 
+    payload,
     {
       headers: {
         "Api-key": API_KEY,
         "X-Signature": getSignature(),
-        "Accept": "application/json",
-        "Content-Type": "application/json",  // ← Important for POST body
+         "Accept": "application/json",
+        "Content-Type": "application/json",
       },
       params: {
-        language: "ENG",  // ← Optional, move here if needed
+        language: "ENG", 
+      },
+    }
+  );
+
+  return response.data;
+}
+// booking
+export async function booking(payload) {
+  const response = await axios.post(
+    `${BASE_URL}/hotel-api/1.0/bookings`,
+    payload,
+    {
+      headers: {
+        "Api-key": API_KEY,
+        "X-Signature": getSignature(),
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      params: {
+        language: "ENG",
       },
     }
   );

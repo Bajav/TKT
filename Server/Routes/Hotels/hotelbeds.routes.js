@@ -13,6 +13,7 @@ import {
   terminals,
   hotelRates,
   hotelAvailbility,
+  bookHotel,
 } from "../../Controllers/Hotelbeds/hotelbeds.controller.js";
 const router = Router();
 
@@ -20,6 +21,7 @@ router.post("/hotels", hotelSearch);
 router.get("/hotels", hotelSearch);
 router.post("/hotels/hotelrates", hotelRates); 
 router.post("/hotels/availability", hotelAvailbility); 
+router.post("/bookhotel", bookHotel); 
 router.post("/hotels/hoteldata", hotelData);
 // isclean
 router.post("/hotelscontents", hotelContents);

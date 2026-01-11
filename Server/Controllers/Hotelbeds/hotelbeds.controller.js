@@ -8,6 +8,7 @@ import {
   getHotelData,
   getHotelComments,
   getRateComments,
+  booking,
 } from "../../Services/Hotelbeds/hotelbeds.service.js";
 
 const hotelSearch = async (req, res) => {
@@ -57,18 +58,36 @@ const hotelAvailbility = async (req, res) => {
     console.log(err.message);
     return res.status(400).json({
       success: false,
-      error: "HOTEL_SEARCH_FAILED",
+      error: "HOTEL_AVAILABILITY HAS FAILED",
       message: err.message,
     });
   }
 };
+
+const bookHotel = async (req, res) => {
+  const bodyData = req.body;
+  console.log(bodyData);
+  //   res.send("route is working");
+  try {
+    const response = await booking(bodyData);
+    res.json(response);
+  } catch (err) {
+    // console.log(err);
+    return res.status(400).json({
+      success: false,
+      error: "HOTEL_BOOKING_HAS_FAILED",
+      message: err,
+    });
+  }
+};
+
 
 const hotelRates = async (req, res) => {
   const {rooms} = req.body;
   // console.log(rooms);
   //   res.send("route is working");
   try {
-    const response = await checkRates({ rooms });
+    const response = await checkRates({rooms});
     // console.log("hotel response", response);
     res.json(response);
   } catch (err) {
@@ -286,4 +305,5 @@ export {
   terminals,
   hotelRates,
   hotelAvailbility,
+  bookHotel,
 };
