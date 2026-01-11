@@ -13,7 +13,7 @@ import { CheckCheckIcon } from "lucide-react";
 import hotelReviews from "../../../data/hotelReviews.data.json";
 import { FacilityList } from "../../../components/Utils/HotelsUtils/facilities.utils.jsx";
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils.jsx";
-
+// import { useHotel } from "../../../components/context/hotels.contenxt";
 // icons
 import {
   AirplaneTaxiingIcon,
@@ -60,10 +60,10 @@ function HotelRoom() {
   const toggleTab = (i) => {
     setActiveTab(i);
   };
-  const airports = terminals.filter((t) => t?.terminalType === "A");
-  const harbours = terminals.filter((t) => t?.terminalType === "P");
-  const railway = terminals.filter((t) => t?.terminalType === "T");
-  const bus = terminals.filter((t) => t?.terminalType === "B");
+  const airports = terminals?.filter((t) => t?.terminalType === "A") || [];
+  const harbours = terminals?.filter((t) => t?.terminalType === "P") || [];
+  const railway = terminals?.filter((t) => t?.terminalType === "T") || [];
+  const bus = terminals?.filter((t) => t?.terminalType === "B") || [];
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />

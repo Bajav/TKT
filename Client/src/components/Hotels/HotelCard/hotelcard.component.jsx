@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { HotelContext } from "../../context/hotels.contenxt";
 import Rates from "../../../pages/Hotels/Rates/rates.component";
-
+// import { useHotel } from "../../context/hotels.contenxt";
 const HotelCard = ({
   hotelName,
   city,
