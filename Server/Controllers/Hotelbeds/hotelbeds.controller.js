@@ -29,10 +29,10 @@ const hotelSearch = async (req, res) => {
         },
       ],
       destination: {
-        code: "LON",
+        code: "DXB",
       },
       filter: {
-        maxHotels: 1,
+        maxHotels: 200,
       },
     });
     // console.log("hotel response", response);
@@ -69,7 +69,7 @@ const bookHotel = async (req, res) => {
   console.log(bodyData);
   //   res.send("route is working");
   try {
-    const response = await booking(bodyData);
+    const response = await booking(req.body);
     res.json(response);
   } catch (err) {
     // console.log(err);
