@@ -10,8 +10,10 @@ import defaultProfile from "../../assets/icons/profile-default-svgrepo-com.svg";
 const LocationHeader = () => {
   const { userData,signedIn,setSigninedIn } = useContext(UserContext);
   const [dropDown, setDropDown] = useState(false);
-  
-  const showDropdown = () => setDropDown(!dropDown);
+  const [isDisplay,setDisplay]= useState(false);
+  const showDropdown = () => {
+    setDisplay(!isDisplay);
+    setDropDown(!dropDown)};
   
 
 useEffect(() => {
@@ -63,7 +65,7 @@ useEffect(() => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.3 }}
-                className="drop-down-contents"
+                className={isDisplay?"drop-down-contents":"dontShow"}
               >
                 <div className="user-drop-down-header">
                   <h3>{userData?.displayName.toLocaleUpperCase()}</h3>
@@ -77,7 +79,7 @@ useEffect(() => {
                 </ul>
               </motion.div>
             ) : (
-              <div className="signIn-container">
+              <div className={isDisplay?"signIn-container":"dontShow"}>
                 <div className="display">
                   <p>sign in / up to view console</p>
                 </div>

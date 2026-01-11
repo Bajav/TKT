@@ -23,7 +23,10 @@
     }
   }
 }
-
+.dontShow{display: none;}
+.drop-down-contents{
+  display: block;
+}
 // user drop down
 .user-drop-down {
   position: absolute;
@@ -79,6 +82,7 @@
 }
 
 .signIn-container {
+  display: block;
   .display {
     background: $page_color;
     height: 129px;
