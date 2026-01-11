@@ -10,6 +10,7 @@ import axios from "axios";
 import { HotelContext } from "../../../components/context/hotels.contenxt.jsx";
 import images from "../../../data/images.data.json";
 import { getBestOffer } from "../../../components/Utils/HotelsUtils/pricing.utils.jsx";
+import { motion } from "framer-motion";
 
 function HotelResults() {
   const { hotelContents, setHotelContents } = useContext(HotelContext);
@@ -82,34 +83,27 @@ function HotelResults() {
         </div>
       </div>
       {hotelJson.hotels.hotels.map((hotel, index) => {
-        const {
-          name,
-          destinationName,
-          categoryName,
-          minRate,
-          categoryCode,
-          rooms,
-        } = hotel;
+        const { name, destinationName, categoryName, minRate, categoryCode } =
+          hotel;
+
         const imageUrl = images[index % images.length];
         const bestOffer = getBestOffer(hotel);
 
         return (
           <HotelCard
             hotelJson={hotelJson}
-            key={hotel.code}
             index={index}
             isDeal={bestOffer?.hasDeal || false}
             hotelName={name}
             offerName={bestOffer?.name || ""}
-            offerAmount={bestOffer?.amount || 0} // e.g., "52.00"
+            offerAmount={bestOffer?.amount || 0}
             country={destinationName}
-            // description="Ritz Paris is a renowned 5-star luxury hotel located in the heart of Paris, France. Famous for its classic architecture, refined service."
             image={imageUrl}
             mainPrice={minRate}
             pricePerNight={100}
             rating="9.0"
             reviewCount={25}
-            rateNum={parseInt(categoryCode)} // e.g., "3EST" → 3
+            rateNum={parseInt(categoryCode)}
             categoryCode={categoryCode}
           />
         );

@@ -1,53 +1,81 @@
+// hotelresults.styles.scss
 @import "../../../styles/variables.scss";
+
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+
 .hotel-results {
   background-color: $page_color;
-  display: flex;
-  height: auto;
   width: 100vw;
+  min-height: 100vh;           // better than auto in most cases
+  display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 10px;
+  padding: 0 10px;
 }
+
 .results-header {
   width: 100%;
   display: flex;
-  align-items: start;
-  padding: 10px 0px;
-  button {
-    padding: 5px 15px;
-    background: $actionsDar_color;
-    font-family: $roboto, sans-serif;
-    font-size: 10px;
-    text-transform: capitalize;
-    color: $inputBackGround;
-    font-weight: 500;
-    // letter-spacing: 0.5px;
-    border-radius: 15px;
-  }
+  justify-content: space-between;   // better distribution
+  align-items: center;
+  padding: 16px 0;
+  flex-wrap: wrap;
+  gap: 12px;
 }
+
+.results-head {
+  font-family: $roboto, sans-serif;
+  font-size: 13px;                  // slightly bigger → better readability
+  color: $visibleFontColor;
+  text-transform: capitalize;
+  font-weight: 500;
+  margin: 0;
+}
+
 .filter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    gap: 10px;
-    border: 1px solid #222;
-    padding: 5px 15px;
-  h5 {
-    font-size: 9px;
-    color: $visibleFontColor;
-    font-family: $roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #222;
+  border-radius: 9999px;           // modern pill shape
+  background-color: transparent;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(34, 34, 34, 0.08);
   }
-}
-.results-head
-{
-    font-family: $roboto,sans-serif;
+
+  h5 {
+    font-family: $roboto, sans-serif;
     font-size: 11px;
     color: $visibleFontColor;
-    text-transform: capitalize;
+    font-weight: 500;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+}
+
+.cancelBtn {
+  padding: 6px 16px;
+  background: $actionsDar_color;
+  color: $inputBackGround;
+  font-family: $roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: capitalize;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
 }
