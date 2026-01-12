@@ -35,7 +35,7 @@ const HotelCard = ({
       return;
     }
     setOverlay(true);
-    navigate("/searchhotels/availablerooms");
+    navigate("/hotels/rooms");
     const selectedHotel = hotelJson.hotels.hotels[index];
 
     setSelectedHotel(selectedHotel);
@@ -46,9 +46,7 @@ const HotelCard = ({
         "http://localhost:3000/hotels/hoteldata",
         { code: selectedHotel.code }
       );
-
       const { hotel: fetchedHotel } = response.data.data;
-      console.log(response.data);
       setHotelInfo(fetchedHotel);
       if (fetchedHotel?.boards?.length > 0) {
         setOverlay(false);

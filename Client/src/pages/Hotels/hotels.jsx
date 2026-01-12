@@ -8,8 +8,8 @@ function Hotels() {
   const location = useLocation();
 
   const hideLayoutRoutes = [
-    "/searchhotels/results",
-    "/searchhotels/availablerooms",
+    "/hotels/results",
+    "/hotels/rooms",
   ];
 
   const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);

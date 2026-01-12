@@ -19,6 +19,7 @@ import BookedFlights from "../pages/bookedFlights/flights.page";
 // hotelpages
 import HotelResults from "../pages/Hotels/HotelSearchResults/hotelresults.page";
 import HotelRoom from "../pages/Hotels/HotelRooms/hotelroom.page";
+import BookHotel from "../pages/Hotels/HotelbBooking/bookhote.page.jsx";
 function AllRoutes() {
   const location = useLocation();
 
@@ -27,8 +28,8 @@ function AllRoutes() {
     "/flights/lastprice",
     "/flights/passengerdata",
     "/myflights",
-    "/searchhotels/results",
-    "/searchhotels/availablerooms",
+    "/hotels/results",
+    "/hotels/rooms",
   ];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>
@@ -40,25 +41,26 @@ function AllRoutes() {
       {/* Show Navbar unless on certain routes */}
       {!shouldHideNavbar && <Navbar />}
       <ErrorBoundary>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="places" element={<Places />} />
-        <Route path="searchhotels" element={<Hotels />} />
-        <Route path="packages" element={<Packages />} />
-        <Route path="myflights" element={<BookedFlights />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="places" element={<Places />} />
+          <Route path="searchhotels" element={<Hotels />} />
+          <Route path="packages" element={<Packages />} />
+          <Route path="myflights" element={<BookedFlights />} />
 
-        {/* Flights Route Group */}
-        <Route path="/flights" element={<Flights />} >
-          <Route path="results" element={<FlightResult />} />
-          <Route path="lastprice" element={<FlightPricing />} />
-          <Route path="passengerdata" element={<Passengers />} />
-        </Route>
-           <Route path="/searchhotels" element={<Hotels />} >
-          <Route path="results" element={<HotelResults />} />
-          <Route path="availablerooms" element={<HotelRoom />} />
-          {/* <Route path="passengerdata" element={<Passengers />} /> */}
-        </Route>
-      </Routes>
+          {/* Flights Route Group */}
+          <Route path="/flights" element={<Flights />}>
+            <Route path="results" element={<FlightResult />} />
+            <Route path="lastprice" element={<FlightPricing />} />
+            <Route path="passengerdata" element={<Passengers />} />
+          </Route>
+          <Route path="/hotels" element={<Hotels />}>
+            <Route path="results" element={<HotelResults />} />
+            <Route path="rooms" element={<HotelRoom />} />
+            <Route path="bookhotel" element={<BookHotel />} />
+            {/* <Route path="passengerdata" element={<Passengers />} /> */}
+          </Route>
+        </Routes>
       </ErrorBoundary>
     </Fragment>
   );

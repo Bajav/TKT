@@ -18,7 +18,7 @@ function Navbar() {
                     <Link to='/flights'>
                     <li>flights</li>
                     </Link>
-                    <Link to='/searchhotels'>
+                    <Link to='/hotels'>
                     <li>hotels</li>
                     </Link>
                     <Link to='/packages'>

@@ -28,7 +28,7 @@ function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
   const { categoryCode, name, rooms: availableRooms } = selectedHotel;
   // console.log("hotelInfo", hotelInfo);
-  const { images, facilities, description, terminals, interestPoints } =
+  const { images , facilities, description, terminals, interestPoints } =
     hotelInfo;
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
