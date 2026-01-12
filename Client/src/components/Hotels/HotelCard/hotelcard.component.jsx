@@ -29,32 +29,41 @@ const HotelCard = ({
     useContext(HotelContext);
   const navigate = useNavigate();
 
-  const selectButton = async (index) => {
-    if (!hotelJson?.hotels?.hotels?.[index]) {
-      console.error("Hotel not found at index:", index);
+const selectButton = async (index) => {
+  const selectedHotel = hotelJson?.hotels?.hotels?.[index];
+
+  if (!selectedHotel) {
+    console.error("Hotel not found at index:", index);
+    return;
+  }
+
+  try {
+    setOverlay(true);
+
+    const response = await axios.post(
+      "http://localhost:3000/hotels/hoteldata",
+      { code: selectedHotel.code }
+    );
+
+    const fetchedHotel = response?.data?.data?.hotel;
+
+    // Validate real hotel data
+    if (!fetchedHotel || !fetchedHotel.boards || fetchedHotel.boards.length === 0) {
+      console.error("Hotel has no available rooms");
+      setOverlay(false);
       return;
     }
-    setOverlay(true);
-    navigate("/hotels/rooms");
-    const selectedHotel = hotelJson.hotels.hotels[index];
-
     setSelectedHotel(selectedHotel);
-    // console.log("selectedHotel", selectedHotel);s
+    setHotelInfo(fetchedHotel);
+    navigate("/hotels/rooms");
 
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/hotels/hoteldata",
-        { code: selectedHotel.code }
-      );
-      const { hotel: fetchedHotel } = response.data.data;
-      setHotelInfo(fetchedHotel);
-      if (fetchedHotel?.boards?.length > 0) {
-        setOverlay(false);
-      }
-    } catch (err) {
-      console.error("Error fetching hotel data:", err);
-    }
-  };
+  } catch (err) {
+    console.error("Error fetching hotel data:", err);
+  } finally {
+    setOverlay(false);
+  }
+};
+
 
   return (
     <div className="hotel-card">

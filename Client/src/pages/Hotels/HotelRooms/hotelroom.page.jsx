@@ -27,8 +27,8 @@ import {
 function HotelRoom() {
   const { selectedHotel, hotelInfo } = useContext(HotelContext);
   const { categoryCode, name, rooms: availableRooms } = selectedHotel;
-  // console.log("hotelInfo", hotelInfo);
-  const { images , facilities, description, terminals, interestPoints } =
+  // console.log("availableRooms", hotelInfo);
+  const { images, facilities, description, terminals, interestPoints } =
     hotelInfo;
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
@@ -61,6 +61,13 @@ function HotelRoom() {
   const toggleTab = (i) => {
     setActiveTab(i);
   };
+
+const bookRoomBtn = (roomIndex,rateIndex) => {
+  const selectedRoom = availableRooms[roomIndex];
+  const selectedRate = selectedRoom[rateIndex];
+  console.log(selectedRate);
+};
+
   const airports = terminals?.filter((t) => t?.terminalType === "A") || [];
   const harbours = terminals?.filter((t) => t?.terminalType === "P") || [];
   const railway = terminals?.filter((t) => t?.terminalType === "T") || [];
@@ -76,7 +83,7 @@ function HotelRoom() {
   const busStops = hotelPlaces.data?.busStops?.slice(0, 10) || [];
 
   useEffect(() => {
-    console.log(attractions);
+    // console.log(attractions);
   }, []);
   return (
     <section className="hotel-rooms">
@@ -156,7 +163,7 @@ function HotelRoom() {
                 {interestPoints?.map((place, index) => {
                   const { poiName, distance } = place;
                   return (
-                    <div className="item" key={index}>
+                    <div className="place" key={index}>
                       <h4>
                         {poiName} {distance} km
                       </h4>
@@ -169,7 +176,7 @@ function HotelRoom() {
                   {attractions?.map((place, index) => {
                     const { name, distanceKm } = place;
                     return (
-                      <div className="item" key={index}>
+                      <div className="place" key={index}>
                         <h4>
                           {name} {distanceKm} km
                         </h4>
@@ -188,7 +195,7 @@ function HotelRoom() {
                   {restaurants?.map((place, index) => {
                     const { name, distanceKm } = place;
                     return (
-                      <div className="item" key={index}>
+                      <div className="place" key={index}>
                         <h4>
                           {name} {distanceKm} km
                         </h4>
@@ -203,7 +210,7 @@ function HotelRoom() {
                   {bars?.map((place, index) => {
                     const { name, distanceKm } = place;
                     return (
-                      <div className="item" key={index}>
+                      <div className="place" key={index}>
                         <h4>
                           {name} {distanceKm} km
                         </h4>
@@ -218,7 +225,7 @@ function HotelRoom() {
                   {cafes?.map((place, index) => {
                     const { name, distanceKm } = place;
                     return (
-                      <div className="item" key={index}>
+                      <div className="place" key={index}>
                         <h4>
                           {name} {distanceKm} km
                         </h4>
@@ -240,7 +247,7 @@ function HotelRoom() {
                       {airports.map((airport) => (
                         <div
                           key={airport.terminalId || airport.name?.content}
-                          className="item"
+                          className="place"
                         >
                           <AirplaneTaxiingIcon size={10} color="#222" />
                           <h5>
@@ -264,7 +271,7 @@ function HotelRoom() {
                       {harbours.map((harbour) => (
                         <div
                           key={harbour.terminalId || harbour.name?.content}
-                          className="item"
+                          className="place"
                         >
                           <AnchorIcon size={10} color="#222" />
                           <h5>
@@ -287,7 +294,7 @@ function HotelRoom() {
                       {railway.map((tain) => (
                         <div
                           key={tain.terminalId || tain.name?.content}
-                          className="item"
+                          className="place"
                         >
                           <TrainIcon size={10} color="#222" />
                           <h5>
@@ -310,7 +317,7 @@ function HotelRoom() {
                       {bus.map((bus) => (
                         <div
                           key={bus.terminalId || bus.name?.content}
-                          className="item"
+                          className="place"
                         >
                           <BusIcon size={10} color="#222" />
                           <h5>
@@ -377,14 +384,14 @@ function HotelRoom() {
         <div className="rooms-container">
           <h2>Rooms Available</h2>
 
-          {availableRooms.map((room, index) => {
+          {availableRooms.map((room, roomIndex) => {
             const cleanCode = cleanRoomCode(room.code);
             const roomImages = roomImagesByCode[cleanCode] || [];
             const detailedRoom = roomDetailsMap[cleanCode];
             const roomFacilities = detailedRoom?.roomFacilities || [];
 
             return (
-              <div key={index} className="rooms">
+              <div key={roomIndex} className="rooms">
                 <h5>{room.name}</h5>
                 <div className="border" />
 
@@ -432,11 +439,11 @@ function HotelRoom() {
                 {/* Rates */}
                 <h4 className="room-rates">Rates Available for this room</h4>
                 <div className="rooms-segment">
-                  {room.rates.map((rate, idx) => {
+                  {room.rates.map((rate, rateIndex) => {
                     const { net, boardName } = rate;
                     const cancellationSummary = getCancellationBadge(rate);
                     return (
-                      <div key={idx} className="room">
+                      <div key={rateIndex} className="room">
                         <div className="top">
                           <div className="side-one">
                             <h4>{boardName || "Room Only"}</h4>
@@ -452,7 +459,10 @@ function HotelRoom() {
                               <p>{cancellationSummary.details}</p>
                             </div>
                           </div>
-                          <button className="book-now">
+                          <button
+                            onClick={() => {bookRoomBtn(roomIndex,rateIndex)}}
+                            className="book-now"
+                          >
                             <span>€{net}</span> {"  "}
                             <small>book now</small>
                           </button>
@@ -477,3 +487,5 @@ function HotelRoom() {
 }
 
 export default HotelRoom;
+
+

@@ -554,7 +554,7 @@ body {
   }
 }
 .transport-container {
-  .item {
+  .place {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -568,9 +568,9 @@ body {
     }
   }
 }
+
 .poi {
-  .item {
-    align-items: flex-start;
+  .place {
     h4 {
       text-align: right;
       font-family: $robotoMono, monospace;
