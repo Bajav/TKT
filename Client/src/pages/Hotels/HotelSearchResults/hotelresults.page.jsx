@@ -5,7 +5,7 @@ import hotelJson from "../../../data/hotelsJson.json";
 import HotelCard from "../../../components/Hotels/HotelCard/hotelcard.component";
 import hotelImg from "../../../assets/images/hotelImg.jpg";
 import { SlidersHorizontal } from "lucide-react";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState,Fragment } from "react";
 import axios from "axios";
 import { HotelContext } from "../../../components/context/hotels.contenxt.jsx";
 import images from "../../../data/images.data.json";
@@ -13,8 +13,7 @@ import { getBestOffer } from "../../../components/Utils/HotelsUtils/pricing.util
 import { motion } from "framer-motion";
 
 function HotelResults() {
-  const { hotelContents, setHotelContents } = useContext(HotelContext);
-  const [isDeal, setDeal] = useState(false);
+  const { hotelContents, setHotelContents,overlay,setOverlay } = useContext(HotelContext);
   const [dealAmount, setDealAmount] = useState(0);
   const [bestOfferName, setBestOfferName] = useState("");
   // this is a helper function to get hotel codes from hotelJson
@@ -69,7 +68,15 @@ function HotelResults() {
   //     loadHotelContents();
   //   }, []);
   return (
-    <main className="hotel-results">
+    <div>
+      {overlay?<div className="overLay">
+        <h4>redirecting you to hotel rooms</h4>
+        <div className="views-container">
+          <img src={hotelImg} />
+        </div>
+        <p>To travel is to discover that everyone is wrong about other countries. <br /> <span>by Aldous Huxley</span></p>
+      </div>:(
+            <main className="hotel-results">
       <div className="results-header">
         <button className="cancelBtn">cancel</button>
       </div>
@@ -109,6 +116,8 @@ function HotelResults() {
         );
       })}
     </main>
+      )}
+    </div>
   );
 }
 

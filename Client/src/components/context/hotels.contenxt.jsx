@@ -8,6 +8,7 @@ export const HotelContext = createContext({
   isDeal: null,
   hotelError: null,
   hotelContents: null,
+  overlay: null,
 
   setHotelJson: () => {},
   setHotelSearchData: () => {},
@@ -16,8 +17,8 @@ export const HotelContext = createContext({
   setHotelContents: () => {},
   setHotelError: () => {},
   setDeal: () => {},
+  setOverlay: () => {},
 });
-
 
 export const HotelActions = {
   SET_HOTEL_INFO: "SET_HOTEL_INFO",
@@ -27,6 +28,7 @@ export const HotelActions = {
   SET_HOTEL_SEARCH_DATA: "SET_HOTEL_SEARCH_DATA",
   SET_HOTEL_ERROR: "SET_HOTEL_ERROR",
   SET_DEAL: "SET_DEAL",
+  SET_OVERLAY: "SET_OVERLAY",
 };
 
 const HotelReducer = (state, action) => {
@@ -48,6 +50,8 @@ const HotelReducer = (state, action) => {
       return { ...state, hotelInfo: action.payload };
     case HotelActions.SET_HOTEL_CONTENTS:
       return { ...state, hotelContents: action.payload };
+          case HotelActions.SET_OVERLAY:
+      return { ...state, overlay: action.payload };
     default:
       return state;
   }
@@ -55,6 +59,7 @@ const HotelReducer = (state, action) => {
 
 const INITIAL_STATE = {
   isDeal: null,
+  overlay:false,
   hotelJson: null,
   hotelSearchData: null,
   selectedHotel: null,
@@ -84,6 +89,8 @@ export const HotelProvider = ({ children }) => {
     dispatch({ type: HotelActions.SET_HOTEL_CONTENTS, payload: data });
   const setDeal = (data) =>
     dispatch({ type: HotelActions.SET_DEAL, payload: data });
+    const setOverlay = (data) =>
+    dispatch({ type: HotelActions.SET_OVERLAY, payload: data });
   const value = {
     hotelJson: state.hotelJson,
     hotelSearchData: state.hotelSearchData,
@@ -92,7 +99,9 @@ export const HotelProvider = ({ children }) => {
     hotelInfo: state.hotelInfo,
     hotelContents: state.hotelContents,
     isDeal: state.isDeal,
+    overlay: state.overlay,
     setDeal,
+    setOverlay,
     setHotelContents,
     setHotelInfo,
     setHotelJson,

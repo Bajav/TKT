@@ -525,7 +525,7 @@ body {
   font-family: $roboto, sans-serif;
   font-size: 12px;
   width: 100%;
-    overflow: auto;
+  overflow: auto;
   padding: 5px;
   .content {
     display: none;
@@ -553,44 +553,37 @@ body {
     display: block;
   }
 }
-.transport-container
-{
-    .item
-    {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-direction: row;
-      margin: 5px;
-      h5
-      {
-        font-family: $robotoMono,monospace;
-        font-size: 10px;
-        font-weight: 500;
-        color: $text_color;
-      }
+.transport-container {
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+    margin: 5px;
+    h5 {
+      font-family: $robotoMono, monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: $text_color;
     }
+  }
 }
-.poi
-{
-  .item
-  {
+.poi {
+  .item {
     align-items: flex-start;
-      h4
-      {
-         text-align: right;
-         font-family: $robotoMono,monospace;
-        font-size: 10px;
-        font-weight: 500;
-        color: $text_color;
-      }
+    h4 {
+      text-align: right;
+      font-family: $robotoMono, monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: $text_color;
+    }
   }
 }
 .footer {
   height: 40vh;
   padding: 10px;
-  .footer-container
-  {
+  .footer-container {
     background: $darkOrange;
     display: flex;
     align-items: center;
@@ -600,11 +593,52 @@ body {
     height: 100%;
     border-radius: 10px;
   }
-  h1
-  {
+  h1 {
     font-size: 80px;
     font-weight: 700;
-    font-family: $roboto,sans-serif;
+    font-family: $roboto, sans-serif;
     color: $inputBackGround;
+  }
+}
+.overLay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  h4 {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 400;
+    font-family: $textFont, sans-serif;
+    color: $darkOrange;
+  }
+  p
+  {
+    margin-top: 10px;
+        text-align: center;
+     font-size: 25px;
+    font-weight: 400;
+    font-family: $textFont, sans-serif;
+    color: $text_color;
+  }
+  span
+  {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .views-container
+  {
+    height: 25vh;
+    width: 95%;
+    // background: #222222;
+    img
+    {
+      border-radius: 10px;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
