@@ -1,0 +1,80 @@
+@import "../../../styles/variables.scss";
+.bookhotel-container {
+  background: $page_color;
+  height: 100vh;
+  padding: 10px;
+  h4 {
+    padding-top: 20px;
+    font-family: $textFont, sans-serif;
+    text-align: center;
+    color: $text_color;
+    text-transform: capitalize;
+    font-weight: 500;
+  }
+  .summary {
+    h5 {
+      font-family: $textFont, sans-serif;
+      text-align: start;
+      color: $text_color;
+      text-transform: capitalize;
+      font-weight: 600;
+      text-decoration: underline;
+      margin-bottom: 10px;
+    }
+  }
+  .summary-container {
+    padding: 10px;
+    background: #fefefe;
+    border-radius: 10px;
+    .summary-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      h1 {
+        font-family: $textFont, sans-serif;
+        font-size: 15px;
+        text-decoration: none;
+        color: $text_color;
+        font-weight: 500;
+      }
+      h5 {
+        font-family: $robotoMono, monospace;
+        font-size: 12px;
+        text-decoration: none;
+        color: $darkOrange;
+      }
+    }
+    h3 {
+      font-size: 11px;
+      font-weight: 500;
+      color: $text_color;
+      font-family: $textFont, sans-serif;
+      margin-bottom: 10px;
+      opacity: 80%;
+    }
+  }
+}
+.dates {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .date {
+    // display: flex;
+    h4 {
+      font-size: 12px;
+      font-weight: 600;
+      text-align: left;
+      color: $text_color;
+      font-family: $robotoMono, monospace;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 12px;
+      font-weight: 700;
+      text-align: left;
+      color: $text_color;
+      font-family: $robotoMono, monospace;
+      margin-bottom: 10px;
+    }
+  }
+}
