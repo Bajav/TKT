@@ -1,6 +1,13 @@
 import "./bookhotel.stles.scss";
+import {useLocation} from 'react-router-dom';
+
+
+
 
 function BookHotel() {
+  const location = useLocation();
+  const {rateKey} = location.state ||{};
+  console.log(rateKey);
   return (
     <div className="bookhotel-container">
       <h4>complete your booking</h4>

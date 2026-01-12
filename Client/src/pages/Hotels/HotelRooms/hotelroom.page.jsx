@@ -32,7 +32,7 @@ function HotelRoom() {
     hotelInfo;
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
-  const backBtn = () => navigate("/searchhotels/results");
+  const backBtn = () => navigate("/hotels/results");
 
   const roomImagesByCode = images
     .filter((img) => img.type.code === "HAB" && img.roomCode)
@@ -62,10 +62,11 @@ function HotelRoom() {
     setActiveTab(i);
   };
 
-const bookRoomBtn = (roomIndex,rateIndex) => {
+const bookRoomBtn = (roomIndex, rateIndex) => {
   const selectedRoom = availableRooms[roomIndex];
-  const selectedRate = selectedRoom[rateIndex];
-  console.log(selectedRate);
+  const selectedRate = selectedRoom?.rates?.[rateIndex];
+  const rateKey = selectedRate.rateKey;
+    navigate(`/hotels/bookhotel`,{state: {rateKey}});
 };
 
   const airports = terminals?.filter((t) => t?.terminalType === "A") || [];
