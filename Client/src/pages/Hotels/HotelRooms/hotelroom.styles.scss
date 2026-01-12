@@ -503,7 +503,7 @@ body {
   justify-content: center;
   padding: 2px 2px;
   // width: 79%;
-  width: 57%;
+  width: 79%;
   border-radius: 15px;
   cursor: pointer;
   .tab {
@@ -541,7 +541,7 @@ body {
     h4 {
       text-transform: capitalize;
       text-align: left;
-      font-family: $textFont, sans-serif;
+      font-family: $robotoMono, monospace;
       color: $text_color;
       margin-top: 10px;
       font-weight: 500;

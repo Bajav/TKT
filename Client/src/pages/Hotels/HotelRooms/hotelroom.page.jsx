@@ -1,5 +1,5 @@
 import "./hotelroom.styles.scss";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { HotelContext } from "../../../components/context/hotels.contenxt";
 import { useNavigate } from "react-router-dom";
 import BackBTN from "../../../components/features/BackButton/BackBTN";
@@ -13,6 +13,7 @@ import { CheckCheckIcon } from "lucide-react";
 import hotelReviews from "../../../data/hotelReviews.data.json";
 import { FacilityList } from "../../../components/Utils/HotelsUtils/facilities.utils.jsx";
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils.jsx";
+import hotelPlaces from "../../../data/data.json";
 // import { useHotel } from "../../../components/context/hotels.contenxt";
 // icons
 import {
@@ -20,7 +21,7 @@ import {
   AnchorIcon,
   TrainIcon,
   BusIcon,
-  SmileyIcon
+  SmileyIcon,
 } from "@phosphor-icons/react";
 
 function HotelRoom() {
@@ -64,6 +65,19 @@ function HotelRoom() {
   const harbours = terminals?.filter((t) => t?.terminalType === "P") || [];
   const railway = terminals?.filter((t) => t?.terminalType === "T") || [];
   const bus = terminals?.filter((t) => t?.terminalType === "B") || [];
+  const restaurants = hotelPlaces.data.restaurants.slice(0, 10) || [];
+  const attractions = hotelPlaces.data.attractions.slice(0, 10) || [];
+  const museums = hotelPlaces.data?.museums?.slice(0, 10) || [];
+  const cafes = hotelPlaces.data?.cafes?.slice(0, 10) || [];
+  const bars = hotelPlaces.data?.bars?.slice(0, 10) || [];
+  const parks = hotelPlaces.data?.parks?.slice(0, 10) || [];
+  const trainStations = hotelPlaces.data?.trainStations?.slice(0, 10) || [];
+  const subwayStations = hotelPlaces.data?.subwayStations?.slice(0, 10) || [];
+  const busStops = hotelPlaces.data?.busStops?.slice(0, 10) || [];
+
+  useEffect(() => {
+    console.log(attractions);
+  }, []);
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
@@ -112,12 +126,12 @@ function HotelRoom() {
             >
               attractions
             </div>
-            {/* <div
+            <div
               onClick={() => toggleTab(3)}
               className={activeTab === 3 ? "tab active" : "tab"}
             >
               food & drinks
-            </div> */}
+            </div>
             <div
               onClick={() => toggleTab(4)}
               className={activeTab === 4 ? "tab active" : "tab"}
@@ -137,9 +151,9 @@ function HotelRoom() {
             <div
               className={activeTab === 2 ? "content active-content" : "content"}
             >
-              <h4>list of attractions available</h4>
+              <h4>list of attractions close by</h4>
               <div className="poi">
-                    {interestPoints?.map((place, index) => {
+                {interestPoints?.map((place, index) => {
                   const { poiName, distance } = place;
                   return (
                     <div className="item" key={index}>
@@ -150,15 +164,69 @@ function HotelRoom() {
                   );
                 })}
               </div>
+              {attractions?.length > 0 ? (
+                <div className="place">
+                  {attractions?.map((place, index) => {
+                    const { name, distanceKm } = place;
+                    return (
+                      <div className="item" key={index}>
+                        <h4>
+                          {name} {distanceKm} km
+                        </h4>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : null}
             </div>
             <div
               className={activeTab === 3 ? "content active-content" : "content"}
             >
-              <h4>list of places to eat and drink available</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quisquam, quod.
-              </p>
+              {restaurants?.length > 0 ? (
+                <div className="place-container">
+                  <h4>restaurants</h4>
+                  {restaurants?.map((place, index) => {
+                    const { name, distanceKm } = place;
+                    return (
+                      <div className="item" key={index}>
+                        <h4>
+                          {name} {distanceKm} km
+                        </h4>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : null}
+              {bars?.length > 0 ? (
+                <div className="place-container">
+                  <h4>bars</h4>
+                  {bars?.map((place, index) => {
+                    const { name, distanceKm } = place;
+                    return (
+                      <div className="item" key={index}>
+                        <h4>
+                          {name} {distanceKm} km
+                        </h4>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : null}
+              {cafes?.length > 0 ? (
+                <div className="place-container">
+                  <h4>cafes</h4>
+                  {cafes?.map((place, index) => {
+                    const { name, distanceKm } = place;
+                    return (
+                      <div className="item" key={index}>
+                        <h4>
+                          {name} {distanceKm} km
+                        </h4>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : null}
             </div>
             <div
               className={activeTab === 4 ? "content active-content" : "content"}
@@ -399,10 +467,10 @@ function HotelRoom() {
         </div>
       </div>
       <div className="footer">
-          <div className="footer-container">
-              <h1>footer</h1>
-        <SmileyIcon size={100} color="#f5f5f5" />
-          </div>
+        <div className="footer-container">
+          <h1>footer</h1>
+          <SmileyIcon size={100} color="#f5f5f5" />
+        </div>
       </div>
     </section>
   );
