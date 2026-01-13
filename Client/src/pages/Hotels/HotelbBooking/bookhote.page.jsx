@@ -84,6 +84,7 @@ function BookHotel() {
                 onChange={() => {}}
                 className=""
               />
+            </div>
               <input
                 type="text"
                 name="phoneNumber"
@@ -91,7 +92,6 @@ function BookHotel() {
                 onChange={() => {}}
                 className=""
               />
-            </div>
           </div>
           <div className="text-info">
             <p>Please enter a valid email address that will be used for confirmation</p>
@@ -106,6 +106,20 @@ function BookHotel() {
                   <input type="radio" name="mySelf" className="check" />
                   <label>someone else</label>
                 </div>
+              </div>
+            </div>
+            <hr />
+            <div className="pricing">
+              <div className="pricing-header">
+                <h2>Total $3941.82</h2>
+                <h5>Online payment Required</h5>
+              </div>
+              <div className="section-two">
+                <div className="section-two-header">
+                  <h3>non refundable .</h3>
+                  <h4>includes taxes and charges</h4>
+                </div>
+                <h4>in property currency : $2,937.60</h4>
               </div>
             </div>
           </div>
