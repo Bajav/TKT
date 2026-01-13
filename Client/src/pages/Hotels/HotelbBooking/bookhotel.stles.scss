@@ -148,6 +148,7 @@
         width: 20px;
         margin: 0px;
         height: 20px;
+        color: $darkOrange;
       }
     }
   }
@@ -156,17 +157,42 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-    margin-top: 10px;
+  margin-top: 10px;
   h2 {
     font-size: 15px;
     font-family: $robotoMono, monospace;
     color: $text_color;
+    font-weight: 600;
   }
-  h5
-  {
-     font-size: 10px;
+  h5 {
+    font-size: 10px;
     font-family: $robotoMono, monospace;
     color: $darkOrange;
     font-weight: 600;
   }
+}
+.section-two {
+  h3 {
+    color: $darkOrange;
+    font-family: $robotoMono, monospace;
+    font-weight: 600;
+    opacity: 100%;
+    font-size: 12px;
+  }
+  h4 {
+    font-family: $robotoMono, monospace;
+    font-size: 11px;
+    opacity: 70%;
+    margin: 0;
+    padding: 0;
+  }
+  .section-two-header
+  {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.heigth {
+  height: 80vh;
 }

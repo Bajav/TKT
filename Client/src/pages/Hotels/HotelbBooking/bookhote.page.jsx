@@ -116,14 +116,24 @@ function BookHotel() {
               </div>
               <div className="section-two">
                 <div className="section-two-header">
-                  <h3>non refundable .</h3>
+                  <h3>non refundable.</h3>
                   <h4>includes taxes and charges</h4>
                 </div>
                 <h4>in property currency : $2,937.60</h4>
               </div>
+              <div className="price-breakdown">
+                <h1>Pricing breakdown</h1>
+               <ul className="list">
+                 <li>Includes $656.97 in taxes and charges</li>
+                <li>Includes $134.17 in damage deposit (fully refundable)</li>
+                <li>Note: the card issuer may charge you a foreign transaction fee.</li>
+               </ul>
+               <p>Price is converted from Euro to show amount in usd but you are paying in Euro, the exchange rate might change before you pay.</p>
+              </div>
             </div>
           </div>
         </form>
+        <div className="heigth"></div>
       </div>
     </div>
   );
