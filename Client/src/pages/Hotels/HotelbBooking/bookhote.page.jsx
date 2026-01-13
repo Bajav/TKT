@@ -1,10 +1,13 @@
 import "./bookhotel.stles.scss";
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useLocation,useNavigate } from "react-router-dom";
+import { useState,useEffect } from "react";
 
 function BookHotel() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { rateKey } = location.state || {};
+  console.log("location.state:", location.state);
+  console.log(rateKey);
   const [input, setInputs] = useState({
     firstName: "",
     lastName: "",
@@ -15,6 +18,12 @@ function BookHotel() {
     someone: false,
     phoneNumber: null,
   });
+ useEffect(() => {
+  if (!rateKey) {
+    navigate("/hotels/results");
+  }
+}, [rateKey, navigate]);
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;

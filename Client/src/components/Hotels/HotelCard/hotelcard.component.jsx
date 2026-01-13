@@ -55,7 +55,7 @@ const selectButton = async (index) => {
     }
     setSelectedHotel(selectedHotel);
     setHotelInfo(fetchedHotel);
-    navigate("/hotels/rooms");
+    navigate("/hotels/rooms",{state: {selectedHotel}});
 
   } catch (err) {
     console.error("Error fetching hotel data:", err);
