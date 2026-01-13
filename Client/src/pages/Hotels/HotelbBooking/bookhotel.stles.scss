@@ -78,3 +78,45 @@
     }
   }
 }
+.form-container {
+  h4 {
+    text-align: left;
+    font-size: 15px;
+    font-family: $textFont, sans-serif;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  p
+  {
+     font-size: 9px;
+     margin-top: 10px;
+    font-family: $robotoMono, monospace;
+    font-weight: 500;
+    opacity: 70%;
+    margin-bottom: 10px; 
+  }
+  input {
+    outline: none;
+    border: 1px solid $darkOrange;
+    height: 50px;
+    font-family: $robotoMono, monospace;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .pax-info-flex {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    input {
+      width: 100%;
+    }
+  }
+  .dates {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
