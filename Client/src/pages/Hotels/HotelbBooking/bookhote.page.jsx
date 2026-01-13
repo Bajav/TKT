@@ -1,13 +1,28 @@
 import "./bookhotel.stles.scss";
-import {useLocation} from 'react-router-dom';
-
-
-
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 function BookHotel() {
   const location = useLocation();
-  const {rateKey} = location.state ||{};
-  console.log(rateKey);
+  const { rateKey } = location.state || {};
+  const [input, setInputs] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    country: "",
+    countryCode: "",
+    mySelf: true,
+    someone: false,
+    phoneNumber: null,
+  });
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="bookhotel-container">
       <h4>complete your booking</h4>
@@ -40,30 +55,33 @@ function BookHotel() {
       </div>
       <div className="form-container">
         <h4>enter your details</h4>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-container">
             <div className="pax-info-flex">
               <input
                 type="text"
                 name="firstName"
                 placeholder="enter first name"
-                onChange={() => {}}
+                value={input.firstName}
                 className=""
+                onChange={handleChange}
               />
               <input
                 type="text"
                 name="lastName"
                 placeholder="enter last name"
-                onChange={() => {}}
+                value={input.lastName}
                 className=""
+                onChange={handleChange}
               />
             </div>
             <input
               type="text"
               name="email"
               placeholder="enter email address"
-              onChange={() => {}}
+              value={input.email}
               className=""
+              onChange={handleChange}
             />
             <p>
               Please enter a valid email address that will be used for
@@ -74,36 +92,54 @@ function BookHotel() {
                 type="text"
                 name="country"
                 placeholder="country"
-                onChange={() => {}}
+                value={input.country}
                 className=""
+                onChange={handleChange}
               />
               <input
                 type="text"
                 name="countryCode"
                 placeholder="country code"
-                onChange={() => {}}
+                value={input.countryCode}
                 className=""
+                onChange={handleChange}
               />
             </div>
-              <input
-                type="text"
-                name="phoneNumber"
-                placeholder="enter phone number"
-                onChange={() => {}}
-                className=""
-              />
+            <input
+              type="text"
+              name="phoneNumber"
+              placeholder="enter phone number"
+              value={input.phoneNumber}
+              className=""
+              onChange={handleChange}
+            />
           </div>
           <div className="text-info">
-            <p>Please enter a valid email address that will be used for confirmation</p>
+            <p>
+              Please enter a valid email address that will be used for
+              confirmation
+            </p>
             <div className="booking-for">
               <h4>Booking for ?</h4>
               <div className="click-container">
                 <div className="click">
-                  <input type="radio" name="mySelf" className="check" />
+                  <input
+                    type="radio"
+                    name="bookingFor"
+                    value="someone"
+                    checked={input.bookingFor === "someone"}
+                    onChange={handleChange}
+                  />
                   <label>my self</label>
                 </div>
                 <div className="click">
-                  <input type="radio" name="mySelf" className="check" />
+                  <input
+                    type="radio"
+                    name="bookingFor"
+                    value="myself"
+                    checked={input.bookingFor === "myself"}
+                    onChange={handleChange}
+                  />
                   <label>someone else</label>
                 </div>
               </div>
@@ -123,15 +159,24 @@ function BookHotel() {
               </div>
               <div className="price-breakdown">
                 <h1>Pricing breakdown</h1>
-               <ul className="list">
-                 <li>Includes $656.97 in taxes and charges</li>
-                <li>Includes $134.17 in damage deposit (fully refundable)</li>
-                <li>Note: the card issuer may charge you a foreign transaction fee.</li>
-               </ul>
-               <p>Price is converted from Euro to show amount in usd but you are paying in Euro, the exchange rate might change before you pay.</p>
+                <ul className="list">
+                  <li>Includes $656.97 in taxes and charges</li>
+                  <li>Includes $134.17 in damage deposit (fully refundable)</li>
+                  <li>
+                    Note: the card issuer may charge you a foreign transaction
+                    fee.
+                  </li>
+                </ul>
+                <p>
+                  Price is converted from Euro to show amount in usd but you are
+                  paying in Euro, the exchange rate might change before you pay.
+                </p>
               </div>
             </div>
           </div>
+          <button type="submit">
+            proceed to payment <span>$3941.82</span>
+          </button>
         </form>
         <div className="heigth"></div>
       </div>
