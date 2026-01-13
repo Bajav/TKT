@@ -84,12 +84,16 @@ const bookHotel = async (req, res) => {
 
 
 const hotelRates = async (req, res) => {
-  const {rooms} = req.body;
-  // console.log(rooms);
+  const {rate} = req.body;
+  console.log(rate);
   //   res.send("route is working");
   try {
-    const response = await checkRates({rooms});
-    // console.log("hotel response", response);
+    const response = await checkRates({rooms: [
+    {
+      rateKey: rate
+    }
+  ]});
+    console.log("hotel response", response);
     res.json(response);
   } catch (error) {
    return res.status(error.status || 500).json({

@@ -1,13 +1,15 @@
 import "./bookhotel.stles.scss";
 import { useLocation,useNavigate } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState,useEffect, Children } from "react";
+import axios from "axios";
+import { CircleChevronRight } from "lucide-react";
 
 function BookHotel() {
   const location = useLocation();
   const navigate = useNavigate();
   const { rateKey } = location.state || {};
   console.log("location.state:", location.state);
-  console.log(rateKey);
+  // console.log(rateKey);
   const [input, setInputs] = useState({
     firstName: "",
     lastName: "",
@@ -18,10 +20,22 @@ function BookHotel() {
     someone: false,
     phoneNumber: null,
   });
+  const [res,setRes]= useState({});
+  const fecthRates = async()=>
+    {
+      try{
+        const response = await axios.post("http://localhost:3000/hotels/hotelrates",{rate:rateKey});
+        setRes(response.data.hotel);
+      }catch(err){
+        console.log(err);
+      }
+    }
  useEffect(() => {
-  if (!rateKey) {
-    navigate("/hotels/results");
-  }
+   if (!rateKey) {
+     navigate("/hotels/results");
+    }
+    fecthRates();
+    console.log(res);
 }, [rateKey, navigate]);
 
   const handleChange = (e) => {
@@ -29,9 +43,23 @@ function BookHotel() {
     const value = e.target.value;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try{
+      const responce = await axios.post('');
+    }catch(error){}
   };
+
+  const {name,checkIn,checkOut,categoryCode,destinationName,modificationPolicies,paymentDataRequired,rooms,totalNet} = res;
+  // const {cancellationPolicies,boardName,net,adults,rateBreakDown,children,rateComments,taxes} = rooms[0] || [];
+  const {rates}=rooms[0];
+  const {cancellationPolicies,boardName,net,adults,rateBreakDown,children,rateComments,taxes}= rates[0];
+  
+  const {allIncluded} = taxes || {};
+  const {clientAmount,included,subType,type} = taxes.taxes[0] || [];
+  // const totalSum = clientAmount+totalNet;
+
+  console.log(taxes);
   return (
     <div className="bookhotel-container">
       <h4>complete your booking</h4>
@@ -39,24 +67,24 @@ function BookHotel() {
         <h5>summary</h5>
         <div className="summary-container">
           <div className="summary-header">
-            <h1>The Beverly Hills Hotel</h1>
+            <h1>{name}</h1>
             <h5>2 weeks</h5>
           </div>
-          <h3>1 Standard Deluxe room</h3>
+          <h3>{rooms[0].name}</h3>
           <hr />
           <div className="dates">
             <div className="date">
               <h4>Check in date</h4>
-              <h2>Fri 16 jan 2026</h2>
+              <h2>{checkIn}</h2>
             </div>
             <div className="date">
               <h4>Check out date</h4>
-              <h2>Fri 16 jan 2026</h2>
+              <h2>{checkOut}</h2>
             </div>
             <div className="date">
               <h4>pax</h4>
               <h2>
-                1 <span>adult</span> 1 <span>child</span>
+                {adults} <span>adult</span> {children} <span>child</span>
               </h2>
             </div>
           </div>
@@ -156,7 +184,7 @@ function BookHotel() {
             <hr />
             <div className="pricing">
               <div className="pricing-header">
-                <h2>Total $3941.82</h2>
+                {included?<h2>total euro {totalNet}</h2>:<h2>Total euro {totalNet}</h2>}
                 <h5>Online payment Required</h5>
               </div>
               <div className="section-two">
@@ -169,7 +197,7 @@ function BookHotel() {
               <div className="price-breakdown">
                 <h1>Pricing breakdown</h1>
                 <ul className="list">
-                  <li>Includes $656.97 in taxes and charges</li>
+                  <li>Includes euro {clientAmount || ""} in taxes and charges</li>
                   <li>Includes $134.17 in damage deposit (fully refundable)</li>
                   <li>
                     Note: the card issuer may charge you a foreign transaction
@@ -179,6 +207,9 @@ function BookHotel() {
                 <p>
                   Price is converted from Euro to show amount in usd but you are
                   paying in Euro, the exchange rate might change before you pay.
+                </p>
+                <p>
+                  {rateComments || ""}
                 </p>
               </div>
             </div>
