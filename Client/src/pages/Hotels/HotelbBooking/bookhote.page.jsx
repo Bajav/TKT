@@ -1,6 +1,7 @@
 import "./bookhotel.stles.scss";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react"; // Removed unused Children import
+import { useState, useEffect } from "react";
+import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils";
 import axios from "axios";
 
 function BookHotel() {
@@ -8,21 +9,23 @@ function BookHotel() {
   const navigate = useNavigate();
   const { rateKey } = location.state || {};
   console.log("location.state:", rateKey);
-  
+
+  // ALL HOOKS FIRST (before any return or early exit)
   const [input, setInputs] = useState({
     firstName: "",
     lastName: "",
     email: "",
     country: "",
     countryCode: "",
-    bookingFor: "myself", // Added this field that was missing
+    bookingFor: "myself",
     phoneNumber: "",
   });
+
   const [res, setRes] = useState(null);
-  const [loading, setLoading] = useState(true); // Uncommented - needed
-  const [error, setError] = useState(null); // Uncommented - needed
-  const [days,setDays]= useState(0);
-  const [weeks,setWeeks]= useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [days, setDays] = useState(0);
+  const [weeks, setWeeks] = useState(0);
 
   const fetchRates = async () => {
     try {
@@ -35,7 +38,6 @@ function BookHotel() {
       );
 
       console.log(response);
-
       setRes(response.data.hotel);
     } catch (error) {
       console.error("Error fetching rates:", error);
@@ -51,29 +53,53 @@ function BookHotel() {
       navigate("/hotels/results");
       return;
     }
-
     fetchRates();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rateKey]);
+  }, [rateKey, navigate]); // Added navigate as dep (good practice)
+
+  // Stay count effect (now safe at top level)
+  useEffect(() => {
+    if (!res?.checkIn || !res?.checkOut) return;
+
+    const checkInDate = new Date(res.checkIn);
+    const checkOutDate = new Date(res.checkOut);
+
+    if (isNaN(checkInDate) || isNaN(checkOutDate)) {
+      setDays(0);
+      setWeeks(0);
+      return;
+    }
+
+    const diffTime = Math.abs(checkOutDate - checkInDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays > 7) {
+      const week = Math.floor(diffDays / 7);
+      const day = diffDays % 7;
+      setWeeks(week);
+      setDays(day);
+    } else {
+      setWeeks(0);
+      setDays(diffDays);
+    }
+  }, [res?.checkIn, res?.checkOut]); // Only run when dates change
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const responce = await axios.post("");
-    } catch (error) {}
+    // Your submit logic here
   };
 
-  // Add loading and error checks BEFORE destructuring
+  // Now early returns are SAFE (after all hooks)
   if (loading) return <p>Loading booking details...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!res) return <p>No data available</p>;
 
+  // Safe destructuring (after checks)
   const {
     name,
     checkIn,
@@ -85,12 +111,11 @@ function BookHotel() {
     rooms,
     totalNet,
   } = res;
-  
-  // Add safety checks
+
   if (!rooms || rooms.length === 0) return <p>No rooms available</p>;
   const { rates } = rooms[0] || {};
   if (!rates || rates.length === 0) return <p>No rates available</p>;
-  
+
   const {
     cancellationPolicies,
     boardName,
@@ -105,15 +130,14 @@ function BookHotel() {
   const { allIncluded } = taxes || {};
   const taxesArray = taxes?.taxes || [];
   const { clientAmount, included, subType, type } = taxesArray[0] || {};
-  
-  console.log(modificationPolicies);
-  
+
   const totalAsNumber = (
     parseFloat(totalNet || 0) + parseFloat(clientAmount || 0)
   ).toFixed(2);
-  // stay count
-  const checkInDate = parseFloat(checkIn.slice(8));
-  const checkOutDate = parseFloat(checkOut.slice(8));
+  console.log(cancellationPolicies);
+
+  const cacellationSummary = getCancellationBadge(rates);
+  console.log(taxesArray.length);
 
   return (
     <div className="bookhotel-container">
@@ -123,9 +147,12 @@ function BookHotel() {
         <div className="summary-container">
           <div className="summary-header">
             <h1>{name}</h1>
-            <h5>{weeks} weeks, {days} days</h5>
+            <h5>
+              {weeks} weeks, {days} days
+            </h5>
           </div>
           <h3>{rooms[0].name}</h3>
+          <h3>{destinationName}</h3>
           <hr />
           <div className="dates">
             <div className="date">
@@ -244,12 +271,12 @@ function BookHotel() {
                 ) : (
                   <h2>Total €{totalAsNumber}</h2>
                 )}
-                <h5>Online payment Required</h5>
+                {paymentDataRequired? <h5>Online payment Required</h5> : <h5>payment at the hotel</h5>}
               </div>
               <div className="section-two">
                 <div className="section-two-header">
-                  <h3>non refundable.</h3>
-                  <h4>includes taxes and charges</h4>
+                  <h3>{cacellationSummary.label} || {modificationPolicies.cancellation ? "free cancellation": "can't cancel this"}</h3>
+                  {taxesArray.length > 0 ?<h4>includes taxes and charges</h4>: null}
                 </div>
                 <h4>in property currency : €{totalNet}</h4>
               </div>
