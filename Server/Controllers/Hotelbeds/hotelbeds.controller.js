@@ -19,7 +19,7 @@ const hotelSearch = async (req, res) => {
     const response = await searchHotels({
       stay: {
         checkIn: "2026-02-10",
-        checkOut: "2026-02-12",
+        checkOut: "2026-02-28",
       },
       occupancies: [
         {
@@ -29,7 +29,7 @@ const hotelSearch = async (req, res) => {
         },
       ],
       destination: {
-        code: "NYC",
+        code: "LON",
       },
       // filter: {
       //   maxHotels: 200,
@@ -86,14 +86,14 @@ const bookHotel = async (req, res) => {
 const hotelRates = async (req, res) => {
   const {rate} = req.body;
   console.log(rate);
-  //   res.send("route is working");
+    // res.send("route is working");
   try {
     const response = await checkRates({rooms: [
     {
       rateKey: rate
     }
   ]});
-    console.log("hotel response", response);
+    // console.log("hotel response", response);
     res.json(response);
   } catch (error) {
    return res.status(error.status || 500).json({

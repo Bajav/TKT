@@ -1,64 +1,120 @@
 import "./bookhotel.stles.scss";
-import { useLocation,useNavigate } from "react-router-dom";
-import { useState,useEffect, Children } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"; // Removed unused Children import
 import axios from "axios";
-import { CircleChevronRight } from "lucide-react";
 
 function BookHotel() {
   const location = useLocation();
   const navigate = useNavigate();
   const { rateKey } = location.state || {};
-  console.log("location.state:", location.state);
-  // console.log(rateKey);
+  console.log("location.state:", rateKey);
+  
   const [input, setInputs] = useState({
     firstName: "",
     lastName: "",
     email: "",
     country: "",
     countryCode: "",
-    mySelf: true,
-    someone: false,
-    phoneNumber: null,
+    bookingFor: "myself", // Added this field that was missing
+    phoneNumber: "",
   });
-  const [res,setRes]= useState({});
-  const fecthRates = async()=>
-    {
-      try{
-        const response = await axios.post("http://localhost:3000/hotels/hotelrates",{rate:rateKey});
-        setRes(response.data.hotel);
-      }catch(err){
-        console.log(err);
-      }
+  const [res, setRes] = useState(null);
+  const [loading, setLoading] = useState(true); // Uncommented - needed
+  const [error, setError] = useState(null); // Uncommented - needed
+  const [days,setDays]= useState(0);
+  const [weeks,setWeeks]= useState(0);
+
+  const fetchRates = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await axios.post(
+        "http://localhost:3000/hotels/hotelrates",
+        { rate: rateKey }
+      );
+
+      console.log(response);
+
+      setRes(response.data.hotel);
+    } catch (error) {
+      console.error("Error fetching rates:", error);
+      setError(error.message || "Failed to fetch rates");
+      navigate("/hotels/results");
+    } finally {
+      setLoading(false);
     }
- useEffect(() => {
-   if (!rateKey) {
-     navigate("/hotels/results");
+  };
+
+  useEffect(() => {
+    if (!rateKey) {
+      navigate("/hotels/results");
+      return;
     }
-    fecthRates();
-    console.log(res);
-}, [rateKey, navigate]);
+
+    fetchRates();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rateKey]);
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-      const responce = await axios.post('');
-    }catch(error){}
+    try {
+      const responce = await axios.post("");
+    } catch (error) {}
   };
 
-  const {name,checkIn,checkOut,categoryCode,destinationName,modificationPolicies,paymentDataRequired,rooms,totalNet} = res;
-  const {rates} = rooms[0] || [];
-  const {cancellationPolicies,boardName,net,adults,rateBreakDown,children,rateComments,taxes}= rates[0] || [];
+  // Add loading and error checks BEFORE destructuring
+  if (loading) return <p>Loading booking details...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!res) return <p>No data available</p>;
+
+  const {
+    name,
+    checkIn,
+    checkOut,
+    categoryCode,
+    destinationName,
+    modificationPolicies,
+    paymentDataRequired,
+    rooms,
+    totalNet,
+  } = res;
   
-  const {allIncluded} = taxes || {};
-  const {clientAmount,included,subType,type} = taxes.taxes[0] || [];
-  // const totalSum = clientAmount+totalNet;
+  // Add safety checks
+  if (!rooms || rooms.length === 0) return <p>No rooms available</p>;
+  const { rates } = rooms[0] || {};
+  if (!rates || rates.length === 0) return <p>No rates available</p>;
+  
+  const {
+    cancellationPolicies,
+    boardName,
+    net,
+    adults,
+    rateBreakDown,
+    children,
+    rateComments,
+    taxes,
+  } = rates[0] || {};
+
+  const { allIncluded } = taxes || {};
+  const taxesArray = taxes?.taxes || [];
+  const { clientAmount, included, subType, type } = taxesArray[0] || {};
+  
   console.log(modificationPolicies);
-const totalAsNumber = parseFloat((parseFloat(totalNet) + parseFloat(clientAmount)).toFixed(2))
+  
+  const totalAsNumber = (
+    parseFloat(totalNet || 0) + parseFloat(clientAmount || 0)
+  ).toFixed(2);
+  // stay count
+  const checkInDate = parseFloat(checkIn.slice(8));
+  const checkOutDate = parseFloat(checkOut.slice(8));
+
   return (
     <div className="bookhotel-container">
       <h4>complete your booking</h4>
@@ -67,7 +123,7 @@ const totalAsNumber = parseFloat((parseFloat(totalNet) + parseFloat(clientAmount
         <div className="summary-container">
           <div className="summary-header">
             <h1>{name}</h1>
-            <h5>2 weeks</h5>
+            <h5>{weeks} weeks, {days} days</h5>
           </div>
           <h3>{rooms[0].name}</h3>
           <hr />
@@ -162,8 +218,8 @@ const totalAsNumber = parseFloat((parseFloat(totalNet) + parseFloat(clientAmount
                   <input
                     type="radio"
                     name="bookingFor"
-                    value="someone"
-                    checked={input.bookingFor === "someone"}
+                    value="myself"
+                    checked={input.bookingFor === "myself"}
                     onChange={handleChange}
                   />
                   <label>my self</label>
@@ -172,8 +228,8 @@ const totalAsNumber = parseFloat((parseFloat(totalNet) + parseFloat(clientAmount
                   <input
                     type="radio"
                     name="bookingFor"
-                    value="myself"
-                    checked={input.bookingFor === "myself"}
+                    value="someone"
+                    checked={input.bookingFor === "someone"}
                     onChange={handleChange}
                   />
                   <label>someone else</label>
@@ -183,7 +239,11 @@ const totalAsNumber = parseFloat((parseFloat(totalNet) + parseFloat(clientAmount
             <hr />
             <div className="pricing">
               <div className="pricing-header">
-                {included?<h2>total €{totalNet}</h2>:<h2>Total €{totalAsNumber}</h2>}
+                {included ? (
+                  <h2>total €{totalNet}</h2>
+                ) : (
+                  <h2>Total €{totalAsNumber}</h2>
+                )}
                 <h5>Online payment Required</h5>
               </div>
               <div className="section-two">
@@ -207,9 +267,7 @@ const totalAsNumber = parseFloat((parseFloat(totalNet) + parseFloat(clientAmount
                   Price is converted from Euro to show amount in usd but you are
                   paying in Euro, the exchange rate might change before you pay.
                 </p>
-                <p>
-                  {rateComments || ""}
-                </p>
+                <p>{rateComments || ""}</p>
               </div>
             </div>
           </div>
