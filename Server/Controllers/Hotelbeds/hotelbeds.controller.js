@@ -68,18 +68,19 @@ const hotelAvailbility = async (req, res) => {
 const bookHotel = async (req, res) => {
   const bodyData = req.body;
   console.log("Request Body:", bodyData);
+  res.send("boking is working");
   
-  try {
-    const response = await booking(req.body);
-    res.json(response);
-  } catch (error) {
-   return res.status(error.status || 500).json({
-      success: false,
-      error: error.operation || "OPERATION_FAILED",
-      message: error.message || "An error occurred",
-      details: error.error || null,
-    });
-  }
+  // try {
+  //   const response = await booking(req.body);
+  //   res.json(response);
+  // } catch (error) {
+  //  return res.status(error.status || 500).json({
+  //     success: false,
+  //     error: error.operation || "OPERATION_FAILED",
+  //     message: error.message || "An error occurred",
+  //     details: error.error || null,
+  //   });
+  // }
 };
 
 

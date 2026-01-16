@@ -2,13 +2,14 @@ import "./bookhotel.stles.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils";
+import rateConfirm from '../../../data/hote.rates.json';
 import axios from "axios";
 
 function BookHotel() {
   const location = useLocation();
   const navigate = useNavigate();
   const { rateKey } = location.state || {};
-  console.log("location.state:", rateKey);
+  // console.log("location.state:", rateKey);
 
   // ALL HOOKS FIRST (before any return or early exit)
   const [input, setInputs] = useState({
@@ -31,14 +32,15 @@ function BookHotel() {
     try {
       setLoading(true);
       setError(null);
+      
+      // const response = await axios.post(
+      //   "http://localhost:3000/hotels/hotelrates",
+      //   { rate: rateKey }
+      // );
 
-      const response = await axios.post(
-        "http://localhost:3000/hotels/hotelrates",
-        { rate: rateKey }
-      );
-
-      console.log(response);
-      setRes(response.data.hotel);
+      // console.log(response);
+      // setRes(response.data.hotel);
+      setRes(rateConfirm.hotel);
     } catch (error) {
       console.error("Error fetching rates:", error);
       setError(error.message || "Failed to fetch rates");
@@ -48,12 +50,14 @@ function BookHotel() {
     }
   };
 
+
   useEffect(() => {
     if (!rateKey) {
       navigate("/hotels/results");
       return;
     }
     fetchRates();
+    console.log(res);
   }, [rateKey, navigate]); // Added navigate as dep (good practice)
 
   // Stay count effect (now safe at top level)
@@ -89,10 +93,6 @@ function BookHotel() {
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Your submit logic here
-  };
 
   // Now early returns are SAFE (after all hooks)
   if (loading) return <p>Loading booking details...</p>;
@@ -129,15 +129,29 @@ function BookHotel() {
 
   const { allIncluded } = taxes || {};
   const taxesArray = taxes?.taxes || [];
+  const submitRate = rates[0].rateKey;
+  console.log(submitRate);
   const { clientAmount, included, subType, type } = taxesArray[0] || {};
 
   const totalAsNumber = (
     parseFloat(totalNet || 0) + parseFloat(clientAmount || 0)
   ).toFixed(2);
-  console.log(cancellationPolicies);
+  // console.log(cancellationPolicies);
 
   const cacellationSummary = getCancellationBadge(rates);
-  console.log(taxesArray.length);
+// submit btn
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(input);
+    try{
+      const response = await axios.post("http://localhost:3000/bookhotel",{rate:submitRate,formData : input});
+      console.log(response);
+    }catch (error)
+    {
+      console.log(error);
+    }
+  };
+  // console.log(taxesArray.length);
 
   return (
     <div className="bookhotel-container">
@@ -153,7 +167,7 @@ function BookHotel() {
           </div>
           <h3>{rooms[0].name}</h3>
           <h3>{destinationName}</h3>
-          <hr />
+          <hr className="hr-line"/>
           <div className="dates">
             <div className="date">
               <h4>Check in date</h4>
@@ -271,19 +285,34 @@ function BookHotel() {
                 ) : (
                   <h2>Total €{totalAsNumber}</h2>
                 )}
-                {paymentDataRequired? <h5>Online payment Required</h5> : <h5>payment at the hotel</h5>}
+                {paymentDataRequired ? (
+                  <h5>Online payment Required</h5>
+                ) : (
+                  <h5>payment at the hotel</h5>
+                )}
               </div>
               <div className="section-two">
                 <div className="section-two-header">
-                  <h3>{cacellationSummary.label} || {modificationPolicies.cancellation ? "free cancellation": "can't cancel this"}</h3>
-                  {taxesArray.length > 0 ?<h4>includes taxes and charges</h4>: null}
+                  <h3>
+                    {cacellationSummary.label} ||{" "}
+                    {modificationPolicies.cancellation
+                      ? "free cancellation"
+                      : "can't cancel this"}
+                  </h3>
+                  {taxesArray.length > 0 ? (
+                    <h4>includes taxes and charges</h4>
+                  ) : null}
                 </div>
                 <h4>in property currency : €{totalNet}</h4>
               </div>
               <div className="price-breakdown">
                 <h1>Pricing breakdown</h1>
                 <ul className="list">
-                  <li>Includes € {clientAmount || ""} in taxes and charges</li>
+                  {taxesArray.length > 0 ? (
+                    <li>
+                      Includes € {clientAmount || ""} in taxes and charges
+                    </li>
+                  ) : null}
                   <li>Includes €134.17 in damage deposit (fully refundable)</li>
                   <li>
                     Note: the card issuer may charge you a foreign transaction
