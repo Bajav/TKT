@@ -69,45 +69,45 @@ const bookHotel = async (req, res) => {
   console.log("Request Body:", bodyData);
   res.send("boking is working");
 
-  try {
-    const response = await booking({
-      holder: {
-        name: "Hussein",
-        surname: "Balijawa",
-      },
-      rooms: [
-        {
-          rateKey:
-            "20260210|20260212|W|254|107255|SUI.QN|BAR OPQ ALL|RO||1~2~0||N@07~~20017d~636141189~N~~~NOR~~FBE642056559404176815471437905AAUK0057000000000121a152",
-          paxes: [
-            {
-              roomId: 1,
-              type: "AD",
-              name: "Hussein",
-              surname: "Balijawa",
-            },
-            {
-              roomId: 1,
-              type: "AD",
-              name: "Allen",
-              surname: "Nakiwewa",
-            },
-          ],
-        },
-      ],
-      clientReference: "TKT-TEST",
-      remark: "Booking remarks if any",
-      tolerance: 2,
-    });
-    res.json(response);
-  } catch (error) {
-    return res.status(error.status || 500).json({
-      success: false,
-      error: error.operation || "OPERATION_FAILED",
-      message: error.message || "An error occurred",
-      details: error.error || null,
-    });
-  }
+  // try {
+  //   const response = await booking({
+  //     holder: {
+  //       name: "Hussein",
+  //       surname: "Balijawa",
+  //     },
+  //     rooms: [
+  //       {
+  //         rateKey:
+  //           "20260210|20260212|W|254|107255|SUI.QN|BAR OPQ ALL|RO||1~2~0||N@07~~20017d~636141189~N~~~NOR~~FBE642056559404176815471437905AAUK0057000000000121a152",
+  //         paxes: [
+  //           {
+  //             roomId: 1,
+  //             type: "AD",
+  //             name: "Hussein",
+  //             surname: "Balijawa",
+  //           },
+  //           {
+  //             roomId: 1,
+  //             type: "AD",
+  //             name: "Allen",
+  //             surname: "Nakiwewa",
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //     clientReference: "TKT-TEST",
+  //     remark: "Booking remarks if any",
+  //     tolerance: 2,
+  //   });
+  //   res.json(response);
+  // } catch (error) {
+  //   return res.status(error.status || 500).json({
+  //     success: false,
+  //     error: error.operation || "OPERATION_FAILED",
+  //     message: error.message || "An error occurred",
+  //     details: error.error || null,
+  //   });
+  // }
 };
 
 const hotelRates = async (req, res) => {

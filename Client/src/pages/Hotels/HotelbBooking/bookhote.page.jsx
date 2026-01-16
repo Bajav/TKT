@@ -162,7 +162,7 @@ function BookHotel() {
           <div className="summary-header">
             <h1>{name}</h1>
             <h5>
-              {weeks} weeks, {days} days
+              {weeks > 0 && days >= 0 ? `${weeks} weeks, ${days} days`:`${days} days`}
             </h5>
           </div>
           <h3>{rooms[0].name}</h3>
@@ -299,7 +299,7 @@ function BookHotel() {
                       ? "free cancellation"
                       : "can't cancel this"}
                   </h3>
-                  {taxesArray.length > 0 ? (
+                  {allIncluded ? (
                     <h4>includes taxes and charges</h4>
                   ) : null}
                 </div>
