@@ -5,27 +5,27 @@ import "./flightSearch.scss";
 
 function FlightSearchInput(props) {
   // contexts
-  // const { iataCodes, setIataCodes } = useContext(FlightContext);
+  const { iataCodes, setIataCodes } = useContext(FlightContext);
   // const { setAirlineData } = useContext(FlightContext);
   // state
   const [showDropdown, setShowDropdown] = useState(true);
   // fetch
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const [iataRes, airlineRes] = await Promise.all([
-  //         axios.get("http://localhost:3000/iataCodes"),
-  //         axios.get("http://localhost:3000/airlines"),
-  //       ]);
-  //       setIataCodes(iataRes.data);
-  //       setAirlineData(airlineRes.data);
-  //     } catch (error) {
-  //       console.error("Error fetching flight data:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [iataRes, airlineRes] = await Promise.all([
+          axios.get("http://localhost:3000/iataCodes"),
+          axios.get("http://localhost:3000/airlines"),
+        ]);
+        setIataCodes(iataRes.data);
+        setAirlineData(airlineRes.data);
+      } catch (error) {
+        console.error("Error fetching flight data:", error);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
   // filters
 

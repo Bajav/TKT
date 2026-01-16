@@ -158,6 +158,7 @@ const findBoards = async (req, res) => {
     });
   }
 };
+
 const findAccomodation = async (req, res) => {
   try {
     const accomodations = await getAccomodations();
@@ -175,7 +176,6 @@ const findAccomodation = async (req, res) => {
     });
   }
 };
-
 
 const getFacilities = async (req, res) => {
   try {

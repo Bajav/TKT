@@ -75,6 +75,7 @@ export async function checkRates(payload) {
       }
     );
     return response.data;
+    console.log("no data recieved")
   } catch (error) {
     handleHotelBedsError(error, "Check Rates");
   }

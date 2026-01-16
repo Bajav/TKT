@@ -51,15 +51,14 @@ function BookHotel() {
   };
 
   const {name,checkIn,checkOut,categoryCode,destinationName,modificationPolicies,paymentDataRequired,rooms,totalNet} = res;
-  // const {cancellationPolicies,boardName,net,adults,rateBreakDown,children,rateComments,taxes} = rooms[0] || [];
-  const {rates}=rooms[0];
-  const {cancellationPolicies,boardName,net,adults,rateBreakDown,children,rateComments,taxes}= rates[0];
+  const {rates} = rooms[0] || [];
+  const {cancellationPolicies,boardName,net,adults,rateBreakDown,children,rateComments,taxes}= rates[0] || [];
   
   const {allIncluded} = taxes || {};
   const {clientAmount,included,subType,type} = taxes.taxes[0] || [];
   // const totalSum = clientAmount+totalNet;
-
-  console.log(taxes);
+  console.log(modificationPolicies);
+const totalAsNumber = parseFloat((parseFloat(totalNet) + parseFloat(clientAmount)).toFixed(2))
   return (
     <div className="bookhotel-container">
       <h4>complete your booking</h4>
@@ -184,7 +183,7 @@ function BookHotel() {
             <hr />
             <div className="pricing">
               <div className="pricing-header">
-                {included?<h2>total euro {totalNet}</h2>:<h2>Total euro {totalNet}</h2>}
+                {included?<h2>total €{totalNet}</h2>:<h2>Total €{totalAsNumber}</h2>}
                 <h5>Online payment Required</h5>
               </div>
               <div className="section-two">
@@ -192,13 +191,13 @@ function BookHotel() {
                   <h3>non refundable.</h3>
                   <h4>includes taxes and charges</h4>
                 </div>
-                <h4>in property currency : $2,937.60</h4>
+                <h4>in property currency : €{totalNet}</h4>
               </div>
               <div className="price-breakdown">
                 <h1>Pricing breakdown</h1>
                 <ul className="list">
-                  <li>Includes euro {clientAmount || ""} in taxes and charges</li>
-                  <li>Includes $134.17 in damage deposit (fully refundable)</li>
+                  <li>Includes € {clientAmount || ""} in taxes and charges</li>
+                  <li>Includes €134.17 in damage deposit (fully refundable)</li>
                   <li>
                     Note: the card issuer may charge you a foreign transaction
                     fee.
@@ -215,7 +214,7 @@ function BookHotel() {
             </div>
           </div>
           <button type="submit">
-            proceed to payment <span>$3941.82</span>
+            proceed to payment <span>€{totalAsNumber}</span>
           </button>
         </form>
         <div className="heigth"></div>
