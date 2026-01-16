@@ -38,8 +38,7 @@ const hotelSearch = async (req, res) => {
     // console.log("hotel response", response);
     res.json(response);
   } catch (error) {
-
-   return res.status(error.status || 500).json({
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -55,8 +54,8 @@ const hotelAvailbility = async (req, res) => {
   try {
     const response = await searchHotels(bodyData);
     res.json(response);
-  }catch (error) {
-   return res.status(error.status || 500).json({
+  } catch (error) {
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -69,35 +68,40 @@ const bookHotel = async (req, res) => {
   const bodyData = req.body;
   console.log("Request Body:", bodyData);
   res.send("boking is working");
-  
-  // try {
-  //   const response = await booking(req.body);
-  //   res.json(response);
-  // } catch (error) {
-  //  return res.status(error.status || 500).json({
-  //     success: false,
-  //     error: error.operation || "OPERATION_FAILED",
-  //     message: error.message || "An error occurred",
-  //     details: error.error || null,
-  //   });
-  // }
-};
 
-
-const hotelRates = async (req, res) => {
-  const {rate} = req.body;
-  console.log(rate);
-    // res.send("route is working");
   try {
-    const response = await checkRates({rooms: [
-    {
-      rateKey: rate
-    }
-  ]});
-    // console.log("hotel response", response);
+    const response = await booking({
+      holder: {
+        name: "Hussein",
+        surname: "Balijawa",
+      },
+      rooms: [
+        {
+          rateKey:
+            "20260210|20260212|W|254|107255|SUI.QN|BAR OPQ ALL|RO||1~2~0||N@07~~20017d~636141189~N~~~NOR~~FBE642056559404176815471437905AAUK0057000000000121a152",
+          paxes: [
+            {
+              roomId: 1,
+              type: "AD",
+              name: "Hussein",
+              surname: "Balijawa",
+            },
+            {
+              roomId: 1,
+              type: "AD",
+              name: "Allen",
+              surname: "Nakiwewa",
+            },
+          ],
+        },
+      ],
+      clientReference: "TKT-TEST",
+      remark: "Booking remarks if any",
+      tolerance: 2,
+    });
     res.json(response);
   } catch (error) {
-   return res.status(error.status || 500).json({
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -106,9 +110,31 @@ const hotelRates = async (req, res) => {
   }
 };
 
+const hotelRates = async (req, res) => {
+  const { rate } = req.body;
+  console.log(rate);
+  // res.send("route is working");
+  try {
+    const response = await checkRates({
+      rooms: [
+        {
+          rateKey: rate,
+        },
+      ],
+    });
+    // console.log("hotel response", response);
+    res.json(response);
+  } catch (error) {
+    return res.status(error.status || 500).json({
+      success: false,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
+    });
+  }
+};
 
-
-//CONTENTS 
+//CONTENTS
 
 const hotelContents = async (req, res) => {
   const { hotelCodes } = req.body;
@@ -132,8 +158,8 @@ const hotelContents = async (req, res) => {
       success: true,
       data: response,
     });
-  }catch (error) {
-   return res.status(error.status || 500).json({
+  } catch (error) {
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -150,8 +176,8 @@ const findBoards = async (req, res) => {
       message: "baords working",
       data: boards,
     });
-  }catch (error) {
-   return res.status(error.status || 500).json({
+  } catch (error) {
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -169,7 +195,7 @@ const findAccomodation = async (req, res) => {
       data: accomodations,
     });
   } catch (error) {
-   return res.status(error.status || 500).json({
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -186,8 +212,8 @@ const getFacilities = async (req, res) => {
       message: "facilities working",
       data: facilities,
     });
-  }catch (error) {
-   return res.status(error.status || 500).json({
+  } catch (error) {
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -205,7 +231,7 @@ const getRooms = async (req, res) => {
       data: rooms,
     });
   } catch (error) {
-   return res.status(error.status || 500).json({
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -226,8 +252,8 @@ const hotelData = async (req, res) => {
       message: "hotel data is working",
       data: rooms,
     });
-  }catch (error) {
-   return res.status(error.status || 500).json({
+  } catch (error) {
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -237,17 +263,17 @@ const hotelData = async (req, res) => {
 };
 
 const hotelComments = async (req, res) => {
-  const {rateCommentsId}  = req.body;
-  console.log(rateCommentsId.split('|')[1]);
+  const { rateCommentsId } = req.body;
+  console.log(rateCommentsId.split("|")[1]);
   try {
-    const rateComments = await getHotelComments(rateCommentsId.split('|')[1]);
+    const rateComments = await getHotelComments(rateCommentsId.split("|")[1]);
     res.json({
       success: true,
       message: "hotel rateComments is working",
       data: rateComments,
     });
   } catch (error) {
-   return res.status(error.status || 500).json({
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -268,7 +294,7 @@ const rateComments = async (req, res) => {
       data: rateComments,
     });
   } catch (error) {
-   return res.status(error.status || 500).json({
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -278,7 +304,6 @@ const rateComments = async (req, res) => {
 };
 
 const promotions = async (req, res) => {
-
   try {
     // const rateComments = await getRateComments(rateCommentsId.split('|')[1]);
     const prmos = await typeHandler("/promotions");
@@ -287,8 +312,8 @@ const promotions = async (req, res) => {
       message: "hotel promotions is working",
       data: prmos,
     });
-  }catch (error) {
-   return res.status(error.status || 500).json({
+  } catch (error) {
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
@@ -298,7 +323,6 @@ const promotions = async (req, res) => {
 };
 
 const terminals = async (req, res) => {
-
   try {
     // const rateComments = await getRateComments(rateCommentsId.split('|')[1]);
     const terminals = await typeHandler("/terminals");
@@ -309,7 +333,7 @@ const terminals = async (req, res) => {
     });
   } catch (error) {
     console.error("Booking Error:", err);
-   return res.status(error.status || 500).json({
+    return res.status(error.status || 500).json({
       success: false,
       error: error.operation || "OPERATION_FAILED",
       message: error.message || "An error occurred",
