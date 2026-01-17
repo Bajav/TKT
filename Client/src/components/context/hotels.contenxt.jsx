@@ -9,8 +9,10 @@ export const HotelContext = createContext({
   hotelError: null,
   hotelContents: null,
   overlay: null,
+  formData: null,
 
   setHotelJson: () => {},
+  setFormData: () => {},
   setHotelSearchData: () => {},
   setSelectedHotel: () => {},
   setHotelInfo: () => {},
@@ -21,6 +23,7 @@ export const HotelContext = createContext({
 });
 
 export const HotelActions = {
+  SET_FORM_DATA :"SET_FORM_DATA",
   SET_HOTEL_INFO: "SET_HOTEL_INFO",
   SET_HOTEL_CONTENTS: "SET_HOTEL_CONTENTS",
   SET_HOTEL_JSON: "SET_HOTEL_JSON",
@@ -33,6 +36,8 @@ export const HotelActions = {
 
 const HotelReducer = (state, action) => {
   switch (action.type) {
+    case HotelActions.SET_FORM_DATA:
+      return {...state, formData : action.payload}
     case HotelActions.SET_HOTEL_JSON:
       return { ...state, hotelJson: action.payload };
     case HotelActions.SET_DEAL:
@@ -50,7 +55,7 @@ const HotelReducer = (state, action) => {
       return { ...state, hotelInfo: action.payload };
     case HotelActions.SET_HOTEL_CONTENTS:
       return { ...state, hotelContents: action.payload };
-          case HotelActions.SET_OVERLAY:
+    case HotelActions.SET_OVERLAY:
       return { ...state, overlay: action.payload };
     default:
       return state;
@@ -58,8 +63,9 @@ const HotelReducer = (state, action) => {
 };
 
 const INITIAL_STATE = {
+  formData: null,
   isDeal: null,
-  overlay:false,
+  overlay: false,
   hotelJson: null,
   hotelSearchData: null,
   selectedHotel: null,
@@ -71,6 +77,8 @@ const INITIAL_STATE = {
 export const HotelProvider = ({ children }) => {
   const [state, dispatch] = useReducer(HotelReducer, INITIAL_STATE);
 
+    const setFormData = (data) =>
+    dispatch({ type: HotelActions.SET_FORM_DATA, payload: data });
   const setHotelJson = (data) =>
     dispatch({ type: HotelActions.SET_HOTEL_JSON, payload: data });
   const setHotelInfo = (data) =>
@@ -89,9 +97,10 @@ export const HotelProvider = ({ children }) => {
     dispatch({ type: HotelActions.SET_HOTEL_CONTENTS, payload: data });
   const setDeal = (data) =>
     dispatch({ type: HotelActions.SET_DEAL, payload: data });
-    const setOverlay = (data) =>
+  const setOverlay = (data) =>
     dispatch({ type: HotelActions.SET_OVERLAY, payload: data });
   const value = {
+    formData: state.formData,
     hotelJson: state.hotelJson,
     hotelSearchData: state.hotelSearchData,
     selectedHotel: state.selectedHotel,
@@ -100,6 +109,8 @@ export const HotelProvider = ({ children }) => {
     hotelContents: state.hotelContents,
     isDeal: state.isDeal,
     overlay: state.overlay,
+    
+    setFormData,
     setDeal,
     setOverlay,
     setHotelContents,

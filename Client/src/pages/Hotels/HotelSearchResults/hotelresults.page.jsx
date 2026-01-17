@@ -11,6 +11,7 @@ import { HotelContext } from "../../../components/context/hotels.contenxt.jsx";
 import images from "../../../data/images.data.json";
 import { getBestOffer } from "../../../components/Utils/HotelsUtils/pricing.utils.jsx";
 import { motion } from "framer-motion";
+// import {getCancellationBadge} from '../../'
 
 function HotelResults() {
   const { hotelContents, setHotelContents,overlay,setOverlay } = useContext(HotelContext);
@@ -108,7 +109,7 @@ function HotelResults() {
             image={imageUrl}
             mainPrice={minRate}
             pricePerNight={100}
-            rating="9.0"
+            rating="9."
             reviewCount={25}
             rateNum={parseInt(categoryCode)}
             categoryCode={categoryCode}
