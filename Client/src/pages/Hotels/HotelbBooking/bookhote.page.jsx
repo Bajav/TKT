@@ -249,7 +249,7 @@ function BookHotel() {
           </div>
           <div className="text-info">
             <p>
-              Please enter a valid email address that will be used for
+              Please enter a valid phone number that will be used for
               confirmation
             </p>
             <div className="booking-for">
@@ -294,7 +294,7 @@ function BookHotel() {
               <div className="section-two">
                 <div className="section-two-header">
                   <h3>
-                    {cacellationSummary.label} ||{" "}
+                    {cacellationSummary.label} ||{""}
                     {modificationPolicies.cancellation
                       ? "free cancellation"
                       : "can't cancel this"}
