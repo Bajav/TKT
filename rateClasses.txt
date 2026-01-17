@@ -1,0 +1,5 @@
+rateClass,Full Name / Meaning,Cancellation Policy,Refundable?,Typical Price Level,How to Display in UI (Best Practice),Color Suggestion
+NRF,Non-Refundable,No free cancellation — full penalty from booking,No,Cheapest,"""Non-refundable"" badge, clear warning text",Red
+NOR,Normal / Refundable,Free cancellation until a date/time (in cancellationPolicies.from),Yes (until deadline),Mid-range,"""Free cancellation"" or ""Free until [date]""",Green
+NRC,Non-Refundable with Conditions,Similar to NRF but with extra restrictions (rare),No,Cheap to mid,"""Non-refundable (conditions apply)""",Red
+OR,On Request,Booking not immediate — hotel must confirm,"Usually yes, but delayed",Any,"""On request"" — user must wait for hotel approval",Yellow/Orange

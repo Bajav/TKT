@@ -105,6 +105,7 @@ export async function booking(payload) {
   }
 }
 
+// get hotel Contents
 export async function getHotelContents(hotelCodes) {
   try {
     // Validate input
@@ -112,10 +113,14 @@ export async function getHotelContents(hotelCodes) {
       throw new Error("hotelCodes must be a non-empty array");
     }
 
+    console.log("Requesting content for hotel codes:", hotelCodes);
+    console.log("Codes string:", hotelCodes.join(","));
+
     const response = await axios.get(`${BASE_URL}/hotel-content-api/1.0/hotels`, {
       params: {
         hotelCodes: hotelCodes.join(","),
         language: "ENG",
+        fields: "all", // Try requesting all fields
       },
       headers: {
         "Api-key": API_KEY,
@@ -123,15 +128,24 @@ export async function getHotelContents(hotelCodes) {
         Accept: "application/json",
       },
     });
+
+    console.log("Content API response:", {
+      requestedCount: hotelCodes.length,
+      returnedCount: response.data.hotels?.length || 0,
+      returnedCodes: response.data.hotels?.map(h => h.code) || [],
+    });
+
     return response.data;
   } catch (error) {
     if (error.message === "hotelCodes must be a non-empty array") {
       throw error;
     }
+    console.error("Content API Error:", error.response?.data);
     handleHotelBedsError(error, "Get Hotel Contents");
   }
-}
+};
 
+// all hotelBoards
 export async function getBoards() {
   try {
     const response = await axios.get(
@@ -153,6 +167,7 @@ export async function getBoards() {
   }
 }
 
+// accomodation types
 export async function getAccomodations() {
   try {
     const response = await axios.get(
@@ -203,6 +218,7 @@ export async function typeHandler(route) {
   }
 }
 
+// get hotel Data
 export async function getHotelData(hotelCode) {
   try {
     // Validate hotelCode
