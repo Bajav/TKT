@@ -12,24 +12,27 @@ import {
 } from "../../Services/Hotelbeds/hotelbeds.service.js";
 
 const hotelSearch = async (req, res) => {
-  const bodyData = req.body;
-  console.log(bodyData);
-  //   res.send("route is working");
+  const {formData} = req.body;
+  console.log(formData);
+  const {accommodationType,dates,destination,guests,rooms} = formData;
+  const room = parseFloat(rooms);
+  const location = destination.slice(0,3);
+    // res.send("route is working");
   try {
     const response = await searchHotels({
       stay: {
-        checkIn: "2026-02-10",
-        checkOut: "2026-02-28",
+        checkIn: dates.checkIn,
+        checkOut: dates.checkOut,
       },
       occupancies: [
         {
-          rooms: 1,
-          adults: 2,
-          children: 0,
+          rooms: room,
+          adults: guests.adults,
+          children: guests.children,
         },
       ],
       destination: {
-        code: "LON",
+        code: location,
       },
       // filter: {
       //   maxHotels: 200,

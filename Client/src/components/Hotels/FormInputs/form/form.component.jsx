@@ -8,9 +8,10 @@ import { useNavigate } from "react-router-dom";
 const HotelForm = () => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
-    accommodationType: "stays",
+    accommodationType: "hotels",
     destination: "",
     rooms: 1,
+    guests:1,
   });
 
   const [dates, setDates] = useState({
@@ -49,7 +50,7 @@ const HotelForm = () => {
       guests,
       dates,
     };
-    navigate("/hotels/results");
+    navigate("/hotels/results",{state:{payload}});
     console.log("Hotel search payload:", payload);
   };
 
