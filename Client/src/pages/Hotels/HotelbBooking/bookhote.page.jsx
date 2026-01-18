@@ -2,7 +2,7 @@ import "./bookhotel.stles.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils";
-import rateConfirm from '../../../data/hote.rates.json';
+import rateConfirm from "../../../data/hote.rates.json";
 import axios from "axios";
 
 function BookHotel() {
@@ -32,7 +32,7 @@ function BookHotel() {
     try {
       setLoading(true);
       setError(null);
-      
+
       // const response = await axios.post(
       //   "http://localhost:3000/hotels/hotelrates",
       //   { rate: rateKey }
@@ -49,7 +49,6 @@ function BookHotel() {
       setLoading(false);
     }
   };
-
 
   useEffect(() => {
     if (!rateKey) {
@@ -92,7 +91,6 @@ function BookHotel() {
     const value = e.target.value;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
-
 
   // Now early returns are SAFE (after all hooks)
   if (loading) return <p>Loading booking details...</p>;
@@ -139,15 +137,17 @@ function BookHotel() {
   // console.log(cancellationPolicies);
 
   const cacellationSummary = getCancellationBadge(rates);
-// submit btn
-   const handleSubmit = async (e) => {
+  // submit btn
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(input);
-    try{
-      const response = await axios.post("http://localhost:3000/bookhotel",{rate:submitRate,formData : input});
+    try {
+      const response = await axios.post("http://localhost:3000/bookhotel", {
+        rate: submitRate,
+        formData: input,
+      });
       console.log(response);
-    }catch (error)
-    {
+    } catch (error) {
       console.log(error);
     }
   };
@@ -162,12 +162,14 @@ function BookHotel() {
           <div className="summary-header">
             <h1>{name}</h1>
             <h5>
-              {weeks > 0 && days >= 0 ? `${weeks} weeks, ${days} days`:`${days} days`}
+              {weeks > 0 && days >= 0
+                ? `${weeks} weeks, ${days} days`
+                : `${days} days`}
             </h5>
           </div>
           <h3>{rooms[0].name}</h3>
           <h3>{destinationName}</h3>
-          <hr className="hr-line"/>
+          <hr className="hr-line" />
           <div className="dates">
             <div className="date">
               <h4>Check in date</h4>
@@ -299,9 +301,7 @@ function BookHotel() {
                       ? "free cancellation"
                       : "can't cancel this"}
                   </h3>
-                  {allIncluded ? (
-                    <h4>includes taxes and charges</h4>
-                  ) : null}
+                  {allIncluded ? <h4>includes taxes and charges</h4> : null}
                 </div>
                 <h4>in property currency : €{totalNet}</h4>
               </div>
@@ -332,7 +332,37 @@ function BookHotel() {
           </button>
         </form>
         <div className="verification-overlay">
-          
+          <div className="verificartion-container">
+          <div className="ad-texts">
+              <h1>Don’t like the process ?</h1>
+            <p>
+              Sign up now to make everything swift and <br /> also get access to
+              exclusives.
+            </p>
+
+          </div>
+          <div className="verification">
+          <div className="verification-header">
+            <p>We just sent you an email <br /> for verification</p>
+          <h4>Enter the security verification code sent to</h4>
+          <h2>balijawahussein@gmail.com</h2>
+          </div>
+          <form onSubmit={()=>{}} className="verification-input-container">
+
+          <div className="verification-inputs">
+            <input type="text" name="v1" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code"  onChange={()=>{}}/>
+            <input type="text" name="v2" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" onChange={()=>{}}/>
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" name="v3" onChange={()=>{}}/>
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" name="v4" onChange={()=>{}}/>
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" name="v5" onChange={()=>{}}/>
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" name="v6" onChange={()=>{}}/>
+          </div>
+            <button className="verification-input-submit">
+              verify email
+            </button>
+          </form>
+          </div>
+          </div>
         </div>
       </div>
     </div>
