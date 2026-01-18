@@ -20,6 +20,8 @@ import BookedFlights from "../pages/bookedFlights/flights.page";
 import HotelResults from "../pages/Hotels/HotelSearchResults/hotelresults.page";
 import HotelRoom from "../pages/Hotels/HotelRooms/hotelroom.page";
 import BookHotel from "../pages/Hotels/HotelbBooking/bookhote.page.jsx";
+// User
+import Bookings from "../pages/Bookings/bookings.page.jsx";
 function AllRoutes() {
   const location = useLocation();
 
@@ -30,7 +32,8 @@ function AllRoutes() {
     "/myflights",
     "/hotels/results",
     "/hotels/rooms",
-    "/hotels/bookhotel"
+    "/hotels/bookhotel",
+    "user/mybookings"
   ];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>
@@ -61,6 +64,7 @@ function AllRoutes() {
             <Route path="bookhotel" element={<BookHotel />} />
             {/* <Route path="passengerdata" element={<Passengers />} /> */}
           </Route>
+          <Route path="user/mybookings" element={<Bookings />} ></Route>
         </Routes>
       </ErrorBoundary>
     </Fragment>
