@@ -15,6 +15,7 @@ function Bookings() {
   return (
     <Fragment>
       <div className="bookings-page">
+        <button className="close">close page</button>
         <div className="tabz-container">
           <div className="tabz">
             <div
@@ -97,7 +98,7 @@ function Bookings() {
                     </div>
                   </div>
                   <hr />
-                  <div className="bookin-pricing">
+                  <div className="booking-pricing">
                     <h2>Pricing Details</h2>
                     <div className="prices">
                       <h5>
@@ -106,11 +107,11 @@ function Bookings() {
                       <h5>
                         Payment Type: <span>{""}</span>
                       </h5>
+                    </div>
                       <p>
                         Free cancellation before 2026-02-07T23:59:00-05:00 after
                         that a fee of $169.13 will be charged
                       </p>
-                    </div>
                   </div>
                   
                   <div className="pricing-breakdown">
@@ -122,7 +123,25 @@ function Bookings() {
                     <p>{""}</p>
                   </div>
                   <div className="booking-request">
-                    <h1></h1>
+                    <h1>Booking Requests from you</h1>
+                    <p>{""}</p>
+                  </div>
+                  <div className="hotel-contacts">
+                    <h1>Hotel Contacts</h1>
+                       <h5>
+                        Tel : {""}
+                      </h5>
+                       <h5>
+                        Tel : {""}
+                      </h5>
+                       <h5>
+                        email : {""}
+                      </h5>
+                  </div>
+                  <div className="modifiers">
+                    <button className="cancel">Cancel Booking</button>
+                    <button className="modify">Modify Booking</button>
+                    <button className="download">Download PDF</button>
                   </div>
                 </div>
               </div>

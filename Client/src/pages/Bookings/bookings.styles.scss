@@ -1,57 +1,148 @@
-@import '../../styles/variables.scss';
-.bookings-page{
-    background: $page_color;
-    height: 100vh;
-    padding: 5px;
-    .tabz {
-        width: 53%;
-        background: $ticketColor;
+@import "../../styles/variables.scss";
+.bookings-page {
+  background: $page_color;
+  height: 100vh;
+  padding: 5px;
+  .tabz {
+    width: 53%;
+    background: $ticketColor;
+  }
+  .tabz-container {
+    margin-top: 30px;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .img-header {
+    height: 35vh;
+    width: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      object-fit: cover;
     }
-    .tabz-container {
-        margin-top: 30px;
-        padding: 0;
-        background: transparent;
-        box-shadow: none;
-    }
-    .img-header
-    {
-        height: 35vh;
-        width: 100%;
-        img
-        {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-    }
-    .tabz-content {
-        padding: 0px;
-    }
-    .content 
-    {
-        background: #fff;
-        padding: 10px;
-        border-radius: 10px;
-        margin-top: 20px;
+  }
+  .tabz-content {
+    padding: 0px;
+  }
+  .content {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
 
-        h1
-        {
-            font-size: 18px;
-            font-family: $roboto,sans-serif;
-            font-weight: 500;
-            text-transform: capitalize;
-            color: $ticketColor;
-            opacity: 90%;
-            margin: 0px 0px 10px 0px;
-        }
-
+    h1 {
+      font-size: 18px;
+      font-family: $robotoMono, monospace;
+      font-weight: 500;
+      text-transform: capitalize;
+      color: $ticketColor;
+      opacity: 90%;
+      margin: 0px 0px 10px 0px;
     }
-   .guest, .room-details
-    {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 0px;
+  }
+  .guest,
+  .room-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
+    h5 {
+      font-size: 12px;
+      //   margin-bottom: 10px;
+      font-family: $robotoMono, sans-serif;
+      color: $ticketColor;
+      text-transform: capitalize;
+      font-weight: 400;
     }
+  }
+  .booking-pricing {
+    margin-top: 10px;
+    p {
+      color: $darkOrange;
+      font-family: $robotoMono, sans-serif;
+    }
+    h5,
+    h2 {
+      font-size: 15px;
+      //   margin-bottom: 10px;
+      font-family: $robotoMono, sans-serif;
+      color: $ticketColor;
+      text-transform: capitalize;
+      font-weight: 500;
+    }
+    h5 {
+      font-size: 12px;
+      margin: 0;
+    }
+    span {
+      font-weight: 600;
+    }
+    .prices {
+      display: flex;
+      align-items: center;
+      gap: 20%;
+    }
+  }
+  .pricing-breakdown {
+    h1 {
+      font-size: 15px;
+      margin-top: 10px;
+      margin-bottom: 0px;
+      color: $ticketColor;
+    }
+    h4 {
+      margin: 0;
+      font-size: 11px;
+      opacity: 90%;
+      color: $ticketColor;
+    }
+    h5 {
+      font-family: $robotoMono, sans-serif;
+      color: $ticketColor;
+      text-transform: capitalize;
+      font-size: 10px;
+      font-weight: 600;
+      opacity: 70%;
+      margin-top: 5px;
+    }
+  }
+  .booking-request {
+    h1 {
+      font-family: $robotoMono, sans-serif;
+      color: $ticketColor;
+      text-transform: capitalize;
+      font-size: 15px;
+      font-weight: 600;
+      //   opacity: 70%;
+      margin-top: 5px;
+      margin-bottom: 0px;
+    }
+    p {
+      color: $ticketColor;
+      font-family: $robotoMono, sans-serif;
+    }
+  }
+  .hotel-contacts {
+    h1 {
+      font-family: $robotoMono, sans-serif;
+      color: $ticketColor;
+      text-transform: capitalize;
+      font-size: 15px;
+      font-weight: 600;
+      //   opacity: 70%;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+    h5 {
+      font-family: $robotoMono, sans-serif;
+      color: $ticketColor;
+      text-transform: capitalize;
+      font-size: 12px;
+      font-weight: 600;
+      //   opacity: 70%;
+      margin-top: 5px;
+    }
+  }
 }
