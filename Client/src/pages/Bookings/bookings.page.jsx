@@ -2,6 +2,7 @@ import "./bookings.styles.scss";
 import hotelImg from "../../assets/images/hotelTwo.jpg";
 import { useLocation } from "react-router-dom";
 import { useState, Fragment } from "react";
+import bookingConfirmantion from "../../data/booking.confirmation.json";
 
 function Bookings() {
   const location = useLocation();
@@ -12,6 +13,28 @@ function Bookings() {
   const toggleTab = (i) => {
     setActiveTab(i);
   };
+  const booking = bookingConfirmantion.booking;
+  const {
+    reference,
+    modificationPolicies,
+    hotel,
+    remark,
+    pendingAmount,
+    totalNet,
+    currency,
+  } = booking;
+  const {
+    categoryCode,
+    checkIn,
+    checkOut,
+    code,
+    destinationName,
+    latitude,
+    longitude,
+    name,
+    rooms,
+  } = hotel;
+//   console.log(hotel);
   return (
     <Fragment>
       <div className="bookings-page">
@@ -58,16 +81,19 @@ function Bookings() {
               className={activeTab === 2 ? "content active-content" : "content"}
             >
               <h1>Your Hotel Bookings</h1>
-              <div className="bookedhotel-container">
+              {rooms.map((room)=>{
+                console.log(room);
+                return(
+                    <div className="bookedhotel-container">
                 <div className="img-header">
                   <img src={hotelImg} />
                 </div>
                 <div className="booking-details">
                   <div className="booking-header">
                     <div className="main-header">
-                      <h1>{""}</h1>
-                      <h3>{""}</h3>
-                      <h3>{""}</h3>
+                      <h1>{name}</h1>
+                      <h3>{room.name}</h3>
+                      <h3>{destinationName}</h3>
                     </div>
                   </div>
                   <div className="booking-amenities">amenities here</div>
@@ -108,17 +134,22 @@ function Bookings() {
                         Payment Type: <span>{""}</span>
                       </h5>
                     </div>
-                      <p>
-                        Free cancellation before 2026-02-07T23:59:00-05:00 after
-                        that a fee of $169.13 will be charged
-                      </p>
+                    <p>
+                      Free cancellation before 2026-02-07T23:59:00-05:00 after
+                      that a fee of $169.13 will be charged
+                    </p>
                   </div>
-                  
+
                   <div className="pricing-breakdown">
                     <h1>Pricing breakdown</h1>
                     <h4>Includes $656.97 in taxes and charges</h4>
-                    <h4>Includes $134.17 in damage deposit (fully refundable)</h4>
-                    <h5>Note: the card issuer may charge you a foreign transaction fee.</h5>
+                    <h4>
+                      Includes $134.17 in damage deposit (fully refundable)
+                    </h4>
+                    <h5>
+                      Note: the card issuer may charge you a foreign transaction
+                      fee.
+                    </h5>
 
                     <p>{""}</p>
                   </div>
@@ -128,15 +159,9 @@ function Bookings() {
                   </div>
                   <div className="hotel-contacts">
                     <h1>Hotel Contacts</h1>
-                       <h5>
-                        Tel : {""}
-                      </h5>
-                       <h5>
-                        Tel : {""}
-                      </h5>
-                       <h5>
-                        email : {""}
-                      </h5>
+                    <h5>Tel : {""}</h5>
+                    <h5>Tel : {""}</h5>
+                    <h5>email : {""}</h5>
                   </div>
                   <div className="modifiers">
                     <button className="cancel">Cancel Booking</button>
@@ -145,6 +170,8 @@ function Bookings() {
                   </div>
                 </div>
               </div>
+                )
+                })}
             </div>
 
             <div
