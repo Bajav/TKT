@@ -33,7 +33,7 @@ function AllRoutes() {
     "/hotels/results",
     "/hotels/rooms",
     "/hotels/bookhotel",
-    "user/mybookings"
+    "/user/mybookings"
   ];
 
   const shouldHideNavbar = hideNavRoutes.some((path) =>

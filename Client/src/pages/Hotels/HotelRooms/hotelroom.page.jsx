@@ -62,12 +62,12 @@ function HotelRoom() {
     setActiveTab(i);
   };
 
-const bookRoomBtn = (roomIndex, rateIndex) => {
-  const selectedRoom = availableRooms[roomIndex];
-  const selectedRate = selectedRoom?.rates?.[rateIndex];
-  const rateKey = selectedRate.rateKey;
-    navigate(`/hotels/bookhotel`,{state: {rateKey}});
-};
+  const bookRoomBtn = (roomIndex, rateIndex) => {
+    const selectedRoom = availableRooms[roomIndex];
+    const selectedRate = selectedRoom?.rates?.[rateIndex];
+    const rateKey = selectedRate.rateKey;
+    navigate(`/hotels/bookhotel`, { state: { rateKey } });
+  };
 
   const airports = terminals?.filter((t) => t?.terminalType === "A") || [];
   const harbours = terminals?.filter((t) => t?.terminalType === "P") || [];
@@ -152,9 +152,7 @@ const bookRoomBtn = (roomIndex, rateIndex) => {
               className={activeTab === 1 ? "content active-content" : "content"}
             >
               <h4>{name}</h4>
-              <p>
-                <p>{description?.content}</p>
-              </p>
+              <p>{description?.content}</p>
             </div>
             <div
               className={activeTab === 2 ? "content active-content" : "content"}
@@ -461,7 +459,9 @@ const bookRoomBtn = (roomIndex, rateIndex) => {
                             </div>
                           </div>
                           <button
-                            onClick={() => {bookRoomBtn(roomIndex,rateIndex)}}
+                            onClick={() => {
+                              bookRoomBtn(roomIndex, rateIndex);
+                            }}
                             className="book-now"
                           >
                             <span>€{net}</span> {"  "}
@@ -488,5 +488,3 @@ const bookRoomBtn = (roomIndex, rateIndex) => {
 }
 
 export default HotelRoom;
-
-
