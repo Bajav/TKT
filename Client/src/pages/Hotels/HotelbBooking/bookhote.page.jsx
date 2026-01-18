@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils";
 import rateConfirm from "../../../data/hote.rates.json";
+import { CheckCircleIcon } from "@phosphor-icons/react";
 import axios from "axios";
 
 function BookHotel() {
@@ -24,6 +25,7 @@ function BookHotel() {
 
   const [res, setRes] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [verifified, setVerifified] = useState(true);
   const [error, setError] = useState(null);
   const [days, setDays] = useState(0);
   const [weeks, setWeeks] = useState(0);
@@ -333,35 +335,99 @@ function BookHotel() {
         </form>
         <div className="verification-overlay">
           <div className="verificartion-container">
-          <div className="ad-texts">
+            <div className="ad-texts">
               <h1>Don’t like the process ?</h1>
-            <p>
-              Sign up now to make everything swift and <br /> also get access to
-              exclusives.
-            </p>
-
-          </div>
-          <div className="verification">
-          <div className="verification-header">
-            <p>We just sent you an email <br /> for verification</p>
-          <h4>Enter the security verification code sent to</h4>
-          <h2>balijawahussein@gmail.com</h2>
-          </div>
-          <form onSubmit={()=>{}} className="verification-input-container">
-
-          <div className="verification-inputs">
-            <input type="text" name="v1" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code"  onChange={()=>{}}/>
-            <input type="text" name="v2" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" onChange={()=>{}}/>
-            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" name="v3" onChange={()=>{}}/>
-            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" name="v4" onChange={()=>{}}/>
-            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" name="v5" onChange={()=>{}}/>
-            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-1]*" autocomplete="one-time-code" name="v6" onChange={()=>{}}/>
-          </div>
-            <button className="verification-input-submit">
-              verify email
-            </button>
-          </form>
-          </div>
+              <p>
+                Sign up now to make everything swift and <br /> also get access
+                to exclusives.
+              </p>
+            </div>
+            <div className="verification">
+              {verifified ? (
+                <div className="verified">
+                  <div className="verified-header">
+                    <h1>you are verified</h1>
+                    <h4>balijawahussein@gmail.com</h4>
+                  </div>
+                  <CheckCircleIcon size={80} color="#40C265" weight="fill" />
+                <p>you are being redirected to the payment page</p>
+                </div>
+              ) : (
+                <div className="killswitch">
+                  <div className="verification-header">
+                    <p>
+                      We just sent you an email <br /> for verification
+                    </p>
+                    <h4>Enter the security verification code sent to</h4>
+                    <h2>balijawahussein@gmail.com</h2>
+                  </div>
+                  <form
+                    onSubmit={() => {}}
+                    className="verification-input-container"
+                  >
+                    <div className="verification-inputs">
+                      <input
+                        type="text"
+                        name="v1"
+                        maxlength="1"
+                        inputmode="numeric"
+                        pattern="[0-1]*"
+                        autocomplete="one-time-code"
+                        onChange={() => {}}
+                      />
+                      <input
+                        type="text"
+                        name="v2"
+                        maxlength="1"
+                        inputmode="numeric"
+                        pattern="[0-1]*"
+                        autocomplete="one-time-code"
+                        onChange={() => {}}
+                      />
+                      <input
+                        type="text"
+                        maxlength="1"
+                        inputmode="numeric"
+                        pattern="[0-1]*"
+                        autocomplete="one-time-code"
+                        name="v3"
+                        onChange={() => {}}
+                      />
+                      <input
+                        type="text"
+                        maxlength="1"
+                        inputmode="numeric"
+                        pattern="[0-1]*"
+                        autocomplete="one-time-code"
+                        name="v4"
+                        onChange={() => {}}
+                      />
+                      <input
+                        type="text"
+                        maxlength="1"
+                        inputmode="numeric"
+                        pattern="[0-1]*"
+                        autocomplete="one-time-code"
+                        name="v5"
+                        onChange={() => {}}
+                      />
+                      <input
+                        type="text"
+                        maxlength="1"
+                        inputmode="numeric"
+                        pattern="[0-1]*"
+                        autocomplete="one-time-code"
+                        name="v6"
+                        onChange={() => {}}
+                      />
+                    </div>
+                    <button className="verification-input-submit">
+                      verify email
+                    </button>
+                  </form>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
