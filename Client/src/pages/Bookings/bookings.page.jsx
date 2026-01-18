@@ -1,0 +1,1 @@
+import './bookings.styles.scss';
