@@ -331,7 +331,9 @@ function BookHotel() {
             proceed to payment <span>€{totalAsNumber}</span>
           </button>
         </form>
-        <div className="heigth"></div>
+        <div className="verification-overlay">
+          
+        </div>
       </div>
     </div>
   );
