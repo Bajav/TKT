@@ -612,7 +612,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                   </SwiperSlide>
 
                   {/* segtment two */}
-                  <SwiperSlide>
+                  <SwiperSlide className="addUp">
                     <div className="flightDealContainer">
                       <AirlineInfo
                         logo={
