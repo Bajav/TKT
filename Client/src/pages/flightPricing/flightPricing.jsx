@@ -37,7 +37,7 @@ function FlightPricing() {
     };
     return airlineLookUp;
   }, {});
-  const coninueBtn = () =>
+  const coninueBtn = () =>{
     navigate("/flights/Passengerdata", { replace: true });
   // console.log("lastFlight", segementOne.carrierCode);
   // check if the flight is direct function
@@ -45,7 +45,7 @@ function FlightPricing() {
   //   setDirect(`${lastFlight.itineraries[0].segments.length} stops`)
   // }else{
   //   setDirect("direct")
-  // }
+  }
 
   return (
     <section className="reviewFlight">
