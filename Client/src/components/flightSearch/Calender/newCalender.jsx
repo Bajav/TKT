@@ -7,7 +7,8 @@ const FlightCalendar = ({
   placeholder = "Select date",
   isRangePicker = false,
   disabled = false,
-  className = ''
+  className = '',
+  returnType
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -130,13 +131,13 @@ const FlightCalendar = ({
       if (selectedRange.start && selectedRange.end) {
         return `${formatDate(selectedRange.start)} - ${formatDate(selectedRange.end)}`;
       } else if (selectedRange.start) {
-        return `${formatDate(selectedRange.start)} - Select return date`;
+        return `${formatDate(selectedRange.start)} - ${returnType}`;
       }
       return '';
     }
     return selectedDate ? formatDate(selectedDate) : '';
   };
-
+// Select return date
   const renderCalendarDays = () => {
     const daysInMonth = getDaysInMonth(viewDate);
     const firstDay = getFirstDayOfMonth(viewDate);

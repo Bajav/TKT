@@ -15,7 +15,7 @@
   height: 60px;
   label {
     color: $deemFontColor;
-    font-family: $textFont, sans-serif;
+    font-family: $robotoMono, monospace;
     text-transform: capitalize;
     font-size: 10px;
     font-weight: 600;
@@ -27,7 +27,7 @@
     width: 95%;
     margin-left: 10px;
     height: 30px;
-    font-family: $roboto, sans-serif;
+    font-family: $robotoMono, monospace;
     background: transparent;
     color: $visibleFontColor;
     // font-weight: 600;
@@ -51,7 +51,7 @@
   z-index: 20;
   background: $visibleFontColor;
   color: $visibleFontColor;
-  font-family: $textFont, sans-serif;
+  font-family:$robotoMono, monospace;
   text-transform: capitalize;
   font-size: 20px;
   padding: 10px;
@@ -109,7 +109,7 @@
     text-overflow: clip;
     list-style: none;
     font-size: 13px;
-    font-family: $textFont, sans-serif;
+    font-family:$robotoMono, monospace;
     // font-weight: 600;
     letter-spacing: 1px;
   }

@@ -1,12 +1,13 @@
 import "./bookings.styles.scss";
 import hotelImg from "../../assets/images/hotelTwo.jpg";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import { useState, Fragment, useEffect } from "react";
 import bookingConfirmantion from "../../data/booking.confirmation.json";
 import BookedTicket from "../../components/BookedFlightTicket/ticket.component";
 
 function Bookings() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(1);
   const [days, setDays] = useState(0);
   const [weeks, setWeeks] = useState(0);
@@ -69,7 +70,7 @@ function Bookings() {
   return (
     <Fragment>
       <div className="bookings-page">
-        <button className="close">close page</button>
+        <button onClick={()=> navigate('/')} className="close">close page</button>
         <div className="tabz-container">
           <div className="tabz">
             <div

@@ -9,7 +9,7 @@
   position: relative;
   display: inline-block;
   width: 100%;
-  font-family: $textFont, sans-serif;
+  font-family: $robotoMono, monospace;
   margin-top: 30px;
 }
 
@@ -25,14 +25,14 @@
 }
 
 .flight-calendar__input-field {
-  height: 60px;
+  height: 50px;
   text-align: center;
   width: 100%;
   padding: 12px 40px 12px 12px;
   border-radius: 5px;
   font-size: 14px;
   background: $inputBackGround;
-  font-family: $textFont, sans-serif;
+  font-family: $robotoMono, monospace;
   cursor: pointer;
   transition: all 0.2s ease;
   outline: none;
