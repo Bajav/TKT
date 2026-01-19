@@ -3,6 +3,7 @@ import hotelImg from "../../assets/images/hotelTwo.jpg";
 import { useLocation } from "react-router-dom";
 import { useState, Fragment, useEffect } from "react";
 import bookingConfirmantion from "../../data/booking.confirmation.json";
+import BookedTicket from "../../components/BookedFlightTicket/ticket.component";
 
 function Bookings() {
   const location = useLocation();
@@ -104,7 +105,10 @@ function Bookings() {
             <div
               className={activeTab === 1 ? "content active-content" : "content"}
             >
-              <p>no booked flights yet</p>
+              <h1>your booked flights</h1>
+              <BookedTicket />
+              <BookedTicket />
+              <button className="submmit-btn">go to check in</button>
             </div>
 
             <div
