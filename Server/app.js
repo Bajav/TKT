@@ -46,11 +46,11 @@ app.use(
       httpOnly: true,
       maxAge: 6000 * 60,
     },
-    store: MongoStore.create({
-      mongoUrl: process.env.DB_HOST,
-      collectionName: "sessions",
-      ttl: 60 * 60, // 1 hour
-    }),
+    // store: MongoStore.create({
+    //   mongoUrl: process.env.DB_HOST,
+    //   collectionName: "sessions",
+    //   ttl: 60 * 60, // 1 hour
+    // }),
   })
 );
 
