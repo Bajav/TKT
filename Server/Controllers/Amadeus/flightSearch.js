@@ -1,4 +1,4 @@
-import amadeus from "../Services/Amadeus.js";
+import amadeus from "../../Services/Amadeus/Amadeus.js";
 
 let responsse;
 let brandedFlight;

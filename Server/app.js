@@ -3,7 +3,8 @@ import MongoStore from "connect-mongo";
 // routes
 import cookieRoutes from "./Routes/cookie.routes.js";
 import iataRoutes from "./Routes/iataRoutes.js";
-import searchFlight from "./Routes/searchFlightRt.js";
+// import searchFlight from "./Routes/Flights.routes.js";
+import flightRoutes from './Routes/Amadeus/Flights.routes.js'
 import stripeRoutes from "./Routes/stripe.routes.js";
 import mytiflyroutes from "./Routes/mystifly.routes.js";
 import hotelRoutes from './Routes/Hotels/hotelbeds.routes.js'
@@ -56,7 +57,7 @@ app.use(
 // routes
 app.use("/", iataRoutes);
 app.use("/", cookieRoutes);
-app.use("/", searchFlight);
+app.use("/", flightRoutes);
 app.use("/", stripeRoutes);
 app.use("/", mytiflyroutes);
 app.use("/", hotelRoutes);

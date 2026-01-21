@@ -1,6 +1,5 @@
 import express from 'express';
-import formData from '../Controllers/flightsForm.js';
-import {searchFlights ,brandedUpSell, getCheckIn, findLastPrice,getFlightOrder,cheapestDate,retriveOrder,deleteOrder,seatMap} from '../Controllers/flightSearch.js';
+import {searchFlights ,brandedUpSell, getCheckIn, findLastPrice,getFlightOrder,cheapestDate,retriveOrder,deleteOrder,seatMap} from '../../Controllers/Amadeus/flightSearch.js';
 
 const router = express.Router();
 
