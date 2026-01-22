@@ -12,19 +12,23 @@ import images from "../../../data/images.data.json";
 import { motion } from "framer-motion";
 import axios from "axios";
 // import {getCancellationBadge} from '../../'
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 function HotelResults() {
+  // hooks
   const { hotelContents, setHotelContents, overlay, setOverlay, setHotelJson } =
     useContext(HotelContext);
   const [dealAmount, setDealAmount] = useState(0);
-const [hotels, setHotels] = useState({ hotels: [] });
+  const [json, setJson] = useState(null);
+  const [hotels, setHotels] = useState({ hotels: [] });
+  const [searchParams] = useSearchParams();
   const [bestOfferName, setBestOfferName] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
   // this is a helper function to get hotel codes from hotelJson
   const getHotelCodes = () => {
     const codes = new Set();
-    hotelJson.hotels.hotels.forEach((hotel) => {
+    json.hotels.hotels.forEach((hotel) => {
       if (hotel.code) {
         codes.add(hotel.code);
       }
@@ -45,21 +49,37 @@ const [hotels, setHotels] = useState({ hotels: [] });
   //     return null;
   //   }
   // };
-
-  const fecthHotels = async (payload) => {
+ const payload = {
+  accommodationType: searchParams.get("accommodationType"),
+  destination: searchParams.get("destination"),
+  dates: {
+    checkIn: searchParams.get("checkIn"),
+    checkOut: searchParams.get("checkOut"),
+  },
+  guests: {
+    adults: Number(searchParams.get("adults")),
+    children: Number(searchParams.get("children")),
+    infants: Number(searchParams.get("infants")),
+  },
+  rooms: Number(searchParams.get("rooms")),
+};
+// console.log("payload :: ",payload);
+  const fecthHotels = async () => {
+    // clg
     try {
       const response = await axios.post("http://localhost:3000/hotels", {
         formData: payload,
       });
-      console.log(response);
+      console.log(response.data.hotels);
       setHotels(response.data.hotels);
+      setJson(response.data);
     } catch (error) {
       console.log("error finding hotels", error);
     }
   };
 
   useEffect(() => {
-    fecthHotels(location.state.payload);
+    fecthHotels();
   }, []);
 
   // this is the use effect to load hotel contents.
@@ -99,10 +119,12 @@ const [hotels, setHotels] = useState({ hotels: [] });
       ) : (
         <main className="hotel-results">
           <div className="results-header">
-            <button className="cancelBtn">cancel</button>
+            <button onClick={() => navigate("/hotels")} className="cancelBtn">
+              cancel
+            </button>
           </div>
           <h1 className="results-head">
-            {hotelJson.hotels.hotels.length} hotels found
+            {hotels?.hotels?.length} hotels found
           </h1>
           <div className="results-header">
             <div className="filter">
@@ -110,7 +132,7 @@ const [hotels, setHotels] = useState({ hotels: [] });
               <h5>filters</h5>
             </div>
           </div>
-          {hotels.hotels.length > 0 ? (
+          {hotels?.hotels?.length > 0 ? (
             hotels.hotels.map((hotel, index) => {
               const {
                 name,
@@ -122,11 +144,11 @@ const [hotels, setHotels] = useState({ hotels: [] });
 
               const imageUrl = images[index % images.length];
               const bestOffer = getBestOffer(hotel);
-
+              // console.log("hotelsss::",hotels?.hotels);
               return (
                 <HotelCard
                   key={index}
-                  hotelJson={hotelJson}
+                  hotelJson={json}
                   index={index}
                   isDeal={bestOffer?.hasDeal || false}
                   hotelName={name}

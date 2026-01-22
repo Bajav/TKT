@@ -1,15 +1,17 @@
 import "./bookhotel.stles.scss";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils";
 import rateConfirm from "../../../data/hote.rates.json";
 import { CheckCircleIcon } from "@phosphor-icons/react";
 import axios from "axios";
+import { UserContext } from "../../../components/context/user.context";
 
 function BookHotel() {
   const location = useLocation();
   const navigate = useNavigate();
   const { rateKey } = location.state || {};
+  const {signedIn} = useContext(UserContext)
   // console.log("location.state:", rateKey);
 
   // ALL HOOKS FIRST (before any return or early exit)

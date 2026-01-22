@@ -50,7 +50,17 @@ const HotelForm = () => {
       guests,
       dates,
     };
-    navigate("/hotels/results",{state:{payload}});
+    const params = new URLSearchParams({
+  accommodationType: payload.accommodationType,
+  destination: payload.destination,
+  checkIn: payload.dates.checkIn,
+  checkOut: payload.dates.checkOut,
+  adults: payload.guests.adults,
+  children: payload.guests.children,
+  infants: payload.guests.infants,
+  rooms: payload.rooms,
+});
+   navigate(`/hotels/results?${params.toString()}`);
     console.log("Hotel search payload:", payload);
   };
 
