@@ -63,6 +63,7 @@ app.use("/", stripeRoutes);
 app.use("/", mytiflyroutes);
 app.use("/", hotelRoutes);
 app.use("/", openTripRoutes);
+app.use("/", sessionRoutes);
 
 // app.use('/',atlasRoutes);
 
