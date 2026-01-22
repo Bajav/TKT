@@ -4,134 +4,110 @@ let responsse;
 let brandedFlight;
 let oderId;
 
+// const searchFlights = async (req, res) => {
+
+//   try {
+//     const {
+//       origin,
+//       destination,
+//       departureDate,
+//       returnDate,
+//       flightType,
+//       seatClass,
+//       passengers,
+//     } = await req.body;
+//     console.log("form data recieved", req.body);
+//   let flightSearch = req.session.flightSearch || [];
+//   if (req.body) {
+//     flightSearch.push(req.body);
+//   } else {
+//     return res.send("no body data");
+//   }
+//   req.session.flightSearch = flightSearch;
+//     if (
+//       !origin ||
+//       !destination ||
+//       !departureDate ||
+//       !passengers ||
+//       !seatClass
+//     ) {
+//       return res
+//         .status(400)
+//         .json({ message: "Missing required fields in request." });
+//     } else {
+//       console.log(req.body);
+//     }
+
+//     const originCode = origin.split(",")[0].trim();
+//     const destinationCode = destination.split(",")[0].trim();
+//     console.log(originCode, destinationCode);
+
+//     // const origin = "EBB";
+//     // const destination ="DXB";
+//     // const departureDate ='2025-06-08';
+//     // const returnDate = '2025-06-15';
+//     // const adult = 1;
+
+//     const response = await amadeus.shopping.flightOffersSearch.get({
+//       originLocationCode: originCode,
+//       destinationLocationCode: destinationCode,
+//       departureDate: departureDate.slice(0, 10),
+//       returnDate: returnDate.slice(0, 10),
+//       adults: passengers.adults,
+//       children: passengers.children,
+//       infants: passengers.infants,
+//       travelClass: seatClass,
+//       nonStop: false,
+//       currencyCode: "USD",
+//       // max: 100,
+//     });
+
+//     if (response.data.length === 0) {
+//       console.log("No flights available");
+//       return res.status(404).json({ message: "No flights available" });
+//     }
+//     responsse = response.data;
+//     console.log(`responess::`, responsse[3]);
+//     const limitedData = response.data.slice(0, 1);
+//     // console.log("LIMITED DATA ::", limitedData);
+
+//     return res.json(response.data);
+//   } catch (error) {
+//     console.error("Flight search error:", error);
+//     return res.status(500).json({
+//       message: "An error occurred while fetching flights",
+//       error: error.response?.data || error.message,
+//     });
+//   }
+// };
+
 const searchFlights = async (req, res) => {
   try {
-    // const {
-    //   origin,
-    //   destination,
-    //   departureDate,
-    //   returnDate,
-    //   flightType,
-    //   seatClass,
-    //   passengers,
-    // } = await req.body;
-    console.log("form data recieved", req.body);
-    // if (req.body) {
-    //   flightSearch.push(req.body);
-    // } else {
-    //   return res.send("no body data");
-    // }
-    // req.session.flightSearch = flightSearch;
-    // if (
-    //   !origin ||
-    //   !destination ||
-    //   !departureDate ||
-    //   !passengers ||
-    //   !seatClass
-    // ) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "Missing required fields in request." });
-    // } else {
-    //   console.log(req.body);
-    // }
-
-    // const originCode = origin.split(",")[0].trim();
-    // const destinationCode = destination.split(",")[0].trim();
-    // console.log(originCode, destinationCode);
-
-    // const response = await amadeus.shopping.flightOffersSearch.get({
-    //   originLocationCode: originCode,
-    //   destinationLocationCode: destinationCode,
-    //   departureDate: departureDate.slice(0, 10),
-    //   returnDate: returnDate.slice(0, 10),
-    //   adults: passengers.adults,
-    //   children: passengers.children,
-    //   infants: passengers.infants,
-    //   travelClass: seatClass,
-    //   nonStop: false,
-    //   currencyCode: "USD",
-    //   // max: 100,
-    // });
-    const origin = "EBB";
-    const destination = "DXB";
-    const departureDate = "2026-04-08";
-    const returnDate = "2026-06-15";
-    const adults = "1";
     const response = await amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: origin,
-      destinationLocationCode: destination,
-      departureDate: departureDate,
-      returnDate: returnDate,
-      adults: adults,
-      children: 0,
-      infants: 0,
-      travelClass: "ECONOMY",
-      nonStop: false,
-      currencyCode: "USD",
-      max: 1,
+      originLocationCode: "NYC",
+      destinationLocationCode: "LAX",
+      departureDate: "2026-03-01",
+      adults: 1,
     });
-    if (response.data.length === 0) {
-      console.log("No flights available");
-      return res.status(404).json({ message: "No flights available" });
-    }
-    responsse = response.data;
-    console.log(`responess::`, responsse[3]);
-    const limitedData = response.data.slice(0, 1);
-    // console.log("LIMITED DATA ::", limitedData);
-
-    return res.json(response.data);
   } catch (error) {
-    console.error("Flight search error:", error);
-    
-    // Handle Amadeus API errors
-    if (error.response) {
-      const statusCode = error.response.statusCode || 500;
-      const errors = error.response.result?.errors || [];
-      
-      // Parse Amadeus error codes
-      let message = "An error occurred while fetching flights";
-      
-      if (errors.length > 0) {
-        const errorCode = errors[0].code;
-        const errorTitle = errors[0].title;
-        const errorDetail = errors[0].detail;
-        
-        switch (errorCode) {
-          case 477:
-            message = "Invalid format for one or more fields";
-            break;
-          case 4926:
-            message = "Invalid date format or date is in the past";
-            break;
-          case 32171:
-            message = "Invalid origin or destination airport code";
-            break;
-          case 38190:
-            message = "No flights found for this route";
-            break;
-          case 141:
-            message = "Amadeus API system error - please try again later";
-            break;
-          case 38189:
-            message = "Maximum number of passengers exceeded";
-            break;
-          default:
-            message = errorTitle || errorDetail || "Unknown error occurred";
-        }
-      }
-      
-      return res.status(statusCode).json({
-        message: message,
-        error: errors,
-        details: errors[0]?.detail || null
+    console.error("API Status check error:", error);
+
+    // Check if it's a ClientError from Amadeus
+    if (error.code === "ClientError" && error.response) {
+      return res.status(error.response.statusCode || 503).json({
+        status: "error",
+        message: "Amadeus API is DOWN again",
+        errorType: "ClientError",
+        error: error.response.result?.errors || error.response.body,
+        timestamp: new Date().toISOString(),
       });
     }
-    
-    // Handle network or other errors
-    return res.status(500).json({
-      message: "Network error - unable to reach flight search service",
+
+    return res.status(503).json({
+      status: "error",
+      message: "Unable to connect to Amadeus API",
       error: error.message,
+      timestamp: new Date().toISOString(),
     });
   }
 };
@@ -371,33 +347,33 @@ const checkApiStatus = async (req, res) => {
   try {
     // Simple API health check using airline code lookup
     const response = await amadeus.referenceData.airlines.get({
-      airlineCodes: 'BA'
+      airlineCodes: "BA",
     });
-    
+
     return res.status(200).json({
-      status: 'operational',
-      message: 'Amadeus API is working correctly',
-      timestamp: new Date().toISOString()
+      status: "operational",
+      message: "Amadeus API is working correctly",
+      timestamp: new Date().toISOString(),
     });
   } catch (error) {
     console.error("API Status check error:", error);
-    
+
     // Check if it's a ClientError from Amadeus
-    if (error.code === 'ClientError' && error.response) {
+    if (error.code === "ClientError" && error.response) {
       return res.status(error.response.statusCode || 503).json({
-        status: 'error',
-        message: 'Amadeus API is experiencing issues',
-        errorType: 'ClientError',
+        status: "error",
+        message: "Amadeus API is experiencing issues",
+        errorType: "ClientError",
         error: error.response.result?.errors || error.response.body,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
-    
+
     return res.status(503).json({
-      status: 'error',
-      message: 'Unable to connect to Amadeus API',
+      status: "error",
+      message: "Unable to connect to Amadeus API",
       error: error.message,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   }
 };
