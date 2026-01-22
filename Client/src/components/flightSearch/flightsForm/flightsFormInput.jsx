@@ -51,31 +51,6 @@ function FlightsForm() {
   const [airlines, setAirlines] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [iataRes, airlineRes] = await Promise.all([
-          axios.get("http://localhost:3000/iataCodes"),
-          axios.get("http://localhost:3000/airlines"),
-        ]);
-        setIataCodes(iataRes.data);
-        setAirlines(airlineRes.data);
-      } catch (error) {
-        console.error("Error fetching flight data:", error);
-      }
-    };
-    const resetState = () => {
-      setFilteredFlights([]);
-      setFlightResults([]);
-      setBrandedUpSell([]);
-      setBookedFlight([]);
-      console.log("state reseted");
-    };
-    fetchData();
-    resetState();
-  }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputs((prev) => ({

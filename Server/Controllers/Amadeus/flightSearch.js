@@ -5,11 +5,7 @@ let brandedFlight;
 let oderId;
 
 const searchFlights = async (req, res) => {
-  if(req.body){
-    req.session.userSearch = req.body;
-  }
-  console.log(req.session);
-  console.log(req.sessionID);
+ 
   try {
     const {
       origin,
@@ -21,8 +17,27 @@ const searchFlights = async (req, res) => {
       passengers,
     } = await req.body;
     console.log("form data recieved", req.body);
-
-    // console.log("passengers",passengers);
+  
+    // Store search data in cookie
+    let flightSearches = [];
+    if (req.cookies.flightSearch) {
+      try {
+        flightSearches = JSON.parse(req.cookies.flightSearch);
+      } catch (e) {
+        flightSearches = [];
+      }
+    }
+    
+    if (req.body) {
+      flightSearches.push(req.body);
+    } else {
+      return res.send("no body data");
+    }
+    
+    res.cookie('flightSearch', JSON.stringify(flightSearches), { 
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      httpOnly: true 
+    });
 
     if (
       !origin ||

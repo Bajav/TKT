@@ -20,9 +20,19 @@ const setSession = (req, res) => {
   res.send("session updated - added new search");
 };
 
-const getSession = (req, res) => {
-  console.log(req.session.flightSearch);
-  res.send("sesssion get is working");
+const getFlightSession = (req, res) => {
+  if(!req.session.flightSearch){
+    res.json({
+        success: false,
+        message:"no recent searches",
+    });
+  }else{
+      res.json({
+        success: false,
+        message:"no recent searches",
+        data: req.session.flightSearch,
+    });
+  }
 };
 
-export { setSession, getSession };
+export { setSession, getFlightSession };
