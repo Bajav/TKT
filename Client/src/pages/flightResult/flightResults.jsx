@@ -11,24 +11,24 @@ import { FlightContext } from "../../components/context/flightSearch.context";
 
 function FlightResult() {
   const { flightSearch,setFlightResults,flightResults,setFilteredFlights } = useContext(FlightContext);
-  const resLength = flightResults.length;
+  const resLength = flightResults?.length || 0;
   // define location
   const location = useLocation();
   const [error, setError] = useState([]);
   // define navigate
   const navigate = useNavigate();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const iataRes = await Promise.all([
-          axios.get("http://localhost:3000/flights"),
-        ]);
-      } catch (err) {
-        setError("Failed to fetch data. Please try again.");
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const iataRes = await Promise.all([
+  //         axios.get("http://localhost:3000/flights"),
+  //       ]);
+  //     } catch (err) {
+  //       setError("Failed to fetch data. Please try again.");
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   const backBtn =()=>{
     setFlightResults([]);

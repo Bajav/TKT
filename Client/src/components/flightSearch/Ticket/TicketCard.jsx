@@ -88,31 +88,31 @@ function FlightCard() {
         console.error("Error posting flight:", error);
       }
     };
-    const fetchAirlines = async () => {
-      try {
-        const [iataRes, airlineRes] = await Promise.all([
-          axios.get("http://localhost:3000/iataCodes"),
-          axios.get("http://localhost:3000/airlines"),
-        ]);
-        setIataCodes(iataRes.data);
-        setAirlineData(airlineRes.data);
-      } catch (error) {
-        console.error("Error fetching flight data:", error);
-      }
-    };
+    // const fetchAirlines = async () => {
+    //   try {
+    //     const [iataRes, airlineRes] = await Promise.all([
+    //       axios.get("http://localhost:3000/iataCodes"),
+    //       axios.get("http://localhost:3000/airlines"),
+    //     ]);
+    //     setIataCodes(iataRes.data);
+    //     setAirlineData(airlineRes.data);
+    //   } catch (error) {
+    //     console.error("Error fetching flight data:", error);
+    //   }
+    // };
 
     setdata();
     fetchFlights();
     fetchData();
-    fetchAirlines();
+    // fetchAirlines();
   }, []);
 
   useEffect(() => {
     const uniqueAirlineCodes = [
       ...new Set(
-        flightResults.flatMap((itinerary) =>
-          itinerary.itineraries[0].segments.flatMap(
-            (items) => items.carrierCode
+        flightResults?.flatMap((itinerary) =>
+          itinerary?.itineraries[0]?.segments?.flatMap(
+            (items) => items?.carrierCode
           )
         )
       ),

@@ -1,10 +1,11 @@
 import express from 'express';
-import {searchFlights ,brandedUpSell, getCheckIn, findLastPrice,getFlightOrder,cheapestDate,retriveOrder,deleteOrder,seatMap} from '../../Controllers/Amadeus/flightSearch.js';
+import {searchFlights,checkApiStatus ,brandedUpSell, getCheckIn, findLastPrice,getFlightOrder,cheapestDate,retriveOrder,deleteOrder,seatMap} from '../../Controllers/Amadeus/flightSearch.js';
 
 const router = express.Router();
 
 // router.get('/', searchFlights);
 router.post('/results', searchFlights);
+router.get('/amadeusstatus', checkApiStatus);
 router.get('/results', searchFlights);
 router.post('/brandedUpSell', brandedUpSell);
 router.get('/brandedUpSell', brandedUpSell);
