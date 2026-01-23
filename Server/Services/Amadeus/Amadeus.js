@@ -5,8 +5,8 @@ import Amadeus from "amadeus";
 dotenv.config();
 
 const amadeus = new Amadeus({
-  clientId: process.env.AMADEUS_API_KEY,
-  clientSecret: process.env.AMADEUS_SECRET_KEY,
+  clientId: process.env.API_KEY,
+  clientSecret: process.env.SECRET_KEY,
 });
 
 export default amadeus;

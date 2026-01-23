@@ -354,6 +354,7 @@ const checkApiStatus = async (req, res) => {
       status: "operational",
       message: "Amadeus API is working correctly",
       timestamp: new Date().toISOString(),
+      data: response.data,
     });
   } catch (error) {
     console.error("API Status check error:", error);

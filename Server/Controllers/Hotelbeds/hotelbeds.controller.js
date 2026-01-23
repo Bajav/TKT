@@ -16,7 +16,7 @@ const hotelSearch = async (req, res) => {
   console.log(formData);
   const {accommodationType,dates,destination,guests,rooms} = formData;
   const room = parseFloat(rooms);
-  const location = destination.slice(0,3);
+  const location = destination?.slice(0,3);
     // res.send("route is working");
   try {
     const response = await searchHotels({

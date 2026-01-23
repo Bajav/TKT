@@ -134,6 +134,7 @@ function HotelResults() {
           </div>
           {hotels?.hotels?.length > 0 ? (
             hotels.hotels.map((hotel, index) => {
+              console.log("hotelllll ::",hotel);
               const {
                 name,
                 destinationName,
