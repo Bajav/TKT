@@ -16,8 +16,15 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 function HotelResults() {
   // hooks
-  const { hotelContents, setHotelContents, overlay, setOverlay, setHotelJson } =
-    useContext(HotelContext);
+  const {
+    hotelContents,
+    setHotelContents,
+    overlay,
+    setFormData,
+    formData,
+    setOverlay,
+    setHotelJson,
+  } = useContext(HotelContext);
   const [dealAmount, setDealAmount] = useState(0);
   const [json, setJson] = useState(null);
   const [hotels, setHotels] = useState({ hotels: [] });
@@ -49,30 +56,41 @@ function HotelResults() {
   //     return null;
   //   }
   // };
- const payload = {
-  accommodationType: searchParams.get("accommodationType"),
-  destination: searchParams.get("destination"),
-  dates: {
-    checkIn: searchParams.get("checkIn"),
-    checkOut: searchParams.get("checkOut"),
-  },
-  guests: {
-    adults: Number(searchParams.get("adults")),
-    children: Number(searchParams.get("children")),
-    infants: Number(searchParams.get("infants")),
-  },
-  rooms: Number(searchParams.get("rooms")),
-};
-// console.log("payload :: ",payload);
+  const payload = {
+    accommodationType: searchParams.get("accommodationType"),
+    destination: searchParams.get("destination"),
+    dates: {
+      checkIn: searchParams.get("checkIn"),
+      checkOut: searchParams.get("checkOut"),
+    },
+    guests: {
+      adults: Number(searchParams.get("adults")),
+      children: Number(searchParams.get("children")),
+      infants: Number(searchParams.get("infants")),
+    },
+    rooms: Number(searchParams.get("rooms")),
+  };
+  // console.log("payload :: ",payload);
+
   const fecthHotels = async () => {
     // clg
+    console.log("formData", formData);
     try {
-      const response = await axios.post("http://localhost:3000/hotels", {
-        formData: payload,
-      });
-      console.log(response.data.hotels);
-      setHotels(response.data.hotels);
-      setJson(response.data);
+      if (payload === null) {
+        const response = await axios.post("http://localhost:3000/hotels", {
+          formData: formData,
+        });
+        console.log(response.data.hotels);
+        setHotels(response.data.hotels);
+        setJson(response.data);
+      } else {
+        const response = await axios.post("http://localhost:3000/hotels", {
+          formData: payload,
+        });
+        console.log(response.data.hotels);
+        setHotels(response.data.hotels);
+        setJson(response.data);
+      }
     } catch (error) {
       console.log("error finding hotels", error);
     }
@@ -80,6 +98,7 @@ function HotelResults() {
 
   useEffect(() => {
     fecthHotels();
+    setFormData(payload);
   }, []);
 
   // this is the use effect to load hotel contents.
@@ -134,14 +153,16 @@ function HotelResults() {
           </div>
           {hotels?.hotels?.length > 0 ? (
             hotels.hotels.map((hotel, index) => {
-              console.log("hotelllll ::",hotel);
+              // console.log("hotelllll ::",hotel);
               const {
                 name,
                 destinationName,
                 categoryName,
                 minRate,
                 categoryCode,
+                rooms,
               } = hotel;
+              // console.log(rooms);
 
               const imageUrl = images[index % images.length];
               const bestOffer = getBestOffer(hotel);
