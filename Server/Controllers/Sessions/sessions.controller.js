@@ -1,36 +1,76 @@
 const setSession = (req, res) => {
-  const body = req.body;
+  try {
+    const searchData = req.body;
 
-  // 1. Get existing or start empty
-  let flightSearch = req.session.flightSearch || [];
+    // Validation...
 
-  // 2. Add new if there's data
-  if (body) {
-    flightSearch.push(body);
-  } else {
-    return res.send("no body data");
+    if (!req.session.flightSearchHistory) {
+      req.session.flightSearchHistory = [];
+    }
+
+    // Check for duplicate
+    const isDuplicate = req.session.flightSearchHistory.some(search => 
+      search.originLocationCode === searchData.originLocationCode &&
+      search.destinationLocationCode === searchData.destinationLocationCode &&
+      search.departureDate === searchData.departureDate &&
+      search.adults === searchData.adults
+    );
+
+    if (isDuplicate) {
+      return res.status(200).json({
+        success: true,
+        message: "Search already in history",
+        duplicate: true,
+      });
+    }
+
+    const searchWithTimestamp = {
+      ...searchData,
+      timestamp: new Date().toISOString(),
+    };
+
+    req.session.flightSearchHistory.unshift(searchWithTimestamp);
+
+    if (req.session.flightSearchHistory.length > 10) {
+      req.session.flightSearchHistory = req.session.flightSearchHistory.slice(0, 10);
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Search added to history",
+      data: searchWithTimestamp,
+      historyCount: req.session.flightSearchHistory.length,
+    });
+
+  } catch (error) {
+    console.error("Error saving to session:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error saving search to session",
+      error: error.message,
+    });
   }
-
-  // 3. Save updated version back
-  req.session.flightSearch = flightSearch;
-
-  console.log("Current searches:", flightSearch);
-  console.log("Session ID:", req.sessionID);
-
-  res.send("session updated - added new search");
 };
 
 const getFlightSession = (req, res) => {
-  if(!req.session.flightSearch){
-    res.json({
-        success: false,
-        message:"no recent searches",
+  try {
+    const history = req.session.flightSearchHistory || [];
+
+    return res.status(200).json({
+      success: true,
+      message:
+        history.length > 0
+          ? `Found ${history.length} recent search${history.length > 1 ? "es" : ""}`
+          : "No recent searches",
+      data: history,
+      count: history.length,
     });
-  }else{
-      res.json({
-        success: false,
-        message:"no recent searches",
-        data: req.session.flightSearch,
+  } catch (error) {
+    console.error("Error fetching search history:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error retrieving search history",
+      error: error.message,
     });
   }
 };

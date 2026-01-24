@@ -26,8 +26,8 @@ function FlightCard() {
     iataCodes,
     airlineData,
     flightSearch,
-    flightResults,
-    setFlightResults,
+    // flightResults,
+    // setFlightResults,
     bookedFlight,
     setBookedFlight,
     selectedFlight,
@@ -45,6 +45,7 @@ function FlightCard() {
   } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
+  const [flightResults, setFlightResults] = useState([]);
   const [filterDropDown, setFilterDropDown] = useState(false);
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
@@ -80,31 +81,31 @@ function FlightCard() {
       try {
         const response = await axios.post(
           "http://localhost:3000/results",
-          formData
+          formData,
         );
-        setFlightResults(response.data);
-        console.log(response.data[0]);
+        setFlightResults(response?.data);
+        console.log(response?.data[0]);
       } catch (error) {
         console.error("Error posting flight:", error);
       }
     };
-    // const fetchAirlines = async () => {
-    //   try {
-    //     const [iataRes, airlineRes] = await Promise.all([
-    //       axios.get("http://localhost:3000/iataCodes"),
-    //       axios.get("http://localhost:3000/airlines"),
-    //     ]);
-    //     setIataCodes(iataRes.data);
-    //     setAirlineData(airlineRes.data);
-    //   } catch (error) {
-    //     console.error("Error fetching flight data:", error);
-    //   }
-    // };
+    const fetchAirlines = async () => {
+      try {
+        const [iataRes, airlineRes] = await Promise.all([
+          axios.get("http://localhost:3000/iataCodes"),
+          axios.get("http://localhost:3000/airlines"),
+        ]);
+        setIataCodes(iataRes.data);
+        setAirlineData(airlineRes.data);
+      } catch (error) {
+        console.error("Error fetching flight data:", error);
+      }
+    };
 
     setdata();
     fetchFlights();
     fetchData();
-    // fetchAirlines();
+    fetchAirlines();
   }, []);
 
   useEffect(() => {
@@ -112,14 +113,13 @@ function FlightCard() {
       ...new Set(
         flightResults?.flatMap((itinerary) =>
           itinerary?.itineraries[0]?.segments?.flatMap(
-            (items) => items?.carrierCode
-          )
-        )
+            (items) => items?.carrierCode,
+          ),
+        ),
       ),
     ];
-    console.log("uniqueAirlineCodes", uniqueAirlineCodes);
     const filteredAirlines = airlineData.filter((airline) =>
-      uniqueAirlineCodes.includes(airline.code)
+      uniqueAirlineCodes.includes(airline.code),
     );
     setAvailableAirlines(filteredAirlines);
     // console.log("filteredAirlines",filteredAirlines);
@@ -127,24 +127,24 @@ function FlightCard() {
   // Filter flights when filters change
   useEffect(() => {
     const applyFilters = () => {
-      const results = flightResults.filter((itinerary) => {
+      const results = flightResults?.filter((itinerary) => {
         // Price filter
-        const priceOk = filters.maxPrice
-          ? parseFloat(itinerary.price.grandTotal) <=
-            parseFloat(filters.maxPrice)
+        const priceOk = filters?.maxPrice
+          ? parseFloat(itinerary?.price.grandTotal) <=
+            parseFloat(filters?.maxPrice)
           : true;
         // Stops filter
         const stopsOk =
-          filters.stops === "any" ||
-          (filters.stops === 0 &&
-            itinerary.itineraries.every((it) =>
-              it.segments.every((seg) => seg.numberOfStops === 0)
+          filters?.stops === "any" ||
+          (filters?.stops === 0 &&
+            itinerary?.itineraries?.every((it) =>
+              it?.segments?.every((seg) => seg.numberOfStops === 0),
             ));
 
         // Airline filter
         const airlineOk = filters.airline
-          ? itinerary.itineraries[0].segments[0].carrierCode.includes(
-              filters.airline
+          ? itinerary?.itineraries[0]?.segments[0]?.carrierCode.includes(
+              filters?.airline,
             )
           : true;
         return priceOk && airlineOk;
@@ -189,7 +189,7 @@ function FlightCard() {
     try {
       const response = await axios.post(
         "http://localhost:3000/brandedUpSell",
-        selected
+        selected,
       );
       setBrandedUpSell(response.data); // likely want .data, not full response
       console.log("brandedUpsell res", response.data);
@@ -254,7 +254,7 @@ function FlightCard() {
       summary: {},
     };
 
-    flightOffers.forEach((offer) => {
+    flightOffers?.forEach((offer) => {
       const price = parseFloat(offer.price.grandTotal);
       const airlines = extractAirlines(offer);
 
@@ -433,7 +433,7 @@ function FlightCard() {
     console.log("Cheapest offer:", results.cheapestOffer?.price.grandTotal);
     console.log(
       "Most expensive offer:",
-      results.mostExpensiveOffer?.price.grandTotal
+      results.mostExpensiveOffer?.price.grandTotal,
     );
     console.log("Most frequent airline:", results.summary.mostFrequentAirline);
     const filtered = getFilteredResults(flightResults, {
@@ -695,7 +695,7 @@ const results = analyzeFlightOffers(flightOffersArray);
               return new Set(carrierCodes).size > 1;
             }
             const hasMultipleAirlines = flagMultipleAirlines(
-              itinerary.itineraries[0]
+              itinerary.itineraries[0],
             );
 
             function getPrimaryAirline(segments) {
@@ -708,16 +708,15 @@ const results = analyzeFlightOffers(flightOffersArray);
             const primaryAirlineCode = getPrimaryAirline(segmentOne);
             function getSecondaryAirlines(segments, primaryAirline) {
               const uniqueCarriers = new Set(
-                segments.map((s) => s.carrierCode)
+                segments.map((s) => s.carrierCode),
               );
               uniqueCarriers.delete(primaryAirline);
               return [...uniqueCarriers];
             }
             const secondaryAirlines = getSecondaryAirlines(
               segmentOne,
-              primaryAirlineCode
-            );
-            console.log("secondaryAirlines", secondaryAirlines);
+              primaryAirlineCode,
+            ); 
 
             return (
               <div className="flightContainer" key={index}>
@@ -766,7 +765,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                           <h4>
                             {segments[lastSegmentIndex]?.arrival.at.slice(
                               0,
-                              10
+                              10,
                             ) || ""}
                           </h4>
                         </div>
@@ -837,7 +836,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                                   {setStopIndex > 0
                                     ? calculateLayover(
                                         segmentOne[setStopIndex - 1].arrival.at,
-                                        stopOver.departure.at
+                                        stopOver.departure.at,
                                       )
                                     : "N/A"}
                                 </h5>
