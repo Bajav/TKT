@@ -11,7 +11,7 @@ export function getBestOffer(hotel) {
     .flatMap((rate) => rate.offers || []);
 
   // No offers? Return null
-  if (allOffers.length === 0) {
+  if (allOffers.length === 0) {                                                       
     return null;
   }
 

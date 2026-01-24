@@ -345,7 +345,7 @@ function BookHotel() {
               </p>
             </div>
             <div className="verification">
-              {verifified ? (
+              {signedIn ? (
                 <div className="verified">
                   <div className="verified-header">
                     <h1>you are verified</h1>

@@ -180,7 +180,7 @@ function HotelResults() {
                   image={imageUrl}
                   mainPrice={minRate}
                   pricePerNight={100}
-                  rating="9."
+                  rating="9.5"
                   reviewCount={25}
                   rateNum={parseInt(categoryCode)}
                   categoryCode={categoryCode}
