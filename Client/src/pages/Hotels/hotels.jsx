@@ -1,5 +1,6 @@
 import "./hotels.styles.scss";
 import HotelForm from "../../components/Hotels/FormInputs/form/form.component";
+import Recentsearch from "../../components/Hotels/RecentSeaches/recentsearch.component";
 import LocationHeader from "../../components/Header/header";
 import { Outlet, useLocation } from "react-router-dom";
 import { Fragment } from "react";
@@ -21,6 +22,7 @@ function Hotels() {
         <div className="hotel-home">
           <LocationHeader />
           <HotelForm />
+          <Recentsearch />
         </div>
       )}
       <Outlet />

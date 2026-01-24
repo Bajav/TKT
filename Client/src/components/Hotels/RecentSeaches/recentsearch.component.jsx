@@ -1,16 +1,22 @@
-import './recentsearch.styles.scss';
+import "./recentsearch.styles.scss";
+import recentSearches from '../../../data/recents.data.json'
 
-const recentsearch =({searchJson})=>{
-    return(
-        <div className="search-items">
-         { searchJson.map((item, index)=>
-        <div className="search-item" key={index}>
-                <img className='search-item-image' src={item.image} />
-               <h4 className='item-name'>{item.searchQuery}</h4>
-           </div>)
-           }
-            
+const Recentsearch = () => {
+  return (
+    <div className="search-items">
+      {recentSearches.map((item, index) => (
+        <div className="search-item" key={item.id ?? index}>
+          <img
+            className="search-item-image"
+            src={item.imgUrl ?? ""}
+            alt={item.placeName ?? "recent search"}
+            loading="lazy"
+          />
+          {/* <h4 className="item-name">{item.placeName}</h4> */}
         </div>
-    );
-}
-export default recentsearch;
+      ))}
+    </div>
+  );
+};
+
+export default Recentsearch;
