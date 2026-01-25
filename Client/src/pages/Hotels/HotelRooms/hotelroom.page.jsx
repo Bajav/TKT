@@ -86,6 +86,31 @@ function HotelRoom() {
   useEffect(() => {
     // console.log(attractions);
   }, []);
+  useEffect(() => {
+    if (!res?.checkIn || !res?.checkOut) return;
+
+    const checkInDate = new Date(res.checkIn);
+    const checkOutDate = new Date(res.checkOut);
+
+    if (isNaN(checkInDate) || isNaN(checkOutDate)) {
+      setDays(0);
+      setWeeks(0);
+      return;
+    }
+
+    const diffTime = Math.abs(checkOutDate - checkInDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays > 7) {
+      const week = Math.floor(diffDays / 7);
+      const day = diffDays % 7;
+      setWeeks(week);
+      setDays(day);
+    } else {
+      setWeeks(0);
+      setDays(diffDays);
+    }
+  }, [res?.checkIn, res?.checkOut]);
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
@@ -421,7 +446,11 @@ function HotelRoom() {
                     </div>
                   )}
                 </div>
-
+                <h5>
+                  {weeks > 0 && days >= 0
+                    ? `${weeks} weeks, ${days} days`
+                    : `${days} days`}
+                </h5>
                 {/* Room-specific facilities */}
                 <div className="amenities-container">
                   <h4>room facilities</h4>
