@@ -23,36 +23,36 @@ const Recentsearch = () => {
   );
 };
 
-const Swipers = () => {
-  return (
-    <Swiper
-      direction={"vertical"}
-      effect={"fade"}
-      loop={true}
-      speed={800}
-      autoplay={{
-        delay: 2500,
-        disableOnInteraction: false,
-      }}
-      modules={[Autoplay, Pagination, EffectFade]}
-      pagination={{
-        clickable: true,
-      }}
-      centeredSlides={true}
-      slidesPerView={1}
-      className="mySwiper"
-    >
-      {recentSearches.map((item, index) => (
-        <SwiperSlide className="slides-item" key={item.id ?? index}>
-          <img
-            className="slide-image"
-            src={item.imgUrl ?? ""}
-            alt={item.placeName ?? "recent search"}
-            loading="lazy"
-          />
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  );
-};
-export { Recentsearch, Swipers };
+// const Swipers = () => {
+//   return (
+//     <Swiper
+//       direction={"vertical"}
+//       effect={"fade"}
+//       loop={true}
+//       speed={800}
+//       autoplay={{
+//         delay: 2500,
+//         disableOnInteraction: false,
+//       }}
+//       modules={[Autoplay, Pagination, EffectFade]}
+//       pagination={{
+//         clickable: true,
+//       }}
+//       centeredSlides={true}
+//       slidesPerView={1}
+//       className="mySwiper"
+//     >
+//       {recentSearches.map((item, index) => (
+//         <SwiperSlide className="slides-item" key={item.id ?? index}>
+//           <img
+//             className="slide-image"
+//             src={item.imgUrl ?? ""}
+//             alt={item.placeName ?? "recent search"}
+//             loading="lazy"
+//           />
+//         </SwiperSlide>
+//       ))}
+//     </Swiper>
+//   );
+// };
+export { Recentsearch };
