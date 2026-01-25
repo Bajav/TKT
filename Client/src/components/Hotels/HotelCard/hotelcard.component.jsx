@@ -23,47 +23,52 @@ const HotelCard = ({
   categoryCode,
   isDeal = false,
   index,
+  rooms,
+  rateType,
+  boardName,
   hotelJson,
 }) => {
   const { setSelectedHotel, setHotelInfo, setOverlay } =
     useContext(HotelContext);
   const navigate = useNavigate();
 
-const selectButton = async (index) => {
-  const selectedHotel = hotelJson?.hotels?.hotels?.[index];
+  const selectButton = async (index) => {
+    const selectedHotel = hotelJson?.hotels?.hotels?.[index];
 
-  if (!selectedHotel) {
-    console.error("Hotel not found at index:", index);
-    return;
-  }
-
-  try {
-    setOverlay(true);
-
-    const response = await axios.post(
-      "http://localhost:3000/hotels/hoteldata",
-      { code: selectedHotel.code }
-    );
-
-    const fetchedHotel = response?.data?.data?.hotel;
-
-    // Validate real hotel data
-    if (!fetchedHotel || !fetchedHotel.boards || fetchedHotel.boards.length === 0) {
-      console.error("Hotel has no available rooms");
-      setOverlay(false);
+    if (!selectedHotel) {
+      console.error("Hotel not found at index:", index);
       return;
     }
-    setSelectedHotel(selectedHotel);
-    setHotelInfo(fetchedHotel);
-    navigate("/hotels/rooms",{state: {selectedHotel}});
 
-  } catch (err) {
-    console.error("Error fetching hotel data:", err);
-  } finally {
-    setOverlay(false);
-  }
-};
+    try {
+      setOverlay(true);
 
+      const response = await axios.post(
+        "http://localhost:3000/hotels/hoteldata",
+        { code: selectedHotel.code },
+      );
+
+      const fetchedHotel = response?.data?.data?.hotel;
+
+      // Validate real hotel data
+      if (
+        !fetchedHotel ||
+        !fetchedHotel.boards ||
+        fetchedHotel.boards.length === 0
+      ) {
+        console.error("Hotel has no available rooms");
+        setOverlay(false);
+        return;
+      }
+      setSelectedHotel(selectedHotel);
+      setHotelInfo(fetchedHotel);
+      navigate("/hotels/rooms", { state: { selectedHotel } });
+    } catch (err) {
+      console.error("Error fetching hotel data:", err);
+    } finally {
+      setOverlay(false);
+    }
+  };
 
   return (
     <div className="hotel-card">
@@ -82,6 +87,21 @@ const selectButton = async (index) => {
             reviewCount={reviewCount || 30}
             rating={rating || 4.2}
           />
+        </div>
+        <div className="center-info">
+          <div className="info-sub">
+            <h4>{boardName}</h4>
+            <h4>{rooms} room's' remaining</h4>
+          </div>
+          <h5>
+            {rateType === "NOR"
+              ? "Refundable"
+              : rateType === "NRF"
+                ? "Non-Refundable"
+                : rateType === "NRC"
+                  ? "Non-Refundable with Conditions"
+                  : "Unknown"}
+          </h5>
         </div>
 
         <div className="amenities-price">

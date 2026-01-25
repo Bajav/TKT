@@ -18,8 +18,9 @@ h6 {
   width: 100%;
   align-items: center;
   height: auto;
-  max-height: 150px;
+  max-height: 200px;
   border-radius: 5px;
+  overflow: hidden;
   // border: 1px solid #222;
   padding: 2px;
   gap: 5px;
@@ -49,7 +50,7 @@ h6 {
   .hotel-header {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     justify-content: space-between;
     .hotel-name-country {
       h1 {
@@ -124,5 +125,23 @@ h6 {
     font-weight: 700;
     text-transform: capitalize;
     margin: 0px;
+  }
+}
+.center-info
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h4,h5
+  {
+    color: $darkOrange;
+    font-size: 10px;
+    font-family: $robotoMono,monospace;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  h5
+  {
+    color: #1ee72c;
   }
 }

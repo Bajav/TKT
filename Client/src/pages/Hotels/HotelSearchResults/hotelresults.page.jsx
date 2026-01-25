@@ -163,13 +163,18 @@ function HotelResults() {
                 rooms,
               } = hotel;
               // console.log(rooms);
-
+              const {name:roomName,rates}= rooms[0] || {};
+              const {boardName,net,paymentType,rateClass,taxes,allotment} = rates[0] || {};
+              // console.log("room rates ::", rateClass);
               const imageUrl = images[index % images.length];
               const bestOffer = getBestOffer(hotel);
               // console.log("hotelsss::",hotels?.hotels);
               return (
                 <HotelCard
                   key={index}
+                  rooms={allotment}
+                  boardName={boardName}
+                  rateType={rateClass}
                   hotelJson={json}
                   index={index}
                   isDeal={bestOffer?.hasDeal || false}
@@ -178,7 +183,7 @@ function HotelResults() {
                   offerAmount={bestOffer?.amount || 0}
                   country={destinationName}
                   image={imageUrl}
-                  mainPrice={minRate}
+                  mainPrice={net}
                   pricePerNight={100}
                   rating="9.5"
                   reviewCount={25}
