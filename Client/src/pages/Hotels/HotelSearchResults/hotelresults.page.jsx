@@ -56,12 +56,12 @@ function HotelResults() {
     try {
       if (payload === null) {
         console.log("no payload found");
-        const response = await axios.post("http://localhost:3000/hotels", {
-          formData: formData,
-        });
-        console.log(response.data.hotels);
-        setHotels(response.data.hotels);
-        setJson(response.data);
+        // const response = await axios.post("http://localhost:3000/hotels", {
+        //   formData: formData,
+        // });
+        // console.log(response.data.hotels);
+        // setHotels(response.data.hotels);
+        // setJson(response.data);
       } else {
         console.log("payload found", payload);
         const response = await axios.post("http://localhost:3000/hotels", {
@@ -79,7 +79,7 @@ function HotelResults() {
   useEffect(() => {
     fecthHotels();
     setFormData(payload);
-  }, []);
+  }, [payload]);
 
   // this is the use effect to load hotel contents.
   //  useEffect(() => {
