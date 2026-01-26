@@ -32,6 +32,7 @@ function HotelResults() {
     setDays,
     setWeeks,
   } = useContext(HotelContext);
+
   const [dealAmount, setDealAmount] = useState(0);
   const [json, setJson] = useState(null);
   const [hotels, setHotels] = useState({ hotels: [] });
@@ -51,7 +52,7 @@ function HotelResults() {
   };
   const payload = extractSearchParams(searchParams);
   const fecthHotels = async () => {
-    console.log("formData", formData);
+    // console.log("formData", formData);
     try {
       if (payload === null) {
         const response = await axios.post("http://localhost:3000/hotels", {
