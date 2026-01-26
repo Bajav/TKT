@@ -132,18 +132,6 @@ function HotelResults() {
 
   return (
     <div>
-      {overlay ? (
-        <div className="overLay">
-          <h4>redirecting you to hotel rooms</h4>
-          <div className="views-container">
-            <img src={hotelImg} />
-          </div>
-          <p>
-            To travel is to discover that everyone is wrong about other
-            countries. <br /> <span>by Aldous Huxley</span>
-          </p>
-        </div>
-      ) : (
         <main className="hotel-results">
           <div className="results-header">
             <button onClick={() => navigate("/hotels")} className="cancelBtn">
@@ -245,7 +233,6 @@ function HotelResults() {
             );
           })} */}
         </main>
-      )}
     </div>
   );
 }
