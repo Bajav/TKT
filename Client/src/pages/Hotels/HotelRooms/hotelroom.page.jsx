@@ -25,15 +25,16 @@ import {
 } from "@phosphor-icons/react";
 
 function HotelRoom() {
-  const { selectedHotel, hotelInfo } = useContext(HotelContext);
+  const { selectedHotel, hotelInfo, days, weeks } = useContext(HotelContext);
   const { categoryCode, name, rooms: availableRooms } = selectedHotel;
-  // console.log("availableRooms", hotelInfo);
+  // console.log("availableRooms", );
   const { images, facilities, description, terminals, interestPoints } =
     hotelInfo;
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
   const backBtn = () => navigate("/hotels/results");
-
+  // console.log()
+  // function to set Room images by room codes.
   const roomImagesByCode = images
     .filter((img) => img.type.code === "HAB" && img.roomCode)
     .reduce((acc, img) => {
@@ -47,9 +48,9 @@ function HotelRoom() {
     }, {});
 
   // Optional sort (uncomment if you want ordered images)
-  // Object.keys(roomImagesByCode).forEach((code) => {
-  //   roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
-  // });
+  Object.keys(roomImagesByCode).forEach((code) => {
+    roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
+  });
   const roomDetailsMap = (hotelInfo.rooms || []).reduce((map, room) => {
     map[room.roomCode] = room;
     return map;
@@ -82,35 +83,6 @@ function HotelRoom() {
   const trainStations = hotelPlaces.data?.trainStations?.slice(0, 10) || [];
   const subwayStations = hotelPlaces.data?.subwayStations?.slice(0, 10) || [];
   const busStops = hotelPlaces.data?.busStops?.slice(0, 10) || [];
-
-  useEffect(() => {
-    // console.log(attractions);
-  }, []);
-  useEffect(() => {
-    if (!res?.checkIn || !res?.checkOut) return;
-
-    const checkInDate = new Date(res.checkIn);
-    const checkOutDate = new Date(res.checkOut);
-
-    if (isNaN(checkInDate) || isNaN(checkOutDate)) {
-      setDays(0);
-      setWeeks(0);
-      return;
-    }
-
-    const diffTime = Math.abs(checkOutDate - checkInDate);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays > 7) {
-      const week = Math.floor(diffDays / 7);
-      const day = diffDays % 7;
-      setWeeks(week);
-      setDays(day);
-    } else {
-      setWeeks(0);
-      setDays(diffDays);
-    }
-  }, [res?.checkIn, res?.checkOut]);
   return (
     <section className="hotel-rooms">
       <BackBTN onClick={backBtn} btnName="back" />
@@ -137,6 +109,12 @@ function HotelRoom() {
       </div>
 
       <div className="flex-rates">
+        <h5>
+          {weeks > 0 && days >= 0
+            ? `${weeks} weeks, ${days} days`
+            : `${days} days`}
+        </h5>
+        <h4>rooms : {availableRooms[0]?.rates[0].rooms}</h4>
         <Rates categoryCode={categoryCode} reviewCount={30} rating={4.2} />
       </div>
 
@@ -446,11 +424,6 @@ function HotelRoom() {
                     </div>
                   )}
                 </div>
-                <h5>
-                  {weeks > 0 && days >= 0
-                    ? `${weeks} weeks, ${days} days`
-                    : `${days} days`}
-                </h5>
                 {/* Room-specific facilities */}
                 <div className="amenities-container">
                   <h4>room facilities</h4>

@@ -2,6 +2,8 @@ import { createContext, useReducer } from "react";
 
 export const HotelContext = createContext({
   hotelJson: null,
+  days:0,
+  weeks:0,
   hotelSearchData: null,
   selectedHotel: null,
   hotelInfo: null,
@@ -12,6 +14,8 @@ export const HotelContext = createContext({
   formData: null,
 
   setHotelJson: () => {},
+  setDays: () => {},
+  setWeeks: () => {},
   setFormData: () => {},
   setHotelSearchData: () => {},
   setSelectedHotel: () => {},
@@ -24,6 +28,8 @@ export const HotelContext = createContext({
 
 export const HotelActions = {
   SET_FORM_DATA :"SET_FORM_DATA",
+  SET_DAYS:"SET_DAYS",
+  SET_WEEKS:"SET_WEEKS",
   SET_HOTEL_INFO: "SET_HOTEL_INFO",
   SET_HOTEL_CONTENTS: "SET_HOTEL_CONTENTS",
   SET_HOTEL_JSON: "SET_HOTEL_JSON",
@@ -42,6 +48,10 @@ const HotelReducer = (state, action) => {
       return { ...state, hotelJson: action.payload };
     case HotelActions.SET_DEAL:
       return { ...state, isDeal: action.payload };
+    case HotelActions.SET_DAYS:
+      return { ...state, days: action.payload };
+    case HotelActions.SET_WEEKS:
+      return { ...state, weeks: action.payload };
 
     case HotelActions.SET_SELECTED_HOTEL:
       return { ...state, selectedHotel: action.payload };
@@ -72,6 +82,8 @@ const INITIAL_STATE = {
   hotelError: null,
   hotelInfo: null,
   hotelContents: null,
+  days: 0,
+  weeks: 0,
 };
 
 export const HotelProvider = ({ children }) => {
@@ -99,6 +111,10 @@ export const HotelProvider = ({ children }) => {
     dispatch({ type: HotelActions.SET_DEAL, payload: data });
   const setOverlay = (data) =>
     dispatch({ type: HotelActions.SET_OVERLAY, payload: data });
+  const setDays = (data) =>
+    dispatch({ type: HotelActions.SET_DAYS, payload: data });
+  const setWeeks = (data) =>
+    dispatch({ type: HotelActions.SET_WEEKS, payload: data });
   const value = {
     formData: state.formData,
     hotelJson: state.hotelJson,
@@ -109,7 +125,8 @@ export const HotelProvider = ({ children }) => {
     hotelContents: state.hotelContents,
     isDeal: state.isDeal,
     overlay: state.overlay,
-    
+    days: state.days,
+    weeks: state.weeks,
     setFormData,
     setDeal,
     setOverlay,
@@ -119,6 +136,8 @@ export const HotelProvider = ({ children }) => {
     setHotelSearchData,
     setSelectedHotel,
     setHotelError,
+    setDays,
+    setWeeks,
   };
 
   return (

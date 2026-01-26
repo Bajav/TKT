@@ -6,13 +6,16 @@ import HotelCard from "../../../components/Hotels/HotelCard/hotelcard.component"
 import hotelImg from "../../../assets/images/hotelImg.jpg";
 import { SlidersHorizontal } from "lucide-react";
 import { getBestOffer } from "../../../components/Utils/HotelsUtils/pricing.utils.jsx";
-import { useEffect, useContext, useState, Fragment } from "react";
 import { HotelContext } from "../../../components/context/hotels.contenxt.jsx";
 import images from "../../../data/images.data.json";
-import { motion } from "framer-motion";
+// import hooks
 import axios from "axios";
-// import {getCancellationBadge} from '../../'
+import { motion } from "framer-motion";
+import { useEffect, useContext, useState, Fragment } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+// import utils
+import { extractSearchParams } from "../../../components/Utils/HotelsUtils/searchparams.utils.jsx";
+// import {getCancellationBadge} from '../../'
 
 function HotelResults() {
   // hooks
@@ -24,14 +27,16 @@ function HotelResults() {
     formData,
     setOverlay,
     setHotelJson,
+    days,
+    weeks,
+    setDays,
+    setWeeks,
   } = useContext(HotelContext);
   const [dealAmount, setDealAmount] = useState(0);
   const [json, setJson] = useState(null);
   const [hotels, setHotels] = useState({ hotels: [] });
   const [searchParams] = useSearchParams();
   const [bestOfferName, setBestOfferName] = useState("");
-    const [days, setDays] = useState(0);
-    const [weeks, setWeeks] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   // this is a helper function to get hotel codes from hotelJson
@@ -44,36 +49,7 @@ function HotelResults() {
     });
     return Array.from(codes);
   };
-  // this is a helper function to fetch hotel contents from the server
-  // const fetchHotelsContent = async (codes) => {
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:3000/hotelscontents",
-  //       { hotelCodes: codes }
-  //     );
-
-  //     return response.data.data || response.data;
-  //   } catch (error) {
-  //     console.error("Error fetching hotels content:", error);
-  //     return null;
-  //   }
-  // };
-  const payload = {
-    accommodationType: searchParams.get("accommodationType"),
-    destination: searchParams.get("destination"),
-    dates: {
-      checkIn: searchParams.get("checkIn"),
-      checkOut: searchParams.get("checkOut"),
-    },
-    guests: {
-      adults: Number(searchParams.get("adults")),
-      children: Number(searchParams.get("children")),
-      infants: Number(searchParams.get("infants")),
-    },
-    rooms: Number(searchParams.get("rooms")),
-  };
-  // console.log("payload :: ",payload);
-
+  const payload = extractSearchParams(searchParams);
   const fecthHotels = async () => {
     console.log("formData", formData);
     try {
@@ -124,32 +100,33 @@ function HotelResults() {
   //     loadHotelContents();
   //   }, []);
 
-    // Stay count effect (now safe at top level)
-    useEffect(() => {
-      if (!hotels?.checkIn || !hotels?.checkOut) return;
-  
-      const checkInDate = new Date(hotels.checkIn);
-      const checkOutDate = new Date(hotels.checkOut);
-  
-      if (isNaN(checkInDate) || isNaN(checkOutDate)) {
-        setDays(0);
-        setWeeks(0);
-        return;
-      }
-  
-      const diffTime = Math.abs(checkOutDate - checkInDate);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
-      if (diffDays > 7) {
-        const week = Math.floor(diffDays / 7);
-        const day = diffDays % 7;
-        setWeeks(week);
-        setDays(day);
-      } else {
-        setWeeks(0);
-        setDays(diffDays);
-      }
-    }, [hotels?.checkIn, hotels?.checkOut]);
+  // Stay count effect (now safe at top level)
+  useEffect(() => {
+    if (!hotels?.checkIn || !hotels?.checkOut) return;
+
+    const checkInDate = new Date(hotels.checkIn);
+    const checkOutDate = new Date(hotels.checkOut);
+
+    if (isNaN(checkInDate) || isNaN(checkOutDate)) {
+      setDays(0);
+      setWeeks(0);
+      return;
+    }
+
+    const diffTime = Math.abs(checkOutDate - checkInDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays > 7) {
+      const week = Math.floor(diffDays / 7);
+      const day = diffDays % 7;
+      setWeeks(week);
+      setDays(day);
+    } else {
+      setWeeks(0);
+      setDays(diffDays);
+    }
+  }, [hotels?.checkIn, hotels?.checkOut]);
+
   return (
     <div>
       {overlay ? (
@@ -191,8 +168,15 @@ function HotelResults() {
                 rooms,
               } = hotel;
               // console.log(rooms);
-              const {name:roomName,rates}= rooms[0] || {};
-              const {boardName,net,paymentType,rateClass,taxes,allotment} = rates[0] || {};
+              const { name: roomName, rates } = rooms[0] || {};
+              const {
+                boardName,
+                net,
+                paymentType,
+                rateClass,
+                taxes,
+                allotment,
+              } = rates[0] || {};
               // console.log("room rates ::", rateClass);
               const imageUrl = images[index % images.length];
               const bestOffer = getBestOffer(hotel);
