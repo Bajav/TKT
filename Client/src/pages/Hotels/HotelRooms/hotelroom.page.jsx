@@ -85,7 +85,7 @@ function HotelRoom() {
   const busStops = hotelPlaces.data?.busStops?.slice(0, 10) || [];
   return (
     <section className="hotel-rooms">
-      <BackBTN onClick={backBtn} btnName="back" />
+<BackBTN to="/hotels/results" preserveParams={true} />
 
       {/* Header Swiper - now using bigger images */}
       <div className="rooms-header">

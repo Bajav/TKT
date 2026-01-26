@@ -55,6 +55,7 @@ function HotelResults() {
     // console.log("formData", formData);
     try {
       if (payload === null) {
+        console.log("no payload found");
         const response = await axios.post("http://localhost:3000/hotels", {
           formData: formData,
         });
@@ -62,6 +63,7 @@ function HotelResults() {
         setHotels(response.data.hotels);
         setJson(response.data);
       } else {
+        console.log("payload found", payload);
         const response = await axios.post("http://localhost:3000/hotels", {
           formData: payload,
         });

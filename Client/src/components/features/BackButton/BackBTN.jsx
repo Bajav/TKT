@@ -22,7 +22,7 @@ function BackBTN({ btnName = "back", to = -1, onClick, preserveParams = false })
     // If preserveParams is true, carry params forward
     if (preserveParams) {
       const params = extractSearchParams(searchParams);
-      
+      console.log(params);
       // If 'to' is a number, use history navigation with current params
       if (typeof to === 'number') {
         // Can't preserve params with numeric navigation, so warn or use fallback
