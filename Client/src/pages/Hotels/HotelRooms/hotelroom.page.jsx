@@ -2,6 +2,7 @@ import "./hotelroom.styles.scss";
 import { useContext, useState, useEffect } from "react";
 import { HotelContext } from "../../../components/context/hotels.contenxt";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import BackBTN from "../../../components/features/BackButton/BackBTN";
 import Rates from "../Rates/rates.component";
 import "swiper/css";
@@ -14,8 +15,7 @@ import hotelReviews from "../../../data/hotelReviews.data.json";
 import { FacilityList } from "../../../components/Utils/HotelsUtils/facilities.utils.jsx";
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils.jsx";
 import hotelPlaces from "../../../data/data.json";
-// import { useHotel } from "../../../components/context/hotels.contenxt";
-// icons
+import hotelImg from "../../../assets/images/HotelImages/1.jpg";
 import {
   AirplaneTaxiingIcon,
   AnchorIcon,
@@ -25,16 +25,112 @@ import {
 } from "@phosphor-icons/react";
 
 function HotelRoom() {
-  const { selectedHotel, hotelInfo, days, weeks } = useContext(HotelContext);
-  const { categoryCode, name, rooms: availableRooms } = selectedHotel;
-  // console.log("availableRooms", );
-  const { images, facilities, description, terminals, interestPoints } =
-    hotelInfo;
+  const { selectedHotel, days, weeks, overlay, setOverlay } =
+    useContext(HotelContext);
+
+  // ✅ ALL HOOKS MUST BE AT THE TOP - BEFORE ANY RETURNS
+  const [hotelInfo, setHotelInfo] = useState(null);
+  const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
+
+  // ✅ Memoize fetchHotelData to avoid useEffect dependency issues
+  useEffect(() => {
+    const fetchHotelData = async () => {
+      if (!selectedHotel || !selectedHotel.code) {
+        console.error("No hotel selected");
+        setError("No hotel selected");
+        setOverlay(false);
+        return;
+      }
+
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/hotels/hoteldata",
+          { code: selectedHotel.code },
+        );
+
+        const fetchedHotel = response?.data?.data?.hotel;
+
+        if (
+          !fetchedHotel ||
+          !fetchedHotel.boards ||
+          fetchedHotel.boards.length === 0
+        ) {
+          console.error("Hotel has no available rooms");
+          setError("This hotel has no available rooms");
+          setOverlay(false);
+          return;
+        }
+
+        setHotelInfo(fetchedHotel);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching hotel data:", err);
+        setError("Failed to load hotel information. Please try again.");
+      } finally {
+        setOverlay(false);
+      }
+    };
+
+    fetchHotelData();
+  }, []); // ✅ Proper dependencies
+
+  // ✅ NOW you can do conditional returns (after all hooks)
+  // Guard against missing selectedHotel
+  if (!selectedHotel) {
+    return (
+      <div className="error-container">
+        <h3>No hotel selected</h3>
+        <button onClick={() => navigate("/hotels/results")}>Go Back</button>
+      </div>
+    );
+  }
+
+  // Early return for loading state
+  if (overlay) {
+    return (
+      <div className="overLay">
+        <h4>getting you to rooms deals</h4>
+        <div className="views-container">
+          <img src={hotelImg} alt="Loading" />
+        </div>
+        <p>
+          To travel is to discover that everyone is wrong about other countries.
+          <br /> <span>by Aldous Huxley</span>
+        </p>
+      </div>
+    );
+  }
+
+  // Early return for error state
+  if (error) {
+    return (
+      <div className="error-container">
+        <h3>{error}</h3>
+        <button onClick={() => navigate("/hotels/results")}>Go Back</button>
+      </div>
+    );
+  }
+
+  // Early return for loading hotelInfo
+  if (!hotelInfo) {
+    return <div className="loading">Loading hotel information...</div>;
+  }
+
+  // ✅ NOW it's safe to destructure
+  const { categoryCode, name, rooms: availableRooms } = selectedHotel;
+  const {
+    images = [],
+    facilities = [],
+    description = {},
+    terminals = [],
+    interestPoints = [],
+  } = hotelInfo;
+
   const backBtn = () => navigate("/hotels/results");
-  // console.log()
-  // function to set Room images by room codes.
+
+  // Room images processing
   const roomImagesByCode = images
     .filter((img) => img.type.code === "HAB" && img.roomCode)
     .reduce((acc, img) => {
@@ -47,21 +143,17 @@ function HotelRoom() {
       return acc;
     }, {});
 
-  // Optional sort (uncomment if you want ordered images)
   Object.keys(roomImagesByCode).forEach((code) => {
     roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
   });
+
   const roomDetailsMap = (hotelInfo.rooms || []).reduce((map, room) => {
     map[room.roomCode] = room;
     return map;
   }, {});
 
-  // Clean room code (handles "[STU.ST]" → "STU.ST")
   const cleanRoomCode = (code) => code?.replace(/[\[\]]/g, "").trim();
-  // toggle tabs
-  const toggleTab = (i) => {
-    setActiveTab(i);
-  };
+  const toggleTab = (i) => setActiveTab(i);
 
   const bookRoomBtn = (roomIndex, rateIndex) => {
     const selectedRoom = availableRooms[roomIndex];
@@ -76,16 +168,12 @@ function HotelRoom() {
   const bus = terminals?.filter((t) => t?.terminalType === "B") || [];
   const restaurants = hotelPlaces.data.restaurants.slice(0, 10) || [];
   const attractions = hotelPlaces.data.attractions.slice(0, 10) || [];
-  const museums = hotelPlaces.data?.museums?.slice(0, 10) || [];
   const cafes = hotelPlaces.data?.cafes?.slice(0, 10) || [];
   const bars = hotelPlaces.data?.bars?.slice(0, 10) || [];
-  const parks = hotelPlaces.data?.parks?.slice(0, 10) || [];
-  const trainStations = hotelPlaces.data?.trainStations?.slice(0, 10) || [];
-  const subwayStations = hotelPlaces.data?.subwayStations?.slice(0, 10) || [];
-  const busStops = hotelPlaces.data?.busStops?.slice(0, 10) || [];
+
   return (
     <section className="hotel-rooms">
-<BackBTN to="/hotels/results" preserveParams={true} />
+      <BackBTN onClick={backBtn} btnName="back" />
 
       {/* Header Swiper - now using bigger images */}
       <div className="rooms-header">
@@ -401,19 +489,17 @@ function HotelRoom() {
                 <div className="img-container">
                   {roomImages.length > 0 ? (
                     <Swiper
-                      slidesPerView={1}
-                      pagination={{ clickable: true }}
+                      pagination={{ type: "fraction" }}
                       navigation={true}
                       modules={[Pagination, Navigation]}
-                      className="room-swiper"
+                      className="mySwiper"
                     >
-                      {roomImages.map((img, i) => (
-                        <SwiperSlide key={i}>
+                      {images.map((img, index) => (
+                        <SwiperSlide key={index}>
                           <img
-                            src={img.url}
-                            alt={`${room.name} - view ${i + 1}`}
+                            src={`https://photos.hotelbeds.com/giata/bigger/${img.path}`}
+                            alt={img.type.description.content || "Hotel view"}
                             loading="lazy"
-                            style={{ width: "100%", objectFit: "cover" }}
                           />
                         </SwiperSlide>
                       ))}

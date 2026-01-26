@@ -36,40 +36,43 @@ const HotelCard = ({
 
   const selectButton = async (index) => {
     const selectedHotel = hotelJson?.hotels?.hotels?.[index];
-
     if (!selectedHotel) {
       console.error("Hotel not found at index:", index);
       return;
     }
+    setOverlay(true);
+    setSelectedHotel(selectedHotel);
+    navigate("/hotels/rooms");
+    // navigate("/hotels/rooms", { state: { selectedHotel } });
 
-    try {
-      setOverlay(true);
+    // try {
+    //   setOverlay(true);
 
-      const response = await axios.post(
-        "http://localhost:3000/hotels/hoteldata",
-        { code: selectedHotel.code },
-      );
+    //   const response = await axios.post(
+    //     "http://localhost:3000/hotels/hoteldata",
+    //     { code: selectedHotel.code },
+    //   );
 
-      const fetchedHotel = response?.data?.data?.hotel;
+    //   const fetchedHotel = response?.data?.data?.hotel;
 
-      // Validate real hotel data
-      if (
-        !fetchedHotel ||
-        !fetchedHotel.boards ||
-        fetchedHotel.boards.length === 0
-      ) {
-        console.error("Hotel has no available rooms");
-        setOverlay(false);
-        return;
-      }
-      setSelectedHotel(selectedHotel);
-      setHotelInfo(fetchedHotel);
-      navigate("/hotels/rooms", { state: { selectedHotel } });
-    } catch (err) {
-      console.error("Error fetching hotel data:", err);
-    } finally {
-      setOverlay(false);
-    }
+    //   // Validate real hotel data
+    //   if (
+    //     !fetchedHotel ||
+    //     !fetchedHotel.boards ||
+    //     fetchedHotel.boards.length === 0
+    //   ) {
+    //     console.error("Hotel has no available rooms");
+    //     setOverlay(false);
+    //     return;
+    //   }
+    //   setSelectedHotel(selectedHotel);
+    //   setHotelInfo(fetchedHotel);
+    //   navigate("/hotels/rooms", { state: { selectedHotel } });
+    // } catch (err) {
+    //   console.error("Error fetching hotel data:", err);
+    // } finally {
+    //   setOverlay(false);
+    // }
   };
 
   return (
@@ -103,14 +106,14 @@ const HotelCard = ({
                     : "Unknown"}
             </h5>
           </div>
-       <div className="data-sub">
-           {rooms < 5 ? <h4>only {rooms} rooms left</h4> : ""}
-               <h5>
+          <div className="data-sub">
+            {rooms < 5 ? <h4>only {rooms} rooms left</h4> : ""}
+            <h5>
               {weeks > 0 && days >= 0
                 ? `${weeks} weeks, ${days} days`
                 : `${days} days`}
             </h5>
-       </div>
+          </div>
         </div>
 
         <div className="amenities-price">
