@@ -61,7 +61,7 @@ function BookHotel() {
     }
     fetchRates();
     console.log(res);
-  }, [rateKey, navigate]); // Added navigate as dep (good practice)
+  }, [rateKey, navigate]);
 
   // Stay count effect (now safe at top level)
   useEffect(() => {
@@ -88,7 +88,7 @@ function BookHotel() {
       setWeeks(0);
       setDays(diffDays);
     }
-  }, [res?.checkIn, res?.checkOut]); // Only run when dates change
+  }, [res?.checkIn, res?.checkOut]);
 
   const handleChange = (e) => {
     const name = e.target.name;

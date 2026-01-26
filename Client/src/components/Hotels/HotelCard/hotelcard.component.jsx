@@ -2,7 +2,7 @@ import "./hotelcard.styles.scss";
 import star from "../../../assets/icons/star.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useContext,useEffect,useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HotelContext } from "../../context/hotels.contenxt";
 import Rates from "../../../pages/Hotels/Rates/rates.component";
 // import { useHotel } from "../../context/hotels.contenxt";
@@ -27,12 +27,12 @@ const HotelCard = ({
   rateType,
   boardName,
   hotelJson,
+  days,
+  weeks,
 }) => {
   const { setSelectedHotel, setHotelInfo, setOverlay } =
     useContext(HotelContext);
   const navigate = useNavigate();
-      const [days, setDays] = useState(0);
-      const [weeks, setWeeks] = useState(0);
 
   const selectButton = async (index) => {
     const selectedHotel = hotelJson?.hotels?.hotels?.[index];
@@ -93,18 +93,24 @@ const HotelCard = ({
         <div className="center-info">
           <div className="info-sub">
             <h4>{boardName}</h4>
-              <h5>
-            {rateType === "NOR"
-              ? "Refundable"
-              : rateType === "NRF"
-                ? "Non-Refundable"
-                : rateType === "NRC"
-                  ? "Non-Refundable with Conditions"
-                  : "Unknown"}
-          </h5>
-          
+            <h5>
+              {rateType === "NOR"
+                ? "Refundable"
+                : rateType === "NRF"
+                  ? "Non-Refundable"
+                  : rateType === "NRC"
+                    ? "Non-Refundable with Conditions"
+                    : "Unknown"}
+            </h5>
           </div>
-       <h4>{rooms} room's' remaining</h4>
+       <div className="data-sub">
+           {rooms < 5 ? <h4>only {rooms} rooms left</h4> : ""}
+               <h5>
+              {weeks > 0 && days >= 0
+                ? `${weeks} weeks, ${days} days`
+                : `${days} days`}
+            </h5>
+       </div>
         </div>
 
         <div className="amenities-price">

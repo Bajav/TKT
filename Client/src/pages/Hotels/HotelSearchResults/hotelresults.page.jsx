@@ -30,6 +30,8 @@ function HotelResults() {
   const [hotels, setHotels] = useState({ hotels: [] });
   const [searchParams] = useSearchParams();
   const [bestOfferName, setBestOfferName] = useState("");
+    const [days, setDays] = useState(0);
+    const [weeks, setWeeks] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   // this is a helper function to get hotel codes from hotelJson
@@ -73,7 +75,6 @@ function HotelResults() {
   // console.log("payload :: ",payload);
 
   const fecthHotels = async () => {
-    // clg
     console.log("formData", formData);
     try {
       if (payload === null) {
@@ -122,6 +123,33 @@ function HotelResults() {
   //     };
   //     loadHotelContents();
   //   }, []);
+
+    // Stay count effect (now safe at top level)
+    useEffect(() => {
+      if (!hotels?.checkIn || !hotels?.checkOut) return;
+  
+      const checkInDate = new Date(hotels.checkIn);
+      const checkOutDate = new Date(hotels.checkOut);
+  
+      if (isNaN(checkInDate) || isNaN(checkOutDate)) {
+        setDays(0);
+        setWeeks(0);
+        return;
+      }
+  
+      const diffTime = Math.abs(checkOutDate - checkInDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+      if (diffDays > 7) {
+        const week = Math.floor(diffDays / 7);
+        const day = diffDays % 7;
+        setWeeks(week);
+        setDays(day);
+      } else {
+        setWeeks(0);
+        setDays(diffDays);
+      }
+    }, [hotels?.checkIn, hotels?.checkOut]);
   return (
     <div>
       {overlay ? (
@@ -174,6 +202,8 @@ function HotelResults() {
                   key={index}
                   rooms={allotment}
                   boardName={boardName}
+                  days={days}
+                  weeks={weeks}
                   rateType={rateClass}
                   hotelJson={json}
                   index={index}
