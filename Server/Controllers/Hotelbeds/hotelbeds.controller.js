@@ -17,37 +17,37 @@ const hotelSearch = async (req, res) => {
   const {accommodationType,dates,destination,guests,rooms} = formData;
   const room = parseFloat(rooms);
   const location = destination?.slice(0,3);
-    res.send("route is working");
-  // try {
-  //   const response = await searchHotels({
-  //     stay: {
-  //       checkIn: dates.checkIn,
-  //       checkOut: dates.checkOut,
-  //     },
-  //     occupancies: [
-  //       {
-  //         rooms: room,
-  //         adults: guests.adults,
-  //         children: guests.children,
-  //       },
-  //     ],
-  //     destination: {
-  //       code: location,
-  //     },
-  //     // filter: {
-  //     //   maxHotels: 200,
-  //     // },
-  //   });
-  //   // console.log("hotel response", response);
-  //   res.json(response);
-  // } catch (error) {
-  //   return res.status(error.status || 500).json({
-  //     success: false,
-  //     error: error.operation || "OPERATION_FAILED",
-  //     message: error.message || "An error occurred",
-  //     details: error.error || null,
-  //   });
-  // }
+    // res.send("route is working");
+  try {
+    const response = await searchHotels({
+      stay: {
+        checkIn: dates.checkIn,
+        checkOut: dates.checkOut,
+      },
+      occupancies: [
+        {
+          rooms: room,
+          adults: guests.adults,
+          children: guests.children,
+        },
+      ],
+      destination: {
+        code: location,
+      },
+      // filter: {
+      //   maxHotels: 200,
+      // },
+    });
+    // console.log("hotel response", response);
+    res.json(response);
+  } catch (error) {
+    return res.status(error.status || 500).json({
+      success: false,
+      error: error.operation || "OPERATION_FAILED",
+      message: error.message || "An error occurred",
+      details: error.error || null,
+    });
+  }
 };
 
 const hotelAvailbility = async (req, res) => {
