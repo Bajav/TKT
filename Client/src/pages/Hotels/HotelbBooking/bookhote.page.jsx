@@ -69,7 +69,7 @@ function BookHotel() {
     }
     fetchRates();
     console.log(res);
-  }, [rateKey, navigate]);
+  }, [rateKey]);
 
   // Stay count effect (now safe at top level)
   useEffect(() => {
@@ -133,6 +133,7 @@ function BookHotel() {
     adults,
     rateBreakDown,
     children,
+    rateClass,
     rateComments,
     taxes,
   } = rates[0] || {};
@@ -195,13 +196,16 @@ function BookHotel() {
         <div className="summary-container">
           <div className="summary-header">
             <h1>{name}</h1>
+            <div className="stay-duration">
+              <h5>{rateClass === "NRF" ? "Non-refundable" : "Refundable"}</h5>
             <h5>
               {weeks > 0 && days >= 0
                 ? `${weeks} weeks, ${days} days`
                 : `${days} days`}
             </h5>
+            </div>
           </div>
-          <h3>{rooms[0].name}</h3>
+          <h3>{rooms[0].name}.{boardName}</h3>
           <h3>{destinationName}</h3>
           <hr className="hr-line" />
           <div className="dates">
