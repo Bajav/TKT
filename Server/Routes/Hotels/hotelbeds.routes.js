@@ -14,6 +14,8 @@ import {
   hotelRates,
   hotelAvailbility,
   bookHotel,
+  verifyEmail,
+  verifyOtp,
 } from "../../Controllers/Hotelbeds/hotelbeds.controller.js";
 const router = Router();
 
@@ -37,4 +39,7 @@ router.post("/hotelscontents/comments", hotelComments);
 router.get("/hotelscontents/ratecomments", rateComments);
 router.get("/hotelscontents/promotions", promotions);
 router.get("/hotelscontents/terminals", terminals);
+// verify email
+router.post("/verifyemail", verifyEmail);
+router.post("/verifyotp", verifyOtp);
 export default router;

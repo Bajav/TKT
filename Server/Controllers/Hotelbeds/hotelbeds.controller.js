@@ -344,6 +344,40 @@ const terminals = async (req, res) => {
     });
   }
 };
+
+const verifyEmail = async (req,res)=>
+  {
+    try{
+        const {email} = req.body;
+    res.json({
+      success:true,
+      data:email,
+      message:"email is verified"
+    });
+    }catch(error){
+      res.status(500).json({
+        success:false,
+        message:"internal server error"
+      });
+    }
+  };
+  // verify Otp
+  const verifyOtp = async (req,res)=>
+  {
+    try{
+      const {otp} = req.body;
+    res.json({
+      success:true,
+      data:otp,
+      message:"otp is verified"
+    }); 
+    }catch(error){
+      res.status(500).json({
+        success:false,
+        message:"internal server error"
+      });
+    }
+  }
 export {
   hotelSearch,
   hotelContents,
@@ -353,10 +387,12 @@ export {
   getFacilities,
   getRooms,
   hotelData,
+  verifyOtp,
   hotelComments,
   promotions,
   terminals,
   hotelRates,
   hotelAvailbility,
   bookHotel,
+  verifyEmail,
 };
