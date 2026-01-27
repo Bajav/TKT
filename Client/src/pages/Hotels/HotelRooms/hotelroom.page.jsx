@@ -142,10 +142,11 @@ function HotelRoom() {
       });
       return acc;
     }, {});
+    // console.log(roomImagesByCode);
 
-  Object.keys(roomImagesByCode).forEach((code) => {
-    roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
-  });
+  // Object.keys(roomImagesByCode).forEach((code) => {
+  //   roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
+  // });
 
   const roomDetailsMap = (hotelInfo.rooms || []).reduce((map, room) => {
     map[room.roomCode] = room;
@@ -197,11 +198,11 @@ function HotelRoom() {
       </div>
 
       <div className="flex-rates">
-        <h5>
+        <h4>
           {weeks > 0 && days >= 0
             ? `${weeks} weeks, ${days} days`
             : `${days} days`}
-        </h5>
+        </h4>
         <h4>rooms : {availableRooms[0]?.rates[0].rooms}</h4>
         <Rates categoryCode={categoryCode} reviewCount={30} rating={4.2} />
       </div>
@@ -479,7 +480,7 @@ function HotelRoom() {
             const roomImages = roomImagesByCode[cleanCode] || [];
             const detailedRoom = roomDetailsMap[cleanCode];
             const roomFacilities = detailedRoom?.roomFacilities || [];
-
+            // console.log(roomImages);
             return (
               <div key={roomIndex} className="rooms">
                 <h5>{room.name}</h5>
@@ -494,11 +495,11 @@ function HotelRoom() {
                       modules={[Pagination, Navigation]}
                       className="mySwiper"
                     >
-                      {images.map((img, index) => (
+                      {roomImages.map((img, index) => (
                         <SwiperSlide key={index}>
                           <img
-                            src={`https://photos.hotelbeds.com/giata/bigger/${img.path}`}
-                            alt={img.type.description.content || "Hotel view"}
+                            src={img.url}
+                            // alt={img.type.description.content || "Hotel view"}
                             loading="lazy"
                           />
                         </SwiperSlide>
