@@ -1,6 +1,6 @@
 import "./bookhotel.stles.scss";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect,useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getCancellationBadge } from "../../../components/Utils/HotelsUtils/cancellation.utils";
 import rateConfirm from "../../../data/hote.rates.json";
 import { CheckCircleIcon } from "@phosphor-icons/react";
@@ -11,7 +11,7 @@ function BookHotel() {
   const location = useLocation();
   const navigate = useNavigate();
   const { rateKey } = location.state || {};
-  const {signedIn} = useContext(UserContext)
+  const { signedIn } = useContext(UserContext);
   // console.log("location.state:", rateKey);
 
   // ALL HOOKS FIRST (before any return or early exit)
@@ -23,6 +23,14 @@ function BookHotel() {
     countryCode: "",
     bookingFor: "myself",
     phoneNumber: "",
+  });
+  const [otp, setOtp] = useState({
+    num1: "",
+    num2: "",
+    num3: "",
+    num4: "",
+    num5: "",
+    num6: "",
   });
 
   const [res, setRes] = useState(null);
@@ -141,7 +149,7 @@ function BookHotel() {
   // console.log(cancellationPolicies);
 
   const cacellationSummary = getCancellationBadge(rates);
-  // submit btn
+  // form submit btn
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(input);
@@ -155,7 +163,29 @@ function BookHotel() {
       console.log(error);
     }
   };
+  const otpSubmit = (e) => {
+    e.preventDefault();
+    const code = Object.values(otp).join("");
+    // if (code.length !== 6) {
+    //   alert("Enter complete OTP");
+    //   return;
+    // }
+    console.log("OTP Submitted:", code);
+    setVerifified(true);
+  };
   // console.log(taxesArray.length);
+  const onOtpChange = (e) => {
+    const { name, value } = e.target;
+    if (!/^\d?$/.test(value)) return; // only 1 digit
+    setOtp((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    // auto-focus next input
+    if (value && e.target.nextSibling) {
+      e.target.nextSibling.focus();
+    }
+  };
 
   return (
     <div className="bookhotel-container">
@@ -335,7 +365,7 @@ function BookHotel() {
             proceed to payment <span>€{totalAsNumber}</span>
           </button>
         </form>
-        <div className="verification-overlay">
+       {!signedIn && <div className="verification-overlay">
           <div className="verificartion-container">
             <div className="ad-texts">
               <h1>Don’t like the process ?</h1>
@@ -345,14 +375,15 @@ function BookHotel() {
               </p>
             </div>
             <div className="verification">
-              {signedIn ? (
+              {verifified ? (
+                // verifified
                 <div className="verified">
                   <div className="verified-header">
                     <h1>you are verified</h1>
                     <h4>balijawahussein@gmail.com</h4>
                   </div>
                   <CheckCircleIcon size={80} color="#40C265" weight="fill" />
-                <p>you are being redirected to the payment page</p>
+                  <p>you are being redirected to the payment page</p>
                 </div>
               ) : (
                 <div className="killswitch">
@@ -364,66 +395,27 @@ function BookHotel() {
                     <h2>balijawahussein@gmail.com</h2>
                   </div>
                   <form
-                    onSubmit={() => {}}
+                    onSubmit={otpSubmit}
                     className="verification-input-container"
                   >
                     <div className="verification-inputs">
-                      <input
-                        type="text"
-                        name="v1"
-                        maxlength="1"
-                        inputmode="numeric"
-                        pattern="[0-1]*"
-                        autocomplete="one-time-code"
-                        onChange={() => {}}
-                      />
-                      <input
-                        type="text"
-                        name="v2"
-                        maxlength="1"
-                        inputmode="numeric"
-                        pattern="[0-1]*"
-                        autocomplete="one-time-code"
-                        onChange={() => {}}
-                      />
-                      <input
-                        type="text"
-                        maxlength="1"
-                        inputmode="numeric"
-                        pattern="[0-1]*"
-                        autocomplete="one-time-code"
-                        name="v3"
-                        onChange={() => {}}
-                      />
-                      <input
-                        type="text"
-                        maxlength="1"
-                        inputmode="numeric"
-                        pattern="[0-1]*"
-                        autocomplete="one-time-code"
-                        name="v4"
-                        onChange={() => {}}
-                      />
-                      <input
-                        type="text"
-                        maxlength="1"
-                        inputmode="numeric"
-                        pattern="[0-1]*"
-                        autocomplete="one-time-code"
-                        name="v5"
-                        onChange={() => {}}
-                      />
-                      <input
-                        type="text"
-                        maxlength="1"
-                        inputmode="numeric"
-                        pattern="[0-1]*"
-                        autocomplete="one-time-code"
-                        name="v6"
-                        onChange={() => {}}
-                      />
+                      {["num1", "num2", "num3", "num4", "num5", "num6"].map(
+                        (key, index) => (
+                          <input
+                            key={key}
+                            type="text"
+                            name={key}
+                            value={otp[key]}
+                            maxLength={1}
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                            autoComplete={index === 0 ? "one-time-code" : "off"}
+                            onChange={onOtpChange}
+                          />
+                        ),
+                      )}
                     </div>
-                    <button className="verification-input-submit">
+                    <button type="submit" className="verification-input-submit">
                       verify email
                     </button>
                   </form>
@@ -432,6 +424,7 @@ function BookHotel() {
             </div>
           </div>
         </div>
+        }
       </div>
     </div>
   );
