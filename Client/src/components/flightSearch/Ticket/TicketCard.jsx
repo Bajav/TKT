@@ -9,7 +9,6 @@ import Loader from "../../EyesLoader/loader";
 import "./ticket.scss";
 // import components
 import BearLoader from "../../bearLoader/bearLoader.component";
-import { Arrow } from "../flightArrowSvg";
 import line from "../../../assets/icons/line.svg";
 import DummyTicket from "../../features/DummyTicket/DummyTicket";
 import TicketHeader from "./ticketheader.component";
@@ -17,10 +16,15 @@ import AirlineInfo from "./airlinedata.component";
 import dollarIcon from "../../../assets/icons/dollarbill.svg";
 import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
 import borderLine from "../../../assets/icons/line.svg";
+// icons
+import { CircleDollarSign,CircleCheckIcon } from "lucide-react";
 // motion
 import { motion } from "motion/react";
 // uitils
-import { iataLookups,airlinesLookUps } from "../../Utils/FlightUtils/airlinecodeslookup.utils";
+import {
+  iataLookups,
+  airlinesLookUps,
+} from "../../Utils/FlightUtils/airlinecodeslookup.utils";
 import { fetchFlightMeta } from "../../Utils/FlightUtils/fetchIataCodes.utils";
 
 function FlightCard() {
@@ -89,15 +93,16 @@ function FlightCard() {
         console.error("Error posting flight:", error);
       }
     };
-const fetchAirlines = async () => {
-  try {
-    const { iataCodes, airlineData } = await fetchFlightMeta();
-    setIataCodes(iataCodes);
-    setAirlineData(airlineData);
-  } catch (err) {
-    console.error("Error fetching flight meta data:", err);
-  }
-};
+
+    const fetchAirlines = async () => {
+      try {
+        const { iataCodes, airlineData } = await fetchFlightMeta();
+        setIataCodes(iataCodes);
+        setAirlineData(airlineData);
+      } catch (err) {
+        console.error("Error fetching flight meta data:", err);
+      }
+    };
 
     setdata();
     fetchFlights();
@@ -291,7 +296,7 @@ const fetchAirlines = async () => {
     };
 
     return results;
-  };
+  }
 
   function extractAirlines(offer) {
     const allAirlines = [];
@@ -519,7 +524,7 @@ const results = analyzeFlightOffers(flightOffersArray);
               const perks =
                 travelerPricings[0].fareDetailsBySegment[0].amenities;
               return (
-                <Swiper spaceBetween={20} slidesPerView="auto">
+                <Swiper spaceBetween={20} slidesPerView="auto" key={index}>
                   <SwiperSlide>
                     <div className="flightDealContainer">
                       <AirlineInfo
@@ -555,10 +560,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                         {perks.map((perk) => {
                           return (
                             <div className="detailsSect">
-                              <img
-                                src={perk.isChargeable ? dollarIcon : checkMark}
-                                alt="perk icon"
-                              />
+                              {perk.isChargeable ? (<CircleDollarSign color="#E82929" size={15}  />) : (<CircleCheckIcon color="#00B74A" size={15} />)}
                               <li>{perk.description}</li>
                             </div>
                           );
@@ -631,10 +633,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                         {perks.map((perk) => {
                           return (
                             <div className="detailsSect">
-                              <img
-                                src={perk.isChargeable ? dollarIcon : checkMark}
-                                alt="perk icon"
-                              />
+                                                        {perk.isChargeable ? (<CircleDollarSign color="#E82929" size={15}  />) : (<CircleCheckIcon color="#00B74A" size={15} />)}
                               <li>{perk.description}</li>
                             </div>
                           );
@@ -700,7 +699,7 @@ const results = analyzeFlightOffers(flightOffersArray);
             const secondaryAirlines = getSecondaryAirlines(
               segmentOne,
               primaryAirlineCode,
-            ); 
+            );
 
             return (
               <div className="flightContainer" key={index}>
