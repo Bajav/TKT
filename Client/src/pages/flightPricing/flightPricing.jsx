@@ -37,6 +37,7 @@ function FlightPricing() {
     };
     return airlineLookUp;
   }, {});
+  console.log("lastFlight",lastFlight);
   const coninueBtn = () =>{
     navigate("/flights/Passengerdata", { replace: true });
   // console.log("lastFlight", segementOne.carrierCode);
@@ -82,24 +83,25 @@ function FlightPricing() {
             count[s.carrierCode] = (count[s.carrierCode] || 0) + 1;
           }
           return Object.entries(count).sort((a, b) => b[1] - a[1])[0][0];
-        }
-        const primaryAirlineCode = getPrimaryAirline(segementOne);
+        };
+        
+        const primaryAirlineCode = getPrimaryAirline(segments);
         function getSecondaryAirlines(segments, primaryAirline) {
           const uniqueCarriers = new Set(segments.map((s) => s.carrierCode));
           uniqueCarriers.delete(primaryAirline);
           return [...uniqueCarriers];
-        }
-        console.log(typeof segementOne)
+        };
+        // console.log( segementOne)
         console.log("primaryAirlineCode",primaryAirlineCode)
         const secondaryAirlines = getSecondaryAirlines(
-          segementOne,
+          segments,
           primaryAirlineCode
         );
-        console.log("secondaryAirlines", secondaryAirlines);
+        // console.log("secondaryAirlines", secondaryAirlines);
         return (
           // <li>hello</li>
           <ReviewCard
-            airlineLogo={primaryAirlineCode?.logo || ""}
+            airlineLogo={airlinesLookUp[primaryAirlineCode]?.logo || ""}
             tripType={
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
             }
@@ -160,7 +162,7 @@ function FlightPricing() {
                 17
               ) || ""
             }
-            // c02Weight={"936kg" || ""}
+            c02Weight={"936kg" || ""}
             iconcolor={"#E82929"}
             flagBgcolor={"#FFDDDD"}
             fontColor={"#E82929"}

@@ -5,7 +5,7 @@ import "./flightSearch.scss";
 
 function FlightSearchInput(props) {
   // contexts
-  const { iataCodes, setIataCodes } = useContext(FlightContext);
+  const { iataCodes, setIataCodes,setAirlineData  } = useContext(FlightContext);
   // const { setAirlineData } = useContext(FlightContext);
   // state
   const [showDropdown, setShowDropdown] = useState(true);

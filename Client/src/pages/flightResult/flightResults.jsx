@@ -17,18 +17,6 @@ function FlightResult() {
   const [error, setError] = useState([]);
   // define navigate
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const iataRes = await Promise.all([
-  //         axios.get("http://localhost:3000/flights"),
-  //       ]);
-  //     } catch (err) {
-  //       setError("Failed to fetch data. Please try again.");
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
 
   const backBtn =()=>{
     setFlightResults([]);
