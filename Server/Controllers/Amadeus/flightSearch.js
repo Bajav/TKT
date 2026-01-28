@@ -5,7 +5,6 @@ let brandedFlight;
 let oderId;
 
 const searchFlights = async (req, res) => {
-
   try {
     const {
       origin,
@@ -117,7 +116,7 @@ const brandedUpSell = async (req, res) => {
   // console.log(req.sessionID);
   const selectedFlight = req.body;
   console.log("selectedFlight received:", selectedFlight);
-  
+
   // res.json({
   //   success:true,
   //   message:"route is working"
@@ -255,7 +254,7 @@ const bookFlight = async (req, res) => {
 //use api to retrieve order using the order ID
 const retriveOrder = async (req, res) => {
   // console.log(oderId);
-  const {orderID} = req.body;
+  const { orderID } = req.body;
   //     res.json({
   //   success:true,
   //   message:"route is working",
@@ -276,7 +275,7 @@ const retriveOrder = async (req, res) => {
 
 //
 const deleteOrder = async (req, res) => {
-   const {orderID} = req.body;
+  const { orderID } = req.body;
   try {
     const response = await amadeus.booking.flightOrder(orderID).delete();
     console.log(response.data);
@@ -292,7 +291,7 @@ const deleteOrder = async (req, res) => {
 
 // SeatMap display
 const seatMap = async (req, res) => {
-     const {orderID} = req.body;
+  const { orderID } = req.body;
   try {
     const response = await amadeus.shopping.seatmaps.get({
       "flight-orderId": orderID,
@@ -394,18 +393,18 @@ const flightDelayPrediction = async (req, res) => {
 
   try {
     const response = await amadeus.travel.predictions.flightDelay.get({
-  originLocationCode: 'EBB',
-  destinationLocationCode: 'DOH',
-  departureDate: '2026-06-08',
-  departureTime: '01:35:00',
-  arrivalDate: '2026-06-08',
-  arrivalTime: '06:40:00',
-  aircraftCode: '788',
-  carrierCode: 'QR',
-  flightNumber: '1392',
-  duration: 'PT5H5M'
-});
-res.json(response.data);
+      originLocationCode: "EBB",
+      destinationLocationCode: "DOH",
+      departureDate: "2026-06-08",
+      departureTime: "01:35:00",
+      arrivalDate: "2026-06-08",
+      arrivalTime: "06:40:00",
+      aircraftCode: "788",
+      carrierCode: "QR",
+      flightNumber: "1392",
+      duration: "PT5H5M",
+    });
+    res.json(response.data);
   } catch (err) {
     console.error("Error fetching flight delay prediction:", err);
     return res.status(500).json({
