@@ -9,7 +9,8 @@ import BackBTN from "../../components/features/BackButton/BackBTN";
 import TicketHeader from "../../components/flightSearch/Ticket/ticketheader.component";
 import { FlightContext } from "../../components/context/flightSearch.context";
 import ReviewCard from "../../components/flight-review-card/flight_review_cardcomponent";
-
+// UTILS
+import { airlinesLookUps, iataLookups } from "../../components/Utils/FlightUtils/airlinecodeslookup.utils";
 function FlightPricing() {
   // const flightOffers = confirmOder.flightOffers;
   // const itineraries = confirmOder.itineraries;
@@ -23,20 +24,8 @@ function FlightPricing() {
 
   const navigate = useNavigate();
 
-  const iataLookup = iataCodes.reduce((lookup, item) => {
-    lookup[item.AirportCode] = {
-      city: item.City,
-      country: item.Country,
-    };
-    return lookup;
-  }, {});
-  const airlinesLookUp = airlineData.reduce((airlineLookUp, item) => {
-    airlineLookUp[item.code] = {
-      logo: item.logo,
-      name: item.name,
-    };
-    return airlineLookUp;
-  }, {});
+  const iataLookup = iataLookups(iataCodes);
+  const airlinesLookUp = airlinesLookUps(airlineData);
   console.log("lastFlight",lastFlight);
   const coninueBtn = () =>{
     navigate("/flights/Passengerdata", { replace: true });
