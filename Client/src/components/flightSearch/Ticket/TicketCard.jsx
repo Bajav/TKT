@@ -19,6 +19,8 @@ import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.
 import borderLine from "../../../assets/icons/line.svg";
 // motion
 import { motion } from "motion/react";
+// uitils
+import { iataLookups,airlinesLookUps } from "../../Utils/FlightUtils/airlinecodeslookup.utils";
 
 function FlightCard() {
   // contexts
@@ -157,22 +159,9 @@ function FlightCard() {
     applyFilters();
   }, [filters, flightResults]);
   // Lookup tables
-  const iataLookup = iataCodes.reduce((lookup, item) => {
-    lookup[item.AirportCode] = {
-      city: item.City,
-      country: item.Country,
-    };
-    return lookup;
-  }, {});
-
-  // Fixed: Correct accumulator name
-  const airlinesLookUp = airlineData.reduce((airlineLookUp, item) => {
-    airlineLookUp[item.code] = {
-      logo: item.logo,
-      name: item.name,
-    };
-    return airlineLookUp;
-  }, {});
+  const iataLookup = iataLookups(iataCodes);
+  // Correct accumulator name
+  const airlinesLookUp = airlinesLookUps(airlineData);
 
   // Button actions
   const seeDetails = (index) => {
