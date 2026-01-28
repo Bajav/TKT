@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 
 export const airlinesLookUps = (airlineData = []) => {
   return airlineData.reduce((lookup, item) => {

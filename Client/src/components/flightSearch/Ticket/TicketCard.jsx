@@ -21,6 +21,7 @@ import borderLine from "../../../assets/icons/line.svg";
 import { motion } from "motion/react";
 // uitils
 import { iataLookups,airlinesLookUps } from "../../Utils/FlightUtils/airlinecodeslookup.utils";
+import { fetchFlightMeta } from "../../Utils/FlightUtils/fetchIataCodes.utils";
 
 function FlightCard() {
   // contexts
@@ -64,9 +65,6 @@ function FlightCard() {
   const navigate = useNavigate();
 
   const formData = location.state;
-
-  console.log(formData);
-
   // Fetch data --- use effects ---
   useEffect(() => {
     const setdata = () => setFormData(formData);
@@ -91,23 +89,20 @@ function FlightCard() {
         console.error("Error posting flight:", error);
       }
     };
-    // const fetchAirlines = async () => {
-    //   try {
-    //     const [iataRes, airlineRes] = await Promise.all([
-    //       axios.get("http://localhost:3000/iataCodes"),
-    //       axios.get("http://localhost:3000/airlines"),
-    //     ]);
-    //     setIataCodes(iataRes.data);
-    //     setAirlineData(airlineRes.data);
-    //   } catch (error) {
-    //     console.error("Error fetching flight data:", error);
-    //   }
-    // };
+const fetchAirlines = async () => {
+  try {
+    const { iataCodes, airlineData } = await fetchFlightMeta();
+    setIataCodes(iataCodes);
+    setAirlineData(airlineData);
+  } catch (err) {
+    console.error("Error fetching flight meta data:", err);
+  }
+};
 
     setdata();
     fetchFlights();
     fetchData();
-    // fetchAirlines();
+    fetchAirlines();
   }, []);
 
   useEffect(() => {
@@ -296,7 +291,7 @@ function FlightCard() {
     };
 
     return results;
-  }
+  };
 
   function extractAirlines(offer) {
     const allAirlines = [];
