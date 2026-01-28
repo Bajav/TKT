@@ -113,10 +113,15 @@ const searchFlights = async (req, res) => {
 // };
 
 const brandedUpSell = async (req, res) => {
-  console.log(req.session);
-  console.log(req.sessionID);
+  // console.log(req.session);
+  // console.log(req.sessionID);
   const selectedFlight = req.body;
-  console.log("selectedFlight received:", selectedFlight.id);
+  console.log("selectedFlight received:", selectedFlight);
+  
+  // res.json({
+  //   success:true,
+  //   message:"route is working"
+  // })
 
   try {
     const response = await amadeus.shopping.flightOffers.upselling.post({
@@ -156,7 +161,7 @@ const brandedUpSell = async (req, res) => {
 
 const findLastPrice = async (req, res) => {
   const response = req.body;
-  console.log("findLastPrice", response.bookedFlight);
+  console.log("findLastPrice", response);
   try {
     const pricingResponse = await amadeus.shopping.flightOffers.pricing.post(
       {
@@ -187,20 +192,20 @@ const findLastPrice = async (req, res) => {
 
 // amadeus.shopping.flightOffers.pricing.post(body ,{include: 'bags'});
 
-// Flight Create Orders
-// To book the flight-offer(s) returned by the Flight Offers Price
-// and create a flight-order with travelers' information.
-// A full example can be found at https://git.io/JtnYo
-
-const getFlightOrder = async (req, res) => {
+const bookFlight = async (req, res) => {
   const { formData, bookedFlight } = req.body;
   console.log("formData", formData);
   console.log("bookedFlight", bookedFlight);
+  //   res.json({
+  //   success:true,
+  //   message:"route is working"
+  // })
+
   try {
     const response = await amadeus.booking.flightOrders.post({
       data: {
         type: "flight-order",
-        flightOffers: [bookedFlight[0]],
+        flightOffers: [bookedFlight],
         travelers: [
           {
             id: "1",
@@ -249,9 +254,15 @@ const getFlightOrder = async (req, res) => {
 
 //use api to retrieve order using the order ID
 const retriveOrder = async (req, res) => {
-  console.log(oderId);
+  // console.log(oderId);
+  const {orderID} = req.body;
+  //     res.json({
+  //   success:true,
+  //   message:"route is working",
+  //   data:orderID
+  // })
   try {
-    const response = await amadeus.booking.flightOrder(oderId).get();
+    const response = await amadeus.booking.flightOrder(orderID).get();
     console.log(response.data);
     return res.json(response.data);
   } catch (err) {
@@ -265,9 +276,9 @@ const retriveOrder = async (req, res) => {
 
 //
 const deleteOrder = async (req, res) => {
-  console.log(oderId);
+   const {orderID} = req.body;
   try {
-    const response = await amadeus.booking.flightOrder(oderId).delete();
+    const response = await amadeus.booking.flightOrder(orderID).delete();
     console.log(response.data);
     return res.json(response.data);
   } catch (err) {
@@ -281,10 +292,10 @@ const deleteOrder = async (req, res) => {
 
 // SeatMap display
 const seatMap = async (req, res) => {
-  console.log(oderId);
+     const {orderID} = req.body;
   try {
     const response = await amadeus.shopping.seatmaps.get({
-      "flight-orderId": oderId,
+      "flight-orderId": orderID,
     });
 
     console.log("Seat Map Response:", response.data);
@@ -378,15 +389,41 @@ const checkApiStatus = async (req, res) => {
     });
   }
 };
+const flightDelayPrediction = async (req, res) => {
+  // const { flightNumber, departureDate } = req.body;
+
+  try {
+    const response = await amadeus.travel.predictions.flightDelay.get({
+  originLocationCode: 'EBB',
+  destinationLocationCode: 'DOH',
+  departureDate: '2026-06-08',
+  departureTime: '01:35:00',
+  arrivalDate: '2026-06-08',
+  arrivalTime: '06:40:00',
+  aircraftCode: '788',
+  carrierCode: 'QR',
+  flightNumber: '1392',
+  duration: 'PT5H5M'
+});
+res.json(response.data);
+  } catch (err) {
+    console.error("Error fetching flight delay prediction:", err);
+    return res.status(500).json({
+      message: "Failed to fetch flight delay prediction",
+      error: err.description || err.message,
+    });
+  }
+};
 export {
   searchFlights,
   getCheckIn,
   brandedUpSell,
   findLastPrice,
-  getFlightOrder,
+  bookFlight,
   cheapestDate,
   retriveOrder,
   deleteOrder,
+  flightDelayPrediction,
   seatMap,
   checkApiStatus,
 };
