@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import axios from "axios";
@@ -81,7 +81,7 @@ function FlightPricing() {
           return [...uniqueCarriers];
         };
         // console.log( segementOne)
-        console.log("primaryAirlineCode",primaryAirlineCode)
+        // console.log("primaryAirlineCode",primaryAirlineCode)
         const secondaryAirlines = getSecondaryAirlines(
           segments,
           primaryAirlineCode
