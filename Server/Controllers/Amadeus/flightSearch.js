@@ -80,6 +80,7 @@ const searchFlights = async (req, res) => {
 //       originLocationCode: "NYC",
 //       destinationLocationCode: "LAX",
 //       departureDate: "2026-03-01",
+//       returnDate: "2026-03-01",
 //       adults: 1,
 //     });
 //       return res.status(200).json({
