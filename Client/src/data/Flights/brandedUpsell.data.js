@@ -1,4 +1,4 @@
-export const brandedUpsellData =[
+[
   {
     type: "flight-offer",
     id: "1",

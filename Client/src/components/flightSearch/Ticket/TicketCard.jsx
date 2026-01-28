@@ -18,6 +18,7 @@ import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.
 import borderLine from "../../../assets/icons/line.svg";
 // icons
 import { CircleDollarSign,CircleCheckIcon } from "lucide-react";
+import { flightSearchData } from "../../../../../Server/DATA/Flights/flightsearch.data.js";
 // motion
 import { motion } from "motion/react";
 // uitils
@@ -28,6 +29,7 @@ import {
 import { fetchFlightMeta } from "../../Utils/FlightUtils/fetchIataCodes.utils";
 
 function FlightCard() {
+  // console.log(flightSearchData);
   // contexts
   const {
     iataCodes,
@@ -82,16 +84,17 @@ function FlightCard() {
       }
     };
     const fetchFlights = async () => {
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/results",
-          formData,
-        );
-        setFlightResults(response?.data);
-        console.log(response?.data[0]);
-      } catch (error) {
-        console.error("Error posting flight:", error);
-      }
+      // try {
+      //   const response = await axios.post(
+      //     "http://localhost:3000/results",
+      //     formData,
+      //   );
+      //   setFlightResults(response?.data);
+      //   console.log(response?.data[0]);
+      // } catch (error) {
+      //   console.error("Error posting flight:", error);
+      // }
+      setFlightResults(flightSearchData);
     };
 
     const fetchAirlines = async () => {

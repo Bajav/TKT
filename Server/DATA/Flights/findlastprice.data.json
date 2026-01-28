@@ -155,14 +155,10 @@
         "billingCurrency": "USD"
       },
       "pricingOptions": {
-        "fareType": [
-          "PUBLISHED"
-        ],
+        "fareType": ["PUBLISHED"],
         "includedCheckedBagsOnly": true
       },
-      "validatingAirlineCodes": [
-        "QR"
-      ],
+      "validatingAirlineCodes": ["QR"],
       "travelerPricings": [
         {
           "travelerId": "1",
@@ -267,7 +263,7 @@
             }
           ]
         }
-      ]\
+      ]
     }
   ],
   "bookingRequirements": {
