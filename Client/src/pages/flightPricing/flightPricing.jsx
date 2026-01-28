@@ -26,7 +26,7 @@ function FlightPricing() {
 
   const iataLookup = iataLookups(iataCodes);
   const airlinesLookUp = airlinesLookUps(airlineData);
-  console.log("lastFlight",lastFlight);
+  // console.log("lastFlight",lastFlight);
   const coninueBtn = () =>{
     navigate("/flights/Passengerdata", { replace: true });
   // console.log("lastFlight", segementOne.carrierCode);
@@ -90,6 +90,7 @@ function FlightPricing() {
         return (
           // <li>hello</li>
           <ReviewCard
+          key={index}
             airlineLogo={airlinesLookUp[primaryAirlineCode]?.logo || ""}
             tripType={
               lastFlight.itineraries.length >= 2 ? "round trip" : "one way"
