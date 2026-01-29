@@ -1,4 +1,4 @@
-[
+export const flightSearchData = [
   {
     type: "flight-offer",
     id: "1",

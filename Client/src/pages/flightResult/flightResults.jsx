@@ -13,6 +13,7 @@ function FlightResult() {
   const { flightSearch,setFlightResults,flightResults,setFilteredFlights } = useContext(FlightContext);
   const resLength = flightResults?.length || 0;
   // define location
+  console.log("flightResults", flightResults);
   const location = useLocation();
   const [error, setError] = useState([]);
   // define navigate
@@ -27,7 +28,7 @@ function FlightResult() {
     <main className="FlightResult-page">
       <BackBTN onClick={backBtn} btnName="back" />
       <div className="FlightResults">
-        <h3 className="text"> <span>{ resLength }</span> Results for your search </h3>
+        <h3 className="text">Results for your search </h3>
         <div className="FlightResult-header">
 
           <div className="ticket-header">
