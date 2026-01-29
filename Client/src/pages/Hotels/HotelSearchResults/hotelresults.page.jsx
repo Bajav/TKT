@@ -7,12 +7,13 @@ import hotelImg from "../../../assets/images/hotelImg.jpg";
 import { SlidersHorizontal } from "lucide-react";
 import { getBestOffer } from "../../../components/Utils/HotelsUtils/pricing.utils.jsx";
 import { HotelContext } from "../../../components/context/hotels.contenxt.jsx";
-import images from "../../../data/images.data.json";
+import imagess from "../../../data/images.data.json";
 // import hooks
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useEffect, useContext, useState, Fragment, useRef } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import imagesData from '../../../data/unsplash/unsplash.data.json';
 // import utils
 import { extractSearchParams } from "../../../components/Utils/HotelsUtils/searchparams.utils.jsx";
 // import {getCancellationBadge} from '../../'
@@ -38,6 +39,7 @@ function HotelResults() {
   const [hotels, setHotels] = useState({ hotels: [] });
   const [searchParams] = useSearchParams();
   const [bestOfferName, setBestOfferName] = useState("");
+  const [images, setImages] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
   // this is a helper function to get hotel codes from hotelJson
@@ -59,12 +61,13 @@ function HotelResults() {
     if (hasFetchedRef.current) return;
     hasFetchedRef.current = true;
     try {
-      const response = await axios.post("http://localhost:3000/hotels", {
-        formData: payload,
-      });
-      console.log(response.data.hotels);
-      setHotels(response.data.hotels);
-      setJson(response.data);
+      // const response = await axios.post("http://localhost:3000/hotels", {
+      //   formData: payload,
+      // });
+      // console.log(response.data.hotels);
+      // setHotels(response.data.hotels);
+      // setJson(response.data);
+      setHotels(hotelJson.hotels);
     } catch (error) {
       console.log("error finding hotels", error);
     }
@@ -97,6 +100,7 @@ function HotelResults() {
   //   }, []);
 
   // Stay count effect (now safe at top level)
+
   useEffect(() => {
     if (!hotels?.checkIn || !hotels?.checkOut) return;
 
@@ -108,6 +112,7 @@ function HotelResults() {
       setWeeks(0);
       return;
     }
+
 
     const diffTime = Math.abs(checkOutDate - checkInDate);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -122,6 +127,17 @@ function HotelResults() {
       setDays(diffDays);
     }
   }, [hotels?.checkIn, hotels?.checkOut]);
+// setHotelImages
+const hotelImages = ()=>
+  { const imagUrls = new Set();
+    imagesData.data.forEach((imgJson)=>{
+      imagUrls.add(imgJson.urls);
+    }); 
+    console.log(imagUrls);
+  }
+  useEffect(()=>{
+    hotelImages();
+  });
 
   return (
     <div>
@@ -140,7 +156,6 @@ function HotelResults() {
         </div>
         {hotels?.hotels?.length > 0 ? (
           hotels.hotels.map((hotel, index) => {
-            // console.log("hotelllll ::",hotel);
             const {
               name,
               destinationName,
@@ -149,12 +164,12 @@ function HotelResults() {
               categoryCode,
               rooms,
             } = hotel;
-            // console.log(rooms);
             const { name: roomName, rates } = rooms[0] || {};
             const { boardName, net, paymentType, rateClass, taxes, allotment } =
               rates[0] || {};
-            // console.log("room rates ::", rateClass);
-            const imageUrl = images[index % images.length];
+
+            // const imageUrl = imagess[index % images.length];
+          const imageUrls = imagesData.data.map(photo => photo.urls.thumb);
             const bestOffer = getBestOffer(hotel);
             // console.log("hotelsss::",hotels?.hotels);
             return (
@@ -172,7 +187,7 @@ function HotelResults() {
                 offerName={bestOffer?.name || ""}
                 offerAmount={bestOffer?.amount || 0}
                 country={destinationName}
-                image={imageUrl}
+                image={imageUrls[index % imageUrls.length]}
                 mainPrice={net}
                 pricePerNight={100}
                 rating="9.5"
