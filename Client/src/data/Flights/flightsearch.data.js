@@ -219,7 +219,7 @@ export const flightSearchData = [
                 },
               },
               {
-                description: "UPGRADE ELIGIBILITY",
+                description: "UPGRA`DE ELIGIBILITY",
                 isChargeable: true,
                 amenityType: "BRANDED_FARES",
                 amenityProvider: {

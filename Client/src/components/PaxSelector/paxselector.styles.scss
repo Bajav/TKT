@@ -6,7 +6,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  font-family: $textFont, sans-serif;
+ font-family: $robotoMono, monospace;
   font-weight: 600;
   color: $deemFontColor;
 }
@@ -23,7 +23,7 @@
   align-items: center;
   // transition: all 0.2s ease;
   span {
-    font-family: $roboto, sans-serif;
+    font-family: $robotoMono, monospace;
     font-size: 15px;
     font-weight: 500;
     color: $visibleFontColor;
@@ -60,6 +60,7 @@
 // }
 .passenger-label {
   margin-bottom: 10px;
+  font-family: $robotoMono, monospace;
 }
 .pax button {
   background-color: $actionOrange;
@@ -84,6 +85,7 @@
 .dropdown-content span {
   font-size: 16px;
   margin: 0 10px;
+  font-family: $robotoMono, monospace;
 }
 
 .seatType {
@@ -106,7 +108,7 @@
   height: 60px;
   width: 100%;
   border-radius: 5px;
-  font-family: $textFont, sans-serif;
+ font-family: $robotoMono, monospace;
   text-transform: capitalize;
   font-weight: 600;
   select {
@@ -129,19 +131,6 @@
     color: $deemFontColor;
     margin-top: 5px;
   }
-}
-.btn-submit {
-  text-align: center;
-  color: $visibleFontColor;
-  font-size: 15px;
-  text-transform: capitalize;
-  border-radius: 5px 5px 13px 13px;
-  border: none;
-  font-family: $textFont, sans-serif;
-  padding: 12px 120px;
-  background: $page_color;
-  width: 100%;
-  font-weight: 200;
 }
 
 .pax {
@@ -171,7 +160,7 @@
     color: $visibleFontColor;
     // opacity: 60%;
     text-transform: capitalize;
-    font-family: $roboto, sans-serif;
+    font-family: $robotoMono, monospace;
   }
 }
 .guest-label
@@ -198,7 +187,7 @@
   z-index: 1;
   top: 33%;
   right: 20px;
-  font-family: $roboto, sans-serif;
+ font-family: $robotoMono, monospace;
   margin-top: 10px; /* to create some space below the button */
 }
 
