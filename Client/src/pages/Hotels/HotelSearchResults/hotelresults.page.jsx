@@ -67,6 +67,7 @@ function HotelResults() {
       // console.log(response.data.hotels);
       // setHotels(response.data.hotels);
       // setJson(response.data);
+    
       setHotels(hotelJson.hotels);
     } catch (error) {
       console.log("error finding hotels", error);
@@ -74,6 +75,7 @@ function HotelResults() {
   };
   
   useEffect(() => {
+    // console.log(hotelJson);
     fecthHotels();
     setFormData(payload);
   }, []);
@@ -164,6 +166,7 @@ const hotelImages = ()=>
               categoryCode,
               rooms,
             } = hotel;
+            // console.log(hotel);
             const { name: roomName, rates } = rooms[0] || {};
             const { boardName, net, paymentType, rateClass, taxes, allotment } =
               rates[0] || {};
@@ -172,6 +175,7 @@ const hotelImages = ()=>
           const imageUrls = imagesData.data.map(photo => photo.urls.thumb);
             const bestOffer = getBestOffer(hotel);
             // console.log("hotelsss::",hotels?.hotels);
+            console.log("imageUrls::",imageUrls);
             return (
               <HotelCard
                 key={index}
