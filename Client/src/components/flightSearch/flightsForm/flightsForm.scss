@@ -4,7 +4,7 @@
     background-color: #ffffff;
     padding: 5px;
     border-radius: 15px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     width: 96vw;
   }
   .cutout-box::before,
@@ -223,7 +223,8 @@
   }
   .btn-submit {
     text-align: center;
-    color: $visibleFontColor;
+    color: $inputBackGround;
+    background: $darkOrange;
     font-size: 15px;
     text-transform: capitalize;
     border-radius: 5px 5px 13px 13px;
@@ -231,10 +232,9 @@
     height: 55px;
     font-family: $robotoMono, monospace;
     padding: 12px 120px;
-    background: $page_color;
     width: 100%;
     font-weight: 500;
-    border: 1px #333 solid;
+    border: none;
   }
 }
 
