@@ -11,7 +11,7 @@ import { LocationContext } from "../../context/location.context";
 import FlightSearchInput from "../SearchInput/flightSearch";
 import ClickOption from "../checkBtns/ClickOption";
 import RoundTripIcon from "../../../assets/icons/arrows-svgrepo-com (1).svg";
-import line from "../../../assets/icons/line.svg";
+import line from "../../../assets/icons/DottedLine.png";
 // import  from "../Calender/flightSearchExample";
 import { FlightCalendar } from "../Calender/newCalender";
 // import styles

@@ -670,7 +670,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                             <h4>{arrivalObjectSegTwo.at.slice(0, 10)}</h4>
                           </div>
                           <div className="flex-tim">
-                              <h4>{segTwoTime.total.formatted}</h4>
+                              <h4>{segTwo.total.formatted}</h4>
                           </div>
                         </div>
                       </div>
