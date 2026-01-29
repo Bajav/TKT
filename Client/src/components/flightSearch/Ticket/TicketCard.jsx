@@ -17,8 +17,9 @@ import dollarIcon from "../../../assets/icons/dollarbill.svg";
 import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
 import borderLine from "../../../assets/icons/line.svg";
 // icons
-import { CircleDollarSign, CircleCheckIcon } from "lucide-react";
+import { CircleDollarSign,CircleCheckIcon } from "lucide-react";
 import { flightSearchData } from "../../../../../Server/DATA/Flights/flightsearch.data.js";
+import { brandedUpsellData } from "../../../data/Flights/brandedUpsell.data.js";
 // motion
 import { motion } from "motion/react";
 // uitils
@@ -179,12 +180,13 @@ function FlightCard() {
     setShowTickets(false);
     setOverlay(true);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/brandedUpSell",
-        selected,
-      );
-      setBrandedUpSell(response.data); // likely want .data, not full response
-      console.log("brandedUpsell res", response.data);
+      // const response = await axios.post(
+      //   "http://localhost:3000/brandedUpSell",
+      //   selected,
+      // );
+      // setBrandedUpSell(response.data); // likely want .data, not full response
+      setBrandedUpSell(brandedUpsellData);
+      // console.log("brandedUpsell res", brandedUpsellData);
     } catch (err) {
       console.error("Axios error:", err?.response?.data?.message);
       setUpsellError(err?.response?.data?.message[0]);
@@ -563,11 +565,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                         {perks.map((perk) => {
                           return (
                             <div className="detailsSect">
-                              {perk.isChargeable ? (
-                                <CircleDollarSign color="#E82929" size={15} />
-                              ) : (
-                                <CircleCheckIcon color="#00B74A" size={15} />
-                              )}
+                              {perk.isChargeable ? (<CircleDollarSign color="#E82929" size={15}  />) : (<CircleCheckIcon color="#00B74A" size={15} />)}
                               <li>{perk.description}</li>
                             </div>
                           );
@@ -640,11 +638,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                         {perks.map((perk) => {
                           return (
                             <div className="detailsSect">
-                              {perk.isChargeable ? (
-                                <CircleDollarSign color="#E82929" size={15} />
-                              ) : (
-                                <CircleCheckIcon color="#00B74A" size={15} />
-                              )}
+                                                        {perk.isChargeable ? (<CircleDollarSign color="#E82929" size={15}  />) : (<CircleCheckIcon color="#00B74A" size={15} />)}
                               <li>{perk.description}</li>
                             </div>
                           );
@@ -849,15 +843,14 @@ const results = analyzeFlightOffers(flightOffersArray);
                         ))}
                       </Swiper>
                       <div className="Alldetails">
-                        <h5>
-                          {" "}
-                          CABIN BAG:{" "}
+                        <h5>  CABIN BAG:{" "}
                           {itinerary.travelerPricings[0]
                             ?.fareDetailsBySegment[0]?.includedCabinBags
                             ?.quantity || 0}{" "}
-                          piece
+                          piece</h5>
+                        <h5>
+                   {itinerary?.numberOfBookableSeats} seats left
                         </h5>
-                        <h5>{itinerary?.numberOfBookableSeats} seats left</h5>
                         <h5>
                           CHECKED BAG:{" "}
                           {itinerary.travelerPricings[0]
