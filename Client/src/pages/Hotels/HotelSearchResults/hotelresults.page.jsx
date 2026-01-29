@@ -61,14 +61,14 @@ function HotelResults() {
     if (hasFetchedRef.current) return;
     hasFetchedRef.current = true;
     try {
-      // const response = await axios.post("http://localhost:3000/hotels", {
-      //   formData: payload,
-      // });
+      const response = await axios.post("http://localhost:3000/hotels", {
+        formData: payload,
+      });
       // console.log(response.data.hotels);
-      // setHotels(response.data.hotels);
-      // setJson(response.data);
+      setHotels(response.data.hotels);
+      setJson(response.data);
     
-      setHotels(hotelJson.hotels);
+      // setHotels(hotelJson.hotels);
     } catch (error) {
       console.log("error finding hotels", error);
     }
@@ -175,7 +175,7 @@ const hotelImages = ()=>
           const imageUrls = imagesData.data.map(photo => photo.urls.thumb);
             const bestOffer = getBestOffer(hotel);
             // console.log("hotelsss::",hotels?.hotels);
-            console.log("imageUrls::",imageUrls);
+            // console.log("imageUrls::",imageUrls);
             return (
               <HotelCard
                 key={index}
