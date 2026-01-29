@@ -13,8 +13,6 @@ import line from "../../../assets/icons/line.svg";
 import DummyTicket from "../../features/DummyTicket/DummyTicket";
 import TicketHeader from "./ticketheader.component";
 import AirlineInfo from "./airlinedata.component";
-import dollarIcon from "../../../assets/icons/dollarbill.svg";
-import checkMark from "../../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
 import borderLine from "../../../assets/icons/line.svg";
 // icons
 import { CircleDollarSign, CircleCheckIcon } from "lucide-react";
@@ -28,6 +26,7 @@ import {
   airlinesLookUps,
 } from "../../Utils/FlightUtils/airlinecodeslookup.utils";
 import { fetchFlightMeta } from "../../Utils/FlightUtils/fetchIataCodes.utils";
+import { getJourneyBreakdown } from "../../Utils/FlightUtils/totaljourneytime.utils.jsx";
 
 function FlightCard() {
   // console.log(flightSearchData);
@@ -452,15 +451,12 @@ const results = analyzeFlightOffers(flightOffersArray);
   // });
   // const hasMultipleAirlines = flagMultipleAirlines();
 
-
-
-// Usage
-// const segments = [
-//   { duration: "PT2H30M" },
-//   { duration: "PT1H15M" },
-//   { duration: "PT45M" }
-// ];
-
+  // Usage
+  // const segments = [
+  //   { duration: "PT2H30M" },
+  //   { duration: "PT1H15M" },
+  //   { duration: "PT45M" }
+  // ];
 
   return (
     <Fragment>
@@ -527,10 +523,11 @@ const results = analyzeFlightOffers(flightOffersArray);
             brandedUpSell.map((upsell, index) => {
               const segments = upsell.itineraries[0]?.segments || [];
               const segmentNumber = segments.length;
+              // console.log("upsell", upsell);
               const lastSegmentIndex = segmentNumber - 1;
               const segmentOne = upsell.itineraries[0].segments;
               const segOneIndex = segmentOne.length - 1;
-              const segmentTwo = upsell.itineraries[1].segments;
+              const segmentTwo = upsell.itineraries[lastSegmentIndex].segments;
               const travelerPricings = upsell.travelerPricings;
               const departureObject = segmentOne[0].departure;
               const arrivalObject = segmentOne[segOneIndex].arrival;
@@ -539,6 +536,9 @@ const results = analyzeFlightOffers(flightOffersArray);
               const arrivalObjectSegTwo = segmentTwo[segTwoIndex].arrival;
               const perks =
                 travelerPricings[0].fareDetailsBySegment[0].amenities;
+                const segOneTime = getJourneyBreakdown(segmentOne);
+                const segTwoTime = getJourneyBreakdown(segmentTwo);
+              // console.log("segOneTime", segOneTime);
               return (
                 <Swiper spaceBetween={20} slidesPerView="auto" key={index}>
                   <SwiperSlide>
@@ -592,7 +592,8 @@ const results = analyzeFlightOffers(flightOffersArray);
                             <h4>{arrivalObject.at.slice(0, 10)}</h4>
                           </div>
                           <div className="flex-tim">
-                            <h4>{segmentOne[0].duration.slice(2)}</h4>
+
+                            <h4>{segOneTime.total.formatted}</h4>
                           </div>
                         </div>
                         <div className="price-details">
@@ -669,7 +670,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                             <h4>{arrivalObjectSegTwo.at.slice(0, 10)}</h4>
                           </div>
                           <div className="flex-tim">
-                            <h4>{segmentTwo[segTwoIndex].duration.slice(2)}</h4>
+                              <h4>{segTwoTime.total.formatted}</h4>
                           </div>
                         </div>
                       </div>
@@ -901,26 +902,3 @@ const calculateLayover = (arrival, departure) => {
 };
 
 export default FlightCard;
-
-//  <div className="detailsSect">
-//             <div className="itemContainer">
-//               <img src={suiteCase} />
-//               <li>{perks.cabinBag || "No Cabin Bag"}</li>
-//             </div>
-//             <div className="itemContainer">
-//               <img src={pctMile} />
-//               <li>{perks.qmiles || "No QMiles Accumulation"}</li>
-//             </div>
-//           </div>
-//  <div className="itemContainer">
-//                         <img src={seat} />
-//                         <li>
-//                           {perks.seatChoice
-//                             ? "Seat Choice Included"
-//                             : "No Seat Selection"}
-//                         </li>
-//                       </div>
-//                       <div className="itemContainer">
-//                         <img src={cutlary} />
-//                         <li>{perks.meal ? "Meal Beverage" : "No Meal"}</li>
-//                       </div>
