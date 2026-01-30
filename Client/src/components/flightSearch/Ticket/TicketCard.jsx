@@ -84,17 +84,17 @@ function FlightCard() {
       }
     };
     const fetchFlights = async () => {
-      // try {
-      //   const response = await axios.post(
-      //     "http://localhost:3000/results",
-      //     formData,
-      //   );
-      //   setFlightResults(response?.data);
-      //   console.log(response?.data[0]);
-      // } catch (error) {
-      //   console.error("Error posting flight:", error);
-      // }
-      setFlightResults(flightSearchData);
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/results",
+          formData,
+        );
+        setFlightResults(response?.data);
+        console.log(response?.data[0]);
+      } catch (error) {
+        console.error("Error posting flight:", error);
+      }
+      // setFlightResults(flightSearchData);
     };
 
     const fetchAirlines = async () => {
@@ -179,12 +179,12 @@ function FlightCard() {
     setShowTickets(false);
     setOverlay(true);
     try {
-      // const response = await axios.post(
-      //   "http://localhost:3000/brandedUpSell",
-      //   selected,
-      // );
-      // setBrandedUpSell(response.data); // likely want .data, not full response
-      setBrandedUpSell(brandedUpsellData);
+      const response = await axios.post(
+        "http://localhost:3000/brandedUpSell",
+        selected,
+      );
+      setBrandedUpSell(response.data); // likely want .data, not full response
+      // setBrandedUpSell(brandedUpsellData);
       // console.log("brandedUpsell res", brandedUpsellData);
     } catch (err) {
       console.error("Axios error:", err?.response?.data?.message);
@@ -670,7 +670,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                             <h4>{arrivalObjectSegTwo.at.slice(0, 10)}</h4>
                           </div>
                           <div className="flex-tim">
-                              <h4>{segTwo.total.formatted}</h4>
+                              <h4>{segTwoTime.total.formatted}</h4>
                           </div>
                         </div>
                       </div>

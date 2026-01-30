@@ -437,8 +437,6 @@ function FlightsForm() {
                   />
                 </div>
               ))}
-
-            <div className="backUpBlock"></div>
           </div>
         </div>
       )}

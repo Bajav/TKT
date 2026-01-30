@@ -31,12 +31,17 @@ function Flights() {
     <main className="flights">
       <Outlet />
       {!shouldHideLayout && (
-        <>
+        <div className="flights-layout">
           <LocationHeader />
           <div className="flights-console">
             <FlightsForm />
           </div>
-        </>
+
+          <div className="flights-container">
+            <h4>most visited places.</h4>
+          </div>
+           <div className="backUpBlock"></div>
+        </div>
       )}
       {alert && (
         <Alert img={success} alertText="Email address changed successfully" />
