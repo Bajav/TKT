@@ -35,7 +35,7 @@ function BookHotel() {
 
   const [res, setRes] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [verifified, setVerifified] = useState(true);
+  const [verified, setVerified] = useState(false);
   const [error, setError] = useState(null);
   const [days, setDays] = useState(0);
   const [weeks, setWeeks] = useState(0);
@@ -172,7 +172,7 @@ function BookHotel() {
     //   return;
     // }
     console.log("OTP Submitted:", code);
-    setVerifified(true);
+    setVerified(true);
   };
   // console.log(taxesArray.length);
   const onOtpChange = (e) => {
@@ -188,250 +188,257 @@ function BookHotel() {
     }
   };
 
-  return (
-    <div className="bookhotel-container">
-      <h4>complete your booking</h4>
-      <div className="summary">
-        <h5>summary</h5>
-        <div className="summary-container">
-          <div className="summary-header">
-            <h1>{name}</h1>
-            <div className="stay-duration">
-              <h5>{rateClass === "NRF" ? "Non-refundable" : "Refundable"}</h5>
-            <h5>
-              {weeks > 0 && days >= 0
-                ? `${weeks} weeks, ${days} days`
-                : `${days} days`}
-            </h5>
-            </div>
+return (
+  <>
+    {!signedIn ? (
+      // Show verification overlay when NOT signed in
+      <div className="verification-overlay">
+        <div className="verificartion-container">
+          <div className="ad-texts">
+            <h1>Don't like the process?</h1>
+            <p>
+              Sign up now to make everything swift and <br /> also get access
+              to exclusives.
+            </p>
           </div>
-          <h3>{rooms[0].name}.{boardName}</h3>
-          <h3>{destinationName}</h3>
-          <hr className="hr-line" />
-          <div className="dates">
-            <div className="date">
-              <h4>Check in date</h4>
-              <h2>{checkIn}</h2>
-            </div>
-            <div className="date">
-              <h4>Check out date</h4>
-              <h2>{checkOut}</h2>
-            </div>
-            <div className="date">
-              <h4>pax</h4>
-              <h2>
-                {adults} <span>adult</span> {children} <span>child</span>
-              </h2>
-            </div>
+          <div className="verification">
+            {verified ? (
+              // Verified state
+              <div className="verified">
+                <div className="verified-header">
+                  <h1>you are verified</h1>
+                  <h4>{input?.email || "balijawahussein@gmail.com"}</h4>
+                </div>
+                <CheckCircleIcon size={80} color="#40C265" weight="fill" />
+                <p>you are being redirected to the payment page</p>
+              </div>
+            ) : (
+              // Not verified yet - show OTP input
+              <div className="killswitch">
+                <div className="verification-header">
+                  <p>
+                    We just sent you an email <br /> for verification
+                  </p>
+                  <h4>Enter the security verification code sent to</h4>
+                  <h2>{input?.email || "balijawahussein@gmail.com"}</h2>
+                </div>
+                <form
+                  onSubmit={otpSubmit}
+                  className="verification-input-container"
+                >
+                  <div className="verification-inputs">
+                    {["num1", "num2", "num3", "num4", "num5", "num6"].map(
+                      (key, index) => (
+                        <input
+                          key={key}
+                          type="text"
+                          name={key}
+                          value={otp[key]}
+                          maxLength={1}
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          autoComplete={index === 0 ? "one-time-code" : "off"}
+                          onChange={onOtpChange}
+                        />
+                      ),
+                    )}
+                  </div>
+                  <button type="submit" className="verification-input-submit">
+                    verify email
+                  </button>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      <div className="form-container">
-        <h4>enter your details</h4>
-        <form onSubmit={handleSubmit}>
-          <div className="form-container">
-            <div className="pax-info-flex">
-              <input
-                type="text"
-                name="firstName"
-                placeholder="enter first name"
-                value={input.firstName}
-                className=""
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="lastName"
-                placeholder="enter last name"
-                value={input.lastName}
-                className=""
-                onChange={handleChange}
-              />
+    ) : (
+      // Show booking form when signed in
+      <div className="bookhotel-container">
+        <h4>complete your booking</h4>
+        <div className="summary">
+          <h5>summary</h5>
+          <div className="summary-container">
+            <div className="summary-header">
+              <h1>{name}</h1>
+              <div className="stay-duration">
+                <h5>{rateClass === "NRF" ? "Non-refundable" : "Refundable"}</h5>
+                <h5>
+                  {weeks > 0 && days >= 0
+                    ? `${weeks} weeks, ${days} days`
+                    : `${days} days`}
+                </h5>
+              </div>
             </div>
-            <input
-              type="text"
-              name="email"
-              placeholder="enter email address"
-              value={input.email}
-              className=""
-              onChange={handleChange}
-            />
-            <p>
-              Please enter a valid email address that will be used for
-              confirmation
-            </p>
+            <h3>{rooms[0]?.name}.{boardName}</h3>
+            <h3>{destinationName}</h3>
+            <hr className="hr-line" />
             <div className="dates">
-              <input
-                type="text"
-                name="country"
-                placeholder="country"
-                value={input.country}
-                className=""
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="countryCode"
-                placeholder="country code"
-                value={input.countryCode}
-                className=""
-                onChange={handleChange}
-              />
-            </div>
-            <input
-              type="text"
-              name="phoneNumber"
-              placeholder="enter phone number"
-              value={input.phoneNumber}
-              className=""
-              onChange={handleChange}
-            />
-          </div>
-          <div className="text-info">
-            <p>
-              Please enter a valid phone number that will be used for
-              confirmation
-            </p>
-            <div className="booking-for">
-              <h4>Booking for ?</h4>
-              <div className="click-container">
-                <div className="click">
-                  <input
-                    type="radio"
-                    name="bookingFor"
-                    value="myself"
-                    checked={input.bookingFor === "myself"}
-                    onChange={handleChange}
-                  />
-                  <label>my self</label>
-                </div>
-                <div className="click">
-                  <input
-                    type="radio"
-                    name="bookingFor"
-                    value="someone"
-                    checked={input.bookingFor === "someone"}
-                    onChange={handleChange}
-                  />
-                  <label>someone else</label>
-                </div>
+              <div className="date">
+                <h4>Check in date</h4>
+                <h2>{checkIn}</h2>
               </div>
-            </div>
-            <hr />
-            <div className="pricing">
-              <div className="pricing-header">
-                {included ? (
-                  <h2>total €{totalNet}</h2>
-                ) : (
-                  <h2>Total €{totalAsNumber}</h2>
-                )}
-                {paymentDataRequired ? (
-                  <h5>Online payment Required</h5>
-                ) : (
-                  <h5>payment at the hotel</h5>
-                )}
+              <div className="date">
+                <h4>Check out date</h4>
+                <h2>{checkOut}</h2>
               </div>
-              <div className="section-two">
-                <div className="section-two-header">
-                  <h3>
-                    {cacellationSummary.label} ||{""}
-                    {modificationPolicies.cancellation
-                      ? "free cancellation"
-                      : "can't cancel this"}
-                  </h3>
-                  {allIncluded ? <h4>includes taxes and charges</h4> : null}
-                </div>
-                <h4>in property currency : €{totalNet}</h4>
+              <div className="date">
+                <h4>pax</h4>
+                <h2>
+                  {adults} <span>adult</span> {children} <span>child</span>
+                </h2>
               </div>
-              <div className="price-breakdown">
-                <h1>Pricing breakdown</h1>
-                <ul className="list">
-                  {taxesArray.length > 0 ? (
-                    <li>
-                      Includes € {clientAmount || ""} in taxes and charges
-                    </li>
-                  ) : null}
-                  <li>Includes €134.17 in damage deposit (fully refundable)</li>
-                  <li>
-                    Note: the card issuer may charge you a foreign transaction
-                    fee.
-                  </li>
-                </ul>
-                <p>
-                  Price is converted from Euro to show amount in usd but you are
-                  paying in Euro, the exchange rate might change before you pay.
-                </p>
-                <p>{rateComments || ""}</p>
-              </div>
-            </div>
-          </div>
-          <button type="submit">
-            proceed to payment <span>€{totalAsNumber}</span>
-          </button>
-        </form>
-       {!signedIn && <div className="verification-overlay">
-          <div className="verificartion-container">
-            <div className="ad-texts">
-              <h1>Don’t like the process ?</h1>
-              <p>
-                Sign up now to make everything swift and <br /> also get access
-                to exclusives.
-              </p>
-            </div>
-            <div className="verification">
-              {verifified ? (
-                // verifified
-                <div className="verified">
-                  <div className="verified-header">
-                    <h1>you are verified</h1>
-                    <h4>balijawahussein@gmail.com</h4>
-                  </div>
-                  <CheckCircleIcon size={80} color="#40C265" weight="fill" />
-                  <p>you are being redirected to the payment page</p>
-                </div>
-              ) : (
-                <div className="killswitch">
-                  <div className="verification-header">
-                    <p>
-                      We just sent you an email <br /> for verification
-                    </p>
-                    <h4>Enter the security verification code sent to</h4>
-                    <h2>balijawahussein@gmail.com</h2>
-                  </div>
-                  <form
-                    onSubmit={otpSubmit}
-                    className="verification-input-container"
-                  >
-                    <div className="verification-inputs">
-                      {["num1", "num2", "num3", "num4", "num5", "num6"].map(
-                        (key, index) => (
-                          <input
-                            key={key}
-                            type="text"
-                            name={key}
-                            value={otp[key]}
-                            maxLength={1}
-                            inputMode="numeric"
-                            pattern="[0-9]*"
-                            autoComplete={index === 0 ? "one-time-code" : "off"}
-                            onChange={onOtpChange}
-                          />
-                        ),
-                      )}
-                    </div>
-                    <button type="submit" className="verification-input-submit">
-                      verify email
-                    </button>
-                  </form>
-                </div>
-              )}
             </div>
           </div>
         </div>
-        }
+        <div className="form-container">
+          <h4>enter your details</h4>
+          <form onSubmit={handleSubmit}>
+            <div className="form-container">
+              <div className="pax-info-flex">
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="enter first name"
+                  value={input.firstName}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="enter last name"
+                  value={input.lastName}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <input
+                type="email"
+                name="email"
+                placeholder="enter email address"
+                value={input.email}
+                onChange={handleChange}
+                required
+              />
+              <p>
+                Please enter a valid email address that will be used for
+                confirmation
+              </p>
+              <div className="dates">
+                <input
+                  type="text"
+                  name="country"
+                  placeholder="country"
+                  value={input.country}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="countryCode"
+                  placeholder="country code"
+                  value={input.countryCode}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <input
+                type="tel"
+                name="phoneNumber"
+                placeholder="enter phone number"
+                value={input.phoneNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="text-info">
+              <p>
+                Please enter a valid phone number that will be used for
+                confirmation
+              </p>
+              <div className="booking-for">
+                <h4>Booking for?</h4>
+                <div className="click-container">
+                  <div className="click">
+                    <input
+                      type="radio"
+                      name="bookingFor"
+                      value="myself"
+                      checked={input.bookingFor === "myself"}
+                      onChange={handleChange}
+                    />
+                    <label>myself</label>
+                  </div>
+                  <div className="click">
+                    <input
+                      type="radio"
+                      name="bookingFor"
+                      value="someone"
+                      checked={input.bookingFor === "someone"}
+                      onChange={handleChange}
+                    />
+                    <label>someone else</label>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div className="pricing">
+                <div className="pricing-header">
+                  {included ? (
+                    <h2>total €{totalNet}</h2>
+                  ) : (
+                    <h2>Total €{totalAsNumber}</h2>
+                  )}
+                  {paymentDataRequired ? (
+                    <h5>Online payment Required</h5>
+                  ) : (
+                    <h5>payment at the hotel</h5>
+                  )}
+                </div>
+                <div className="section-two">
+                  <div className="section-two-header">
+                    <h3>
+                      {cacellationSummary?.label} ||{" "}
+                      {modificationPolicies?.cancellation
+                        ? "free cancellation"
+                        : "can't cancel this"}
+                    </h3>
+                    {allIncluded ? <h4>includes taxes and charges</h4> : null}
+                  </div>
+                  <h4>in property currency: €{totalNet}</h4>
+                </div>
+                <div className="price-breakdown">
+                  <h1>Pricing breakdown</h1>
+                  <ul className="list">
+                    {taxesArray?.length > 0 ? (
+                      <li>
+                        Includes €{clientAmount || ""} in taxes and charges
+                      </li>
+                    ) : null}
+                    <li>Includes €134.17 in damage deposit (fully refundable)</li>
+                    <li>
+                      Note: the card issuer may charge you a foreign transaction
+                      fee.
+                    </li>
+                  </ul>
+                  <p>
+                    Price is converted from Euro to show amount in USD but you are
+                    paying in Euro, the exchange rate might change before you pay.
+                  </p>
+                  <p>{rateComments || ""}</p>
+                </div>
+              </div>
+            </div>
+            <button type="submit">
+              proceed to payment <span>€{totalAsNumber}</span>
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    )}
+  </>
+);
 }
 
 export default BookHotel;
