@@ -1,4 +1,4 @@
-import { generateOTP,transporter } from "../../Services/NodeMailer/nodemailer.services";
+import { generateOTP,transporter } from "../../Services/NodeMailer/nodemailer.services.js";
 
 export const sendOtp = async (req, res) => {
   const { email } = req.body;
