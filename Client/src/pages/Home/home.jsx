@@ -1,4 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 // import { useContext, useEffect } from "react";
 // import axios from "axios";
 // import styles
@@ -10,6 +12,7 @@ import { Outlet } from "react-router-dom";
 // import images
 import skiing from "../../assets/images/skiing.jpg";
 import umrah from "../../assets/images/umrah.jpg";
+import kaba from "../../assets/images/kabba-nobg.png";
 import brazil from "../../assets/images/brazil.jpg";
 import gorrila from "../../assets/images/gorrila.jpg";
 // import icons
@@ -19,6 +22,15 @@ import safari from "../../assets/icons/safari (1).png";
 import resort from "../../assets/icons/resort.png";
 
 function Home() {
+const listRef = useRef(null);
+
+// const { scrollXProgress } = useScroll({
+//   container: listRef,
+// });
+
+// // image moves slower than scroll
+// const x = useTransform(scrollXProgress, [0, 2], ["-0%", "10%"]);
+
   return (
     <main className="home">
       <Outlet />
@@ -27,15 +39,15 @@ function Home() {
         <p>
           hey its <span>winter</span> <br /> treat yourself this season
         </p>
-        <div className="items-list">
+        <div className="items-list"  ref={listRef}>
           <div className="item-to-do">
-            <img src={skiing} alt="skiing" />
+            <motion.img  src={skiing} alt="skiing" />
             <h1>
               go skiing in <br /> switizerland
             </h1>
           </div>
           <div className="item-to-do">
-            <img src={skiing} alt="skiing" />
+            <motion.img  src={skiing} alt="skiing" />
             <h1>
               go skiing in <br /> switizerland
             </h1>
@@ -43,7 +55,6 @@ function Home() {
         </div>
         <div className="quick-links-wrapper">
           <h5>quick links</h5>
-
           <div className="quick-links">
             <div className="quick-link">
               <h4>my flights</h4>
@@ -69,6 +80,26 @@ function Home() {
                 <img src={safari} alt="safari" />
               </div>
             </div>
+          </div>
+        </div>
+        {/* places to visit */}
+        <div className="places-to-visit-wrapper">
+          <h5>packages for only you</h5>
+          <div className="place-to-visit">
+            <div className="place-img">
+              <img className="BackGround" src={umrah} alt="umrah" />
+            <h4>umrah</h4>
+              <img className="foreGround" src={kaba} alt="umrah" />
+
+            </div>
+          
+          </div>
+
+          <div className="place-to-visit">
+            <div className="place-img">
+              <img src={umrah} alt="umrah" />
+            </div>
+            <h4>umrah</h4>
           </div>
         </div>
       </div>
