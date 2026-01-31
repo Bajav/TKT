@@ -1,5 +1,6 @@
 import { generateOTP,transporter } from "../../Services/NodeMailer/nodemailer.services.js";
 
+const otpStore = new Map();
 export const sendOtp = async (req, res) => {
   const { email } = req.body;
 
@@ -19,7 +20,7 @@ export const sendOtp = async (req, res) => {
 
     // Send email
     await transporter.sendMail({
-      from: '"Your App Name" <your-email@gmail.com>',
+      from: '"tkt travel agency" <balijawahussein@gmail.com>',
       to: email,
       subject: "Your Verification Code",
       html: `

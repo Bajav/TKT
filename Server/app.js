@@ -11,6 +11,7 @@ import hotelRoutes from './Routes/Hotels/hotelbeds.routes.js'
 import openTripRoutes  from './Routes/Opentriproutes/opentrip.routes.js'
 import sessionRoutes from './Routes/SessionRoutes/session.routes.js'
 import unsplashRoutes from './Routes/Unsplash/unsplash.routes.js';
+import nodemailerRoutes from './Routes/Nodemailer/nodemailer.routes.js';
 // import atlasRoutes from './Routes/atlas.routes.js'
 // middleware
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
@@ -66,6 +67,7 @@ app.use("/", hotelRoutes);
 app.use("/", openTripRoutes);
 app.use("/", sessionRoutes);
 app.use("/", unsplashRoutes);
+app.use("/", nodemailerRoutes);
 
 // app.use('/',atlasRoutes);
 
