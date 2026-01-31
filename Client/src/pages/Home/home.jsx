@@ -24,38 +24,54 @@ function Home() {
       <Outlet />
       <LocationHeader />
       <div className="home-contents">
-      <p>hey its <span>winter</span> <br /> treat yourself this season</p>
-
-      <div
-        className="items-list">
+        <p>
+          hey its <span>winter</span> <br /> treat yourself this season
+        </p>
+        <div className="items-list">
           <div className="item-to-do">
             <img src={skiing} alt="skiing" />
-            <h1>go skiing in <br /> switizerland</h1>
+            <h1>
+              go skiing in <br /> switizerland
+            </h1>
           </div>
-            <div className="item-to-do">
+          <div className="item-to-do">
             <img src={skiing} alt="skiing" />
-            <h1>go skiing in <br /> switizerland</h1>
+            <h1>
+              go skiing in <br /> switizerland
+            </h1>
           </div>
-        {/* <SwiperSlide>
-          <div className="item-to-do">
-            <img src={umrah} alt="umrah" />
-            <h1>go to umrah</h1>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="item-to-do">
-            <img src={brazil} alt="brazil" />
-            <h1>visit brazil</h1>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="item-to-do">
-            <img src={gorrila} alt="gorrila" />
-            <h1>go gorilla trekking</h1>
-          </div>
-        </SwiperSlide>   */}
         </div>
-      </div>    
+        <div className="quick-links-wrapper">
+          <h5>quick links</h5>
+
+          <div className="quick-links">
+            <div className="quick-link">
+              <h4>my flights</h4>
+              <div className="link-icon">
+                <img src={airlineTicket} alt="airline ticket" />
+              </div>
+            </div>
+            <div className="quick-link">
+              <h4>my hotels</h4>
+              <div className="link-icon">
+                <img src={resort} alt="resort" />
+              </div>
+            </div>
+            <div className="quick-link">
+              <h4>my community</h4>
+              <div className="link-icon">
+                <img src={community} alt="community" />
+              </div>
+            </div>
+            <div className="quick-link">
+              <h4>my activities</h4>
+              <div className="link-icon">
+                <img src={safari} alt="safari" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
