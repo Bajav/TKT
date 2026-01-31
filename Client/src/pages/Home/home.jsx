@@ -32,6 +32,10 @@ function Home() {
             <img src={skiing} alt="skiing" />
             <h1>go skiing in <br /> switizerland</h1>
           </div>
+            <div className="item-to-do">
+            <img src={skiing} alt="skiing" />
+            <h1>go skiing in <br /> switizerland</h1>
+          </div>
         {/* <SwiperSlide>
           <div className="item-to-do">
             <img src={umrah} alt="umrah" />
