@@ -26,15 +26,12 @@ function Home() {
       <div className="home-contents">
       <p>hey its <span>winter</span> <br /> treat yourself this season</p>
 
-      <Swiper
-        spaceBetween={50}
-        slidesPerView={3}>  
-        <SwiperSlide>
+      <div
+        className="items-list">
           <div className="item-to-do">
             <img src={skiing} alt="skiing" />
             <h1>go skiing in <br /> switizerland</h1>
           </div>
-        </SwiperSlide>
         {/* <SwiperSlide>
           <div className="item-to-do">
             <img src={umrah} alt="umrah" />
@@ -53,7 +50,7 @@ function Home() {
             <h1>go gorilla trekking</h1>
           </div>
         </SwiperSlide>   */}
-        </Swiper>
+        </div>
       </div>    
     </main>
   );

@@ -1,13 +1,67 @@
-@import '../../styles/variables.scss';
-body
-{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+@import "../../styles/variables.scss";
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-.home
-{
-    height: 100vh;
-    background: $page_color;
+.home {
+  height: 100vh;
+  background: $page_color;
+}
+.home-contents {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  p {
+    font-family: $RobotoCondensed, sans-serif;
+    font-size: 30px;
+    color: $ticketColor;
+    text-transform: capitalize;
+    font-weight: 600;
+    line-height: 40px;
+    opacity: 0.9;
+  }
+  span {
+    color: $darkOrange;
+  }
+}
+.items-list {
+  height: 40vh;
+  width: 100%;
+  // background: green;
+  display: flex;
+  align-items: center;
 
+  .swiping {
+    // background: blue;
+    width: 100%;
+  }
+  .item-to-do {
+    flex: auto 0 0;
+    width: 100%;
+    height: 100%;
+    // background-color: red;
+    img {
+      width: 100%;
+      border-radius: 10px;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      // bottom: 300px;
+      z-index: 1;
+      // left: 10px;
+    }
+    h1 {
+      font-family: $cityFont, sans-serif;
+      color: $page_color;
+      font-size: 60px;
+      position: relative;
+      bottom: 360px;
+      z-index: 10;
+      left: 10px;
+      line-height: 60px;
+    }
+  }
 }

@@ -6,11 +6,21 @@
   font-style: normal;
 }
 @font-face {
-  font-family: "bebbasNeue";
-  src: url("../fonts/BebasNeue-Regular.ttf") format("ttf");
-  font-weight: normal;
+  font-family: "BebasNeue";
+  src: 
+    url("../fonts/BebasNeue-Regular.woff2") format("woff2"),
+    url("../fonts/BebasNeue-Regular.woff") format("woff"),
+    url("../fonts/BebasNeue-Regular.ttf") format("truetype");
+  font-weight: 500;
   font-style: normal;
 }
+@font-face {
+  font-family: "RobotoCondensed";
+  src: url("../fonts/RobotoCondensed-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900; /* variable font range */
+  font-style: normal;
+}
+
 
 @font-face {
   font-family: "RobotoFlex";
@@ -52,6 +62,7 @@ $deemFontColor: #313030;
 $visibleFontColor: #313030;
 $inputBackGround: #fefefe;
 $textFont: poppins;
-$cityFont: bebbasNeue;
+$cityFont: BebasNeue;
 $roboto: RobotoFlex;
 $robotoMono: RobotoMono;
+$RobotoCondensed :RobotoCondensed;
