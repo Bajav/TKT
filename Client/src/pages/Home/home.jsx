@@ -6,65 +6,55 @@ import "swiper/css";
 import "./home.scss";
 // import components
 import LocationHeader from "../../components/Header/header";
-import Location from "../../components/places/location";
 import { Outlet } from "react-router-dom";
-import DatePicker from "../../components/flightSearch/Calender/calender.component";
+// import images
+import skiing from "../../assets/images/skiing.jpg";
+import umrah from "../../assets/images/umrah.jpg";
+import brazil from "../../assets/images/brazil.jpg";
+import gorrila from "../../assets/images/gorrila.jpg";
+// import icons
+import airlineTicket from "../../assets/icons/airline-ticket.png";
+import community from "../../assets/icons/social-media.png";
+import safari from "../../assets/icons/safari (1).png";
+import resort from "../../assets/icons/resort.png";
 
 function Home() {
   return (
     <main className="home">
       <Outlet />
       <LocationHeader />
-      <h1>welcome dennin</h1>
-      <div className="activites">
-        <h2>Activities to do this summer.</h2>
+      <div className="home-contents">
+      <p>hey its <span>winter</span> <br /> treat yourself this season</p>
 
-        <Swiper
-          spaceBetween={40}
-          slidesPerView={1}
-          // onSlideChange={() => console.log('slide change')}
-          // onSwiper={(swiper) => console.log(swiper)}
-          className="activity-rail"
-        >
-          <SwiperSlide>
-            <div className="activity">
-              <Location />
-              <h1>sky diving</h1>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="activity">
-              <Location />
-              <h1>sky diving</h1>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="activity">
-              <Location />
-              <h1>sky diving</h1>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="activity">
-              <Location />
-              <h1>sky diving</h1>
-            </div>
-          </SwiperSlide>
+      <Swiper
+        spaceBetween={50}
+        slidesPerView={3}>  
+        <SwiperSlide>
+          <div className="item-to-do">
+            <img src={skiing} alt="skiing" />
+            <h1>go skiing in <br /> switizerland</h1>
+          </div>
+        </SwiperSlide>
+        {/* <SwiperSlide>
+          <div className="item-to-do">
+            <img src={umrah} alt="umrah" />
+            <h1>go to umrah</h1>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="item-to-do">
+            <img src={brazil} alt="brazil" />
+            <h1>visit brazil</h1>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="item-to-do">
+            <img src={gorrila} alt="gorrila" />
+            <h1>go gorilla trekking</h1>
+          </div>
+        </SwiperSlide>   */}
         </Swiper>
-      </div>
-      <div className="container">
-        <DatePicker
-          monthLabel="Choose Month"
-          yearLabel="Pick Year"
-          rangePrompt="Pick return journey"
-          isRangePicker={true}
-          enableRange={true}
-          onRangeSelect={({ start, end }) => {
-            console.log("Range selected:", start, end);
-          }}
-        />
-        {/* <Alert img={Succes} alertText="Email address changed successfully"/> */}
-      </div>
+      </div>    
     </main>
   );
 }
