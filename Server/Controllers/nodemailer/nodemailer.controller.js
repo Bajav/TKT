@@ -24,14 +24,14 @@ export const sendOtp = async (req, res) => {
       to: email,
       subject: "Your Verification Code",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="font-family: roboto, monospace; max-width: 600px; margin: 0 auto;">
           <h2>Email Verification</h2>
           <p>Your verification code is:</p>
-          <h1 style="background: #f4f4f4; padding: 20px; text-align: center; letter-spacing: 5px;">
+          <h1 style="background: #f5f5f5; padding: 20px; text-align: center; letter-spacing: 5px;">
             ${otp}
           </h1>
           <p>This code will expire in 5 minutes.</p>
-          <p style="color: #666; font-size: 12px;">
+          <p style="color: #333; font-size: 12px; font-weight:500;">
             If you didn't request this code, please ignore this email.
           </p>
         </div>
