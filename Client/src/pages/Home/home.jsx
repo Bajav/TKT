@@ -15,6 +15,9 @@ import umrah from "../../assets/images/umrah.jpg";
 import kaba from "../../assets/images/kabba-nobg.png";
 import brazil from "../../assets/images/brazil.jpg";
 import gorrila from "../../assets/images/gorrila.jpg";
+import gorrilaNoBG from "../../assets/images/gorillatrekking.png";
+import skyDiving from "../../assets/images/skyDving.jpg";
+
 // import icons
 import airlineTicket from "../../assets/icons/airline-ticket.png";
 import community from "../../assets/icons/social-media.png";
@@ -22,14 +25,14 @@ import safari from "../../assets/icons/safari (1).png";
 import resort from "../../assets/icons/resort.png";
 
 function Home() {
-const listRef = useRef(null);
+  const listRef = useRef(null);
 
-// const { scrollXProgress } = useScroll({
-//   container: listRef,
-// });
+  // const { scrollXProgress } = useScroll({
+  //   container: listRef,
+  // });
 
-// // image moves slower than scroll
-// const x = useTransform(scrollXProgress, [0, 2], ["-0%", "10%"]);
+  // // image moves slower than scroll
+  // const x = useTransform(scrollXProgress, [0, 2], ["-0%", "10%"]);
 
   return (
     <main className="home">
@@ -39,17 +42,17 @@ const listRef = useRef(null);
         <p>
           hey its <span>winter</span> <br /> treat yourself this season
         </p>
-        <div className="items-list"  ref={listRef}>
+        <div className="items-list" ref={listRef}>
           <div className="item-to-do">
-            <motion.img  src={skiing} alt="skiing" />
+            <motion.img src={skiing} alt="skiing" />
             <h1>
               go skiing in <br /> switizerland
             </h1>
           </div>
           <div className="item-to-do">
-            <motion.img  src={skiing} alt="skiing" />
+            <motion.img src={skyDiving} alt="sky diving" />
             <h1>
-              go skiing in <br /> switizerland
+              go sky diving in <br /> dubai
             </h1>
           </div>
         </div>
@@ -85,21 +88,26 @@ const listRef = useRef(null);
         {/* places to visit */}
         <div className="places-to-visit-wrapper">
           <h5>packages for only you</h5>
-          <div className="place-to-visit">
-            <div className="place-img">
-              <img className="BackGround" src={umrah} alt="umrah" />
-            <h4>umrah</h4>
-              <img className="foreGround" src={kaba} alt="umrah" />
-
+          <div className="places-to">
+            <div className="place-to-visit">
+              <div className="place-img">
+                <img className="BackGround" src={umrah} alt="umrah" />
+                <h4>umrah</h4>
+                <img className="foreGround" src={kaba} alt="umrah" />
+              </div>
             </div>
-          
-          </div>
 
-          <div className="place-to-visit">
-            <div className="place-img">
-              <img src={umrah} alt="umrah" />
+            <div className="place-to-visit">
+              <div className="place-img">
+                <img className="BackGround" src={gorrila} alt="gorrila" />
+                <h4>gorrila trekking</h4>
+                <img
+                  className="foreGround gorrila"
+                  src={gorrilaNoBG}
+                  alt="gorrilaNoBG"
+                />
+              </div>
             </div>
-            <h4>umrah</h4>
           </div>
         </div>
       </div>
