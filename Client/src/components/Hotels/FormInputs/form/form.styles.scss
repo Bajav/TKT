@@ -32,6 +32,10 @@ $black: #222;
   align-items: center;
   justify-content: center;
   gap: 5px;
+  .flight-calendar {
+  margin-top: 0;
+  width: 50%;
+  height: 50px;
 }
 .flight-calendar__input-field {
   height: 50px;
@@ -42,17 +46,14 @@ $black: #222;
   font-weight: 500;
   font-size: 14px;
 }
+}
 .flight-calendar__input {
   width: 100%;
 }
 .flight-calendar__input-icon {
   display: none;
 }
-.flight-calendar {
-  margin-top: 0;
-  width: 50%;
-  height: 50px;
-}
+
 .form-header {
   h1 {
     font-family: $roboto, sans-serif;
