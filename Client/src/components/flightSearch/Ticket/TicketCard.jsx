@@ -172,10 +172,10 @@ function FlightCard() {
   const airlinesLookUp = airlinesLookUps(airlineData);
 
   // Button actions
-  const seeDetails = (index) => {
-    console.log("details button is clicked for card", index);
-    showDropDown((prevIndex) => (prevIndex === index ? null : index));
-  };
+const seeDetails = (index) => {
+  console.log("details button is clicked for card", index);
+  showDropDown((prevIndex) => (prevIndex === index ? null : index));
+};
 
   const selectButton = async (index) => {
     console.log("selectButton clicked");
@@ -444,12 +444,9 @@ function FlightCard() {
   // Usage example:
   /*
 const results = analyzeFlightOffers(flightOffersArray);
-
-
 // Get specific filtered results
 });
 */
-
   // flightResults.map(itinerary=>{const hasMultipleAirlines = flagMultipleAirlines(itinerary)});
 
   //   console.log("hasMultipleAirlines",hasMultipleAirlines);
@@ -462,13 +459,39 @@ const results = analyzeFlightOffers(flightOffersArray);
   //   { duration: "PT1H15M" },
   //   { duration: "PT45M" }
   // ];
-// scroll animations
- gsap.registerPlugin(ScrollTrigger);
- useGSAP(()=>{
-  const tickets = gsap.utils.toArray(scrollRef.current.children);
-  console.log("tickets",tickets);
-
- });
+  // scroll animations
+  gsap.registerPlugin(ScrollTrigger);
+  const allChildren = gsap.utils.toArray(scrollRef?.current?.children);
+  const flightTickets = allChildren.slice(1);
+  console.log(typeof flightTickets);
+  useGSAP(() => {
+    gsap.from(".flightContainer", {
+      x: -500,
+      opacity: 0,
+      delay: 0.05,
+      stagger: 1,
+      ease: "power1.inOut",
+      // stagger: {
+      //   amount: 1,
+      //   from: "edges",
+      //   grid: "auto",
+      //   ease: "power2.inOut",
+      // }
+    });
+    //   gsap.from('.flightDealContainer',{
+    //   x:-500,
+    //   opacity:0,
+    //   delay:1,
+    //   stagger:0.4
+    // });
+    //    gsap.from('.flightDealContainer',{
+    //   x:-500,
+    //   opacity:0,
+    //   delay:1,
+    //   stagger:0.4
+    // });
+  });
+  // console.log(scrollRef?.current?.children)
   return (
     <Fragment>
       <div className="filter-form">
@@ -547,8 +570,8 @@ const results = analyzeFlightOffers(flightOffersArray);
               const arrivalObjectSegTwo = segmentTwo[segTwoIndex].arrival;
               const perks =
                 travelerPricings[0].fareDetailsBySegment[0].amenities;
-                const segOneTime = getJourneyBreakdown(segmentOne);
-                const segTwoTime = getJourneyBreakdown(segmentTwo);
+              const segOneTime = getJourneyBreakdown(segmentOne);
+              const segTwoTime = getJourneyBreakdown(segmentTwo);
               // console.log("segOneTime", segOneTime);
               return (
                 <Swiper spaceBetween={20} slidesPerView="auto" key={index}>
@@ -603,7 +626,6 @@ const results = analyzeFlightOffers(flightOffersArray);
                             <h4>{arrivalObject.at.slice(0, 10)}</h4>
                           </div>
                           <div className="flex-tim">
-
                             <h4>{segOneTime.total.formatted}</h4>
                           </div>
                         </div>
@@ -681,7 +703,7 @@ const results = analyzeFlightOffers(flightOffersArray);
                             <h4>{arrivalObjectSegTwo.at.slice(0, 10)}</h4>
                           </div>
                           <div className="flex-tim">
-                              <h4>{segTwoTime.total.formatted}</h4>
+                            <h4>{segTwoTime.total.formatted}</h4>
                           </div>
                         </div>
                       </div>

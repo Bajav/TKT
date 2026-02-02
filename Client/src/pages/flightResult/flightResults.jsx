@@ -18,7 +18,7 @@ function FlightResult() {
   const [error, setError] = useState([]);
   // define navigate
   const navigate = useNavigate();
-  const scrollRef = useRef();
+  const scrollRef = useRef([]);
   const backBtn =()=>{
     setFlightResults([]);
     setFilteredFlights([]);
@@ -26,7 +26,7 @@ function FlightResult() {
   };
   useEffect(()=>{
     setScrollRef(scrollRef);
-  })
+  },[])
   return (
     <main className="FlightResult-page">
       <BackBTN onClick={backBtn} btnName="back" />
