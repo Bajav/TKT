@@ -23,9 +23,44 @@ import airlineTicket from "../../assets/icons/airline-ticket.png";
 import community from "../../assets/icons/social-media.png";
 import safari from "../../assets/icons/safari (1).png";
 import resort from "../../assets/icons/resort.png";
-
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+import { SplitText } from "gsap/SplitText";
+import { del } from "motion/react-client";
 function Home() {
   const listRef = useRef(null);
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(SplitText);
+  let tl  = gsap.timeline({delay:2,ease:"power1.In"});
+  useGSAP(() => {
+    let split = SplitText.create("#slider-text", {
+      type: "chars,words,lines",
+    });
+    gsap.from(split.words, {
+        y: -200,
+        opacity: 0,
+        stagger: 0.05,         
+        ease: "power1.out",     
+        duration: 1.2,
+        delay: 1,         
+      });
+      gsap.from(".head-text",{
+        x:-100,
+        ease:"power1.inOut",
+        opacity:0,
+        stagger:1.5,
+        delay:2
+      });
+      // gsap.from(".foreGround",{
+      //   y:100,
+      //   scale:"0.5",
+      //   delay:3,
+      //   ease:"power1.out",
+      //   opacity:0,
+      // });
+
+  });
 
   // const { scrollXProgress } = useScroll({
   //   container: listRef,
@@ -33,7 +68,16 @@ function Home() {
 
   // // image moves slower than scroll
   // const x = useTransform(scrollXProgress, [0, 2], ["-0%", "10%"]);
-
+  // gsap.fromTo('#slider-text',{
+  //   y:-200,
+  //   opacity:"0",
+  //   delay:3,
+  // },{
+  //   opacity:"1",
+  //   delay:2,
+  //   y: 0,
+  //   ease:"power1.in"
+  // });
   return (
     <main className="home">
       <Outlet />
@@ -44,13 +88,13 @@ function Home() {
         </p>
         <div className="items-list" ref={listRef}>
           <div className="item-to-do">
-            <motion.img src={skiing} alt="skiing" />
-            <h1>
+            <img src={skiing} alt="skiing" />
+            <h1 id="slider-text">
               go skiing in <br /> switizerland
             </h1>
           </div>
           <div className="item-to-do">
-            <motion.img src={skyDiving} alt="sky diving" />
+            <img src={skyDiving} alt="sky diving" />
             <h1>
               go sky diving in <br /> dubai
             </h1>
@@ -92,7 +136,7 @@ function Home() {
             <div className="place-to-visit">
               <div className="place-img">
                 <img className="BackGround" src={umrah} alt="umrah" />
-                <h4>umrah</h4>
+                <h4 className="head-text">umrah</h4>
                 <img className="foreGround" src={kaba} alt="umrah" />
               </div>
             </div>
@@ -100,7 +144,7 @@ function Home() {
             <div className="place-to-visit">
               <div className="place-img">
                 <img className="BackGround" src={gorrila} alt="gorrila" />
-                <h4>gorrila trekking</h4>
+                <h4 className="head-text">gorrila trekking</h4>
                 <img
                   className="foreGround gorrila"
                   src={gorrilaNoBG}
