@@ -3,6 +3,9 @@ import { FlightContext } from "../../context/flightSearch.context";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
 import axios from "axios";
 import Loader from "../../EyesLoader/loader";
 // import scss
@@ -51,6 +54,7 @@ function FlightCard() {
     setAirlineData,
     filteredFlights,
     setFilteredFlights,
+    scrollRef,
   } = useContext(FlightContext);
   // states
   const [isOverlay, setOverlay] = useState(false);
@@ -85,12 +89,13 @@ function FlightCard() {
     };
     const fetchFlights = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/results",
-          formData,
-        );
-        setFlightResults(response?.data);
-        console.log(response?.data[0]);
+        // const response = await axios.post(
+        //   "http://localhost:3000/results",
+        //   formData,
+        // );
+        // setFlightResults(response?.data);
+        setFlightResults(flightSearchData);
+        // console.log(response?.data[0]);
       } catch (error) {
         console.error("Error posting flight:", error);
       }
@@ -155,7 +160,7 @@ function FlightCard() {
         return priceOk && airlineOk;
       });
 
-      console.log("filter res", results);
+      // console.log("filter res", results);
       setFilteredFlights(results);
     };
 
@@ -179,12 +184,12 @@ function FlightCard() {
     setShowTickets(false);
     setOverlay(true);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/brandedUpSell",
-        selected,
-      );
-      setBrandedUpSell(response.data); // likely want .data, not full response
-      // setBrandedUpSell(brandedUpsellData);
+      // const response = await axios.post(
+      //   "http://localhost:3000/brandedUpSell",
+      //   selected,
+      // );
+      // setBrandedUpSell(response.data); // likely want .data, not full response
+      setBrandedUpSell(brandedUpsellData);
       // console.log("brandedUpsell res", brandedUpsellData);
     } catch (err) {
       console.error("Axios error:", err?.response?.data?.message);
@@ -202,7 +207,7 @@ function FlightCard() {
         bookedFlight: flight,
       });
       setBookedFlight(response.data);
-      console.log("response", response.data);
+      // console.log("response", response.data);
       // console.log("booked", bookedFlight);
       navigate("/flights/lastprice", { replace: true });
     } catch (err) {
@@ -428,7 +433,7 @@ function FlightCard() {
       "Most expensive offer:",
       results.mostExpensiveOffer?.price.grandTotal,
     );
-    console.log("Most frequent airline:", results.summary.mostFrequentAirline);
+    // console.log("Most frequent airline:", results.summary.mostFrequentAirline);
     const filtered = getFilteredResults(flightResults, {
       multiAirlineOnly: true,
       priceRange: { min: 200, max: 600 },
@@ -457,7 +462,13 @@ const results = analyzeFlightOffers(flightOffersArray);
   //   { duration: "PT1H15M" },
   //   { duration: "PT45M" }
   // ];
+// scroll animations
+ gsap.registerPlugin(ScrollTrigger);
+ useGSAP(()=>{
+  const tickets = gsap.utils.toArray(scrollRef.current.children);
+  console.log("tickets",tickets);
 
+ });
   return (
     <Fragment>
       <div className="filter-form">

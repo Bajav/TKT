@@ -3,8 +3,11 @@ import { createContext, useState, useReducer } from "react";
 export const FlightContext = createContext({
   flightSearch: null,
   setFormData: () => null,
+
   iataCodes: [],
   setIataCodes: () => {},
+    scrollRef: [],
+  setScrollRef: () => {},
   airlineData: [],
   setAirlineData: () => {},
   flightResults: [],
@@ -37,6 +40,8 @@ const ACTIONS = {
   SET_UPSELL_ERROR: "SET_UPSELL_ERROR",
   SET_LAST_FLIGHT: "SET_LAST_FLIGHT",
   SET_ALERT: "SET_ALERT",
+   SET_REF: "SET_REF",
+  
 };
 
 const flightReducer = (state, action) => {
@@ -73,6 +78,8 @@ const flightReducer = (state, action) => {
 
     case ACTIONS.SET_ALERT:
       return { ...state, alert: action.payload };
+          case ACTIONS.SET_REF:
+      return { ...state, scrollRef: action.payload };
 
     default:
       return state;
@@ -92,6 +99,7 @@ const INITIAL_STATE = {
   lastFlight: [],
   alert: false,
   filteredFlights: [],
+      scrollRef: [],
 };
 
 export const FlightSearchProvider = ({ children }) => {
@@ -118,7 +126,8 @@ export const FlightSearchProvider = ({ children }) => {
     lastFlight,
     alert,
     filteredFlights,
-    flightResults
+    flightResults,
+    scrollRef,
   } = state;
 
   const setFormData = (data) => dispatch({ type: ACTIONS.SET_FORM_DATA, payload: data });;
@@ -132,6 +141,7 @@ export const FlightSearchProvider = ({ children }) => {
   const setAlert = (data) => dispatch({ type: ACTIONS.SET_ALERT, payload: data });;
   const setFilteredFlights = (data) => dispatch({ type: ACTIONS.SET_FILTERED_FLIGHTS, payload: data });;
   const setSelectFlight = (data) => dispatch({ type: ACTIONS.SET_SELECTED_FLIGHTS, payload: data });;
+    const setScrollRef = (data) => dispatch({ type: ACTIONS.SET_REF, payload: data });;
   const value = {
     flightSearch,
     setFormData,
@@ -155,6 +165,8 @@ export const FlightSearchProvider = ({ children }) => {
     setAlert,
     filteredFlights,
     setFilteredFlights,
+    scrollRef,
+    setScrollRef
   };
 
   return (

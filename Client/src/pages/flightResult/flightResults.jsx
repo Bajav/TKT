@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 // importing components
 import FlightCard from "../../components/flightSearch/Ticket/TicketCard";
@@ -10,20 +10,23 @@ import BackBTN from "../../components/features/BackButton/BackBTN";
 import { FlightContext } from "../../components/context/flightSearch.context";
 
 function FlightResult() {
-  const { flightSearch,setFlightResults,flightResults,setFilteredFlights } = useContext(FlightContext);
+  const { flightSearch,setFlightResults,flightResults,setScrollRef,setFilteredFlights } = useContext(FlightContext);
   const resLength = flightResults?.length || 0;
   // define location
-  console.log("flightResults", flightResults);
+  // console.log("flightResults", flightResults);
   const location = useLocation();
   const [error, setError] = useState([]);
   // define navigate
   const navigate = useNavigate();
-
+  const scrollRef = useRef();
   const backBtn =()=>{
     setFlightResults([]);
     setFilteredFlights([]);
     navigate("/flights");
   };
+  useEffect(()=>{
+    setScrollRef(scrollRef);
+  })
   return (
     <main className="FlightResult-page">
       <BackBTN onClick={backBtn} btnName="back" />
@@ -44,7 +47,7 @@ function FlightResult() {
           </div>
           
         </div>
-        <div className="results">
+        <div className="results" ref={scrollRef}>
           <FlightCard />
           {/* <DummyTicket /> */}
           <Dummy />
