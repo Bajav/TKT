@@ -33,43 +33,43 @@ import resort from "../../assets/icons/resort.png";
 function Home() {
   const listRef = useRef(null);
 
-  useGSAP(
-    () => {
-      // Wait for fonts to be fully loaded before creating SplitText
-      document.fonts.ready.then(() => {
-        // Create SplitText instance safely
-        const split = new SplitText("#slider-text", {
-          type: "chars,words,lines",
-          autoSplit: true, // auto re-split on resize / late font load
-        });
+  // useGSAP(
+  //   () => {
+  //     // Wait for fonts to be fully loaded before creating SplitText
+  //     document.fonts.ready.then(() => {
+  //       // Create SplitText instance safely
+  //       const split = new SplitText("#slider-text", {
+  //         type: "chars,words,lines",
+  //         autoSplit: true, // auto re-split on resize / late font load
+  //       });
 
-        // Animate words (staggered slide-in from top)
-        gsap.from(split.words, {
-          y: -200,
-          opacity: 0,
-          stagger: 0.05,
-          ease: "power1.out",
-          duration: 1.2,
-          delay: 1,
-        });
+  //       // Animate words (staggered slide-in from top)
+  //       gsap.from(split.words, {
+  //         y: -200,
+  //         opacity: 0,
+  //         stagger: 0.05,
+  //         ease: "power1.out",
+  //         duration: 1.2,
+  //         delay: 1,
+  //       });
 
-        // Animate quick links text
-        gsap.from(".head-text", {
-          x: -100,
-          opacity: 0,
-          ease: "power1.inOut",
-          stagger: 0.3, // reduced from 1.5s — more natural feel
-          delay: 2,
-        });
+  //       // Animate quick links text
+  //       gsap.from(".head-text", {
+  //         x: -100,
+  //         opacity: 0,
+  //         ease: "power1.inOut",
+  //         stagger: 0.3, // reduced from 1.5s — more natural feel
+  //         delay: 2,
+  //       });
 
-        // Optional cleanup: revert SplitText on unmount / re-run
-        return () => {
-          split.revert();
-        };
-      });
-    },
-    { scope: listRef } // scope animations to the container ref
-  );
+  //       // Optional cleanup: revert SplitText on unmount / re-run
+  //       return () => {
+  //         split.revert();
+  //       };
+  //     });
+  //   },
+  //   { scope: listRef } // scope animations to the container ref
+  // );
 
   return (
     <main className="home">
