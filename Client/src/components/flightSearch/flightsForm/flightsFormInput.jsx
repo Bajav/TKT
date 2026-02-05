@@ -193,7 +193,7 @@ useEffect(() => {
   console.log("Populating form from selected flightSearch", flightSearch);
 
   setInputs((prev) => ({
-    ...prev,                       
+    ...prev,
     origin: flightSearch.origin || "",
     destination: flightSearch.Destination || "",  
     departureDate: flightSearch.departureDate || "",
@@ -270,8 +270,9 @@ useEffect(() => {
                 </div>
 
                 <div className="flightInputs">
-                  <FlightSearchInput
-                    classOne="flexInput"
+                  <div className="newFlex">
+                        <FlightSearchInput
+                    classOne="flexInput inputOne"
                     labelFor="Origin"
                     label="Origin"
                     placeholder="Input place of origin"
@@ -279,6 +280,7 @@ useEffect(() => {
                     change={handleChange}
                     value={inputs.origin}
                   />
+                  </div>
                   <motion.button
                     initial={{ rotate: 0 }}
                     animate={

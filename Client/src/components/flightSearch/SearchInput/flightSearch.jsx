@@ -1,17 +1,20 @@
-import { Fragment, useEffect, useState, useContext } from "react";
+import { Fragment, useEffect, useState, useContext, useRef } from "react";
 import axios from "axios";
 import { FlightContext } from "../../context/flightSearch.context";
 import "./flightSearch.scss";
 
 function FlightSearchInput(props) {
   // contexts
-  const { iataCodes, setIataCodes,setAirlineData  } = useContext(FlightContext);
+  const { iataCodes, setIataCodes, setAirlineData } = useContext(FlightContext);
   // const { setAirlineData } = useContext(FlightContext);
   // state
   const [showDropdown, setShowDropdown] = useState(true);
   // fetch
+  const hasFetchedRef = useRef(false);
   useEffect(() => {
     const fetchData = async () => {
+      if (hasFetchedRef.current) return;
+      hasFetchedRef.current = true;
       try {
         const [iataRes, airlineRes] = await Promise.all([
           axios.get("http://localhost:3000/iataCodes"),
@@ -32,10 +35,10 @@ function FlightSearchInput(props) {
   const filteredCodes = iataCodes.filter((code) => {
     return (
       code.AirportName?.toLowerCase().includes(
-        props.value?.toLowerCase() || ""
+        props.value?.toLowerCase() || "",
       ) ||
       code.AirportCode?.toLowerCase().includes(
-        props.value?.toLowerCase() || ""
+        props.value?.toLowerCase() || "",
       ) ||
       code.City?.toLowerCase().includes(props.value?.toLowerCase() || "") ||
       code.Country?.toLowerCase().includes(props.value?.toLowerCase() || "")
@@ -49,6 +52,9 @@ function FlightSearchInput(props) {
 
   return (
     <Fragment>
+      <div className="inputs-wrapper">
+
+ 
       <div className={props.classOne}>
         <label htmlFor={props.labelFor}>{props.label}</label>
         <input
@@ -60,11 +66,10 @@ function FlightSearchInput(props) {
           onChange={props.change}
           value={props.value}
           onFocus={() => setShowDropdown(true)}
-          onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+          onBlur={() => setTimeout(() => setShowDropdown(true), 200)}
           autoComplete="off"
         />
       </div>
-      {/* props.value && */}
       {props.value && showDropdown && filteredCodes.length > 0 ? (
         <div className="dropDown">
           <ul>
@@ -74,7 +79,7 @@ function FlightSearchInput(props) {
                 key={index}
                 onClick={() =>
                   onSearch(
-                    `${code.AirportCode}, ${code.AirportName}, ${code.City}, ${code.Country}`
+                    `${code.AirportCode}, ${code.AirportName}, ${code.City}, ${code.Country}`,
                   )
                 }
               >
@@ -85,6 +90,7 @@ function FlightSearchInput(props) {
           </ul>
         </div>
       ) : null}
+           </div>
     </Fragment>
   );
 }
