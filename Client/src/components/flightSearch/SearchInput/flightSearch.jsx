@@ -66,7 +66,7 @@ function FlightSearchInput(props) {
           onChange={props.change}
           value={props.value}
           onFocus={() => setShowDropdown(true)}
-          onBlur={() => setTimeout(() => setShowDropdown(true), 200)}
+          onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
           autoComplete="off"
         />
       </div>
