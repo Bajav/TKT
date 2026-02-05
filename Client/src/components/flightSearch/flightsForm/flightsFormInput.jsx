@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, Fragment } from "react";
+import { useState, useEffect, useContext, Fragment,useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "motion/react";
 import axios from "axios";
@@ -20,6 +20,7 @@ import "./flightsForm.scss";
 function FlightsForm() {
   // contexts
   const {
+    flightSearch,
     setFormData,
     setIataCodes,
     setFlightResults,
@@ -29,7 +30,7 @@ function FlightsForm() {
     setAlert,
   } = useContext(FlightContext);
   const { userLocation } = useContext(LocationContext);
-
+  const prevFlightSearchRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -179,6 +180,33 @@ function FlightsForm() {
     setMultiCityFlights(multiCityFlights.filter((_, i) => i !== index));
   };
 
+  // populate form recent searches
+
+useEffect(() => {
+  // Skip if no flightSearch or it's the same reference (early bail-out)
+  if (!flightSearch) return;
+
+  // Optional: deep comparison if you want to avoid updates on same content
+  // But usually reference + existence check is enough if parent controls uniqueness
+  if (prevFlightSearchRef.current === flightSearch) return;
+
+  console.log("Populating form from selected flightSearch", flightSearch);
+
+  setInputs((prev) => ({
+    ...prev,                       
+    origin: flightSearch.origin || "",
+    destination: flightSearch.Destination || "",  
+    departureDate: flightSearch.departureDate || "",
+    returnDate: flightSearch.returnDate || "",
+    flightType: flightSearch.tripType?.toLowerCase() === "round trip" 
+      ? "roundTrip" 
+      : "oneWay",        
+    seatClass: "ECONOMY",          
+  }));
+
+  prevFlightSearchRef.current = flightSearch;
+}, [flightSearch]);   // still depends on flightSearch, but we bail early if same ref
+
   return (
     <div>
       {location.pathname === "/flights" && (
@@ -229,14 +257,14 @@ function FlightsForm() {
                         inputs.flightType === "oneWay"
                           ? "1px"
                           : inputs.flightType === "roundTrip"
-                          ? "140px"
-                          : "270px",
+                            ? "140px"
+                            : "270px",
                       width:
                         inputs.flightType === "oneWay"
                           ? "120px"
                           : inputs.flightType === "roundTrip"
-                          ? "120px"
-                          : "132px",
+                            ? "120px"
+                            : "132px",
                     }}
                   />
                 </div>
@@ -421,7 +449,7 @@ function FlightsForm() {
                           handleMultiChange(
                             index,
                             "destination",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         value={flight.destination}
@@ -446,8 +474,6 @@ function FlightsForm() {
 }
 
 export default FlightsForm;
-
-
 
 // const array = ["UR", "QR","QR","WB","UR","ET"];
 // const findDupes =(db)=>{

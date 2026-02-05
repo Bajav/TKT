@@ -10,7 +10,7 @@ import { FlightContext } from "../../components/context/flightSearch.context";
 import axios from "axios";
 import searchData from "../../data/searchdata/searchdata.json";
 function Flights() {
-  const { alert } = useContext(FlightContext);
+  const { alert,setFormData } = useContext(FlightContext);
   const location = useLocation();
 
   const hideLayoutRoutes = [
@@ -33,6 +33,13 @@ function Flights() {
   useEffect(() => {
     fetchFlightRecents();
   }, []);
+  // populate selected from search array
+  const getSelected =(index)=>
+    {
+      const selectedSearch = (searchData[index]);
+      setFormData(selectedSearch);
+      console.log(index,selectedSearch);
+    }
 
   return (
     <main className="flights">
@@ -51,7 +58,7 @@ function Flights() {
                 return (
                   <div
                     className="search"
-                    onClick={() => console.log("recent search clicked",index)}
+                    onClick={()=>getSelected(index)}
                     key={index}
                   >
                     <h5>origin:{item.origin} </h5>
@@ -64,6 +71,7 @@ function Flights() {
           </div>
           <div className="backUpBlock"></div>
         </div>
+
       )}
       {alert && (
         <Alert img={success} alertText="Email address changed successfully" />
