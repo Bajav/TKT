@@ -10,7 +10,7 @@ import Navbar from "../components/NavBar/navBar";
 import ErrorBoundary from "../pages/ErrorPage/error.page.jsx";
 
 // FLIGHTS PAGES
-import Flights from "../pages/flights";
+import Flights from "../pages/flightsearch/flights.jsx";
 import FlightPricing from "../pages/flightPricing/flightPricing";
 import FlightResult from "../pages/flightResult/flightResults";
 import Passengers from "../pages/pasengerInputPage/passengers";

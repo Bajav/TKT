@@ -1,98 +1,94 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { motion, useScroll, useTransform } from "motion/react";
+// home.jsx
 import { useRef } from "react";
-// import { useContext, useEffect } from "react";
-// import axios from "axios";
-// import styles
+import { Outlet } from "react-router-dom";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+
+// Register plugins only once (outside the component)
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+// Import styles & assets
 import "swiper/css";
 import "./home.scss";
-// import components
+
+// Components
 import LocationHeader from "../../components/Header/header";
-import { Outlet } from "react-router-dom";
-// import images
+
+// Images
 import skiing from "../../assets/images/skiing.jpg";
+import skyDiving from "../../assets/images/skyDving.jpg";
 import umrah from "../../assets/images/umrah.jpg";
 import kaba from "../../assets/images/kabba-nobg.png";
-import brazil from "../../assets/images/brazil.jpg";
 import gorrila from "../../assets/images/gorrila.jpg";
 import gorrilaNoBG from "../../assets/images/gorillatrekking.png";
-import skyDiving from "../../assets/images/skyDving.jpg";
 
-// import icons
+// Icons
 import airlineTicket from "../../assets/icons/airline-ticket.png";
 import community from "../../assets/icons/social-media.png";
 import safari from "../../assets/icons/safari (1).png";
 import resort from "../../assets/icons/resort.png";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
-import { SplitText } from "gsap/SplitText";
-import { del } from "motion/react-client";
+
 function Home() {
   const listRef = useRef(null);
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.registerPlugin(SplitText);
-  let tl  = gsap.timeline({delay:2,ease:"power1.In"});
-  useGSAP(() => {
-    let split = SplitText.create("#slider-text", {
-      type: "chars,words,lines",
-    });
-    gsap.from(split.words, {
-        y: -200,
-        opacity: 0,
-        stagger: 0.05,         
-        ease: "power1.out",     
-        duration: 1.2,
-        delay: 1,         
+
+  useGSAP(
+    () => {
+      // Wait for fonts to be fully loaded before creating SplitText
+      document.fonts.ready.then(() => {
+        // Create SplitText instance safely
+        const split = new SplitText("#slider-text", {
+          type: "chars,words,lines",
+          autoSplit: true, // auto re-split on resize / late font load
+        });
+
+        // Animate words (staggered slide-in from top)
+        gsap.from(split.words, {
+          y: -200,
+          opacity: 0,
+          stagger: 0.05,
+          ease: "power1.out",
+          duration: 1.2,
+          delay: 1,
+        });
+
+        // Animate quick links text
+        gsap.from(".head-text", {
+          x: -100,
+          opacity: 0,
+          ease: "power1.inOut",
+          stagger: 0.3, // reduced from 1.5s — more natural feel
+          delay: 2,
+        });
+
+        // Optional cleanup: revert SplitText on unmount / re-run
+        return () => {
+          split.revert();
+        };
       });
-      gsap.from(".head-text",{
-        x:-100,
-        ease:"power1.inOut",
-        opacity:0,
-        stagger:1.5,
-        delay:2
-      });
-      // gsap.from(".foreGround",{
-      //   y:100,
-      //   scale:"0.5",
-      //   delay:3,
-      //   ease:"power1.out",
-      //   opacity:0,
-      // });
+    },
+    { scope: listRef } // scope animations to the container ref
+  );
 
-  });
-
-  // const { scrollXProgress } = useScroll({
-  //   container: listRef,
-  // });
-
-  // // image moves slower than scroll
-  // const x = useTransform(scrollXProgress, [0, 2], ["-0%", "10%"]);
-  // gsap.fromTo('#slider-text',{
-  //   y:-200,
-  //   opacity:"0",
-  //   delay:3,
-  // },{
-  //   opacity:"1",
-  //   delay:2,
-  //   y: 0,
-  //   ease:"power1.in"
-  // });
   return (
     <main className="home">
       <Outlet />
       <LocationHeader />
+
       <div className="home-contents">
         <p>
           hey its <span>winter</span> <br /> treat yourself this season
         </p>
+
         <div className="items-list" ref={listRef}>
           <div className="item-to-do">
             <img src={skiing} alt="skiing" />
             <h1 id="slider-text">
-              go skiing in <br /> switizerland
+              go skiing in <br /> switzerland
             </h1>
           </div>
+
           <div className="item-to-do">
             <img src={skyDiving} alt="sky diving" />
             <h1>
@@ -100,6 +96,7 @@ function Home() {
             </h1>
           </div>
         </div>
+
         <div className="quick-links-wrapper">
           <h5>quick links</h5>
           <div className="quick-links">
@@ -129,6 +126,7 @@ function Home() {
             </div>
           </div>
         </div>
+
         {/* places to visit */}
         <div className="places-to-visit-wrapper">
           <h5>packages for only you</h5>
@@ -137,18 +135,18 @@ function Home() {
               <div className="place-img">
                 <img className="BackGround" src={umrah} alt="umrah" />
                 <h4 className="head-text">umrah</h4>
-                <img className="foreGround" src={kaba} alt="umrah" />
+                <img className="foreGround" src={kaba} alt="kaaba" />
               </div>
             </div>
 
             <div className="place-to-visit">
               <div className="place-img">
-                <img className="BackGround" src={gorrila} alt="gorrila" />
-                <h4 className="head-text">gorrila trekking</h4>
+                <img className="BackGround" src={gorrila} alt="gorilla" />
+                <h4 className="head-text">gorilla trekking</h4>
                 <img
                   className="foreGround gorrila"
                   src={gorrilaNoBG}
-                  alt="gorrilaNoBG"
+                  alt="gorilla trekking no background"
                 />
               </div>
             </div>
