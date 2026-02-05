@@ -40,43 +40,118 @@ export const FacilityList = ({
     : null;
 
   const filtered = facilities.filter((f) => {
-    if (!allowedGroups) return true; // show all if no filter
+    if (!allowedGroups) return true;
     return allowedGroups.includes(f.facilityGroupCode);
   });
 
   const displayed = limit ? filtered.slice(0, limit) : filtered;
 
   if (displayed.length === 0) {
-    return null; // or <div>No facilities in this category</div>
+    return null;
   }
-  // Helper to detect if facility likely requires payment
-  const isPaidFacility = (facility) => {
-    // Strong indicators - most APIs use these consistently
-    if (facility.indFee === true) return true;
-    if (facility.voucher === true) return true;
 
-    // Weaker / contextual indicators (use with caution)
-    // e.g. "Transfer service", "Airport Shuttle", "Laundry service" almost always paid
-    const desc = (facility.description?.content || "").toLowerCase();
-    if (
-      desc.includes("transfer") ||
-      desc.includes("shuttle") ||
-      desc.includes("laundry") ||
-      (desc.includes("parking") && facility.indYesOrNo === false) ||
-      desc.includes("deposit") ||
-      desc.includes("fee") ||
-      desc.includes("rental")
-    ) {
-      return true;
+const isPaidFacility = (facility) => {
+  // indFee is the primary indicator for extra charges
+  if (facility.indFee === true) return true;
+  
+  // Optional: Check voucher only if you know it indicates payment
+  // In some APIs, voucher means "requires prepaid voucher"
+  // Comment this out if you're unsure
+  // if (facility.voucher === true) return true;
+  
+  return false;
+};
+
+  // Format time from "07:00:00" to "7:00 AM"
+  const formatTime = (time) => {
+    if (!time) return null;
+    
+    const [hours, minutes] = time.split(":");
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? "PM" : "AM";
+    const hour12 = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+    
+    return `${hour12}:${minutes} ${ampm}`;
+  };
+
+  // Format currency amount
+  const formatAmount = (amount, currency) => {
+    if (!amount) return null;
+    
+    const symbols = {
+      USD: "$",
+      EUR: "€",
+      GBP: "£",
+      JPY: "¥",
+    };
+    
+    const symbol = symbols[currency] || currency;
+    return `${symbol}${amount}`;
+  };
+
+  // NEW: Smart facility text builder
+  const getFacilityText = (facility) => {
+    const baseText = facility.description?.content || "";
+    const parts = [baseText];
+    const metadata = [];
+    
+    // Handle number (e.g., "1 Bathroom", "26 sqm")
+    if (facility.number) {
+      const lowerText = baseText.toLowerCase();
+      
+      if (lowerText.includes("room size") || lowerText.includes("sqm")) {
+        return `room size ${facility.number} sqm`;
+      } else if (lowerText.includes("bathroom")) {
+        return `${facility.number} ${facility.number > 1 ? "Bathrooms" : "Bathroom"}`;
+      } else if (lowerText.includes("bedroom")) {
+        return `${facility.number} ${facility.number > 1 ? "Bedrooms" : "Bedroom"}`;
+      } else if (lowerText.includes("floor")) {
+        return `Floor ${facility.number}`;
+      } else {
+        parts[0] = `${facility.number} ${baseText}`;
+      }
     }
-
-    return false;
+    
+    // Handle time range (e.g., "Breakfast: 7:00 AM - 10:00 AM")
+    if (facility.timeFrom && facility.timeTo) {
+      const from = formatTime(facility.timeFrom);
+      const to = formatTime(facility.timeTo);
+      metadata.push(`${from} - ${to}`);
+    } else if (facility.timeTo) {
+      // Only "to" time (e.g., "Check-out: 12:00 PM")
+      const to = formatTime(facility.timeTo);
+      metadata.push(`by ${to}`);
+    } else if (facility.timeFrom) {
+      // Only "from" time (e.g., "Check-in: from 3:00 PM")
+      const from = formatTime(facility.timeFrom);
+      metadata.push(`from ${from}`);
+    }
+    
+    // Handle amount/price (e.g., "Small pets: £20")
+    if (facility.amount && facility.currency) {
+      const price = formatAmount(facility.amount, facility.currency);
+      metadata.push(price);
+    }
+    
+    // Handle applicationType if needed
+    if (facility.applicationType === "UN") {
+      // UN typically means "per unit" - you can add this if needed
+      // metadata.push("per stay");
+    }
+    
+    // Combine parts
+    if (metadata.length > 0) {
+      return `${parts[0]}: ${metadata.join(" · ")}`;
+    }
+    
+    return parts[0];
   };
 
   return (
     <div className={`facilities ${className}`}>
       {displayed.map((facility, index) => {
         const display = getFacilityDisplay(facility.description?.content);
+        const facilityText = getFacilityText(facility);
 
         return (
           <div
@@ -88,14 +163,12 @@ export const FacilityList = ({
             {display ? (
               <>
                 <display.Icon size={20} color={display.color || "#E88D67"} />
-                <span className="facility-label">{display.label}</span>
+                <span className="facility-label">{facilityText}</span>
               </>
             ) : (
               <>
                 <span className="dot" />
-                <span className="facility-label">
-                  {facility.description?.content}
-                </span>
+                <span className="facility-label">{facilityText}</span>
               </>
             )}
 

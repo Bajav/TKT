@@ -29,6 +29,7 @@ import {
   BrushCleaning, // ← exists! housekeeping
   AirVent,
   UtensilsIcon,
+  Microwave,
 } from "lucide-react";
 
 // Phosphor hair dryer icon is called HairDryer (not SprayBottleIcon)
@@ -42,13 +43,18 @@ import {
   CreditCardIcon,
   WheelchairMotionIcon,
   BeerBottleIcon,
+  ForkKnifeIcon,
+  BreadIcon
 } from "@phosphor-icons/react";
 
 const facilityIconMap = {
   wifi: { icon: Wifi, label: "Free WiFi" },
   "wi-fi": { icon: Wifi, label: "Free WiFi" },
+  "microwave": { icon: Microwave, label: "Microwave" },
+  "cooker": { icon: OvenIcon , label: "Cooker" },
   internet: { icon: Wifi, label: "Internet Access" },
   wireless: { icon: Wifi, label: "WiFi" },
+  "toaster": { icon: BreadIcon, label: "Toaster" },
   "disability-friendly bathroom": {
     icon: WheelchairMotionIcon,
     label: "Disability-Friendly Bathroom",
@@ -72,10 +78,10 @@ const facilityIconMap = {
   "plug adaptor": { icon: Plug, label: "Plug Adaptor" },
   "ironing set": { icon: Plug, label: "Ironing Set" },
   "kitchen utensils, plates & cups": {
-    icon: Plug,
+    icon: ForkKnifeIcon,
     label: "Kitchen utensils, plates & cups",
   },
-  "kitchen utensils": { icon: Plug, label: "Kitchen Utensils" },
+  "kitchen utensils": { icon: ForkKnifeIcon, label: "Kitchen Utensils" },
   kitchenette: { icon: OvenIcon, label: "Kitchenette" },
   "wheelchair-accessible": {
     icon: Accessibility,

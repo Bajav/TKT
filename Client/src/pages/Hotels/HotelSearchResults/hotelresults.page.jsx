@@ -158,6 +158,7 @@ const hotelImages = ()=>
         </div>
         {hotels?.hotels?.length > 0 ? (
           hotels.hotels.map((hotel, index) => {
+
             const {
               name,
               destinationName,

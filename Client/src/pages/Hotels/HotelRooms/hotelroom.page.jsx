@@ -34,7 +34,7 @@ function HotelRoom() {
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
 
-  // ✅ Memoize fetchHotelData to avoid useEffect dependency issues
+
   useEffect(() => {
     const fetchHotelData = async () => {
       if (!selectedHotel || !selectedHotel.code) {
@@ -74,10 +74,8 @@ function HotelRoom() {
     };
 
     fetchHotelData();
-  }, []); // ✅ Proper dependencies
+  }, []);
 
-  // ✅ NOW you can do conditional returns (after all hooks)
-  // Guard against missing selectedHotel
   if (!selectedHotel) {
     return (
       <div className="error-container">
@@ -441,7 +439,7 @@ function HotelRoom() {
           <div className="hotel-facilities">
             <FacilityList
               facilities={facilities}
-              groupCodes={[71, 80, 30, 72, 80, 90]}
+              groupCodes={[,10,71, 80, 30,70,71, 72, 80, 90]}
             />
           </div>
         </div>
@@ -480,7 +478,7 @@ function HotelRoom() {
             const roomImages = roomImagesByCode[cleanCode] || [];
             const detailedRoom = roomDetailsMap[cleanCode];
             const roomFacilities = detailedRoom?.roomFacilities || [];
-            // console.log(roomImages);
+            console.log(hotelInfo);
             return (
               <div key={roomIndex} className="rooms">
                 <h5>{room.name}</h5>
