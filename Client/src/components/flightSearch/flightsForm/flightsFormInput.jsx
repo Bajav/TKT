@@ -194,11 +194,11 @@ useEffect(() => {
 
   setInputs((prev) => ({
     ...prev,
-    origin: flightSearch.origin || "",
-    destination: flightSearch.Destination || "",  
-    departureDate: flightSearch.departureDate || "",
-    returnDate: flightSearch.returnDate || "",
-    flightType: flightSearch.tripType?.toLowerCase() === "round trip" 
+    origin: flightSearch?.origin || "",
+    destination: flightSearch?.Destination || "",  
+    departureDate: flightSearch?.departureDate || "",
+    returnDate: flightSearch?.returnDate || "",
+    flightType: flightSearch?.tripType?.toLowerCase() === "round trip" 
       ? "roundTrip" 
       : "oneWay",        
     seatClass: "ECONOMY",          
@@ -411,6 +411,7 @@ useEffect(() => {
                   </div>
 
                   <div className="flightInputs">
+                    <div className="newFlex">
                     <FlightSearchInput
                       classOne="flexInput"
                       labelFor="Origin"
@@ -422,6 +423,7 @@ useEffect(() => {
                       }
                       value={flight.origin}
                     />
+                    </div>
 
                     <motion.button
                       initial={{ rotate: 0 }}
