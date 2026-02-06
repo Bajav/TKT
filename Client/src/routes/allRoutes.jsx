@@ -13,7 +13,7 @@ import ErrorBoundary from "../pages/ErrorPage/error.page.jsx";
 import Flights from "../pages/flightsearch/flights.jsx";
 import FlightPricing from "../pages/flightPricing/flightPricing";
 import FlightResult from "../pages/flightResult/flightResults";
-import Passengers from "../pages/pasengerInputPage/passengers";
+import Passengers from "../pages/pasengerInputPage/passengers.page";
 import BookedFlights from "../pages/bookedFlights/flights.page";
 
 // hotelpages

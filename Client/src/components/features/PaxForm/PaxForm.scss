@@ -1,17 +1,19 @@
 @import "../../../styles/variables.scss";
 .LabelInput {
   border: 1px #1e1e1e solid;
-  input {
-    color: $visibleFontColor;
-    text-transform: capitalize;
-    font-family: $textFont, sans-serif;
-    font-size: 10px;
-  }
+  border-radius: 10px;
   width: 100%;
   border-radius: 5px;
 }
 .formContainer
 {
+  input {
+    color: $visibleFontColor;
+    font-family:$robotoMono,monospace;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 600;
+  }
   width: 100%;
 }
 .paxForm {
@@ -39,7 +41,7 @@
     border-radius: 5px;
     font-size: 15px;
     color: $page_color;
-    font-family: $textFont, sans-serif;
+    font-family:$robotoMono,monospace;
     font-weight: 300;
     text-transform: capitalize;
     position: relative;
@@ -48,10 +50,10 @@
 }
 .PhoneInputInput {
   background-color: $inputBackGround;
-  font-family: $textFont, sans-serif;
+  font-family:$robotoMono,monospace;
   font-size: 13px;
   select {
-    font-family: $textFont, sans-serif;
+    font-family:$robotoMono,monospace;
   }
 }
 .PhoneInput {
@@ -59,6 +61,7 @@
   padding: 2px 10px;
   // height: 45px;
   border: 1px #1e1e1e solid;
+  border-radius: 10px;
   input {
     // border: 1px solid #1e1e1e;
     outline: none;
@@ -66,14 +69,14 @@
   }
 }
 option {
-  font-family: $textFont, sans-serif;
-  font-size: 10px;
+  font-family: $robotoMono, monospace;
+  font-size: 15px;
   color: $visibleFontColor;
-  font-weight: 400;
+  font-weight: 500;
 }
 .paxFormContainer {
   padding: 10px;
-  width: 97vw;
+  width: 100vw;
   border-radius: 10px;
   margin-top: 10px;
   h1 {
@@ -81,7 +84,7 @@ option {
     width: fit-content;
     padding: 5px 25px;
     color: $page_color;
-    font-family: $textFont, sans-serif;
+    font-family:$robotoMono,monospace;
     text-transform: capitalize;
     border-radius: 30px;
     margin-bottom: 30px;

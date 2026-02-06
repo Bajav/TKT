@@ -11,7 +11,7 @@
     padding: 10px;
     cursor: pointer;
     border-radius: 6px;
-    font-family: $textFont, sans-serif;
+    font-family: $robotoMono, monospace;
     background: $inputBackGround;
     border: 1px solid #eee;
     color: $visibleFontColor;
@@ -19,14 +19,15 @@
     display: flex;
     justify-content: space-between;
     height: 50px;
-    font-size: 10px;
+    font-size: 15px;
     align-items: center;
     color: $visibleFontColor;
+    text-transform: uppercase;
   }
 
   .dropdown-menu {
     position: absolute;
-    background: $page_color;
+    background: #fff;
     border: 1px solid #ccc;
     width: 100%;
     border-radius: 6px;
@@ -39,7 +40,7 @@
       padding: 10px;
       cursor: pointer;
       color: $visibleFontColor;
-      font-family: $textFont, sans-serif;
+      font-family: $robotoMono, monospace;
 
       &:hover {
         background: $page_color;
