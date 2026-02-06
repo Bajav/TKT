@@ -89,13 +89,13 @@ function FlightCard() {
     };
     const fetchFlights = async () => {
       try {
-        // const response = await axios.post(
-        //   "http://localhost:3000/results",
-        //   formData,
-        // );
-        // setFlightResults(response?.data);
-        setFlightResults(flightSearchData);
-        // console.log(response?.data[0]);
+        const response = await axios.post(
+          "http://localhost:3000/results",
+          formData,
+        );
+        setFlightResults(response?.data);
+        // setFlightResults(flightSearchData);
+        console.log(response?.data[0]);
       } catch (error) {
         console.error("Error posting flight:", error);
       }
@@ -184,13 +184,13 @@ const seeDetails = (index) => {
     setShowTickets(false);
     setOverlay(true);
     try {
-      // const response = await axios.post(
-      //   "http://localhost:3000/brandedUpSell",
-      //   selected,
-      // );
-      // setBrandedUpSell(response.data); // likely want .data, not full response
-      setBrandedUpSell(brandedUpsellData);
-      // console.log("brandedUpsell res", brandedUpsellData);
+      const response = await axios.post(
+        "http://localhost:3000/brandedUpSell",
+        selected,
+      );
+      setBrandedUpSell(response.data); // likely want .data, not full response
+      // setBrandedUpSell(brandedUpsellData);
+      console.log("brandedUpsell res", brandedUpsellData);
     } catch (err) {
       console.error("Axios error:", err?.response?.data?.message);
       setUpsellError(err?.response?.data?.message[0]);

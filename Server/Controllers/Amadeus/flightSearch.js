@@ -193,62 +193,92 @@ const findLastPrice = async (req, res) => {
 
 const bookFlight = async (req, res) => {
   const { formData, bookedFlight } = req.body;
-  console.log("formData", formData);
-  console.log("bookedFlight", bookedFlight);
+  const {DOB,docExpiryDate,docIssueDate,docNumber,docType,email,fName,gender,lName,nationality,phone} = formData;
+  const number = phone?.slice(4);
+  const code = phone?.slice(1,4);
+  console.log("formData",formData);
+  console.log("bookedFlight", bookedFlight[0]);
   //   res.json({
   //   success:true,
   //   message:"route is working"
   // })
 
-  try {
-    const response = await amadeus.booking.flightOrders.post({
-      data: {
-        type: "flight-order",
-        flightOffers: [bookedFlight],
-        travelers: [
-          {
-            id: "1",
-            dateOfBirth: "1999-11-11", //YYY-MMM-DDD
-            name: {
-              firstName: "JORGE",
-              lastName: "GONZALES",
-            },
-            gender: "MALE",
-            contact: {
-              emailAddress: "jorge.gonzales833@telefonica.es",
-              phones: [
-                {
-                  deviceType: "MOBILE",
-                  countryCallingCode: "256",
-                  number: "781372789",
-                },
-              ],
-            },
-            documents: [
-              {
-                documentType: "PASSPORT",
-                birthPlace: "Madrid",
-                issuanceLocation: "Madrid",
-                issuanceDate: "2020-04-14",
-                number: "00000000",
-                expiryDate: "2076-04-14",
-                issuanceCountry: "UG",
-                validityCountry: "UG",
-                nationality: "UG",
-                holder: true,
-              },
-            ],
-          },
-        ],
-      },
-    });
-    console.log(response.data);
-    oderId = response.data.id;
-    return res.json(response.data);
-  } catch (err) {
-    console.log("error getting pricing", err);
-    return res.json(err);
-  }
+//  try {
+//   // Clean and parse phone
+//   const parsePhone = (phone) => {
+//     const cleaned = phone.replace(/[\s\-\+]/g, '');
+//     return {
+//       countryCallingCode: cleaned.substring(0, 3),
+//       number: cleaned.substring(3)
+//     };
+//   };
+
+//   const { countryCallingCode, number } = parsePhone(phone);
+
+//   // Clean names
+//   const cleanName = (name) => {
+//     return name.trim().toUpperCase().replace(/[^A-Z\s]/g, '').replace(/\s+/g, ' ');
+//   };
+
+//   // Log data before sending (for debugging)
+//   const travelerData = {
+//     id: "1",
+//     dateOfBirth: DOB,
+//     name: {
+//       firstName: cleanName(fName),
+//       lastName: cleanName(lName),
+//     },
+//     gender: gender.toUpperCase(),
+//     contact: {
+//       emailAddress: email.trim().toLowerCase(),
+//       phones: [
+//         {
+//           deviceType: "MOBILE",
+//           countryCallingCode: countryCallingCode,
+//           number: number,
+//         },
+//       ],
+//     },
+//     documents: [
+//       {
+//         documentType: docType.toUpperCase(),
+//         birthPlace: "Kampala", // You need to add this to your form
+//         issuanceLocation: "Kampala", // You need to add this to your form
+//         issuanceDate: docIssueDate,
+//         number: docNumber.toUpperCase().replace(/\s/g, ''),
+//         expiryDate: docExpiryDate,
+//         issuanceCountry: nationality.toUpperCase(),
+//         validityCountry: nationality.toUpperCase(),
+//         nationality: nationality.toUpperCase(),
+//         holder: true,
+//       },
+//     ],
+//   };
+
+//   console.log("Traveler data being sent:", JSON.stringify(travelerData, null, 2));
+
+//   const response = await amadeus.booking.flightOrders.post({
+//     data: {
+//       type: "flight-order",
+//       flightOffers: [bookedFlight],
+//       travelers: [travelerData],
+//     },
+//   });
+
+//   console.log("Booking successful:", response.data);
+//   const orderId = response.data.id;
+//   return res.json(response.data);
+
+// } catch (error) {
+//   // Log full error details
+//   console.error("Full error:", JSON.stringify(error.response?.data, null, 2));
+//   console.error("Error description:", error.description);
+  
+//   return res.status(400).json({
+//     error: "Booking failed",
+//     details: error.response?.data?.errors || error.description || error.message
+//   });
+// }
 };
 
 //use api to retrieve order using the order ID
@@ -428,3 +458,45 @@ export {
 };
 
 // conso-lidator
+// test data
+  // const response = await amadeus.booking.flightOrders.post({
+  //     data: {
+  //       type: "flight-order",
+  //       flightOffers: [bookedFlight],
+  //       travelers: [
+  //         {
+  //           id: "1",
+  //           dateOfBirth: "1999-11-11", //YYY-MMM-DDD
+  //           name: {
+  //             firstName: "JORGE",
+  //             lastName: "GONZALES",
+  //           },
+  //           gender: "MALE",
+  //           contact: {
+  //             emailAddress: "jorge.gonzales833@telefonica.es",
+  //             phones: [
+  //               {
+  //                 deviceType: "MOBILE",
+  //                 countryCallingCode: "256",
+  //                 number: "781372789",
+  //               },
+  //             ],
+  //           },
+  //           documents: [
+  //             {
+  //               documentType: "PASSPORT",
+  //               birthPlace: "Madrid",
+  //               issuanceLocation: "Madrid",
+  //               issuanceDate: "2020-04-14",
+  //               number: "00000000",
+  //               expiryDate: "2076-04-14",
+  //               issuanceCountry: "UG",
+  //               validityCountry: "UG",
+  //               nationality: "UG",
+  //               holder: true,
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   });
