@@ -203,82 +203,82 @@ const bookFlight = async (req, res) => {
   //   message:"route is working"
   // })
 
-//  try {
-//   // Clean and parse phone
-//   const parsePhone = (phone) => {
-//     const cleaned = phone.replace(/[\s\-\+]/g, '');
-//     return {
-//       countryCallingCode: cleaned.substring(0, 3),
-//       number: cleaned.substring(3)
-//     };
-//   };
+ try {
+  // Clean and parse phone
+  const parsePhone = (phone) => {
+    const cleaned = phone.replace(/[\s\-\+]/g, '');
+    return {
+      countryCallingCode: cleaned.substring(0, 3),
+      number: cleaned.substring(3)
+    };
+  };
 
-//   const { countryCallingCode, number } = parsePhone(phone);
+  const { countryCallingCode, number } = parsePhone(phone);
 
-//   // Clean names
-//   const cleanName = (name) => {
-//     return name.trim().toUpperCase().replace(/[^A-Z\s]/g, '').replace(/\s+/g, ' ');
-//   };
+  // Clean names
+  const cleanName = (name) => {
+    return name.trim().toUpperCase().replace(/[^A-Z\s]/g, '').replace(/\s+/g, ' ');
+  };
 
-//   // Log data before sending (for debugging)
-//   const travelerData = {
-//     id: "1",
-//     dateOfBirth: DOB,
-//     name: {
-//       firstName: cleanName(fName),
-//       lastName: cleanName(lName),
-//     },
-//     gender: gender.toUpperCase(),
-//     contact: {
-//       emailAddress: email.trim().toLowerCase(),
-//       phones: [
-//         {
-//           deviceType: "MOBILE",
-//           countryCallingCode: countryCallingCode,
-//           number: number,
-//         },
-//       ],
-//     },
-//     documents: [
-//       {
-//         documentType: docType.toUpperCase(),
-//         birthPlace: "Kampala", // You need to add this to your form
-//         issuanceLocation: "Kampala", // You need to add this to your form
-//         issuanceDate: docIssueDate,
-//         number: docNumber.toUpperCase().replace(/\s/g, ''),
-//         expiryDate: docExpiryDate,
-//         issuanceCountry: nationality.toUpperCase(),
-//         validityCountry: nationality.toUpperCase(),
-//         nationality: nationality.toUpperCase(),
-//         holder: true,
-//       },
-//     ],
-//   };
+  // Log data before sending (for debugging)
+  const travelerData = {
+    id: "1",
+    dateOfBirth: DOB,
+    name: {
+      firstName: cleanName(fName),
+      lastName: cleanName(lName),
+    },
+    gender: gender.toUpperCase(),
+    contact: {
+      emailAddress: email.trim().toLowerCase(),
+      phones: [
+        {
+          deviceType: "MOBILE",
+          countryCallingCode: countryCallingCode,
+          number: number,
+        },
+      ],
+    },
+    documents: [
+      {
+        documentType: docType.toUpperCase(),
+        birthPlace: "Kampala", // You need to add this to your form
+        issuanceLocation: "Kampala", // You need to add this to your form
+        issuanceDate: docIssueDate,
+        number: docNumber.toUpperCase().replace(/\s/g, ''),
+        expiryDate: docExpiryDate,
+        issuanceCountry: nationality.toUpperCase(),
+        validityCountry: nationality.toUpperCase(),
+        nationality: nationality.toUpperCase(),
+        holder: true,
+      },
+    ],
+  };
 
-//   console.log("Traveler data being sent:", JSON.stringify(travelerData, null, 2));
+  console.log("Traveler data being sent:", JSON.stringify(travelerData, null, 2));
 
-//   const response = await amadeus.booking.flightOrders.post({
-//     data: {
-//       type: "flight-order",
-//       flightOffers: [bookedFlight],
-//       travelers: [travelerData],
-//     },
-//   });
+  const response = await amadeus.booking.flightOrders.post({
+    data: {
+      type: "flight-order",
+      flightOffers: [bookedFlight[0]],
+      travelers: [travelerData],
+    },
+  });
 
-//   console.log("Booking successful:", response.data);
-//   const orderId = response.data.id;
-//   return res.json(response.data);
+  console.log("Booking successful:", response.data);
+  const orderId = response.data.id;
+  return res.json(response.data);
 
-// } catch (error) {
-//   // Log full error details
-//   console.error("Full error:", JSON.stringify(error.response?.data, null, 2));
-//   console.error("Error description:", error.description);
+} catch (error) {
+  // Log full error details
+  console.error("Full error:", JSON.stringify(error.response?.data, null, 2));
+  console.error("Error description:", error.description);
   
-//   return res.status(400).json({
-//     error: "Booking failed",
-//     details: error.response?.data?.errors || error.description || error.message
-//   });
-// }
+  return res.status(400).json({
+    error: "Booking failed",
+    details: error.response?.data?.errors || error.description || error.message
+  });
+}
 };
 
 //use api to retrieve order using the order ID
