@@ -34,7 +34,6 @@ function HotelRoom() {
   const [activeTab, setActiveTab] = useState(1);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const fetchHotelData = async () => {
       if (!selectedHotel || !selectedHotel.code) {
@@ -140,7 +139,7 @@ function HotelRoom() {
       });
       return acc;
     }, {});
-    // console.log(roomImagesByCode);
+  // console.log(roomImagesByCode);
 
   // Object.keys(roomImagesByCode).forEach((code) => {
   //   roomImagesByCode[code].sort((a, b) => a.visualOrder - b.visualOrder);
@@ -439,7 +438,7 @@ function HotelRoom() {
           <div className="hotel-facilities">
             <FacilityList
               facilities={facilities}
-              groupCodes={[,10,71, 80, 30,70,71, 72, 80, 90]}
+              groupCodes={[ 10, 71, 80,85, 30, 70, 71, 72,73, 80, 90,91]}
             />
           </div>
         </div>
@@ -478,10 +477,10 @@ function HotelRoom() {
             const roomImages = roomImagesByCode[cleanCode] || [];
             const detailedRoom = roomDetailsMap[cleanCode];
             const roomFacilities = detailedRoom?.roomFacilities || [];
-            console.log(hotelInfo);
+            const roomStays = detailedRoom?.roomStays || [];
+            console.log("detailedRoom:::", detailedRoom);
             return (
               <div key={roomIndex} className="rooms">
-                <h5>{room.name}</h5>
                 <div className="border" />
 
                 {/* Room-specific images */}
@@ -511,6 +510,15 @@ function HotelRoom() {
                 </div>
                 {/* Room-specific facilities */}
                 <div className="amenities-container">
+                  <div className="room-id">
+                    <h5>{room.name}</h5>
+                  <h5>{detailedRoom?.description}</h5>
+                  </div>
+                  <div className="all-room-info">
+                    <h6>max adults {detailedRoom?.maxAdults}</h6>
+                    <h6>max children {detailedRoom?.maxChildren}</h6>
+                    <h6>max occupants {detailedRoom?.maxPax}</h6>
+                  </div>
                   <h4>room facilities</h4>
                   <div className="amenities">
                     <FacilityList
@@ -545,6 +553,21 @@ function HotelRoom() {
                               <p>{cancellationSummary.details}</p>
                             </div>
                           </div>
+
+                          {!roomStays && roomStays?.map((roomStay) => {
+                            return roomStay?.roomStayFacilities.map(
+                              (stayFacility, stayI) => {
+                                return (
+                                  <div className="room-data" key={stayI}>
+                                    <h6>
+                                      {stayFacility.number}{" "}
+                                      {stayFacility.description.content}{" "}
+                                    </h6>
+                                  </div>
+                                );
+                              },
+                            );
+                          })}
                           <button
                             onClick={() => {
                               bookRoomBtn(roomIndex, rateIndex);

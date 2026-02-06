@@ -122,6 +122,7 @@ const facilityIconMap = {
   "non-smoking rooms": { icon: CigaretteOff, label: "Non-smoking Rooms" },
   "family rooms": { icon: Baby, label: "Family Rooms" },
   tv: { icon: Tv, label: "TV" },
+  "satellite tv": { icon: Tv, label: "Satellite TV" },
   television: { icon: Tv, label: "Television" },
 };
 

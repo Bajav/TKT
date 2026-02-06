@@ -104,7 +104,7 @@ const isPaidFacility = (facility) => {
       } else if (lowerText.includes("bathroom")) {
         return `${facility.number} ${facility.number > 1 ? "Bathrooms" : "Bathroom"}`;
       } else if (lowerText.includes("bedroom")) {
-        return `${facility.number} ${facility.number > 1 ? "Bedrooms" : "Bedroom"}`;
+        return `Number of bedrooms ${facility.number}`;
       } else if (lowerText.includes("floor")) {
         return `Floor ${facility.number}`;
       } else {

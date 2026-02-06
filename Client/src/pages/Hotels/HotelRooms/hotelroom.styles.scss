@@ -619,31 +619,48 @@ body {
     font-family: $textFont, sans-serif;
     color: $darkOrange;
   }
-  p
-  {
+  p {
     margin-top: 10px;
-        text-align: center;
-     font-size: 25px;
+    text-align: center;
+    font-size: 25px;
     font-weight: 400;
     font-family: $textFont, sans-serif;
     color: $text_color;
   }
-  span
-  {
+  span {
     font-size: 20px;
     font-weight: 600;
   }
-  .views-container
-  {
+  .views-container {
     height: 25vh;
     width: 95%;
     // background: #222222;
-    img
-    {
+    img {
       border-radius: 10px;
       object-fit: cover;
       width: 100%;
       height: 100%;
     }
+  }
+}
+.room-id
+{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+}
+.all-room-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  // padding: 0px 5px;
+  gap: 10px;
+  margin-bottom: 5px;
+  h6 {
+    font-size: 9px;
+    font-family: $robotoMono, monospace;
+    color: $darkOrange;
+    font-weight: 600;
+    text-transform: capitalize;
   }
 }
