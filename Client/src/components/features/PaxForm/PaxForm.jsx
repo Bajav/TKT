@@ -132,7 +132,6 @@ function PaxForm() {
     
     // Clean up passenger data (remove UI-only fields)
     const formattedPassengers = passengers.map(({ selectedCountry, id, ...rest }) => rest);
-    
     console.log("Passengers Data:", formattedPassengers);
     
     setModel(true);

@@ -192,45 +192,40 @@ const findLastPrice = async (req, res) => {
 // amadeus.shopping.flightOffers.pricing.post(body ,{include: 'bags'});
 
 const bookFlight = async (req, res) => {
-  const { formData, bookedFlight } = req.body;
-  const {DOB,docExpiryDate,docIssueDate,docNumber,docType,email,fName,gender,lName,nationality,phone} = formData;
-  const number = phone?.slice(4);
-  const code = phone?.slice(1,4);
-  console.log("formData",formData);
-  console.log("bookedFlight", bookedFlight[0]);
-  //   res.json({
-  //   success:true,
-  //   message:"route is working"
-  // })
-
- try {
-  // Clean and parse phone
-  const parsePhone = (phone) => {
-    const cleaned = phone.replace(/[\s\-\+]/g, '');
-    return {
-      countryCallingCode: cleaned.substring(0, 3),
-      number: cleaned.substring(3)
-    };
+  // const { formData, bookedFlight } = req.body;
+//   const {DOB,docExpiryDate,docIssueDate,docNumber,docType,email,fName,gender,lName,nationality,phone} = formData;
+// Assuming formData is now an array of passenger objects
+const { formData, bookedFlight } = req.body;
+console.log(formData);
+// Helper function to parse phone
+const parsePhone = (phone) => {
+  const cleaned = phone.replace(/[\s\-\+]/g, '');
+  return {
+    countryCallingCode: cleaned.substring(0, 3),
+    number: cleaned.substring(3)
   };
+};
 
-  const { countryCallingCode, number } = parsePhone(phone);
+// Helper function to clean names
+const cleanName = (name) => {
+  return name.trim().toUpperCase().replace(/[^A-Z\s]/g, '').replace(/\s+/g, ' ');
+};
 
-  // Clean names
-  const cleanName = (name) => {
-    return name.trim().toUpperCase().replace(/[^A-Z\s]/g, '').replace(/\s+/g, ' ');
-  };
-
-  // Log data before sending (for debugging)
-  const travelerData = {
-    id: "1",
-    dateOfBirth: DOB,
+// Map formData array to travelers array
+const travelers = formData.map((passenger, index) => {
+  const { countryCallingCode, number } = parsePhone(passenger.phone);
+  console.log("passenger",passenger);
+  
+  return {
+    id: String(index + 1), // "1", "2", "3", etc.
+    dateOfBirth: passenger.DOB,
     name: {
-      firstName: cleanName(fName),
-      lastName: cleanName(lName),
+      firstName: cleanName(passenger.fName),
+      lastName: cleanName(passenger.lName),
     },
-    gender: gender.toUpperCase(),
+    gender: passenger?.gender?.toUpperCase(),
     contact: {
-      emailAddress: email.trim().toLowerCase(),
+      emailAddress: passenger?.email?.trim().toLowerCase(),
       phones: [
         {
           deviceType: "MOBILE",
@@ -241,39 +236,49 @@ const bookFlight = async (req, res) => {
     },
     documents: [
       {
-        documentType: docType.toUpperCase(),
-        birthPlace: "Kampala", // You need to add this to your form
-        issuanceLocation: "Kampala", // You need to add this to your form
-        issuanceDate: docIssueDate,
-        number: docNumber.toUpperCase().replace(/\s/g, ''),
-        expiryDate: docExpiryDate,
-        issuanceCountry: nationality.toUpperCase(),
-        validityCountry: nationality.toUpperCase(),
-        nationality: nationality.toUpperCase(),
-        holder: true,
+        documentType: passenger.docType.toUpperCase(),
+        birthPlace:  "Kampala",
+        issuanceLocation: "Kampala",
+        issuanceDate: passenger.docIssueDate,
+        number: passenger.docNumber.toUpperCase().replace(/\s/g, ''),
+        expiryDate: passenger.docExpiryDate,
+        issuanceCountry: passenger?.nationality?.code.toUpperCase(),
+        validityCountry: passenger?.nationality?.code.toUpperCase(),
+        nationality: passenger.nationality?.code.toUpperCase(),
+        holder: index === 0, // First traveler is the primary holder
       },
     ],
   };
+});
 
-  console.log("Traveler data being sent:", JSON.stringify(travelerData, null, 2));
+console.log(`Processing booking for ${travelers.length} traveler(s)`);
+// console.log(travelers[0]?.documents[0]);
 
-  const response = await amadeus.booking.flightOrders.post({
+// Now use in booking
+try {
+  const pricingResponse = awaitamadeus.booking.flightOrders.post({
     data: {
       type: "flight-order",
       flightOffers: [bookedFlight[0]],
-      travelers: [travelerData],
+      travelers: [travelers],
     },
   });
 
-  console.log("Booking successful:", response.data);
-  const orderId = response.data.id;
-  return res.json(response.data);
+  const confirmedFlightOffer = pricingResponse.data.flightOffers[0];
+
+  const bookingResponse = await amadeus.booking.flightOrders.post({
+    data: {
+      type: "flight-order",
+      flightOffers: [confirmedFlightOffer],
+      travelers: travelers, // Array of all travelers
+    },
+  });
+
+  console.log("Booking successful:", bookingResponse.data);
+  return res.json(bookingResponse.data);
 
 } catch (error) {
-  // Log full error details
-  console.error("Full error:", JSON.stringify(error.response?.data, null, 2));
-  console.error("Error description:", error.description);
-  
+  console.error("Booking error:", error.response?.data || error.description);
   return res.status(400).json({
     error: "Booking failed",
     details: error.response?.data?.errors || error.description || error.message
