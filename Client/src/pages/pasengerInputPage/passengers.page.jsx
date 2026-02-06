@@ -90,6 +90,7 @@ function Passengers() {
           </motion.div>
         )}
       </AnimatePresence>
+      <div className="bloc"></div>
     </section>
   );
 }

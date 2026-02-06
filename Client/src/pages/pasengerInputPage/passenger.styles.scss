@@ -6,7 +6,7 @@
   align-items: center;
   background: #f5f7f8;
   padding: 10px 5px;
-  height: 100vh;
+  // height: 100vh;
   h1 {
     font-family: $textFont, sans-serif;
     margin-top: 10px;
@@ -48,5 +48,11 @@
   height: 70vh;
   position: relative;
   top: 35%;
+  width: 100%;
+}
+.bloc
+{
+  background-color: aquamarine;
+  height: 100vh;
   width: 100%;
 }

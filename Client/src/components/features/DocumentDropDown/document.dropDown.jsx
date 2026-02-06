@@ -37,7 +37,7 @@ function DocumentTypeDropdown({ selectedType, onChange }) {
         className="dropdown-selected"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        {selectedType || "Select a document type"}
+        {selectedType || "document type"}
         <ChevronDown size={18} />
       </div>
       {isOpen && (

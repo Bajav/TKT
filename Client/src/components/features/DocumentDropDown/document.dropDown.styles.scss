@@ -22,8 +22,8 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    font-family: $textFont, sans-serif;
-    font-size: 10px;
+    font-family: $robotoMono,monospace;
+    font-size: 15px;
     color: $visibleFontColor;
     height: 50px;
   }
@@ -31,13 +31,16 @@
   .dropdown-options {
     position: absolute;
     width: 100%;
-    background: $inputBackGround;
+    background: #fff;
     border: 1px solid #ddd;
-    font-family: $textFont, sans-serif;
+    font-family: $robotoMono,monospace;
     border-radius: 6px;
     margin-top: 0.4rem;
     max-height: 200px;
+    font-size: 15px;
+    text-transform: uppercase;
     overflow-y: auto;
+    font-weight: 600;
     z-index: 10;
 
     .option-item {
