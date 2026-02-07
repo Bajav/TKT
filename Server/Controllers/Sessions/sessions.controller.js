@@ -1,16 +1,45 @@
 const saveuserdata = (req, res) => {
-  req.session.user = {
-    username:"balijawa hussein",
-    email:"balijawahussein@gmail.com"
+  let { user, flightSearch, hotelSearch } = req.body;
+  // if (user || flightSearch || hotelSearch) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: "Missing required parameters",
+  //   });
+  // }
+  if (user) {
+    req.session.user = user;
+  } else if (flightSearch) {
+    if (!req.session.flightSearch) {
+      req.session.flightSearch = [];
+    }
+    //   // Check for duplicate
+    // const isDuplicate = req.session.flightSearch.some(
+    //   (search) =>
+    //     search.origin === flightSearch.origin &&
+    //     search.destination === flightSearch.destination &&
+    //     search.departureDate === flightSearch.departureDate &&
+    //     search.adults === flightSearch.pax.adults,
+    // );
+    // if (isDuplicate) {
+    //   return res.status(200).json({
+    //     success: true,
+    //     message: "Search already in history",
+    //     duplicate: true,
+    //     data: req.session.flightSearch,
+    //   });
+    // }
+    req.session.flightSearch.unshift(flightSearch);
+  } else if (hotelSearch) {
+    req.session.hotelSearch = hotelSearch;
   }
   console.log(req.session.user);
   console.log(req.session.id);
   res.json({
-    data:{
-      sessionInfo:req.session,
-      sessionId:req.session.id,
-    }
-  })
+    data: {
+      sessionInfo: req.session,
+      sessionId: req.session.id,
+    },
+  });
   // try {
   //   const searchData = req.body;
 
@@ -70,7 +99,7 @@ const saveuserdata = (req, res) => {
   //     }
 
   //     console.log("Session saved successfully:", req.session.flightSearchHistory);
-      
+
   //     return res.status(200).json({
   //       success: true,
   //       message: "Search added to history",
@@ -91,14 +120,14 @@ const saveuserdata = (req, res) => {
 };
 
 const checkSession = (req, res) => {
-    res.json({
-      data:req.session,
-      sessionId:req.session.id
-    })
+  res.json({
+    data: req.session,
+    sessionId: req.session.id,
+  });
   // try {
   //   console.log("Session ID:", req.sessionID);
   //   console.log("Session data:", req.session);
-    
+
   //   const history = req.session.flightSearchHistory || [];
 
   //   return res.status(200).json({
@@ -122,3 +151,8 @@ const checkSession = (req, res) => {
 };
 
 export { saveuserdata, checkSession };
+
+// "user":{
+//   "username":"balijawa hussein",
+//   "email":"balijawahussein@gmail.com"
+// }
