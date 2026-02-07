@@ -68,11 +68,17 @@ export const verifyOtp = (req, res) => {
   if (stored.otp !== otp) {
     return res.status(400).json({ error: "Invalid OTP" });
   }
+  req.session.user={
+    email:email,
+    isVerified:true,
+    timeStamp: new Date()
+  };
   // OTP is valid
   otpStore.delete(email);
   res.json({
     success: true,
     message: "Email verified successfully",
     verified: true,
+    data:req.session.user
   });
 };
