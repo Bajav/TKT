@@ -58,7 +58,7 @@ app.use(express.static("public"));
 // );
 app.use(
   session({
-    secret: "keyboard cat", // Use env variable in production
+    secret: "keyboard cat", 
     resave: false, // Don't save session if unmodified
     saveUninitialized: false, // Don't create session until something stored
     cookie: {
@@ -67,6 +67,11 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
       // sameSite: "lax", // CRITICAL: Must be 'lax' or 'none' for cross-origin
     },
+     store: MongoStore.create({
+      mongoUrl: process.env.DB_HOST,
+      collectionName: "sessions",
+      ttl: 60 * 60 *24 *7, // this store will last for 7 days
+    }),
   })
 );
 

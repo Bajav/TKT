@@ -11,7 +11,8 @@ const saveuserdata = (req, res) => {
         search.origin === flightSearch.origin &&
         search.destination === flightSearch.destination &&
         search.departureDate === flightSearch.departureDate &&
-        search.tripType === flightSearch.tripType,
+        search.returnDate ? search.returnDate === flightSearch.returnDate :false &&
+        search.tripType === flightSearch.tripType
     );
     if (isDuplicate) {
       return res.status(200).json({
@@ -36,7 +37,6 @@ const saveuserdata = (req, res) => {
       //   // Check for duplicate
       const isDuplicate = req.session.hotelSearch.some(
         (search) =>
-          search.origin === hotelSearch.origin &&
           search.destination === hotelSearch.destination &&
           search.checkInDate === hotelSearch.checkInDate &&
           search.checkOutDate === hotelSearch.checkOutDate &&
