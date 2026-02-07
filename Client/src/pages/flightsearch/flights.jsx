@@ -1,5 +1,5 @@
 import "./flightsearch.styles.scss";
-import { useEffect, useContext,useRef } from "react";
+import { useEffect, useContext,useRef,useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import FlightsForm from "../../components/flightSearch/flightsForm/flightsFormInput";
 import Gallery from "../../components/flightSearch/galler";
@@ -9,10 +9,12 @@ import success from "../../assets/icons/white-heavy-check-mark-svgrepo-com.svg";
 import windowImg from "../../assets/images/windowseat.jpg";
 import { FlightContext } from "../../components/context/flightSearch.context";
 import axios from "axios";
-import searchData from "../../data/searchdata/searchdata.json";
 import { ArrowRight } from "lucide-react";
+import { SessionContext } from "../../components/context/session.context";
 function Flights() {
   const { alert, setFormData } = useContext(FlightContext);
+  const { setSession } = useContext(SessionContext);
+  const [searchData,setSearchData] = useState(null);
   const location = useLocation();
 
   const hideLayoutRoutes = [
@@ -29,7 +31,9 @@ function Flights() {
     try {
       const res = await axios.get("http://localhost:3000/getsession",{withCredentials: true});
       if (res) {
-        setSession(res.data.data.flightSearch);
+        setSession(res.data.data);
+        setSearchData(res?.data?.data?.flightSearch);
+        console.log(res?.data?.data?.flightSearch);
       }
     } catch (err) {
       console.log(err);
@@ -37,7 +41,7 @@ function Flights() {
   };
   useEffect(() => {
     fetchFlightRecents();
-  }, []);
+  });
   // populate selected from search array
   const getSelected = (index) => {
     const selectedSearch = searchData[index];
@@ -66,10 +70,9 @@ function Flights() {
                     key={index}
                   >
                     <h5>origin:{item.origin} </h5>
-                    <h5>destination:{item.Destination} </h5>
+                    <h5>destination:{item.destination} </h5>
                     <h5>
-                      {item.tripType}: {item.departureDate} -{" "}
-                      {item.returnDate}{" "}
+                      {item.flightType}
                     </h5>
                   </div>
                 );

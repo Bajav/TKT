@@ -10,9 +10,7 @@ const saveuserdata = (req, res) => {
       (search) =>
         search.origin === flightSearch.origin &&
         search.destination === flightSearch.destination &&
-        search.departureDate === flightSearch.departureDate &&
-        search.returnDate ? search.returnDate === flightSearch.returnDate :false &&
-        search.tripType === flightSearch.tripType
+        search.flightType === flightSearch.flightType,
     );
     if (isDuplicate) {
       return res.status(200).json({

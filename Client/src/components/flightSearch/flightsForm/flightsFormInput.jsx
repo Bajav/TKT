@@ -7,6 +7,7 @@ import { Minus } from "lucide-react";
 // hooks
 import { FlightContext } from "../../context/flightSearch.context";
 import { LocationContext } from "../../context/location.context";
+import { SessionContext } from "../../context/session.context";
 // components
 import FlightSearchInput from "../SearchInput/flightSearch";
 import ClickOption from "../checkBtns/ClickOption";
@@ -30,7 +31,8 @@ function FlightsForm() {
     setAlert,
   } = useContext(FlightContext);
   // hooks
-  const { userLocation } = useContext(LocationContext);
+  // const { userLocation } = useContext(LocationContext);
+
   const prevFlightSearchRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -54,8 +56,6 @@ function FlightsForm() {
     children: 0,
     infants: 0,
   });
-
-  const [airlines, setAirlines] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
   const handleChange = (e) => {
@@ -195,7 +195,7 @@ function FlightsForm() {
     setInputs((prev) => ({
       ...prev,
       origin: flightSearch?.origin || "",
-      destination: flightSearch?.Destination || "",
+      destination: flightSearch?.destination || "",
       departureDate: flightSearch?.departureDate || "",
       returnDate: flightSearch?.returnDate || "",
       seatClass: "ECONOMY",
