@@ -109,7 +109,7 @@ function FlightsForm() {
     };
     setFormData(formData);
     setAlert(false);
-    navigate("/flights/results", { state: formData });
+    // navigate("/flights/results", { state: formData });
   };
 
   const handleSwitch = (e) => {

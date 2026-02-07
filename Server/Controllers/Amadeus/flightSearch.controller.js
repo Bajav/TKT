@@ -214,7 +214,7 @@ const cleanName = (name) => {
 // Map formData array to travelers array
 const travelers = formData.map((passenger, index) => {
   const { countryCallingCode, number } = parsePhone(passenger.phone);
-  console.log("passenger",passenger);
+  // console.log("passenger",passenger);
   
   return {
     id: String(index + 1), // "1", "2", "3", etc.

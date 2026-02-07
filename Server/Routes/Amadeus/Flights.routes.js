@@ -11,7 +11,7 @@ import {
   deleteOrder,
   flightDelayPrediction,
   seatMap,
-} from "../../Controllers/Amadeus/flightSearch.js";
+} from "../../Controllers/Amadeus/flightSearch.controller.js";
 
 const router = express.Router();
 
