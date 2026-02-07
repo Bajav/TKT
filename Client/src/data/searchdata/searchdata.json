@@ -2,7 +2,7 @@
     {
         "origin": "DOH, Doha Qatar",
         "Destination": "EBB, Kampala Uganda",
-        "tripType": "Round Trip",
+        "tripType": "roundTrip",
         "departureDate": "10TH 04 2026",
         "returnDate": "30TH 04 2026",
         "pax": {"adult": 1, "children": 0, "infats": 0}
@@ -10,7 +10,7 @@
     {
         "origin": "AUH, Abu Dhabi United Arab Emirates",
         "Destination": "NBO, Nairobi Kenya",
-        "tripType": "Round Trip",
+        "tripType": "roundTrip",
         "departureDate": "18TH 04 2026",
         "returnDate": "08TH 05 2026",
         "pax": {"adult": 1, "children": 0, "infats": 0}
@@ -18,7 +18,7 @@
     {
         "origin": "JED, Jeddah Saudi Arabia",
         "Destination": "ADD, Addis Ababa Ethiopia",
-        "tripType": "Round Trip",
+        "tripType": "roundTrip",
         "departureDate": "22ND 04 2026",
         "returnDate": "12TH 05 2026",
         "pax": {"adult": 1, "children": 0, "infats": 0}
@@ -26,7 +26,7 @@
     {
         "origin": "IST, Istanbul Turkey",
         "Destination": "JNB, Johannesburg South Africa",
-        "tripType": "Round Trip",
+        "tripType": "roundTrip",
         "departureDate": "28TH 04 2026",
         "returnDate": "18TH 05 2026",
         "pax": {"adult": 1, "children": 0, "infats": 0}
@@ -34,7 +34,7 @@
     {
         "origin": "RUH, Riyadh Saudi Arabia",
         "Destination": "DAR, Dar es Salaam Tanzania",
-        "tripType": "Round Trip",
+        "tripType": "roundTrip",
         "departureDate": "05TH 05 2026",
         "returnDate": "25TH 05 2026",
         "pax": {"adult": 1, "children": 0, "infats": 0}

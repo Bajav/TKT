@@ -87,26 +87,27 @@ function FlightCard() {
         console.log("Error status:", err.response?.status);
       }
     };
-    const setSession = async ()=>{
-      try{
-             const sessionpost = await axios.post(
-          "http://localhost:3000/setsession",
-          formData,
-        );
-        console.log(sessionpost);
-      }catch(err){
-        console.log(err);
-      }
-    }
+   const setSession = async () => {
+  try {
+    const sessionpost = await axios.post(
+      "http://localhost:3000/setsession",
+      { flightSearch: formData },
+      { withCredentials: true } 
+    );
+    console.log(sessionpost);
+  } catch (err) {
+    console.log(err);
+  }
+};
     const fetchFlights = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/results",
-          formData,
-        );
-        setFlightResults(response?.data);
-        // setFlightResults(flightSearchData);
-        console.log(response?.data[0]);
+        // const response = await axios.post(
+        //   "http://localhost:3000/results",
+        //   formData,
+        // );
+        // setFlightResults(response?.data);
+        setFlightResults(flightSearchData);
+        // console.log(response?.data[0]);
       } catch (error) {
         console.error("Error posting flight:", error);
       }

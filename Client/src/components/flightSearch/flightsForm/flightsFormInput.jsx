@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, Fragment,useRef } from "react";
+import { useState, useEffect, useContext, Fragment, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "motion/react";
 import axios from "axios";
@@ -29,10 +29,16 @@ function FlightsForm() {
     setBookedFlight,
     setAlert,
   } = useContext(FlightContext);
+  // hooks
   const { userLocation } = useContext(LocationContext);
   const prevFlightSearchRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+    // calender
+  const [departureDate, setDepartureDate] = useState(null);
+  const [returnDate, setReturnDate] = useState({ start: null, end: null });
+  const [isRangeEnabled, setIsRangeEnabled] = useState(false);
+  // const [calenderType, setIsRangeEnabled] = useState(false);
 
   const [inputs, setInputs] = useState({
     origin: "",
@@ -122,12 +128,6 @@ function FlightsForm() {
     }));
   };
 
-  // calender
-  const [departureDate, setDepartureDate] = useState(null);
-  const [returnDate, setReturnDate] = useState({ start: null, end: null });
-  const [isRangeEnabled, setIsRangeEnabled] = useState(false);
-  // const [calenderType, setIsRangeEnabled] = useState(false);
-
   const handleDepartureSelect = (date) => {
     setDepartureDate(date);
     setInputs((prev) => ({
@@ -182,30 +182,27 @@ function FlightsForm() {
 
   // populate form recent searches
 
-useEffect(() => {
-  // Skip if no flightSearch or it's the same reference (early bail-out)
-  if (!flightSearch) return;
+  useEffect(() => {
+    // Skip if no flightSearch or it's the same reference (early bail-out)
+    if (!flightSearch) return;
 
-  // Optional: deep comparison if you want to avoid updates on same content
-  // But usually reference + existence check is enough if parent controls uniqueness
-  if (prevFlightSearchRef.current === flightSearch) return;
+    // Optional: deep comparison if you want to avoid updates on same content
+    // But usually reference + existence check is enough if parent controls uniqueness
+    if (prevFlightSearchRef.current === flightSearch) return;
 
-  console.log("Populating form from selected flightSearch", flightSearch);
+    console.log("Populating form from selected flightSearch", flightSearch);
 
-  setInputs((prev) => ({
-    ...prev,
-    origin: flightSearch?.origin || "",
-    destination: flightSearch?.Destination || "",  
-    departureDate: flightSearch?.departureDate || "",
-    returnDate: flightSearch?.returnDate || "",
-    flightType: flightSearch?.tripType?.toLowerCase() === "round trip" 
-      ? "roundTrip" 
-      : "oneWay",        
-    seatClass: "ECONOMY",          
-  }));
+    setInputs((prev) => ({
+      ...prev,
+      origin: flightSearch?.origin || "",
+      destination: flightSearch?.Destination || "",
+      departureDate: flightSearch?.departureDate || "",
+      returnDate: flightSearch?.returnDate || "",
+      seatClass: "ECONOMY",
+    }));
 
-  prevFlightSearchRef.current = flightSearch;
-}, [flightSearch]);   // still depends on flightSearch, but we bail early if same ref
+    prevFlightSearchRef.current = flightSearch;
+  }, [flightSearch]); // still depends on flightSearch, but we bail early if same ref
 
   return (
     <div>
@@ -271,15 +268,15 @@ useEffect(() => {
 
                 <div className="flightInputs">
                   <div className="newFlex">
-                        <FlightSearchInput
-                    classOne="flexInput inputOne"
-                    labelFor="Origin"
-                    label="Origin"
-                    placeholder="Input place of origin"
-                    InputName="origin"
-                    change={handleChange}
-                    value={inputs.origin}
-                  />
+                    <FlightSearchInput
+                      classOne="flexInput inputOne"
+                      labelFor="Origin"
+                      label="Origin"
+                      placeholder="Input place of origin"
+                      InputName="origin"
+                      change={handleChange}
+                      value={inputs.origin}
+                    />
                   </div>
                   <motion.button
                     initial={{ rotate: 0 }}
@@ -412,17 +409,17 @@ useEffect(() => {
 
                   <div className="flightInputs">
                     <div className="newFlex">
-                    <FlightSearchInput
-                      classOne="flexInput"
-                      labelFor="Origin"
-                      label="Origin"
-                      placeholder="Input place of origin"
-                      InputName="origin"
-                      change={(e) =>
-                        handleMultiChange(index, "origin", e.target.value)
-                      }
-                      value={flight.origin}
-                    />
+                      <FlightSearchInput
+                        classOne="flexInput"
+                        labelFor="Origin"
+                        label="Origin"
+                        placeholder="Input place of origin"
+                        InputName="origin"
+                        change={(e) =>
+                          handleMultiChange(index, "origin", e.target.value)
+                        }
+                        value={flight.origin}
+                      />
                     </div>
 
                     <motion.button

@@ -27,9 +27,9 @@ function Flights() {
     if (hasFetchedRef.current) return;
     hasFetchedRef.current = true;
     try {
-      const res = await axios.get("http://localhost:3000/getsession");
+      const res = await axios.get("http://localhost:3000/getsession",{withCredentials: true});
       if (res) {
-        console.log(res);
+        setSession(res.data.data.flightSearch);
       }
     } catch (err) {
       console.log(err);
