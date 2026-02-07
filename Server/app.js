@@ -40,20 +40,33 @@ app.use(loggerMiddleware);
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.static("public"));
-app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      maxAge: 6000 * 60,
-    },
+// app.use(
+//   session({
+//     secret: "keyboard cat",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       httpOnly: true,
+//       maxAge: 6000 * 60,
+//     },
     // store: MongoStore.create({
     //   mongoUrl: process.env.DB_HOST,
     //   collectionName: "sessions",
     //   ttl: 60 * 60, // 1 hour
     // }),
+//   })
+// );
+app.use(
+  session({
+    secret: "keyboard cat", // Use env variable in production
+    resave: false, // Don't save session if unmodified
+    saveUninitialized: false, // Don't create session until something stored
+    cookie: {
+      secure: false, // Set to true in production with HTTPS
+      httpOnly: true, // Prevents client-side JS from accessing cookie
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      // sameSite: "lax", // CRITICAL: Must be 'lax' or 'none' for cross-origin
+    },
   })
 );
 
