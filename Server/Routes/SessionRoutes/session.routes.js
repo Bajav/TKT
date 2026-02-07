@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { setSession,getFlightSession } from "../../Controllers/Sessions/sessions.controller.js";
+import { saveuserdata,checkSession } from "../../Controllers/Sessions/sessions.controller.js";
 const router = Router();
 
-router.get('/setsession',setSession);
-router.post('/setsession',setSession);
-router.get('/getsession',getFlightSession);
+router.get('/setsession',saveuserdata);
+router.post('/setsession',saveuserdata);
+router.get('/getsession',checkSession);
 export default router;
