@@ -1,7 +1,8 @@
-import mongoose, { model } from "mongoose";
-import {iataConnection,airlineConnection,cityCodeConnection} from '../Config/DB/mongoose.config.js'
+import mongoose from "mongoose";
+import { getAtlasDb } from "../../Config/DB/mongoAtlas.config.js";
 
-// Define schemas and models on specific connections
+const atlastDB = getAtlasDb();
+
 const iataSchema = new mongoose.Schema({
   AirportCode: String,
   AirportName: String,
@@ -26,10 +27,7 @@ const iataCitySchema = new mongoose.Schema({
   time_zone: String,
 });
 
-// initiate models
-const IATACODE =  iataConnection.model("IATACODE", iataSchema);
-const Airline =  airlineConnection.model("Airline", airlineSchema);
-const IATACITIES =  cityCodeConnection.model("City", iataCitySchema);
-
-export {IATACODE,Airline,IATACITIES};
+export const IATACODES =  atlastDB.model("IATACODE", iataSchema);
+export const Airline =  atlastDB.model("AIRLINE", airlineSchema);
+export const IATACITIES =  atlastDB.model("City", iataCitySchema);
 
