@@ -1,4 +1,7 @@
 import { IATACODES,IATACITIES,AIRLINES } from "../../Models/Database/atlast.iata.models.js";
+import airports from '../../DATA/airportCities.json'
+import airLines from '../../DATA/airlines.json'
+import iataCities from '../../JSONs/iatacityCodes.json'
 import { getAtlasDb } from "../../Config/DB/mongoAtlas.config.js";
 
 const atlasDb = getAtlasDb();
@@ -14,7 +17,7 @@ export const importIATACities = async (req, res) => {
     await IATACITIES.deleteMany({});
     
     // Bulk insert with ordered: false for better error handling
-    const result = await IATACITIES.insertMany(iatacitiesJson, { 
+    const result = await IATACITIES.insertMany(iataCities, { 
       ordered: false,
       lean: true 
     });
@@ -38,7 +41,7 @@ export const importAirports = async (req, res) => {
   try {
     await IATACODES.deleteMany({});
     
-    const result = await IATACODES.insertMany(airportsJson, { 
+    const result = await IATACODES.insertMany(airports, { 
       ordered: false,
       lean: true 
     });
@@ -60,9 +63,9 @@ export const importAirports = async (req, res) => {
 
 export const importAirlines = async (req, res) => {
   try {
-    await Airline.deleteMany({});
+    await AIRLINES.deleteMany({});
     
-    const result = await Airline.insertMany(airlinesJson, { 
+    const result = await AIRLINES.insertMany(airLines, { 
       ordered: false,
       lean: true 
     });
@@ -86,9 +89,9 @@ export const importAirlines = async (req, res) => {
 export const importAllData = async (req, res) => {
   try {
     const results = await Promise.allSettled([
-      IATACITIES.insertMany(iatacitiesJson, { ordered: false }),
-      IATACODES.insertMany(airportsJson, { ordered: false }),
-      Airline.insertMany(airlinesJson, { ordered: false })
+      IATACITIES.insertMany(iataCities, { ordered: false }),
+      IATACODES.insertMany(airports, { ordered: false }),
+      AIRLINES.insertMany(airLines, { ordered: false })
     ]);
 
     const summary = {

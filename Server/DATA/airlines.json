@@ -1,4 +1,4 @@
-const airlines = [
+[
     {
         "name": "Riyadh Air",
         "code": "RX",
@@ -6593,6 +6593,4 @@ const airlines = [
         "is_lowcost": true,
         "logo": "https://pics.avs.io/200/200/JE@2x.png"
     }
-];
-
-export default airlines;
+]
