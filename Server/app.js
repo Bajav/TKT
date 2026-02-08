@@ -68,7 +68,8 @@ app.use("/", nodemailerRoutes);
 // start databases
 const atlas = await connectAtlasDb();
 // console.log(atlas);
-// Start server
+// Start serverrs
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

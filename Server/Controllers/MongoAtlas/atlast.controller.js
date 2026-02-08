@@ -1,11 +1,11 @@
-// import { getAtlasDb } from "../Config/DB/mongoAtlas.config.js";
-// import { createUserModel } from "../Models/User.js";
+import { getAtlasDb } from "../Config/DB/mongoAtlas.config.js";
+import { createUserModel } from "../Models/User.js";
 
-// export const checkDbStatus = (req, res) => {
-//   const atlasDb = getAtlasDb();
-//   const state = atlasDb.readyState;
-//   res.json({ dbState: state });
-// };
+export const checkDbStatus = (req, res) => {
+  const atlasDb = getAtlasDb();
+  const state = atlasDb.readyState;
+  res.json({ dbState: state });
+};
 
 // export const createUserHandler = async (req, res) => {
 //   const sessionId = req.session.id;
@@ -63,19 +63,19 @@
 //   }
 // };
 
-// export const findUsers = async (req, res) => {
-//   if(!req.body) return;
-//   console.log("USER-DATA :: " , req.body);
-//   res.json(req.body);
-//   try {
-//     const atlasDb = getAtlasDb();
-//     const UserModel = createUserModel(atlasDb);
-//     const users = await UserModel.find();
-//     console.log(users);
-//     console.log("users found");
-//     res.status(200).json(users);
-//   } catch (err) {
-//     console.log(err.message);
-//     res.status(404).send("no users found");
-//   }
-// };
+export const findUsers = async (req, res) => {
+  if(!req.body) return;
+  console.log("USER-DATA :: " , req.body);
+  res.json(req.body);
+  try {
+    const atlasDb = getAtlasDb();
+    const UserModel = createUserModel(atlasDb);
+    const users = await UserModel.find();
+    console.log(users);
+    console.log("users found");
+    res.status(200).json(users);
+  } catch (err) {
+    console.log(err.message);
+    res.status(404).send("no users found");
+  }
+};
