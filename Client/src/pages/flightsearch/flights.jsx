@@ -1,5 +1,5 @@
 import "./flightsearch.styles.scss";
-import { useEffect, useContext,useRef,useState } from "react";
+import { useEffect, useContext, useRef, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import FlightsForm from "../../components/flightSearch/flightsForm/flightsFormInput";
 import Gallery from "../../components/flightSearch/galler";
@@ -14,7 +14,7 @@ import { SessionContext } from "../../components/context/session.context";
 function Flights() {
   const { alert, setFormData } = useContext(FlightContext);
   const { setSession } = useContext(SessionContext);
-  const [searchData,setSearchData] = useState(null);
+  const [searchData, setSearchData] = useState(null);
   const location = useLocation();
 
   const hideLayoutRoutes = [
@@ -29,7 +29,9 @@ function Flights() {
     if (hasFetchedRef.current) return;
     hasFetchedRef.current = true;
     try {
-      const res = await axios.get("http://localhost:3000/getsession",{withCredentials: true});
+      const res = await axios.get("http://localhost:3000/getsession", {
+        withCredentials: true,
+      });
       if (res) {
         setSession(res.data.data);
         setSearchData(res?.data?.data?.flightSearch);
@@ -62,21 +64,21 @@ function Flights() {
           <div className="searches-container">
             <h4>recent searches.</h4>
             <div className="searched-wrapper">
-              {searchData.map((item, index) => {
-                return (
-                  <div
-                    className="search"
-                    onClick={() => getSelected(index)}
-                    key={index}
-                  >
-                    <h5>origin:{item.origin} </h5>
-                    <h5>destination:{item.destination} </h5>
-                    <h5>
-                      {item.flightType}
-                    </h5>
-                  </div>
-                );
-              })}
+              {searchData?.length > 0
+                ? searchData?.map((item, index) => {
+                    return (
+                      <div
+                        className="search"
+                        onClick={() => getSelected(index)}
+                        key={index}
+                      >
+                        <h5>origin:{item.origin} </h5>
+                        <h5>destination:{item.destination} </h5>
+                        <h5>{item.flightType}</h5>
+                      </div>
+                    );
+                  })
+                : null}
             </div>
           </div>
           <div className="did-you-know-wrapper">

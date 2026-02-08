@@ -4,14 +4,14 @@ import MongoStore from "connect-mongo";
 import cookieRoutes from "./Routes/cookie.routes.js";
 import iataRoutes from "./Routes/iataRoutes.js";
 // import searchFlight from "./Routes/Flights.routes.js";
-import flightRoutes from './Routes/Amadeus/Flights.routes.js'
+import flightRoutes from "./Routes/Amadeus/Flights.routes.js";
 import stripeRoutes from "./Routes/stripe.routes.js";
 import mytiflyroutes from "./Routes/mystifly.routes.js";
-import hotelRoutes from './Routes/Hotels/hotelbeds.routes.js'
-import openTripRoutes  from './Routes/Opentriproutes/opentrip.routes.js'
-import sessionRoutes from './Routes/SessionRoutes/session.routes.js'
-import unsplashRoutes from './Routes/Unsplash/unsplash.routes.js';
-import nodemailerRoutes from './Routes/Nodemailer/nodemailer.routes.js';
+import hotelRoutes from "./Routes/Hotels/hotelbeds.routes.js";
+import openTripRoutes from "./Routes/Opentriproutes/opentrip.routes.js";
+import sessionRoutes from "./Routes/SessionRoutes/session.routes.js";
+import unsplashRoutes from "./Routes/Unsplash/unsplash.routes.js";
+import nodemailerRoutes from "./Routes/Nodemailer/nodemailer.routes.js";
 // import atlasRoutes from './Routes/atlas.routes.js'
 // middleware
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
@@ -20,14 +20,7 @@ import loggerMiddleware from "./Middleware/logger.middleware.js";
 import session from "express-session";
 import mongoose from "mongoose";
 // DB
-// import {connectAtlasDb} from './Config/DB/mongoAtlas.config.js'
-
-// try {
-//   await connectAtlasDb();
-// } catch (err) {
-//   console.error("Failed to connect to Mongo Atlas. Exiting process.");
-//   process.exit(1);
-// }
+import { connectAtlasDb } from "./Config/DB/mongoAtlas.config.js";
 
 // set up
 const port = 3000;
@@ -40,25 +33,9 @@ app.use(loggerMiddleware);
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.static("public"));
-// app.use(
-//   session({
-//     secret: "keyboard cat",
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       httpOnly: true,
-//       maxAge: 6000 * 60,
-//     },
-    // store: MongoStore.create({
-    //   mongoUrl: process.env.DB_HOST,
-    //   collectionName: "sessions",
-    //   ttl: 60 * 60, // 1 hour
-    // }),
-//   })
-// );
 app.use(
   session({
-    secret: "keyboard cat", 
+    secret: "keyboard cat",
     resave: false, // Don't save session if unmodified
     saveUninitialized: false, // Don't create session until something stored
     cookie: {
@@ -67,12 +44,12 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
       // sameSite: "lax", // CRITICAL: Must be 'lax' or 'none' for cross-origin
     },
-     store: MongoStore.create({
+    store: MongoStore.create({
       mongoUrl: process.env.DB_HOST,
       collectionName: "sessions",
-      ttl: 60 * 60 *24 *7, // this store will last for 7 days
+      ttl: 60 * 60 * 24 * 7, // this store will last for 7 days
     }),
-  })
+  }),
 );
 
 // routes
@@ -88,7 +65,9 @@ app.use("/", unsplashRoutes);
 app.use("/", nodemailerRoutes);
 
 // app.use('/',atlasRoutes);
-
+// start databases
+const atlas = await connectAtlasDb();
+// console.log(atlas);
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
