@@ -1,7 +1,6 @@
 import express from "express";
 import MongoStore from "connect-mongo";
 // routes
-import cookieRoutes from "./Routes/cookie.routes.js";
 import iataRoutes from "./Routes/iataRoutes.js";
 // import searchFlight from "./Routes/Flights.routes.js";
 import flightRoutes from "./Routes/Amadeus/Flights.routes.js";
@@ -15,10 +14,8 @@ import nodemailerRoutes from "./Routes/Nodemailer/nodemailer.routes.js";
 // import atlasRoutes from './Routes/atlas.routes.js'
 // middleware
 import corsMiddleware from "./Middleware/corsMiddleWare.js";
-// import sessionSetUp from "./Middleware/cookie.middleware.js";
 import loggerMiddleware from "./Middleware/logger.middleware.js";
 import session from "express-session";
-import mongoose from "mongoose";
 // DB
 import { connectAtlasDb } from "./Config/DB/mongoAtlas.config.js";
 
@@ -36,12 +33,12 @@ app.use(express.static("public"));
 app.use(
   session({
     secret: "keyboard cat",
-    resave: false, // Don't save session if unmodified
-    saveUninitialized: false, // Don't create session until something stored
+    resave: false,
+    saveUninitialized: false,
     cookie: {
-      secure: false, // Set to true in production with HTTPS
-      httpOnly: true, // Prevents client-side JS from accessing cookie
-      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      secure: false,
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7,  //7 DAYS
       // sameSite: "lax", // CRITICAL: Must be 'lax' or 'none' for cross-origin
     },
     store: MongoStore.create({
@@ -54,7 +51,6 @@ app.use(
 
 // routes
 app.use("/", iataRoutes);
-app.use("/", cookieRoutes);
 app.use("/", flightRoutes);
 app.use("/", stripeRoutes);
 app.use("/", mytiflyroutes);

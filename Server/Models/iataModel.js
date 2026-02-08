@@ -1,5 +1,5 @@
 import mongoose, { model } from "mongoose";
-import {iataConnection,airlineConnection} from '../Config/DB/mongoose.js'
+import {iataConnection,airlineConnection,cityCodeConnection} from '../Config/DB/mongoose.config.js'
 
 // Define schemas and models on specific connections
 const iataSchema = new mongoose.Schema({
@@ -16,10 +16,20 @@ const airlineSchema = new mongoose.Schema({
   is_lowcost: Boolean,
   logo: String,
 });
+const iataCitySchema = new mongoose.Schema({
+  id: Number,
+  name: String,
+  coordinates: String,
+  country: String,
+  iata: String,
+  name_en: String,
+  time_zone: String,
+});
 
 // initiate models
 const IATACODE =  iataConnection.model("IATACODE", iataSchema);
 const Airline =  airlineConnection.model("Airline", airlineSchema);
+const IATACITIES =  cityCodeConnection.model("City", iataCitySchema);
 
-export {IATACODE,Airline};
+export {IATACODE,Airline,IATACITIES};
 
