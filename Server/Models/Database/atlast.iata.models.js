@@ -28,6 +28,6 @@ const iataCitySchema = new mongoose.Schema({
 });
 
 export const IATACODES =  atlastDB.model("IATACODE", iataSchema);
-export const Airline =  atlastDB.model("AIRLINE", airlineSchema);
+export const AIRLINES =  atlastDB.model("AIRLINE", airlineSchema);
 export const IATACITIES =  atlastDB.model("City", iataCitySchema);
 
