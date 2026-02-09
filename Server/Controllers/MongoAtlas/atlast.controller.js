@@ -142,7 +142,42 @@ export const importAirlines = async (req, res) => {
     });
   }
 };
-
+export const importCities = async (req, res) => {
+    try {
+      const atlasDb = getAtlasDb();
+      const { IATACITIES} = getModels(atlasDb);
+    const cities = await IATACITIES.find();
+    res.json({
+      success: true,
+      data: cities,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: "failed to fetch cities",
+      data: error,
+    });
+  }
+};
+export const importAirports = async (req, res) => {
+    try {
+      const atlasDb = getAtlasDb();
+      const { IATACODES} = getModels(atlasDb);
+    const airports = await IATACODES.find();
+    res.json({
+      success: true,
+      data: airports,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: "failed to fetch airports",
+      data: error,
+    });
+  }
+};
 // const fetchIataCodes = async (req, res) => {
 //   try {
 //     const airline = new Airline();
