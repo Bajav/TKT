@@ -2,7 +2,7 @@ import { getModels } from "../../Models/Database/atlast.iata.models.js";
 import airports from "../../DATA/airportCities.json" with { type: "json" };
 import airLines from "../../DATA/airlines.json" with { type: "json" };
 import iataCities from "../../JSONs/iatacityCodes.json" with { type: "json" };
-import { getAtlasDb } from "../../Config/DB/mongoAtlas.config.js";
+import { getAtlasDb } from "../../Config/DB/mongoAtlas.config.js" ;
 
 export const checkDbStatus = (req, res) => {
   const state = atlasDb.readyState;
