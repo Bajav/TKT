@@ -1,7 +1,5 @@
+// Models/Database/atlast.iata.models.js
 import mongoose from "mongoose";
-import { getAtlasDb } from "../../Config/DB/mongoAtlas.config.js";
-
-const atlastDB = getAtlasDb();
 
 const iataSchema = new mongoose.Schema({
   AirportCode: String,
@@ -11,12 +9,14 @@ const iataSchema = new mongoose.Schema({
   Latitude: String,
   Longitude: String,
 });
+
 const airlineSchema = new mongoose.Schema({
   name: String,
   code: String,
   is_lowcost: Boolean,
   logo: String,
 });
+
 const iataCitySchema = new mongoose.Schema({
   id: Number,
   name: String,
@@ -27,7 +27,21 @@ const iataCitySchema = new mongoose.Schema({
   time_zone: String,
 });
 
-export const IATACODES =  atlastDB.model("IATACODE", iataSchema);
-export const AIRLINES =  atlastDB.model("AIRLINE", airlineSchema);
-export const IATACITIES =  atlastDB.model("City", iataCitySchema);
+// Export schema definitions, not model instances
+export const schemas = {
+  iataSchema,
+  airlineSchema,
+  iataCitySchema
+};
 
+// Lazy model getter
+let models = {};
+
+export const getModels = (connection) => {
+  if (!models.IATACODES) {
+    models.IATACODES = connection.model("IATACODE", iataSchema);
+    models.AIRLINES = connection.model("AIRLINE", airlineSchema);
+    models.IATACITIES = connection.model("City", iataCitySchema);
+  }
+  return models;
+};

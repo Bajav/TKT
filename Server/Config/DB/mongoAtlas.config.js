@@ -1,17 +1,19 @@
+// Config/DB/mongoAtlas.config.js
 import mongoose from "mongoose";
 
-// encodeURIComponent('d!*%XJMLJBN29PP');
-const encodedPassword = encodeURIComponent('d!*%XJMLJBN29PP');
+const encodedPassword = encodeURIComponent(process.env.ENCODED_PASSWORD);
 
 const DB_URI = `mongodb+srv://tkt_development:${encodedPassword}@tktdb.arfqreg.mongodb.net/?retryWrites=true&w=majority&appName=TKTDB`;
 
 let atlasDb;
 
 export const connectAtlasDb = async () => {
-  atlasDb = mongoose.createConnection(DB_URI,{
-  ssl: true, // Explicitly required for Atlas
-  tlsAllowInvalidCertificates: false, // For strict production security
-});
+  if (atlasDb) return atlasDb; // Return existing connection
+  
+  atlasDb = mongoose.createConnection(DB_URI, {
+    ssl: true,
+    tlsAllowInvalidCertificates: false,
+  });
 
   atlasDb.on("connected", () => {
     console.log("✅ Connected to TKTDB");
@@ -25,10 +27,13 @@ export const connectAtlasDb = async () => {
     console.log("⚠️ Disconnected from TKTDB");
   });
 
+  // Wait for connection to be ready
+  await atlasDb.asPromise();
+  
   return atlasDb;
 };
 
 export const getAtlasDb = () => {
-  if (!atlasDb) throw new Error("DB not connected yet.");
+  if (!atlasDb) throw new Error("DB not connected yet. Call connectAtlasDb() first.");
   return atlasDb;
 };
