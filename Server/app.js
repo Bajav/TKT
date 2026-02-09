@@ -62,7 +62,7 @@ app.use("/", nodemailerRoutes);
 app.use('/',atlasRoutes);
 
 // start databases
-const atlas = await connectAtlasDb();
+// const atlas = await connectAtlasDb();
 // console.log(atlas);
 // Start serverrs
 

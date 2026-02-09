@@ -1,5 +1,7 @@
 const saveuserdata = (req, res) => {
   let { flightSearch, hotelSearch } = req.body;
+  console.log(req.body);
+  console.log("hotelSearch :::", hotelSearch);
 
   if (flightSearch) {
     if (!req.session.flightSearch) {
@@ -27,17 +29,17 @@ const saveuserdata = (req, res) => {
       data: req.session.flightSearch,
     });
   } else if (hotelSearch) {
-    req.session.hotelSearch = hotelSearch;
-    if (flightSearch) {
       if (!req.session.hotelSearch) {
         req.session.hotelSearch = [];
+        console.log("debug",req.session.hotelSearch);
       }
-      //   // Check for duplicate
+        // Check for duplicate
       const isDuplicate = req.session.hotelSearch.some(
         (search) =>
+          search.accommodationType === hotelSearch.accommodationType &&
           search.destination === hotelSearch.destination &&
-          search.checkInDate === hotelSearch.checkInDate &&
-          search.checkOutDate === hotelSearch.checkOutDate &&
+          search.dates.checkIn === hotelSearch.dates.checkIn &&
+          search.dates.checkOut === hotelSearch.dates.checkOut &&
           search.rooms === hotelSearch.rooms,
       );
       if (isDuplicate) {
@@ -57,11 +59,10 @@ const saveuserdata = (req, res) => {
     } else {
       return res.status(400).json({
         success: false,
-        message: "Missing required parameters",
+        message: "Missing required hotel parameters",
       });
     }
-  }
-};
+  };
 const checkSession = (req, res) => {
   res.json({
     data: req.session,

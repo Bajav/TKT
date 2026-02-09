@@ -73,11 +73,23 @@ function HotelResults() {
       console.log("error finding hotels", error);
     }
   };
-  
+   const setSession = async () => {
+  try {
+    const sessionpost = await axios.post(
+      "http://localhost:3000/setsession",
+      { hotelSearch: payload },
+      { withCredentials: true } 
+    );
+    console.log(sessionpost);
+  } catch (err) {
+    console.log(err);
+  }
+};
   useEffect(() => {
     // console.log(hotelJson);
-    fecthHotels();
+    // fecthHotels();
     setFormData(payload);
+    setSession();
   }, []);
   // this is the use effect to load hotel contents.
   //  useEffect(() => {
