@@ -4,9 +4,9 @@ const router = Router();
 
 router.get('/atlasstatus',checkDbStatus);
 router.get('/exportData',exportAll);
-router.get('/airlines',importAirlines);
-router.get('/cities',importCities);
-router.get('/airports',importAirports);
+router.get('/atlas/airlines',importAirlines);
+router.get('/atlas/cities',importCities);
+router.get('/atlas/airports',importAirports);
 
 
 export default router;
