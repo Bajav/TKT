@@ -21,7 +21,8 @@ useEffect(() => {
   const fetchCities = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/atlas/cities");
+      const response = await axios.get("http://localhost:3000/get/cities");
+        console.log("response :: :: ",response);
       
       if (isMounted) { // ✅ Only update state if still mounted
         setcitiesJson(response.data);
@@ -60,7 +61,7 @@ useEffect(() => {
         value: `${item.iata}, ${item.name_en}, ${item.country}`,
       },
     });
-    setShowDropdown(false);
+    setShowDropdown(!showDropdown);
   };
 
   return (
@@ -96,7 +97,7 @@ useEffect(() => {
                   className="destination-row"
                   onClick={() => handleSelect(item)}
                 >
-                  <span>{item.iata}</span>
+                  <span>{item.iata}</span> {" "}
                   <span className="meta">
                     {item.name_en}, {item.country}
                   </span>
