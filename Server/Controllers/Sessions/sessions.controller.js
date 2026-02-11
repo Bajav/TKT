@@ -34,22 +34,22 @@ const saveuserdata = (req, res) => {
         console.log("debug",req.session.hotelSearch);
       }
         // Check for duplicate
-      const isDuplicate = req.session.hotelSearch.some(
-        (search) =>
-          search.accommodationType === hotelSearch.accommodationType &&
-          search.destination === hotelSearch.destination &&
-          search.dates.checkIn === hotelSearch.dates.checkIn &&
-          search.dates.checkOut === hotelSearch.dates.checkOut &&
-          search.rooms === hotelSearch.rooms,
-      );
-      if (isDuplicate) {
-        return res.status(200).json({
-          success: true,
-          message: "Search already in history",
-          duplicate: true,
-          data: req.session.hotelSearch,
-        });
-      }
+      // const isDuplicate = req.session.hotelSearch.some(
+      //   (search) =>
+      //     search.accommodationType === hotelSearch.accommodationType &&
+      //     search.destination === hotelSearch.destination &&
+      //     search.dates.checkIn === hotelSearch.dates.checkIn &&
+      //     search.dates.checkOut === hotelSearch.dates.checkOut &&
+      //     search.rooms === hotelSearch.rooms,
+      // );
+      // if (isDuplicate) {
+      //   return res.status(200).json({
+      //     success: true,
+      //     message: "Search already in history",
+      //     duplicate: true,
+      //     data: req.session.hotelSearch,
+      //   });
+      // }
       req.session.hotelSearch.unshift(hotelSearch);
       return res.status(200).json({
         success: true,
