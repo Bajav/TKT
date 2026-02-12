@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 100%;
+    width: 90%;
     padding: 10px 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -29,7 +29,8 @@
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     scroll-snap-align: start;
-    width: 95%;
+    width: auto;
+    max-width: 100%;
     h5
     {
         font-family: $robotoMono,monospace;

@@ -4,6 +4,7 @@ import {Recentsearch} from "../../components/Hotels/RecentSeaches/recentsearch.c
 import LocationHeader from "../../components/Header/header";
 import { Outlet, useLocation } from "react-router-dom";
 import { Fragment } from "react";
+import hotelSearch from "../../data/searchdata/hotelsearch.json"
 
 function Hotels() {
   const location = useLocation();
@@ -27,17 +28,17 @@ function Hotels() {
           <LocationHeader />
           <HotelForm />
                <div className="searched-wrapper">
-              {searchData?.length > 0
-                ? searchData?.map((item, index) => {
+              {hotelSearch?.length > 0
+                ? hotelSearch?.map((item, index) => {
                     return (
                       <div
                         className="search"
                         onClick={getSelected}
                         key={index}
                       >
-                        <h5>origin:{item.origin} </h5>
-                        <h5>destination:{item.destination} </h5>
-                        <h5>{item.flightType}</h5>
+                        <h5>location:{item.destination} </h5>
+                        <h5>rooms:{item.rooms} </h5>
+                        <h5>accommodationType :{item.accommodationType}</h5>
                       </div>
                     );
                   })
