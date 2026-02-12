@@ -5,6 +5,7 @@ import LocationHeader from "../../components/Header/header";
 import { Outlet, useLocation } from "react-router-dom";
 import { Fragment } from "react";
 import hotelSearch from "../../data/searchdata/hotelsearch.json";
+import hotelImg from '../../assets/images/HotelImages/1.jpg'
 
 function Hotels() {
   const location = useLocation();
@@ -41,6 +42,14 @@ function Hotels() {
               : null}
           </div>
           <div className="visual-wrapper">
+            <div className="hotel-img">
+              <img src={hotelImg} alt="" />
+            </div>
+            <div className="text-wrapper">
+              <h4>the hotel, london uk</h4>
+              <p>the hotel is a hotel location in united kingdom</p>
+            </div>
+
             {/* <div className="hotel-items"></div>
             <div className="hotel-items"></div>
             <div className="hotel-items high"></div> */}
