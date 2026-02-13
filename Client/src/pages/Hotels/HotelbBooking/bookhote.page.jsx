@@ -151,28 +151,22 @@ function BookHotel() {
 
   const cacellationSummary = getCancellationBadge(rates);
   // form submit btn
+    const postFormData = async ()=>{
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/initiateBooking",
+        { bookingData: input,isVerified:signedIn }
+      );
+      console.log(response);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    postFormData();
     console.log(input);
-    try {
-      const response = await axios.post("http://localhost:3000/bookhotel", {
-        rate: submitRate,
-        formData: input,
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const otpSubmit = (e) => {
-    e.preventDefault();
-    const code = Object.values(otp).join("");
-    // if (code.length !== 6) {
-    //   alert("Enter complete OTP");
-    //   return;
-    // }
-    console.log("OTP Submitted:", code);
-    setVerified(true);
   };
   // console.log(taxesArray.length);
   const onOtpChange = (e) => {

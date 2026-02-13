@@ -13,7 +13,7 @@ import {
   terminals,
   hotelRates,
   hotelAvailbility,
-  bookHotel,
+  initiateBooking,
   verifyEmail,
   verifyOtp,
 } from "../../Controllers/Hotelbeds/hotelbeds.controller.js";
@@ -23,7 +23,7 @@ router.post("/hotels", hotelSearch);
 router.get("/hotels", hotelSearch);
 router.post("/hotels/hotelrates", hotelRates); 
 router.post("/hotels/availability", hotelAvailbility); 
-router.post("/bookhotel", bookHotel); 
+router.post("/initiateBooking", initiateBooking); 
 router.post("/hotels/hoteldata", hotelData);
 // isclean
 router.post("/hotelscontents", hotelContents);
