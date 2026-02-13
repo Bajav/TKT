@@ -40,6 +40,6 @@ router.get("/hotelscontents/ratecomments", rateComments);
 router.get("/hotelscontents/promotions", promotions);
 router.get("/hotelscontents/terminals", terminals);
 // verify email
-router.post("/verifyemail", verifyEmail);
+router.post("/sendotp", verifyEmail);
 router.post("/verifyotp", verifyOtp);
 export default router;

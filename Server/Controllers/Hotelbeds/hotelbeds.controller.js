@@ -10,6 +10,7 @@ import {
   getRateComments,
   booking,
 } from "../../Services/Hotelbeds/hotelbeds.service.js";
+import { generateOTP } from "../../Services/NodeMailer/nodemailer.services.js";
 
 const hotelSearch = async (req, res) => {
   const {formData} = req.body;
@@ -67,50 +68,121 @@ const hotelAvailbility = async (req, res) => {
   }
 };
 
-const bookHotel = async (req, res) => {
-  const bodyData = req.body;
-  console.log("Request Body:", bodyData);
-  res.send("boking is working");
+// const bookHotel = async (req, res) => {
+//   const bodyData = req.body;
+//   const bookingData = {
+//       holder: {
+//         name: "Hussein",
+//         surname: "Balijawa",
+//       },
+//       rooms: [
+//         {
+//           rateKey:
+//             "20260210|20260212|W|254|107255|SUI.QN|BAR OPQ ALL|RO||1~2~0||N@07~~20017d~636141189~N~~~NOR~~FBE642056559404176815471437905AAUK0057000000000121a152",
+//           paxes: [
+//             {
+//               roomId: 1,
+//               type: "AD",
+//               name: "Hussein",
+//               surname: "Balijawa",
+//             },
+//             {
+//               roomId: 1,
+//               type: "AD",
+//               name: "Allen",
+//               surname: "Nakiwewa",
+//             },
+//           ],
+//         },
+//       ],
+//       clientReference: "TKT-TEST",
+//       remark: "Booking remarks if any",
+//       tolerance: 2,
+//     }
+//   console.log("Request Body:", bodyData);
+//   res.send("boking is working");
 
-  // try {
-  //   const response = await booking({
-  //     holder: {
-  //       name: "Hussein",
-  //       surname: "Balijawa",
-  //     },
-  //     rooms: [
-  //       {
-  //         rateKey:
-  //           "20260210|20260212|W|254|107255|SUI.QN|BAR OPQ ALL|RO||1~2~0||N@07~~20017d~636141189~N~~~NOR~~FBE642056559404176815471437905AAUK0057000000000121a152",
-  //         paxes: [
-  //           {
-  //             roomId: 1,
-  //             type: "AD",
-  //             name: "Hussein",
-  //             surname: "Balijawa",
-  //           },
-  //           {
-  //             roomId: 1,
-  //             type: "AD",
-  //             name: "Allen",
-  //             surname: "Nakiwewa",
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //     clientReference: "TKT-TEST",
-  //     remark: "Booking remarks if any",
-  //     tolerance: 2,
-  //   });
-  //   res.json(response);
-  // } catch (error) {
-  //   return res.status(error.status || 500).json({
-  //     success: false,
-  //     error: error.operation || "OPERATION_FAILED",
-  //     message: error.message || "An error occurred",
-  //     details: error.error || null,
-  //   });
-  // }
+//   // try {
+//   //   const response = await booking(bookingData);
+//   //   res.json(response);
+//   // } catch (error) {
+//   //   return res.status(error.status || 500).json({
+//   //     success: false,
+//   //     error: error.operation || "OPERATION_FAILED",
+//   //     message: error.message || "An error occurred",
+//   //     details: error.error || null,
+//   //   });
+//   // }
+// };
+const initiateBooking = async (req, res) => {
+  const { bookingData, userEmail, verified = false } = req.body;
+  
+  // Validate booking data
+  if (!bookingData || !userEmail) {
+    return res.status(400).json({ 
+      success: false, 
+      error: "Booking data and email required" 
+    });
+  }
+
+  // Store booking data in session IMMEDIATELY
+  req.session.pendingBooking = {
+    bookingData,
+    userEmail,
+    createdAt: Date.now(),
+    verified: false
+  };
+
+  // If already verified (returning user), skip OTP
+  if (verified || req.session.user?.isVerified) {
+    return res.json({
+      success: true,
+      message: "Proceed to payment/confirmation",
+      requiresVerification: false,
+      sessionId: req.sessionID
+    });
+  }
+
+  // Need verification - send OTP
+  try {
+    const otp = generateOTP();
+    
+    otpStore.set(userEmail, {
+      otp,
+      expiresAt: Date.now() + 5 * 60 * 1000,
+      sessionId: req.sessionID // Link OTP to session
+    });
+
+    await transporter.sendMail({
+      from: '"tkt travel agency" <balijawahussein@gmail.com>',
+      to: userEmail,
+      subject: "Verify Your Email to Complete Booking",
+      html: `
+        <div style="font-family: roboto, monospace; max-width: 600px; margin: 0 auto;">
+          <h2>Complete Your Hotel Booking</h2>
+          <p>Your verification code is:</p>
+          <h1 style="background: #f5f5f5; padding: 20px; text-align: center; letter-spacing: 5px;">
+            ${otp}
+          </h1>
+          <p>This code will expire in 5 minutes.</p>
+        </div>
+      `,
+    });
+
+    res.json({
+      success: true,
+      message: "OTP sent. Please verify to complete booking.",
+      requiresVerification: true,
+      email: userEmail
+    });
+
+  } catch (error) {
+    console.error("OTP send failed:", error);
+    res.status(500).json({ 
+      success: false, 
+      error: "Failed to send verification code" 
+    });
+  }
 };
 
 const hotelRates = async (req, res) => {
@@ -393,6 +465,6 @@ export {
   terminals,
   hotelRates,
   hotelAvailbility,
-  bookHotel,
+  initiateBooking,
   verifyEmail,
 };

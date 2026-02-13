@@ -190,7 +190,7 @@ function BookHotel() {
 
 return (
   <>
-    {!signedIn ? (
+    {signedIn ? (
       // Show verification overlay when NOT signed in
       <div className="verification-overlay">
         <div className="verificartion-container">
@@ -207,7 +207,7 @@ return (
               <div className="verified">
                 <div className="verified-header">
                   <h1>you are verified</h1>
-                  <h4>{input?.email || "balijawahussein@gmail.com"}</h4>
+                  <h4>{input?.email || " "}</h4>
                 </div>
                 <CheckCircleIcon size={80} color="#40C265" weight="fill" />
                 <p>you are being redirected to the payment page</p>
@@ -220,7 +220,7 @@ return (
                     We just sent you an email <br /> for verification
                   </p>
                   <h4>Enter the security verification code sent to</h4>
-                  <h2>{input?.email || "balijawahussein@gmail.com"}</h2>
+                  <h2>{input?.email || " "}</h2>
                 </div>
                 <form
                   onSubmit={otpSubmit}
