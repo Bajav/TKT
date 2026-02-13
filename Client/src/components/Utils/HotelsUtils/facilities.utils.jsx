@@ -136,7 +136,7 @@ const isPaidFacility = (facility) => {
     // Handle applicationType if needed
     if (facility.applicationType === "UN") {
       // UN typically means "per unit" - you can add this if needed
-      // metadata.push("per stay");
+      metadata.push("per stay");
     }
     
     // Combine parts

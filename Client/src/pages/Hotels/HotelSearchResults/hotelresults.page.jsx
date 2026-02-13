@@ -87,7 +87,7 @@ function HotelResults() {
 };
   useEffect(() => {
     // console.log(hotelJson);
-    // fecthHotels();
+    fecthHotels();
     setFormData(payload);
     setSession();
   }, []);

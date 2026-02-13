@@ -101,12 +101,12 @@ function FlightCard() {
 };
     const fetchFlights = async () => {
       try {
-        // const response = await axios.post(
-        //   "http://localhost:3000/results",
-        //   formData,
-        // );
-        // setFlightResults(response?.data);
-        setFlightResults(flightSearchData);
+        const response = await axios.post(
+          "http://localhost:3000/results",
+          formData,
+        );
+        setFlightResults(response?.data);
+        // setFlightResults(flightSearchData);
         // console.log(response?.data[0]);
       } catch (error) {
         console.error("Error posting flight:", error);
