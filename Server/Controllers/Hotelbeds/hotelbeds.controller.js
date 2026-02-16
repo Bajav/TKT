@@ -10,7 +10,7 @@ import {
   getRateComments,
   booking,
 } from "../../Services/Hotelbeds/hotelbeds.service.js";
-import { generateOTP } from "../../Services/NodeMailer/nodemailer.services.js";
+import { generateOTP,otpStore } from "../../Services/NodeMailer/nodemailer.services.js";
 
 const hotelSearch = async (req, res) => {
   const {formData} = req.body;
@@ -115,10 +115,11 @@ const hotelAvailbility = async (req, res) => {
 //   // }
 // };
 const initiateBooking = async (req, res) => {
-  const { bookingData, userEmail, verified = false } = req.body;
+  const { bookingData, isVerified } = req.body;
+  console.log(req.body);
   
   // Validate booking data
-  if (!bookingData || !userEmail) {
+  if (!bookingData) {
     return res.status(400).json({ 
       success: false, 
       error: "Booking data and email required" 
@@ -128,13 +129,12 @@ const initiateBooking = async (req, res) => {
   // Store booking data in session IMMEDIATELY
   req.session.pendingBooking = {
     bookingData,
-    userEmail,
     createdAt: Date.now(),
-    verified: false
+    isVerified: isVerified
   };
 
   // If already verified (returning user), skip OTP
-  if (verified || req.session.user?.isVerified) {
+  if (isVerified || req.session.user?.isVerified) {
     return res.json({
       success: true,
       message: "Proceed to payment/confirmation",
@@ -147,7 +147,7 @@ const initiateBooking = async (req, res) => {
   try {
     const otp = generateOTP();
     
-    otpStore.set(userEmail, {
+    otpStore.set(bookingData.email, {
       otp,
       expiresAt: Date.now() + 5 * 60 * 1000,
       sessionId: req.sessionID // Link OTP to session
@@ -155,7 +155,7 @@ const initiateBooking = async (req, res) => {
 
     await transporter.sendMail({
       from: '"tkt travel agency" <balijawahussein@gmail.com>',
-      to: userEmail,
+      to: bookingData.email,
       subject: "Verify Your Email to Complete Booking",
       html: `
         <div style="font-family: roboto, monospace; max-width: 600px; margin: 0 auto;">
@@ -173,7 +173,7 @@ const initiateBooking = async (req, res) => {
       success: true,
       message: "OTP sent. Please verify to complete booking.",
       requiresVerification: true,
-      email: userEmail
+      email: bookingData.email
     });
 
   } catch (error) {

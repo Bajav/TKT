@@ -7,7 +7,6 @@ import { FlightSearchProvider } from "./components/context/flightSearch.context.
 import { LocationProvider } from "./components/context/location.context.jsx";
 import { UserContextProvider } from "./components/context/user.context.jsx";
 import { UiContextProvider } from "./components/context/ui.context.jsx";
-import { SessionProvider } from "./components/context/session.context.jsx";
 import { HotelProvider } from "./components/context/hotels.contenxt.jsx";
 import {Provider} from 'react-redux';
 import {store} from './store/store.jsx'
@@ -21,9 +20,7 @@ createRoot(document.getElementById("root")).render(
           <FlightSearchProvider>
             <UiContextProvider>
               <LocationProvider>
-                <SessionProvider>
                   <App />
-                </SessionProvider>
               </LocationProvider>
             </UiContextProvider>
           </FlightSearchProvider>

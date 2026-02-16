@@ -5,7 +5,7 @@ import crypto from 'crypto';
 
 
 // Store OTPs temporarily (use Redis in production)
-const otpStore = new Map();
+export const otpStore = new Map();
 // Create transporter with Gmail
 export const transporter = nodemailer.createTransport({
   service: 'gmail',

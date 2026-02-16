@@ -1,10 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-// import tailwindcss from "@tailwindcss/vite";
-// tailwindcss()
-// https://vitejs.dev/config/
+
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['@phosphor-icons/react'],
+    esbuildOptions: {
+      loader: {
+        '.js': 'jsx',  // ✅ Treat all .js as JSX during optimization
+      },
+    },
+  },
 });
-
-// tailwind config
