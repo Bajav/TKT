@@ -18,7 +18,10 @@ import loggerMiddleware from "./Middleware/logger.middleware.js";
 import session from "express-session";
 // DB
 import { connectAtlasDb } from "./Config/DB/mongoAtlas.config.js";
-
+import {   iataConnection, 
+  airlineConnection, 
+  cityCodeConnection,
+  initializeDatabase  } from "./Config/DB/mongoose.config.js";
 // set up
 const port = 3000;
 const app = express();
@@ -63,6 +66,7 @@ app.use('/',atlasRoutes);
 
 // start databases
 const atlas = await connectAtlasDb();
+const mongoose = await initializeDatabase();
 // console.log(atlas);
 // Start serverrs
 

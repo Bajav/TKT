@@ -1,6 +1,6 @@
 // db/connections.js (or wherever your connections are)
 import mongoose from "mongoose";
-import { createSearchIndexes, listIndexes } from "./createIndexes.js";
+import { createSearchIndexes,listIndexes } from "../../Controllers/iataindex.controller.js";
 
 const iataConnection = mongoose.createConnection("mongodb://127.0.0.1:27017/IATACODESDB");
 iataConnection.on('connected', () => {

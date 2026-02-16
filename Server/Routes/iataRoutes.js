@@ -8,7 +8,7 @@ import {
   searchAirlines,
   searchAirports,
 } from "../Controllers/iataController.js";
-import { createSearchIndexes, listIndexes } from "../db/createIndexes.js";
+import { createSearchIndexes, listIndexes } from "../Controllers/iataindex.controller.js";
 
 const router = express.Router();
 
