@@ -44,8 +44,8 @@ function FlightCard() {
     setBookedFlight,
     selectedFlight,
     setSelectFlight,
-    brandedUpSell,
-    setBrandedUpSell,
+    // brandedUpSell,
+    // setBrandedUpSell,
     upsellError,
     setUpsellError,
     setlastFlight,
@@ -59,6 +59,7 @@ function FlightCard() {
   // states
   const [isOverlay, setOverlay] = useState(false);
   const [flightResults, setFlightResults] = useState([]);
+  const [brandedUpSell, setBrandedUpSell] = useState([]);
   const [filterDropDown, setFilterDropDown] = useState(false);
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [dropDown, showDropDown] = useState(null);
@@ -87,18 +88,18 @@ function FlightCard() {
         console.log("Error status:", err.response?.status);
       }
     };
-   const setSession = async () => {
-  try {
-    const sessionpost = await axios.post(
-      "http://localhost:3000/setsession",
-      { flightSearch: formData },
-      { withCredentials: true } 
-    );
-    console.log(sessionpost);
-  } catch (err) {
-    console.log(err);
-  }
-};
+    const setSession = async () => {
+      try {
+        const sessionpost = await axios.post(
+          "http://localhost:3000/setsession",
+          { flightSearch: formData },
+          { withCredentials: true },
+        );
+        console.log(sessionpost);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     const fetchFlights = async () => {
       try {
         const response = await axios.post(
@@ -185,10 +186,10 @@ function FlightCard() {
   const airlinesLookUp = airlinesLookUps(airlineData);
 
   // Button actions
-const seeDetails = (index) => {
-  console.log("details button is clicked for card", index);
-  showDropDown((prevIndex) => (prevIndex === index ? null : index));
-};
+  const seeDetails = (index) => {
+    console.log("details button is clicked for card", index);
+    showDropDown((prevIndex) => (prevIndex === index ? null : index));
+  };
 
   const selectButton = async (index) => {
     console.log("selectButton clicked");
@@ -203,7 +204,7 @@ const seeDetails = (index) => {
       );
       setBrandedUpSell(response.data); // likely want .data, not full response
       // setBrandedUpSell(brandedUpsellData);
-      console.log("brandedUpsell res", brandedUpsellData);
+      console.log("brandedUpsell res", response.data);
     } catch (err) {
       console.error("Axios error:", err?.response?.data?.message);
       setUpsellError(err?.response?.data?.message[0]);
@@ -570,12 +571,13 @@ const results = analyzeFlightOffers(flightOffersArray);
             brandedUpSell?.map((upsell, index) => {
               const segments = upsell.itineraries[0]?.segments || [];
               const segmentNumber = segments.length;
-              console.log("upsell", upsell);
+              // console.log("upsell", upsell);
               const lastSegmentIndex = segmentNumber - 1;
-              const segmentOne = upsell.itineraries[0].segments;
+              const segmentOne = upsell?.itineraries[0]?.segments;
               const segOneIndex = segmentOne.length - 1;
-              const segmentTwo = upsell.itineraries[lastSegmentIndex].segments;
+              const segmentTwo = upsell.itineraries[upsell?.itineraries?.length - 1]?.segments;
               const travelerPricings = upsell.travelerPricings;
+              // console.log("segmentTwo", segmentTwo);
               const departureObject = segmentOne[0].departure;
               const arrivalObject = segmentOne[segOneIndex].arrival;
               const segTwoIndex = segmentTwo.length - 1;
