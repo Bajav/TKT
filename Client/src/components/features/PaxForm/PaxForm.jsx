@@ -134,19 +134,19 @@ function PaxForm() {
     const formattedPassengers = passengers.map(({ selectedCountry, id, ...rest }) => rest);
     console.log("Passengers Data:", formattedPassengers);
     
-    setModel(true);
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3000/bookflight",
-    //     {
-    //       formData: formattedPassengers, // Now it's an array
-    //       bookedFlight: bookedFlight.flightOffers,
-    //     }
-    //   );
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error("Error posting flight:", error);
-    // }
+    // setModel(true);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/bookflight",
+        {
+          formData: formattedPassengers,
+          bookedFlight: bookedFlight.flightOffers,
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error posting flight:", error);
+    }
   };
 
   // Get passenger by ID

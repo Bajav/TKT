@@ -21,7 +21,7 @@ function FlightSearchInput(props) {
   const { setAirlineData } = useContext(FlightContext);
   
   const [suggestions, setSuggestions] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(true);
   const [loading, setLoading] = useState(false);
   
   const debouncedSearchTerm = useDebounce(props.value, 300);
@@ -91,7 +91,7 @@ function FlightSearchInput(props) {
 
   const onSearch = (searchTerm) => {
     props.change({ target: { name: props.InputName, value: searchTerm } });
-    setShowDropdown(false);
+    setShowDropdown(true);
     setSuggestions([]);
   };
 
@@ -130,7 +130,8 @@ function FlightSearchInput(props) {
                       )
                     }
                   >
-                    <strong>{code.AirportCode}</strong> - {code.AirportName}, {code.City}, {code.Country}
+                    {/* <strong>{code.AirportCode}</strong> - {code.AirportName}, {code.City}, {code.Country} */}
+                    <strong>{code.AirportCode} </strong> - {code.AirportName}  {code.Country}
                   </li>
                 ))}
               </ul>

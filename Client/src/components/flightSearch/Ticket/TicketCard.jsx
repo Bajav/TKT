@@ -564,13 +564,13 @@ const results = analyzeFlightOffers(flightOffersArray);
               destinationCode={flightSearch?.destination?.slice(0, 3) || "XXX"}
             />
           </div>
-          {brandedUpSell.length === 0 ? (
+          {brandedUpSell?.length === 0 ? (
             <BearLoader />
           ) : (
-            brandedUpSell.map((upsell, index) => {
+            brandedUpSell?.map((upsell, index) => {
               const segments = upsell.itineraries[0]?.segments || [];
               const segmentNumber = segments.length;
-              // console.log("upsell", upsell);
+              console.log("upsell", upsell);
               const lastSegmentIndex = segmentNumber - 1;
               const segmentOne = upsell.itineraries[0].segments;
               const segOneIndex = segmentOne.length - 1;
