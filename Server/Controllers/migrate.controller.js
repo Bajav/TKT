@@ -29,7 +29,6 @@ export async function migrateData(req,res) {
   }
 }
 
-Promise.all([
-  iataConnection.asPromise(),
-  atlasDb.asPromise(),
-]).then(migrateData).catch((err) => console.error('Connection failed:', err));
+// Promise.all([
+//   iataConnection.asPromise(),
+// ]).then(migrateData).catch((err) => console.error('Connection failed:', err));
