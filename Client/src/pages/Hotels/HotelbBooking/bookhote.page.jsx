@@ -176,6 +176,7 @@ function BookHotel() {
       ...prev,
       [name]: value,
     }));
+    
     // auto-focus next input
     if (value && e.target.nextSibling) {
       e.target.nextSibling.focus();

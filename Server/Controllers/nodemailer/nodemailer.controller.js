@@ -1,53 +1,52 @@
 import { generateOTP,transporter } from "../../Services/NodeMailer/nodemailer.services.js";
 
-const otpStore = new Map();
-export const sendOtp = async (req, res) => {
-  const { email } = req.body;
+// export const sendOtp = async (req, res) => {
+//   const { email } = req.body;
 
-  if (!email) {
-    return res.status(400).json({ error: "Email is required" });
-  }
+//   if (!email) {
+//     return res.status(400).json({ error: "Email is required" });
+//   }
 
-  try {
-    // Generate OTP
-    const otp = generateOTP();
+//   try {
+//     // Generate OTP
+//     const otp = generateOTP();
 
-    // Store OTP with expiration (5 minutes)
-    otpStore.set(email, {
-      otp,
-      expiresAt: Date.now() + 5 * 60 * 1000,
-    });
+//     // Store OTP with expiration (5 minutes)
+//     otpStore.set(email, {
+//       otp,
+//       expiresAt: Date.now() + 5 * 60 * 1000,
+//     });
 
-    // Send email
-    await transporter.sendMail({
-      from: '"tkt travel agency" <balijawahussein@gmail.com>',
-      to: email,
-      subject: "Your Verification Code",
-      html: `
-        <div style="font-family: roboto, monospace; max-width: 600px; margin: 0 auto;">
-          <h2>Email Verification</h2>
-          <p>Your verification code is:</p>
-          <h1 style="background: #f5f5f5; padding: 20px; text-align: center; letter-spacing: 5px;">
-            ${otp}
-          </h1>
-          <p>This code will expire in 5 minutes.</p>
-          <p style="color: #333; font-size: 12px; font-weight:500;">
-            If you didn't request this code, please ignore this email.
-          </p>
-        </div>
-      `,
-    });
+//     // Send email
+//     await transporter.sendMail({
+//       from: '"tkt travel agency" <balijawahussein@gmail.com>',
+//       to: email,
+//       subject: "Your Verification Code",
+//       html: `
+//         <div style="font-family: roboto, monospace; max-width: 600px; margin: 0 auto;">
+//           <h2>Email Verification</h2>
+//           <p>Your verification code is:</p>
+//           <h1 style="background: #f5f5f5; padding: 20px; text-align: center; letter-spacing: 5px;">
+//             ${otp}
+//           </h1>
+//           <p>This code will expire in 5 minutes.</p>
+//           <p style="color: #333; font-size: 12px; font-weight:500;">
+//             If you didn't request this code, please ignore this email.
+//           </p>
+//         </div>
+//       `,
+//     });
 
-    res.json({
-      success: true,
-      message: "OTP sent successfully",
-      email, // Send back email for confirmation
-    });
-  } catch (error) {
-    console.error("Error sending OTP:", error);
-    res.status(500).json({ error: "Failed to send OTP" });
-  }
-};
+//     res.json({
+//       success: true,
+//       message: "OTP sent successfully",
+//       email, // Send back email for confirmation
+//     });
+//   } catch (error) {
+//     console.error("Error sending OTP:", error);
+//     res.status(500).json({ error: "Failed to send OTP" });
+//   }
+// };
 
 // Verify OTP endpoint
 export const verifyOtp = (req, res) => {
