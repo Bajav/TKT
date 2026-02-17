@@ -132,18 +132,18 @@ function PaxForm() {
     console.log("bookedFlight ::", bookedFlight.flightOffers);
 
     // setModel(true);
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3000/bookflight",
-    //     {
-    //       formData: formattedPassengers,
-    //       bookedFlight: bookedFlight.flightOffers,
-    //     }
-    //   );
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error("Error posting flight:", error);
-    // }
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/bookflight",
+        {
+          formData: formattedPassengers,
+          bookedFlight: bookedFlight.flightOffers,
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error posting flight:", error);
+    }
   };
 
   // Get passenger by ID

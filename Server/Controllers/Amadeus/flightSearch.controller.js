@@ -196,7 +196,7 @@ const bookFlight = async (req, res) => {
 //   const {DOB,docExpiryDate,docIssueDate,docNumber,docType,email,fName,gender,lName,nationality,phone} = formData;
 // Assuming formData is now an array of passenger objects
 const { formData, bookedFlight } = req.body;
-console.log(formData);
+console.log(req.body);
 // Helper function to parse phone
 const parsePhone = (phone) => {
   const cleaned = phone.replace(/[\s\-\+]/g, '');
@@ -255,35 +255,35 @@ console.log(`Processing booking for ${travelers.length} traveler(s)`);
 // console.log(travelers[0]?.documents[0]);
 
 // Now use in booking
-// try {
-//   const pricingResponse = awaitamadeus.booking.flightOrders.post({
-//     data: {
-//       type: "flight-order",
-//       flightOffers: [bookedFlight[0]],
-//       travelers: [travelers],
-//     },
-//   });
+try {
+  const pricingResponse = awaitamadeus.booking.flightOrders.post({
+    data: {
+      type: "flight-order",
+      flightOffers: [bookedFlight[0]],
+      travelers: [travelers],
+    },
+  });
 
-//   const confirmedFlightOffer = pricingResponse.data.flightOffers[0];
+  const confirmedFlightOffer = pricingResponse.data.flightOffers[0];
 
-//   const bookingResponse = await amadeus.booking.flightOrders.post({
-//     data: {
-//       type: "flight-order",
-//       flightOffers: [confirmedFlightOffer],
-//       travelers: travelers, // Array of all travelers
-//     },
-//   });
+  const bookingResponse = await amadeus.booking.flightOrders.post({
+    data: {
+      type: "flight-order",
+      flightOffers: [confirmedFlightOffer],
+      travelers: travelers, // Array of all travelers
+    },
+  });
 
-//   console.log("Booking successful:", bookingResponse.data);
-//   return res.json(bookingResponse.data);
+  console.log("Booking successful:", bookingResponse.data);
+  return res.json(bookingResponse.data);
 
-// } catch (error) {
-//   console.error("Booking error:", error.response?.data || error.description);
-//   return res.status(400).json({
-//     error: "Booking failed",
-//     details: error.response?.data?.errors || error.description || error.message
-//   });
-// }
+} catch (error) {
+  console.error("Booking error:", error.response?.data || error.description);
+  return res.status(400).json({
+    error: "Booking failed",
+    details: error.response?.data?.errors || error.description || error.message
+  });
+}
 };
 
 //use api to retrieve order using the order ID
