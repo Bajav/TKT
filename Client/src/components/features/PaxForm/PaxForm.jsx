@@ -47,17 +47,15 @@ function PaxForm() {
     const { name, value } = e.target;
     setPassengers((prev) =>
       prev.map((pax) =>
-        pax.id === passengerId ? { ...pax, [name]: value } : pax
-      )
+        pax.id === passengerId ? { ...pax, [name]: value } : pax,
+      ),
     );
   };
 
   // Handler for phone input
   const handlePhoneChange = (passengerId, phone) => {
     setPassengers((prev) =>
-      prev.map((pax) =>
-        pax.id === passengerId ? { ...pax, phone } : pax
-      )
+      prev.map((pax) => (pax.id === passengerId ? { ...pax, phone } : pax)),
     );
   };
 
@@ -67,26 +65,22 @@ function PaxForm() {
       prev.map((pax) =>
         pax.id === passengerId
           ? { ...pax, selectedCountry: country, nationality: country || null }
-          : pax
-      )
+          : pax,
+      ),
     );
   };
 
   // Handler for gender selection
   const handleGenderChange = (passengerId, gender) => {
     setPassengers((prev) =>
-      prev.map((pax) =>
-        pax.id === passengerId ? { ...pax, gender } : pax
-      )
+      prev.map((pax) => (pax.id === passengerId ? { ...pax, gender } : pax)),
     );
   };
 
   // Handler for document type selection
   const handleDocTypeChange = (passengerId, docType) => {
     setPassengers((prev) =>
-      prev.map((pax) =>
-        pax.id === passengerId ? { ...pax, docType } : pax
-      )
+      prev.map((pax) => (pax.id === passengerId ? { ...pax, docType } : pax)),
     );
   };
 
@@ -96,8 +90,8 @@ function PaxForm() {
       prev.map((pax) =>
         pax.id === passengerId
           ? { ...pax, DOB: date?.toISOString().split("T")[0] }
-          : pax
-      )
+          : pax,
+      ),
     );
   };
 
@@ -111,59 +105,59 @@ function PaxForm() {
               docIssueDate: range.start?.toISOString().split("T")[0],
               docExpiryDate: range.end?.toISOString().split("T")[0],
             }
-          : pax
-      )
+          : pax,
+      ),
     );
   };
 
   // Get dynamic placeholder based on document type
   const getDocNumberPlaceholder = (docType) => {
     if (!docType) return "Document Number";
-    
+
     const type = docType.toLowerCase();
     if (type.includes("passport")) return "Passport Number";
     if (type.includes("id") || type.includes("identity")) return "ID Number";
-    if (type.includes("driving") || type.includes("license")) return "License Number";
+    if (type.includes("driving") || type.includes("license"))
+      return "License Number";
     return "Document Number";
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     // Clean up passenger data (remove UI-only fields)
-    const formattedPassengers = passengers.map(({ selectedCountry, id, ...rest }) => rest);
+    const formattedPassengers = passengers.map(
+      ({ selectedCountry, id, ...rest }) => rest,
+    );
     console.log("Passengers Data:", formattedPassengers);
-    
+    console.log("bookedFlight ::", bookedFlight.flightOffers);
+
     // setModel(true);
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/bookflight",
-        {
-          formData: formattedPassengers,
-          bookedFlight: bookedFlight.flightOffers,
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error posting flight:", error);
-    }
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:3000/bookflight",
+    //     {
+    //       formData: formattedPassengers,
+    //       bookedFlight: bookedFlight.flightOffers,
+    //     }
+    //   );
+    //   console.log(response.data);
+    // } catch (error) {
+    //   console.error("Error posting flight:", error);
+    // }
   };
 
   // Get passenger by ID
   const getPassenger = (id) => {
     return passengers.find((pax) => pax.id === id) || {};
   };
-
   return (
     <div className="paxFormContainer">
       <form className="paxForm" onSubmit={handleSubmit}>
         {array.map((i) => {
           const passenger = getPassenger(i);
-          
           return (
             <div className="formContainer" key={i}>
               <h1>Passenger {i}</h1>
-              
               <div className="flex-items">
                 <FlexInput
                   labelName="first name"
@@ -245,7 +239,6 @@ function PaxForm() {
             </div>
           );
         })}
-
         <button className="submit" type="submit">
           Submit
         </button>
