@@ -1,4 +1,3 @@
-import { getModels } from "../../Config/DB/mongoAtlas.config.js";
 import airports from "../../DATA/airportCities.json" with { type: "json" };
 import airLines from "../../DATA/airlines.json" with { type: "json" };
 import iataCities from "../../JSONs/iatacityCodes.json" with { type: "json" };

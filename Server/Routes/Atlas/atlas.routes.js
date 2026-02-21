@@ -5,12 +5,12 @@ import {
   importAirlines,
   importCities,
   importAirports,
+} from "../../Controllers/MongoAtlas/atlas.controller.js";
+import {  createIndexes,
   getIndexes,
-  createIndexes,
   createAirportIndexes,
   createAirlineIndexes,
-  createCityIndexes,
-} from "../../Controllers/MongoAtlas/atlas.controller.js";
+  createCityIndexes } from "../../Controllers/MongoAtlas/atlasind.controller.js";
 const router = Router();
 
 router.get("/atlasstatus", checkDbStatus);
