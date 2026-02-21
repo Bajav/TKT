@@ -205,12 +205,10 @@ const parsePhone = (phone) => {
     number: cleaned.substring(3)
   };
 };
-
 // Helper function to clean names
 const cleanName = (name) => {
   return name.trim().toUpperCase().replace(/[^A-Z\s]/g, '').replace(/\s+/g, ' ');
 };
-
 // Map formData array to travelers array
 const travelers = formData.map((passenger, index) => {
   const { countryCallingCode, number } = parsePhone(passenger.phone);
@@ -256,21 +254,11 @@ console.log(`Processing booking for ${travelers.length} traveler(s)`);
 
 // Now use in booking
 try {
-  const pricingResponse = awaitamadeus.booking.flightOrders.post({
-    data: {
-      type: "flight-order",
-      flightOffers: [bookedFlight[0]],
-      travelers: [travelers],
-    },
-  });
-
-  const confirmedFlightOffer = pricingResponse.data.flightOffers[0];
-
   const bookingResponse = await amadeus.booking.flightOrders.post({
     data: {
       type: "flight-order",
-      flightOffers: [confirmedFlightOffer],
-      travelers: travelers, // Array of all travelers
+      flightOffers: [bookedFlight[0]],
+      travelers: travelers,
     },
   });
 
