@@ -1,7 +1,7 @@
 // Models/Database/atlast.iata.models.js
 import mongoose from "mongoose";
 
-const iataSchema = new mongoose.Schema({
+export const iataSchema = new mongoose.Schema({
   AirportCode: String,
   AirportName: String,
   City: String,
@@ -10,14 +10,14 @@ const iataSchema = new mongoose.Schema({
   Longitude: String,
 });
 
-const airlineSchema = new mongoose.Schema({
+export const airlineSchema = new mongoose.Schema({
   name: String,
   code: String,
   is_lowcost: Boolean,
   logo: String,
 });
 
-const iataCitySchema = new mongoose.Schema({
+export const iataCitySchema = new mongoose.Schema({
   id: Number,
   name: String,
   coordinates: String,

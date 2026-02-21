@@ -1,4 +1,4 @@
-import { getModels } from "../../Models/Database/atlast.iata.models.js";
+import { getModels } from "../../Config/DB/mongoAtlas.config.js";
 import airports from "../../DATA/airportCities.json" with { type: "json" };
 import airLines from "../../DATA/airlines.json" with { type: "json" };
 import iataCities from "../../JSONs/iatacityCodes.json" with { type: "json" };
@@ -178,25 +178,3 @@ export const importAirports = async (req, res) => {
     });
   }
 };
-// const fetchIataCodes = async (req, res) => {
-//   try {
-//     const airline = new Airline();
-//     const iataCodes = await IATACODE.find();
-//     // console.log(iataCodes);
-//     return res.json(iataCodes);
-//     // return iataCodes;
-//   } catch (err) {
-//     console.error("error fetching codes:", err);
-//     throw err;
-//   }
-// };
-
-// const fetchAirlines = async (req, res) => {
-//   try {
-//     const airlines = await Airline.find();
-//     return res.json(airlines); // Add res.json!
-//   } catch (err) {
-//     console.error("error fetching airlines:", err);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
