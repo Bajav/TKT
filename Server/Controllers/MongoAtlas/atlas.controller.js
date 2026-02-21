@@ -179,225 +179,136 @@ export const importAirports = async (req, res) => {
   }
 };
 //INDEXS
-
-// Airport search indexes
-export const createAtlasAirportIndexes = async () => {
+// Search airports from Atlas
+export const searchAtlasAirports = async (req, res) => {
+  const startTime = Date.now();
+  
   try {
     const atlasDb = getAtlasDb();
     const { IATACODES } = getModels(atlasDb);
     
-    console.log('📋 Creating airport search indexes on Atlas...');
-    
-    // Drop existing indexes if they exist
-    try {
-      await IATACODES.collection.dropIndex('airport_search_index');
-      await IATACODES.collection.dropIndex('airport_text_index');
-    } catch (err) {
-      // Indexes don't exist, that's fine
+    const { query, limit = 50 } = req.query;
+
+    if (!query || query.length < 2) {
+      return res.json({ suggestions: [], source: 'atlas' });
     }
 
-    // Create compound index for efficient regex searches
-    await IATACODES.collection.createIndex(
-      {
-        AirportCode: 1,
-        City: 1,
-        AirportName: 1,
-        Country: 1
-      },
-      {
-        name: 'airport_search_index',
-        background: true // Don't block other operations
-      }
-    );
-
-    // Create text index for full-text search
-    await IATACODES.collection.createIndex(
-      {
-        AirportName: 'text',
-        City: 'text',
-        Country: 'text'
-      },
-      {
-        name: 'airport_text_index',
-        weights: {
-          City: 10,
-          AirportName: 5,
-          Country: 3
-        },
-        background: true
-      }
-    );
-
-    console.log('✅ Airport indexes created on Atlas');
+    let searchQuery;
     
-    // Show all indexes
-    const indexes = await IATACODES.collection.listIndexes().toArray();
-    console.log('📊 Airport indexes:', indexes.map(i => i.name));
-    
-    return { success: true, message: 'Airport indexes created' };
+    if (query.length === 3 && /^[A-Z]{3}$/i.test(query)) {
+      searchQuery = {
+        AirportCode: { $regex: `^${query}`, $options: 'i' }
+      };
+    } else {
+      searchQuery = {
+        $or: [
+          { AirportCode: { $regex: `^${query}`, $options: 'i' } },
+          { City: { $regex: `^${query}`, $options: 'i' } },
+          { AirportName: { $regex: query, $options: 'i' } },
+          { Country: { $regex: query, $options: 'i' } }
+        ]
+      };
+    }
+
+    const suggestions = await IATACODES.find(searchQuery)
+      .select('AirportCode AirportName City Country')
+      .limit(parseInt(limit))
+      .lean();
+
+    const duration = Date.now() - startTime;
+    console.log(`🌐 Atlas search "${query}" took ${duration}ms, found ${suggestions.length} results`);
+
+    res.json({ 
+      suggestions,
+      count: suggestions.length,
+      source: 'atlas',
+      duration 
+    });
     
   } catch (err) {
-    console.error('❌ Error creating airport indexes:', err);
-    throw err;
+    console.error("❌ Error searching Atlas airports:", err);
+    res.status(500).json({ 
+      error: "Search failed",
+      suggestions: [],
+      source: 'atlas'
+    });
   }
 };
 
-// Airline search indexes
-export const createAtlasAirlineIndexes = async () => {
+// Search airlines from Atlas
+export const searchAtlasAirlines = async (req, res) => {
   try {
     const atlasDb = getAtlasDb();
     const { AIRLINES } = getModels(atlasDb);
     
-    console.log('📋 Creating airline search indexes on Atlas...');
-    
-    try {
-      await AIRLINES.collection.dropIndex('airline_search_index');
-      await AIRLINES.collection.dropIndex('airline_text_index');
-    } catch (err) {
-      // Indexes don't exist, that's fine
+    const { query, limit = 50 } = req.query;
+
+    if (!query || query.length < 2) {
+      return res.json({ suggestions: [], source: 'atlas' });
     }
 
-    // Compound index
-    await AIRLINES.collection.createIndex(
-      {
-        code: 1,
-        name: 1
-      },
-      {
-        name: 'airline_search_index',
-        background: true
-      }
-    );
+    const suggestions = await AIRLINES.find({
+      $or: [
+        { code: { $regex: `^${query}`, $options: 'i' } },
+        { name: { $regex: query, $options: 'i' } }
+      ]
+    })
+    .select('name code logo')
+    .limit(parseInt(limit))
+    .lean();
 
-    // Text index for airline name
-    await AIRLINES.collection.createIndex(
-      {
-        name: 'text'
-      },
-      {
-        name: 'airline_text_index',
-        background: true
-      }
-    );
-
-    console.log('✅ Airline indexes created on Atlas');
-    
-    const indexes = await AIRLINES.collection.listIndexes().toArray();
-    console.log('📊 Airline indexes:', indexes.map(i => i.name));
-    
-    return { success: true, message: 'Airline indexes created' };
+    res.json({ 
+      suggestions,
+      count: suggestions.length,
+      source: 'atlas'
+    });
     
   } catch (err) {
-    console.error('❌ Error creating airline indexes:', err);
-    throw err;
+    console.error("❌ Error searching Atlas airlines:", err);
+    res.status(500).json({ 
+      error: "Search failed",
+      suggestions: [],
+      source: 'atlas'
+    });
   }
 };
 
-// City search indexes
-export const createAtlasCityIndexes = async () => {
+// Search cities from Atlas
+export const searchAtlasCities = async (req, res) => {
   try {
     const atlasDb = getAtlasDb();
     const { IATACITIES } = getModels(atlasDb);
     
-    console.log('📋 Creating city search indexes on Atlas...');
-    
-    try {
-      await IATACITIES.collection.dropIndex('city_search_index');
-      await IATACITIES.collection.dropIndex('city_text_index');
-    } catch (err) {
-      // Indexes don't exist, that's fine
+    const { query, limit = 50 } = req.query;
+
+    if (!query || query.length < 2) {
+      return res.json({ suggestions: [], source: 'atlas' });
     }
 
-    // Compound index
-    await IATACITIES.collection.createIndex(
-      {
-        iata: 1,
-        name: 1,
-        name_en: 1,
-        country: 1
-      },
-      {
-        name: 'city_search_index',
-        background: true
-      }
-    );
+    const suggestions = await IATACITIES.find({
+      $or: [
+        { name: { $regex: `^${query}`, $options: 'i' } },
+        { name_en: { $regex: `^${query}`, $options: 'i' } },
+        { iata: { $regex: `^${query}`, $options: 'i' } },
+        { country: { $regex: query, $options: 'i' } }
+      ]
+    })
+    .select('name name_en iata country')
+    .limit(parseInt(limit))
+    .lean();
 
-    // Text index
-    await IATACITIES.collection.createIndex(
-      {
-        name: 'text',
-        name_en: 'text',
-        country: 'text'
-      },
-      {
-        name: 'city_text_index',
-        weights: {
-          name_en: 10,
-          name: 8,
-          country: 3
-        },
-        background: true
-      }
-    );
-
-    console.log('✅ City indexes created on Atlas');
-    
-    const indexes = await IATACITIES.collection.listIndexes().toArray();
-    console.log('📊 City indexes:', indexes.map(i => i.name));
-    
-    return { success: true, message: 'City indexes created' };
+    res.json({ 
+      suggestions,
+      count: suggestions.length,
+      source: 'atlas'
+    });
     
   } catch (err) {
-    console.error('❌ Error creating city indexes:', err);
-    throw err;
-  }
-};
-
-// Master function to create all Atlas indexes
-export  const createAllAtlasIndexes = async () => {
-  console.log('🚀 Starting Atlas index creation process...\n');
-  
-  try {
-    const results = await Promise.all([
-      createAtlasAirportIndexes(),
-      createAtlasAirlineIndexes(),
-      createAtlasCityIndexes()
-    ]);
-    
-    console.log('\n✨ All Atlas indexes created successfully!');
-    return { success: true, results };
-    
-  } catch (err) {
-    console.error('\n💥 Atlas index creation failed:', err);
-    throw err;
-  }
-};
-
-// Check existing indexes
-export  const checkAtlasIndexes = async () => {
-  try {
-    const atlasDb = getAtlasDb();
-    const { IATACODES, AIRLINES, IATACITIES } = getModels(atlasDb);
-    
-    console.log('🔍 Checking existing Atlas indexes...\n');
-    
-    const airportIndexes = await IATACODES.collection.listIndexes().toArray();
-    console.log('✈️  Airport indexes:', airportIndexes.map(i => i.name));
-    
-    const airlineIndexes = await AIRLINES.collection.listIndexes().toArray();
-    console.log('🛫 Airline indexes:', airlineIndexes.map(i => i.name));
-    
-    const cityIndexes = await IATACITIES.collection.listIndexes().toArray();
-    console.log('🏙️  City indexes:', cityIndexes.map(i => i.name));
-    
-    return {
-      airports: airportIndexes,
-      airlines: airlineIndexes,
-      cities: cityIndexes
-    };
-    
-  } catch (err) {
-    console.error('❌ Error checking indexes:', err);
-    throw err;
+    console.error("❌ Error searching Atlas cities:", err);
+    res.status(500).json({ 
+      error: "Search failed",
+      suggestions: [],
+      source: 'atlas'
+    });
   }
 };

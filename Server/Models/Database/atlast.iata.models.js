@@ -34,14 +34,14 @@ export const schemas = {
   iataCitySchema
 };
 
-// Lazy model getter
-let models = {};
+// // Lazy model getter
+// let models = {};
 
-export const getModels = (connection) => {
-  if (!models.IATACODES) {
-    models.IATACODES = connection.model("IATACODE", iataSchema);
-    models.AIRLINES = connection.model("AIRLINE", airlineSchema);
-    models.IATACITIES = connection.model("City", iataCitySchema);
-  }
-  return models;
-};
+// export const getModels = (connection) => {
+//   if (!models.IATACODES) {
+//     models.IATACODES = connection.model("IATACODE", iataSchema);
+//     models.AIRLINES = connection.model("AIRLINE", airlineSchema);
+//     models.IATACITIES = connection.model("City", iataCitySchema);
+//   }
+//   return models;
+// };

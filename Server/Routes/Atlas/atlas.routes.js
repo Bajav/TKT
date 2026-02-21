@@ -5,6 +5,9 @@ import {
   importAirlines,
   importCities,
   importAirports,
+    searchAtlasAirports,
+  searchAtlasAirlines,
+  searchAtlasCities,
 } from "../../Controllers/MongoAtlas/atlas.controller.js";
 import {  createIndexes,
   getIndexes,
@@ -23,5 +26,10 @@ router.get("/indexes/check", getIndexes);
 router.post("/indexes/airports", createAirportIndexes);
 router.post("/indexes/airlines", createAirlineIndexes);
 router.post("/indexes/cities", createCityIndexes);
+
+// Atlas search routes (use these for production)
+router.get("/atlas/searchairports", searchAtlasAirports);
+router.get("/atlas/searchairlines", searchAtlasAirlines);
+router.get("/atlas/searchcities", searchAtlasCities);
 
 export default router;
