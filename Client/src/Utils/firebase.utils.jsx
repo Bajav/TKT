@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA6XOLD5Dd04e4KM3g67gIgRLZWgyk4VNQ",
+  apiKey: proccess.env.GOOGLE_API_KEY,
   authDomain: "tkt-travel-agency.firebaseapp.com",
   projectId: "tkt-travel-agency",
   storageBucket: "tkt-travel-agency.firebasestorage.app",
