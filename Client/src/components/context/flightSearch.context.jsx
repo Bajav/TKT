@@ -103,17 +103,6 @@ const INITIAL_STATE = {
 };
 
 export const FlightSearchProvider = ({ children }) => {
-  // const [flightSearch, setFormData] = useState(null);
-  // const [iataCodes, setIataCodes] = useState([]);
-  // const [airlineData, setAirlineData] = useState([]);
-  // const [flightResults, setFlightResults] = useState([]);
-  // const [selectedFlight, setSelectFlight] = useState([]);
-  // const [bookedFlight, setBookedFlight] = useState([]);
-  // const [brandedUpSell, setBrandedUpSell] = useState([]);
-  // const [upsellError, setUpsellError] = useState("");
-  // const [lastFlight, setlastFlight] = useState([]);
-  // const [alert, setAlert] = useState(false);
-  // const [filteredFlights, setFilteredFlights] = useState([]);
   const [state, dispatch] = useReducer(flightReducer, INITIAL_STATE);
   const {
     flightSearch,
@@ -141,7 +130,7 @@ export const FlightSearchProvider = ({ children }) => {
   const setAlert = (data) => dispatch({ type: ACTIONS.SET_ALERT, payload: data });;
   const setFilteredFlights = (data) => dispatch({ type: ACTIONS.SET_FILTERED_FLIGHTS, payload: data });;
   const setSelectFlight = (data) => dispatch({ type: ACTIONS.SET_SELECTED_FLIGHTS, payload: data });;
-    const setScrollRef = (data) => dispatch({ type: ACTIONS.SET_REF, payload: data });;
+  const setScrollRef = (data) => dispatch({ type: ACTIONS.SET_REF, payload: data });;
   const value = {
     flightSearch,
     setFormData,

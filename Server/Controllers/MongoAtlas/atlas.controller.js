@@ -3,6 +3,7 @@ import airLines from "../../DATA/airlines.json" with { type: "json" };
 import iataCities from "../../JSONs/iatacityCodes.json" with { type: "json" };
 // import { getAtlasDb } from "../../Config/DB/mongoAtlas.config.js" ;
 import {getAtlasDb,getModels} from "../../Config/DB/mongoAtlas.config.js"
+import { searchAirlines,searchAirports,searchCities } from "../utils/amadeus/flightsearch.utils.js";
 
 export const checkDbStatus = (req, res) => {
   const state = atlasDb.readyState;
@@ -178,64 +179,36 @@ export const importAirports = async (req, res) => {
     });
   }
 };
-//INDEXS
-// Search airports from Atlas
+//search for data through indexes
 export const searchAtlasAirports = async (req, res) => {
-  const startTime = Date.now();
-  
   try {
     const atlasDb = getAtlasDb();
     const { IATACODES } = getModels(atlasDb);
     
     const { query, limit = 50 } = req.query;
 
-    if (!query || query.length < 2) {
-      return res.json({ suggestions: [], source: 'atlas' });
-    }
+    // Use the reusable util
+    const result = await searchAirports(IATACODES, query, limit);
 
-    let searchQuery;
-    
-    if (query.length === 3 && /^[A-Z]{3}$/i.test(query)) {
-      searchQuery = {
-        AirportCode: { $regex: `^${query}`, $options: 'i' }
-      };
-    } else {
-      searchQuery = {
-        $or: [
-          { AirportCode: { $regex: `^${query}`, $options: 'i' } },
-          { City: { $regex: `^${query}`, $options: 'i' } },
-          { AirportName: { $regex: query, $options: 'i' } },
-          { Country: { $regex: query, $options: 'i' } }
-        ]
-      };
-    }
-
-    const suggestions = await IATACODES.find(searchQuery)
-      .select('AirportCode AirportName City Country')
-      .limit(parseInt(limit))
-      .lean();
-
-    const duration = Date.now() - startTime;
-    console.log(`🌐 Atlas search "${query}" took ${duration}ms, found ${suggestions.length} results`);
+    console.log(`🌐 Atlas airport search: "${query}" took ${result.duration}ms, found ${result.count} results`);
 
     res.json({ 
-      suggestions,
-      count: suggestions.length,
-      source: 'atlas',
-      duration 
+      ...result,
+      source: 'atlas'
     });
     
   } catch (err) {
-    console.error("❌ Error searching Atlas airports:", err);
+    console.error("❌ Error in searchAtlasAirports:", err);
     res.status(500).json({ 
       error: "Search failed",
+      message: err.message,
       suggestions: [],
       source: 'atlas'
     });
   }
 };
 
-// Search airlines from Atlas
+
 export const searchAtlasAirlines = async (req, res) => {
   try {
     const atlasDb = getAtlasDb();
@@ -243,37 +216,25 @@ export const searchAtlasAirlines = async (req, res) => {
     
     const { query, limit = 50 } = req.query;
 
-    if (!query || query.length < 2) {
-      return res.json({ suggestions: [], source: 'atlas' });
-    }
-
-    const suggestions = await AIRLINES.find({
-      $or: [
-        { code: { $regex: `^${query}`, $options: 'i' } },
-        { name: { $regex: query, $options: 'i' } }
-      ]
-    })
-    .select('name code logo')
-    .limit(parseInt(limit))
-    .lean();
+    // Use the reusable util
+    const result = await searchAirlines(AIRLINES, query, limit);
 
     res.json({ 
-      suggestions,
-      count: suggestions.length,
+      ...result,
       source: 'atlas'
     });
     
   } catch (err) {
-    console.error("❌ Error searching Atlas airlines:", err);
+    console.error("❌ Error in searchAtlasAirlines:", err);
     res.status(500).json({ 
       error: "Search failed",
+      message: err.message,
       suggestions: [],
       source: 'atlas'
     });
   }
 };
 
-// Search cities from Atlas
 export const searchAtlasCities = async (req, res) => {
   try {
     const atlasDb = getAtlasDb();
@@ -281,32 +242,19 @@ export const searchAtlasCities = async (req, res) => {
     
     const { query, limit = 50 } = req.query;
 
-    if (!query || query.length < 2) {
-      return res.json({ suggestions: [], source: 'atlas' });
-    }
-
-    const suggestions = await IATACITIES.find({
-      $or: [
-        { name: { $regex: `^${query}`, $options: 'i' } },
-        { name_en: { $regex: `^${query}`, $options: 'i' } },
-        { iata: { $regex: `^${query}`, $options: 'i' } },
-        { country: { $regex: query, $options: 'i' } }
-      ]
-    })
-    .select('name name_en iata country')
-    .limit(parseInt(limit))
-    .lean();
+    // Use the reusable util
+    const result = await searchCities(IATACITIES, query, limit);
 
     res.json({ 
-      suggestions,
-      count: suggestions.length,
+      ...result,
       source: 'atlas'
     });
     
   } catch (err) {
-    console.error("❌ Error searching Atlas cities:", err);
+    console.error("❌ Error in searchAtlasCities:", err);
     res.status(500).json({ 
       error: "Search failed",
+      message: err.message,
       suggestions: [],
       source: 'atlas'
     });
