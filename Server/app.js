@@ -1,7 +1,7 @@
 import express from "express";
 import MongoStore from "connect-mongo";
 // routes
-import iataRoutes from "./Routes/iataRoutes.js";
+// import iataRoutes from "./Routes/iataRoutes.js";
 // import searchFlight from "./Routes/Flights.routes.js";
 import flightRoutes from "./Routes/Amadeus/Flights.routes.js";
 import stripeRoutes from "./Routes/stripe.routes.js";
@@ -18,10 +18,7 @@ import loggerMiddleware from "./Middleware/logger.middleware.js";
 import session from "express-session";
 // DB
 import { connectAtlasDb } from "./Config/DB/mongoAtlas.config.js";
-import {   iataConnection, 
-  airlineConnection, 
-  cityCodeConnection,
-  initializeDatabase  } from "./Config/DB/mongoose.config.js";
+// import {   connectDatabases  } from "./Config/DB/mongoose.config.js";
 // set up
 const port = 3000;
 const app = express();
@@ -53,7 +50,7 @@ app.use(
 );
 
 // routes
-app.use("/", iataRoutes);
+// app.use("/", iataRoutes);
 app.use("/", flightRoutes);
 app.use("/", stripeRoutes);
 app.use("/", mytiflyroutes);
