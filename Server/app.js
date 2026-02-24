@@ -66,7 +66,7 @@ app.use('/',atlasRoutes);
 
 // start databases
 const atlas = await connectAtlasDb();
-const mongoose = await initializeDatabase();
+// const mongoose = await initializeDatabase();
 // console.log(atlas);
 // Start serverrs
 
